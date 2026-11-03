@@ -113,7 +113,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** The target user, USD 29 ticket fixture, three sources of truth, explicit recovery deadline, flagship failure, success outcome, integration roles, and exclusions are written down. Render is excluded.
   **Verify:** Inspect the contract against the complete complaint-to-reproduction-to-repair journey. Record unresolved decisions without inventing answers.
 
-- [ ] **CC-002. Make the application skeleton runnable.**
+- [x] **CC-002. Make the application skeleton runnable.**
   **Done when:** The chosen web application, API, database, and worker start using documented commands with pinned dependency versions, migrations, and a seeded merchant fixture.
   **Verify:** Start from a clean checkout and database. Record startup, health responses, migration success, and the actual commands.
 
@@ -121,11 +121,11 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** Repository instructions reference this checklist; STATUS.md records unfinished work; the evidence format and allowed completion states are established. Existing repository rules are preserved.
   **Verify:** Inspect the files and have a fresh Codex session identify the current task, evidence requirement, and completion boundary without relying on previous chat history.
 
-- [ ] **CC-004. Prove integration prerequisites early.**
+- [x] **CC-004. Prove integration prerequisites early.**
   **Done when:** PayPal sandbox access, model access, AG Studio licensing, and KERNEL access are confirmed with minimal appropriate checks. The owned application is reachable from KERNEL and a webhook delivery path is documented. APIMatic and Postman prerequisites, license expiry, and access through the judging period are recorded.
   **Verify:** Save sanitized connectivity results and exact blockers. Do not mark this complete while a required credential or reachable test target is missing.
 
-- [ ] **CC-005. Persist the experiment and payment identities.**
+- [x] **CC-005. Persist the experiment and payment identities.**
   **Done when:** Migrations store runs, attempts, purchases, semantic operation keys, order IDs, request IDs and bodies, events, invariant versions, fault configurations, and evidence references. Live sandbox and recorded replay data have explicit modes.
   **Verify:** Create a sample run, restart the services, and read it back. Confirm two runs cannot silently share merchant state, fault configuration, or evidence.
 
@@ -136,73 +136,73 @@ The checker can validate record structure, files, hashes, modes, and completion 
 ### Phase 2: One real customer checkout
 **Gate:** An actual sandbox purchase delivers exactly one ticket, with independently inspectable records.
 
-- [ ] **CC-007. Build the owned merchant fixture.**
+- [x] **CC-007. Build the owned merchant fixture.**
   **Done when:** A customer can view the USD 29 workshop ticket, its delivery promise, and an actual entitlement page backed by stored merchant state.
   **Verify:** Walk the browser flow. Confirm an unpaid purchase has no ticket and a displayed ticket corresponds to a real merchant record.
 
-- [ ] **CC-008. Create and journal a real sandbox order.**
+- [x] **CC-008. Create and journal a real sandbox order.**
   **Done when:** The server determines the price and currency, creates the PayPal sandbox order, and persists the order ID and intended operation before capture can start.
   **Verify:** Inspect the actual provider response and operation journal. Altering a client-supplied price must not silently change the server-owned ticket price.
 
-- [ ] **CC-009. Complete the buyer approval flow.**
+- [x] **CC-009. Complete the buyer approval flow.**
   **Done when:** Real sandbox buyer approval returns to the merchant correctly. Cancellation and abandonment remain explicit non-completed paths.
   **Verify:** Exercise approval and cancellation in a browser. Save the corresponding states and identifiers; a fabricated approval callback does not satisfy this check.
 
-- [ ] **CC-010. Capture and independently confirm payment.**
+- [x] **CC-010. Capture and independently confirm payment.**
   **Done when:** An approved sandbox order is actually captured and an independent provider read confirms the capture's status, amount, currency, and relation to the purchase.
   **Verify:** Save sanitized actual capture and retrieval records. An HTTP success response without the expected payment object is insufficient.
 
-- [ ] **CC-011. Grant the entitlement once.**
+- [x] **CC-011. Grant the entitlement once.**
   **Done when:** The healthy merchant creates exactly one usable ticket for the confirmed logical purchase. Re-entering fulfillment for that purchase does not create another ticket.
   **Verify:** Query the merchant's entitlement store before and after repeated fulfillment processing. Match the ticket to the confirmed purchase.
 
-- [ ] **CC-012. Record the first complete KERNEL checkout.**
+- [x] **CC-012. Record the first complete KERNEL checkout.**
   **Done when:** A real KERNEL session performs the complete owned merchant journey through sandbox approval, payment confirmation, and ticket access. Run, browser session, payment, and ticket IDs are correlated.
   **Verify:** Inspect the session recording and independent payment and merchant records. Local browser automation alone cannot establish the KERNEL claim.
 
 ### Phase 3: Compare customer, provider, and merchant evidence
 **Gate:** CrashCart can demonstrate the core disagreement before substantial dashboard polish.
 
-- [ ] **CC-013. Capture what the customer actually sees.**
+- [x] **CC-013. Capture what the customer actually sees.**
   **Done when:** Each run records the relevant browser state, navigation events, visible payment or delivery message, and links to its recording at the important transition.
   **Verify:** Compare the recorded customer view with the underlying browser run. A server-side status copied into a UI label is not independent browser evidence.
 
-- [ ] **CC-014. Reconcile from the order ID when the capture response is lost.**
+- [x] **CC-014. Reconcile from the order ID when the capture response is lost.**
   **Done when:** The investigator can retrieve the order, discover its capture, and confirm payment even when the merchant never learned the capture ID.
   **Verify:** Use a real sandbox capture with a deliberately lost merchant-facing response. Show that the persisted order ID is sufficient to find the confirmed payment.
 
-- [ ] **CC-015. Read actual merchant delivery state.**
+- [x] **CC-015. Read actual merchant delivery state.**
   **Done when:** A documented read-only adapter exposes the fixture's ticket or entitlement state by logical purchase. Unknown and missing records remain distinguishable.
   **Verify:** Compare the adapter response with the underlying merchant store for paid, unpaid, and missing-purchase cases. Do not invent a PayPal entitlement API.
 
-- [ ] **CC-016. Correlate events without inventing causality.**
+- [x] **CC-016. Correlate events without inventing causality.**
   **Done when:** Browser, provider, and merchant observations join through run, purchase, order, and operation identities. The trace distinguishes event time, observation time, and supported causal relationships.
   **Verify:** Inspect a delayed or reordered observation. The timeline must not claim that timestamp ordering alone proves cause across different systems.
 
-- [ ] **CC-017. Evaluate a fixed, time-bounded invariant.**
+- [x] **CC-017. Evaluate a fixed, time-bounded invariant.**
   **Done when:** Deterministic code checks payment status, integer minor-unit amounts, currency, and ticket count against a versioned invariant and explicit recovery window. It returns pass, fail, or inconclusive.
   **Verify:** Exercise a true mismatch, legitimate delayed delivery within the window, and missing provider evidence. The model cannot change the deadline after seeing the result.
 
-- [ ] **CC-018. Produce the first genuine mismatch report.**
+- [x] **CC-018. Produce the first genuine mismatch report.**
   **Done when:** A small controlled fault in the owned fixture leaves a completed sandbox payment with zero tickets beyond the deadline, and the report links all three observations.
   **Verify:** Inspect the actual capture, failed or unresolved customer experience, and merchant query. This first report can be deterministic; AI discovery is verified later.
 
 ### Phase 4: Controlled faults and reliable recovery
 **Gate:** Failures are deliberate and observable; the investigator's own behavior remains reliable.
 
-- [ ] **CC-019. Restrict faults to registered owned targets.**
+- [x] **CC-019. Restrict faults to registered owned targets.**
   **Done when:** Fault controls operate only on registered merchant fixtures in the permitted environment. They cannot modify PayPal's actual provider records or target an arbitrary host.
   **Verify:** An unregistered target is rejected before a network action. A valid owned fixture accepts an explicitly recorded fault configuration.
 
-- [ ] **CC-020. Execute a small typed fault grammar.**
+- [x] **CC-020. Execute a small typed fault grammar.**
   **Done when:** The harness can apply the planned response loss, controlled event delay or duplication, and merchant-process interruption at documented boundaries. Healthy behavior is the default.
   **Verify:** For each supported fault, save its configuration, activation, observed effect, and deactivation. Unsupported faults must produce an explicit error.
 
-- [ ] **CC-021. Preserve ambiguous payment outcomes.**
+- [x] **CC-021. Preserve ambiguous payment outcomes.**
   **Done when:** The investigator records a lost response as unresolved until independent reconciliation establishes payment state. It preserves the faulty merchant's incorrect message as evidence.
   **Verify:** Demonstrate an ambiguous successful capture and a genuinely unsuccessful operation. Neither may be inferred solely from a timeout.
 
-- [ ] **CC-022. Preserve payment operation identity across retries.**
+- [x] **CC-022. Preserve payment operation identity across retries.**
   **Done when:** A retry of the same semantic payment operation uses the persisted request ID and body, including after restart. A changed financial operation cannot masquerade as the same retry.
   **Verify:** Exercise a lost-response retry and inspect the operation journal and provider records. Respect the endpoint's documented idempotency support and retention limits.
 
@@ -217,46 +217,46 @@ The checker can validate record structure, files, hashes, modes, and completion 
 ### Phase 5: A real AI investigation
 **Gate:** The agent proposes and tests a hypothesis; deterministic code establishes the result.
 
-- [ ] **CC-025. Execute and record real model calls.**
+- [x] **CC-025. Execute and record real model calls.**
   **Done when:** An actual configured model processes the incident and produces structured output. Sanitized traces retain model identity, input versions, tool exchanges, and observed usage where available.
   **Verify:** Inspect a real invocation. Remove model access in a separate check and confirm the run reports the limitation instead of presenting a canned response as live reasoning.
 
-- [ ] **CC-026. Translate a promise into a validated invariant.**
+- [x] **CC-026. Translate a promise into a validated invariant.**
   **Done when:** The agent maps a customer's delivery promise to a bounded schema using actual adapter fields, amount, currency, and timing semantics. Missing information is surfaced.
   **Verify:** Try two meaningfully different promises and one ambiguous input. The proposed invariant must change appropriately and cannot invent an unobservable field.
 
-- [ ] **CC-027. Give the investigator bounded tools.**
+- [x] **CC-027. Give the investigator bounded tools.**
   **Done when:** Typed tools expose relevant browser, provider, merchant, and controlled-fixture operations. Tool outputs are validated, and the runtime agent cannot directly set a verified verdict.
   **Verify:** Inspect actual calls and reject malformed or out-of-scope requests. Provider objects and page text are treated as data, not new instructions.
 
-- [ ] **CC-028. Plan and execute an adaptive investigation.**
+- [x] **CC-028. Plan and execute an adaptive investigation.**
   **Done when:** The agent records a hypothesis and bounded experiment before executing it, then uses observations to select or revise subsequent steps.
   **Verify:** Change a relevant incident condition or fixture behavior. Confirm the investigation adapts rather than replaying an unchanged hardcoded diagnosis.
 
-- [ ] **CC-029. Ground the diagnosis in evidence.**
+- [x] **CC-029. Ground the diagnosis in evidence.**
   **Done when:** Every substantive finding references the observations and invariant that support it. Reports distinguish an observed mismatch, a hypothesis, and insufficient evidence.
   **Verify:** Remove a necessary observation in a controlled case. The agent must preserve uncertainty instead of inventing the missing payment or delivery fact.
 
-- [ ] **CC-030. Bound and stop investigations cleanly.**
+- [x] **CC-030. Bound and stop investigations cleanly.**
   **Done when:** Attempts, execution time, and model or browser usage have explicit budgets. Cancellation, malformed model output, provider errors, and exhausted budgets preserve collected evidence.
   **Verify:** Exercise a budget exhaustion and cancellation. Confirm termination is visible and cannot become a success result through a fallback response.
 
 ### Phase 6: Recorded replay, reduction, and executable export
 **Gate:** A failure can be reproduced from the delivered artifact, with its provenance intact.
 
-- [ ] **CC-031. Save a replayable evidence package.**
+- [x] **CC-031. Save a replayable evidence package.**
   **Done when:** The run captures the required request and response tape, fixture state, fault schedule, invariant version, source versions, and a sanitized artifact manifest with hashes.
   **Verify:** Reconstruct the inputs without relying on the original browser tab, process memory, or undocumented absolute paths.
 
-- [ ] **CC-032. Run genuinely offline recorded replay.**
+- [x] **CC-032. Run genuinely offline recorded replay.**
   **Done when:** Replay re-executes merchant behavior from the recorded inputs in an isolated namespace without new PayPal or KERNEL calls. Unsupported interactions fail explicitly.
   **Verify:** Execute with outbound network access disabled. Save the resulting trace and label it RECORDED_REPLAY throughout the UI and export.
 
-- [ ] **CC-033. Reduce by executing candidates.**
+- [x] **CC-033. Reduce by executing candidates.**
   **Done when:** The reducer removes unnecessary steps and reruns each accepted candidate while preserving valid prerequisites and the same payment-versus-delivery failure signature.
   **Verify:** Inspect rejected and accepted candidates. Removing buyer approval and causing a capture error must not count as reproducing a completed-payment delivery failure.
 
-- [ ] **CC-034. Report bounded reduction and repeatability honestly.**
+- [x] **CC-034. Report bounded reduction and repeatability honestly.**
   **Done when:** Reports include original and reduced sizes, candidate outcomes, search budget, termination reason, and whether repeated replay produced the same failure.
   **Verify:** Run a small predefined repeatability check. Use "smallest reproducer found within the search" and report flakiness when observed.
 
@@ -298,15 +298,15 @@ The checker can validate record structure, files, hashes, modes, and completion 
 ### Phase 8: The complete investigation experience in AG Studio
 **Gate:** A user can start, understand, inspect, and export an investigation through the actual product.
 
-- [ ] **CC-043. Start a new investigation from the product.**
+- [x] **CC-043. Start a new investigation from the product.**
   **Done when:** An operator selects the registered fixture, supplies a promise or incident, sees the relevant budget and invariant, and starts a uniquely identified run.
   **Verify:** Use the UI with new input. Confirm it creates a real backend investigation rather than opening an existing demonstration result.
 
-- [ ] **CC-044. Show truthful run states and controls.**
+- [x] **CC-044. Show truthful run states and controls.**
   **Done when:** Queued, running, awaiting approval, completed, failed, cancelled, and inconclusive states appear when applicable. Refreshing reconnects to persisted run state.
   **Verify:** Exercise an approval wait, an interruption, and cancellation. Confirm controls act on the selected run and existing evidence remains readable.
 
-- [ ] **CC-045. Build the actual AG Studio investigation workspace.**
+- [x] **CC-045. Build the actual AG Studio investigation workspace.**
   **Done when:** AG Studio renders custom payment-versus-delivery and run-comparison widgets using real investigation data, with a usable theme and layout.
   **Verify:** Inspect the implementation and exercise the running widgets. An ordinary table or dependency entry alone cannot satisfy the promised Studio integration.
 
@@ -314,7 +314,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** Selecting a run or finding synchronizes the customer observation, provider record, merchant entitlement, and timeline. Recorded replay and fresh sandbox provenance are visible.
   **Verify:** Switch between materially different runs and inspect all linked panels. Stale cross-run data or fabricated causal ordering fails this check.
 
-- [ ] **CC-047. Make Studio's agent interaction useful.**
+- [x] **CC-047. Make Studio's agent interaction useful.**
   **Done when:** A supported natural-language request queries or changes the actual investigation dashboard using Studio's agent integration, within the configured boundaries.
   **Verify:** Ask for completed payments with missing tickets, change the dataset, and repeat. Inspect the actual returned records and widget changes rather than accepting a canned answer.
 
@@ -325,7 +325,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
 ### Phase 9: Sponsor proof, durable orchestration, and portable delivery
 **Gate:** Claimed integrations are exercised, and the investigator can survive realistic interruptions.
 
-- [ ] **CC-049. Handle KERNEL interruption and recording provenance.**
+- [x] **CC-049. Handle KERNEL interruption and recording provenance.**
   **Done when:** Browser session failures are reflected in run state, partial evidence is retained, and recordings remain linked to the correct investigation. A local-browser fallback is labelled accurately.
   **Verify:** Interrupt one KERNEL session and inspect recovery or explicit failure. Confirm a saved session artifact is not presented as a new live run.
 
@@ -333,7 +333,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** A valid collection and environment template perform the documented API verification, extract relevant identifiers, and assert meaningful status, amount, and correlation conditions.
   **Verify:** Import and run the actual exported collection. Use fresh or explicitly selected observed IDs, and keep secrets outside the collection.
 
-- [ ] **CC-051. Prove APIMatic's actual development contribution.**
+- [x] **CC-051. Prove APIMatic's actual development contribution.**
   **Done when:** A real Context Plugin interaction informs a concrete PayPal implementation decision, and the sponsor ledger describes that development role accurately.
   **Verify:** Save sanitized request/output evidence and the resulting implementation reference. Do not describe the plugin as a runtime payment verifier.
 
@@ -341,18 +341,18 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** Durable run state, job ownership, pending approvals, and operation identities prevent an orchestration retry or competing worker from silently duplicating a payment or entitlement action.
   **Verify:** Run one focused concurrent-claim check and terminate a worker at a meaningful boundary. Inspect the resumed run, operation journal, and resulting counts.
 
-- [ ] **CC-053. Keep experiments isolated and evidence safe to share.**
+- [x] **CC-053. Keep experiments isolated and evidence safe to share.**
   **Done when:** Run namespaces, fault settings, secrets, and recordings remain isolated. Public exports exclude credentials and unnecessary buyer data. Recorded replay cannot accidentally fall through to a live provider.
   **Verify:** Run two successive experiments with different faults, inspect export contents, and prove an unsupported replay interaction fails without an external call.
 
-- [ ] **CC-054. Package portable runtime and access instructions.**
+- [x] **CC-054. Package portable runtime and access instructions.**
   **Done when:** The web application, API, database, and background worker have reproducible startup and configuration instructions on the selected environment. KERNEL and webhook reachability are addressed. Render is absent from runtime dependencies and deployment configuration.
   **Verify:** Start the documented package in a fresh environment or the chosen authorized deployment and exercise its health and reachability checks. Do not substitute a static frontend for the working backend.
 
 ### Phase 10: Independent verification and submission-ready handoff
 **Gate:** The product can be run and assessed from its delivered artifacts, with no unsupported completion claim.
 
-- [ ] **CC-055. Run meaningful automated release checks.**
+- [x] **CC-055. Run meaningful automated release checks.**
   **Done when:** The configured build, types, lint where applicable, and focused behavior checks pass. Required test groups execute actual cases, and any unavailable live integration is reported as unverified.
   **Verify:** Save the current-build output and executed/skipped counts. Separate offline CI from controlled sandbox verification; missing credentials cannot silently turn a required integration gate green.
 
@@ -364,7 +364,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** A reviewer inspects the frozen build, reruns the core regression and export, and challenges fresh-sandbox and sponsor claims. Every blocking finding is resolved or leaves the relevant box open.
   **Verify:** Save the review report with specific criteria, commands, inspected artifacts, and unresolved findings. A second summary of the builder's assertions is not a review.
 
-- [ ] **CC-058. Finish the repository and technical explanation.**
+- [x] **CC-058. Finish the repository and technical explanation.**
   **Done when:** Source, license, setup, architecture, adapter contract, environment template, limitations, reproduction commands, and a truthful sponsor-use ledger are complete. Published repository access is verified when publication is authorized.
   **Verify:** Inspect the actual repository from a clean reader's perspective. If required public access is still pending, keep the relevant release status open rather than claiming submission readiness.
 
