@@ -271,7 +271,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
 ### Phase 7: Held-out discovery and an unchanged test of the repair
 **Gate:** The core claim survives an experiment whose answer was withheld from the runtime agent.
 
-- [ ] **CC-037. Freeze a held-out evaluation protocol.**
+- [x] **CC-037. Freeze a held-out evaluation protocol.**
   **Done when:** The investigator version is frozen before a reviewer selects the held-out fixture variation. The seed, expected answer, and relevant defect source are excluded from the runtime agent's context and tools.
   **Verify:** Inspect the actual allowed inputs and fixture metadata for answer leakage. Record the expected mismatch outside the investigator's input path.
 
@@ -279,7 +279,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** The runtime agent finds the withheld mismatch without being supplied the bug identity or causal sequence during the run, and the deterministic checker verifies it.
   **Verify:** Save the full sanitized investigation and reveal the seed only after the verdict. Label this as seeded-defect discovery, not proof of unknown production-bug discovery.
 
-- [ ] **CC-039. Pass the clean and inconclusive controls.**
+- [x] **CC-039. Pass the clean and inconclusive controls.**
   **Done when:** A healthy merchant with legitimate delayed fulfillment passes, and a case with inadequate payment evidence remains inconclusive. No-failure-found reports disclose search limits.
   **Verify:** Run the predefined controls with unchanged invariants. "No failure found" must not become a universal safety guarantee.
 

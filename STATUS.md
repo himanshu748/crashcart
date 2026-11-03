@@ -1,12 +1,19 @@
 # CrashCart development status
 
-**Verified: 42/60. Zero stale requirements. Project incomplete.** Updated 3 November 2026.
+**Verified: 44/60. Zero stale requirements. Project incomplete.** Updated 4 November 2026 (India).
 
-The maintainer's private acceptance archive has 42 verified requirements. The 39
-reopened for the frontend and delivery-timing changes were independently
-revalidated against frozen source and preserved evidence. No new acceptance IDs
-were added. Original sandbox, model and replay observations retain their original
-execution dates and modes; a local check does not refresh them.
+The private acceptance archive has 44 verified requirements. This batch newly
+verified **CC-037** through document review of the actual frozen protocol,
+independent private selection and allowed-input audit, and **CC-039** through four
+local control cases. The controls used synthetic provider/model responses and a
+controlled clock through the production gate. They are not real AI discovery,
+Sandbox transactions or fresh repair proof. An independent reviewer accepted the
+actual canonical readback; source code, the 58 other records and all acceptance
+conditions stayed unchanged.
+
+The previous 42-requirement snapshot and its historical failures remain intact.
+Original Sandbox, model and replay observations retain their actual execution
+dates and modes; a local check does not refresh them.
 
 ## Working product
 
@@ -37,7 +44,7 @@ original full-suite test passed; its wrapper's documentation-only drift failure
 is retained. Actual [source CI](https://github.com/himanshu748/crashcart/actions/runs/41684204842)
 passed build/typecheck, 356 Python tests and 45 timing-model tests on
 [02762db7](https://github.com/himanshu748/crashcart/commit/02762db7d4a25ab6936bb6e3525eab9ba2dda6bd).
-This subsequent status/checklist update changes no runtime code. Source CI is
+This subsequent documentation/checklist update changes no runtime code. Source CI is
 separate from private acceptance, fresh sandbox verification and deployment.
 
 The curated public replay tape fails the defective variant with
@@ -50,7 +57,7 @@ The public checkout cannot reconstruct the full private acceptance archive.
 
 - Failed: CC-023, CC-035.
 - Blocked: CC-024, CC-036, CC-038, CC-041, CC-052, CC-056, CC-060.
-- Implemented but unverified: CC-037, CC-039, CC-046, CC-048, CC-050, CC-057.
+- Implemented but unverified: CC-046, CC-048, CC-050, CC-057.
 - In progress: CC-040, CC-042. Pending: CC-059. Stale: none.
 
 The main gaps are authentic payment-notification verification/resend/rejection,
@@ -59,7 +66,26 @@ comparison, the complete operator journey and an actual public demo video.
 All eight remote-browser grants are consumed and closed. Source publication does
 not renew spending or service access, deploy the product or submit a hackathon entry.
 
-Next: reconcile the existing Devpost draft with the refreshed product story and
-current public-source link after checking the official form. Real-provider gates
-need renewed bounded authorization and usable sandbox-buyer approval.
+[MILESTONES.md](MILESTONES.md) maps the remaining work into eight completion
+milestones and proposes four separate SaaS milestones. The proposals are outside
+the 60-check contract and do not authorize additional services or spending.
+
+Next: resolve the remote-session absolute lifetime/cost finding and prepare a
+reviewed notification/failure-recording experiment. Real-provider gates require
+renewed bounded authorization and usable Sandbox-buyer approval. Complete the
+missing fresh/operator footage before claiming the demo or final entry is ready.
 Render is excluded. Declare completion only after **CC-060** passes.
+
+## Submission preparation
+
+The [Devpost project page](https://devpost.com/software/crashcart-87asqz) has a
+product story and a landing-page image clearly labelled as an illustrative
+walkthrough. The hackathon entry is **DRAFT, 3/5 steps done**. Additional answers
+are saved; the final rules agreement remains unchecked and the required public
+video is absent. The repository instructions link is a local-build route, not a
+hosted service or proof of complete evaluator access.
+
+The private archive retains the source-bound protocol, selection/input audit,
+four control traces and independent acceptance readback. Raw/private evidence is
+not distributed here. Public source publication is separate from final entry,
+provider usage, deployment and acceptance completion.

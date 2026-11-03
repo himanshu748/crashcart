@@ -11,7 +11,8 @@ a Bryntum delivery-timing view.
 
 ![CrashCart landing page with its payment receipt and missing-ticket illustration. The diagram is an example test payment.](docs/images/landing.jpg)
 
-**In development. Read [STATUS.md](STATUS.md) for actual verified scope.**
+**In development. Read [STATUS.md](STATUS.md) for actual verified scope and
+[MILESTONES.md](MILESTONES.md) for the completion path and proposed SaaS roadmap.**
 No real payment, AI investigation, KERNEL recording, or AG Studio claim is implied
 by a local test. The release boundary is CC-060 in BUILD_CHECKLIST.md.
 
