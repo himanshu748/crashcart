@@ -115,6 +115,10 @@ function syncRecoveryNotice(data=current){
     text('message','Payment confirmed. Recovery issued one workshop ticket.');
 }
 function syncActionButtons(data=current){
+  const context=selected?`?run=${encodeURIComponent(selected)}`:'';
+  $('studio-link').href='/studio/index.html'+context;
+  $('delivery-timing-link').href='/deadlines/index.html'+context;
+  $('merchant-link').href='/shop'+context;
   $('start-button').disabled=active;
   const matched=!!data&&data.run.id===selected;
   if(!matched){$('busy').hidden=!active;for(const id of ['checkout','capture','reconcile','investigate','cancel-run'])$(id).disabled=true;return;}

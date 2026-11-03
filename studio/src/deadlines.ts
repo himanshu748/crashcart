@@ -94,13 +94,14 @@ function createChart(visible: TimingRow[]) {
   ] : []);
   scheduler = new Scheduler({
     appendTo: element('timing-chart'),
-    height: Math.min(520, 100 + Math.max(visible.length, 1) * 104),
+    height: Math.min(520, 100 + Math.max(visible.length, 1) * 80),
     readOnly: true,
     startDate: new Date(anchor), endDate: new Date(anchor + horizon),
     viewPreset: { id: 'delivery-seconds', tickWidth: 80, timeResolution: { unit: 'second', increment: 1 },
       headers: [{ unit: 'second', increment: horizon === 120000 ? 15 : 30, renderer: (start: Date) => String((start.getTime() - anchor) / 1000) + 's' }] },
-    rowHeight: 92,
-    barMargin: 10,
+    rowHeight: 80,
+    barMargin: 6,
+    eventLayout: 'pack',
     columns: [{ text: 'Saved investigation', field: 'name', width: 260, sortable: false,
       renderer: ({ value }: { value: unknown }) => StringHelper.encodeHtml(String(value)) }],
     resources: visible.map(row => ({ id: row.id, name: 'Case ' + row.reference + ' / ' + row.verdictLabel })),
@@ -150,6 +151,7 @@ function render() {
   if (chosen) showDetail(chosen); else detail.hidden = true;
 }
 async function load() {
+  clearTimeout(filterTimer);
   const myGeneration = ++generation;
   active?.abort();
   active = new AbortController();
@@ -178,7 +180,7 @@ async function load() {
     }
     if (myGeneration !== generation) return;
     rows = loaded;
-    latestScope = (listed.length > 60 ? 'Up to 60 records shown, including the selected case. ' : '') + (incomplete ? incomplete + ' records could not be loaded. ' : '') + 'Refresh reads saved records; it makes no new payment.';
+    latestScope = (listed.length > 60 ? 'Up to 60 records shown, including the selected case. ' : '') + (incomplete ? incomplete + (incomplete === 1 ? ' record could not be loaded. ' : ' records could not be loaded. ') : '') + 'Refresh reads saved records; it makes no new payment.';
     resultPanel.hidden = false;
     render();
   } catch (error) {

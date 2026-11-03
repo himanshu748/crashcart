@@ -23,8 +23,10 @@ real payment, model, browser or fresh-verification evidence.
 
 Local workbench tests passed 356 Python tests, 35 focused tests, four configured
 checks, 71 clean-package checks and 45 timing-model tests. These are local checks,
-not fresh PayPal or KERNEL execution. Current Bryntum keyboard, responsive and final
-frozen-source runtime verification remains pending. Private raw evidence, account
+not fresh PayPal or KERNEL execution. Targeted Bryntum keyboard, pointer, filtering, refresh, HTTP-error and
+320px/390px layout checks passed. Two asynchronous loading/navigation defects
+were reproduced and repaired. Independent final source/evidence review remains
+pending; the complete operator journey and accessibility validation remain open. Private raw evidence, account
 receipts, databases, credentials and recordings are intentionally unpublished.
 
 The sole curated historical replay tape under evidence/ is a sanitized test input.

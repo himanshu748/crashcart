@@ -9,6 +9,8 @@ one ticket within 60 seconds of completed capture. It is a private-workspace
 prototype, with a marketing page, investigation workspace, AG Studio records and
 a Bryntum delivery-timing view.
 
+![CrashCart landing page with its payment receipt and missing-ticket illustration. The diagram is an example test payment.](docs/images/landing.jpg)
+
 **In development. Read [STATUS.md](STATUS.md) for actual verified scope.**
 No real payment, AI investigation, KERNEL recording, or AG Studio claim is implied
 by a local test. The release boundary is CC-060 in BUILD_CHECKLIST.md.
