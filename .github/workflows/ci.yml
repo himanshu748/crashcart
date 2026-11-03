@@ -1,0 +1,26 @@
+name: Source behavior
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.15'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+      - run: npm ci --ignore-scripts --prefix studio
+      - run: npm run build --prefix studio
+      - run: npm run test:deadlines --prefix studio
+      - run: python -m compileall -q crashcart scripts tests
+      - run: node --check web/app.js
+      - run: node --check web/marketing.js
+      - run: python -m unittest discover -v
+      - run: python scripts/verify_foundation.py
+      - run: python -m crashcart prerequisites
+      # No provider credentials or external transactions. These local checks do
+      # not replace the strict private artifact/phase/release acceptance gate.

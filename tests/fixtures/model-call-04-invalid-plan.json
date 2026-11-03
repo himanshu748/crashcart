@@ -1,0 +1,29 @@
+{
+  "arguments": {
+    "fault": null,
+    "run_id": "run_e2dedff87e1b402f8dc5008a7f3d37b6"
+  },
+  "findings": [],
+  "hypothesis": "Unsupported promise: the promise requests two tickets (merchant.ticket_count=2) and EUR 45.00 (provider.currency=EUR, provider.amount=4500), both known-incompatible with the fixed ticket-v1 contract (USD 29.00, one ticket), and timing_trigger=buyer_approval, whose timing is not observable through the approved capture_completed adapter. No evidence is needed to classify incompatibility, but the requested trigger (buyer_approval) requires timing_start=null per the adapter rules.",
+  "missing_fields": [
+    "timing_trigger"
+  ],
+  "promise_status": "unsupported",
+  "proposed_invariant": {
+    "adapter_fields": {
+      "amount_minor": "provider.amount",
+      "currency": "provider.currency",
+      "delivered_at": "merchant.tickets[].created_at",
+      "ticket_count": "merchant.ticket_count",
+      "timing_start": "provider.capture_completed_at"
+    },
+    "amount_minor": 4500,
+    "currency": "EUR",
+    "deadline_seconds": 120,
+    "delivery_kind": "ticket",
+    "ticket_count": 2,
+    "timing_trigger": "buyer_approval",
+    "version": "promise-proposal-v1"
+  },
+  "tool": "finish"
+}

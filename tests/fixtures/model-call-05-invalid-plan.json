@@ -1,0 +1,34 @@
+{
+  "arguments": {
+    "fault": null,
+    "run_id": "run_9b2e50a44ae347e1b920996ac8cdf602"
+  },
+  "findings": [],
+  "hypothesis": "The customer states a workshop ticket purchase but omits amount, currency, ticket count, timing trigger, deadline, and delivery kind. The promise is ambiguous: requested values are missing. No evidence has been collected, so the next step is to read merchant ticket records to look for delivery evidence.",
+  "missing_fields": [
+    "amount_minor",
+    "currency",
+    "ticket_count",
+    "timing_trigger",
+    "timing_trigger",
+    "delivery_kind"
+  ],
+  "promise_status": "ambiguous",
+  "proposed_invariant": {
+    "adapter_fields": {
+      "amount_minor": "provider.amount",
+      "currency": "provider.currency",
+      "delivered_at": "merchant.tickets[].created_at",
+      "ticket_count": "merchant.ticket_count",
+      "timing_start": "provider.capture_completed_at"
+    },
+    "amount_minor": null,
+    "currency": null,
+    "deadline_seconds": null,
+    "delivery_kind": null,
+    "ticket_count": null,
+    "timing_trigger": null,
+    "version": "promise-proposal-v1"
+  },
+  "tool": "read_merchant"
+}

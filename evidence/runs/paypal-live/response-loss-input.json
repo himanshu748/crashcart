@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "source": {
+    "mode": "LIVE_SANDBOX",
+    "synthetic": false,
+    "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+    "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+    "order_id": "68425985KJ7663929",
+    "hashes": {
+      "crashcart/service.py": "bb62b0157d8bff0c3da22cace42b8783bd69c095ad56dc8afa22365398014076",
+      "crashcart/store.py": "b09c64ce28f62ce7d93abcf6d0a24b872b05c2886bbc5e084513ccb13ea1cbe3",
+      "crashcart/invariant.py": "01c7007132e939716f5236322f40b175058981d21334c7add57dd4bb20007fea",
+      "crashcart/replay.py": "4357c16d8b9429634c4e27f8745c20faf5d72c22472587c0b2a9393021343d98",
+      "migrations/001_initial.sql": "776c928b0b07da50b3773a9c2feae8dbe20670d553ebbe643683802767f74714"
+    }
+  },
+  "fixture_id": "workshop-v1",
+  "invariant": {
+    "version": "ticket-v1",
+    "amount": 2900,
+    "currency": "USD",
+    "ticket_count": 1,
+    "recovery_seconds": 60
+  },
+  "fault": {
+    "kind": "response_loss",
+    "merchant": "defective"
+  },
+  "operations": [
+    {
+      "kind": "order.create",
+      "request_id": "5c14f74b-455b-4cce-860a-ee73e697d5f5",
+      "body": {
+        "intent": "CAPTURE",
+        "purchase_units": [
+          {
+            "reference_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "custom_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "amount": {
+              "value": "29.00",
+              "currency_code": "USD"
+            }
+          }
+        ]
+      },
+      "original_body_sha256": "d70254bd17d9883a63a0487fc8c49880d59460f56fc1ccd030aef03ce6e3005e",
+      "redacted_fields": [
+        "payment_source"
+      ]
+    },
+    {
+      "kind": "order.capture",
+      "request_id": "cd37298e-0685-4272-9a57-f4a65a66d138",
+      "body": {},
+      "original_body_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "redacted_fields": []
+    }
+  ],
+  "records": [
+    {
+      "id": "event_36f46f4d4faf478699a63d16f8bcb3e1",
+      "source": "browser",
+      "event_type": "customer_observation",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": null,
+      "observed_at": "2026-10-22T09:06:41.560304Z",
+      "payload": {
+        "url_path": "/",
+        "visible_text": "CREATED | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | ",
+        "action": "investigation_created",
+        "browser_kind": "LOCAL_BROWSER"
+      }
+    },
+    {
+      "id": "event_2001bd2347a74eee8a692b3ff8d7295c",
+      "source": "provider",
+      "event_type": "order_created",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:07:08.411363Z",
+      "payload": {
+        "id": "68425985KJ7663929",
+        "status": "PAYER_ACTION_REQUIRED",
+        "intent": "CAPTURE",
+        "purchase_units": [
+          {
+            "reference_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "custom_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "amount": {
+              "value": "29.00",
+              "currency_code": "USD"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "event_b451bfa547e546c5bb08ee5fe36330e2",
+      "source": "browser",
+      "event_type": "customer_observation",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:07:08.528079Z",
+      "payload": {
+        "url_path": "/",
+        "visible_text": "awaiting_approval | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | ",
+        "action": "leaving_for_buyer_approval",
+        "browser_kind": "LOCAL_BROWSER"
+      }
+    },
+    {
+      "id": "event_358b37e5c83e4f308c542db88dcc7f15",
+      "source": "browser",
+      "event_type": "customer_observation",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:07:53.185231Z",
+      "payload": {
+        "url_path": "/return",
+        "visible_text": "awaiting_approval | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | Returned from PayPal. Confirming capture requires an independent approval read.",
+        "action": "buyer_returned",
+        "browser_kind": "LOCAL_BROWSER"
+      }
+    },
+    {
+      "id": "event_0fba780e47054b318f090f43b45d6fb1",
+      "source": "provider",
+      "event_type": "pre_capture_read",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:08:13.742869Z",
+      "payload": {
+        "id": "68425985KJ7663929",
+        "status": "APPROVED",
+        "intent": "CAPTURE",
+        "create_time": "2026-10-22T09:07:07Z",
+        "purchase_units": [
+          {
+            "reference_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "custom_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "amount": {
+              "value": "29.00",
+              "currency_code": "USD"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "event_e3330974e4914610a436a9ea3729d926",
+      "source": "harness",
+      "event_type": "fault_activated",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:08:13.802654Z",
+      "payload": {
+        "kind": "response_loss",
+        "merchant": "defective"
+      }
+    },
+    {
+      "id": "event_abf7dd87eaed4bd28d75c766aaf05c8e",
+      "source": "harness",
+      "event_type": "capture_transport_response",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:08:15.569766Z",
+      "payload": {
+        "id": "68425985KJ7663929",
+        "status": "COMPLETED",
+        "intent": "CAPTURE",
+        "create_time": "2026-10-22T09:07:07Z",
+        "update_time": "2026-10-22T09:08:14Z",
+        "purchase_units": [
+          {
+            "reference_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "custom_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "amount": {
+              "value": "29.00",
+              "currency_code": "USD"
+            },
+            "payments": {
+              "captures": [
+                {
+                  "id": "89W827457H563290W",
+                  "status": "COMPLETED",
+                  "custom_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+                  "create_time": "2026-10-22T09:08:14Z",
+                  "update_time": "2026-10-22T09:08:14Z",
+                  "amount": {
+                    "value": "29.00",
+                    "currency_code": "USD"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "event_fb4fec4e0354475b9c09630857c4184d",
+      "source": "browser",
+      "event_type": "customer_observation",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:08:15.859490Z",
+      "payload": {
+        "url_path": "/return",
+        "visible_text": "inconclusive | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | ",
+        "action": "capture_result",
+        "browser_kind": "LOCAL_BROWSER"
+      }
+    },
+    {
+      "id": "event_615fc2371c1a437082274586e3d8c846",
+      "source": "provider",
+      "event_type": "independent_order_read",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:09:57.966348Z",
+      "payload": {
+        "id": "68425985KJ7663929",
+        "status": "COMPLETED",
+        "intent": "CAPTURE",
+        "create_time": "2026-10-22T09:08:14Z",
+        "update_time": "2026-10-22T09:08:14Z",
+        "purchase_units": [
+          {
+            "reference_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "custom_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+            "amount": {
+              "value": "29.00",
+              "currency_code": "USD"
+            },
+            "payments": {
+              "captures": [
+                {
+                  "id": "89W827457H563290W",
+                  "status": "COMPLETED",
+                  "custom_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+                  "create_time": "2026-10-22T09:08:14Z",
+                  "update_time": "2026-10-22T09:08:14Z",
+                  "amount": {
+                    "value": "29.00",
+                    "currency_code": "USD"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "event_3bebcd2a50ff49c49e9316f9398a1fdc",
+      "source": "merchant",
+      "event_type": "entitlement_read",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:09:57.989888Z",
+      "payload": {
+        "known": true,
+        "tickets": [],
+        "observed_at": "2026-10-22T09:09:57.989252Z",
+        "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+        "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+        "order_id": "68425985KJ7663929",
+        "ticket_count": 0
+      }
+    },
+    {
+      "id": "event_0ec305c3bf3e4949ab9106da49d679c5",
+      "source": "browser",
+      "event_type": "customer_observation",
+      "run_id": "run_0844f20eed164dbdb3b38003859f04d5",
+      "purchase_id": "purchase_6c48c1b348dd48e3af8daf3d8d4861dc",
+      "order_id": "68425985KJ7663929",
+      "observed_at": "2026-10-22T09:09:58.042310Z",
+      "payload": {
+        "url_path": "/return",
+        "visible_text": "failed | FAIL: Confirmed payment has zero tickets beyond the fixed recovery deadline. | 0 tickets | ",
+        "action": "reconciliation_result",
+        "browser_kind": "LOCAL_BROWSER"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "event_36f46f4d4faf478699a63d16f8bcb3e1",
+      "kind": "observe_browser",
+      "record_id": "event_36f46f4d4faf478699a63d16f8bcb3e1"
+    },
+    {
+      "id": "event_2001bd2347a74eee8a692b3ff8d7295c",
+      "kind": "order_create",
+      "record_id": "event_2001bd2347a74eee8a692b3ff8d7295c"
+    },
+    {
+      "id": "event_b451bfa547e546c5bb08ee5fe36330e2",
+      "kind": "observe_browser",
+      "record_id": "event_b451bfa547e546c5bb08ee5fe36330e2"
+    },
+    {
+      "id": "event_358b37e5c83e4f308c542db88dcc7f15",
+      "kind": "observe_browser",
+      "record_id": "event_358b37e5c83e4f308c542db88dcc7f15"
+    },
+    {
+      "id": "event_0fba780e47054b318f090f43b45d6fb1",
+      "kind": "buyer_approval",
+      "record_id": "event_0fba780e47054b318f090f43b45d6fb1"
+    },
+    {
+      "id": "event_abf7dd87eaed4bd28d75c766aaf05c8e",
+      "kind": "capture",
+      "record_id": "event_abf7dd87eaed4bd28d75c766aaf05c8e"
+    },
+    {
+      "id": "event_fb4fec4e0354475b9c09630857c4184d",
+      "kind": "observe_browser",
+      "record_id": "event_fb4fec4e0354475b9c09630857c4184d"
+    },
+    {
+      "id": "event_615fc2371c1a437082274586e3d8c846",
+      "kind": "reconcile",
+      "record_id": "event_615fc2371c1a437082274586e3d8c846"
+    },
+    {
+      "id": "event_3bebcd2a50ff49c49e9316f9398a1fdc",
+      "kind": "observe_merchant",
+      "record_id": "event_3bebcd2a50ff49c49e9316f9398a1fdc"
+    }
+  ],
+  "evaluate_at": "2026-10-22T09:09:57.989252Z"
+}

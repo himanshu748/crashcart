@@ -1,0 +1,735 @@
+{
+  "CC-001": {
+    "phase": 1,
+    "allowed_modes": [
+      "DOCUMENT_REVIEW"
+    ],
+    "dependencies": [],
+    "independent_review_required": false
+  },
+  "CC-002": {
+    "phase": 1,
+    "allowed_modes": [
+      "LOCAL_TEST"
+    ],
+    "dependencies": [],
+    "independent_review_required": false
+  },
+  "CC-003": {
+    "phase": 1,
+    "allowed_modes": [
+      "DOCUMENT_REVIEW"
+    ],
+    "dependencies": [],
+    "independent_review_required": false
+  },
+  "CC-004": {
+    "phase": 1,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [],
+    "independent_review_required": false
+  },
+  "CC-005": {
+    "phase": 1,
+    "allowed_modes": [
+      "LOCAL_TEST"
+    ],
+    "dependencies": [
+      "CC-002"
+    ],
+    "independent_review_required": false
+  },
+  "CC-006": {
+    "phase": 1,
+    "allowed_modes": [
+      "LOCAL_TEST"
+    ],
+    "dependencies": [
+      "CC-003"
+    ],
+    "independent_review_required": false
+  },
+  "CC-007": {
+    "phase": 2,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-002",
+      "CC-005"
+    ],
+    "independent_review_required": false
+  },
+  "CC-008": {
+    "phase": 2,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-005",
+      "CC-007"
+    ],
+    "independent_review_required": false
+  },
+  "CC-009": {
+    "phase": 2,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-008"
+    ],
+    "independent_review_required": false
+  },
+  "CC-010": {
+    "phase": 2,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-009"
+    ],
+    "independent_review_required": false
+  },
+  "CC-011": {
+    "phase": 2,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-005",
+      "CC-010"
+    ],
+    "independent_review_required": false
+  },
+  "CC-012": {
+    "phase": 2,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-007",
+      "CC-008",
+      "CC-009",
+      "CC-010",
+      "CC-011"
+    ],
+    "independent_review_required": false
+  },
+  "CC-013": {
+    "phase": 3,
+    "allowed_modes": [
+      "LIVE_SANDBOX",
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-012"
+    ],
+    "independent_review_required": false
+  },
+  "CC-014": {
+    "phase": 3,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-005",
+      "CC-010"
+    ],
+    "independent_review_required": false
+  },
+  "CC-015": {
+    "phase": 3,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-005",
+      "CC-007"
+    ],
+    "independent_review_required": false
+  },
+  "CC-016": {
+    "phase": 3,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-013",
+      "CC-014",
+      "CC-015"
+    ],
+    "independent_review_required": false
+  },
+  "CC-017": {
+    "phase": 3,
+    "allowed_modes": [
+      "LOCAL_TEST"
+    ],
+    "dependencies": [
+      "CC-001",
+      "CC-015"
+    ],
+    "independent_review_required": false
+  },
+  "CC-018": {
+    "phase": 3,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-013",
+      "CC-014",
+      "CC-015",
+      "CC-017"
+    ],
+    "independent_review_required": false
+  },
+  "CC-019": {
+    "phase": 4,
+    "allowed_modes": [
+      "LOCAL_TEST"
+    ],
+    "dependencies": [
+      "CC-001",
+      "CC-005"
+    ],
+    "independent_review_required": false
+  },
+  "CC-020": {
+    "phase": 4,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-019"
+    ],
+    "independent_review_required": false
+  },
+  "CC-021": {
+    "phase": 4,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-010",
+      "CC-020"
+    ],
+    "independent_review_required": false
+  },
+  "CC-022": {
+    "phase": 4,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-008",
+      "CC-020",
+      "CC-021"
+    ],
+    "independent_review_required": false
+  },
+  "CC-023": {
+    "phase": 4,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-010",
+      "CC-011"
+    ],
+    "independent_review_required": false
+  },
+  "CC-024": {
+    "phase": 4,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-014",
+      "CC-020",
+      "CC-022",
+      "CC-023"
+    ],
+    "independent_review_required": false
+  },
+  "CC-025": {
+    "phase": 5,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-001"
+    ],
+    "independent_review_required": false
+  },
+  "CC-026": {
+    "phase": 5,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-017",
+      "CC-025"
+    ],
+    "independent_review_required": false
+  },
+  "CC-027": {
+    "phase": 5,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-017",
+      "CC-019"
+    ],
+    "independent_review_required": false
+  },
+  "CC-028": {
+    "phase": 5,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-020",
+      "CC-025",
+      "CC-026",
+      "CC-027"
+    ],
+    "independent_review_required": false
+  },
+  "CC-029": {
+    "phase": 5,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-016",
+      "CC-017",
+      "CC-028"
+    ],
+    "independent_review_required": false
+  },
+  "CC-030": {
+    "phase": 5,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-005",
+      "CC-027"
+    ],
+    "independent_review_required": false
+  },
+  "CC-031": {
+    "phase": 6,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-016",
+      "CC-018",
+      "CC-020"
+    ],
+    "independent_review_required": false
+  },
+  "CC-032": {
+    "phase": 6,
+    "allowed_modes": [
+      "RECORDED_REPLAY"
+    ],
+    "dependencies": [
+      "CC-031"
+    ],
+    "independent_review_required": false
+  },
+  "CC-033": {
+    "phase": 6,
+    "allowed_modes": [
+      "RECORDED_REPLAY"
+    ],
+    "dependencies": [
+      "CC-032"
+    ],
+    "independent_review_required": false
+  },
+  "CC-034": {
+    "phase": 6,
+    "allowed_modes": [
+      "RECORDED_REPLAY"
+    ],
+    "dependencies": [
+      "CC-033"
+    ],
+    "independent_review_required": false
+  },
+  "CC-035": {
+    "phase": 6,
+    "allowed_modes": [
+      "RECORDED_REPLAY"
+    ],
+    "dependencies": [
+      "CC-031",
+      "CC-033",
+      "CC-034"
+    ],
+    "independent_review_required": false
+  },
+  "CC-036": {
+    "phase": 6,
+    "allowed_modes": [
+      "RECORDED_REPLAY"
+    ],
+    "dependencies": [
+      "CC-035"
+    ],
+    "independent_review_required": false
+  },
+  "CC-037": {
+    "phase": 7,
+    "allowed_modes": [
+      "DOCUMENT_REVIEW"
+    ],
+    "dependencies": [
+      "CC-028",
+      "CC-029",
+      "CC-030"
+    ],
+    "independent_review_required": false
+  },
+  "CC-038": {
+    "phase": 7,
+    "allowed_modes": [
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-018",
+      "CC-028",
+      "CC-029",
+      "CC-037"
+    ],
+    "independent_review_required": false
+  },
+  "CC-039": {
+    "phase": 7,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-017",
+      "CC-037"
+    ],
+    "independent_review_required": false
+  },
+  "CC-040": {
+    "phase": 7,
+    "allowed_modes": [
+      "FRESH_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-034",
+      "CC-036",
+      "CC-038"
+    ],
+    "independent_review_required": false
+  },
+  "CC-041": {
+    "phase": 7,
+    "allowed_modes": [
+      "RECORDED_REPLAY"
+    ],
+    "dependencies": [
+      "CC-035"
+    ],
+    "independent_review_required": false
+  },
+  "CC-042": {
+    "phase": 7,
+    "allowed_modes": [
+      "FRESH_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-024",
+      "CC-040",
+      "CC-041"
+    ],
+    "independent_review_required": false
+  },
+  "CC-043": {
+    "phase": 8,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-005",
+      "CC-026",
+      "CC-027",
+      "CC-030"
+    ],
+    "independent_review_required": false
+  },
+  "CC-044": {
+    "phase": 8,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-043"
+    ],
+    "independent_review_required": false
+  },
+  "CC-045": {
+    "phase": 8,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-043"
+    ],
+    "independent_review_required": false
+  },
+  "CC-046": {
+    "phase": 8,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-016",
+      "CC-040",
+      "CC-045"
+    ],
+    "independent_review_required": false
+  },
+  "CC-047": {
+    "phase": 8,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-025",
+      "CC-045"
+    ],
+    "independent_review_required": false
+  },
+  "CC-048": {
+    "phase": 8,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-043",
+      "CC-044",
+      "CC-045",
+      "CC-046",
+      "CC-047"
+    ],
+    "independent_review_required": false
+  },
+  "CC-049": {
+    "phase": 9,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [
+      "CC-012",
+      "CC-044"
+    ],
+    "independent_review_required": false
+  },
+  "CC-050": {
+    "phase": 9,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "LIVE_SANDBOX",
+      "FRESH_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-010",
+      "CC-035"
+    ],
+    "independent_review_required": false
+  },
+  "CC-051": {
+    "phase": 9,
+    "allowed_modes": [
+      "SPONSOR_SERVICE"
+    ],
+    "dependencies": [],
+    "independent_review_required": false
+  },
+  "CC-052": {
+    "phase": 9,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "LIVE_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-005",
+      "CC-022",
+      "CC-024"
+    ],
+    "independent_review_required": false
+  },
+  "CC-053": {
+    "phase": 9,
+    "allowed_modes": [
+      "LOCAL_TEST",
+      "RECORDED_REPLAY"
+    ],
+    "dependencies": [
+      "CC-019",
+      "CC-031",
+      "CC-032"
+    ],
+    "independent_review_required": false
+  },
+  "CC-054": {
+    "phase": 9,
+    "allowed_modes": [
+      "LOCAL_TEST"
+    ],
+    "dependencies": [
+      "CC-002"
+    ],
+    "independent_review_required": false
+  },
+  "CC-055": {
+    "phase": 10,
+    "allowed_modes": [
+      "LOCAL_TEST"
+    ],
+    "dependencies": [
+      "CC-006"
+    ],
+    "independent_review_required": false
+  },
+  "CC-056": {
+    "phase": 10,
+    "allowed_modes": [
+      "FRESH_SANDBOX"
+    ],
+    "dependencies": [
+      "CC-036",
+      "CC-042",
+      "CC-048",
+      "CC-054"
+    ],
+    "independent_review_required": false
+  },
+  "CC-057": {
+    "phase": 10,
+    "allowed_modes": [
+      "DOCUMENT_REVIEW"
+    ],
+    "dependencies": [
+      "CC-050",
+      "CC-055",
+      "CC-056"
+    ],
+    "independent_review_required": true
+  },
+  "CC-058": {
+    "phase": 10,
+    "allowed_modes": [
+      "DOCUMENT_REVIEW"
+    ],
+    "dependencies": [
+      "CC-051",
+      "CC-054"
+    ],
+    "independent_review_required": false
+  },
+  "CC-059": {
+    "phase": 10,
+    "allowed_modes": [
+      "DOCUMENT_REVIEW"
+    ],
+    "dependencies": [
+      "CC-038",
+      "CC-040",
+      "CC-042",
+      "CC-048",
+      "CC-058"
+    ],
+    "independent_review_required": false
+  },
+  "CC-060": {
+    "phase": 10,
+    "allowed_modes": [
+      "DOCUMENT_REVIEW"
+    ],
+    "dependencies": [
+      "CC-001",
+      "CC-002",
+      "CC-003",
+      "CC-004",
+      "CC-005",
+      "CC-006",
+      "CC-007",
+      "CC-008",
+      "CC-009",
+      "CC-010",
+      "CC-011",
+      "CC-012",
+      "CC-013",
+      "CC-014",
+      "CC-015",
+      "CC-016",
+      "CC-017",
+      "CC-018",
+      "CC-019",
+      "CC-020",
+      "CC-021",
+      "CC-022",
+      "CC-023",
+      "CC-024",
+      "CC-025",
+      "CC-026",
+      "CC-027",
+      "CC-028",
+      "CC-029",
+      "CC-030",
+      "CC-031",
+      "CC-032",
+      "CC-033",
+      "CC-034",
+      "CC-035",
+      "CC-036",
+      "CC-037",
+      "CC-038",
+      "CC-039",
+      "CC-040",
+      "CC-041",
+      "CC-042",
+      "CC-043",
+      "CC-044",
+      "CC-045",
+      "CC-046",
+      "CC-047",
+      "CC-048",
+      "CC-049",
+      "CC-050",
+      "CC-051",
+      "CC-052",
+      "CC-053",
+      "CC-054",
+      "CC-055",
+      "CC-056",
+      "CC-057",
+      "CC-058",
+      "CC-059"
+    ],
+    "independent_review_required": true
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "CrashCart observed sandbox API verification",
+    "description": "Read-only verification export. Local smoke proves health and fixture only. Observed sandbox evidence requires an explicitly selected real paid run and independent provider retrieval. It does not initiate a payment, replay a regression, or turn stored evidence into fresh sandbox execution. CC-050 remains unverified until this actual collection passes against approved real observations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Local smoke",
+      "description": "No credentials or payment calls. A pass establishes only API/database health and the fixed merchant fixture.",
+      "item": [
+        {
+          "name": "API and database health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/healthz",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Health responds HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Application identifies CrashCart\", () => pm.expect(body.service).to.eql(\"crashcart\"));",
+                  "pm.test(\"API and actual database are healthy\", () => {pm.expect(body.status).to.eql(\"ok\"); pm.expect(body.database).to.eql(\"ok\");});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Owned workshop fixture",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/fixture",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Registered fixture responds HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Owned workshop fixture identity is fixed\", () => pm.expect(body.id).to.eql(\"workshop-v1\"));",
+                  "pm.test(\"Server owns exact 2900 USD price\", () => {pm.expect(body.amount_minor).to.eql(2900); pm.expect(body.currency).to.eql(\"USD\");});",
+                  "pm.test(\"Recovery deadline remains sixty seconds\", () => pm.expect(body.recovery_seconds).to.eql(60));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Observed sandbox evidence",
+      "description": "Select an existing approved, captured and independently reconciled sandbox run. Missing token, run or proof makes this folder fail; no integration assertions are skipped. Requests are GET only.",
+      "item": [
+        {
+          "name": "Inspect independently observed paid run",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/runs/{{run_id}}",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{operator_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Explicit observed run ID is required\", () => pm.expect(pm.environment.get(\"run_id\"), \"Set run_id to an existing actual sandbox run\").to.match(/^run_[a-zA-Z0-9]+$/));",
+                  "pm.test(\"Operator token must be configured privately\", () => pm.expect(pm.environment.get(\"operator_token\"), \"Set operator_token in a private environment\").to.be.a(\"string\").and.not.eql(\"\"));",
+                  "pm.collectionVariables.unset(\"selected_purchase_id\");",
+                  "pm.collectionVariables.unset(\"selected_order_id\");",
+                  "pm.collectionVariables.unset(\"selected_capture_id\");"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Selected actual sandbox run responds HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "const run = body.run || {};",
+                  "const purchase = body.purchase || {};",
+                  "const merchant = body.merchant || {};",
+                  "pm.test(\"Stored run matches selection and actual sandbox mode\", () => {pm.expect(run.id).to.eql(pm.environment.get(\"run_id\")); pm.expect([\"LIVE_SANDBOX\", \"FRESH_SANDBOX\"]).to.include(run.mode);});",
+                  "pm.test(\"Payment was independently confirmed\", () => {pm.expect(purchase.payment_confirmed).to.eql(1); pm.expect(purchase.payment_state).to.eql(\"COMPLETED\"); pm.expect(purchase.order_id).to.be.a(\"string\").and.not.eql(\"\"); pm.expect(purchase.capture_id).to.be.a(\"string\").and.not.eql(\"\");});",
+                  "pm.test(\"Confirmed purchase is exactly 2900 USD\", () => {pm.expect(purchase.amount).to.eql(2900); pm.expect(purchase.currency).to.eql(\"USD\");});",
+                  "pm.test(\"Run, logical purchase and merchant identities correlate\", () => {pm.expect(purchase.run_id).to.eql(run.id); pm.expect(run.purchase_id).to.eql(purchase.id); pm.expect(merchant.purchase_id).to.eql(purchase.id); pm.expect(merchant.run_id).to.eql(run.id); pm.expect(merchant.order_id).to.eql(purchase.order_id);});",
+                  "const reads = (Array.isArray(body.events) ? body.events : []).filter(event => event.source === \"provider\" && event.event_type === \"independent_order_read\" && event.run_id === run.id && event.purchase_id === purchase.id && event.order_id === purchase.order_id && event.payload && event.payload.id === purchase.order_id);",
+                  "pm.test(\"Independent provider retrieval event exists\", () => pm.expect(reads.length, \"A stored top-level success label is insufficient\").to.be.above(0));",
+                  "const read = reads[reads.length - 1] || {};",
+                  "const order = read.payload || {};",
+                  "const units = order.purchase_units || [];",
+                  "const unit = units[0] || {};",
+                  "const captures = (unit.payments || {}).captures || [];",
+                  "const capture = captures[0] || {};",
+                  "pm.test(\"Retrieved completed order contains one correlated purchase unit\", () => {pm.expect(order.id).to.eql(purchase.order_id); pm.expect(order.status).to.eql(\"COMPLETED\"); pm.expect(order.intent).to.eql(\"CAPTURE\"); pm.expect(units).to.have.lengthOf(1); pm.expect(unit.reference_id).to.eql(purchase.id); pm.expect(unit.custom_id).to.eql(purchase.id); pm.expect(unit.amount).to.deep.eql({currency_code:\"USD\", value:\"29.00\"});});",
+                  "pm.test(\"Independent nested capture confirms exact amount and identity\", () => {pm.expect(captures).to.have.lengthOf(1); pm.expect(capture.id).to.eql(purchase.capture_id); pm.expect(capture.status).to.eql(\"COMPLETED\"); pm.expect(capture.amount).to.deep.eql({currency_code:\"USD\", value:\"29.00\"}); pm.expect(capture.update_time).to.eql(purchase.capture_completed_at); pm.expect(Number.isFinite(Date.parse(capture.update_time))).to.eql(true); pm.expect(Date.parse(read.observed_at)).to.be.at.least(Date.parse(capture.update_time));});",
+                  "pm.test(\"Logical capture journal matches the independently observed order\", () => {const operations = (body.operations || []).filter(operation => operation.semantic_key === \"order.capture\" && operation.purchase_id === purchase.id); pm.expect(operations).to.have.lengthOf(1); pm.expect(operations[0].request_id).to.be.a(\"string\").and.not.eql(\"\");});",
+                  "const expected = pm.environment.get(\"expected_ticket_count\");",
+                  "pm.test(\"An explicit expected ticket count is supplied\", () => pm.expect(expected).to.match(/^[0-9]+$/));",
+                  "pm.test(\"Actual merchant count matches the chosen experiment\", () => {pm.expect(merchant.known).to.eql(true); pm.expect(merchant.ticket_count).to.eql(Number(expected)); pm.expect(merchant.tickets).to.have.lengthOf(Number(expected)); for (const ticket of merchant.tickets) {pm.expect(ticket.purchase_id).to.eql(purchase.id); pm.expect(ticket.id).to.be.a(\"string\").and.not.eql(\"\");}});",
+                  "if (typeof purchase.id === \"string\" && typeof purchase.order_id === \"string\" && typeof purchase.capture_id === \"string\") {pm.collectionVariables.set(\"selected_purchase_id\", purchase.id); pm.collectionVariables.set(\"selected_order_id\", purchase.order_id); pm.collectionVariables.set(\"selected_capture_id\", purchase.capture_id);}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Read actual merchant entitlement",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/api/merchant/{{selected_purchase_id}}",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{operator_token}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Read-only merchant adapter responds HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Merchant adapter retains selected run and payment correlation\", () => {pm.expect(body.known).to.eql(true); pm.expect(body.run_id).to.eql(pm.environment.get(\"run_id\")); pm.expect(body.purchase_id).to.eql(pm.collectionVariables.get(\"selected_purchase_id\")); pm.expect(body.order_id).to.eql(pm.collectionVariables.get(\"selected_order_id\"));});",
+                  "pm.test(\"Stored usable tickets match the explicit expected count\", () => {const expected = Number(pm.environment.get(\"expected_ticket_count\")); pm.expect(body.ticket_count).to.eql(expected); pm.expect(body.tickets).to.have.lengthOf(expected); for (const ticket of body.tickets) {pm.expect(ticket.purchase_id).to.eql(body.purchase_id); pm.expect(ticket.id).to.be.a(\"string\").and.not.eql(\"\");}});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

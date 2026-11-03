@@ -1,0 +1,35 @@
+{
+  "arguments": {
+    "fault": null,
+    "run_id": "run_4f97529ceecc4901a478316830264ebf"
+  },
+  "findings": [
+    {
+      "claim": "",
+      "evidence_ids": [
+        "event_d75621dc01ec4506974c9d53f8939f0c"
+      ],
+      "kind": "observed"
+    }
+  ],
+  "hypothesis": "HYPOTHESIS: The promise requests USD 2900 minor units, exactly one workshop ticket, delivered within 60 seconds of confirmed provider capture completion, delivery_kind=ticket. Provider capture is confirmed complete at 2026-10-22T09:31:52Z for USD 2900, so the remaining gap is the merchant ticket record (count and created_at).",
+  "missing_fields": [],
+  "promise_status": "compatible",
+  "proposed_invariant": {
+    "adapter_fields": {
+      "amount_minor": "provider.amount",
+      "currency": "provider.currency",
+      "delivered_at": "merchant.tickets[].created_at",
+      "ticket_count": "merchant.ticket_count",
+      "timing_start": "provider.capture_completed_at"
+    },
+    "amount_minor": 2900,
+    "currency": "USD",
+    "deadline_seconds": 60,
+    "delivery_kind": "ticket",
+    "ticket_count": 1,
+    "timing_trigger": "capture_completed",
+    "version": "promise-proposal-v1"
+  },
+  "tool": "read_merchant"
+}

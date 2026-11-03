@@ -1,0 +1,43 @@
+{
+  "arguments": {
+    "fault": null,
+    "run_id": "run_26527844901f4357bd1aa06ebf2a9673"
+  },
+  "findings": [
+    {
+      "claim": "No collected evidence IDs exist yet (available_evidence_ids is empty), so no observation can be cited.",
+      "evidence_ids": [],
+      "kind": "hypothesis"
+    },
+    {
+      "claim": "The untrusted promise omits the monetary amount, ticket count, delivery timestamp field, and an explicit timing anchor word; only 'USD 29' and 'within 60 seconds of confirmed payment' are stated, and the payment-confirmation wording is not the approved adapter trigger 'capture_completed'.",
+      "evidence_ids": [],
+      "kind": "hypothesis"
+    }
+  ],
+  "hypothesis": "Hypothesis: a live read of the workshop-v1 merchant/provider/browser will surface whether provider.capture_completed_at exists and whether exactly one ticket is recorded, which is needed to test the promise against the approved invariant.",
+  "missing_fields": [
+    "amount_minor",
+    "ticket_count",
+    "delivery_kind",
+    "timing_trigger"
+  ],
+  "promise_status": "ambiguous",
+  "proposed_invariant": {
+    "adapter_fields": {
+      "amount_minor": "provider.amount",
+      "currency": "provider.currency",
+      "delivered_at": "merchant.tickets[].created_at",
+      "ticket_count": "merchant.ticket_count",
+      "timing_start": null
+    },
+    "amount_minor": null,
+    "currency": "USD",
+    "deadline_seconds": 60,
+    "delivery_kind": null,
+    "ticket_count": null,
+    "timing_trigger": null,
+    "version": "promise-proposal-v1"
+  },
+  "tool": "propose_fault"
+}

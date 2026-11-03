@@ -1,0 +1,30 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.venv/
+var/
+node_modules/
+.DS_Store
+*.sqlite*
+coverage/
+playwright-report/
+test-results/
+
+# Private operational and submission material stays out of the public source.
+.devpost-hackathon-state.json
+devpost-submission.md
+Untitled.txt
+evidence/*
+!evidence/README.md
+!evidence/runs/
+evidence/runs/*
+!evidence/runs/paypal-live/
+evidence/runs/paypal-live/*
+!evidence/runs/paypal-live/response-loss-input.json
+# Build locally from the pinned public package lock; never commit licensed overlays.
+web/studio/*
+!web/studio/index.html
+web/deadlines/*
+!web/deadlines/index.html
