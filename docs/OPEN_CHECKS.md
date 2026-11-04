@@ -49,7 +49,7 @@ has separate public tests and does not inherit live-provider acceptance.
   duration and public access before accepting CC-059. Never publish credentials.
 
 CC-023 can be exercised independently through local Safari without KERNEL. A
-scoped notification-only harness is being prepared; it is not activated. Safari
+scoped notification-only harness passed independent frozen-source review and 12 offline tests after a receipt-publication fix; it is not activated. Safari
 control recovered after two timeouts, but Developer still redirects to sign-in; authenticated buyer access is unconfirmed.
 No fresh payment, public window or webhook has started. This is an access and
 verification blocker, not a request for another blanket approval.
