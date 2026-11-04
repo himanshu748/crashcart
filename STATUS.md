@@ -1,91 +1,36 @@
 # CrashCart development status
 
-**Verified: 44/60. Zero stale requirements. Project incomplete.** Updated 4 November 2026 (India).
+**Verified: 44/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 4 November 2026 (India).
 
-The private acceptance archive has 44 verified requirements. This batch newly
-verified **CC-037** through document review of the actual frozen protocol,
-independent private selection and allowed-input audit, and **CC-039** through four
-local control cases. The controls used synthetic provider/model responses and a
-controlled clock through the production gate. They are not real AI discovery,
-Sandbox transactions or fresh repair proof. An independent reviewer accepted the
-actual canonical readback; source code, the 58 other records and all acceptance
-conditions stayed unchanged.
+## Current delivery
 
-The previous 42-requirement snapshot and its historical failures remain intact.
-Original Sandbox, model and replay observations retain their actual execution
-dates and modes; a local check does not refresh them.
+The public build now includes an interactive product landing page and a keyless recorded investigation. Run `sh scripts/judge.sh`: it recomputes the defective and healthy outcomes, opens the finished investigation, and provides source records and an executable replay. No PayPal, AG Studio, KERNEL or model key is needed for this path.
 
-## Working product
+The curated early-read recording produces **FAIL / paid_without_ticket** for the faulty store and **PASS / ticket_delivered_once_on_time** for the healthy store at +32.261423 seconds. The original late recording remains unchanged and still fails correctly. No invariant, deadline or historical failure was relaxed.
 
-- Product landing page with an interactive, labelled example and private workspace.
-- Owned workshop test-payment investigation, durable records and fixed rules:
-  USD 29 buys exactly one ticket within 60 seconds of completed payment.
-- Actual AG Studio widgets/native saved-record queries and a real MIT Bryntum
-  Community Scheduler delivery-timing view with filters and case links.
-- Bounded investigation, recorded offline replay and inspection/regression exports.
+The existing live workspace and sponsor integrations remain separate and require their own configuration, licences and permitted service use. The keyless page does not execute an AI investigation or a fresh payment. Hosted output is computed during site build, local output at app launch.
 
-A clean clone starts with an empty database and requires its own configuration,
-applicable licences and authorized service usage. Credentials, the private AG
-licence/build, databases, raw evidence and recordings are intentionally excluded.
-Missing access is explicit; an example is not a real payment.
+## Verification
 
-## What was checked
+Final local suite: **367 tests in 55.789s, OK**. Replay suite: **3 tests in 0.329s, OK**. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
 
-Twenty-five local UI workflow groups passed: SDK Enter/Space/pointer activation,
-filters, refresh, signed-out and HTTP-error states, an unpaid create/cancel/export
-journey, real licensed Studio rendering and 1280px/390px/320px layouts. Two loading
-and navigation races were reproduced, repaired and checked with the same inputs.
-Checks retain their actual revisions; not all ran on the final revision. Full
-operator/fresh comparison and accessibility validation remain open.
+No new CC requirement is marked verified in this batch. The private archive remains 44/60; additive keyless code is separately tested and does not inherit live-provider acceptance. Frozen live runtime and prior acceptance source remain unchanged. Historical CC-037 document review and CC-039 synthetic control proof retain their original scope and dates.
 
-Local checks include 356 Python tests, 45 timing-model tests, 35 focused tests,
-four configured commands, 71 package checks and 27 asset/provenance checks. The
-original full-suite test passed; its wrapper's documentation-only drift failure
-is retained. Actual [source CI](https://github.com/himanshu748/crashcart/actions/runs/41684204842)
-passed build/typecheck, 356 Python tests and 45 timing-model tests on
-[02762db7](https://github.com/himanshu748/crashcart/commit/02762db7d4a25ab6936bb6e3525eab9ba2dda6bd).
-This subsequent documentation/checklist update changes no runtime code. Source CI is
-separate from private acceptance, fresh sandbox verification and deployment.
+## Open acceptance
 
-The curated public replay tape fails the defective variant with
-`paid_without_ticket`; its healthy variant also fails with `ticket_delivered_late`.
-It is not the separate private early-read tape whose healthy comparison passed.
-Do not relax the deadline or infer repair success from a recorded failure.
-The public checkout cannot reconstruct the full private acceptance archive.
+- Failed: **CC-023, CC-035**.
+- Blocked: **CC-024, CC-036, CC-038, CC-041, CC-052, CC-056, CC-060**.
+- Implemented but unverified: **CC-046, CC-048, CC-050, CC-057**.
+- In progress: **CC-040, CC-042**. Pending: **CC-059**. Stale: **none** on the frozen build.
 
-## Remaining work
+[OPEN_CHECKS.md](docs/OPEN_CHECKS.md) records each exact missing result and dependency. Main gaps: authentic notification/resend/rejection, original fault recording, held-out discovery, fresh repaired purchase, full operator journey and actual public video. All eight old remote-browser grants are consumed. AWS infrastructure under $10/month is now permitted; this does not renew model or browser test usage. No AWS resources or spending were needed for this batch. Render remains excluded.
 
-- Failed: CC-023, CC-035.
-- Blocked: CC-024, CC-036, CC-038, CC-041, CC-052, CC-056, CC-060.
-- Implemented but unverified: CC-046, CC-048, CC-050, CC-057.
-- In progress: CC-040, CC-042. Pending: CC-059. Stale: none.
+Part F is not started because Part A cannot pass yet. No prize-lane feature is used to bypass that prerequisite.
 
-The main gaps are authentic payment-notification verification/resend/rejection,
-the required original failure recording, held-out discovery, the fresh repaired
-comparison, the complete operator journey and an actual public demo video.
-All eight remote-browser grants are consumed and closed. Source publication does
-not renew spending or service access, deploy the product or submit a hackathon entry.
+## Hosting and submission
 
-[MILESTONES.md](MILESTONES.md) maps the remaining work into eight completion
-milestones and proposes four separate SaaS milestones. The proposals are outside
-the 60-check contract and do not authorize additional services or spending.
+Free GitHub Pages publishing is prepared and independently reviewed; target publication/readback is pending. It will host the recorded project demonstration, not the live backend. [Hosting details](docs/HOSTING.md).
 
-Next: resolve the remote-session absolute lifetime/cost finding and prepare a
-reviewed notification/failure-recording experiment. Real-provider gates require
-renewed bounded authorization and usable Sandbox-buyer approval. Complete the
-missing fresh/operator footage before claiming the demo or final entry is ready.
-Render is excluded. Declare completion only after **CC-060** passes.
+MIT is present in LICENSE and detected by GitHub. [README](README.md) includes the 60-second path and private Sandbox buyer placeholders. [Demo script](docs/DEMO_SCRIPT.md) is 160 seconds; the owner still needs to record it. [Submission draft](docs/SUBMISSION.md) is prepared and qualified by actual evidence. No final Devpost submission was made; the existing entry remains a draft.
 
-## Submission preparation
-
-The [Devpost project page](https://devpost.com/software/crashcart-87asqz) has a
-product story and a landing-page image clearly labelled as an illustrative
-walkthrough. The hackathon entry is **DRAFT, 3/5 steps done**. Additional answers
-are saved; the final rules agreement remains unchecked and the required public
-video is absent. The repository instructions link is a local-build route, not a
-hosted service or proof of complete evaluator access.
-
-The private archive retains the source-bound protocol, selection/input audit,
-four control traces and independent acceptance readback. Raw/private evidence is
-not distributed here. Public source publication is separate from final entry,
-provider usage, deployment and acceptance completion.
+Next: publish the fully tested recorded build and inspect the hosted result, then obtain the bounded provider path and required buyer approval to close the original live gates. Declare completion only after **CC-060** passes.

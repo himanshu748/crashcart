@@ -35,8 +35,8 @@ has separate public tests and does not inherit live-provider acceptance.
 ## Owner and external dependencies
 
 - A usable owned Sandbox buyer and its actual approval for required new test payments.
-- A permitted, bounded real browser/model execution path. No spending or service
-  usage is authorized by the current task. Eight previous remote session grants
+- A permitted, bounded real browser/model execution path. No new model/browser test usage is authorized. AWS infrastructure under
+  $10/month is now allowed, but does not renew those provider grants. Eight previous remote session grants
   are consumed. KERNEL has been asked to clarify an absolute lifetime/billing
   bound; the sent message is not a provider answer.
 - The original faulty-checkout recording, or access/authorization to create a
@@ -46,5 +46,4 @@ has separate public tests and does not inherit live-provider acceptance.
 - The final demonstration video, which the owner will record; review its contents,
   duration and public access before accepting CC-059. Never publish credentials.
 
-Part F remains gated: Part A is incomplete under the no-service/no-spending
-constraint. No prize-lane feature is added to bypass these dependencies.
+Part F remains gated: Part A is incomplete while the required live-provider evidence remains blocked. No prize-lane feature is added to bypass these dependencies.
