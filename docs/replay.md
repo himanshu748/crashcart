@@ -2,12 +2,39 @@
 
 This module re-executes payment confirmation and entitlement writes in a new SQLite database using the actual `Store` implementation, then runs the frozen `ticket-v1` invariant. It never reads a saved verdict. It imports no network client or live provider adapter and cannot fall through to PayPal or KERNEL.
 
-The public checkout includes one curated historical response-loss input tape at
-`evidence/runs/paypal-live/response-loss-input.json`. Its original source mode,
-identities and times are preserved. Executing it now is **recorded replay**, not
-a new transaction or fresh repair verification. Raw provider receipts and
-recordings remain private. The tape's schema and hashes cannot independently
-authenticate its historical origin. Synthetic unit fixtures remain `LOCAL_TEST`.
+The public checkout includes two exact historical response-loss recordings.
+`early-response-loss-input.json` is the recommended repair comparison:
+**defective fails with no ticket; healthy delivers one ticket on time**.
+`response-loss-input.json` retains the original late-read case: both variants
+fail, and healthy reports `ticket_delivered_late`. That failure is intentional.
+Both files live under `evidence/runs/paypal-live/`; original identities and times
+are preserved. Neither recording was edited to produce a pass.
+
+Executing either now is **recorded replay**, not a new transaction or fresh
+repair verification. The early case's first usable payment read is about 32.26
+seconds after capture, so the real fulfillment code can deliver before the
+unchanged 60-second deadline. Its defective variant still delivers zero tickets.
+Raw provider receipts and original recordings are not included. The schema and
+hashes alone cannot authenticate historical origin. Synthetic unit fixtures
+remain `LOCAL_TEST`.
+
+## Reproduce the repair comparison
+
+```sh
+python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant defective
+# Expected exit 1: FAIL / paid_without_ticket / 0 tickets
+python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant healthy
+# Expected exit 0: PASS / ticket_delivered_once_on_time / 1 ticket
+python3 -m unittest discover -s tests -p test_public_replay.py -v
+# Three tests, including preservation of the old late failure.
+```
+
+Both executions use the exact same input, invariant, deadline and evaluation
+horizon. The new tape's file SHA-256 is
+`07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288`;
+the original late tape remains
+`c82dc46148d2dc985de77d051177c67d1d9c7d7d9a760242d2a3758e3d91f88e`.
+
 
 The invariant and recorded schedule stay fixed for both merchant variants. If
 the first usable reconciliation is after the deadline, even the healthy variant

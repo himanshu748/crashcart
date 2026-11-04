@@ -23,6 +23,7 @@ evidence/runs/*
 !evidence/runs/paypal-live/
 evidence/runs/paypal-live/*
 !evidence/runs/paypal-live/response-loss-input.json
+!evidence/runs/paypal-live/early-response-loss-input.json
 # Build locally from the pinned public package lock; never commit licensed overlays.
 web/studio/*
 !web/studio/index.html
