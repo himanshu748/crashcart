@@ -1,0 +1,17 @@
+**
+!crashcart/
+!crashcart/*.py
+!migrations/
+!migrations/*.sql
+!web/
+!web/judge/
+!web/judge/**
+!evidence/
+!evidence/runs/
+!evidence/runs/paypal-live/
+!evidence/runs/paypal-live/early-response-loss-input.json
+!LICENSE
+!deploy/
+!deploy/judge/
+!deploy/judge/Dockerfile
+!deploy/judge/Caddyfile

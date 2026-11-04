@@ -1,0 +1,18 @@
+{
+	admin off
+	email {$ACME_EMAIL}
+}
+
+{$JUDGE_DOMAIN} {
+	root * /srv
+	@writes not method GET HEAD
+	respond @writes "Recorded review is read-only" 405
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+		Cache-Control no-store
+	}
+	header /downloads/* Content-Disposition "attachment"
+	file_server
+}

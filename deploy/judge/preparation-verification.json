@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-04",
+  "prior_failure": {
+    "attempt": 1,
+    "error": "FileNotFoundError: migrations/001_initial.sql absent from minimal build context",
+    "fix": "Add migrations/ COPY and Docker ignore allowlist; no runtime or validator change"
+  },
+  "minimal_build_context_export": {
+    "attempt": 2,
+    "exit_code": 0,
+    "file_count": 11,
+    "mode": "RECORDED_REPLAY",
+    "computed_when": "site build",
+    "network_calls": 0,
+    "outcomes": {
+      "defective": [
+        "FAIL",
+        "paid_without_ticket",
+        0
+      ],
+      "healthy": [
+        "PASS",
+        "ticket_delivered_once_on_time",
+        1
+      ]
+    }
+  },
+  "budget_json": {
+    "exit_code": 0,
+    "thresholds": [
+      20,
+      50
+    ],
+    "scope": "account-wide",
+    "unit": "USD",
+    "period": "MONTHLY"
+  },
+  "invalid_email_rejected": true,
+  "documented_shell_syntax": {
+    "blocks": 9,
+    "exit_code": 0
+  },
+  "docker_build": "NOT_RUN: Docker daemon unavailable; Compose plugin absent. No image pulled.",
+  "aws_and_https": "NOT_RUN: Owner-run deployment plan only; no resources, alerts or TLS target created.",
+  "source_sha256": {
+    "deploy/judge/Caddyfile": "ad8ee9e888e9ed14c71de9e4968d5a1818d9be090e59f4fcbf1d30035f73ae37",
+    "deploy/judge/Dockerfile": "2850486211b920f1ef9b9ec43b81cc3ead6225c47c46f8fb438f9843ada61317",
+    "deploy/judge/Dockerfile.dockerignore": "ee0ee061e04a330e1fa97c0c9e2b3a623dfb091cf42162a9d99a8bd1beb5010f",
+    "deploy/judge/budget-files.py": "e72e4c209f011e5e7a6aed434f2e877119c88f94590df2159d22fda287f029fb",
+    "deploy/judge/compose.yaml": "601a96f95570e7fa7b673be550a9f5643844335ce5f00c85bc4b00c42680668a"
+  }
+}

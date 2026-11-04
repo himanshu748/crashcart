@@ -1,0 +1,31 @@
+services:
+  judge:
+    image: crashcart-judge:reviewed
+    build:
+      context: ../..
+      dockerfile: deploy/judge/Dockerfile
+    restart: unless-stopped
+    environment:
+      JUDGE_DOMAIN: ${JUDGE_DOMAIN:?Set the owned public DNS name}
+      ACME_EMAIL: ${ACME_EMAIL:?Set the certificate contact email}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 1.0
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "2"
+volumes:
+  caddy_data:
+  caddy_config:
