@@ -44,3 +44,9 @@ A separate healthy-store experiment now verifies **CC-024**: after a real USD29 
 **CC-052** is also verified after independent review of the existing 17 local concurrency/restart groups and the newly satisfied CC-024 prerequisite. Those local tests used synthetic payment replies with actual competing workers, SIGKILL, default lease expiry and resumed work; they retained one ticket and the same operation identities. They are not evidence of concurrent live capture requests. The earlier interrupted recovery attempt and historical recovery proof remain preserved separately.
 
 Next: recover or produce the original faulty-checkout recording and its matching regression artifact for CC-035, then complete held-out discovery, the fresh repaired checkout comparison, operator acceptance and the public video. Part F remains gated. Declare completion only after **CC-060** passes.
+
+## Submission-only scope — step 1
+
+**47/60 verified; no new CC checkmarks.** On 4 November the owner froze features and deferred non-gating original-contract work. CC-035/036/038/041/046/048/050/056/057/060 remain failed, blocked or unverified as listed above, but are outside this submission sprint in their full original scope. CC-040/042 are also deferred. The public video part of CC-059 remains gating. This is a scope decision, not acceptance or removal of the original requirements.
+
+Triage and official-requirement mapping: [submission gates](docs/SUBMISSION_GATES.md). Next: finish clean-clone/runtime evidence, public AI evidence, AWS plan and submission assets. No new payment, model call or recorder experiment is needed for the deferred checks.
