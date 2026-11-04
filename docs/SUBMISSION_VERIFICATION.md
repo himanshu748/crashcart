@@ -77,3 +77,7 @@ The existing [GitHub Pages demo](https://himanshu748.github.io/crashcart/) retur
 ## Preserved failed attempt
 
 The first dependency extraction exhausted local disk space (`ENOSPC`). The simultaneous first full-suite attempt consequently errored and exited120; the first app launch could not create a temporary directory. Only this attempt's incomplete `node_modules` directory was removed. The second suite, dependency installation, build and app launch passed after space became available. Private raw failed logs remain under `var/submission-v61/results/`; their failure summary is retained publicly. No source, expected result or deadline was changed to address the environmental failure.
+
+## Final pre-push check
+
+After all five parts were committed, source `dcd8332190150eee6cf3c7751234ffcb8fcefbe3` passed the full suite again: **367 tests in 60.852s, OK**; replay: **3 tests in 0.552s, OK**. [Exact final commands and output](../evidence/runs/submission-ready/final-verification.json). The independently reviewed deployment plan remains unexecuted on AWS. No application runtime files changed from the clean-clone revision.

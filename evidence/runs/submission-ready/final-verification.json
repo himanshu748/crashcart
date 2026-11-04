@@ -1,0 +1,25 @@
+{
+  "tested_commit": "dcd8332190150eee6cf3c7751234ffcb8fcefbe3",
+  "runtime_changed_since_clean_clone": false,
+  "full_suite": {
+    "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v",
+    "tests": 367,
+    "seconds": 60.852,
+    "exit_code": 0,
+    "output": "Ran 367 tests in 60.852s\n\nOK"
+  },
+  "replay": {
+    "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin python3 -m unittest discover -s tests -p 'test_public_replay.py' -v",
+    "tests": 3,
+    "seconds": 0.552,
+    "exit_code": 0,
+    "output": "Ran 3 tests in 0.552s\n\nOK"
+  },
+  "contract_verified": 47,
+  "contract_total": 60,
+  "newly_verified_cc_ids": [],
+  "feature_freeze": true,
+  "aws_deployed": false,
+  "budget_alerts_created": false,
+  "devpost_submitted": false
+}
