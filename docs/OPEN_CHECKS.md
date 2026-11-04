@@ -1,7 +1,7 @@
 # Remaining acceptance work
 
-Reviewed 4 November 2026. The frozen private build has **44/60 verified** and
-zero stale requirements. No open requirement was promoted by this review.
+Reviewed 4 November 2026. The frozen private build has **45/60 verified** and
+zero stale requirements. CC-023 was accepted after actual Sandbox execution and independent review.
 The public repository includes reproducible source tests and curated replay
 inputs; it excludes the private acceptance archive. Additive judge-access work
 has separate public tests and does not inherit live-provider acceptance.
@@ -10,7 +10,6 @@ has separate public tests and does not inherit live-provider acceptance.
 
 | Check | Root cause / current result | Exact next evidence |
 | --- | --- | --- |
-| CC-023 | The earlier webhook verifier reserialized signed JSON. Current code preserves the original bytes. Fresh local raw-body and PayPal-adapter regressions passed: 27 tests, 0 failures. | Authentic corrected PayPal notification, exact-event resend, bad-signature rejection, and inspected ticket count. Local injected responses cannot accept this check. |
 | CC-035 | The regression reproduces the failure, but its original faulty-checkout recording is absent. | Recover the original hash-bound recording, or record a new authorized faulty checkout and export its matching regression. An unrelated healthy recording or local replay video is insufficient. |
 
 ## Remaining checks, in requested order
@@ -24,7 +23,7 @@ has separate public tests and does not inherit live-provider acceptance.
 | CC-048 / implemented, unverified | Complete operator start/inspect/cancel/compare/export, keyboard and responsive states; depends on CC-046. |
 | CC-050 / implemented, unverified | CC-035. Current exported collection was rerun on 4 November: 7 local assertions and 48 assertions across six GETs of copied historical Sandbox records passed; missing proof failed as expected. This is stored-observation inspection, not a fresh provider call. |
 | CC-057 / implemented, unverified | Independent complete acceptance review; depends on CC-050, CC-055 and CC-056. Partial review is not full acceptance. |
-| CC-024 / blocked | Actual payment interruption/restart recovery; supporting historical proof exists, but CC-023 remains unmet. |
+| CC-024 / blocked | A current-source LIVE_SANDBOX healthy crash/restart test. Historical FRESH_SANDBOX proof passed for its old source, but that mode is not allowed for this check and service/store/PayPal code has changed. CC-023 is now verified; do not relabel or promote the older proof. |
 | CC-036 / blocked | Complete regression from a clean environment; depends on the missing recording in CC-035. |
 | CC-038 / blocked | Real agent discovery of the still-undisclosed seeded defect and deterministic confirmation. Protocol CC-037 is accepted; known-case queries are not discovery. |
 | CC-041 / blocked | Same meaningful regression fails defective and passes repaired, with complete CC-035 artifact. A newly executed recorded pair is useful but does not replace the recording. |
@@ -48,10 +47,12 @@ has separate public tests and does not inherit live-provider acceptance.
 - The final demonstration video, which the owner will record; review its contents,
   duration and public access before accepting CC-059. Never publish credentials.
 
-CC-023 can be exercised independently through local Safari without KERNEL. A
-scoped notification-only harness passed independent frozen-source review and 12 offline tests after a receipt-publication fix; it is not activated. Safari
-control recovered after two timeouts, but Developer still redirects to sign-in; authenticated buyer access is unconfirmed.
-No fresh payment, public window or webhook has started. This is an access and
-verification blocker, not a request for another blanket approval.
+CC-023 is now verified: authentic first event and provider resend each returned
+200 after signature verification; a controlled invalid-signature probe returned
+400 without state changes. The intentionally defective merchant retained zero
+tickets, one capture operation and one verified event. Exact webhook deletion and
+process/tunnel cleanup passed. [Sanitized evidence](../evidence/runs/judge-ready/webhook-v55.json).
+The old signature failure remains recorded. Safari buyer sign-in succeeded;
+that one checkout and its temporary window are consumed and closed.
 
 Part F remains gated: Part A is incomplete while the required live-provider evidence remains blocked. No prize-lane feature is added to bypass these dependencies.

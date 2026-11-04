@@ -1,6 +1,6 @@
 # CrashCart development status
 
-**Verified: 44/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 4 November 2026 (India).
+**Verified: 45/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 4 November 2026 (India).
 
 ## Current delivery
 
@@ -12,20 +12,20 @@ The existing live workspace and sponsor integrations remain separate and require
 
 ## Verification
 
-Latest local suite on Python 3.13.15: **367 tests in 56.845s, OK**. Replay suite: **3 tests in 1.703s, OK**. An initial attempt accidentally used unsupported Python 3.9 and failed; its output is retained. No source or assertion was changed for the corrected run. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
+Latest local suite on Python 3.13.15: **367 tests in 115.397s, OK**. Replay suite: **3 tests in 0.858s, OK**. An initial attempt accidentally used unsupported Python 3.9 and failed; its output is retained. No source or assertion was changed for the corrected run. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
 
 Current Postman execution passed seven local assertions and 48 assertions against copied historical Sandbox observations (six GETs); missing proof still fails. No new provider call was made. CC-050 remains open through CC-035.
 
-No new CC requirement is marked verified in this batch. The private archive remains 44/60; additive keyless code is separately tested and does not inherit live-provider acceptance. Frozen live runtime and prior acceptance source remain unchanged. Historical CC-037 document review and CC-039 synthetic control proof retain their original scope and dates.
+Newly verified: **CC-023**, from actual PayPal Sandbox ingress and independent review. Authentic first delivery and exact-event resend both verified; the controlled invalid-signature probe was rejected without changing counts. One capture operation, one event and the expected zero tickets for the intentionally defective store remained. The private archive now records 45/60; additive keyless code is separately tested and does not inherit live-provider acceptance. Frozen live runtime and prior acceptance source remain unchanged. Historical CC-037 document review and CC-039 synthetic control proof retain their original scope and dates.
 
 ## Open acceptance
 
-- Failed: **CC-023, CC-035**.
+- Failed: **CC-035**.
 - Blocked: **CC-024, CC-036, CC-038, CC-041, CC-052, CC-056, CC-060**.
 - Implemented but unverified: **CC-046, CC-048, CC-050, CC-057**.
 - In progress: **CC-040, CC-042**. Pending: **CC-059**. Stale: **none** on the frozen build.
 
-[OPEN_CHECKS.md](docs/OPEN_CHECKS.md) records each exact missing result and dependency. Main gaps: authentic notification/resend/rejection, original fault recording, held-out discovery, fresh repaired purchase, full operator journey and actual public video. All eight old remote-browser grants are consumed. AWS infrastructure under $10/month is now permitted; this does not renew model or browser test usage. No AWS resources or spending were needed for this batch. Render remains excluded.
+[OPEN_CHECKS.md](docs/OPEN_CHECKS.md) records each exact missing result and dependency. Main gaps: current-source healthy process recovery, original fault recording, held-out discovery, fresh repaired purchase, full operator journey and actual public video. All eight old remote-browser grants are consumed. AWS infrastructure under $10/month is now permitted; this does not renew model or browser test usage. No AWS resources or spending were needed for this batch. Render remains excluded.
 
 Part F is not started because Part A cannot pass yet. No prize-lane feature is used to bypass that prerequisite.
 
@@ -37,6 +37,6 @@ MIT is present in LICENSE and detected by GitHub. [README](README.md) includes t
 
 The AG Studio trial is already privately configured and valid through 17 December 2026. No replacement licence is needed. KERNEL has not yet answered the absolute lifetime/billing-bound question. Continuation is authorized, but it does not resolve that technical limit.
 
-The local-Safari-only notification harness passed independent review after fixing an atomic receipt-publication race; 12 offline tests passed. This is preparation, not live notification proof.
+The local Safari test completed one USD29 Sandbox payment and authentic notification verification. The exact temporary webhook was deleted and confirmed absent; gateway, worker and tunnel exited in 211.213 seconds, inside the 30-minute window. No KERNEL session, model call or paid service was used. The earlier signed-JSON failure remains preserved. [Sanitized live evidence](evidence/runs/judge-ready/webhook-v55.json).
 
-Next: execute CC-023 after Safari Developer/buyer access is available, binding the existing authorization to the reviewed source and fresh readiness. Safari control recovered after two timeouts, but refreshing Developer still redirected to sign-in after the reported verification. No test payment, public window or webhook was started. This route needs no paid browser session. Record actual notification, exact-event resend, rejected signature and ticket counts before accepting CC-023. Declare completion only after **CC-060** passes.
+Next: prepare and independently review a current-source LIVE_SANDBOX healthy process-interruption test for CC-024, then bind a separate one-checkout execution scope. Its historical FRESH_SANDBOX proof used older service/store/PayPal source and cannot be relabelled or promoted. CC-052 remains blocked by CC-024. Safari sign-in is now working; the completed notification window is closed. Declare completion only after **CC-060** passes.

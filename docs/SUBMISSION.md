@@ -73,8 +73,9 @@ healthy ticket too late. We kept that failure and its timestamps intact, then
 added a separately recorded earlier observation for the meaningful repair
 comparison. The same rule rejects late delivery and accepts timely delivery.
 
-Real-provider proof also has limits: authentic webhook verification and the
-complete freshly recorded repair journey remain open. We expose those gaps
+Authentic Sandbox webhook delivery and exact-event resend now pass signature
+verification, while an invalid-signature probe is rejected without state changes.
+The complete freshly recorded repair journey remains open. We expose those gaps
 rather than treating a local test or attractive screenshot as a live pass.
 
 ## Accomplishments
@@ -95,7 +96,7 @@ production readiness, customer adoption, full acceptance or a deployed repair.
 
 ## What's next
 
-Complete authentic notification verification and the original/fresh checkout
+Complete current-source healthy recovery and the original/fresh checkout
 recordings; finish the operator acceptance journey and public video. After those
 gates pass, evaluate a narrowly scoped sponsor-powered improvement. Broader
 merchant onboarding, team access and support-system handoff are future work,

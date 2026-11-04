@@ -1,0 +1,110 @@
+{
+  "check": "CC-023",
+  "date": "2026-11-04",
+  "mode": "LIVE_SANDBOX",
+  "source": "Unchanged36-file reviewed execution snapshot; raw private acceptance archive retained",
+  "result": "PASS_INDEPENDENTLY_REVIEWED",
+  "run_id": "run_f07d7794052b45efaba565d1c1bb9976",
+  "capture_id": "1JT40023CB251853S",
+  "amount": "29.00",
+  "currency": "USD",
+  "merchant": "intentionally defective",
+  "expected_ticket_count": 0,
+  "receipts": [
+    {
+      "receipt_id": "39af6189d92a43c9bd9698e840811f44",
+      "observed_at": "2026-11-04T09:41:27.200725+00:00",
+      "body_sha256": "d170b16874873ceabddaa163b05f03de6618a7038d020bbe250d9147f611faa4",
+      "headers_sha256": "ee4e7c36e6f7d67bb477862ce8ca7d2e374043b675269228548383086fd2e54c",
+      "event_id": "WH-9HM73745PF242911D-9NF27052PK415683T",
+      "event_type": "PAYMENT.CAPTURE.COMPLETED",
+      "order_id": "4Y383185CG475813Y",
+      "purchase_id": "purchase_6b303edebb184167acdba270cc68b124",
+      "run_id": "run_f07d7794052b45efaba565d1c1bb9976",
+      "response_status": 400,
+      "signature_verified": false,
+      "duplicate": null,
+      "counts_before": {
+        "tickets": 0,
+        "capture_operations": 1,
+        "event_rows": 1
+      },
+      "counts_after": {
+        "tickets": 0,
+        "capture_operations": 1,
+        "event_rows": 1
+      },
+      "role": "CONTROLLED_INVALID_SIGNATURE_PROBE",
+      "raw_ingress_mode": "ACTUAL_PROVIDER_DELIVERY",
+      "mode": "CONTROLLED_INVALID_SIGNATURE_PROBE"
+    },
+    {
+      "receipt_id": "a22e50e6da5d4280bcca6d5676a523d8",
+      "observed_at": "2026-11-04T09:41:37.519344+00:00",
+      "body_sha256": "d170b16874873ceabddaa163b05f03de6618a7038d020bbe250d9147f611faa4",
+      "headers_sha256": "b805a180b46ac7f501b36e77d91b02330244b7a5db5a13ff93b0cb8366818b35",
+      "event_id": "WH-9HM73745PF242911D-9NF27052PK415683T",
+      "event_type": "PAYMENT.CAPTURE.COMPLETED",
+      "order_id": "4Y383185CG475813Y",
+      "purchase_id": "purchase_6b303edebb184167acdba270cc68b124",
+      "run_id": "run_f07d7794052b45efaba565d1c1bb9976",
+      "response_status": 200,
+      "signature_verified": true,
+      "duplicate": true,
+      "counts_before": {
+        "tickets": 0,
+        "capture_operations": 1,
+        "event_rows": 1
+      },
+      "counts_after": {
+        "tickets": 0,
+        "capture_operations": 1,
+        "event_rows": 1
+      },
+      "role": "AUTHENTIC_PAYPAL_RESEND",
+      "raw_ingress_mode": "ACTUAL_PROVIDER_DELIVERY",
+      "mode": "AUTHENTIC_PAYPAL_RESEND"
+    },
+    {
+      "receipt_id": "cfb7f3bbbbc646a68b0f5dc4b188906e",
+      "observed_at": "2026-11-04T09:41:21.069054+00:00",
+      "body_sha256": "d170b16874873ceabddaa163b05f03de6618a7038d020bbe250d9147f611faa4",
+      "headers_sha256": "253e05fb426ec4b479b011a1c7f0117c8c5c505a819267743a9141012d4d173b",
+      "event_id": "WH-9HM73745PF242911D-9NF27052PK415683T",
+      "event_type": "PAYMENT.CAPTURE.COMPLETED",
+      "order_id": "4Y383185CG475813Y",
+      "purchase_id": "purchase_6b303edebb184167acdba270cc68b124",
+      "run_id": "run_f07d7794052b45efaba565d1c1bb9976",
+      "response_status": 200,
+      "signature_verified": true,
+      "duplicate": false,
+      "counts_before": {
+        "tickets": 0,
+        "capture_operations": 1,
+        "event_rows": 0
+      },
+      "counts_after": {
+        "tickets": 0,
+        "capture_operations": 1,
+        "event_rows": 1
+      },
+      "role": "AUTHENTIC_PAYPAL_FIRST_DELIVERY",
+      "raw_ingress_mode": "ACTUAL_PROVIDER_DELIVERY",
+      "mode": "AUTHENTIC_PAYPAL_FIRST_DELIVERY"
+    }
+  ],
+  "cleanup": {
+    "webhook": "DELETED_AND_ABSENT",
+    "elapsed_seconds": 211.213,
+    "within_approved_window": true,
+    "all_local_processes_exited": true,
+    "cloudflared_exited": true
+  },
+  "reviewer": "/root/cc023_live_review",
+  "limits": [
+    "First and resend are authentic provider deliveries. Invalid-signature probe was initiated locally against real ingress.",
+    "No KERNEL or model call was used.",
+    "Historical failures remain retained.",
+    "Does not verify healthy process recovery, fresh repaired checkout, browser video or CC060."
+  ]
+}

@@ -206,7 +206,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** A retry of the same semantic payment operation uses the persisted request ID and body, including after restart. A changed financial operation cannot masquerade as the same retry.
   **Verify:** Exercise a lost-response retry and inspect the operation journal and provider records. Respect the endpoint's documented idempotency support and retention limits.
 
-- [ ] **CC-023. Authenticate and deduplicate webhook processing.**
+- [x] **CC-023. Authenticate and deduplicate webhook processing.**
   **Done when:** Real webhook ingress verifies signatures. Controlled duplicate processing uses a distinct fixture path after verification and does not disable external signature checks.
   **Verify:** Save one authentic sandbox event, rejection of an invalid signature, and a repeated-event trace with the expected entitlement count.
 
