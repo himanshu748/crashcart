@@ -1,6 +1,6 @@
 # CrashCart development status
 
-**Verified: 45/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 4 November 2026 (India).
+**Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 4 November 2026 (India).
 
 ## Current delivery
 
@@ -16,16 +16,16 @@ Latest local suite on Python 3.13.15: **367 tests in 115.397s, OK**. Replay suit
 
 Current Postman execution passed seven local assertions and 48 assertions against copied historical Sandbox observations (six GETs); missing proof still fails. No new provider call was made. CC-050 remains open through CC-035.
 
-Newly verified: **CC-023**, from actual PayPal Sandbox ingress and independent review. Authentic first delivery and exact-event resend both verified; the controlled invalid-signature probe was rejected without changing counts. One capture operation, one event and the expected zero tickets for the intentionally defective store remained. The private archive now records 45/60; additive keyless code is separately tested and does not inherit live-provider acceptance. Frozen live runtime and prior acceptance source remain unchanged. Historical CC-037 document review and CC-039 synthetic control proof retain their original scope and dates.
+Earlier in this batch, **CC-023** was verified through actual PayPal Sandbox ingress and independent review. Authentic first delivery and exact-event resend both verified; the controlled invalid-signature probe was rejected without changing counts. One capture operation, one event and the expected zero tickets for the intentionally defective store remained. That notification batch brought the private archive to 45/60; additive keyless code is separately tested and does not inherit live-provider acceptance. Frozen live runtime and prior acceptance source remain unchanged. Historical CC-037 document review and CC-039 synthetic control proof retain their original scope and dates.
 
 ## Open acceptance
 
 - Failed: **CC-035**.
-- Blocked: **CC-024, CC-036, CC-038, CC-041, CC-052, CC-056, CC-060**.
+- Blocked: **CC-036, CC-038, CC-041, CC-056, CC-060**.
 - Implemented but unverified: **CC-046, CC-048, CC-050, CC-057**.
 - In progress: **CC-040, CC-042**. Pending: **CC-059**. Stale: **none** on the frozen build.
 
-[OPEN_CHECKS.md](docs/OPEN_CHECKS.md) records each exact missing result and dependency. Main gaps: current-source healthy process recovery, original fault recording, held-out discovery, fresh repaired purchase, full operator journey and actual public video. All eight old remote-browser grants are consumed. AWS infrastructure under $10/month is now permitted; this does not renew model or browser test usage. No AWS resources or spending were needed for this batch. Render remains excluded.
+[OPEN_CHECKS.md](docs/OPEN_CHECKS.md) records each exact missing result and dependency. Main gaps: original fault recording, held-out discovery, fresh repaired purchase, full operator journey and actual public video. All eight old remote-browser grants are consumed. AWS infrastructure under $10/month is now permitted; this does not renew model or browser test usage. No AWS resources or spending were needed for this batch. Render remains excluded.
 
 Part F is not started because Part A cannot pass yet. No prize-lane feature is used to bypass that prerequisite.
 
@@ -39,4 +39,8 @@ The AG Studio trial is already privately configured and valid through 17 Decembe
 
 The local Safari test completed one USD29 Sandbox payment and authentic notification verification. The exact temporary webhook was deleted and confirmed absent; gateway, worker and tunnel exited in 211.213 seconds, inside the 30-minute window. No KERNEL session, model call or paid service was used. The earlier signed-JSON failure remains preserved. [Sanitized live evidence](evidence/runs/judge-ready/webhook-v55.json).
 
-Next: prepare and independently review a current-source LIVE_SANDBOX healthy process-interruption test for CC-024, then bind a separate one-checkout execution scope. Its historical FRESH_SANDBOX proof used older service/store/PayPal source and cannot be relabelled or promoted. CC-052 remains blocked by CC-024. Safari sign-in is now working; the completed notification window is closed. Declare completion only after **CC-060** passes.
+A separate healthy-store experiment now verifies **CC-024**: after a real USD29 PayPal Sandbox capture, the checkout process exited before ticket creation. A restarted worker independently checked the same payment and delivered exactly one ticket **4.067743 seconds** after capture, within the unchanged 60-second deadline. All test processes and the temporary tunnel stopped within **141.658 seconds**. No KERNEL session, model call, webhook registration or spending was involved. [Sanitized recovery evidence](evidence/runs/judge-ready/recovery-v56.json).
+
+**CC-052** is also verified after independent review of the existing 17 local concurrency/restart groups and the newly satisfied CC-024 prerequisite. Those local tests used synthetic payment replies with actual competing workers, SIGKILL, default lease expiry and resumed work; they retained one ticket and the same operation identities. They are not evidence of concurrent live capture requests. The earlier interrupted recovery attempt and historical recovery proof remain preserved separately.
+
+Next: recover or produce the original faulty-checkout recording and its matching regression artifact for CC-035, then complete held-out discovery, the fresh repaired checkout comparison, operator acceptance and the public video. Part F remains gated. Declare completion only after **CC-060** passes.

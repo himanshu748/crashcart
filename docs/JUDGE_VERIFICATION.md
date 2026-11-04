@@ -1,6 +1,6 @@
 # Recorded walkthrough verification — 4 November 2026
 
-Source: `0e6bee2` for judge access, `f878402` for public replay. Later hosting and documentation commits do not change these runtime files. Python 3.13.15, Node 22.14.0. No real service credentials or new payment were used.
+Source: `0e6bee2` for judge access, `f878402` for public replay. Later hosting and documentation commits do not change these runtime files. Python 3.13.15, Node 22.14.0. No real service credentials or new payment were used in the recorded-walkthrough batch below. Later actual Sandbox verification is documented separately.
 
 | Exact command | Observed result |
 | --- | --- |
@@ -67,6 +67,16 @@ The current Postman export also passed seven local assertions and 48 assertions 
 
 CC-023 passed on 4 November in a separate actual PayPal Sandbox checkout through local Safari. It is not a replay of the keyless page. First authentic delivery and its targeted resend each passed signature verification (HTTP 200); the resend was a duplicate. A locally initiated invalid-signature probe against the real ingress returned HTTP 400 and changed no counts. One completed USD29 capture, one event and zero tickets for the intentionally defective merchant were independently inspected. Cleanup removed only the newly created webhook and confirmed its absence; all processes and tunnel stopped in 211.213 seconds. No KERNEL or model call was made.
 
-[Sanitized receipts](../evidence/runs/judge-ready/webhook-v55.json) distinguish the negative probe from provider-origin delivery. Exact raw event bytes, source snapshots, prior failure and independent review remain in the private `evidence/CC-023/live-v55/` acceptance packet. Current acceptance is **45/60**. CC-024 still needs a current-source recovery experiment; its old mode/source cannot be relabelled.
+[Sanitized receipts](../evidence/runs/judge-ready/webhook-v55.json) distinguish the negative probe from provider-origin delivery. Exact raw event bytes, source snapshots, prior failure and independent review remain in the private `evidence/CC-023/live-v55/` acceptance packet. That notification verification brought acceptance to **45/60**. Its separate recovery follow-up is recorded below; the old recovery mode/source was not relabelled.
 
 After accepting CC-023, the same explicit Python 3.13.15 commands above were rerun: `unittest discover -v` reported **367 tests in 115.397s, OK**, and `unittest tests.test_public_replay -v` reported **3 tests in 0.858s, OK**. Logs are retained in the private `evidence/runs/continuation-v55/` archive. No public runtime source changed in this acceptance update.
+
+## Actual payment recovery and local worker contention
+
+Current acceptance is **47/60**, following independent acceptance of **CC-024 and CC-052** on 4 November. Public runtime source is unchanged; the latest full-suite/replay results remain the v55 results above.
+
+The new CC-024 experiment used local Safari and one actual USD29 PayPal Sandbox checkout against the owned healthy store. The process intentionally exited 86 after completed capture but before ticket delivery. The durable checkpoint contained zero tickets and pending reconciliation. A separate normal worker then independently read the same payment, preserved the original operation IDs, request IDs and request bodies, and produced exactly one ticket **4.067743 seconds** after capture. The fixed deadline remained 60 seconds. All exact child processes and the temporary tunnel exited within 141.658 seconds, and a separate readback confirmed the processes absent and local port closed. No KERNEL session, model call, webhook registration or paid service was used.
+
+[Sanitized recovery evidence](../evidence/runs/judge-ready/recovery-v56.json) retains the payment correlation and outcome. The private `evidence/CC-024/live-v56/` packet contains the frozen source, actual checkpoint/restart/recovery receipts, closed database and independent review. This is actual Sandbox recovery, distinct from the curated public replay. It does not establish a recorded faulty checkout, held-out AI discovery or a fresh repaired comparison. The preceding interrupted attempt remains recorded without a recovery pass.
+
+CC-052 uses the existing source-bound local contention experiment: 17/17 groups passed with actual competing workers, a pre-ticket SIGKILL, the unchanged default 30-second lease, lease-expiry reclaim and stale-owner rejection. Resumed work retained one ticket and the same operation identities. Its provider replies were synthetic; it is **LOCAL_TEST** evidence, not concurrent live capture-POST proof. Independent full review accepted the requirement after CC-024 satisfied its previously missing prerequisite. The original local execution timestamp and partial-review artifacts remain unchanged.

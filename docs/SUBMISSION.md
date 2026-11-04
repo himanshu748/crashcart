@@ -75,8 +75,12 @@ comparison. The same rule rejects late delivery and accepts timely delivery.
 
 Authentic Sandbox webhook delivery and exact-event resend now pass signature
 verification, while an invalid-signature probe is rejected without state changes.
-The complete freshly recorded repair journey remains open. We expose those gaps
-rather than treating a local test or attractive screenshot as a live pass.
+We also tested the moment a store can lose its place: immediately after a real
+$29 Sandbox payment, before creating the ticket. After the checkout process
+stopped, a restarted worker checked the payment independently and delivered one
+ticket in 4.07 seconds from capture. It used the same order and operation identities;
+the customer's 60-second promise never changed. The complete freshly recorded
+repair journey remains open and is tracked separately.
 
 ## Accomplishments
 
@@ -85,9 +89,11 @@ rather than treating a local test or attractive screenshot as a live pass.
 - One unchanged input that fails the faulty merchant and passes the healthy
   merchant, with an executable regression test for both outcomes.
 - The original late-read failure preserved as a separate negative test.
-- Durable local concurrency and restart checks that retain exactly one ticket;
-  their synthetic provider responses are explicitly distinguished from actual
-  payment recovery.
+- Recovery after an actual PayPal Sandbox payment and a process interruption:
+  one ticket delivered in 4.07 seconds, without creating another payment operation.
+- Competing-worker and restart checks that retain one ticket through a worker
+  kill and lease expiry. These local tests use synthetic provider replies and
+  complement the separate actual Sandbox recovery.
 - A product workflow that connects customer, payment and delivery evidence while
   keeping automatic payment verdicts outside model-generated prose.
 
@@ -96,8 +102,8 @@ production readiness, customer adoption, full acceptance or a deployed repair.
 
 ## What's next
 
-Complete current-source healthy recovery and the original/fresh checkout
-recordings; finish the operator acceptance journey and public video. After those
+Complete the original faulty-checkout recording and fresh repaired comparison;
+finish the operator acceptance journey and public video. After those
 gates pass, evaluate a narrowly scoped sponsor-powered improvement. Broader
 merchant onboarding, team access and support-system handoff are future work,
 not capabilities of this single-store prototype.

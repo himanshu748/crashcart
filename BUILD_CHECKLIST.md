@@ -210,7 +210,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** Real webhook ingress verifies signatures. Controlled duplicate processing uses a distinct fixture path after verification and does not disable external signature checks.
   **Verify:** Save one authentic sandbox event, rejection of an invalid signature, and a repeated-event trace with the expected entitlement count.
 
-- [ ] **CC-024. Recover the healthy merchant after interruption.**
+- [x] **CC-024. Recover the healthy merchant after interruption.**
   **Done when:** After a crash following payment but before ticket delivery, durable reconciliation establishes payment and fulfills the healthy merchant once within the declared budget.
   **Verify:** Kill and restart the relevant process at the recorded boundary. Inspect the recovered operation and ticket count. The deliberately faulty fixture remains available for investigation.
 
@@ -337,7 +337,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** A real Context Plugin interaction informs a concrete PayPal implementation decision, and the sponsor ledger describes that development role accurately.
   **Verify:** Save sanitized request/output evidence and the resulting implementation reference. Do not describe the plugin as a runtime payment verifier.
 
-- [ ] **CC-052. Survive duplicate jobs and worker restarts.**
+- [x] **CC-052. Survive duplicate jobs and worker restarts.**
   **Done when:** Durable run state, job ownership, pending approvals, and operation identities prevent an orchestration retry or competing worker from silently duplicating a payment or entitlement action.
   **Verify:** Run one focused concurrent-claim check and terminate a worker at a meaningful boundary. Inspect the resumed run, operation journal, and resulting counts.
 

@@ -1,0 +1,52 @@
+{
+  "mode": "LIVE_SANDBOX",
+  "run_id": "run_a877691d72644e08be1c93afbec39823",
+  "purchase_id": "purchase_5fefa341af5d424783507bb09cad0c31",
+  "order_id": "3JN87600XA9824158",
+  "capture_id": "7GG53344GM2074312",
+  "amount": "29.00",
+  "currency": "USD",
+  "fault": {
+    "kind": "process_interrupt",
+    "merchant": "healthy"
+  },
+  "invariant": {
+    "version": "ticket-v1",
+    "amount": 2900,
+    "currency": "USD",
+    "ticket_count": 1,
+    "recovery_seconds": 60
+  },
+  "actual_process_exit_code": 86,
+  "checkpoint_tickets": 0,
+  "checkpoint_pending_reconcile": true,
+  "final_ticket_count": 1,
+  "capture_completed_at": "2026-11-04T15:47:21Z",
+  "ticket_created_at": "2026-11-04T15:47:25.067743Z",
+  "capture_to_ticket_seconds": 4.067743,
+  "operation_identities_preserved": true,
+  "operation_count": 2,
+  "capture_operation_count": 1,
+  "independent_order_read": true,
+  "verdict": "PASS",
+  "signature": "ticket_delivered_once_on_time",
+  "finished_at": "2026-11-04T15:47:25.438829+00:00",
+  "window_seconds": 141.658,
+  "within_approved_window": true,
+  "all_children_exited": true,
+  "new_remote_sessions": 0,
+  "model_calls": 0,
+  "webhook_registrations": 0,
+  "spending_usd": "0.00",
+  "limits": [
+    "Actual new PayPal Sandbox checkout and healthy recovery. No browser recording, agent discovery, repaired fresh comparison or KERNEL execution is established.",
+    "Capture operation remains IN_FLIGHT after the intentional crash; independent order read establishes completion without reissuing capture.",
+    "Prior interrupted attempt and historical FRESH_SANDBOX proof remain unchanged."
+  ],
+  "source_receipt_sha256": {
+    "after-exit.json": "da7895dd256322251ccb4fa55a98c82278862a07a27dc9b2708b6ef3c545f8d7",
+    "restarted.json": "42ba117d992877a77a2cf7938a9b3bfc3874412cc10e0e65d596dc1800f051e8",
+    "recovery.json": "eb3d508cdcf6c9b157ec613303873837ced58034d308066f5fe64e9e1c79d91b",
+    "window.json": "06f5ce4a866f32fc057d5d91c29407fd808a0b8d7c1c30b30e631f8e161f878d"
+  }
+}
