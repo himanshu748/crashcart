@@ -64,3 +64,9 @@ GitHub About visibly shows MIT, matching root LICENSE and GitHub metadata. READM
 ## Video preparation — step 4
 
 **47/60 verified; CC-059 remains pending.** The [175-second video script](docs/VIDEO_SCRIPT.md) contains 15s problem, 120s interactive product/historical AI, 30s PayPal and 10s close, with a shot list and narration. Control labels and timing were inspected. It uses the working hosted recorded demo and separately labels the actual historical model run. No video was recorded or uploaded; script duration is not exported-video proof. Owner next action: record, measure/watch the export, upload Public on YouTube, and test signed-out playback.
+
+## Submission copy — step 5
+
+**47/60 verified; no newly verified CC IDs; zero stale accepted checks.** [DEVPOST.md](docs/DEVPOST.md) has all requested paste-ready fields and verified working links. [SUBMISSION.md](docs/SUBMISSION.md) is aligned with the feature freeze and historical proof limits. Optional AG Grid/Bryntum lanes are not claimed from the keyless demo. An independent reviewer found no blocking package defects, reran all three replay tests, checked seven AI provenance hashes and five deployment hashes, and inspected public artifacts for credentials. This is a submission-package review, not full CC-057/060 acceptance.
+
+**Remaining submission actions:** owner-run AWS provisioning/DNS/HTTPS and Budget readback if using AWS; actual public YouTube video; owner review and final Devpost submission. Existing GitHub Pages remains available; AWS and alerts are not created. Future uptime through 15 December cannot be marked verified today. The original 13 open checks retain their historical states; non-gating original experiments are deferred. No new feature, provider call, payment or Devpost submission occurred.

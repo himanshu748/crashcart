@@ -1,9 +1,16 @@
 # CrashCart — Devpost draft
 
-Prepared for the PayPal AI Hackathon. **Draft only: do not submit.**
-The owner still needs to record/upload the video and resolve the live-evidence
-and access gaps in [OPEN_CHECKS.md](OPEN_CHECKS.md). A recorded repair comparison
-is not a claim that every acceptance check or the final release gate has passed.
+Prepared for the PayPal AI Hackathon. **Draft only: the owner submits.**
+Features are frozen. The current submission scope is a working recorded
+demonstration with honest historical integration evidence, not completion of
+every original development check. [STATUS.md](../STATUS.md) separates submission
+gates from deferred checks; unverified requirements remain unchecked.
+
+[DEVPOST.md](DEVPOST.md) contains the paste-ready fields and working try-it links.
+[VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) is the current 175-second recording plan.
+The owner must still record, upload and verify the actual public YouTube video.
+A recorded repair comparison does not establish full acceptance or a fresh
+repaired payment. AWS remains a plan, not a deployed service.
 
 ## Tagline
 
@@ -38,6 +45,12 @@ records, a Bryntum delivery-timing view and bounded AI investigations. The AI
 proposes hypotheses and tests; deterministic code decides payment and ticket
 verdicts. These live integrations are distinct from the keyless review, which
 makes no fresh payment, remote-browser or AI request.
+
+In a separate historical real AI investigation, DeepSeek requested an existing
+PayPal Sandbox payment and then matching ticket records before finishing.
+The [sanitized trace and model excerpt](AI_EVIDENCE.md) show observation-dependent
+reasoning. That historical healthy case is different from the public faulty
+replay; its model calls are not rerun by the keyless page.
 
 ## How it's built
 
@@ -102,11 +115,12 @@ production readiness, customer adoption, full acceptance or a deployed repair.
 
 ## What's next
 
-Complete the original faulty-checkout recording and fresh repaired comparison;
-finish the operator acceptance journey and public video. After those
-gates pass, evaluate a narrowly scoped sponsor-powered improvement. Broader
-merchant onboarding, team access and support-system handoff are future work,
-not capabilities of this single-store prototype.
+Record the working product and its clearly labelled historical AI evidence,
+then provide the public video and complete the owner's submission. Features
+remain frozen. Future validation includes the complete fresh investigation and
+repair journey; held-out discovery and full operator acceptance remain open.
+Broader merchant onboarding, team access and support-system handoff are future
+work, not capabilities of this single-store prototype.
 
 ## Built with
 
@@ -125,26 +139,36 @@ impact, innovation and presentation. The organizers determine eligibility.
 
 | Target lane | Product reason and one line of evidence | Remaining boundary |
 | --- | --- | --- |
-| Best Use of PayPal + AI | Payment state is central to every verdict; `crashcart/paypal.py` and `crashcart/investigator.py` separate provider observations from model hypotheses, and the public replay executes the payment-to-ticket comparison. | Historical model evidence is private; the keyless review does not run AI, and complete fresh discovery/repair proof remains open. |
+| Best Use of PayPal + AI | Payment state is central to every verdict; [historical real AI evidence](AI_EVIDENCE.md) shows the model selecting a real existing-order read and then matching merchant evidence. | Different historical case from the faulty replay; no new checkout during that investigation. The keyless review does not run AI. Private artifact hashes are provenance bindings, not independently accessible provider receipts. |
 | Most Impactful | A specific support problem—paid but no ticket—becomes an inspectable failure and repair comparison; `tests/test_public_replay.py` exercises both outcomes with the same promise. | No customer validation, adoption or measured support-time reduction is claimed. |
-| Best Use of AG Grid | `studio/src/` implements actual AG Studio evidence widgets and saved-record queries in the full workspace. | The keyless review does not load AG Studio. Applicable licensed judge access and the complete operator proof remain separate; do not claim this lane solely from the keyless page. |
-| Best Use of Bryntum | `studio/src/deadlines.ts` uses the actual Community Scheduler and `deadlines-model.ts` validates payment-relative timing; the timing suite exercises the projection. | The keyless review is not the Bryntum view. Record and verify the configured full-workspace interaction before presenting it as a demonstrated sponsor lane. |
+| AG Grid — not claimed by this submission scope | `studio/src/` implements actual AG Studio evidence widgets and saved-record queries in the full workspace. | The keyless review does not load AG Studio; complete operator proof remains unverified. |
+| Bryntum — not claimed by this submission scope | `studio/src/deadlines.ts` uses the Community Scheduler and `deadlines-model.ts` validates payment-relative timing. | The keyless review is not the Bryntum view; this scope does not present its full-workspace journey as verified. |
 
 ## Testing instructions and links
 
 - [Public repository](https://github.com/himanshu748/crashcart)
+- [Working interactive recorded walkthrough](https://himanshu748.github.io/crashcart/)
 - [Keyless setup and 60-second path](../README.md#try-the-product-in-60-seconds)
 - [Recorded replay commands](../README.md#reproduce-the-comparison)
 - [Optional test-buyer path](../README.md#optional-sandbox-test-buyer-path)
 - [Exact open checks](OPEN_CHECKS.md)
-- [Video shot list](DEMO_SCRIPT.md) — the public video URL is still missing.
+- [Current video shot list](VIDEO_SCRIPT.md) — the public YouTube URL is still missing.
+- [Paste-ready Devpost fields](DEVPOST.md)
+- [Historical PayPal-plus-AI explanation](AI_EVIDENCE.md)
 - [Existing Devpost project page](https://devpost.com/software/crashcart-87asqz)
 
-Do not paste a hosted URL until its actual published page and downloads have
-been read back. A static hosted review displays build-time replay results; the
-local command executes the replay. Neither is a hosted live-payment backend.
+The published GitHub Pages URL above is the working try-it link. Do not replace
+it with an AWS URL until that deployment and its downloads have been verified.
+The hosted review displays build-time replay results; the local command executes
+the replay. Neither is a hosted live-payment backend.
 Keep judge access free through the end of judging and retain the runnable source.
 Do not publish real test-buyer or service credentials with the source.
+
+The owner must watch the exported video, verify a duration under three minutes,
+upload it publicly to YouTube and test signed-out access before adding the link
+to Devpost. The official guidance emphasizes showing PayPal and AI working;
+label the recorded AI segment as historical and distinct from the replay. The
+organizers decide whether the finished entry satisfies their requirements.
 
 Official dates checked on 4 November 2026: submissions close **13 November 2026,
 01:30 IST** (12 November, noon Pacific). Judging ends **15 December 2026,
