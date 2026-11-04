@@ -27,8 +27,15 @@ in the workflow. Platform availability remains subject to GitHub's service and
 usage limits, not an uptime guarantee made by CrashCart. No paid upgrade or
 custom domain is required.
 
-The deploy URL and actual publication result belong in STATUS.md after target
-readback. A prepared workflow is not deployment evidence.
+Published: **https://himanshu748.github.io/crashcart/**. Source checks and Pages
+deployment passed on `ba7ac9c`; see STATUS.md for the linked runs. The hosted
+landing, walkthrough, case switch, PayPal filter and 390px layout were exercised.
+Two hosted download attempts timed out in the task browser; that check stopped
+and remains unresolved. Local browser downloads and archive execution passed.
+The clone-based command remains the verified download-independent path.
+
+AWS infrastructure below $10/month is authorized, but no AWS resources or paid
+services were needed for this free recorded demo.
 
 ## Why not a hosted live server?
 

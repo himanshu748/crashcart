@@ -29,8 +29,8 @@ Part F is not started because Part A cannot pass yet. No prize-lane feature is u
 
 ## Hosting and submission
 
-Free GitHub Pages publishing is prepared and independently reviewed; target publication/readback is pending. It will host the recorded project demonstration, not the live backend. [Hosting details](docs/HOSTING.md).
+The [recorded walkthrough is published on GitHub Pages](https://himanshu748.github.io/crashcart/). [Source CI](https://github.com/himanshu748/crashcart/actions/runs/41802366607) and [deployment](https://github.com/himanshu748/crashcart/actions/runs/41802528629) passed on `ba7ac9c`. Hosted landing, walkthrough, case selection, PayPal filter and 390px layout were exercised. Hosted download verification timed out twice in the task browser and was stopped; no hosted-download success is claimed. Local downloads and extracted ZIP execution passed. This hosts the recorded demonstration, not the live backend. [Hosting details](docs/HOSTING.md).
 
 MIT is present in LICENSE and detected by GitHub. [README](README.md) includes the 60-second path and private Sandbox buyer placeholders. [Demo script](docs/DEMO_SCRIPT.md) is 160 seconds; the owner still needs to record it. [Submission draft](docs/SUBMISSION.md) is prepared and qualified by actual evidence. No final Devpost submission was made; the existing entry remains a draft.
 
-Next: publish the fully tested recorded build and inspect the hosted result, then obtain the bounded provider path and required buyer approval to close the original live gates. Declare completion only after **CC-060** passes.
+Next: diagnose the hosted-download/browser limitation in a new verification step, then obtain a bounded provider path and required buyer approval to close the original live gates. Declare completion only after **CC-060** passes.

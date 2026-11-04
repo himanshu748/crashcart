@@ -12,6 +12,9 @@ confirmed payment**. The deadline stays the same for both merchant versions.
 
 ## Try the product in 60 seconds
 
+**[Open the interactive recorded walkthrough](https://himanshu748.github.io/crashcart/)** — no account required. Hosted results are computed during site build.
+
+
 Have Python installed, then run from a terminal:
 
 ```sh

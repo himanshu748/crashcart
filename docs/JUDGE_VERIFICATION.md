@@ -32,3 +32,9 @@ The actual browser-downloaded ZIP was extracted and both replay commands execute
 These are local and recorded-replay results, not fresh Sandbox proof. **44/60 remains unchanged; newly verified requirement IDs: none.** The original fault recording and live gates in [OPEN_CHECKS.md](OPEN_CHECKS.md) remain open. Part F is gated by Part A.
 
 Private raw logs, browser captures, source hashes and review receipts are retained under `evidence/runs/judge-ready-v53/` in the owner's acceptance archive; they are not required to run the public tests or included as private raw evidence in this repository.
+
+## Hosted readback
+
+[Source CI](https://github.com/himanshu748/crashcart/actions/runs/41802366607) passed on `ba7ac9c`: 367 tests in 47.094s, OK; 45 timing tests passed, 0 failed. [Pages deployment](https://github.com/himanshu748/crashcart/actions/runs/41802528629) succeeded. The [public landing page](https://himanshu748.github.io/crashcart/) was inspected in a real browser: site-build disclosure, animated walkthrough controls, repaired-case selection, 4-of-15 PayPal filtering and 390px no-overflow layout worked. No warning/error console logs were observed.
+
+Hosted JSON download verification timed out twice (download event, then the browser's file-link download helper); the step stopped under the two-attempt rule. No hosted JSON/ZIP download pass is claimed. This differs from the successful local UI downloads and extracted-archive execution above. Use the clone-based keyless command for the verified runnable path.
