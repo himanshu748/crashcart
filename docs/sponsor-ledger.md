@@ -15,7 +15,7 @@ implemented. [Development status and release limits](../STATUS.md).
 | --- | --- | --- |
 | **PayPal** | Establish whether the customer actually paid, then compare payment to delivery | Real Sandbox approval, capture and independent payment retrieval are implemented. Historical owned-store checks include a paid/zero-ticket failure and successful delivery. Authentic notification delivery/resend/signature checks and a complete fresh repair journey remain open. |
 | **AG Grid: AG Studio** | Inspect linked browser, payment, ticket, comparison and timeline records; ask questions over saved cases | Actual pinned Studio 3.0.0, five registered widgets and four historical model-backed queries over changing saved data. A vendor trial was exercised privately; the source checkout includes no licence value or permission to use that private trial. Configure your own entitlement where required. Delivered licensed access and the full operator journey remain open. |
-| **Bryntum Community Scheduler** | Compare delivery timing across investigations and open the original case | Actual MIT-licensed `@bryntum/scheduler-community` 8.0.0-beta.1 powers the separate read-only Delivery timing page. Model checks and an SDK/CSP feasibility render have run. Final source-bound browser verification and acceptance review are pending. |
+| **Bryntum Community Scheduler** | Compare delivery timing across investigations and open the original case | Actual MIT-licensed `@bryntum/scheduler-community` 8.0.0-beta.1 powers the separate read-only Delivery timing page. Projection tests and actual local SDK rendering, saved-case filtering and keyboard selection have been exercised. Full fresh/operator acceptance remains open. |
 | **KERNEL** | Inspect a real browser checkout and its recording alongside payment and delivery | Actual owned sandbox sessions and correlated recordings were exercised historically; one complete recorded checkout delivered one ticket in 3.898776 seconds. Saved playback is distinct from a new checkout. Remote usage needs a new explicit bounded allowance; no live session is included in a source checkout. |
 | **Modal + DeepSeek** | Propose evidence-grounded hypotheses and bounded investigations | Actual historical model calls queried copied saved records. Deterministic code, rather than model prose, decides payment and ticket outcomes. The public Modal origin is a nonworking placeholder requiring a reviewed owned-origin source change; OpenAI supports your own key/model. No maintainer credentials or inference allowance are included. |
 | **APIMatic Context Plugin** | Improve the development-time PayPal integration | Sponsor-linked API/SDK guidance and an offline serialization probe informed explicit credentials, journal-owned request IDs and deliberate retries. The runtime adapter is handwritten Python; it is not an APIMatic-generated SDK. |
@@ -23,11 +23,34 @@ implemented. [Development status and release limits](../STATUS.md).
 
 The historical observations above are summaries from the maintainer's private
 evidence archive. Raw payment/account receipts, licences, databases, recordings
-and that acceptance archive are intentionally not published. The one curated
-historical replay input included for offline source tests is labelled separately. They are not links
-to public proof, a claim of fresh provider execution or a final release pass.
+and that acceptance archive are intentionally not published. The two curated
+historical replay inputs are public: the earlier recording supports the same-input
+failure/repair comparison, and the original late-read recording remains a negative
+example. Current execution of those files can be reproduced with the README
+commands. Historical integration summaries are not a claim of fresh provider
+execution or a final release pass.
 Local fixtures and model tests remain explicitly synthetic. Source publication,
 a build or a sponsor logo does not establish runtime integration behavior.
+
+## Keyless review versus the configured workspace
+
+`./scripts/judge.sh` executes both recorded merchant variants when the local app
+starts and serves their results through a separate read-only interface. It
+imports no live adapter, starts no worker and does not load `.env`. The page
+shows saved checkout, payment and store observations plus the locally recomputed
+verdicts. It makes no PayPal, KERNEL or model call and does not use AG Studio or
+Bryntum packages. Those SDKs remain substantive integrations in the separately
+configured full workspace; the plain review UI is not presented as their output.
+
+A static export performs the replay once during its build. A hosted visitor
+inspects those results and can download the executable regression; browser
+refresh does not run Python or create another payment. The historical original
+fault video remains unavailable. Recorded source labels and hashes do not
+independently authenticate a provider observation.
+
+Modal hosts the owned model endpoint used in historical AI checks. It is **not**
+one of the event's listed tool sponsors. No free model allowance or current
+endpoint access is bundled with this public repository.
 
 ## Delivery timing with Bryntum
 
@@ -61,9 +84,9 @@ ticket, model request or recording.
 The projection has 45 passing synthetic tests and was checked against two saved
 paid/healthy records and the original saved paid/zero-ticket record. A real SDK
 render with synthetic data established CSP feasibility after local Font Awesome
-bundling removed an observed CDN fallback. These checks do not establish final
-keyboard/responsive behavior or fresh sandbox execution; final browser and
-acceptance verification are still pending.
+bundling removed an observed CDN fallback. Later local browser checks exercised filtering and keyboard case selection on
+the public build. Those checks do not establish a complete fresh operator
+journey or fresh sandbox execution.
 
 Build and run instructions are in [README](../README.md#delivery-timing).
 Implementation: [build script](../studio/build.mjs),
