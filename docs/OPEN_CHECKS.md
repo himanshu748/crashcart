@@ -22,7 +22,7 @@ has separate public tests and does not inherit live-provider acceptance.
 | CC-059 / pending | An exported public video under three minutes showing the required original and fresh journey; script alone is insufficient. Depends on CC-038, CC-040, CC-042, CC-048 and CC-058. |
 | CC-046 / implemented, unverified | Complete actual Studio selection/comparison with provenance and no stale cross-case data; depends on CC-040. Recorded-only comparison is supplemental. |
 | CC-048 / implemented, unverified | Complete operator start/inspect/cancel/compare/export, keyboard and responsive states; depends on CC-046. |
-| CC-050 / implemented, unverified | Current exported Postman collection run and CC-035. Historical execution passed 48 assertions; this does not repair its artifact dependency. |
+| CC-050 / implemented, unverified | CC-035. Current exported collection was rerun on 4 November: 7 local assertions and 48 assertions across six GETs of copied historical Sandbox records passed; missing proof failed as expected. This is stored-observation inspection, not a fresh provider call. |
 | CC-057 / implemented, unverified | Independent complete acceptance review; depends on CC-050, CC-055 and CC-056. Partial review is not full acceptance. |
 | CC-024 / blocked | Actual payment interruption/restart recovery; supporting historical proof exists, but CC-023 remains unmet. |
 | CC-036 / blocked | Complete regression from a clean environment; depends on the missing recording in CC-035. |
@@ -35,15 +35,23 @@ has separate public tests and does not inherit live-provider acceptance.
 ## Owner and external dependencies
 
 - A usable owned Sandbox buyer and its actual approval for required new test payments.
-- A permitted, bounded real browser/model execution path. No new model/browser test usage is authorized. AWS infrastructure under
-  $10/month is now allowed, but does not renew those provider grants. Eight previous remote session grants
-  are consumed. KERNEL has been asked to clarify an absolute lifetime/billing
+- A technically bounded real browser/model execution path. Continuation is authorized; AWS infrastructure under
+  $10/month is allowed. Eight previous remote session grants are consumed; no new paid session has started.
+  The unresolved provider-enforced lifetime/billing limit still prevents KERNEL execution. KERNEL has been asked to clarify an absolute lifetime/billing
   bound; the sent message is not a provider answer.
 - The original faulty-checkout recording, or access/authorization to create a
   properly recorded replacement experiment.
-- Applicable AG Studio permission for the full sponsor workspace through judging.
-  The keyless recorded review must not require or redistribute a private licence.
+- AG Studio licence access is already resolved: the privately configured trial expires
+  17 December 2026, after judging. No new key is requested. Full sponsor-workspace
+  acceptance still needs the operator journey above; the keyless page does not
+  require or redistribute this licence.
 - The final demonstration video, which the owner will record; review its contents,
   duration and public access before accepting CC-059. Never publish credentials.
+
+CC-023 can be exercised independently through local Safari without KERNEL. A
+scoped notification-only harness is being prepared; it is not activated. Safari
+control recovered after two timeouts, but Developer still redirects to sign-in; authenticated buyer access is unconfirmed.
+No fresh payment, public window or webhook has started. This is an access and
+verification blocker, not a request for another blanket approval.
 
 Part F remains gated: Part A is incomplete while the required live-provider evidence remains blocked. No prize-lane feature is added to bypass these dependencies.

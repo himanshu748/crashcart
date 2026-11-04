@@ -30,9 +30,12 @@ custom domain is required.
 Published: **https://himanshu748.github.io/crashcart/**. Source checks and Pages
 deployment passed on `ba7ac9c`; see STATUS.md for the linked runs. The hosted
 landing, walkthrough, case switch, PayPal filter and 390px layout were exercised.
-Two hosted download attempts timed out in the task browser; that check stopped
-and remains unresolved. Local browser downloads and archive execution passed.
-The clone-based command remains the verified download-independent path.
+Two hosted download attempts timed out in the task browser; that check stopped.
+A separate native Safari check successfully downloaded JSON and ZIP after site
+download permission was granted. Both matched the independently fetched HTTPS
+artifacts, whose manifest and defective/healthy execution passed. See
+[JUDGE_VERIFICATION.md](JUDGE_VERIFICATION.md) for hashes and retained limitations.
+The clone-based command also remains a verified download-independent path.
 
 AWS infrastructure below $10/month is authorized, but no AWS resources or paid
 services were needed for this free recorded demo.

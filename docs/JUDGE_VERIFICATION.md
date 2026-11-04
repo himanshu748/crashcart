@@ -37,4 +37,27 @@ Private raw logs, browser captures, source hashes and review receipts are retain
 
 [Source CI](https://github.com/himanshu748/crashcart/actions/runs/41802366607) passed on `ba7ac9c`: 367 tests in 47.094s, OK; 45 timing tests passed, 0 failed. [Pages deployment](https://github.com/himanshu748/crashcart/actions/runs/41802528629) succeeded. The [public landing page](https://himanshu748.github.io/crashcart/) was inspected in a real browser: site-build disclosure, animated walkthrough controls, repaired-case selection, 4-of-15 PayPal filtering and 390px no-overflow layout worked. No warning/error console logs were observed.
 
-Hosted JSON download verification timed out twice (download event, then the browser's file-link download helper); the step stopped under the two-attempt rule. No hosted JSON/ZIP download pass is claimed. This differs from the successful local UI downloads and extracted-archive execution above. Use the clone-based keyless command for the verified runnable path.
+Hosted JSON download verification initially timed out twice (download event, then the browser's file-link download helper); that step stopped under the two-attempt rule. Those failures remain recorded.
+
+A separate native Safari check on 4 November completed both UI downloads after granting the site's download permission. Safari listed the JSON (130,204 bytes) and ZIP (25,516 bytes) as complete. Both were byte-identical to the HTTPS artifacts fetched and tested independently. The ZIP's seven-file manifest passed, its MIT notice was present, and its defective/healthy commands produced the expected exits 1/0 and signatures above. This verifies Safari delivery, not a resolution of the earlier task-browser limitation.
+
+- JSON SHA-256: `de463f4bb83d4436292c6879f17abcdeab999970e829d2690158152217510067`
+- ZIP SHA-256: `8d436ff1043743f8408e7a67c6438acff2770dda54cb406447019f65a511091f`
+
+Sanitized receipts are in [hosted-downloads-v54.json](../evidence/runs/judge-ready/hosted-downloads-v54.json). Native download readback, exact downloaded files and execution logs remain in the private `evidence/runs/continuation-v54/` archive. The acceptance checker still reports 44/60; no CC requirement is newly accepted by this download check.
+
+
+## Current-source recheck
+
+On 4 November the unchanged public runtime was rerun with Python 3.13.15:
+
+```sh
+env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v
+# Ran 367 tests in 56.845s — OK
+env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest tests.test_public_replay -v
+# Ran 3 tests in 1.703s — OK
+```
+
+These are the exact commands for this Mac. Other supported installations can use `python3` directly, after confirming version 3.11 or newer and making the same interpreter available to child processes. The first recheck accidentally resolved macOS Python 3.9.6 and failed (367 tests; three failures and three errors). Its log is retained; no product source, assertions or deadlines were changed before the corrected pass.
+
+The current Postman export also passed seven local assertions and 48 assertions across six GETs of copied historical Sandbox records. Missing proof produced the expected failing exit with 14 assertion failures and no skips. No provider requests or payments occurred. CC-050 still depends on CC-035. See [the sanitized execution summary](../evidence/runs/judge-ready/postman-v54.json).

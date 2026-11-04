@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-04",
+  "hosted_source_revision": "ba7ac9c",
+  "ui": {
+    "source_revision": "ba7ac9c",
+    "mode": "ACTUAL_SAFARI_HOSTED_DOWNLOAD",
+    "downloads": [
+      {
+        "filename": "healthy-2.json",
+        "bytes": 130204,
+        "sha256": "de463f4bb83d4436292c6879f17abcdeab999970e829d2690158152217510067",
+        "matches_https_artifact": true
+      },
+      {
+        "filename": "replay-2.zip",
+        "bytes": 25516,
+        "sha256": "8d436ff1043743f8408e7a67c6438acff2770dda54cb406447019f65a511091f",
+        "matches_https_artifact": true
+      }
+    ],
+    "interaction": "Selected repaired replay, clicked JSON, allowed owned site downloads, clicked replay ZIP; Safari Downloads listed both complete",
+    "prior_iab_timeouts_retained": true,
+    "claim": "Safari UI delivery and byte identity to already executed ZIP pass; in-app-browser limitation remains separate"
+  },
+  "execution": {
+    "source_revision": "ba7ac9c",
+    "transport": "HTTPS artifact fetch, not UI download",
+    "manifest": {
+      "result": "PASS",
+      "files_checked": 7,
+      "mode": "RECORDED_REPLAY"
+    },
+    "mit_notice": true,
+    "input_sha256": "07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288",
+    "results": [
+      {
+        "variant": "defective",
+        "exit_code": 1,
+        "verdict": "FAIL",
+        "signature": "paid_without_ticket",
+        "ticket_count": 0
+      },
+      {
+        "variant": "healthy",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "signature": "ticket_delivered_once_on_time",
+        "ticket_count": 1
+      }
+    ]
+  },
+  "newly_verified_requirement_ids": [],
+  "verified_count": 44,
+  "total": 60
+}

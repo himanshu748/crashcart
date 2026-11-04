@@ -12,7 +12,9 @@ The existing live workspace and sponsor integrations remain separate and require
 
 ## Verification
 
-Final local suite: **367 tests in 55.789s, OK**. Replay suite: **3 tests in 0.329s, OK**. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
+Latest local suite on Python 3.13.15: **367 tests in 56.845s, OK**. Replay suite: **3 tests in 1.703s, OK**. An initial attempt accidentally used unsupported Python 3.9 and failed; its output is retained. No source or assertion was changed for the corrected run. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
+
+Current Postman execution passed seven local assertions and 48 assertions against copied historical Sandbox observations (six GETs); missing proof still fails. No new provider call was made. CC-050 remains open through CC-035.
 
 No new CC requirement is marked verified in this batch. The private archive remains 44/60; additive keyless code is separately tested and does not inherit live-provider acceptance. Frozen live runtime and prior acceptance source remain unchanged. Historical CC-037 document review and CC-039 synthetic control proof retain their original scope and dates.
 
@@ -29,8 +31,10 @@ Part F is not started because Part A cannot pass yet. No prize-lane feature is u
 
 ## Hosting and submission
 
-The [recorded walkthrough is published on GitHub Pages](https://himanshu748.github.io/crashcart/). [Source CI](https://github.com/himanshu748/crashcart/actions/runs/41802366607) and [deployment](https://github.com/himanshu748/crashcart/actions/runs/41802528629) passed on `ba7ac9c`. Hosted landing, walkthrough, case selection, PayPal filter and 390px layout were exercised. Hosted download verification timed out twice in the task browser and was stopped; no hosted-download success is claimed. Local downloads and extracted ZIP execution passed. This hosts the recorded demonstration, not the live backend. [Hosting details](docs/HOSTING.md).
+The [recorded walkthrough is published on GitHub Pages](https://himanshu748.github.io/crashcart/). [Source CI](https://github.com/himanshu748/crashcart/actions/runs/41802366607) and [deployment](https://github.com/himanshu748/crashcart/actions/runs/41802528629) passed on `ba7ac9c`. Hosted landing, walkthrough, case selection, PayPal filter and 390px layout were exercised. A subsequent native Safari check downloaded both JSON and executable ZIP successfully after allowing this site’s downloads. Their hashes matched the HTTPS artifacts; the ZIP manifest and both replay outcomes passed. The two earlier task-browser timeouts remain recorded separately. This hosts the recorded demonstration, not the live backend. [Hosting details](docs/HOSTING.md).
 
 MIT is present in LICENSE and detected by GitHub. [README](README.md) includes the 60-second path and private Sandbox buyer placeholders. [Demo script](docs/DEMO_SCRIPT.md) is 160 seconds; the owner still needs to record it. [Submission draft](docs/SUBMISSION.md) is prepared and qualified by actual evidence. No final Devpost submission was made; the existing entry remains a draft.
 
-Next: diagnose the hosted-download/browser limitation in a new verification step, then obtain a bounded provider path and required buyer approval to close the original live gates. Declare completion only after **CC-060** passes.
+The AG Studio trial is already privately configured and valid through 17 December 2026. No replacement licence is needed. KERNEL has not yet answered the absolute lifetime/billing-bound question. Continuation is authorized, but it does not resolve that technical limit.
+
+Next: independently review the local-Safari-only notification harness, then execute CC-023 after Safari Developer/buyer access is available. Safari control recovered after two timeouts, but refreshing Developer still redirected to sign-in after the reported verification. No test payment, public window or webhook was started. This route needs no paid browser session. Record actual notification, exact-event resend, rejected signature and ticket counts before accepting CC-023. Declare completion only after **CC-060** passes.

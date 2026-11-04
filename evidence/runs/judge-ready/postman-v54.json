@@ -1,0 +1,80 @@
+{
+  "executed_at": "2026-11-04T09:22:10.554727+00:00",
+  "mode": "LOCAL_TEST_AND_OBSERVED_SANDBOX_RECORDS",
+  "result": "PASS",
+  "commands": [
+    {
+      "command": "python3 scripts/verify_postman.py --newman var/postman-v54/runner/node_modules/.bin/newman --evidence-dir evidence/runs/continuation-v54/postman/local",
+      "exit_code": 0
+    },
+    {
+      "command": "python3 var/postman-v54/run_observed.py",
+      "exit_code": 0
+    }
+  ],
+  "local_smoke": {
+    "requests": 2,
+    "assertions": 7,
+    "failures": 0,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "deliberately_missing_proof": {
+    "requests": 2,
+    "assertions": 16,
+    "failures": 14,
+    "skipped": 0,
+    "exit_code": 1,
+    "expected_failure": true
+  },
+  "stored_observations": {
+    "requests": 6,
+    "assertions": 48,
+    "failures": 0,
+    "skipped": 0,
+    "exit_code": 0
+  },
+  "runtime_flags": {
+    "CRASHCART_ALLOW_SANDBOX": "0",
+    "CRASHCART_ALLOW_MODEL": "0",
+    "CRASHCART_ALLOW_KERNEL": "0"
+  },
+  "original_files_unchanged": true,
+  "copied_rows_unchanged": true,
+  "provider_calls": 0,
+  "new_payments": 0,
+  "new_remote_browser_sessions": 0,
+  "source_hashes": {
+    "var/postman-v54/run_observed.py": "51c1a31a597514b112039fdca273badb41b00f2a79c0f03b945a6400e41699c5",
+    "var/postman-v54/verify_observed.cjs": "9391b5d2d308940cd8a8cb5db2305f30b8f35f5a2ac749cd0122718e6922299b",
+    "exports/crashcart.postman_collection.json": "e5552ed39c20df6330f8eb9719e9394efa1c157417868eece6e6b032f0cd213f",
+    "exports/crashcart.postman_environment.json": "3a64f78f8f2c8bbabd54d383524cebdaa0d5c653a8c526d4321d6642ab331282",
+    "scripts/verify_postman.py": "420268490b0c8f36814211dc1e38cff3e3a1d4a6f78eff1173ba55c773eb846b",
+    "migrations/001_initial.sql": "776c928b0b07da50b3773a9c2feae8dbe20670d553ebbe643683802767f74714",
+    "crashcart/worker.py": "b0e409c5feb7d9ae0f850b953f5ece28d2e91903dbccff91052ae18daf23439d",
+    "crashcart/paypal.py": "a69534358625888c52aac555346f79129bf2261b18ed9d16471fa136824715ae",
+    "crashcart/store.py": "86c2a1915e5b68ef9934db188bb6eae431732bb6c2e07b7e726b605da00b20c4",
+    "crashcart/service.py": "2a969ecb47e7aee5447fa666c2f43cf7e242f0f45be4ea3094cfd707a401beb9",
+    "crashcart/promise.py": "cd4e20e9a1c7b9a93e337edcc1ca35a01a22eebe98b8899527f18c8a7b3ca0e2",
+    "crashcart/server.py": "df73797bb1f2b7f42688d7ab876b74ad40be8c00bd55c4f98bddc902cbdb7af2",
+    "crashcart/kernel_evidence.py": "4261da551bcca5e44fd04208a197ba1ba80da046b09f0f7ae94af88c9c4d4fb2",
+    "crashcart/config.py": "a26160affc4cd474efa45164be5ed92eac996200732fd28724d43dbd07315ead",
+    "crashcart/replay_workspace.py": "d2957acf1d893ee808996382975904a24452de8ffd5cb56df002cbea7b5061be",
+    "crashcart/kernel_browser.py": "edd8523e13515d252542e4462effea88d202618bd38c7610d429619719f12126",
+    "crashcart/recording.py": "e10910dd4e904f2dac8d9b09f30671e889641d9c9d7da0ec17b3aee3f1797145",
+    "crashcart/__init__.py": "fb29cf6e467a7feab03803e60d3181794f2a28b1aa3beed5d16146f0fa777e0a",
+    "crashcart/studio_agent.py": "c8a906793b011e765ffe7a9c9943285bbcbd274677017cb53307656c2716d616",
+    "crashcart/replay.py": "ae419d09dc203f3a8c93ba7edd60bf5d4d5894968044812403e7ed438481f47d",
+    "crashcart/held_out.py": "23b0e99179d0061c58c8aa8dc5c8b98a132d0ba769c94838c41d594845a88e44",
+    "crashcart/model_transport.py": "9a3116c2a574dfcf0546963da6a94ae26f7b7357615390f6fe89bf055e416ac5",
+    "crashcart/invariant.py": "01c7007132e939716f5236322f40b175058981d21334c7add57dd4bb20007fea",
+    "crashcart/investigator.py": "15753d31a91270b5a22328696f3572119051604812a1fbb8d9e20464aac0af87",
+    "crashcart/verification_gateway.py": "710aafe05a4f795c6f39a6308c8be0122cca9818766f985e3dac4c0163efe506",
+    "crashcart/__main__.py": "d625b908e14956bcb6779d43386e89fa68e5711762715179f1c4e52805d2ed5e",
+    "crashcart/faults.py": "57e052c295e8e77857f2c8336851e845781a29916cc2ae7f08a233a95b870462"
+  },
+  "newman_version": "6.2.1",
+  "runner_lock_sha256": "500a3a2c1cc67f499cfeef7c8d3e95877a7ad1f9a3807a8031e54d09aa30c480",
+  "CC-050": "IMPLEMENTED_UNVERIFIED",
+  "blocker": "CC-035 complete original recording and regression acceptance remains open. CC-010 already has historical accepted proof. Current collection execution is refreshed, but is not a new provider read or fresh sandbox payment."
+}
