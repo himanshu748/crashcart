@@ -1,0 +1,34 @@
+{
+  "kind": "sanitized-historical-ai-evidence-summary-v1",
+  "prepared_on": "2026-11-04",
+  "proof_scope": "Actual historical Modal model execution and PayPal Sandbox read of an existing order; copied historical merchant records",
+  "new_verification_claim": false,
+  "public_judge_mode_calls_model": false,
+  "same_case_as_public_faulty_replay": false,
+  "provider": "Modal",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "investigation_started_at": "2026-10-26T14:16:46.363214Z",
+  "investigation_finished_at": "2026-10-26T14:17:01.972868Z",
+  "historical_capture_date": "2026-10-23",
+  "invariant": {"amount_minor": 2900, "currency": "USD", "ticket_count": 1, "deadline_seconds": 60},
+  "actual_operations": {"model_calls": 3, "paypal_oauth_requests": 1, "paypal_existing_order_gets": 1, "new_payments": 0, "kernel_sessions": 0, "studio_queries": 0},
+  "trace": [
+    {"step": 1, "action": "read_provider", "evidence_categories_before_response": [], "reasoning_summary": "Payment confirmation and ticket timing remain unobserved.", "wire_response_sha256": "adae0bca79779a001b94353482f303004a35afa4d05a0f822c9f8073f06db97e"},
+    {"step": 2, "action": "read_merchant", "evidence_categories_before_response": ["completed PayPal Sandbox capture"], "exact_model_excerpt": "Provider capture is confirmed complete; merchant ticket delivery records have not yet been observed, so fulfillment timing cannot be evaluated.", "wire_response_sha256": "8a0e0b5a1b8481ee8c3bc681e50aabd945017b06a0be65285c2b87716dfa4412"},
+    {"step": 3, "action": "finish", "evidence_categories_before_response": ["completed PayPal Sandbox capture", "matching single delivered ticket"], "reasoning_summary": "Delivery latency is approximately 3.42 seconds and both observations support the promise.", "wire_response_sha256": "a958fc763a73c48a04d02dce57c3936d3e0ebcbb1767ce4a0d3eb913e972c7a2"}
+  ],
+  "deterministic_result": {"verdict": "PASS", "signature": "ticket_delivered_once_on_time", "delivery_latency_seconds": 3.417739},
+  "historical_verification": {"passed": 22, "total": 22, "independent_review_result": "PASS", "scope": "Actual paid versus unpaid observation-dependent model reasoning; no expected-answer or previous-verdict leakage in inspected contexts"},
+  "additional_historical_control": {"condition": "Entire provider observation withheld from copied case", "actual_model_calls": 3, "structural_checks_passed": 8, "independent_checks_passed": 28, "deterministic_result": "INCONCLUSIVE / missing_correlation_identity", "new_payment_or_provider_call": false},
+  "private_source_bindings": [
+    {"path": "evidence/runs/model-v32-historical-paid/actual-attempts.json", "sha256": "f80abfc4cfd0f7f1a659f5509697d85cd7200f8af3e6814abc354134c3d8a159"},
+    {"path": "evidence/runs/model-v32-historical-paid/actual-invocation.json", "sha256": "8c69da84e81cfac7cce4aa90bfcf5fa21bdaefcec1278910248888d2a9b83301"},
+    {"path": "evidence/runs/model-v32-historical-paid/actual-verification.json", "sha256": "5ad915cc6d561dfff84781a9ea212f84531b02b89f48a8007bc39cf82538a021"},
+    {"path": "evidence/runs/model-v32-historical-paid/comparison.json", "sha256": "e3d8f3ec329aa67923f84bcc9b102a1334977cca947115ef341a88cdb9e57f12"},
+    {"path": "evidence/reviews/model-v32-adaptive-independent.md", "sha256": "69079939cefc1bf57a136751d6d93814cdd2ab73d1c81398570b318c299a1663"},
+    {"path": "evidence/runs/continuation-v33/missing-observation/actual-structural-verification.json", "sha256": "52dd92f42c21df2d2cb7550790113a0cd18d88dbfe4186b59dc011d8adba1007"},
+    {"path": "evidence/reviews/continuation-v33-missing-observation-independent.json", "sha256": "9951e3d8da9570f60958529547e340f7faf1b1dc106663ac267f7dd4dba0d0ce"}
+  ],
+  "redactions": ["Model endpoint address", "Provider response identifiers", "Run, purchase, order, capture, ticket and observation identifiers", "Buyer information and credentials"],
+  "limits": ["Private source hashes are provenance bindings, not independently accessible public provider receipts", "Historical known-case analysis; not held-out discovery", "No new checkout during the paid AI investigation", "Not AI investigation of the public faulty replay case", "No model inference in keyless judge mode", "No claim of repeated stochastic reliability, fresh repaired payment, or current hosted AI execution", "No acceptance check changed by this summary"]
+}

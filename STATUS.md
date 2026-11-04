@@ -27,7 +27,7 @@ Earlier in this batch, **CC-023** was verified through actual PayPal Sandbox ing
 
 [OPEN_CHECKS.md](docs/OPEN_CHECKS.md) records each exact missing result and dependency. Main gaps: original fault recording, held-out discovery, fresh repaired purchase, full operator journey and actual public video. All eight old remote-browser grants are consumed. AWS infrastructure under $10/month is now permitted; this does not renew model or browser test usage. No AWS resources or spending were needed for this batch. Render remains excluded.
 
-Part F is not started because Part A cannot pass yet. No prize-lane feature is used to bypass that prerequisite.
+Features, including Part F, are frozen by the latest owner direction. The submission sprint closes only official delivery gates; unfinished original checks remain unchecked.
 
 ## Hosting and submission
 
@@ -43,10 +43,16 @@ A separate healthy-store experiment now verifies **CC-024**: after a real USD29 
 
 **CC-052** is also verified after independent review of the existing 17 local concurrency/restart groups and the newly satisfied CC-024 prerequisite. Those local tests used synthetic payment replies with actual competing workers, SIGKILL, default lease expiry and resumed work; they retained one ticket and the same operation identities. They are not evidence of concurrent live capture requests. The earlier interrupted recovery attempt and historical recovery proof remain preserved separately.
 
-Next: recover or produce the original faulty-checkout recording and its matching regression artifact for CC-035, then complete held-out discovery, the fresh repaired checkout comparison, operator acceptance and the public video. Part F remains gated. Declare completion only after **CC-060** passes.
+Next: finish the submission-only gates below. Original recording, held-out discovery and fresh repair experiments are deferred; do not resume them as submission prerequisites. Declare project completion only after CC-060 passes.
 
 ## Submission-only scope — step 1
 
 **47/60 verified; no new CC checkmarks.** On 4 November the owner froze features and deferred non-gating original-contract work. CC-035/036/038/041/046/048/050/056/057/060 remain failed, blocked or unverified as listed above, but are outside this submission sprint in their full original scope. CC-040/042 are also deferred. The public video part of CC-059 remains gating. This is a scope decision, not acceptance or removal of the original requirements.
 
 Triage and official-requirement mapping: [submission gates](docs/SUBMISSION_GATES.md). Next: finish clean-clone/runtime evidence, public AI evidence, AWS plan and submission assets. No new payment, model call or recorder experiment is needed for the deferred checks.
+
+## Submission access — step 2
+
+**47/60 verified; zero new CC IDs.** A fresh GitHub clone at `fba4ffd` passed 367 tests in 60.294s and all three replay tests in 0.167s. The app started without provider/model/licence credentials; browser case switching, payment filtering and expanded records worked. The downloaded ZIP independently reproduced faulty FAIL and healthy PASS, and the original late healthy tape still failed. Fresh frontend installation/typecheck/build and 45 timing tests passed. Node was 26.12.0 for this build (CI pins 22.14.0); Python was 3.13.15. The first attempt exhausted local disk; its failure remains recorded. No invariant or assertion changed.
+
+GitHub About visibly shows MIT, matching root LICENSE and GitHub metadata. README Sandbox instructions and safe buyer placeholders were inspected. Actual historical PayPal-plus-DeepSeek investigation evidence is now summarized publicly, explicitly a different case from the public replay. The keyless app makes no model calls. [Commands, outputs and browser evidence](docs/SUBMISSION_VERIFICATION.md). Public video and owner submission remain pending; no AWS resource or alert exists yet.

@@ -1,0 +1,11 @@
+{
+  "result": "FAILED_ENVIRONMENT",
+  "cause": "ENOSPC during npm extraction and simultaneous temporary-file/database creation",
+  "first_full_suite_exit": 120,
+  "first_app_launch": "No usable temporary directory found",
+  "cleanup": "Only incomplete new clean-clone studio/node_modules removed",
+  "source_or_assertion_changed": false,
+  "retry_suite": "367 tests in 60.294s OK",
+  "retry_build": "PASS",
+  "retry_keyless_http": 200
+}

@@ -1,0 +1,41 @@
+{
+  "paypal": {
+    "configured": false,
+    "missing": [
+      "PAYPAL_CLIENT_ID",
+      "PAYPAL_CLIENT_SECRET"
+    ],
+    "connectivity_verified": false
+  },
+  "webhook": {
+    "configured": false,
+    "missing": [
+      "PAYPAL_WEBHOOK_ID",
+      "CRASHCART_PUBLIC_URL"
+    ],
+    "connectivity_verified": false
+  },
+  "model": {
+    "configured": false,
+    "missing": [
+      "OPENAI_API_KEY",
+      "OPENAI_MODEL"
+    ],
+    "connectivity_verified": false
+  },
+  "kernel": {
+    "configured": false,
+    "missing": [
+      "KERNEL_API_KEY",
+      "CRASHCART_PUBLIC_URL"
+    ],
+    "connectivity_verified": false
+  },
+  "studio": {
+    "configured": false,
+    "missing": [
+      "AG_STUDIO_LICENSE_KEY"
+    ],
+    "connectivity_verified": false
+  }
+}

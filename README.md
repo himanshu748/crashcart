@@ -47,6 +47,8 @@ saved results. Reloading a hosted page does not execute Python or contact PayPal
 The original faulty-checkout video is unavailable; saved page observations are
 included. A repaired replay does not establish a fresh test payment or deployed fix.
 
+The [recorded AI investigation](docs/AI_EVIDENCE.md) shows how actual DeepSeek calls used a PayPal Sandbox read to choose the next evidence check. It is a separate historical case, not AI running inside this keyless walkthrough.
+
 ## What powers CrashCart
 
 | Technology | Its actual job | Available in keyless review? |
@@ -292,3 +294,7 @@ release limitations remain separate in [STATUS.md](STATUS.md). A hosted recorded
 deploy the live checkout backend. Source publication does not submit a hackathon entry.
 The [Devpost project page](https://devpost.com/software/crashcart-87asqz) is separate
 from this source repository; submission and final release remain unfinished.
+
+## Submission materials
+
+[Verified clean-clone path](docs/SUBMISSION_VERIFICATION.md) · [Submission scope](docs/SUBMISSION_GATES.md) · [AWS Docker/HTTPS commands](docs/AWS_JUDGE_DEPLOY.md) · [Video script](docs/VIDEO_SCRIPT.md) · [Devpost draft](docs/DEVPOST.md). AWS hosting is prepared, not deployed. The public YouTube video and final submission are still owner actions.

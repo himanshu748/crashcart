@@ -1,0 +1,57 @@
+
+> crashcart-studio@0.1.0 test:deadlines
+> node test-deadlines.mjs
+
+✔ valid correlated saved records preserve microsecond relative ticket time and the server result (4.603292ms)
+✔ projection accepts frozen input and changes no source records (0.262583ms)
+✔ a completed run or customer page message cannot establish payment (0.136666ms)
+✔ untrusted confirmation flag "1" stays unplotted (0.075583ms)
+✔ untrusted confirmation flag "true" stays unplotted (0.066667ms)
+✔ untrusted confirmation flag 2 stays unplotted (0.071125ms)
+✔ untrusted confirmation flag null stays unplotted (0.626792ms)
+✔ boolean true is an explicit confirmation flag, not a truthy coercion (0.244958ms)
+✔ missing completed-payment order_id stays unplotted (0.290916ms)
+✔ missing completed-payment capture_id stays unplotted (0.484959ms)
+✔ missing completed-payment payment_state stays unplotted (0.218041ms)
+✔ wrong amount or currency does not enter the fixed-ticket timeline (0.238375ms)
+✔ ambiguous or invalid payment time 2026-10-28T07:47:43 stays unplotted (0.120125ms)
+✔ ambiguous or invalid payment time 2026-02-30T07:47:43Z stays unplotted (0.299291ms)
+✔ ambiguous or invalid payment time 2026-10-28T24:00:00Z stays unplotted (0.189834ms)
+✔ ambiguous or invalid payment time 2026-10-28T07:47:43+24:00 stays unplotted (0.13025ms)
+✔ ambiguous or invalid payment time not-a-date stays unplotted (0.066083ms)
+✔ equivalent explicit offsets preserve actual relative timing (0.155959ms)
+✔ unknown store records stay unavailable rather than becoming zero tickets (0.087667ms)
+✔ cross-purchase merchant run_id stays unplotted (0.088792ms)
+✔ cross-purchase merchant purchase_id stays unplotted (0.049625ms)
+✔ cross-purchase merchant order_id stays unplotted (0.053ms)
+✔ missing or pre-payment store observation is not plotted (0.115875ms)
+✔ disagreeing ticket count, negative count or repeated ticket is not repaired by the client (0.182541ms)
+✔ a ticket from another purchase cannot create a timeline marker (0.091625ms)
+✔ invalid, timezone-free, pre-payment or after-observation ticket times are not clamped (0.131042ms)
+✔ a late ticket keeps its actual offset and never changes the recorded verdict (0.128833ms)
+✔ multiple distinct tickets retain all actual offsets and the recorded result (0.118458ms)
+✔ zero tickets beyond the promise without a saved result does not become a client failure (0.099042ms)
+✔ newest observed checker result wins independently of array order (2.319ms)
+✔ equal observed times use the API's deterministic event-id ordering (0.103875ms)
+✔ bad latest result identity never silently falls back to an earlier favorable result (0.071125ms)
+✔ saved result header run_id must belong to this checker observation (0.037417ms)
+✔ saved result header purchase_id must belong to this checker observation (0.025166ms)
+✔ saved result header order_id must belong to this checker observation (0.039ms)
+✔ saved result header source must belong to this checker observation (0.0235ms)
+✔ unsupported payload invariant or verdict is not presented as an accepted server result (0.043042ms)
+✔ duplicate checker identity or an unavailable result time does not choose an outcome (0.056583ms)
+✔ missing saved deadline hides timing while preserving the recorded result (0.036ms)
+✔ even a one-microsecond deadline conflict is exposed without rewriting the saved result (0.038958ms)
+✔ an inconclusive saved checker result may have only the source identities it established (0.034542ms)
+✔ unsupported run invariant is unavailable even when a payload says ticket-v1 (0.022917ms)
+✔ top-level run and purchase identity errors throw a fixed user-safe error (0.251958ms)
+✔ run list rejects duplicate identities and maps modes without internal enum labels (0.116666ms)
+✔ unknown state names cannot select prototype properties or become executable content (0.096708ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 24.4615

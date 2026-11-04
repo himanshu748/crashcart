@@ -1,0 +1,11 @@
+{
+  "url": "https://himanshu748.github.io/crashcart/data.json",
+  "status": 200,
+  "mode": "RECORDED_REPLAY",
+  "computed_when": "site build",
+  "network_calls": 0,
+  "outcomes": {
+    "defective": "paid_without_ticket",
+    "healthy": "ticket_delivered_once_on_time"
+  }
+}
