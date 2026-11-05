@@ -1,19 +1,22 @@
 # Remaining acceptance work
 
-Reviewed 4 November 2026. The frozen private build has **47/60 verified** and
+Reviewed 5 November 2026. The frozen private build has **47/60 verified** and
 zero stale requirements. CC-023 and CC-024 were accepted after actual Sandbox execution and independent review.
 CC-052 combines its reviewed local concurrency proof with the now-satisfied recovery prerequisite.
 The public repository includes reproducible source tests and curated replay
 inputs; it excludes the private acceptance archive. Additive judge-access work
 has separate public tests and does not inherit live-provider acceptance.
 
-## Failed requirements first
+
+**Current priority:** features are frozen and non-gating original experiments are deferred. This page describes what is still missing from the original contract; it is not an instruction to resume those experiments. The active submission work is the public video and owner submission. [Submission gates](SUBMISSION_GATES.md) separates those tasks from full CC acceptance; [milestones](../MILESTONES.md) gives the current order.
+
+## Deferred failed requirement
 
 | Check | Root cause / current result | Exact next evidence |
 | --- | --- | --- |
 | CC-035 | The regression reproduces the failure, but its original faulty-checkout recording is absent. | Recover the original hash-bound recording, or record a new authorized faulty checkout and export its matching regression. An unrelated healthy recording or local replay video is insufficient. |
 
-## Remaining checks, in requested order
+## Original checks and their missing evidence
 
 | Check / state | Missing acceptance evidence or prerequisite |
 | --- | --- |
@@ -30,7 +33,7 @@ has separate public tests and does not inherit live-provider acceptance.
 | CC-056 / blocked | Full clean-start fresh investigation, export and repair comparison; depends on CC-036, CC-042 and CC-048. Keyless replay access is a different, explicitly labelled path. |
 | CC-060 / blocked | All earlier checks and required independent phase/release reviews. Project incomplete. |
 
-## Owner and external dependencies
+## Dependencies for the deferred full release
 
 - A usable owned Sandbox buyer and its actual approval for required new test payments.
 - A technically bounded real browser/model execution path. Continuation is authorized; AWS infrastructure under
@@ -58,4 +61,4 @@ CC-024 now proves recovery after an actual USD29 Sandbox capture and process exi
 
 CC-052 is accepted using the existing 17-group LOCAL_TEST concurrency/restart evidence and the satisfied CC-024 prerequisite. Actual competing workers, SIGKILL and lease-expiry recovery retained one ticket with synthetic provider replies. This does not establish simultaneous real capture-POST behavior. The earlier interrupted recovery attempt remains recorded and is not a pass.
 
-Part F remains gated: Part A is incomplete while the required live-provider evidence remains blocked. No prize-lane feature is added to bypass these dependencies.
+Part F and all other feature work remain frozen by the owner. The deferred original release backlog is not a prerequisite for writing or recording the narrower, accurately labelled submission demonstration. It remains a prerequisite for claiming CC-060 or project completion.

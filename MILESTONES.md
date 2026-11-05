@@ -1,3 +1,40 @@
+# CrashCart delivery milestones
+
+Updated **5 November 2026**. **47/60 verified; 13 original checks open; zero stale accepted checks.** Features are frozen. These milestones order work; they neither grant acceptance nor authorize new spending, provider calls or submission.
+
+## Current submission path
+
+| Milestone | State and evidence | Next action / owner |
+| --- | --- | --- |
+| Runnable, keyless product | Verified clean-clone execution, healthy/faulty replay pair, downloadable regression and hosted access. See [verification](docs/SUBMISSION_VERIFICATION.md). | Preserve the working [HTTPS demo](https://himanshu748.github.io/crashcart/); fix a demonstrated regression if one appears. |
+| Honest integration story | Historical actual PayPal recovery and model investigation documented; keyless mode makes no new provider/model calls. See [AI evidence](docs/AI_EVIDENCE.md) and [submission copy](docs/DEVPOST.md). | Keep replay, historical service calls and fresh verification distinct in the recording. |
+| Public video | **Pending — required submission deliverable.** The [175-second script](docs/VIDEO_SCRIPT.md) is prepared; no video or public watch URL is verified. | Owner records, inspects actual duration/privacy, uploads Public to YouTube and verifies signed-out playback. |
+| Final Devpost entry | **Pending — owner action.** Paste-ready fields exist; a draft is not submitted. | Owner reviews links and video, then submits before 13 November 2026, 01:30 IST. Agent must not submit. |
+| Access during judging | Current GitHub Pages access is verified; future uptime is **ongoing/unverified**. | Keep source/demo available through 15 December. Recheck access before submission and during judging. |
+
+## Optional AWS host
+
+Local Docker/Caddy and AWS Budget configuration are verified; an AWS compute instance and public TLS endpoint are **not deployed**. No existing hostname was supplied. This does not block runnable access because the current HTTPS demo and clean-clone path work. Budget emails are configured, but delivery is not verified and alerts are not spending caps. See [AWS plan and current results](docs/AWS_JUDGE_DEPLOY.md). Do not buy a domain or provision infrastructure merely to close this optional milestone.
+
+## Original release backlog — deferred, not passed
+
+| Original state | IDs | Boundary |
+| --- | --- | --- |
+| Failed | CC-035 | Matching original faulty-checkout recording missing; preserve the failure. |
+| Blocked | CC-036, CC-038, CC-041, CC-056, CC-060 | Full export, held-out discovery, repair journey and release prerequisites remain unmet. |
+| Implemented, unverified | CC-046, CC-048, CC-050, CC-057 | Full linked workspace, operator journey, Postman artifact and complete acceptance review remain unverified. |
+| In progress, now deferred | CC-040, CC-042 | Fresh reduced-witness and repaired-payment experiments remain incomplete. |
+| Pending | CC-059 | Public video is active submission work; full original acceptance also requires the broader journey and dependencies. |
+
+The exact causes and original evidence requirements remain in [open checks](docs/OPEN_CHECKS.md). Resume these experiments only when the owner restores that scope and the necessary access, technical bounds and authorization exist. CC-060 remains the sole project-completion gate.
+
+## Preserved earlier planning
+
+The following snapshot preserves the earlier milestone mapping and its dated evidence. Its counts, ordering and proposed next actions are historical and superseded by the current submission scope above.
+
+<details>
+<summary>Earlier full-release plan — historical, not an active work queue</summary>
+
 # CrashCart completion milestones
 
 Plan updated after the actual **3 November 2026** verification. Canonical progress is **44/60**, with zero stale requirements: CC-037 is verified by `DOCUMENT_REVIEW` and CC-039 by `LOCAL_TEST`. The tables retain all **18 originally mapped IDs**; **16 remain open**. These milestones organize the existing [60-check contract](BUILD_CHECKLIST.md); they do not change its conditions, add checkmarks or create service authorization. [STATUS.md](STATUS.md) remains the current execution ledger. The private acceptance archive retains the actual application readback and independent review; [STATUS.md](STATUS.md) summarizes the scoped results.
@@ -115,3 +152,5 @@ These four ideas are **proposed and unimplemented**. They are not CC-061 onward,
 | **S2 — Provider connection health** | An operator knows whether payment, model and browser access is configured, recently verified, expired or unavailable. | A private connection setup distinguishes missing configuration from actual connectivity, exposes a real last-checked time, reports a controlled failure accurately and offers recovery without exposing secrets. Health checks make no unintended payment/model/browser operation and obey approved call/cost limits. Licence/access expiry is handled explicitly. |
 | **S3 — Reviewed support handoff and notifications** | A confirmed incident reaches the team's chosen support destination with its evidence links. | A human reviews the exact incident payload and authorized destination. One real successful send returns a stored external receipt; duplicate triggers create one external item; a failed send shows a retryable state without false success. Minimized data, destination isolation and revocation are exercised. Zapier may fit, but no sponsor/API integration is claimed until its real delivery is tested. |
 | **S4 — Recurring owned-flow reliability checks** | A team can schedule bounded test purchases or recorded checks and notice a missed promise. | One authorized scheduled owned-flow check and one controlled failure actually execute, retain correct fresh/replay modes, and respect per-workspace concurrency, call, time and cost controls. Pause prevents new dispatch; active cleanup and failure-tail limits are tested. Notification receipts and retention/deletion work across isolated workspaces. No unattended production charge or inherited blanket spending permission. |
+
+</details>

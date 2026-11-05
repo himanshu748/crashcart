@@ -27,10 +27,20 @@ CC-040 and CC-042 (fresh reduced witness and repaired purchase) are also outside
 
 ## Submission checklist (separate from the 60-check contract)
 
-- Clean-clone execution, keyless runtime and replay pair: evidence is recorded in [SUBMISSION_VERIFICATION.md](SUBMISSION_VERIFICATION.md).
-- Sandbox account instructions and safe private buyer placeholders: [README](../README.md#optional-sandbox-test-buyer-path).
-- Public repository and MIT licence: verify GitHub metadata and rendered repository licence link.
-- Meaningful PayPal and AI: actual historical provider/model evidence must be inspected and described accurately; no new inference in judge mode.
-- AWS: deployment plan only until the owner provisions and verifies it. The existing GitHub Pages URL remains the working public link.
-- Video: owner must record and publish a YouTube video under three minutes; no public video was created by this sprint.
-- Devpost: draft fields only; owner reviews and submits before **13 November 2026, 01:30 IST**. Keep test access through **15 December 2026**.
+Evidence reviewed through 5 November 2026. These task states do not add CC checkmarks or establish organizer acceptance. A recorded integration and a fresh execution are different forms of proof.
+
+| Task | State | Evidence and next action |
+| --- | --- | --- |
+| Clean-clone build and keyless runtime | Verified | [Commands, outputs and browser inspection](SUBMISSION_VERIFICATION.md). |
+| Faulty/healthy replay and unchanged deadline | Verified | [Replay test output](../evidence/runs/submission-ready/replay-v62.log): faulty fails, timely healthy passes, original late healthy still fails. |
+| Public source and OSI licence | Verified | [GitHub metadata](../evidence/runs/submission-ready/github-metadata.json), [About licence readback](../evidence/runs/submission-ready/github-license.txt), root MIT LICENSE. |
+| Sandbox credential instructions | Verified document | [README](../README.md#optional-sandbox-test-buyer-path) has account roles, variable names and safe private placeholders; no live access is included. |
+| Meaningful PayPal and AI evidence | Historically exercised; documented | [Actual Sandbox recovery](../evidence/runs/judge-ready/recovery-v56.json) and [actual model investigation](AI_EVIDENCE.md). Different cases; keyless mode makes no new payment/model calls. Show this distinction in the video. |
+| Submission fields and video script | Prepared | [DEVPOST.md](DEVPOST.md), [SUBMISSION.md](SUBMISSION.md), [175-second script](VIDEO_SCRIPT.md). Prepared copy is not a completed video or submitted form. |
+| Public YouTube video under three minutes | **Pending — required** | Owner records, checks actual exported duration and privacy, uploads Public and verifies signed-out playback. A script does not satisfy this task or CC-059. |
+| Final Devpost submission | **Pending — owner only** | Owner checks the real video/demo/source links and submits before 13 November 2026, 01:30 IST. The agent must not submit. |
+| Free access throughout judging | Ongoing | Existing [HTTPS demo](https://himanshu748.github.io/crashcart/) is available; future uptime through 15 December cannot be verified in advance. Retain the runnable source fallback. |
+
+### Optional AWS deployment
+
+The [local Docker/Caddy image](../evidence/runs/submission-ready/container-verified-v62.json) and [USD20/USD50 Budget configuration](../evidence/runs/submission-ready/budget-verified-v62.json) are verified. Budget email delivery is unverified. AWS compute and public TLS remain **not deployed**, pending an existing hostname. The [deployment instructions](AWS_JUDGE_DEPLOY.md) remain available; AWS is not required for the already verified runnable access path. Alerts are notifications, not spending caps. Render stays excluded.

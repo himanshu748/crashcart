@@ -1,0 +1,12 @@
+{
+  "source_commit": "88a18094ee807eb0605d4beb9e3aceb057d4c87e",
+  "result": "PASS",
+  "requirements_compared": 60,
+  "acceptance_hashes_unchanged": true,
+  "checkboxes_unchanged": true,
+  "verified_count": 47,
+  "private_public_acceptance_equal": true,
+  "previous_milestone_text_preserved_exactly": true,
+  "missing_local_links": [],
+  "new_cc_verifications": []
+}
