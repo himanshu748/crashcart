@@ -4,6 +4,8 @@
 
 ## Current delivery
 
+**5 November remaining-check verification:** the owner resumed verification of all 13 open requirements. Features remain frozen. [Current results and exact blockers](docs/REMAINING_VERIFICATION.md) supersede earlier deferral language; no new payment, model, browser-service or recording grant is implied.
+
 **5 November follow-through:** GitHub Pages remains the public demo. AWS Budget configuration and local Docker/Caddy behavior are verified. No CrashCart AWS server or public TLS target was created. The public video and owner submission remain pending.
 
 The public build now includes an interactive product landing page and a keyless recorded investigation. Run `sh scripts/judge.sh`: it recomputes the defective and healthy outcomes, opens the finished investigation, and provides source records and an executable replay. No PayPal, AG Studio, KERNEL or model key is needed for this path.
@@ -104,3 +106,11 @@ Checklist batch verification: **367 tests in 52.169s, OK**; independent document
 Validation: the canonical progress checker passed at **47/60**, with no errors; all 60 acceptance hashes and checkboxes match the prior revision. Relevant runtime/test directories are byte-unchanged from the clean-clone baseline, so the existing 367-test pass is retained without claiming a new suite run. [Checklist validation](evidence/runs/submission-ready/design-checklist-v64.json).
 
 Independent design-checklist review passed after confirming the evidence receipt and linked artifacts; no blocking findings remain in this documentation batch. This does not close the full CC-057 acceptance review.
+
+## Remaining 13 verification — 5 November
+
+**47/60 verified; newly verified IDs none; no stale accepted checks.** [Per-check results](docs/REMAINING_VERIFICATION.md). Full suite: **367 tests in 70.969s, OK**; public replay: **3 tests in 0.285s, OK**. Existing exported ZIP runs from a clean directory with network denied: defective FAIL/paid_without_ticket; healthy PASS/ticket_delivered_once_on_time. Postman passed 7 smoke and 48 copied-record assertions; missing proof produced 14 expected assertion failures. Held-out preflight remains blocked with all 24 frozen source hashes matching. Release audit correctly failed: 12 preceding open checks and missing phase 6–10 reviews.
+
+Independent audit found no additional original acceptance possible. Private inactive recorder preparation now passes 9 tests (independent rerun 9 tests in 4.893s); three prior blockers repaired, 29 canonical files unchanged. Actual recorder not run. Owner approved a five-second harmless capture, but window identification failed twice, then twice again after the owner resumed the step and the UI raised the window. Native capture reports zero on-screen matches while UI control shows CrashCart. No capture occurred and no allowance was consumed. This native targeting mismatch is the immediate blocker before proposing a newly recorded faulty checkout.
+
+Original states remain: CC-035 FAILED; CC-036/038/041/056/060 BLOCKED; CC-046/048/050/057 IMPLEMENTED_UNVERIFIED; CC-040/042 IN_PROGRESS; CC-059 PENDING. Five stale blocker descriptions were corrected; all acceptance conditions and checkboxes remain unchanged. No payment, tunnel, model call or remote browser session occurred. Next: resolve the native capture visibility mismatch, verify a harmless bounded capture, then prepare the separately scoped recorded checkout; held-out actual-trial inputs and owner video remain necessary.

@@ -1,0 +1,166 @@
+{
+  "source_commit": "d13b37d7587a4557a4f11877fc6b63069b7126f0",
+  "verified_count": 47,
+  "new_cc_verifications": [],
+  "canonical_runtime_changed": false,
+  "full_suite": {
+    "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v",
+    "cwd": "public checkout",
+    "exit_code": 0,
+    "output": "Ran 367 tests in 70.969s; OK"
+  },
+  "public_replay": {
+    "command": "python3 -m unittest tests.test_public_replay -v",
+    "exit_code": 0,
+    "output": "Ran 3 tests in 0.285s; OK"
+  },
+  "export": {
+    "command": "python3 var/verification-v65/verify_export.py",
+    "sha256": "7fcbfaf00081bb82f6806f0120e74fae68cb84dfc18419f9732a91bc0ebb5f41",
+    "fresh_directory": true,
+    "socket_operations_denied": true,
+    "source_unchanged": true,
+    "recording_present": false,
+    "cases": [
+      {
+        "name": "manifest",
+        "exit_code": 0,
+        "verdict": null,
+        "signature": null
+      },
+      {
+        "name": "defective",
+        "exit_code": 1,
+        "verdict": "FAIL",
+        "signature": "paid_without_ticket"
+      },
+      {
+        "name": "healthy",
+        "exit_code": 0,
+        "verdict": "PASS",
+        "signature": "ticket_delivered_once_on_time"
+      }
+    ]
+  },
+  "postman": {
+    "commands": [
+      "python3 scripts/verify_postman.py --newman var/postman-v54/runner/node_modules/.bin/newman --evidence-dir evidence/runs/verification-v65/postman/local",
+      "python3 var/verification-v65/run_observed.py"
+    ],
+    "both_exit_codes": 0,
+    "runner": "Newman6.2.1",
+    "smoke_pass": true,
+    "smoke_assertions": 7,
+    "negative_assertion_failures": 14,
+    "negative_exit_code": 1,
+    "observed_requests": 6,
+    "observed_assertions": 48,
+    "observed_failures": 0,
+    "original_files_unchanged": true,
+    "copied_rows_unchanged": true,
+    "provider_calls": 0,
+    "note": "Fresh execution of exported collection against copied historical records. Raw runner receipt retains its historical command label; the actual v65 entry point and child verifier path are recorded here."
+  },
+  "heldout_preflight": {
+    "command": "python3 var/cc038-preflight-v59/preflight.py",
+    "exit_code": 2,
+    "status": "BLOCKED_MISSING_ACTUAL_TRIAL_INPUTS",
+    "source_integrity": {
+      "files_checked": 24,
+      "all_match": true
+    },
+    "sealed_paths_accessed": false,
+    "provider_calls": 0
+  },
+  "release_audit": {
+    "command": "python3 scripts/check_completion.py release --report evidence/runs/verification-v65/release-audit.json",
+    "exit_code": 1,
+    "ok": false,
+    "verified_count": 47,
+    "open_states": {
+      "CC-035": "FAILED",
+      "CC-036": "BLOCKED",
+      "CC-038": "BLOCKED",
+      "CC-040": "IN_PROGRESS",
+      "CC-041": "BLOCKED",
+      "CC-042": "IN_PROGRESS",
+      "CC-046": "IMPLEMENTED_UNVERIFIED",
+      "CC-048": "IMPLEMENTED_UNVERIFIED",
+      "CC-050": "IMPLEMENTED_UNVERIFIED",
+      "CC-056": "BLOCKED",
+      "CC-057": "IMPLEMENTED_UNVERIFIED",
+      "CC-059": "PENDING",
+      "CC-060": "BLOCKED"
+    },
+    "missing_phase_reviews": [
+      6,
+      7,
+      8,
+      9,
+      10
+    ]
+  },
+  "inactive_preparation": {
+    "tests": "9 tests in 1.385s, OK",
+    "independent_rerun": "9 tests in 4.893s, OK",
+    "review": "PASS for offline preparation only",
+    "source_snapshot_files": 53,
+    "unchanged_canonical_files": 29,
+    "actual_recorder_executed": false,
+    "fixed": [
+      "shared synthetic journal/verdict clock",
+      "watchdog before AppKit initialization",
+      "recorder liveness at payment dispatch"
+    ],
+    "remaining": "Actual native capture, finalization and recorded checkout unverified."
+  },
+  "capture_preflight": {
+    "scope": "Owner approved one five-second exact CrashCart Safari window recording, audio off.",
+    "recording_started": false,
+    "allowance_used": false,
+    "result": "BLOCKED_WINDOW_IDENTIFICATION",
+    "first_step": [
+      "two matching windows in complete inventory",
+      "zero matching on-screen windows"
+    ],
+    "resumed_after_owner_update": [
+      "zero matching on-screen windows",
+      "zero matching on-screen windows after UI Raise"
+    ],
+    "step_stopped_after_two_failures": true,
+    "no_video_created": true
+  },
+  "independent_acceptance_audit": {
+    "reviewer": "submission_package_review",
+    "result": "NO_NEW_ACCEPTANCE",
+    "root_dependencies": [
+      "CC-035",
+      "CC-038"
+    ],
+    "all_13_items_reviewed": true,
+    "partial_review_only": true
+  },
+  "artifact_sha256": {
+    "evidence/runs/verification-v65/full-suite.log": "7d063b51322c265c17b2ebe035898bdb9e7da6e7cfcf9aad3c67061ad0066d8c",
+    "evidence/runs/verification-v65/public-replay.log": "512894b59e4c76fdb4fe1b5c5c37b1e0359d27be8924a124f0818f4f0326f3f5",
+    "evidence/runs/verification-v65/export/result.json": "1540d330b8b69e218638823a653013fe81042354c065740a55d59fb2f92e02c7",
+    "evidence/runs/verification-v65/heldout-preflight.json": "6a7e3a5a6ce648a76d09e71db25f906b5633a64c270262cee7c9af1593e196c2",
+    "evidence/runs/verification-v65/release-audit.json": "ec3e2668ade6c9b73fbfea5f728e55862e59b4f46ef0ca8028dcd3c37342367b",
+    "var/verification-v65/run_observed.py": "8e0763bc524b4ba249976401f02711522a7d6247668a06f4aa3a1fb7efb5ac6c",
+    "var/verification-v65/verify_observed.cjs": "e9d8e1e950421e726088757a0f9780aea5c367f339ed785ed0ad8380c31f0a0f",
+    "var/verification-v65/verify_export.py": "0e2f547bc0825712c6f3d6033866b78278881c72002e2d4a7d7399ea0f09dc5f"
+  },
+  "final_progress": {
+    "ok": true,
+    "verified_count": 47,
+    "errors": [],
+    "acceptance_hashes_and_checkboxes_unchanged": true
+  },
+  "publication_review": {
+    "reviewer": "submission_package_review",
+    "result": "PASS",
+    "blocking_findings": [],
+    "raw_artifact_hashes_matched": 8,
+    "scope": "Summary accuracy and sanitized package; prior offline preparation review remains limited. No new CC acceptance."
+  }
+}

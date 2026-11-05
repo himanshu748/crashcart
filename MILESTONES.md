@@ -2,6 +2,10 @@
 
 Updated **5 November 2026**. **47/60 verified; 13 original checks open; zero stale accepted checks.** Features are frozen. These milestones order work; they neither grant acceptance nor authorize new spending, provider calls or submission.
 
+## Verification resumed — 5 November
+
+The owner has now requested verification of all 13 open CC checks. [Current results](docs/REMAINING_VERIFICATION.md) supersede the deferral and next-action language below. Features remain frozen; no new service allowance or payment/recording window is created by this request. The recorded submission path remains available while original acceptance gaps are resolved.
+
 ## Current submission path
 
 | Milestone | State and evidence | Next action / owner |

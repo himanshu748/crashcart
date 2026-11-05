@@ -6,7 +6,7 @@ Deployment constraint: Render is excluded.
 
 ## Current execution scope — 5 November 2026
 
-**47/60 verified; 13 original requirements remain open.** Features are frozen. The owner has prioritized a judgeable submission and deferred non-gating original experiments. Use [STATUS.md](STATUS.md) for current evidence, [MILESTONES.md](MILESTONES.md) for execution order, and [submission gates](docs/SUBMISSION_GATES.md) for the official-deliverable mapping.
+**47/60 verified; 13 original requirements remain open.** Features are frozen. On 5 November the owner resumed verification of all 13 open checks. New provider/payment/recording experiments still require their applicable authorization; the feature freeze remains in force. Use [STATUS.md](STATUS.md) for current evidence, [MILESTONES.md](MILESTONES.md) for execution order, and [submission gates](docs/SUBMISSION_GATES.md) for the official-deliverable mapping.
 
 Deferral changes priority, not acceptance. All 60 IDs, checkboxes, Done when conditions, Verify conditions, dependencies and proof modes remain authoritative. A passing public replay does not close a fresh-payment requirement; a public video alone does not satisfy CC-059's broader original journey. Project completion still requires CC-060. Do not restart deferred provider experiments from a historical plan.
 

@@ -8,9 +8,9 @@ inputs; it excludes the private acceptance archive. Additive judge-access work
 has separate public tests and does not inherit live-provider acceptance.
 
 
-**Current priority:** features are frozen and non-gating original experiments are deferred. This page describes what is still missing from the original contract; it is not an instruction to resume those experiments. The active submission work is the public video and owner submission. [Submission gates](SUBMISSION_GATES.md) separates those tasks from full CC acceptance; [milestones](../MILESTONES.md) gives the current order.
+**Current priority:** on 5 November the owner resumed verification of all 13 open checks, while keeping features frozen. [Current verification results](REMAINING_VERIFICATION.md) distinguish freshly executed offline checks from missing original recording, held-out discovery and fresh-run proof. New scoped service/payment/recording grants remain separate; existing preparation is not an active experiment.
 
-## Deferred failed requirement
+## Failed requirement
 
 | Check | Root cause / current result | Exact next evidence |
 | --- | --- | --- |
@@ -20,8 +20,8 @@ has separate public tests and does not inherit live-provider acceptance.
 
 | Check / state | Missing acceptance evidence or prerequisite |
 | --- | --- |
-| CC-040 / in progress | New namespace, order, buyer approval and transaction for the reduced witness; depends on CC-036 and CC-038. |
-| CC-042 / in progress | Fresh repaired purchase, equivalent fault and unchanged promise, with provider, ticket and browser result; remaining dependencies are CC-040 and CC-041; CC-024 is satisfied. |
+| CC-040 / in progress | Accepted reduced-witness lineage and CC-036/038; historical fresh transaction proof exists, but current service/store/paypal source bindings need impact review or a new matched run. |
+| CC-042 / in progress | Historical repaired payment and customer-view proof exist (one ticket at 3.360974s); current-source/provenance review and CC-040/041 remain open. CC-024 is satisfied. |
 | CC-059 / pending | An exported public video under three minutes showing the required original and fresh journey; script alone is insufficient. Depends on CC-038, CC-040, CC-042, CC-048 and CC-058. |
 | CC-046 / implemented, unverified | Complete actual Studio selection/comparison with provenance and no stale cross-case data; depends on CC-040. Recorded-only comparison is supplemental. |
 | CC-048 / implemented, unverified | Complete operator start/inspect/cancel/compare/export, keyboard and responsive states; depends on CC-046. |
@@ -33,7 +33,7 @@ has separate public tests and does not inherit live-provider acceptance.
 | CC-056 / blocked | Full clean-start fresh investigation, export and repair comparison; depends on CC-036, CC-042 and CC-048. Keyless replay access is a different, explicitly labelled path. |
 | CC-060 / blocked | All earlier checks and required independent phase/release reviews. Project incomplete. |
 
-## Dependencies for the deferred full release
+## Dependencies for full acceptance
 
 - A usable owned Sandbox buyer and its actual approval for required new test payments.
 - A technically bounded real browser/model execution path. Continuation is authorized; AWS infrastructure under
@@ -61,4 +61,4 @@ CC-024 now proves recovery after an actual USD29 Sandbox capture and process exi
 
 CC-052 is accepted using the existing 17-group LOCAL_TEST concurrency/restart evidence and the satisfied CC-024 prerequisite. Actual competing workers, SIGKILL and lease-expiry recovery retained one ticket with synthetic provider replies. This does not establish simultaneous real capture-POST behavior. The earlier interrupted recovery attempt remains recorded and is not a pass.
 
-Part F and all other feature work remain frozen by the owner. The deferred original release backlog is not a prerequisite for writing or recording the narrower, accurately labelled submission demonstration. It remains a prerequisite for claiming CC-060 or project completion.
+Part F and all other feature work remain frozen by the owner. The original release backlog is not a prerequisite for writing or recording the narrower, accurately labelled submission demonstration. It remains a prerequisite for claiming CC-060 or project completion.
