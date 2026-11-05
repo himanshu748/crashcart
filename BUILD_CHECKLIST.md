@@ -12,6 +12,8 @@ Deferral changes priority, not acceptance. All 60 IDs, checkboxes, Done when con
 
 The [design verification checklist](docs/DESIGN_VERIFICATION.md) maps the agreed UI direction to scoped browser checks, known gaps and reverification triggers. It supplements this contract; it does not add CC IDs or change acceptance.
 
+Latest preparation evidence: the actual ten-second exact-window capture probe passed; the five-second failure and subsequent pre-checkout heartbeat failure are preserved. [Capture receipt](evidence/runs/submission-ready/capture-v66.json). This closes no original requirement: the matching faulty-checkout recording and its export remain required, and all 60 acceptance conditions and checkbox states are unchanged.
+
 ## 1. What this build must achieve
 
 CrashCart investigates disagreements between the customer's checkout experience, independently observed PayPal sandbox payment state, and the owned merchant's delivered entitlement. It produces an executable reproduction, reduces unnecessary steps, and verifies a repaired merchant against the same business promise.

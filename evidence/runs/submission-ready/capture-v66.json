@@ -1,0 +1,194 @@
+{
+  "kind": "ACTUAL_NATIVE_CAPTURE_PREPARATION_ONLY",
+  "source_commit": "87f80ed409fa08cec772d3a043040263a951f2ed",
+  "verified_count": 47,
+  "new_cc_verifications": [],
+  "first_probe": {
+    "status": "FAILED_READINESS",
+    "exit_code": 1,
+    "error": "NoUsableRecording",
+    "elapsed_seconds": 4.677096290999998,
+    "video_duration_seconds": 0.343333,
+    "video_frames": 5,
+    "audio_streams": 0,
+    "decode": "Exited successfully with two invalid timestamp warnings; not clean playback-timing proof.",
+    "media_sha256": "853eb9c71b2b0648642c27bc24c23701185ca24c77c78d69f3eca0c9bfd44bea"
+  },
+  "second_probe": {
+    "status": "PASS_SHORT_NATIVE_CAPTURE_ONLY",
+    "source": "ACTUAL_NATIVE_CAPTURE",
+    "recorder_binary_sha256": "ef4f5901563c67f04baed8cefca320903041fd277f1a02d119eafb488392e694",
+    "approved_total_limit_seconds": 10,
+    "process_elapsed_seconds": 8.626110499999413,
+    "native_elapsed_seconds": 8.578930166667305,
+    "video_duration_seconds": 7.691667,
+    "video_bytes": 450895,
+    "frames": 115,
+    "audio_streams": 0,
+    "ready_duration": 1,
+    "last_heartbeat_duration": 7,
+    "final_receipt_present": true,
+    "recorder_process_absent": true,
+    "decode_exit": 0,
+    "decode_warnings": [],
+    "frame_review": "Start and end frames show intended CrashCart local recorded-example Safari window; readable, no other app content.",
+    "recording_sha256": "ba315a6d5abdaa96775c92ef09958db075c25cc7c0b9abc9fa51a3e2b4377e87",
+    "independent_review": "PASS by submission_package_review; same scoped result independently inspected. Native receipt counters lag finalized media metrics; use ffprobe/filesystem.",
+    "prior_attempt": "Five-second NoUsableRecording failure retained in probe-result.json with timestamp warnings.",
+    "new_payments": 0,
+    "provider_calls": 0,
+    "new_cc_verifications": [],
+    "limitations": [
+      "Not a recorded checkout or CC035 proof.",
+      "Does not prove 600-second runtime behavior or successful future buyer session."
+    ]
+  },
+  "inactive_checkout_preparation": {
+    "tests": "9 tests in 1.126s, OK",
+    "source_files_frozen": 53,
+    "fixture_unpaid": true,
+    "activation_ready": false,
+    "approval_present": false,
+    "private_evidence_binding_updated": true,
+    "tests_after_title_binding": "9 tests in 1.103s, OK",
+    "independent_source_plan_review": "PASS, conditional on explicit grant, fresh readiness, unchanged hashes and actual scoped HTTPS login before order"
+  },
+  "current_blockers": [
+    "Changed recorder compiles and passes 10 offline tests but actual capture remains unverified; previous proof applies only to old binary.",
+    "Native Safari control failed twice during browser-window cleanup; restore reliable control before real capture.",
+    "Consumed test grant cannot be reused; any new capture or checkout requires applicable scope.",
+    "Complete original faulty-checkout recording/export and held-out discovery remain missing."
+  ],
+  "recording_uploaded": false,
+  "new_payments": 0,
+  "model_calls": 0,
+  "remote_browser_sessions": 0,
+  "public_test_windows": 1,
+  "canonical_runtime_changed": false,
+  "previous_suite_retained": "367 tests in 70.969s, OK; replay 3 tests in 0.285s, OK. No new full-suite claim for this documentation/private-helper batch.",
+  "private_artifact_sha256": {
+    "capture/probe-result.json": "d53b9ac08f19888d2c821742fd6d585350f3af1db7184747618a1a87848e2d44",
+    "capture/probe-result-2.json": "74136835aac0dd72a21620b9cea89b20cd8c71c326950fbfb132020ffc589c1a",
+    "cc035-proposal/draft-validation.json": "8f549446364f0e9ed3f90e62dca6f32f625d3f6fa42b4b6996229cf34581772f"
+  },
+  "buyer_preparation": {
+    "developer_access_observed": true,
+    "sandbox_buyer_authenticated": true,
+    "no_recording_during_login": true,
+    "password_not_saved": true,
+    "unique_local_target_identified": true,
+    "readiness_must_be_refreshed_before_execution": true
+  },
+  "recorded_checkout_attempt": {
+    "status": "FAILED_BEFORE_CHECKOUT",
+    "error": "RECORDER_HEARTBEAT_STALE",
+    "elapsed_seconds": 53.639,
+    "within_approved_window": true,
+    "unpaid_readback": {
+      "status": "UNPAID_LOCAL_FIXTURE_ONLY",
+      "order_id": null,
+      "capture_id": null,
+      "counts": {
+        "operations": 0,
+        "events": 0,
+        "tickets": 0,
+        "jobs": 0
+      },
+      "provider_calls": 0
+    },
+    "cleanup": {
+      "gateway": {
+        "pid": 42562,
+        "process_exited": true,
+        "exit_code": -15
+      },
+      "tunnel": {
+        "pid": 42514,
+        "process_exited": true,
+        "exit_code": 0
+      },
+      "recorder": {
+        "pid": 42466,
+        "process_exited": true,
+        "exit_code": 0
+      }
+    },
+    "cloudflared_cleanup": {
+      "cloudflared": {
+        "pid": 42516,
+        "process_exited": true,
+        "exit_code": 0
+      }
+    },
+    "private_video": {
+      "duration_seconds": 51.525,
+      "frames": 710,
+      "bytes": 1343024,
+      "audio_streams": 0,
+      "decode_exit_code": 0,
+      "decode_warning_count": 26,
+      "frame_review": "Start and end show only intended CrashCart preparation page; not checkout footage. No credentials visible in inspected frames. Full privacy inspection not claimed.",
+      "sha256": "183962feb1e8d6b779c66430ac376aedef7a91c9ceb30f40539ce027a6b49455"
+    },
+    "grant_consumed": true,
+    "new_cc_verifications": [],
+    "recorder_cause": "Heartbeat is gated on SCRecordingOutput encoded-duration counter; real capture stall vs counter-reporting lag cannot be distinguished without sample callbacks. No timeout/check weakened.",
+    "scoped_login": "UI reported string did not match expected pattern; authentication not verified before gateway closed.",
+    "all_owned_child_pids_absent": true,
+    "recording_uploaded": false,
+    "independent_review": {
+      "reviewer": "submission_package_review",
+      "result": "CONFIRMED_FAILURE_AND_CLEANUP",
+      "scope": "Exact PIDs absent; read-only unpaid database; recording metadata and sampled frames inspected. No CC acceptance."
+    },
+    "browser_cleanup": "Temporary login-window dismissal unverified: native controller returned noWindowsAvailable, then timeoutReached. Stopped UI cleanup after two failures. Backend gateway revoked/stopped, and no payment exists."
+  },
+  "local_preparation_server_stopped": true,
+  "unchanged_public_tested_directories": [
+    "crashcart",
+    "web",
+    "tests",
+    "scripts"
+  ],
+  "recorder_candidate_v67": {
+    "status": "OFFLINE_CANDIDATE_PASSED_ACTUAL_CAPTURE_UNVERIFIED",
+    "candidate_behavior": [
+      "Real SCStreamOutput.complete sample callback with valid/data-ready image and strictly increasing finite PTS admits progress.",
+      "Heartbeat observed_at equals actual admitted sample callback timestamp.",
+      "Idle/blank/suspended/invalid/missing-image/nonfinite/repeated/regressed samples cannot renew freshness.",
+      "Five-second age rule, recording-start requirement, positive media bytes/duration, PID/window/run binding and payment guards retained.",
+      "Separate callback diagnostics are not a heartbeat."
+    ],
+    "tests": {
+      "command": "env PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/opt/python@3.13/libexec/bin/python3 var/cc035-live-v60/test_preparation.py",
+      "exit_code": 0,
+      "result": "Ran 10 tests in 1.532s; OK",
+      "attempt": 1,
+      "boundary": "Synthetic sample-admission and metadata tests plus real no-capture Swift probes/owned-process cleanup. Actual CMSampleBuffer callback runtime and encoder persistence remain unverified."
+    },
+    "recorder_executed": false,
+    "old_capture_proof_covers_new_binary": false,
+    "new_cc_verifications": [],
+    "binary_sha256": "893aa2c465053a7e9df9d154b29c8292946d351d35b548999269046cce689cf9",
+    "private_verification_sha256": "5cd3f471cdba5a5499e6a068d39a1df29c209e699e1b00ced24f35d0c7ed9833",
+    "independent_review": {
+      "reviewer": "submission_package_review",
+      "result": "PASS_OFFLINE_SOURCE_ONLY",
+      "test_result": "10 tests in 3.366s, OK",
+      "actual_capture_verified": false
+    },
+    "readme_correction": "Preserved consumed approval/failed execution acknowledged; only README hash changed after source review."
+  },
+  "publication_review": {
+    "reviewer": "submission_package_review",
+    "result": "PASS",
+    "scope": "Four public files: accuracy, resolved links, privacy and unchanged tested runtime",
+    "new_cc_verifications": []
+  },
+  "final_progress": {
+    "ok": true,
+    "verified_count": 47,
+    "errors": [],
+    "all_60_conditions_and_checkboxes_unchanged": true
+  }
+}

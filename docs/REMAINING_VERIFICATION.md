@@ -1,8 +1,18 @@
 # Remaining 13 checks — verification results
 
-5 November 2026. **47/60 verified; no new CC checkmarks.** The owner resumed verification of all open checks. Features remain frozen. This pass executed available offline checks, inspected original evidence and dependencies, and repaired inactive recording preparation. No payment, public test window, recording, model call or remote browser session occurred.
+5 November 2026. **47/60 verified; no new CC checkmarks.** The owner resumed verification of all open checks. Features remain frozen. The v65 pass executed available offline checks, inspected original evidence and dependencies, and repaired inactive recording preparation. No payment, public test window, recording, model call or remote browser session occurred.
 
-## What actually ran
+## Capture follow-through — v66
+
+The separately approved ten-second native capture probe passed with 115 frames / 7.691667 seconds, no audio, clean decoding and finalization within the ten-second process budget. The failed five-second readiness probe remains preserved. Start/end frames were independently inspected. Both grants are consumed; the private videos were not uploaded. [Sanitized receipt](../evidence/runs/submission-ready/capture-v66.json).
+
+This established short-capture behavior for the then-frozen recorder only. CC-035 still needs an actual recorded faulty checkout. Nine offline guards passed, Developer access and existing Sandbox buyer authentication were observed, and a unique preparation window was identified. The reviewed proposal subsequently received approval for the single attempt below. Any repaired recorder requires new actual-capture verification; the prior short pass does not transfer to changed code.
+
+## Recorded-checkout attempt — v66 failure
+
+After a separate scoped approval, the attempt stopped before checkout with `RECORDER_HEARTBEAT_STALE` in 53.639 seconds. All four owned child processes were confirmed absent; no order, capture or merchant operation exists. The private partial video has 710 frames / 51.525 seconds and no audio, but 26 decode timestamp warnings. It is not checkout proof. The encoder counter lagged final media and cannot establish whether real frame delivery stalled. An offline repair now uses valid advancing captured-frame callbacks and passes ten focused tests plus compilation; the five-second freshness guard remains unchanged. Actual capture with the new binary remains unverified. The one-attempt grant is consumed; further capture/payment needs applicable authorization.
+
+## What actually ran — v65
 
 | Verification | Observed result | Acceptance limit |
 | --- | --- | --- |
@@ -36,7 +46,7 @@
 
 The missing faulty-checkout recording and actual held-out discovery are the dependency roots. Other checks also require fresh-run, workspace, review and video conditions. Historical fresh payments are not silently promoted into current-source proof or new execution.
 
-## Preparation repairs and next action
+## Preserved v65 preparation history
 
 Inactive private helpers now share the synthetic journal/verdict clock, arm the recorder watchdog before AppKit initialization and independently check recorder heartbeat/PID before order/capture/reconciliation dispatch. Nine offline tests passed in 1.385s on the first resumed attempt; shared Swift watchdog probes exited124 for simulated startup/finalization stalls. Recorder compilation passed. Actual native capture was not executed. Old failed attempts remain preserved; no canonical runtime changed.
 

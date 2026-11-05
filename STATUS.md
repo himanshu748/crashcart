@@ -4,6 +4,8 @@
 
 ## Current delivery
 
+**5 November recording verification:** the short native capture probe passed, but the separately approved recorded-checkout attempt stopped on a stale recorder heartbeat before any order or payment. All owned test processes exited after 53.639 seconds. The unpaid fixture remains empty. **47/60; no new CC IDs.** The failure and recording are preserved; a private recorder repair passes ten offline tests while actual capture with the changed binary remains unverified.
+
 **5 November remaining-check verification:** the owner resumed verification of all 13 open requirements. Features remain frozen. [Current results and exact blockers](docs/REMAINING_VERIFICATION.md) supersede earlier deferral language; no new payment, model, browser-service or recording grant is implied.
 
 **5 November follow-through:** GitHub Pages remains the public demo. AWS Budget configuration and local Docker/Caddy behavior are verified. No CrashCart AWS server or public TLS target was created. The public video and owner submission remain pending.
@@ -16,7 +18,7 @@ The existing live workspace and sponsor integrations remain separate and require
 
 ## Verification
 
-Latest local suite on Python 3.13.15 (5 November): **367 tests in 52.617s, OK**. Replay suite: **3 tests in 0.261s, OK**. An initial attempt accidentally used unsupported Python 3.9 and failed; its output is retained. No source or assertion was changed for the corrected run. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
+Latest local suite on Python 3.13.15 (5 November): **367 tests in 70.969s, OK**. Replay suite: **3 tests in 0.285s, OK**. An initial attempt accidentally used unsupported Python 3.9 and failed; its output is retained. No source or assertion was changed for the corrected run. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
 
 Current Postman execution passed seven local assertions and 48 assertions against copied historical Sandbox observations (six GETs); missing proof still fails. No new provider call was made. CC-050 remains open through CC-035.
 
@@ -114,3 +116,23 @@ Independent design-checklist review passed after confirming the evidence receipt
 Independent audit found no additional original acceptance possible. Private inactive recorder preparation now passes 9 tests (independent rerun 9 tests in 4.893s); three prior blockers repaired, 29 canonical files unchanged. Actual recorder not run. Owner approved a five-second harmless capture, but window identification failed twice, then twice again after the owner resumed the step and the UI raised the window. Native capture reports zero on-screen matches while UI control shows CrashCart. No capture occurred and no allowance was consumed. This native targeting mismatch is the immediate blocker before proposing a newly recorded faulty checkout.
 
 Original states remain: CC-035 FAILED; CC-036/038/041/056/060 BLOCKED; CC-046/048/050/057 IMPLEMENTED_UNVERIFIED; CC-040/042 IN_PROGRESS; CC-059 PENDING. Five stale blocker descriptions were corrected; all acceptance conditions and checkboxes remain unchanged. No payment, tunnel, model call or remote browser session occurred. Next: resolve the native capture visibility mismatch, verify a harmless bounded capture, then prepare the separately scoped recorded checkout; held-out actual-trial inputs and owner video remain necessary.
+
+## Native capture preparation — 5 November
+
+**47/60 verified; newly verified CC IDs: none; stale accepted checks: none.** Unique window targeting and the actual recorder were exercised. The first five-second probe failed readiness and retained its partial video/timestamp warnings. A separately approved ten-second probe passed: 115 frames, 7.691667 seconds, no audio, advancing heartbeat, final receipt and clean decode; process exit took 8.626 seconds. Independent inspection confirmed the intended CrashCart page at both ends. Both capture grants are consumed; recordings remain private. [Sanitized evidence](evidence/runs/submission-ready/capture-v66.json).
+
+Before the attempt below, the inactive checkout helper was bound to a fresh v66 evidence directory and nine offline guards passed. This preparation made no payment or public test window. The complete faulty-checkout recording is still missing, so CC-035 remains FAILED and dependent requirements remain open. Other states remain CC-036/038/041/056/060 BLOCKED; CC-046/048/050/057 IMPLEMENTED_UNVERIFIED; CC-040/042 IN_PROGRESS; CC-059 PENDING.
+
+The owner completed Developer sign-in; the existing Sandbox buyer then authenticated successfully in Safari without recording active, before any proposed checkout recording. A unique local preparation window was identified. The frozen plan then passed independent review and the owner approved the single bounded attempt recorded below. The earlier saved-login failures are preserved. Held-out trial inputs and the owner-recorded submission video remain separate gaps.
+
+### Recorded-checkout attempt — preserved failure
+
+The newly approved single attempt stopped with `RECORDER_HEARTBEAT_STALE` before checkout. All gateway, tunnel, cloudflared and recorder processes were confirmed absent; cleanup completed in **53.639 seconds**. Read-only state contains no order, capture, operation, event, ticket or job. The partial private video contains 710 frames over 51.525 seconds, no audio, and 26 decode timestamp warnings; it is not accepted checkout proof. The final encoder counter reported only 47 seconds. The recorder used for this failed attempt uses that counter for heartbeat freshness, so capture stall and counter lag cannot yet be distinguished.
+
+The grant is consumed and no public test window is running. Next: repair and independently test actual-frame liveness reporting, then obtain scoped authorization for real capture verification before another checkout. No payment occurred, no CC state changed, and the original 60-second promise and recorder freshness guard remain unchanged.
+
+### Recorder repair candidate — offline proof only
+
+The private recorder now uses actual complete-frame callbacks with valid image data and advancing timestamps for liveness. Idle, blank, suspended or invalid callbacks cannot renew the unchanged five-second freshness limit. Ten focused tests passed in **1.532 seconds** and compilation passed. Canonical runtime, public UI and original acceptance conditions are unchanged. The old ten-second capture pass applies only to its original binary; the changed binary is **implemented but not verified by actual capture**.
+
+Native Safari control failed twice during temporary-window cleanup, so that UI step stopped. All test backend processes and the local preparation server are gone. Independent candidate source review passed, including a separate 10-test run in 3.366 seconds. Next concrete action: restore reliable Safari control and obtain a scoped harmless capture validation before any new checkout. This batch remains **47/60; newly verified CC IDs none**.
