@@ -57,3 +57,9 @@ Five stale blocker descriptions were corrected without changing states: CC-040 p
 The owner approved a harmless five-second exact-window capture probe. No capture started: initial window identification failed twice; after the owner confirmed visibility, on-screen matching failed twice again, including after a UI Raise. UI control renders CrashCart while native capture reports no on-screen matching window. The step is stopped and the capture allowance is unused. Next: resolve this visibility mismatch, then inspect actual frames, audio absence and finalization before proposing a scoped recorded Sandbox checkout. Compilation and watchdog probes are not actual recorder proof.
 
 AG Studio is configured through 17 December; no replacement key is needed. Held-out execution still needs independently bound actual-trial inputs and applicable provider/model access and allowance. No new spending/service setup is authorized by this report. Owner video and final Devpost submission remain separate.
+
+## Current recorder diagnostic — v68
+
+The earlier capture blocker is resolved for a bounded harmless probe of the repaired binary: independent review passed, video is 67.143333 seconds / 997 frames / no audio, full decode emits no warnings, and process exit took 68.190 seconds. The five-second freshness guard is unchanged (maximum observed age 0.174427 seconds). Covering the window was exercised only for the final approximately seven seconds; return happened after capture. This does not prove a 600-second recording or a checkout. The one-use grant is consumed and all probe processes are stopped. [Scoped receipt](../evidence/runs/submission-ready/capture-v68.json).
+
+**All 13 requirement states above remain unchanged; 47/60 verified.** Next: prepare and review a fresh recorded Sandbox checkout before obtaining its scoped execution authorization. No old attempt, payment or recording allowance is reused.

@@ -12,7 +12,7 @@ Deferral changes priority, not acceptance. All 60 IDs, checkboxes, Done when con
 
 The [design verification checklist](docs/DESIGN_VERIFICATION.md) maps the agreed UI direction to scoped browser checks, known gaps and reverification triggers. It supplements this contract; it does not add CC IDs or change acceptance.
 
-Latest preparation evidence: the actual ten-second exact-window capture probe passed; the five-second failure and subsequent pre-checkout heartbeat failure are preserved. [Capture receipt](evidence/runs/submission-ready/capture-v66.json). This closes no original requirement: the matching faulty-checkout recording and its export remain required, and all 60 acceptance conditions and checkbox states are unchanged.
+Latest preparation evidence: the repaired recorder passed a bounded seventy-second diagnostic (67.143333 seconds of video, 997 frames, no audio, clean decode and independent review). [Scoped capture receipt](evidence/runs/submission-ready/capture-v68.json). The earlier failures remain preserved. This closes no original requirement and does not prove a full checkout recording: matching faulty-checkout footage and export remain required. All 60 acceptance conditions and checkbox states are unchanged.
 
 ## 1. What this build must achieve
 

@@ -1,0 +1,82 @@
+{
+  "scope": "Actual single-window native recorder diagnostic only; no CC acceptance",
+  "state": "PASS_BOUNDED_NATIVE_CAPTURE_PROBE",
+  "verified_count": 47,
+  "newly_verified_cc_ids": [],
+  "started_at": "2026-11-05T15:39:51.894968+00:00",
+  "ended_at": "2026-11-05T15:41:00.085468+00:00",
+  "binary_sha256": "893aa2c465053a7e9df9d154b29c8292946d351d35b548999269046cce689cf9",
+  "harness_sha256": "3d6f378548cbfdf6bc10ab390919b03104728604a7234884517bf854ed5a0339",
+  "process_exit_seconds": 68.19008341699998,
+  "exit_code": 0,
+  "heartbeat_freshness_limit_seconds": 5,
+  "max_observed_heartbeat_age_seconds": 0.174427,
+  "heartbeat_samples": 611,
+  "video": {
+    "duration_seconds": 67.143333,
+    "frames": 997,
+    "width": 2648,
+    "height": 1846,
+    "audio_streams": 0,
+    "sha256": "b953f201b9e6b76667c2cce22e7071c41454114b7f3556bf4f71e6119aaa37a3",
+    "published": false,
+    "decode_exit_code": 0,
+    "decode_warning_bytes": 0
+  },
+  "visual_inspection": {
+    "start": "Intended CrashCart local page, first payment walkthrough stage",
+    "end": "Same page and window, second missing-ticket walkthrough stage, background window chrome",
+    "unrelated_window_visible_in_sampled_frames": false
+  },
+  "cover_observation": {
+    "covered_at": "2026-11-05T15:40:52.791Z",
+    "returned_at": "2026-11-05T15:41:20.345Z",
+    "seconds_before_process_exit": 7.294468,
+    "return_transition_recorded": false
+  },
+  "limits": [
+    "Only 68.19 seconds of process lifetime exercised; the 600-second checkout limit is not verified here.",
+    "Cover occurred late, for approximately the final seven seconds, not the originally planned middle interval.",
+    "Return to CrashCart occurred after recording ended.",
+    "No checkout, login, payment, public tunnel, provider call or upload.",
+    "Actual full-checkout footage and matching replay remain missing; CC-035 stays FAILED."
+  ],
+  "cleanup": {
+    "recorder_absent": true,
+    "local_server_absent": true,
+    "temporary_license_window_closed": true,
+    "safari_left_at": "https://himanshu748.github.io/crashcart/"
+  },
+  "artifacts": {
+    "execution.json": "1c0d359189c6315af0d3fe0a4138db280cc1e0282ba140132182b9149fce764f",
+    "media.json": "97da6aa9aa829b94630dbb187a5c89bb81ef74fb158be113c21ce48f34ddf9a2",
+    "decode.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "controller-observations.json": "8fa1006d5e0d3899b38f7814183e9bae1cb863c83d873d6c6137f149510f900b",
+    "frame-start.png": "70015a757c5585864fc0a70c7daadd2e99da5e3d4e2d607640925ae887cb58f4",
+    "frame-middle.png": "1847d0354631e0b7cbc67ce9bc52d92e031bd0ad16a40e6b945c7e2bb784c680",
+    "frame-end.png": "72ad5dcddf2f07fbee5f74600f2fa803510afd995e399f4a9d3e619cf09a90e5",
+    "cleanup.json": "bb2645556cbf3788c07c236697b1482bcab063145437c511e4620c52a64c8f3f",
+    "independent-review.json": "d32a9c48f9062082ee5e29e8fe9a5924e29a033d86a6aaf6c41918abacd81ab6"
+  },
+  "independent_review": {
+    "reviewer": "/root/probe_review_v68",
+    "decision": "PASS",
+    "scope": "Bounded harmless native-capture probe only",
+    "blocking_findings": [],
+    "checks": [
+      "Correct window in start/middle/end frames; stage 1 then stage 2; no unrelated-window content in sampled frames",
+      "All 611 heartbeat entries checked for identity, scope, freshness and nonregression; max age 0.174427 seconds",
+      "Independent full ffmpeg decode exited 0 with empty output",
+      "Media hash, 67.143333 second duration, 997 frames, video-only stream verified",
+      "Recorder and server PIDs absent",
+      "66 retained heartbeat observations after cover advance complete-frame sample counts 891 to 995"
+    ],
+    "reviewed_predecision_receipt_sha256": "30af8eeec6f975e64e52b1553ed6b6e01334b1402b3d6d2597788ae0654a7d7a",
+    "media_sha256": "b953f201b9e6b76667c2cce22e7071c41454114b7f3556bf4f71e6119aaa37a3",
+    "limits": [
+      "Only final approximately 7.294 seconds covered; return was after capture",
+      "Does not verify 600-second recording, checkout, CC-035 or any new CC"
+    ],
+    "attribution": "Read-only reviewer result persisted by parent from independent agent message"
+  }
+}

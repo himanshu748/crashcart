@@ -4,7 +4,7 @@
 
 ## Current delivery
 
-**5 November recording verification:** the short native capture probe passed, but the separately approved recorded-checkout attempt stopped on a stale recorder heartbeat before any order or payment. All owned test processes exited after 53.639 seconds. The unpaid fixture remains empty. **47/60; no new CC IDs.** The failure and recording are preserved; a private recorder repair passes ten offline tests while actual capture with the changed binary remains unverified.
+**5 November recording verification:** the repaired recorder passed an independently reviewed bounded native-capture probe: 67.143333 seconds of video, 997 frames, no audio and clean decode. Process exit took 68.190 seconds; maximum observed frame-heartbeat age was 0.174427 seconds against the unchanged five-second limit. The prior failed checkout attempt remains preserved. **47/60; no new CC IDs.** Full matching checkout footage is still missing. [Scoped evidence](evidence/runs/submission-ready/capture-v68.json).
 
 **5 November remaining-check verification:** the owner resumed verification of all 13 open requirements. Features remain frozen. [Current results and exact blockers](docs/REMAINING_VERIFICATION.md) supersede earlier deferral language; no new payment, model, browser-service or recording grant is implied.
 
@@ -136,3 +136,11 @@ The grant is consumed and no public test window is running. Next: repair and ind
 The private recorder now uses actual complete-frame callbacks with valid image data and advancing timestamps for liveness. Idle, blank, suspended or invalid callbacks cannot renew the unchanged five-second freshness limit. Ten focused tests passed in **1.532 seconds** and compilation passed. Canonical runtime, public UI and original acceptance conditions are unchanged. The old ten-second capture pass applies only to its original binary; the changed binary is **implemented but not verified by actual capture**.
 
 Native Safari control failed twice during temporary-window cleanup, so that UI step stopped. All test backend processes and the local preparation server are gone. Independent candidate source review passed, including a separate 10-test run in 3.366 seconds. Next concrete action: restore reliable Safari control and obtain a scoped harmless capture validation before any new checkout. This batch remains **47/60; newly verified CC IDs none**.
+
+### Repaired recorder — actual bounded probe verified
+
+**47/60 verified; newly verified CC IDs: none; stale accepted checks: none.** The separately approved seventy-second private diagnostic passed independent media review. Actual capture produced **997 frames over 67.143333 seconds**, with no audio and no decode warnings. The recorder exited normally after **68.190 seconds**. All 611 retained heartbeat observations satisfy the unchanged five-second freshness limit; maximum observed age was **0.174427 seconds**. [Evidence and review](evidence/runs/submission-ready/capture-v68.json).
+
+The intended CrashCart window appears at the beginning, middle and end. A harmless local licence window covered it for approximately the final seven seconds; the recording continued to show CrashCart. Return to the foreground happened after recording ended and is not claimed as captured. This verifies only the bounded diagnostic, not a 600-second checkout recording. No payment, login, provider call, public tunnel or upload occurred. The one-use capture grant is consumed; recorder and temporary local server are stopped, the cover window is closed, and Safari shows the public demo.
+
+CC-035 remains FAILED because matching checkout footage/export is still missing. CC-036/038/041/056/060 remain BLOCKED; CC-046/048/050/057 IMPLEMENTED_UNVERIFIED; CC-040/042 IN_PROGRESS; CC-059 PENDING. Next: prepare a fresh recorded Sandbox checkout with independent review and scoped authorization, preserving the consumed failed attempt. Held-out investigation inputs and the owner video/submission remain separate gaps. Public runtime and tests are unchanged; the previously recorded 367-test and three-test replay passes are retained, not represented as new executions.
