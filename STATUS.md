@@ -1,8 +1,10 @@
 # CrashCart development status
 
-**Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 4 November 2026 (India).
+**Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 5 November 2026 (India).
 
 ## Current delivery
+
+**5 November follow-through:** GitHub Pages remains the public demo. AWS Budget configuration and local Docker/Caddy behavior are verified. No CrashCart AWS server or public TLS target was created. The public video and owner submission remain pending.
 
 The public build now includes an interactive product landing page and a keyless recorded investigation. Run `sh scripts/judge.sh`: it recomputes the defective and healthy outcomes, opens the finished investigation, and provides source records and an executable replay. No PayPal, AG Studio, KERNEL or model key is needed for this path.
 
@@ -12,7 +14,7 @@ The existing live workspace and sponsor integrations remain separate and require
 
 ## Verification
 
-Latest local suite on Python 3.13.15: **367 tests in 60.294s, OK**. Replay suite: **3 tests in 0.167s, OK**. An initial attempt accidentally used unsupported Python 3.9 and failed; its output is retained. No source or assertion was changed for the corrected run. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
+Latest local suite on Python 3.13.15 (5 November): **367 tests in 52.617s, OK**. Replay suite: **3 tests in 0.261s, OK**. An initial attempt accidentally used unsupported Python 3.9 and failed; its output is retained. No source or assertion was changed for the corrected run. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
 
 Current Postman execution passed seven local assertions and 48 assertions against copied historical Sandbox observations (six GETs); missing proof still fails. No new provider call was made. CC-050 remains open through CC-035.
 
@@ -45,32 +47,44 @@ A separate healthy-store experiment now verifies **CC-024**: after a real USD29 
 
 Next: finish the submission-only gates below. Original recording, held-out discovery and fresh repair experiments are deferred; do not resume them as submission prerequisites. Declare project completion only after CC-060 passes.
 
-## Submission-only scope — step 1
+## Submission-only scope — step 1 — 4 November history
 
 **47/60 verified; no new CC checkmarks.** On 4 November the owner froze features and deferred non-gating original-contract work. CC-035/036/038/041/046/048/050/056/057/060 remain failed, blocked or unverified as listed above, but are outside this submission sprint in their full original scope. CC-040/042 are also deferred. The public video part of CC-059 remains gating. This is a scope decision, not acceptance or removal of the original requirements.
 
 Triage and official-requirement mapping: [submission gates](docs/SUBMISSION_GATES.md). Next: finish clean-clone/runtime evidence, public AI evidence, AWS plan and submission assets. No new payment, model call or recorder experiment is needed for the deferred checks.
 
-## Submission access — step 2
+## Submission access — step 2 — 4 November history
 
 **47/60 verified; zero new CC IDs.** A fresh GitHub clone at `fba4ffd` passed 367 tests in 60.294s and all three replay tests in 0.167s. The app started without provider/model/licence credentials; browser case switching, payment filtering and expanded records worked. The downloaded ZIP independently reproduced faulty FAIL and healthy PASS, and the original late healthy tape still failed. Fresh frontend installation/typecheck/build and 45 timing tests passed. Node was 26.12.0 for this build (CI pins 22.14.0); Python was 3.13.15. The first attempt exhausted local disk; its failure remains recorded. No invariant or assertion changed.
 
 GitHub About visibly shows MIT, matching root LICENSE and GitHub metadata. README Sandbox instructions and safe buyer placeholders were inspected. Actual historical PayPal-plus-DeepSeek investigation evidence is now summarized publicly, explicitly a different case from the public replay. The keyless app makes no model calls. [Commands, outputs and browser evidence](docs/SUBMISSION_VERIFICATION.md). Public video and owner submission remain pending; no AWS resource or alert exists yet.
 
-## AWS deployment plan — step 3
+## AWS deployment plan — step 3 — 4 November history
 
 **47/60 verified; no acceptance changes.** [Owner-run AWS commands](docs/AWS_JUDGE_DEPLOY.md) prepare Lightsail at a USD7/month base price, Docker/Caddy HTTPS and account-wide USD20/USD50 Budget alerts. Taxes, excess usage and any domain charge are additional; alerts do not cap costs. Keep the instance/IP/DNS/certificates through 15 December and retain GitHub Pages as fallback. The allowlisted export and budget JSON were exercised; Docker daemon/Compose were unavailable, so actual container startup, AWS provisioning, HTTPS and alerts remain unverified and uncreated. No cloud spending or changes occurred. The owner supplies existing-domain DNS, AWS login and alert email and runs the exact commands.
 
-## Video preparation — step 4
+## Video preparation — step 4 — 4 November history
 
 **47/60 verified; CC-059 remains pending.** The [175-second video script](docs/VIDEO_SCRIPT.md) contains 15s problem, 120s interactive product/historical AI, 30s PayPal and 10s close, with a shot list and narration. Control labels and timing were inspected. It uses the working hosted recorded demo and separately labels the actual historical model run. No video was recorded or uploaded; script duration is not exported-video proof. Owner next action: record, measure/watch the export, upload Public on YouTube, and test signed-out playback.
 
-## Submission copy — step 5
+## Submission copy — step 5 — 4 November history
 
 **47/60 verified; no newly verified CC IDs; zero stale accepted checks.** [DEVPOST.md](docs/DEVPOST.md) has all requested paste-ready fields and verified working links. [SUBMISSION.md](docs/SUBMISSION.md) is aligned with the feature freeze and historical proof limits. Optional AG Grid/Bryntum lanes are not claimed from the keyless demo. An independent reviewer found no blocking package defects, reran all three replay tests, checked seven AI provenance hashes and five deployment hashes, and inspected public artifacts for credentials. This is a submission-package review, not full CC-057/060 acceptance.
 
-**Remaining submission actions:** owner-run AWS provisioning/DNS/HTTPS and Budget readback if using AWS; actual public YouTube video; owner review and final Devpost submission. Existing GitHub Pages remains available; AWS and alerts are not created. Future uptime through 15 December cannot be marked verified today. The original 13 open checks retain their historical states; non-gating original experiments are deferred. No new feature, provider call, payment or Devpost submission occurred.
+**Remaining submission actions:** owner-run AWS provisioning/DNS/HTTPS if using AWS; Budget readback is now complete; actual public YouTube video; owner review and final Devpost submission. Existing GitHub Pages remains available; AWS compute is not created; budget alerts were subsequently configured on 5 November (see follow-through below). Future uptime through 15 December cannot be marked verified today. The original 13 open checks retain their historical states; non-gating original experiments are deferred. No new feature, provider call, payment or Devpost submission occurred.
 
-## Final package verification
+## Final package verification — 4 November history
 
-**47/60 verified.** On source `dcd8332`, the full suite passed again: **367 tests in 60.852s, OK**; replay: **3 tests in 0.552s, OK**. [Exact commands and results](evidence/runs/submission-ready/final-verification.json); [independent review](evidence/runs/submission-ready/independent-review.json). No runtime source, fixture, deadline, validator or original checkbox changed. The local verification server was stopped after inspection. No AWS deployment, alert creation, video upload or Devpost submission is claimed. Next concrete action: owner runs the reviewed AWS instructions if that host is wanted, then records the 175-second script against a verified hosted URL and supplies the actual public YouTube link before personally submitting.
+**47/60 verified.** On source `dcd8332`, the full suite passed again: **367 tests in 60.852s, OK**; replay: **3 tests in 0.552s, OK**. [Exact commands and results](evidence/runs/submission-ready/final-verification.json); [independent review](evidence/runs/submission-ready/independent-review.json). No runtime source, fixture, deadline, validator or original checkbox changed. The local verification server was stopped after inspection. That 4 November batch did not deploy AWS, create alerts, upload video or submit Devpost. Alerts were subsequently configured on 5 November; the other actions remain unperformed. Next concrete action: owner runs the reviewed AWS instructions if that host is wanted, then records the 175-second script against a verified hosted URL and supplies the actual public YouTube link before personally submitting.
+
+## AWS budget follow-through — 5 November
+
+**47/60 verified; no new CC checkmarks.** The owner selected the existing signed-in AWS account. The account-wide monthly budget `CrashCart-account-monthly-alerts` was created, with actual-cost alerts above USD20 and USD50. AWS readback verified both absolute thresholds and the intended email recipient; email delivery itself remains unverified. These are monitoring-only notifications, not spending caps. [Sanitized configuration evidence](evidence/runs/submission-ready/budget-verified-v62.json). No CrashCart compute instance was created. No Route53 hosted zones were found; the owner has not supplied an existing hostname. Other projects' infrastructure was left untouched. GitHub Pages remains the functioning HTTPS demo.
+
+## Local Docker verification — 5 November
+
+**47/60 verified; no new original-contract acceptance.** The unchanged deployment image built after installing the missing Buildx plugin. Caddy configuration validation passed, and the actual ARM64 container served both recorded outcomes on loopback HTTP. Browser case switching/filtering passed, POST returned405, `.env` and live API routes returned404, and the downloaded ZIP independently reproduced faultyFAIL/healthyPASS. The final image had no `/src`, `.env`, or Python executable. [Container evidence](evidence/runs/submission-ready/container-verified-v62.json). Original failed build command is preserved. This is local Docker verification, not AWS deployment, public TLS, live payment or AI execution.
+
+Current next action: record the prepared video against the working GitHub Pages URL, upload it publicly to YouTube, and personally submit. AWS hosting is optional for runnable access and remains pending an existing hostname; no domain or compute was purchased. Budget configuration is verified, notification delivery is not. The original failed/blocked/unverified check states remain unchanged, with no stale accepted requirements.
+
+Final follow-through verification: **367 tests in 52.617s, OK** ([log](evidence/runs/submission-ready/full-suite-v62.log)); replay **3 tests in 0.261s, OK** ([log](evidence/runs/submission-ready/replay-v62.log)). Independent review passed after checking AWS readbacks and the actual local container ([review](evidence/runs/submission-ready/followthrough-review-v62.json)). The owned test container and default Colima VM were stopped afterward; other profiles were not stopped. No runtime, fixture, invariant or acceptance check changed. **47/60**, newly verified CC IDs none; CC-035 failed/deferred, CC-036/038/041/056/060 blocked/deferred, CC-046/048/050/057 implemented/unverified, CC-040/042 deferred, CC-059 public video pending; stale none.

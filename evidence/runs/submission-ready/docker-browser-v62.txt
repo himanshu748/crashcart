@@ -1,0 +1,181 @@
+Browser tab: 10, Title: "CrashCart — from payment to promise", URL: "http://127.0.0.1:8912/#investigation".
+0 AXWebArea CrashCart — from payment to promise, URL: 127.0.0.1:8912/#investigation
+	1 link Description: Skip to checkout review, Value: 127.0.0.1:8912/#main
+	2 container
+		3 link Description: CrashCart home, Value: 127.0.0.1:8912/#home
+		4 container Main navigation
+			5 link Description: Product, Value: 127.0.0.1:8912/#home
+			6 link Description: Investigation, Value: 127.0.0.1:8912/#investigation
+			7 link Description: Evidence, Value: 127.0.0.1:8912/#evidence
+		8 text Recorded example · no new payment
+	9 container main
+		10 container Paid is only half the story., ID: home
+			11 text PAYMENT & DELIVERY, TOGETHER
+			12 heading Paid is only half the story., Value: 1, ID: page-title
+				13 text Paid is only
+				14 text half the story.
+			15 container
+				16 text Your customer paid. Their ticket didn’t arrive.
+				17 text CrashCart connects the checkout, payment and delivery records—so you can find the gap and test the repair.
+			18 link Description: Explore an investigation, Value: 127.0.0.1:8912/#investigation
+			19 text A working recorded example. No account or keys needed.
+			20 container Interactive checkout walkthrough
+				21 text FOLLOW ONE $29 CHECKOUT
+				22 text 01 / 03
+				23 image A confirmed payment flows through the store to a ticket. The walkthrough highlights the missing delivery and the repaired replay.
+				24 container story-copy
+					25 text Payment confirmed
+					26 heading The payment went through., Value: 2, ID: story-title
+						27 text The payment went through.
+					28 text PayPal’s saved record confirms the $29 payment. That tells us the money arrived—not whether the customer got their ticket.
+				29 container Walk through the checkout
+					30 checkbox 1. Payment, Value: 1
+					31 checkbox 2. The gap, Value: 0
+					32 checkbox 3. The repair, Value: 0
+				33 container
+					34 text One ticket. $29. Within 60 seconds.
+					35 text The same promise throughout.
+		36 container How CrashCart helps
+			37 text 01
+			38 heading See the whole checkout., Value: 2
+				39 text See the whole checkout.
+			40 text Bring the customer’s view, payment status and ticket record together.
+			41 text 02
+			42 heading Test the customer promise., Value: 2
+				43 text Test the customer promise.
+			44 text Check an exact amount, ticket count and deadline with deterministic rules.
+			45 text 03
+			46 heading Keep a replay of the finding., Value: 2
+				47 text Keep a replay of the finding.
+			48 text Rerun the failure and the healthy merchant against the same recorded input.
+		49 container review
+			50 container About these results
+				51 text Real records. Recorded replay.
+				52 text Both outcomes were recomputed during site build (5 Nov 2026, 08:00:21 UTC). The checkout observations were recorded in October 2026.
+				53 text These historical PayPal test observations drive the actual ticket rules again. No PayPal account, AI model, browser service or licence is used by this review.
+			54 container One checkout. Two outcomes., ID: investigation
+				55 text 01 / THE RESULT
+				56 heading One checkout. Two outcomes., Value: 2, ID: comparison-title
+					57 text One checkout. Two outcomes.
+				58 text Same $29 · same 60-second promise
+				59 container
+					60 text FAULTY MERCHANT Promise broken
+					61 heading Payment arrived. The ticket didn’t., Value: 3
+						62 text Payment arrived.
+						63 text The ticket didn’t.
+					64 text The payment response was lost. The faulty merchant failed to recover and deliver the ticket.
+					65 definition list
+						66 container Confirmed payment
+							67 text Confirmed payment
+						68 text $29.00
+						69 container Tickets delivered
+							70 text Tickets delivered
+						71 text 0
+						72 container Delivery deadline
+							73 text Delivery deadline
+						74 text 60s
+					75 text Confirmed payment, zero tickets beyond the deadline. The deterministic checker marks the customer promise as broken.
+					76 checkbox Inspect the failed checkout, Value: 0
+				77 container
+					78 text HEALTHY MERCHANT REPLAY Promise kept
+					79 heading A second check. One delivered ticket., Value: 3
+						80 text A second check.
+						81 text One delivered ticket.
+					82 text The healthy merchant independently confirms the payment, then saves exactly one ticket.
+					83 definition list
+						84 container Confirmed payment
+							85 text Confirmed payment
+						86 text $29.00
+						87 container Tickets delivered
+							88 text Tickets delivered
+						89 text 1
+						90 container Ticket after payment
+							91 text Ticket after payment
+						92 text 32.26s
+					93 text Re-executed using the same saved observations. This is a repaired replay, not a new test payment or a deployed fix.
+					94 checkbox Inspect the repaired replay, Value: 1
+			95 container Follow the payment., ID: evidence
+				96 text 02 / THE EVIDENCE
+				97 heading Follow the payment., Value: 2, ID: evidence-title
+					98 text Follow the payment.
+				99 link Description: Download these records ↓, Value: 127.0.0.1:8912/downloads/healthy.json, ID: download-case
+				100 text VIEWING
+				229 text Repaired replay · same saved payment response lost
+				102 container Choose checkout
+					103 checkbox Failed checkout, Value: 0
+					104 checkbox Repaired replay, Value: 1
+				105 container facts
+					230 text 01 / PAYMENT
+					231 heading $29.00 confirmed, Value: 3
+						232 text $29.00 confirmed
+					233 text Historical completion: 22 Oct 2026, 09:31:52 UTC.
+					234 text 02 / DELIVERY
+					235 heading 1 ticket, Value: 3
+						236 text 1 ticket
+					237 text Replay creation: 22 Oct 2026, 09:32:24 UTC · 32.26s after payment.
+					238 text 03 / DEADLINE
+					239 heading 60 seconds, Value: 3
+						240 text 60 seconds
+					241 text Unchanged deadline: 22 Oct 2026, 09:32:52 UTC. Outcome: promise kept.
+				118 heading What happened, and when, Value: 3
+					119 text What happened, and when
+				120 container
+					121 text Show records from
+					122 pop up button (collapsed, settable) Show records from, Value: PayPal, ID: source-filter, Secondary Actions: Expand
+						123 menu
+							124 All sources
+							125 (selected) PayPal
+							126 Checkout page
+							127 Ticket store
+							128 Test interruption
+				242 text 4 of 15 saved observations. Times are relative to confirmed payment; order alone does not establish cause.
+				130 content list timeline
+					243 button (collapsed) + PayPal Checkout created -91.44s, Secondary Actions: Expand
+						244 text +
+						245 text PayPal
+						246 text Checkout created
+						247 text -91.44s
+					248 button (collapsed) + PayPal Buyer approval checked -0.86s, Secondary Actions: Expand
+						249 text +
+						250 text PayPal
+						251 text Buyer approval checked
+						252 text -0.86s
+					253 button (collapsed) + PayPal Payment independently checked +32.26s, Secondary Actions: Expand
+						254 text +
+						255 text PayPal
+						256 text Payment independently checked
+						257 text +32.26s
+					258 button (collapsed) + PayPal Payment independently checked +93.86s, Secondary Actions: Expand
+						259 text +
+						260 text PayPal
+						261 text Payment independently checked
+						262 text +93.86s
+				206 button (collapsed) + Input identity and technical result, Secondary Actions: Expand
+					207 text +
+					208 text Input identity and technical result
+			209 container A result you can rerun., ID: reproduce
+				210 text 03 / TRY IT YOURSELF
+				211 heading A result you can rerun., Value: 2, ID: reproduce-title
+					212 text A result you can rerun.
+				213 text Download the replay, unzip it, and run the two commands below with Python 3.11 or newer. No credentials or installation needed.
+				214 link Description: Download executable replay, Value: 127.0.0.1:8912/downloads/replay.zip
+				215 text FROM THE EXTRACTED FOLDER
+				216 text python3 -m crashcart.replay run input.json --merchant defective
+# Expected: FAIL · paid_without_ticket · exit 1
+
+python3 -m crashcart.replay run input.json --merchant healthy
+# Expected: PASS · ticket_delivered_once_on_time · exit 0
+				217 link Description: Download the original input only ↓, Value: 127.0.0.1:8912/downloads/input.json
+			218 container What this review does—and doesn’t—show
+				219 heading What this review does—and doesn’t—show, Value: 2, ID: limits-title
+					220 text What this review does—and doesn’t—show
+				221 text The failure is in our intentionally faulty test store, not a PayPal vulnerability. The original fault video is unavailable; the recorded page messages, payment observations and store state are available above. No new AI investigation runs here.
+				222 text The normal CrashCart workspace remains available separately for authorized live test payments when service credentials are configured. See the repository README for that path.
+	223 container
+		224 link Description: CrashCart, Value: 127.0.0.1:8912/#home
+		225 text From a successful payment to a delivered promise.
+		226 checkbox (settable, integer) Description: Reduce motion, Value: 0, ID: reduce-motion
+		227 link Description: MIT licence, Value: 127.0.0.1:8912/LICENSE
+		228 text Saved evidence. Honest boundaries.
+
+The focused UI element is 97 heading Follow the payment., Value: 2, ID: evidence-title

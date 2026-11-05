@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-05",
+  "budget_name": "CrashCart-account-monthly-alerts",
+  "created": true,
+  "configuration_verified": true,
+  "period": "MONTHLY",
+  "currency": "USD",
+  "budget_limit": 50,
+  "actual_alert_thresholds": [
+    20,
+    50
+  ],
+  "comparison": "GREATER_THAN",
+  "scope": "whole AWS account",
+  "recipient_match_verified": true,
+  "recipient_publicly_redacted": true,
+  "email_delivery_verified": false,
+  "actions_enabled": false,
+  "notification_pricing_source": "https://aws.amazon.com/aws-cost-management/aws-budgets/pricing/",
+  "crashcart_compute_provisioned": false,
+  "actions_list_readback_empty": true
+}

@@ -1,0 +1,66 @@
+{
+  "source_commit": "f519598b8e9e1630e388754e6060c8b8215860f4",
+  "mode": "LOCAL_DOCKER_RECORDED_REPLAY",
+  "image_id": "sha256:696d96bc090fef5b91ebf6ad788709a3b067e7c19d0c64dddb886bc933f72cf7",
+  "architecture": "arm64",
+  "docker_build": "PASS_AFTER_BUILDx_INSTALLED",
+  "prior_failure": "First command failed: Buildx missing, legacy builder rejected --progress; no code changed",
+  "caddy_validate": "PASS",
+  "http_checks": [
+    {
+      "path": "/",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "path": "/",
+      "method": "POST",
+      "status": 405
+    },
+    {
+      "path": "/.env",
+      "method": "GET",
+      "status": 404
+    },
+    {
+      "path": "/api/runs",
+      "method": "GET",
+      "status": 404
+    }
+  ],
+  "outcomes": {
+    "defective": [
+      "FAIL",
+      "paid_without_ticket",
+      0
+    ],
+    "healthy": [
+      "PASS",
+      "ticket_delivered_once_on_time",
+      1
+    ]
+  },
+  "network_calls_in_replay": 0,
+  "computed_when": "site build",
+  "aws_compute_deployed": false,
+  "public_tls_verified": false,
+  "compose_config": "PASS via docker-compose 5.6.1",
+  "runtime_command": "docker run with loopback-only port8912, original Caddyfile, JUDGE_DOMAIN=:80, read-only filesystem, tmpfs, 256MB and1CPU",
+  "browser_comparison_and_filter": "PASS",
+  "download_zip_sha256": "a766ba169d55af85eaeaaf8d2aaf5cc0d081fc9448337ee546eff024b19e7648",
+  "downloaded_replay": [
+    {
+      "variant": "defective",
+      "exit": 1,
+      "verdict": "FAIL",
+      "signature": "paid_without_ticket"
+    },
+    {
+      "variant": "healthy",
+      "exit": 0,
+      "verdict": "PASS",
+      "signature": "ticket_delivered_once_on_time"
+    }
+  ],
+  "no_env_source_or_python_in_runtime": true
+}

@@ -1,6 +1,6 @@
 # AWS judge demo: owner-run deployment
 
-**Prepared, not deployed. No AWS resources or Budget alerts have been created by this work.** The verified public demo remains [GitHub Pages](https://himanshu748.github.io/crashcart/). Keep that try-it link until the AWS HTTPS checks below pass. This Docker image serves the interactive recorded investigation, with outcomes computed during image build. It cannot initiate a payment, browser session or model call.
+**Hosting is prepared, not deployed. The requested Budget alerts were created and read back on 5 November 2026; no CrashCart compute instance exists.** The verified public demo remains [GitHub Pages](https://himanshu748.github.io/crashcart/). Keep that try-it link until the AWS HTTPS checks below pass. This Docker image serves the interactive recorded investigation, with outcomes computed during image build. It cannot initiate a payment, browser session or model call.
 
 ## Cost, boundaries and lifetime
 
@@ -38,6 +38,8 @@ test ! -e "$CC_SSH_KEY" && ssh-keygen -t rsa -b 3072 -f "$CC_SSH_KEY" -C crashca
 ```
 
 ## 2. Create and read back Budget alerts
+
+**Current maintainer account:** this budget already exists. Skip the `create-budget` command and use the readback commands; do not replace it. [Verified configuration](../evidence/runs/submission-ready/budget-verified-v62.json). Both recipient matches passed, but actual email delivery was not tested. The creation command below is for a different account where the named budget is absent.
 
 One monthly USD50 cost budget has absolute ACTUAL notifications **above USD20** and **above USD50**, to your selected email. The Python helper only writes JSON. Store requests outside the repo. [AWS Budget CLI](https://docs.aws.amazon.com/cli/latest/reference/budgets/create-budget.html).
 
@@ -178,7 +180,7 @@ Expected: trusted HTTPS 200; defective FAIL; healthy PASS; POST 405; `.env` 404;
 
 ## What is verified here, and what is still owner-run
 
-This workstation had Docker CLI but no running daemon and no Compose plugin on 4 November 2026. Container build, Caddy validation, AWS provisioning, public TLS and alert creation/delivery remain **unverified**. [Preparation evidence](../deploy/judge/preparation-verification.json) records the actual minimal-context Python export: defective FAIL, healthy PASS, zero provider calls. The first export failed because the migration was omitted; the corrected context passed on the second attempt. Budget JSON thresholds and invalid-email rejection passed, as did syntax checks of all nine documented shell blocks. These do not establish container or AWS runtime behavior. The owner supplies authenticated AWS access, alert email, existing domain/DNS and SSH administration, and runs the provisioning/validation above. No application credentials or new payment are required. Stop if a step fails twice; preserve the errors rather than relaxing checks.
+The original 4 November attempt had Docker CLI but no running daemon or discovered Compose plugin. On 5 November, the default local Colima environment started, standalone `docker-compose` 5.6.1 validated the configuration, and installing Buildx enabled an actual image build. [Local container evidence](../evidence/runs/submission-ready/container-verified-v62.json) records Caddy validation, ARM64 loopback HTTP checks, actual browser interactions and executable ZIP replay. No container/deployment source changed. Public TLS and actual AWS hosting remain unverified. Container build, Caddy validation, AWS compute provisioning and public TLS were unverified in the original 4 November preparation. Budget creation and configuration readback subsequently passed on 5 November; email delivery remains unverified. [Preparation evidence](../deploy/judge/preparation-verification.json) records the actual minimal-context Python export: defective FAIL, healthy PASS, zero provider calls. The first export failed because the migration was omitted; the corrected context passed on the second attempt. Budget JSON thresholds and invalid-email rejection passed, as did syntax checks of all nine documented shell blocks. These do not establish container or AWS runtime behavior. The owner supplies authenticated AWS access, alert email, existing domain/DNS and SSH administration, and runs the provisioning/validation above. No application credentials or new payment are required. Stop if a step fails twice; preserve the errors rather than relaxing checks.
 
 ## Cleanup only after judging
 

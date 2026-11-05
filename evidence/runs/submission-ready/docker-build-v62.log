@@ -1,0 +1,139 @@
+#0 building with "colima" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 900B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/caddy:2-alpine
+#2 DONE 4.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.13-slim
+#3 DONE 4.0s
+
+#4 [internal] load build context
+#4 transferring context: 832.13kB 0.0s done
+#4 DONE 0.1s
+
+#5 [stage-1 1/3] FROM docker.io/library/caddy:2-alpine@sha256:70b3180738b46cd88e49b300d790ae448a0aca3f58edef0f000bb57d619a9ab3
+#5 resolve docker.io/library/caddy:2-alpine@sha256:70b3180738b46cd88e49b300d790ae448a0aca3f58edef0f000bb57d619a9ab3 0.0s done
+#5 DONE 0.1s
+
+#6 [export 1/8] FROM docker.io/library/python:3.13-slim@sha256:ae14d4ce8771606477a81446e7ef429edd6762305fc50c84507c1041fa8285d1
+#6 resolve docker.io/library/python:3.13-slim@sha256:ae14d4ce8771606477a81446e7ef429edd6762305fc50c84507c1041fa8285d1 0.0s done
+#6 sha256:3a038b6d1fa12b6c9a602e667271f13cf48adce187d2ad813c33dfe1004f7e37 0B / 251B 0.2s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 0B / 11.86MB 0.3s
+#6 sha256:b09e3727000c35ae6c3abe484cb954c8df08f895eff51f09df26b891a0468d24 0B / 1.27MB 0.2s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 0B / 30.21MB 0.2s
+#6 sha256:3a038b6d1fa12b6c9a602e667271f13cf48adce187d2ad813c33dfe1004f7e37 251B / 251B 0.5s done
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 1.05MB / 11.86MB 2.0s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 2.10MB / 11.86MB 2.6s
+#6 sha256:b09e3727000c35ae6c3abe484cb954c8df08f895eff51f09df26b891a0468d24 1.27MB / 1.27MB 3.1s done
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 3.15MB / 11.86MB 3.2s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 4.19MB / 11.86MB 3.6s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 5.24MB / 11.86MB 4.5s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 6.29MB / 11.86MB 4.8s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 2.10MB / 30.21MB 5.3s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 7.34MB / 11.86MB 5.4s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 8.39MB / 11.86MB 5.9s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 9.44MB / 11.86MB 6.3s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 10.49MB / 11.86MB 6.6s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 11.53MB / 11.86MB 7.5s
+#6 sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 11.86MB / 11.86MB 7.6s done
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 4.19MB / 30.21MB 8.0s
+#6 ...
+
+#5 [stage-1 1/3] FROM docker.io/library/caddy:2-alpine@sha256:70b3180738b46cd88e49b300d790ae448a0aca3f58edef0f000bb57d619a9ab3
+#5 sha256:2c8c8f8ce0e89504c960b22c3185bfb6e05eee0d897d84cfd010a12c70854ab9 16.49MB / 16.49MB 7.6s done
+#5 sha256:e6d1df8fdd49da33b1d28007fdd1b07e242c84c67de3a92c2b7c7e9b847ef08d 7.50kB / 7.50kB 2.0s done
+#5 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 1.1s done
+#5 sha256:873b94e511f0ec80ec6cce86c968b610d228a774642b83f1a326d66ee6ae3aa8 2.81MB / 2.81MB 2.4s done
+#5 sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 4.19MB / 4.19MB 2.0s done
+#5 extracting sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 0.1s done
+#5 extracting sha256:873b94e511f0ec80ec6cce86c968b610d228a774642b83f1a326d66ee6ae3aa8 0.1s done
+#5 DONE 9.8s
+
+#5 [stage-1 1/3] FROM docker.io/library/caddy:2-alpine@sha256:70b3180738b46cd88e49b300d790ae448a0aca3f58edef0f000bb57d619a9ab3
+#5 extracting sha256:e6d1df8fdd49da33b1d28007fdd1b07e242c84c67de3a92c2b7c7e9b847ef08d done
+#5 extracting sha256:2c8c8f8ce0e89504c960b22c3185bfb6e05eee0d897d84cfd010a12c70854ab9
+#5 extracting sha256:2c8c8f8ce0e89504c960b22c3185bfb6e05eee0d897d84cfd010a12c70854ab9 0.3s done
+#5 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
+#5 DONE 10.1s
+
+#6 [export 1/8] FROM docker.io/library/python:3.13-slim@sha256:ae14d4ce8771606477a81446e7ef429edd6762305fc50c84507c1041fa8285d1
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 6.29MB / 30.21MB 10.1s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 8.39MB / 30.21MB 11.6s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 10.49MB / 30.21MB 12.6s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 12.58MB / 30.21MB 13.4s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 14.68MB / 30.21MB 14.1s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 16.78MB / 30.21MB 14.9s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 18.87MB / 30.21MB 15.3s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 20.97MB / 30.21MB 15.9s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 23.07MB / 30.21MB 16.4s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 25.17MB / 30.21MB 16.8s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 27.26MB / 30.21MB 17.3s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 29.36MB / 30.21MB 17.6s
+#6 sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 30.21MB / 30.21MB 17.7s done
+#6 extracting sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36
+#6 extracting sha256:2b70e040f7d132c8d366ee0223462552686510fb372ea5a83822973c30f19e36 0.7s done
+#6 DONE 18.5s
+
+#6 [export 1/8] FROM docker.io/library/python:3.13-slim@sha256:ae14d4ce8771606477a81446e7ef429edd6762305fc50c84507c1041fa8285d1
+#6 extracting sha256:b09e3727000c35ae6c3abe484cb954c8df08f895eff51f09df26b891a0468d24 0.0s done
+#6 extracting sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3
+#6 extracting sha256:3ebe763086bb4dfda359318669d08c4fc8f072eaae49af4ad7a125595b29feb3 0.3s done
+#6 extracting sha256:3a038b6d1fa12b6c9a602e667271f13cf48adce187d2ad813c33dfe1004f7e37
+#6 extracting sha256:3a038b6d1fa12b6c9a602e667271f13cf48adce187d2ad813c33dfe1004f7e37 done
+#6 DONE 18.9s
+
+#7 [export 2/8] WORKDIR /src
+#7 DONE 0.4s
+
+#8 [export 3/8] COPY crashcart/ crashcart/
+#8 DONE 0.0s
+
+#9 [export 4/8] COPY migrations/ migrations/
+#9 DONE 0.0s
+
+#10 [export 5/8] COPY web/judge/ web/judge/
+#10 DONE 0.0s
+
+#11 [export 6/8] COPY evidence/runs/paypal-live/early-response-loss-input.json evidence/runs/paypal-live/early-response-loss-input.json
+#11 DONE 0.0s
+
+#12 [export 7/8] COPY LICENSE LICENSE
+#12 DONE 0.0s
+
+#13 [export 8/8] RUN python -m crashcart.judge --export-site /site
+#13 0.619 {
+#13 0.619   "path": "/site",
+#13 0.619   "mode": "RECORDED_REPLAY",
+#13 0.619   "files": 9,
+#13 0.619   "sha256": {
+#13 0.619     "index.html": "04f03995847106a7c9b86840542953c08ac9ff9da504f68bf45af0d710ecd440",
+#13 0.619     "app.js": "3dca66869819777543745213b065c6541a2cf8393a293438ea4a4b205d0d5f6d",
+#13 0.619     "style.css": "9d1afa6d676dee7a2d40bfffca4af0a11bbad1bddc71baec1746c616e26aaa84",
+#13 0.619     "data.json": "1ef3b78b8f057c203c63ecb4f720fb2220f69e6fa3253e510165738a602681a0",
+#13 0.619     "LICENSE": "96b3dda2b18f44646baeb204a4dd3a7ecf99d8234781979b731521234c43d9f7",
+#13 0.619     "downloads/input.json": "07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288",
+#13 0.619     "downloads/defective.json": "0edbfcd80c7b9fdf76355ed04f510aa7175bc26256cabaf4072111fa5ba1c78b",
+#13 0.619     "downloads/healthy.json": "3e12b594d57952d7a907f956bc67446bba7b39b304c7ff44d8592dc3c671742f",
+#13 0.619     "downloads/replay.zip": "a766ba169d55af85eaeaaf8d2aaf5cc0d081fc9448337ee546eff024b19e7648"
+#13 0.619   }
+#13 0.619 }
+#13 DONE 0.6s
+
+#14 [stage-1 2/3] COPY --from=export /site /srv
+#14 DONE 0.0s
+
+#15 [stage-1 3/3] COPY deploy/judge/Caddyfile /etc/caddy/Caddyfile
+#15 DONE 0.0s
+
+#16 exporting to image
+#16 exporting layers 0.0s done
+#16 exporting manifest sha256:088650c6167df2aa5ad00d150afa6062e0d6dfdca61aa554fde32273dc189f7c done
+#16 exporting config sha256:72e7bd679149490124023baec9596b2cbce47fd9cb16958730ceee305a03baee done
+#16 exporting attestation manifest sha256:a12105ee842a0cb121764829e18a40a7ba220fb81c831df19f31ece75965278c done
+#16 exporting manifest list sha256:696d96bc090fef5b91ebf6ad788709a3b067e7c19d0c64dddb886bc933f72cf7 done
+#16 naming to docker.io/library/crashcart-judge:submission-v62 done
+#16 unpacking to docker.io/library/crashcart-judge:submission-v62 0.0s done
+#16 DONE 0.1s
