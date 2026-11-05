@@ -1,0 +1,58 @@
+{
+  "documentation_baseline": "3c2a35b625769bc82440c5d0cfd731eb25b13b16",
+  "runtime_baseline": "fba4ffd64e9a8a1dc41602a443aec6ac02119343",
+  "result": "PASS",
+  "acceptance_conditions_and_checkboxes_unchanged": true,
+  "requirements_compared": 60,
+  "private_public_acceptance_equal": true,
+  "runtime_directories_compared": [
+    "web",
+    "studio",
+    "crashcart",
+    "scripts",
+    "tests"
+  ],
+  "changed_runtime_files": [],
+  "relative_file_links_checked": 48,
+  "missing_local_files": [],
+  "new_browser_execution": false,
+  "new_cc_verifications": [],
+  "verified_count": 47,
+  "design_checklist_sha256": "856d4639bc96318f1a253d42ad473f768a48693a68ad3022b63e27c8c6214d0b",
+  "canonical_progress": {
+    "ok": true,
+    "verified_count": 47,
+    "total": 60,
+    "errors": [],
+    "open_states": {
+      "CC-035": "FAILED",
+      "CC-036": "BLOCKED",
+      "CC-038": "BLOCKED",
+      "CC-040": "IN_PROGRESS",
+      "CC-041": "BLOCKED",
+      "CC-042": "IN_PROGRESS",
+      "CC-046": "IMPLEMENTED_UNVERIFIED",
+      "CC-048": "IMPLEMENTED_UNVERIFIED",
+      "CC-050": "IMPLEMENTED_UNVERIFIED",
+      "CC-056": "BLOCKED",
+      "CC-057": "IMPLEMENTED_UNVERIFIED",
+      "CC-059": "PENDING",
+      "CC-060": "BLOCKED"
+    }
+  },
+  "test_basis": {
+    "new_test_run": false,
+    "reason": "Documentation-only update; runtime, fixtures, assertions and test files unchanged.",
+    "retained_suite": "367 tests in 52.169s, OK",
+    "evidence": "evidence/runs/submission-ready/checklist-review-v63.json"
+  },
+  "independent_review": {
+    "reviewer": "submission_package_review",
+    "result": "PASS",
+    "blocking_findings": [],
+    "checked_prior_browser_source_hashes": 7,
+    "checklist_link_targets_resolve": 16,
+    "scope": "Document claims and cited existing evidence only; no new browser execution.",
+    "prior_packaging_finding": "Receipt was absent during initial review; final review confirmed it exists and matches the checklist SHA-256."
+  }
+}

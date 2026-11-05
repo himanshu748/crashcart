@@ -1,5 +1,7 @@
 # Submission-path verification
 
+For decision-to-check mapping, scoped prior results and remaining gaps, use the [design verification checklist](DESIGN_VERIFICATION.md). This report preserves the dated execution evidence.
+
 **Verified 47/60 in the original contract. No new CC acceptance claimed.** This is a separate verification of runnable submission access. Tested source: public main `fba4ffd64e9a8a1dc41602a443aec6ac02119343`, freshly cloned from GitHub on 4 November 2026. The clean clone had no tracked changes. Subsequent submission packaging changes are documentation and isolated deployment configuration; runtime sources, fixtures and assertions remain unchanged.
 
 ## Clean clone and commands actually run

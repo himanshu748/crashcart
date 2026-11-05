@@ -1,5 +1,7 @@
 # Recorded walkthrough verification — 4 November 2026
 
+For decision-to-check mapping, scoped prior results and remaining gaps, use the [design verification checklist](DESIGN_VERIFICATION.md). This report preserves the dated execution evidence.
+
 Source: `0e6bee2` for judge access, `f878402` for public replay. Later hosting and documentation commits do not change these runtime files. Python 3.13.15, Node 22.14.0. No real service credentials or new payment were used in the recorded-walkthrough batch below. Later actual Sandbox verification is documented separately.
 
 | Exact command | Observed result |
@@ -29,7 +31,7 @@ Real browser checks covered 1280px, 390px and 320px layouts, walkthrough state c
 
 The actual browser-downloaded ZIP was extracted and both replay commands executed: expected exits 1 and 0. Its README carries the exact MIT notice. Independent review executed 11 judge/replay tests in 2.114s, OK, with no external network/DNS or environment-file reads observed. It found and resolved a missing licence notice in judge-specific packaging, then accepted the final one-space HTML correction. Executable replay core and validators remain unchanged.
 
-These are local and recorded-replay results, not fresh Sandbox proof. **This recorded-review batch remained 44/60; newly verified requirement IDs in that batch: none.** The original fault recording and live gates in [OPEN_CHECKS.md](OPEN_CHECKS.md) remain open. Part F is gated by Part A.
+These are local and recorded-replay results, not fresh Sandbox proof. **This recorded-review batch remained 44/60; newly verified requirement IDs in that batch: none.** The original fault recording and live gates in [OPEN_CHECKS.md](OPEN_CHECKS.md) remain open. That was the historical scope; the current owner instruction freezes all feature work and defers non-gating experiments, as recorded in [submission gates](SUBMISSION_GATES.md).
 
 Private raw logs, browser captures, source hashes and review receipts are retained under `evidence/runs/judge-ready-v53/` in the owner's acceptance archive; they are not required to run the public tests or included as private raw evidence in this repository.
 

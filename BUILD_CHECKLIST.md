@@ -10,6 +10,8 @@ Deployment constraint: Render is excluded.
 
 Deferral changes priority, not acceptance. All 60 IDs, checkboxes, Done when conditions, Verify conditions, dependencies and proof modes remain authoritative. A passing public replay does not close a fresh-payment requirement; a public video alone does not satisfy CC-059's broader original journey. Project completion still requires CC-060. Do not restart deferred provider experiments from a historical plan.
 
+The [design verification checklist](docs/DESIGN_VERIFICATION.md) maps the agreed UI direction to scoped browser checks, known gaps and reverification triggers. It supplements this contract; it does not add CC IDs or change acceptance.
+
 ## 1. What this build must achieve
 
 CrashCart investigates disagreements between the customer's checkout experience, independently observed PayPal sandbox payment state, and the owned merchant's delivered entitlement. It produces an executable reproduction, reduces unnecessary steps, and verifies a repaired merchant against the same business promise.

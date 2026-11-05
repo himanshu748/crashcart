@@ -1,0 +1,40 @@
+# Design verification checklist
+
+Updated 5 November 2026. This translates the agreed design direction into observable checks; it does not approve a redesign or add features. **Original acceptance remains 47/60.** DV identifiers below organize UI verification only and are not additional CC requirements.
+
+## Design decision and scope
+
+CrashCart should feel like a user-facing SaaS: warm and approachable, with an interactive product landing page, a clear next action, readable payment/delivery labels and deliberate motion. The landing page explains the customer problem before exposing technical evidence. The investigation makes the payment, missing ticket and repaired outcome understandable without hiding uncertainty or provenance.
+
+For the frozen submission, the entry point is the [keyless recorded example](https://himanshu748.github.io/crashcart/), implemented in `web/judge/`. The configured live workspace is a separate surface. The earlier [workspace motion decision](design/motion-v35.md) applies to its own implementation; its precise timings are not assumed to describe the keyless page. The broader rich-page brief, including additional marketing sections, is not permission to expand the frozen release.
+
+This checklist uses existing results from [browser verification](JUDGE_VERIFICATION.md), [clean-clone verification](SUBMISSION_VERIFICATION.md) and their linked artifacts. Checked entries mean **the stated, limited behavior was exercised previously**, not that a browser run happened during this documentation update. The relevant public runtime files are unchanged from clean-clone source `fba4ffd64e9a8a1dc41602a443aec6ac02119343` through the documentation baseline `3c2a35b625769bc82440c5d0cfd731eb25b13b16`. [Validation receipt](../evidence/runs/submission-ready/design-checklist-v64.json).
+
+## Recorded example: exercised behavior
+
+- [x] **DV-01 — Interactive landing.** Selecting Payment, The gap and The repair changes the walkthrough state. The landing and its controls were inspected locally and on GitHub Pages. [Browser results](JUDGE_VERIFICATION.md#browser-and-independent-review), [hosted results](JUDGE_VERIFICATION.md#hosted-readback). This does not establish usability with first-time customers.
+- [x] **DV-02 — Useful investigation controls.** Switching failed/repaired cases updates the selected evidence and download; PayPal filtering shows four of 15 observations; expanding the payment record exposes its details. [Actual browser readback](../evidence/runs/submission-ready/browser-keyless.txt).
+- [x] **DV-03 — Truthful recorded outcomes.** The faulty replay fails with `paid_without_ticket`; the timely healthy replay passes with one ticket at +32.261423 seconds; the original late tape still fails. The UI discloses recorded evidence and no new payment. [Runtime results](../evidence/runs/submission-ready/runtime-result.json), [replay test output](../evidence/runs/submission-ready/replay-v62.log), [hosted disclosure](JUDGE_VERIFICATION.md#hosted-readback). A repaired replay is not a fresh checkout or deployed repair.
+- [x] **DV-04 — Narrow-screen layout.** The recorded page was inspected at 1280px, 390px and 320px; no horizontal page overflow was observed at the two phone widths. A missing mobile space was fixed and rechecked. [Scoped browser results](JUDGE_VERIFICATION.md#browser-and-independent-review). Other viewport/zoom combinations remain unverified.
+- [x] **DV-05 — Exercised keyboard controls.** Enter/Space activation was exercised for the recorded walkthrough and case controls. [Browser results](JUDGE_VERIFICATION.md#browser-and-independent-review). This is not a complete keyboard or screen-reader audit; see DV-10.
+- [x] **DV-06 — In-product reduced motion.** The Reduce motion control yielded `animation: none` and zero-duration transitions while interactions continued to work. [Observed result](JUDGE_VERIFICATION.md#browser-and-independent-review). OS preference changes were not exercised.
+- [x] **DV-07 — Usable downloads.** Safari delivered the JSON and ZIP; hashes matched the hosted artifacts and the extracted ZIP reproduced the expected faulty/healthy results. [Download receipt](../evidence/runs/judge-ready/hosted-downloads-v54.json). Earlier task-browser download timeouts remain recorded; this pass covers Safari delivery only.
+
+## Still to verify after a relevant design change
+
+These are explicit gaps, not new submission gates or evidence of failure. Keep them unchecked until the stated procedure is actually performed. New runtime work remains subject to the feature freeze.
+
+- [ ] **DV-08 — Complete customer-facing copy and hierarchy review.** Inspect landing, investigation, empty/error states and narrow layouts. Primary actions must be obvious; headings must render without Markdown residue or joined words. Internal values such as `FRESH_SANDBOX` belong in technical details/exports, with plain-language labels in the main flow. Distinguish saved observations, replay and new checkout everywhere. Save screenshots and the reviewed routes; do not infer complete coverage from one happy-path screenshot.
+- [ ] **DV-09 — OS reduced motion and deliberate transitions.** Enable the browser/OS reduced-motion preference before load and change it while open; verify spatial motion stops while walkthrough, filtering and downloads still work. In normal mode, changing evidence must not hide its content, imply a new payment or restart distracting motion. Record computed styles and interactions for both settings. The existing in-product toggle result is insufficient for this check.
+- [ ] **DV-10 — Complete keyboard, zoom and assistive-technology pass.** Traverse from the skip link through navigation, walkthrough, case selection, filters, details and downloads using keyboard only. Verify visible focus, logical order, no traps and meaningful control/selection announcements. Inspect 200% zoom and measure text/control contrast. Record browser, viewport, screen reader and any unsupported cases; do not claim WCAG conformance from partial checks.
+- [ ] **DV-11 — Loading and unavailable-data states.** In an isolated local copy, delay `data.json`, return an error and supply malformed data separately. Inspect loading/error text and recovery after restoring the valid file and reloading. Confirm no invented success or live action, and no unreadable layout. Keep failed attempts and fresh results; do not alter the published tape to stage this check.
+- [ ] **DV-12 — Complete live-workspace journey.** Exercise start, inspect, cancel, linked evidence selection, compare and export with loading/empty/unavailable-provider/missing-evidence states at the agreed sizes. This is **deferred** and still depends on the original CC-046/CC-048 prerequisites and appropriate service authorization. Keyless results do not satisfy it. See [exact blockers](OPEN_CHECKS.md).
+
+## Reverification and evidence rules
+
+1. Before implementation, name the affected DV rows and original CC requirements. A design approval establishes intent, not a pass.
+2. Changes to HTML, styles, scripts, data projection, routes or fixtures reopen the affected rows. Retain the old result with its source revision, mark it stale for the changed surface and rerun the relevant real entry point. Reopen affected original CC claims under [the evidence contract](evidence.md); do not reopen unrelated provider proof for a documentation edit.
+3. Save source revision/hashes, environment, viewport, exact actions, expected and observed results, failures and sanitized artifacts. Separate local browser, hosted browser, recorded replay and actual Sandbox execution.
+4. Obtain independent review at the relevant phase boundary. A screenshot, build or code inspection alone cannot check a runtime item. Update STATUS.md and the checklist together; only original CC acceptance changes the 60-check count.
+
+The next submission action remains the owner-recorded public video and owner submission. This document does not imply the full live operator journey or CC-059/CC-060 is complete.

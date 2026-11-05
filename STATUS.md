@@ -96,3 +96,11 @@ Final follow-through verification: **367 tests in 52.617s, OK** ([log](evidence/
 All 60 acceptance hashes and checkboxes compare exactly with the pre-edit snapshot; private/public conditions match, current local links resolve, and mechanical progress passes with no stale accepted checks. [Document validation](evidence/runs/submission-ready/checklist-validation-v63.json). Original failed/blocked/unverified states remain unchanged. Next concrete action remains the owner-recorded public video, then owner submission; optional AWS hosting still needs a hostname.
 
 Checklist batch verification: **367 tests in 52.169s, OK**; independent documentation review **PASS, no blocking findings** ([verification and review](evidence/runs/submission-ready/checklist-review-v63.json)). This is checklist maintenance, not new CC acceptance. **47/60 verified; newly verified IDs none; stale none.**
+
+## Design verification checklist — 5 November
+
+**47/60 verified; newly verified CC IDs: none; stale accepted checks: none.** The [design verification checklist](docs/DESIGN_VERIFICATION.md) now maps the user-facing SaaS direction to landing, investigation, responsive, keyboard, motion, copy and failure-state checks. Seven narrowly scoped rows cite existing browser/replay results; five remain unchecked, including OS reduced motion, complete accessibility/copy/error-state coverage and the deferred live operator journey. No new browser execution, design implementation or original CC acceptance is claimed. All failed, blocked and implemented/unverified original items remain unchanged. Next concrete action: owner records the prepared public video and submits; any subsequent design change must reopen and reverify affected rows.
+
+Validation: the canonical progress checker passed at **47/60**, with no errors; all 60 acceptance hashes and checkboxes match the prior revision. Relevant runtime/test directories are byte-unchanged from the clean-clone baseline, so the existing 367-test pass is retained without claiming a new suite run. [Checklist validation](evidence/runs/submission-ready/design-checklist-v64.json).
+
+Independent design-checklist review passed after confirming the evidence receipt and linked artifacts; no blocking findings remain in this documentation batch. This does not close the full CC-057 acceptance review.
