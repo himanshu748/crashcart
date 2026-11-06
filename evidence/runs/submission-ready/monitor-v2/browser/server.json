@@ -1,0 +1,14 @@
+{
+  "url": "http://127.0.0.1:53352",
+  "mode": "LOCAL_TEST",
+  "source_sha256": {
+    "crashcart/monitor_store.py": "7702b3c5f244d68b33d1338e52f0d2f3fdc8e4c99e46a66d6bc775bfae4be1cd",
+    "crashcart/monitor_server.py": "a86c3392181b0e3a34ad06fe0a63cc545cfbc3e06e3d11f12c936bf9e4bf5051",
+    "crashcart/monitor_ingress.py": "d2cf5918e06f0905e112dd5de1a305ba22d7facd422e9b3493ce13cf8fc57cfe",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "scripts/monitor_backup.py": "c8e9a407b4a958cb9092f78a53ef8bdd6f78136646b7bac8a666e75ee1c2a85b",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "web/monitor/index.html": "cbe78ddc9de11774c80490010bb5b62f2a14aa84d3f5ab5e68b9cf31722cacae",
+    "web/monitor/style.css": "8176eb1bbbd03990e8e6c811887790961f0f041efc22cbaa5c3fd11146ec1cfa"
+  }
+}

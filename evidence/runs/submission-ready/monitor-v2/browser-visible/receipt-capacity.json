@@ -1,0 +1,12 @@
+{
+  "mode": "LOCAL_TEST; locally signed fixture, direct synthetic PayPal facts, zero provider calls",
+  "response": {
+    "status": 503,
+    "body": {
+      "error": "This workspace cannot receive more store updates right now. Try again later."
+    },
+    "retry_after": "60"
+  },
+  "orders": 1,
+  "alerts": 1
+}

@@ -54,7 +54,7 @@ The first matcher requires an exact capture reference, exact total and currency,
 
 The inbox retains one overdue alert per matched order/deadline. Acknowledging an alert records that it was seen; it does not delete the breach. Late fulfilment may resolve the current issue while preserving its history. Keep the monitoring process running: an offline process cannot deliver real-time alerts. `/healthz` exposes scanner status and its last successful scan; a scanner error reports degraded health rather than inventing a result.
 
-Public ingress is not ready for unrestricted traffic: add and exercise request-rate limits, receipt retention and content deduplication before exposing it. Body and login bounds alone do not limit storage growth from repeated valid signed events.
+Local request, rate and receipt-retention safeguards are implemented and independently verified; see [the exact limits, recovery checks and backup command](WEBHOOK_SAFEGUARDS.md). They do not establish deployed HTTPS/proxy operation or authentic provider delivery. Receipt limits bound retained receipt rows, not total business-data growth or database file bytes. Keep real-store connection and intended hosting acceptance open until exercised.
 
 Before claiming a real connection, verify authentic order delivery, actual PayPal signature verification, exact transaction matching, timely and overdue fulfilment, a real inbox alert, duplicate delivery, bad-signature rejection and restart persistence on the owned store. Repeat this for each platform. These gates remain open until their evidence is recorded. Billing is not enabled; the planned pricing unit is one store.
 

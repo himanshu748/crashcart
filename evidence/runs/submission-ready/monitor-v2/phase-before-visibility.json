@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "proof_mode": "LOCAL_TEST",
+  "base_commit": "89aeffe843517fc987ff36e2de484bc376f05c58",
+  "source_snapshot": "evidence/snapshots/monitor-v2",
+  "source_sha256": {
+    "crashcart/monitor_store.py": "7702b3c5f244d68b33d1338e52f0d2f3fdc8e4c99e46a66d6bc775bfae4be1cd",
+    "crashcart/monitor_server.py": "a86c3392181b0e3a34ad06fe0a63cc545cfbc3e06e3d11f12c936bf9e4bf5051",
+    "crashcart/monitor_ingress.py": "d2cf5918e06f0905e112dd5de1a305ba22d7facd422e9b3493ce13cf8fc57cfe",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "scripts/monitor_backup.py": "c8e9a407b4a958cb9092f78a53ef8bdd6f78136646b7bac8a666e75ee1c2a85b",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "web/monitor/index.html": "cbe78ddc9de11774c80490010bb5b62f2a14aa84d3f5ab5e68b9cf31722cacae",
+    "web/monitor/style.css": "8176eb1bbbd03990e8e6c811887790961f0f041efc22cbaa5c3fd11146ec1cfa",
+    "tests/test_monitor_store.py": "ece503b3ec1e0bd7139b021670792d7b150b2b11eaca780b96d67da8666743bc",
+    "tests/test_monitor_connectors.py": "482ab28fdd04729692c492cb739c1380e274786163c81f9beedaf1d98012c98f",
+    "tests/test_monitor_http.py": "0e0111c253bc3fb4e4a028aede04c9a66dedfc71e3b30becee32d8e926569dc8",
+    "tests/test_monitor_ingress.py": "3401d2748d062f753262304af595a34baceaa26c4cc4ca31296ce42fe5bdb73d",
+    "tests/test_monitor_recovery.py": "b4a12c899364d3624053bc809f07a27c36087597bf563227149c18d33f0e10f9"
+  },
+  "verified_local_checks": [
+    "WH-001",
+    "WH-002",
+    "WH-003",
+    "WH-004",
+    "WH-005",
+    "WH-006"
+  ],
+  "reverified_local_pm": [
+    "PM-001",
+    "PM-005",
+    "PM-007"
+  ],
+  "original_contract": {
+    "verified": 47,
+    "total": 60,
+    "new_cc_ids": [],
+    "errors": [],
+    "open_states": {
+      "CC-035": "FAILED",
+      "CC-036": "BLOCKED",
+      "CC-038": "BLOCKED",
+      "CC-040": "IN_PROGRESS",
+      "CC-041": "BLOCKED",
+      "CC-042": "IN_PROGRESS",
+      "CC-046": "IMPLEMENTED_UNVERIFIED",
+      "CC-048": "IMPLEMENTED_UNVERIFIED",
+      "CC-050": "IMPLEMENTED_UNVERIFIED",
+      "CC-056": "BLOCKED",
+      "CC-057": "IMPLEMENTED_UNVERIFIED",
+      "CC-059": "PENDING",
+      "CC-060": "BLOCKED"
+    },
+    "boundary": "Frozen private acceptance only; changed public monitoring source inherits no original acceptance."
+  },
+  "commands": [
+    {
+      "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v",
+      "result": "Ran 456 tests in 87.055s; OK",
+      "artifact": "monitor-v2/full-suite.log"
+    },
+    {
+      "command": "python3 -m unittest tests.test_public_replay -v",
+      "python": "3.13.15",
+      "result": "Ran 3 tests in 0.380s; OK",
+      "artifact": "monitor-v2/replay.log",
+      "assertions": "Defective paid_without_ticket FAIL; healthy PASS; original late healthy recording remains FAIL."
+    },
+    {
+      "command": "node --test tests/test_workspace_api.cjs tests/test_judge_ui.cjs",
+      "result": "14pass,0fail; duration_ms271.791959",
+      "artifact": "monitor-v2/ui.log"
+    },
+    {
+      "command": "python3 -W error::ResourceWarning -m unittest tests.test_monitor_recovery -v",
+      "python": "3.13.15",
+      "result": "4 tests in11.659s; OK",
+      "artifact": "monitor-v2/recovery-final.log"
+    }
+  ],
+  "actual_http_browser": {
+    "mode": "Actual loopback HTTP/browser with locally signed commerce fixture and direct synthetic PayPal facts; zero provider calls.",
+    "default_receipt_cap": "32 retainedaliases; next signedWoo delivery503 withRetryAfter60, oneorder/onealert retained.",
+    "default_handler_cap": "16 active+peak; real browser preserves record andshowsbusy message; recovery, ack/focus, storeseparation and relogin exercised.",
+    "source_binding": "monitor-v2/browser/server.json",
+    "cleanup": "serverprocess exited0; ownedtesttabclosed; nohosted/provider resources."
+  },
+  "reviews": [
+    "monitor-v2/correctness-review.json",
+    "monitor-v2/security-review.json"
+  ],
+  "preserved_failures": [
+    {
+      "artifact": "monitor-v2/recovery-first.log",
+      "cause": "During parallelimplementation HTTP imported ReceiptCapacityError before store worker definedit; importfailed, no assertions executed; rerunafterinterface landed."
+    },
+    {
+      "artifact": "monitor-v2/recovery-retry.log",
+      "cause": "Passed with an unclosedSQLiteconnection ResourceWarning. Fixed connectionclosing; ResourceWarning-as-error runs passed."
+    },
+    {
+      "artifact": "monitor-v2/ingress-first.log",
+      "cause": "DeepoperatorJSON reachedauth401 ratherthan shape400. Added32depthguard; same assertionpassed. No validator relaxed."
+    }
+  ],
+  "limits": {
+    "handlers": 16,
+    "socket_deadline_seconds": 10,
+    "global_burst": 60,
+    "global_refill_per_second": 10,
+    "store_burst": 20,
+    "store_refill_per_second": 2,
+    "store_bucket_limit": 256,
+    "bucket_idle_seconds": 600,
+    "body_bytes": 131072,
+    "sqlite_busy_seconds": 2,
+    "receipt_retention_seconds": 2592000,
+    "aliases_per_fact": 32,
+    "receipts_per_store_kind": 10000,
+    "receipts_global": 100000
+  },
+  "claim_boundaries": [
+    "Pre-provider saturation means handler/global/store admission; durable receipt capacity follows authenticity and mayinvoke verifier.",
+    "Socketclosure not DB/provider cancellation or hardreal-time scheduling.",
+    "Receiver-time expiry islazy; no unexpired evictions; legacyovercapsretained; no businesshistoryprune/filebytesguarantee.",
+    "SQLite recovery nothost/disk/deployedDR.",
+    "Oldsource proof retainedas history; PMverifiedrecords reissued onlyafterfullfreshreview.",
+    "WHchecks arelocal. Authenticdelivery/Shopifytransactionmatching/install/customeraccounts/hosting/billing remainopen."
+  ],
+  "external_effects": {
+    "provider_calls": 0,
+    "payments": 0,
+    "webhook_registrations": 0,
+    "public_exposures": 0,
+    "deployments": 0,
+    "spending": 0
+  },
+  "artifacts_sha256": {
+    "acceptance-before-verification.md": "eeb4bf86af5ce7ac59cf47131dddb752d990544b8654e6bccbde27eee131e644",
+    "browser/ack-dom.txt": "4e65a7b260e9e5fdf9ac14dfe9c83581ae054f762b6a79fb8b4dd1d40d304213",
+    "browser/before-dom.txt": "e3ea1643028d2ebdeaec06c11dcc3a9573cb253cd03b4491d5b4e34357e89517",
+    "browser/cleanup.json": "25d3fd08f4c8fc1848707ad714ab936cf53794d2dd9a534a58e4417cdd18eee6",
+    "browser/execution-harness.py": "aa576543b511e0a97fd89c3ff9a566545178a7f1c8c0ff5f80d45e35bd5a8031",
+    "browser/final-console.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "browser/final.png": "803276c0ddd3202aec7f3436899c41818fd3ddc171a4205c685de80806bde966",
+    "browser/focus.json": "b2402a4a90a11c11d49275246e9ba544c55eeab9278847cc6fae5cd8c5937d5b",
+    "browser/logout-dom.txt": "ebe0509fa8701031ce323c7def223a4756b3e841c9dac08552d448e7f7d30e2d",
+    "browser/other-store-dom.txt": "a4caaf6176d6a24c291e30fb7a6eae0a0ce402695e28bc347b5164bc155df57d",
+    "browser/overload-dom.txt": "8611575499d6cf6c766447365de9db46f6a1149b4538108918a1f4e28d6a62fa",
+    "browser/overload.png": "75bf7dabdb1ecc155f829b3d0e7087d1aaebd7220fc1440e084796fe4455c0ab",
+    "browser/receipt-capacity.json": "b804f627cba8212339e4f84a14eac7ac28b88820828b353ad7a176ae1effb2ce",
+    "browser/recovered-dom.txt": "72cd772957cdbe51b81bea6b72afb6cec10a429b29d3eb683dfbbd27c8136eb8",
+    "browser/recovered.png": "381ec7b544d6bc00098d03577b9705c2a73e7fe5090060c51e91109983164109",
+    "browser/relogin-dom.txt": "91f24198c2eb0e9baa901fd3c69beb0973e04b67a5e341f2ddaf7513555476e6",
+    "browser/saturated.json": "c16bb19914bdd71a2b4092e399bc64d73a1955bee290f36e441ad964db07c5a3",
+    "browser/server.json": "ba79bd94e8db4f011f8c3268dd408d398460d932a176adb0e56f1ffd3b905ad2",
+    "busy-wait-tests.log": "a6fe807f81ea4f10de2dd094e4070edc25ca0a4458781ed3b2d74df5c9d56cf3",
+    "correctness-review.json": "f75b072ad65d6dc3dce480294f879661db2e23a7e36c1669aca14b23e91b47c4",
+    "full-suite.log": "866b79fc06bc2605170fac44c4950b623bad528cbcf0e98c5ab350dab8c6fb0e",
+    "ingress-first.log": "fb113c3f08f01534a0684336db3d4a51471eeea405636d87cad390743b478732",
+    "ingress-reviewed.log": "c968bd3678cc205fbfcd25b9a95717ba4f363cc074e07c8b84b07c3e4145dd4e",
+    "receipt-tests-first.log": "f1e00b8810ce6648d4e24cfdde7dc8ed201d528d09ba7b523cfd424510a3ac61",
+    "recovery-concurrent.log": "cd51989977e6099a4042cd54f34b7968cebd8eb81bb9ddf394ae27ccb996d456",
+    "recovery-final.log": "cb24f2a0ca2692cc6b80ab785ede7b6cc767bb6b9526b382568d96a614d36777",
+    "recovery-first.log": "0a28d03f7a51de5429857fe45d5b60ac60ddd799c526b517e3bdb2edb4e6dc42",
+    "recovery-resource-check.log": "3f388f45d80dd6fcd979398e21cf43ee9ede89555a73e77c995b06835faafdf3",
+    "recovery-retry.log": "48085e2aebee53aa679c65dddcc0f206ed061beaffd5c1fce03b9e523ebd1d3b",
+    "replay.log": "90eb9ed470a7557c2cafd12acd1940453bbed718ebc8c6ae87e07d14a57195c8",
+    "security-review.json": "505e7e379b42702dd24cb79c55f1d68177c734ef30ddb75ec80b2359734b35be",
+    "ui.log": "f64450cdac51dd931a81a9718c5bbe1b664d5bb16148b4c4995fc98090965760"
+  }
+}

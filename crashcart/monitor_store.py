@@ -35,19 +35,51 @@ def _money(currency,amount,positive=False):
 SHOPIFY_ADDRESS_HINT = 'Use your store’s …myshopify.com address, without a page path or a custom port.'
 
 
+class ReceiptCapacityError(RuntimeError):
+    """Unexpired receipts fill a configured durable admission limit."""
+
+
 class MonitorStore:
-    def __init__(self,path):
+    def __init__(self,path,*,receipt_retention_seconds=30*86400,
+                 receipt_alias_limit=32,receipt_limit_per_store_kind=10_000,
+                 receipt_limit_global=100_000,clock=None,busy_timeout_seconds=2):
+        if type(busy_timeout_seconds) not in {int,float} or not 0<busy_timeout_seconds<=5:
+            raise ValueError('SQLite busy wait must be above zero and at most five seconds')
+        self.busy_timeout_seconds=float(busy_timeout_seconds)
+        if type(receipt_retention_seconds) is not int or not 60<=receipt_retention_seconds<=365*86400:
+            raise ValueError('Receipt retention must be between 60 seconds and one year')
+        if (type(receipt_alias_limit) is not int or not 1<=receipt_alias_limit<=1024
+                or type(receipt_limit_per_store_kind) is not int or not 1<=receipt_limit_per_store_kind<=1_000_000
+                or type(receipt_limit_global) is not int or not receipt_limit_per_store_kind<=receipt_limit_global<=10_000_000):
+            raise ValueError('Invalid durable receipt capacity')
+        if clock is not None and not callable(clock): raise ValueError('Receipt clock must be callable')
+        self.receipt_retention_seconds=receipt_retention_seconds
+        self.receipt_alias_limit=receipt_alias_limit
+        self.receipt_limit_per_store_kind=receipt_limit_per_store_kind
+        self.receipt_limit_global=receipt_limit_global
+        self._receipt_clock=clock or _now
+        migration_time=self._receipt_now()
         self.path=Path(path);self.path.parent.mkdir(parents=True,exist_ok=True)
         with self._db() as db:
             db.executescript('''
             CREATE TABLE IF NOT EXISTS monitor_stores(id TEXT PRIMARY KEY,name TEXT NOT NULL,platform TEXT NOT NULL,domain TEXT NOT NULL,promise_seconds INTEGER NOT NULL,created_at TEXT NOT NULL);
-            CREATE TABLE IF NOT EXISTS monitor_events(store_id TEXT NOT NULL REFERENCES monitor_stores(id),kind TEXT NOT NULL,event_id TEXT NOT NULL,payload_hash TEXT NOT NULL,PRIMARY KEY(store_id,kind,event_id));
+            CREATE TABLE IF NOT EXISTS monitor_events(store_id TEXT NOT NULL REFERENCES monitor_stores(id),kind TEXT NOT NULL,event_id TEXT NOT NULL,payload_hash TEXT NOT NULL,received_at TEXT NOT NULL,PRIMARY KEY(store_id,kind,event_id));
             CREATE TABLE IF NOT EXISTS monitor_orders(store_id TEXT NOT NULL REFERENCES monitor_stores(id),platform_order_id TEXT NOT NULL,display_number TEXT NOT NULL,currency TEXT NOT NULL,total_minor INTEGER NOT NULL,payment_references TEXT NOT NULL,fulfillment_status TEXT NOT NULL,fulfilled_at TEXT,updated_at TEXT NOT NULL,promise_seconds INTEGER NOT NULL,PRIMARY KEY(store_id,platform_order_id));
             CREATE TABLE IF NOT EXISTS monitor_payments(store_id TEXT NOT NULL REFERENCES monitor_stores(id),capture_id TEXT NOT NULL,reference TEXT NOT NULL,currency TEXT NOT NULL,amount_minor INTEGER NOT NULL,completed_at TEXT NOT NULL,verified_by TEXT NOT NULL,PRIMARY KEY(store_id,capture_id));
             CREATE TABLE IF NOT EXISTS monitor_associations(store_id TEXT NOT NULL,platform_order_id TEXT NOT NULL,capture_id TEXT NOT NULL,completed_at TEXT NOT NULL,promise_seconds INTEGER NOT NULL,PRIMARY KEY(store_id,platform_order_id),FOREIGN KEY(store_id,platform_order_id) REFERENCES monitor_orders(store_id,platform_order_id),FOREIGN KEY(store_id,capture_id) REFERENCES monitor_payments(store_id,capture_id));
             CREATE TABLE IF NOT EXISTS monitor_alerts(id TEXT PRIMARY KEY,store_id TEXT NOT NULL,platform_order_id TEXT NOT NULL,kind TEXT NOT NULL,capture_id TEXT NOT NULL,deadline_at TEXT NOT NULL,detected_at TEXT NOT NULL,resolved_at TEXT,acknowledged_at TEXT,retracted_at TEXT,resolution_reason TEXT,UNIQUE(store_id,platform_order_id,capture_id,deadline_at),FOREIGN KEY(store_id,platform_order_id) REFERENCES monitor_orders(store_id,platform_order_id));
             ''')
         with self._db() as db:
+            db.execute('BEGIN IMMEDIATE')
+            event_columns={row['name'] for row in db.execute('PRAGMA table_info(monitor_events)')}
+            if 'received_at' not in event_columns:
+                db.execute('ALTER TABLE monitor_events ADD COLUMN received_at TEXT')
+            # Legacy arrival time is unknown. Preserve every old identity for a
+            # full receiver-clock retention window; never infer age from payloads.
+            db.execute('UPDATE monitor_events SET received_at=? WHERE received_at IS NULL',(migration_time,))
+            db.execute('CREATE INDEX IF NOT EXISTS monitor_event_content ON monitor_events(store_id,kind,payload_hash)')
+            db.execute('CREATE INDEX IF NOT EXISTS monitor_event_age ON monitor_events(received_at)')
+            self._prune_receipts(db,migration_time)
             order_columns={row['name'] for row in db.execute('PRAGMA table_info(monitor_orders)')}
             if 'promise_seconds' not in order_columns:
                 db.execute('ALTER TABLE monitor_orders ADD COLUMN promise_seconds INTEGER')
@@ -70,7 +102,7 @@ class MonitorStore:
 
     @contextmanager
     def _db(self):
-        db=sqlite3.connect(self.path,timeout=10);db.row_factory=sqlite3.Row;db.execute('PRAGMA foreign_keys=ON')
+        db=sqlite3.connect(self.path,timeout=self.busy_timeout_seconds);db.row_factory=sqlite3.Row;db.execute('PRAGMA foreign_keys=ON')
         try: yield db;db.commit()
         except BaseException: db.rollback();raise
         finally: db.close()
@@ -81,14 +113,51 @@ class MonitorStore:
         if row is None: raise KeyError('Store not found')
         return dict(row)
 
-    @staticmethod
-    def _event(db,store_id,kind,event_id,facts):
-        event_id=_text(event_id,'event id');digest=hashlib.sha256(json.dumps(facts,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    def _receipt_now(self):
+        value=self._receipt_clock()
+        if isinstance(value,datetime):
+            if value.tzinfo is None or value.utcoffset() is None: raise ValueError('Receipt clock needs a timezone')
+            value=value.isoformat()
+        return timestamp(value)
+
+    def _prune_receipts(self,db,now):
+        cutoff=(datetime.fromisoformat(now)-timedelta(seconds=self.receipt_retention_seconds)).isoformat(timespec='microseconds')
+        return db.execute('DELETE FROM monitor_events WHERE received_at<=?',(cutoff,)).rowcount
+
+    def prune_receipts(self):
+        """Expire receiver-time receipts only; retain all business history.
+
+        SQLite may retain freed pages. This bounds live receipt rows, not bytes.
+        """
+        with self._db() as db:
+            db.execute('BEGIN IMMEDIATE')
+            return self._prune_receipts(db,self._receipt_now())
+
+    def _event(self,db,store_id,kind,event_id,facts):
+        """Retain every accepted identity for a finite receiver-time window.
+
+        Original and alias IDs cannot change facts while retained. Identical
+        normalized content under a new ID gets a bounded identity receipt but
+        does not repeat business mutation. Capacity exhaustion fails closed;
+        unexpired identities are never evicted to admit another delivery.
+        Redelivery never refreshes an existing receipt's arrival time.
+        After expiry, immutable payments, first associations and order chronology
+        protect business history, but the old ID conflict guarantee has ended.
+        """
+        event_id=_text(event_id,'event id')
+        digest=hashlib.sha256(json.dumps(facts,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+        now=self._receipt_now();self._prune_receipts(db,now)
         old=db.execute('SELECT payload_hash FROM monitor_events WHERE store_id=? AND kind=? AND event_id=?',(store_id,kind,event_id)).fetchone()
         if old:
             if old[0]!=digest: raise ValueError('Event id reused with different facts')
             return False
-        db.execute('INSERT INTO monitor_events VALUES (?,?,?,?)',(store_id,kind,event_id,digest));return True
+        aliases=db.execute('SELECT COUNT(*) FROM monitor_events WHERE store_id=? AND kind=? AND payload_hash=?',(store_id,kind,digest)).fetchone()[0]
+        local=db.execute('SELECT COUNT(*) FROM monitor_events WHERE store_id=? AND kind=?',(store_id,kind)).fetchone()[0]
+        total=db.execute('SELECT COUNT(*) FROM monitor_events').fetchone()[0]
+        if aliases>=self.receipt_alias_limit or local>=self.receipt_limit_per_store_kind or total>=self.receipt_limit_global:
+            raise ReceiptCapacityError('Receipt storage is full; retry after retained receipts expire')
+        db.execute('INSERT INTO monitor_events (store_id,kind,event_id,payload_hash,received_at) VALUES (?,?,?,?,?)',(store_id,kind,event_id,digest,now))
+        return aliases==0
 
     def create_store(self,name,platform,domain,promise_seconds):
         name=_text(name,'store name',100)

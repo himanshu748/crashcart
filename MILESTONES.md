@@ -9,7 +9,7 @@ Newly authorized scope, separate from the frozen investigation contract:
 3. Customer accounts, supported installation and hosted operation: pending. PM-008/009.
 4. Per-store subscription/cancellation: pending a separate billing decision and Sandbox implementation. PM-010. No live charges authorized.
 
-[Product acceptance](docs/MONITOR_PRODUCT.md). Original private acceptance stays 47/60; monitoring does not inherit it.
+[Product acceptance](docs/MONITOR_PRODUCT.md). Local webhook limits, receipt retention and recovery WH-001–006 now pass with [source-bound proof](evidence/runs/submission-ready/monitor-v2.json). Authentic platform data, installation and hosted/customer SaaS remain open. Original private acceptance stays 47/60; monitoring does not inherit it.
 
 
 Updated **6 November 2026**. **47/60 verified; 13 original checks open; zero stale accepted checks.** Original investigation features are frozen; the merchant-monitoring scope above is separately authorized. These milestones order work; they neither grant acceptance nor authorize new spending, provider calls or submission.

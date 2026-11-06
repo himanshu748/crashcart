@@ -1,0 +1,20 @@
+test_monitor_recovery (unittest.loader._FailedTest.test_monitor_recovery) ... ERROR
+
+======================================================================
+ERROR: test_monitor_recovery (unittest.loader._FailedTest.test_monitor_recovery)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_monitor_recovery
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/unittest/loader.py", line 141, in loadTestsFromName
+    module = __import__(module_name)
+  File "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_monitor_recovery.py", line 15, in <module>
+    from crashcart.monitor_server import make_server
+  File "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/crashcart/monitor_server.py", line 20, in <module>
+    from .monitor_store import MonitorStore, ReceiptCapacityError, SHOPIFY_ADDRESS_HINT
+ImportError: cannot import name 'ReceiptCapacityError' from 'crashcart.monitor_store' (/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/crashcart/monitor_store.py)
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

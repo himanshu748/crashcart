@@ -1,0 +1,19 @@
+{
+  "requirement": "PM-007",
+  "state": "VERIFIED",
+  "proof_mode": "LOCAL_TEST",
+  "source_sha256": {
+    "crashcart/monitor_store.py": "aaedd2550a8b4810d05eeecb8fe7da4698bdaad03e63e1926fc1f2d49f57c4cf",
+    "crashcart/monitor_server.py": "b17b71516a6e6a2654f2f06f369de340b9ebb0141dc9d6cdd12d2f594bc38bc8",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "web/monitor/index.html": "cbe78ddc9de11774c80490010bb5b62f2a14aa84d3f5ab5e68b9cf31722cacae",
+    "web/monitor/style.css": "8176eb1bbbd03990e8e6c811887790961f0f041efc22cbaa5c3fd11146ec1cfa",
+    "tests/test_monitor_connectors.py": "482ab28fdd04729692c492cb739c1380e274786163c81f9beedaf1d98012c98f",
+    "tests/test_monitor_store.py": "9aae0faccb9ab235af61a3b5697e59387065b4a1bc75641b941b83c42d450cf1",
+    "tests/test_monitor_http.py": "c08c90a4af1cf6601bd6112d60cdf057630224ed2ce64b700a01aa66df9103c9"
+  },
+  "evidence": "../runs/submission-ready/monitor-v1.json",
+  "review": "../runs/submission-ready/monitor-v1/accepted/final-correctness-review.json",
+  "scope": "Single-operator loopback with synthetic facts. No authentic provider or customer-account acceptance."
+}

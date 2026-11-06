@@ -1,0 +1,49 @@
+{
+  "reviewer": "current_contract_audit",
+  "receipt_type": "Parent-saved summary of returned independent read-only review",
+  "result": "PASS_LOCAL_PHASE",
+  "findings": [],
+  "eligible_local_checks": [
+    "WH-001",
+    "WH-002",
+    "WH-003",
+    "WH-004",
+    "WH-005",
+    "WH-006",
+    "PM-001",
+    "PM-005",
+    "PM-007"
+  ],
+  "independent_command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -W error::ResourceWarning -m unittest tests.test_monitor_store tests.test_monitor_connectors tests.test_monitor_http tests.test_monitor_ingress tests.test_monitor_recovery -q",
+  "independent_result": "Ran 89 tests in 34.513s \u2014 OK",
+  "evidence_reviewed": {
+    "full_suite": "456 tests in 87.055s \u2014 OK",
+    "browser": "Actual default active16/peak16; order retained with busy message; recovery and acknowledgement retain history, ARTICLE3pxoutline, unresolvedcount1; otherstoreempty; logout/relogin retains acknowledgement.",
+    "cleanup": "server_closed:true,peak_handlers:16,handler_limit:16,provider_calls:0",
+    "console": "[]",
+    "source_binding": "Final hashes match reviewed freeze and browser/server.json"
+  },
+  "constraints": [
+    "WH005 pre-provider rejection covers handler/global/store admission; durable receipt saturation follows authenticity and can invoke verifier before503.",
+    "Socket closure does not cancel executing DB/provider work.",
+    "Receipt row limits do not bound database bytes or business history.",
+    "Recovery is local SQLite, not disk/host/deployedDR.",
+    "PM007 reuses source-compatible unchangedUI/keyboard/phone evidence with fresh browser overload/recovery.",
+    "No authenticstore/provider/production or originalCC acceptance; frozen47/60 unchanged."
+  ],
+  "source_sha256": {
+    "crashcart/monitor_store.py": "7702b3c5f244d68b33d1338e52f0d2f3fdc8e4c99e46a66d6bc775bfae4be1cd",
+    "crashcart/monitor_server.py": "a86c3392181b0e3a34ad06fe0a63cc545cfbc3e06e3d11f12c936bf9e4bf5051",
+    "crashcart/monitor_ingress.py": "d2cf5918e06f0905e112dd5de1a305ba22d7facd422e9b3493ce13cf8fc57cfe",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "scripts/monitor_backup.py": "c8e9a407b4a958cb9092f78a53ef8bdd6f78136646b7bac8a666e75ee1c2a85b",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "web/monitor/index.html": "cbe78ddc9de11774c80490010bb5b62f2a14aa84d3f5ab5e68b9cf31722cacae",
+    "web/monitor/style.css": "8176eb1bbbd03990e8e6c811887790961f0f041efc22cbaa5c3fd11146ec1cfa",
+    "tests/test_monitor_store.py": "ece503b3ec1e0bd7139b021670792d7b150b2b11eaca780b96d67da8666743bc",
+    "tests/test_monitor_connectors.py": "482ab28fdd04729692c492cb739c1380e274786163c81f9beedaf1d98012c98f",
+    "tests/test_monitor_http.py": "0e0111c253bc3fb4e4a028aede04c9a66dedfc71e3b30becee32d8e926569dc8",
+    "tests/test_monitor_ingress.py": "3401d2748d062f753262304af595a34baceaa26c4cc4ca31296ce42fe5bdb73d",
+    "tests/test_monitor_recovery.py": "b4a12c899364d3624053bc809f07a27c36087597bf563227149c18d33f0e10f9"
+  }
+}

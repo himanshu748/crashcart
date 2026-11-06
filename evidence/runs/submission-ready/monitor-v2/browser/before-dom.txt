@@ -1,0 +1,40 @@
+- link "Skip to monitoring":
+  - /url: "#main"
+- banner:
+  - link "↳ CrashCart":
+    - /url: /
+  - generic: Store monitoring
+  - button "Sign out"
+  - link "Recorded walkthrough ↗":
+    - /url: https://himanshu748.github.io/crashcart/
+- main:
+  - paragraph: YOUR STORES
+  - heading "Orders that need you." [level=1]
+  - paragraph: Track payment, fulfilment and the promise between them.
+  - button "Refresh"
+  - complementary:
+    - heading "Stores" [level=2]
+    - button "Example shop · local verification"
+    - button "Example Shopify · local verification"
+    - generic "Add a store"
+    - option "Shopify" [selected]
+    - option "WooCommerce"
+  - heading "Example shop · local verification" [level=2]
+  - paragraph: WooCommerce · safeguard.example.test. Store saved. Complete the connection setup to receive orders and payment checks.
+  - link "Connection setup ↗":
+    - /url: https://github.com/himanshu748/crashcart/blob/main/docs/MONITOR_SETUP.md
+  - group "Monitoring view":
+    - button "Needs attention 1" [pressed]
+    - button "Orders"
+  - region "Alert inbox":
+    - article:
+      - generic: Fulfilment overdue
+      - heading "Order EXAMPLE-101" [level=3]
+      - paragraph: "Paid order missed its fulfilment deadline: 6 Nov 2026, 23:07."
+      - paragraph: First detected 6 Nov 2026, 23:08
+      - button "Acknowledge"
+  - paragraph: Fulfilment means the store has marked an order complete. It does not confirm parcel delivery.
+  - status
+- contentinfo:
+  - generic: CrashCart · payment-to-fulfilment monitoring
+  - generic: Last checked 23:09:03

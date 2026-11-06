@@ -41,6 +41,8 @@ class MonitorHTTPTests(unittest.TestCase):
         method = method or ('POST' if data is not None or raw is not None else 'GET')
         payload = raw if raw is not None else (json.dumps(data).encode() if data is not None else None)
         hdr = {'X-CrashCart-Request':'1',**({'Cookie':self.cookie} if self.cookie else {}),**(headers or {})}
+        if path.endswith('/paypal') and 'X-Test-Signature' in hdr:
+            hdr.update({'Paypal-Auth-Algo':'SHA256withRSA','Paypal-Cert-Url':'https://api-m.sandbox.paypal.com/v1/notifications/certs/LOCALFIXTURE','Paypal-Transmission-Id':'local-transmission','Paypal-Transmission-Sig':base64.b64encode(b'local-signature-fixture').decode(),'Paypal-Transmission-Time':'2026-11-06T10:00:00Z'})
         conn=http.client.HTTPConnection('127.0.0.1',self.server.server_port,timeout=3)
         conn.request(method,path,body=payload,headers=hdr);res=conn.getresponse();body=res.read()
         result=(res.status,json.loads(body),dict(res.getheaders()));conn.close();return result

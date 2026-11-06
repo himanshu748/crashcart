@@ -2,7 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from crashcart.monitor_store import MonitorStore
+from crashcart.monitor_store import MonitorStore, ReceiptCapacityError
 
 T='2026-11-06T00:00:'
 def at(seconds):
@@ -186,6 +186,109 @@ class MonitorStoreTests(unittest.TestCase):
             with self.subTest(address=address):
                 item=self.db.create_store('Shopify','shopify',address,60)
                 self.assertEqual(item['domain'],'shop.myshopify.com')
+    def configure_receipts(self,**policy):
+        self.receipt_clock=[0]
+        self.db=MonitorStore(self.path,clock=lambda:at(self.receipt_clock[0]),**policy)
+    def receipt_count(self):
+        with self.db._db() as db:return db.execute('SELECT COUNT(*) FROM monitor_events').fetchone()[0]
+    def test_receipt_alias_budget_bounds_thousand_unsigned_ids_and_survives_restart(self):
+        self.configure_receipts(receipt_alias_limit=32)
+        self.order(event='canonical')
+        admitted=1;rejected=0
+        for index in range(1000):
+            try:self.order(event='alias-'+str(index));admitted+=1
+            except ReceiptCapacityError:rejected+=1
+        self.assertEqual(admitted,32);self.assertEqual(rejected,969);self.assertEqual(self.receipt_count(),32)
+        self.db=MonitorStore(self.path,clock=lambda:at(1),receipt_alias_limit=32)
+        self.order(event='canonical')
+        with self.assertRaises(ReceiptCapacityError):self.order(event='new-alias')
+        with self.assertRaises(ValueError):self.order(event='alias-0',updated=2)
+        self.assertEqual(self.receipt_count(),32)
+    def test_retained_alias_conflict_checked_before_other_content_and_capacity(self):
+        self.configure_receipts(receipt_alias_limit=2,receipt_limit_per_store_kind=3,receipt_limit_global=3)
+        self.order(event='first');self.order(updated=2,event='second');self.order(event='alias')
+        with self.assertRaisesRegex(ValueError,'reused'):self.order(updated=2,event='alias')
+        self.order(event='first');self.assertEqual(self.receipt_count(),3)
+    def test_global_capacity_rejects_order_and_payment_mutations_atomically(self):
+        self.configure_receipts(receipt_limit_per_store_kind=2,receipt_limit_global=3)
+        self.order();self.payment();self.order(store=self.b)
+        before=self.db.orders(self.a)[0]
+        with self.assertRaises(ReceiptCapacityError):self.order(updated=2,event='new-order')
+        with self.assertRaises(ReceiptCapacityError):self.payment(id='new-capture',reference='other',event='new-payment')
+        self.assertEqual(self.db.orders(self.a)[0],before)
+        with self.db._db() as db:self.assertEqual(db.execute('SELECT COUNT(*) FROM monitor_payments').fetchone()[0],1)
+        self.assertEqual(self.receipt_count(),3)
+    def test_store_kind_capacity_is_scoped_and_does_not_evict_known_ids(self):
+        self.configure_receipts(receipt_limit_per_store_kind=1,receipt_limit_global=10)
+        self.order();self.payment();self.order(store=self.b)
+        with self.assertRaises(ReceiptCapacityError):self.order(updated=2,event='new-facts')
+        self.order();self.assertEqual(self.receipt_count(),3)
+        self.assertEqual(self.db.orders(self.a)[0]['updated_at'],at(1).replace('+00:00','.000000+00:00'))
+    def test_retention_uses_receiver_time_and_redelivery_never_extends_window(self):
+        self.configure_receipts(receipt_retention_seconds=60)
+        self.order(updated=10**7,event='future-payload')
+        self.receipt_clock[0]=59;self.order(updated=10**7,event='future-payload')
+        self.assertEqual(self.db.prune_receipts(),0)
+        self.receipt_clock[0]=60;self.assertEqual(self.db.prune_receipts(),1)
+        self.assertEqual(self.receipt_count(),0);self.assertEqual(len(self.db.orders(self.a)),1)
+        self.order(updated=1,event='ancient-payload');self.assertEqual(self.db.prune_receipts(),0)
+        self.assertEqual(self.db.orders(self.a)[0]['updated_at'],at(10**7).replace('+00:00','.000000+00:00'))
+    def test_receipt_expiry_never_resets_capture_clock_association_or_alert(self):
+        self.configure_receipts(receipt_retention_seconds=60)
+        self.order();self.payment();original=self.db.scan(at(61))[0]
+        self.receipt_clock[0]=61;self.assertEqual(self.db.prune_receipts(),2)
+        with self.assertRaisesRegex(ValueError,'immutable'):self.payment(completed=40)
+        self.payment(event='redelivered');self.order(updated=0,event='old-order')
+        self.db=MonitorStore(self.path,clock=lambda:at(62),receipt_retention_seconds=60)
+        self.assertEqual(self.db.orders(self.a)[0]['deadline_at'],original['deadline_at'])
+        self.assertEqual(self.db.orders(self.a)[0]['updated_at'],at(1).replace('+00:00','.000000+00:00'))
+        self.assertEqual(self.db.alerts(self.a)[0]['id'],original['id']);self.assertEqual(self.db.scan(at(100)),[])
+    def test_concurrent_alias_admission_cannot_exceed_budget(self):
+        from concurrent.futures import ThreadPoolExecutor
+        self.configure_receipts(receipt_alias_limit=8);self.order(event='canonical')
+        def deliver(index):
+            try:self.order(event='parallel-'+str(index));return True
+            except ReceiptCapacityError:return False
+        with ThreadPoolExecutor(max_workers=8) as pool:results=list(pool.map(deliver,range(48)))
+        self.assertEqual(sum(results),7);self.assertEqual(self.receipt_count(),8)
+    def test_legacy_duplicate_identity_migration_keeps_full_conflict_window(self):
+        self.order();
+        with self.db._db() as db:
+            row=dict(db.execute('SELECT * FROM monitor_events').fetchone())
+            db.execute('DROP TABLE monitor_events')
+            db.execute('CREATE TABLE monitor_events(store_id TEXT NOT NULL,kind TEXT NOT NULL,event_id TEXT NOT NULL,payload_hash TEXT NOT NULL,PRIMARY KEY(store_id,kind,event_id))')
+            for index in range(5):db.execute('INSERT INTO monitor_events VALUES (?,?,?,?)',(row['store_id'],row['kind'],'legacy-'+str(index),row['payload_hash']))
+        self.configure_receipts(receipt_retention_seconds=60,receipt_alias_limit=2,receipt_limit_per_store_kind=2,receipt_limit_global=2)
+        self.assertEqual(self.receipt_count(),5);self.order(event='legacy-0')
+        with self.assertRaisesRegex(ValueError,'reused'):self.order(updated=2,event='legacy-1')
+        with self.assertRaises(ReceiptCapacityError):self.order(event='new-alias')
+        self.receipt_clock[0]=60;self.assertEqual(self.db.prune_receipts(),5)
+        self.order(event='now-admitted');self.assertEqual(self.receipt_count(),1)
+        self.assertEqual(len(self.db.orders(self.a)),1)
+    def test_invalid_receipt_policies_and_untrusted_clock_shapes_rejected(self):
+        for policy in [{'receipt_retention_seconds':True},{'receipt_retention_seconds':59},{'receipt_alias_limit':0},{'receipt_limit_per_store_kind':False},{'receipt_limit_per_store_kind':3,'receipt_limit_global':2},{'clock':42},{'clock':lambda:'2026-11-06T00:00:00'}]:
+            with self.subTest(policy=policy),self.assertRaises(ValueError):MonitorStore(self.path,**policy)
+    def test_busy_wait_policy_is_bounded_and_defaults_to_two_seconds(self):
+        with self.db._db() as db:self.assertEqual(db.execute('PRAGMA busy_timeout').fetchone()[0],2000)
+        custom=MonitorStore(self.path,busy_timeout_seconds=5)
+        with custom._db() as db:self.assertEqual(db.execute('PRAGMA busy_timeout').fetchone()[0],5000)
+        for value in [True,False,0,-1,5.01,float('nan'),float('inf'),float('-inf'),'2',None]:
+            with self.subTest(value=value),self.assertRaises(ValueError):MonitorStore(self.path,busy_timeout_seconds=value)
+    def test_default_busy_writer_wait_rolls_back_then_recovers_without_mocks(self):
+        import sqlite3,time
+        self.order();before=self.db.orders(self.a)[0];before_receipts=self.receipt_count()
+        writer=sqlite3.connect(self.path)
+        try:
+            writer.execute('BEGIN IMMEDIATE');start=time.monotonic()
+            with self.assertRaisesRegex(sqlite3.OperationalError,'locked'):
+                self.order(updated=2,event='blocked-delivery')
+            elapsed=time.monotonic()-start
+            self.assertGreaterEqual(elapsed,1.8);self.assertLess(elapsed,5)
+        finally:writer.rollback();writer.close()
+        self.assertEqual(self.receipt_count(),before_receipts);self.assertEqual(self.db.orders(self.a)[0],before)
+        updated=self.order(updated=2,event='blocked-delivery')
+        self.assertEqual(updated['updated_at'],at(2).replace('+00:00','.000000+00:00'))
+        self.assertEqual(self.receipt_count(),before_receipts+1)
     def test_facts_and_private_storage_are_explicit(self):
         self.order();p=self.payment();self.assertEqual(p['verified_by'],'paypal_signature_verifier_caller')
         self.assertIn('not_physical_delivery',self.db.orders(self.a)[0]['fulfillment_basis']);self.assertEqual(self.path.stat().st_mode&0o777,0o600)

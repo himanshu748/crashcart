@@ -1,0 +1,58 @@
+{
+  "item_id": "WH-003",
+  "state": "VERIFIED",
+  "status": "VERIFIED",
+  "mode": "LOCAL_TEST",
+  "proof_mode": "LOCAL_TEST",
+  "source_commit": null,
+  "source_snapshot": "evidence/snapshots/monitor-v2",
+  "relevant_source_hashes": {
+    "crashcart/monitor_store.py": "7702b3c5f244d68b33d1338e52f0d2f3fdc8e4c99e46a66d6bc775bfae4be1cd",
+    "crashcart/monitor_server.py": "a86c3392181b0e3a34ad06fe0a63cc545cfbc3e06e3d11f12c936bf9e4bf5051",
+    "crashcart/monitor_ingress.py": "d2cf5918e06f0905e112dd5de1a305ba22d7facd422e9b3493ce13cf8fc57cfe",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "scripts/monitor_backup.py": "c8e9a407b4a958cb9092f78a53ef8bdd6f78136646b7bac8a666e75ee1c2a85b",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "web/monitor/index.html": "29ebe8980593027fb267e17ca88ddb50efe2724601137f11ba60f2413de99523",
+    "web/monitor/style.css": "ce5adf194fed6ebe1d08a31a05341b0508b60f9185ac5b5e353d0ed6d33f9f28",
+    "tests/test_monitor_store.py": "ece503b3ec1e0bd7139b021670792d7b150b2b11eaca780b96d67da8666743bc",
+    "tests/test_monitor_connectors.py": "482ab28fdd04729692c492cb739c1380e274786163c81f9beedaf1d98012c98f",
+    "tests/test_monitor_http.py": "0e0111c253bc3fb4e4a028aede04c9a66dedfc71e3b30becee32d8e926569dc8",
+    "tests/test_monitor_ingress.py": "3401d2748d062f753262304af595a34baceaa26c4cc4ca31296ce42fe5bdb73d",
+    "tests/test_monitor_recovery.py": "b4a12c899364d3624053bc809f07a27c36087597bf563227149c18d33f0e10f9"
+  },
+  "acceptance_sha256": "656879079e84405462395f30b01131762c4e43639ea4bbc88fceadc5eefcfdbf",
+  "run_id": "monitor-v2",
+  "environment": {
+    "python": "3.13.15",
+    "scope": "Owned loopback fixtures, synthetic facts, stubbed provider verification"
+  },
+  "command_or_action": "See monitor-v2 phase commands and actual HTTP/browser artifacts",
+  "observed_result": "456testsOK; replay3OK; UI14pass; independentcore89twiceOK; finalnotices/workflowbrowserchecked. Exactcombinedpressurevisibilityfollow-upUNVERIFIED.",
+  "evidence_files": [
+    "evidence/runs/submission-ready/monitor-v2.json",
+    "evidence/runs/submission-ready/monitor-v2/full-suite.log",
+    "evidence/runs/submission-ready/monitor-v2/correctness-review.json",
+    "evidence/runs/submission-ready/monitor-v2/security-review.json",
+    "evidence/runs/submission-ready/monitor-v2/visibility-correctness-review.json",
+    "evidence/runs/submission-ready/monitor-v2/visibility-security-review.json"
+  ],
+  "result": {
+    "outcome": "PASS",
+    "scope": "Local mechanics only; no original CC or authentic-provider acceptance."
+  },
+  "review": {
+    "correctness": "current_contract_audit",
+    "security": "monitor_security",
+    "result": "PASS_LOCAL_PHASE"
+  },
+  "evidence_sha256": {
+    "evidence/runs/submission-ready/monitor-v2.json": "842d5574f7342773afc86b2f15a3573531b777bf3ffe19a7f2606a3356b7dd51",
+    "evidence/runs/submission-ready/monitor-v2/full-suite.log": "866b79fc06bc2605170fac44c4950b623bad528cbcf0e98c5ab350dab8c6fb0e",
+    "evidence/runs/submission-ready/monitor-v2/correctness-review.json": "f75b072ad65d6dc3dce480294f879661db2e23a7e36c1669aca14b23e91b47c4",
+    "evidence/runs/submission-ready/monitor-v2/security-review.json": "505e7e379b42702dd24cb79c55f1d68177c734ef30ddb75ec80b2359734b35be",
+    "evidence/runs/submission-ready/monitor-v2/visibility-correctness-review.json": "a1e8f3a6072c405b5da05e80b45385153a60b80d58b4d8bf8d023895fff06dea",
+    "evidence/runs/submission-ready/monitor-v2/visibility-security-review.json": "9aafac41655f8320bfb10450272f2a6117c0e7a603f99b9a17a26a79b2145d95"
+  },
+  "acceptance_context_sha256": "1221a41fd5c7d126f26c88ea2bbcef6033be7c5bcaac0b2b60a17d9f8c63b519"
+}

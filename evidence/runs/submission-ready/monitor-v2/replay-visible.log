@@ -1,0 +1,8 @@
+test_both_variants_import_as_separate_finished_replay_cases (tests.test_public_replay.PublicReplayTests.test_both_variants_import_as_separate_finished_replay_cases) ... ok
+test_early_recording_fails_defective_and_passes_healthy_with_same_promise (tests.test_public_replay.PublicReplayTests.test_early_recording_fails_defective_and_passes_healthy_with_same_promise) ... ok
+test_original_late_recording_still_rejects_late_healthy_delivery (tests.test_public_replay.PublicReplayTests.test_original_late_recording_still_rejects_late_healthy_delivery) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.295s
+
+OK

@@ -1,0 +1,8 @@
+test_backup_exclusive_lock_fails_within_bound_and_keeps_source (tests.test_monitor_recovery.MonitorRecoveryTests.test_backup_exclusive_lock_fails_within_bound_and_keeps_source) ... ok
+test_killed_uncommitted_writer_rolls_back_saved_facts (tests.test_monitor_recovery.MonitorRecoveryTests.test_killed_uncommitted_writer_rolls_back_saved_facts) ... ok
+test_online_backup_restores_facts_deadline_ack_but_not_sessions (tests.test_monitor_recovery.MonitorRecoveryTests.test_online_backup_restores_facts_deadline_ack_but_not_sessions) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 11.174s
+
+OK

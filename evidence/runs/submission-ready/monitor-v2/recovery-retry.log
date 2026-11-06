@@ -1,0 +1,9 @@
+test_killed_uncommitted_writer_rolls_back_saved_facts (tests.test_monitor_recovery.MonitorRecoveryTests.test_killed_uncommitted_writer_rolls_back_saved_facts) ... ok
+test_online_backup_restores_facts_deadline_ack_but_not_sessions (tests.test_monitor_recovery.MonitorRecoveryTests.test_online_backup_restores_facts_deadline_ack_but_not_sessions) ... <frozen importlib._bootstrap_external>:781: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x10a281300>
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.203s
+
+OK

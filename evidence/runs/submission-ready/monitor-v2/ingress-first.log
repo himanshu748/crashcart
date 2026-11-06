@@ -1,0 +1,68 @@
+test_close_shuts_partial_request_socket_and_releases_handler (tests.test_monitor_ingress.IngressHTTPTests.test_close_shuts_partial_request_socket_and_releases_handler) ... ----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 52314)
+Traceback (most recent call last):
+  File "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/crashcart/monitor_server.py", line 254, in do_POST
+    raw = self.body()
+  File "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/crashcart/monitor_server.py", line 136, in body
+    raise ValueError('Incomplete body')
+ValueError: Incomplete body
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socketserver.py", line 766, in __init__
+    self.handle()
+    ~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/server.py", line 451, in handle
+    self.handle_one_request()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/server.py", line 439, in handle_one_request
+    method()
+    ~~~~~~^^
+  File "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/crashcart/monitor_server.py", line 313, in do_POST
+    return self.send(400, {'error': error})
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/crashcart/monitor_server.py", line 122, in send
+    self.end_headers()
+    ~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/server.py", line 553, in end_headers
+    self.flush_headers()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/http/server.py", line 557, in flush_headers
+    self.wfile.write(b"".join(self._headers_buffer))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+    ~~~~~~~~~~~~~~~~~~^^^
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+ok
+test_concurrency_cap_slow_body_deadline_and_permit_recovery (tests.test_monitor_ingress.IngressHTTPTests.test_concurrency_cap_slow_body_deadline_and_permit_recovery) ... ok
+test_duplicate_headers_bad_framing_deep_json_and_disconnect_release_permits (tests.test_monitor_ingress.IngressHTTPTests.test_duplicate_headers_bad_framing_deep_json_and_disconnect_release_permits) ... FAIL
+test_global_rejects_before_body_database_or_verifier_then_recovers (tests.test_monitor_ingress.IngressHTTPTests.test_global_rejects_before_body_database_or_verifier_then_recovers) ... ok
+test_intentional_receipt_capacity_is_retryable_not_acknowledged (tests.test_monitor_ingress.IngressHTTPTests.test_intentional_receipt_capacity_is_retryable_not_acknowledged) ... ok
+test_missing_invalid_and_duplicate_signature_metadata_never_dispatch_provider (tests.test_monitor_ingress.IngressHTTPTests.test_missing_invalid_and_duplicate_signature_metadata_never_dispatch_provider) ... ok
+test_store_budget_shared_across_routes_headers_and_providers (tests.test_monitor_ingress.IngressHTTPTests.test_store_budget_shared_across_routes_headers_and_providers) ... ok
+test_global_refill_and_constant_state (tests.test_monitor_ingress.LimiterTests.test_global_refill_and_constant_state) ... ok
+test_limits_fail_closed (tests.test_monitor_ingress.LimiterTests.test_limits_fail_closed) ... ok
+test_store_isolation_bounded_state_and_idle_recovery (tests.test_monitor_ingress.LimiterTests.test_store_isolation_bounded_state_and_idle_recovery) ... ok
+
+======================================================================
+FAIL: test_duplicate_headers_bad_framing_deep_json_and_disconnect_release_permits (tests.test_monitor_ingress.IngressHTTPTests.test_duplicate_headers_bad_framing_deep_json_and_disconnect_release_permits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_monitor_ingress.py", line 127, in test_duplicate_headers_bad_framing_deep_json_and_disconnect_release_permits
+    self.assertEqual(self.request('/api/login',raw=deep,headers={'X-CrashCart-Request':'1'})[0],400)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 401 != 400
+
+----------------------------------------------------------------------
+Ran 10 tests in 4.364s
+
+FAILED (failures=1)

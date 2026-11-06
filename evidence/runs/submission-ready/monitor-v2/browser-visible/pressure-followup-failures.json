@@ -1,0 +1,21 @@
+{
+  "mode": "LOCAL_TEST",
+  "state": "STOPPED_UNVERIFIED",
+  "check": "Exact combined default-overload screenshot after sticky-notice repair",
+  "attempts": [
+    {
+      "outcome": "FAIL_SETUP",
+      "observed": "Initial10-second request window expired before the UI assertion; busy text absent and wait timed out.",
+      "evidence": "first-window-missed-dom.txt"
+    },
+    {
+      "outcome": "FAIL_SETUP",
+      "observed": "Replacement bounded pressure harness failed during loopback connection setup with ConnectionResetError: [Errno54] Connection reset by peer. No overload UI assertion executed.",
+      "evidence": "pressure-cleanup.json"
+    }
+  ],
+  "guard_limits_unchanged": true,
+  "additional_pressure_attempts": 0,
+  "rule": "Stopped pressure-based follow-up aftertwofailedattempts. Different ordinaryvalidation/offline/recovery checks continued independently.",
+  "provider_calls": 0
+}

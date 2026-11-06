@@ -30,9 +30,9 @@ python3 -m crashcart.monitor_server --db var/monitor.sqlite3 --port 8790
 Open `http://127.0.0.1:8790/`. Follow [connection setup](docs/MONITOR_SETUP.md).
 This preview has one operator managing owned stores. Customer accounts, OAuth
 installation and per-store billing remain pending; no live charges are made.
-[Product acceptance](docs/MONITOR_PRODUCT.md) · [Local verification](evidence/runs/submission-ready/monitor-v1.json).
+[Product acceptance](docs/MONITOR_PRODUCT.md) · [Local verification](evidence/runs/submission-ready/monitor-v2.json) · [Webhook limits and backup/restore](docs/WEBHOOK_SAFEGUARDS.md).
 
-![Monitoring inbox retaining an acknowledged overdue order in an explicitly labelled local verification store](evidence/runs/submission-ready/monitor-v1/workflow/final-inbox.png)
+![Monitoring inbox retaining an acknowledged overdue order in an explicitly labelled local verification store](evidence/runs/submission-ready/monitor-v2/browser-visible/recovered-desktop.png)
 
 *Local example records and stubbed payment verification; no connected merchant store.*
 
