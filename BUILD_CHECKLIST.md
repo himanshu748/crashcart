@@ -8,11 +8,11 @@ Deployment constraint: Render is excluded.
 
 **47/60 verified; 13 original requirements remain open.** Features are frozen. On 5 November the owner resumed verification of all 13 open checks. New provider/payment/recording experiments still require their applicable authorization; the feature freeze remains in force. Use [STATUS.md](STATUS.md) for current evidence, [MILESTONES.md](MILESTONES.md) for execution order, and [submission gates](docs/SUBMISSION_GATES.md) for the official-deliverable mapping.
 
-Deferral changes priority, not acceptance. All 60 IDs, checkboxes, Done when conditions, Verify conditions, dependencies and proof modes remain authoritative. A passing public replay does not close a fresh-payment requirement; a public video alone does not satisfy CC-059's broader original journey. Project completion still requires CC-060. Do not restart deferred provider experiments from a historical plan.
+Deferral changes priority, not acceptance. All 60 IDs, checkboxes, dependencies and proof modes remain authoritative. The current Done when and Verify conditions include the explicitly recorded design amendment below. A passing public replay does not close a fresh-payment requirement; a public video alone does not satisfy CC-059's broader original journey. Project completion still requires CC-060. Do not restart deferred provider experiments from a historical plan.
 
-The [design verification checklist](docs/DESIGN_VERIFICATION.md) maps the agreed UI direction to scoped browser checks, known gaps and reverification triggers. It supplements this contract; it does not add CC IDs or change acceptance.
+The [design verification checklist](docs/DESIGN_VERIFICATION.md) supplies scoped browser procedures. The **6 November design amendment** updates the descriptions of 22 CC entries, renames 10 still-open entries and strengthens CC-046/048/056/059 acceptance for the two product surfaces, readable labels, recovery and accessibility. IDs remain stable. [Decision, CC mapping and freshness review](docs/DESIGN_CONTRACT_UPDATE.md). Verified acceptance conditions and checkmarks are unchanged; revised open checks require fresh evidence and remain unchecked.
 
-Historical preparation evidence: the repaired recorder passed a bounded seventy-second diagnostic (67.143333 seconds of video, 997 frames, no audio, clean decode and independent review). [Scoped capture receipt](evidence/runs/submission-ready/capture-v68.json). The earlier failures remain preserved. This closes no original requirement and does not prove a full checkout recording: matching faulty-checkout footage and export remain required. All 60 acceptance conditions and checkbox states are unchanged.
+Historical preparation evidence: the repaired recorder passed a bounded seventy-second diagnostic (67.143333 seconds of video, 997 frames, no audio, clean decode and independent review). [Scoped capture receipt](evidence/runs/submission-ready/capture-v68.json). The earlier failures remain preserved. This closes no original requirement and does not prove a full checkout recording: matching faulty-checkout footage and export remain required. That diagnostic changed no acceptance condition or checkbox; the later design amendment above is separate.
 
 On 6 November, the approved replacement attempt failed before checkout on captured-frame freshness; no order or payment was created and all temporary processes closed. Its grant is consumed. The v70 recorder and error-message changes are isolated candidates with local/offline proof, not deployed fixes or fresh checkout acceptance. The updated design checklist separates public recorded-page, configured-workspace and native-recording checks, including DV-13/14. Historical repair evidence remains historical partial support only. See STATUS.md for evidence and the unchanged 47/60 count.
 
@@ -122,6 +122,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
 **Gate:** A runnable skeleton and a working verification process exist. External prerequisites are known.
 
 - [x] **CC-001. Freeze the product contract.**
+  **Current design description:** Warm, customer-facing product language leads with the missing ticket and the unchanged USD29 / one-ticket / 60-second promise. The keyless recorded example is the public entry path; the configured investigation remains a separate capability. This describes presentation, not a replacement for the agreed investigation scope.
   **Done when:** The target user, USD 29 ticket fixture, three sources of truth, explicit recovery deadline, flagship failure, success outcome, integration roles, and exclusions are written down. Render is excluded.
   **Verify:** Inspect the contract against the complete complaint-to-reproduction-to-repair journey. Record unresolved decisions without inventing answers.
 
@@ -261,6 +262,7 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Verify:** Reconstruct the inputs without relying on the original browser tab, process memory, or undocumented absolute paths.
 
 - [x] **CC-032. Run genuinely offline recorded replay.**
+  **Current design description:** The public keyless page presents saved observations and recomputed replay outcomes. Keep “Recorded example” visible; preserve exact machine-readable modes in details and exports. Hosted site-build computation and local app-launch computation are distinct. DV-03/07 support this surface only.
   **Done when:** Replay re-executes merchant behavior from the recorded inputs in an isolated namespace without new PayPal or KERNEL calls. Unsupported interactions fail explicitly.
   **Verify:** Execute with outbound network access disabled. Save the resulting trace and label it RECORDED_REPLAY throughout the UI and export.
 
@@ -272,11 +274,13 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** Reports include original and reduced sizes, candidate outcomes, search budget, termination reason, and whether repeated replay produced the same failure.
   **Verify:** Run a small predefined repeatability check. Use "smallest reproducer found within the search" and report flakiness when observed.
 
-- [ ] **CC-035. Export a runnable regression artifact.**
+- [ ] **CC-035. Export the recorded regression with its matching checkout evidence.**
+  **Current design description:** A convenient keyless ZIP is supporting replay proof. This check still requires its original matching checkout recording and complete regression artifact; partial or unrelated footage cannot be substituted. See DV-07/14.
   **Done when:** The export includes the fixture or its documented dependency, invariant, fault schedule, recording, versions, commands, and meaningful test outcomes. Offline and fresh sandbox modes are distinct.
   **Verify:** Run the exported regression against the defective fixture. Confirm it fails for the claimed mismatch, with useful output; a generic process error is insufficient.
 
-- [ ] **CC-036. Reproduce from a clean environment.**
+- [ ] **CC-036. Run the exported regression without keys from a clean environment.**
+  **Current design description:** The public recorded example and downloaded ZIP provide a keyless access path. Their scoped clean-start passes do not close this check until the complete CC-035 export satisfies its prerequisites.
   **Done when:** The exported artifact runs using only its documented prerequisites. Offline reproduction needs no payment credentials. Fresh execution clearly exposes any buyer approval step.
   **Verify:** Use a clean directory or disposable environment and execute the export itself. Save its actual output and any unavoidable external prerequisites.
 
@@ -295,15 +299,18 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Done when:** A healthy merchant with legitimate delayed fulfillment passes, and a case with inadequate payment evidence remains inconclusive. No-failure-found reports disclose search limits.
   **Verify:** Run the predefined controls with unchanged invariants. "No failure found" must not become a universal safety guarantee.
 
-- [ ] **CC-040. Verify the reduced witness in a fresh sandbox run.**
+- [ ] **CC-040. Verify the reduced case in a separate new test checkout.**
+  **Current design description:** Use plain-language “New test checkout” in the main flow, with original/fresh identities in details. Replaying October observations is not new execution, regardless of label.
   **Done when:** The reduced scenario is exercised using a new merchant namespace, newly created order, normal buyer approval, and actual new sandbox transaction evidence.
   **Verify:** Compare the original, recorded-replay, and fresh-verification identifiers and semantic outcomes. Reusing the original paid order does not satisfy this check.
 
-- [ ] **CC-041. Repair the merchant without weakening the test.**
+- [ ] **CC-041. Prove the repair against the same exported failure test.**
+  **Current design description:** Show faulty and repaired results with the same input, fault and delivery deadline. A healthy curated replay is supporting evidence, not acceptance of the still-incomplete original export.
   **Done when:** The repaired code passes the same invariant and materially equivalent fault schedule that exposes the defective code. Neither the deadline nor the checker is relaxed.
   **Verify:** Run the same exported regression against both versions. Inspect the diff and show an actual behavior correction rather than suppression of the finding.
 
-- [ ] **CC-042. Verify the repaired flow with a fresh payment.**
+- [ ] **CC-042. Confirm the repaired customer journey with a new test payment.**
+  **Current design description:** The new repaired purchase must remain visibly distinct from the saved repaired replay. A green comparison card cannot stand in for a new provider-confirmed transaction.
   **Done when:** A new approved sandbox purchase under the same meaningful fault completes recovery and delivers exactly one ticket within the unchanged budget.
   **Verify:** Inspect independent payment state, ticket count, fault activation, and final customer experience. Save a direct comparison with the defective run.
 
@@ -311,33 +318,40 @@ The checker can validate record structure, files, hashes, modes, and completion 
 **Gate:** A user can start, understand, inspect, and export an investigation through the actual product.
 
 - [x] **CC-043. Start a new investigation from the product.**
+  **Current design description:** The product landing can offer “Explore an investigation” for the keyless recorded example. “Start investigation” in the configured workspace must still create a real new run; opening a saved example does not satisfy this check.
   **Done when:** An operator selects the registered fixture, supplies a promise or incident, sees the relevant budget and invariant, and starts a uniquely identified run.
   **Verify:** Use the UI with new input. Confirm it creates a real backend investigation rather than opening an existing demonstration result.
 
 - [x] **CC-044. Show truthful run states and controls.**
+  **Current design description:** Main labels explain waiting, failed, cancelled and incomplete states in ordinary language. Keep internal mode codes in details. DV-11 checks only the recorded page; DV-13 checks configured workspace errors and does not inherit the public-page pass.
   **Done when:** Queued, running, awaiting approval, completed, failed, cancelled, and inconclusive states appear when applicable. Refreshing reconnects to persisted run state.
   **Verify:** Exercise an approval wait, an interruption, and cancellation. Confirm controls act on the selected run and existing evidence remains readable.
 
 - [x] **CC-045. Build the actual AG Studio investigation workspace.**
+  **Current design description:** AG Studio is the configured investigation workspace. The keyless public comparison is not AG Studio and does not establish sponsor-widget execution. Preserve the distinct layout, licence and source evidence for each.
   **Done when:** AG Studio renders custom payment-versus-delivery and run-comparison widgets using real investigation data, with a usable theme and layout.
   **Verify:** Inspect the implementation and exercise the running widgets. An ordinary table or dependency entry alone cannot satisfy the promised Studio integration.
 
-- [ ] **CC-046. Link evidence selection across the workspace.**
-  **Done when:** Selecting a run or finding synchronizes the customer observation, provider record, merchant entitlement, and timeline. Recorded replay and fresh sandbox provenance are visible.
-  **Verify:** Switch between materially different runs and inspect all linked panels. Stale cross-run data or fabricated causal ordering fails this check.
+- [ ] **CC-046. Keep every evidence panel linked to the selected investigation.**
+  **Current design description:** Use readable Payment, Delivery and Checkout labels while keeping exact records inspectable. Selection must update linked panels, downloads and any footage together; old-case information must not remain visible under a new case. See DV-02/03/12/14.
+  **Done when:** Selecting a run or finding synchronizes the customer observation, provider record, merchant entitlement, and timeline. Recorded replay and fresh sandbox provenance are visible. Main labels use customer-facing terms, while exact modes remain inspectable; any selected-case recording and download must match the same investigation.
+  **Verify:** Switch between materially different runs and inspect all linked panels. Stale cross-run data or fabricated causal ordering fails this check. Inspect download targets and available/missing/partial footage after selection changes; retain screenshots and case identities.
 
 - [x] **CC-047. Make Studio's agent interaction useful.**
+  **Current design description:** The recorded walkthrough is interactive but runs no AI. Studio agent requests require their own actual model/dashboard evidence; story buttons and saved AI summaries cannot replace this check.
   **Done when:** A supported natural-language request queries or changes the actual investigation dashboard using Studio's agent integration, within the configured boundaries.
   **Verify:** Ask for completed payments with missing tickets, change the dataset, and repeat. Inspect the actual returned records and widget changes rather than accepting a canned answer.
 
-- [ ] **CC-048. Finish the operator journey and its error states.**
-  **Done when:** Starting, inspecting, cancelling, comparing, and exporting work end to end. Loading, empty, unavailable-provider, and missing-evidence states are legible; essential controls work by keyboard and at the documented viewport sizes.
-  **Verify:** Perform one focused browser walkthrough covering the main journey and concrete failure states. Save observed defects and fixes rather than counting screens.
+- [ ] **CC-048. Complete the user-facing workspace journey, recovery and accessible controls.**
+  **Current design description:** The warm SaaS design includes legible loading, empty, error and recovery states; responsive, keyboard-accessible controls; deliberate user-triggered motion; and reduced-motion support. Verify the keyless and configured paths separately, using DV-04–06/08–13. A public-page pass does not establish the live operator journey.
+  **Done when:** Starting, inspecting, cancelling, comparing, and exporting work end to end. Loading, empty, unavailable-provider, and missing-evidence states are legible; essential controls work by keyboard and at the documented viewport sizes. The separate keyless entry path is clearly labelled as recorded. Motion respects the reduced-motion preference, focus and selection stay understandable, and an unavailable response cannot display a fabricated result or automatically retry a payment.
+  **Verify:** Perform one focused browser walkthrough covering the main journey and concrete failure states. Save observed defects and fixes rather than counting screens. Cover keyboard-only traversal, documented narrow layouts, reduced-motion before load and during use, clear error recovery and selected-case consistency; record unsupported assistive-technology checks explicitly instead of claiming conformance.
 
 ### Phase 9: Sponsor proof, durable orchestration, and portable delivery
 **Gate:** Claimed integrations are exercised, and the investigator can survive realistic interruptions.
 
 - [x] **CC-049. Handle KERNEL interruption and recording provenance.**
+  **Current design description:** Playback must identify the actual case, provider or local origin and partial/complete state. The failed local recording and isolated recorder candidate remain distinct from the historical KERNEL proof. DV-14 is still open.
   **Done when:** Browser session failures are reflected in run state, partial evidence is retained, and recordings remain linked to the correct investigation. A local-browser fallback is labelled accurately.
   **Verify:** Interrupt one KERNEL session and inspect recovery or explicit failure. Confirm a saved session artifact is not presented as a new live run.
 
@@ -354,10 +368,12 @@ The checker can validate record structure, files, hashes, modes, and completion 
   **Verify:** Run one focused concurrent-claim check and terminate a worker at a meaningful boundary. Inspect the resumed run, operation journal, and resulting counts.
 
 - [x] **CC-053. Keep experiments isolated and evidence safe to share.**
+  **Current design description:** Downloads and media retain the selected case identity and safe sharing boundary. The public recorded page must never fall through to a payment, browser-service or model call when evidence is unavailable.
   **Done when:** Run namespaces, fault settings, secrets, and recordings remain isolated. Public exports exclude credentials and unnecessary buyer data. Recorded replay cannot accidentally fall through to a live provider.
   **Verify:** Run two successive experiments with different faults, inspect export contents, and prove an unsupported replay interaction fails without an external call.
 
 - [x] **CC-054. Package portable runtime and access instructions.**
+  **Current design description:** Keep keyless recorded access and configured application/API/worker startup instructions separate. GitHub Pages serves the former; it is not evidence that the live backend is hosted. No Render dependency is introduced.
   **Done when:** The web application, API, database, and background worker have reproducible startup and configuration instructions on the selected environment. KERNEL and webhook reachability are addressed. Render is absent from runtime dependencies and deployment configuration.
   **Verify:** Start the documented package in a fresh environment or the chosen authorized deployment and exercise its health and reachability checks. Do not substitute a static frontend for the working backend.
 
@@ -365,26 +381,32 @@ The checker can validate record structure, files, hashes, modes, and completion 
 **Gate:** The product can be run and assessed from its delivered artifacts, with no unsupported completion claim.
 
 - [x] **CC-055. Run meaningful automated release checks.**
+  **Current design description:** Report local checks, remote CI and hosted readback separately. The current GitHub account billing lock prevents CI startup and deployment; passing local checks do not establish a published repair.
   **Done when:** The configured build, types, lint where applicable, and focused behavior checks pass. Required test groups execute actual cases, and any unavailable live integration is reported as unverified.
   **Verify:** Save the current-build output and executed/skipped counts. Separate offline CI from controlled sandbox verification; missing credentials cannot silently turn a required integration gate green.
 
-- [ ] **CC-056. Perform the clean-start acceptance walkthrough.**
-  **Done when:** A clean checkout or the exact delivered build supports configuration, a real investigation, an inspectable finding, reproduction export, and a repaired comparison using documented steps.
-  **Verify:** Use the delivered instructions, not the author's private setup notes. Record the source revision, actual flow, external dependencies, and any missing step.
+- [ ] **CC-056. Verify both the keyless entry path and the configured acceptance journey.**
+  **Current design description:** A visitor first follows the keyless landing → walkthrough → comparison → evidence → download path. The original configured real-investigation/export/repair walkthrough is still required and remains separately gated.
+  **Done when:** A clean checkout or the exact delivered build supports configuration, a real investigation, an inspectable finding, reproduction export, and a repaired comparison using documented steps. Also exercise the keyless recorded entry path without provider or licence keys, keeping its result separate from the configured real-investigation path.
+  **Verify:** Use the delivered instructions, not the author's private setup notes. Record the source revision, actual flow, external dependencies, and any missing step. Record both entry paths and their actual outputs; no account requirement for the recorded path and no replay substitution for the live path.
 
-- [ ] **CC-057. Obtain an independent acceptance review.**
+- [ ] **CC-057. Independently review each delivered surface and its evidence.**
+  **Current design description:** Review the frozen source and actual evidence for the public recorded page, configured workspace and recorder independently. Check design changes for stale evidence; preserve failures, missing proof and the difference between source pushed and deployed.
   **Done when:** A reviewer inspects the frozen build, reruns the core regression and export, and challenges fresh-sandbox and sponsor claims. Every blocking finding is resolved or leaves the relevant box open.
   **Verify:** Save the review report with specific criteria, commands, inspected artifacts, and unresolved findings. A second summary of the builder's assertions is not a review.
 
 - [x] **CC-058. Finish the repository and technical explanation.**
+  **Current design description:** Write the README and submission as a customer product story with an obvious keyless next action, exact live setup and honest sponsor roles. Technical evidence belongs in linked documentation; avoid internal jargon in the primary journey.
   **Done when:** Source, license, setup, architecture, adapter contract, environment template, limitations, reproduction commands, and a truthful sponsor-use ledger are complete. Published repository access is verified when publication is authorized.
   **Verify:** Inspect the actual repository from a clean reader's perspective. If required public access is still pending, keep the relevant release status open rather than claiming submission readiness.
 
-- [ ] **CC-059. Produce the truthful demonstration and handoff materials.**
-  **Done when:** The recorded demo stays under three minutes and shows the complaint, actual mismatch evidence, labelled recorded reduction, and fresh repaired result. Submission text and required links describe only demonstrated capabilities.
-  **Verify:** Watch the exported video, measure its duration, inspect the links and factual claims, and confirm the required public video access when authorized. A script alone does not count as a completed video.
+- [ ] **CC-059. Deliver a truthful product-story video and submission handoff.**
+  **Current design description:** Tell the missing-ticket story through the actual product, with plain-language captions and accurate replay/live labels. The owner-facing video script is preparation only. Keep the original fresh repaired-result requirement and public-video inspection; do not substitute a script or static animation.
+  **Done when:** The recorded demo stays under three minutes and shows the complaint, actual mismatch evidence, labelled recorded reduction, and fresh repaired result. Submission text and required links describe only demonstrated capabilities. Present the customer problem and product journey in plain language; identify each recorded, historical or fresh segment accurately.
+  **Verify:** Watch the exported video, measure its duration, inspect the links and factual claims, and confirm the required public video access when authorized. A script alone does not count as a completed video. Compare the exported video with the delivered UI and source evidence; a hosted old version or locally fixed screen must be identified accurately.
 
 - [ ] **CC-060. Issue the final evidence-backed release verdict.**
+  **Current design description:** Release still requires all 60 original IDs. Design-verification rows support named CC conditions but do not add to the denominator or replace missing provider, recording, review, video or release evidence.
   **Done when:** The release checker validates CC-001 through CC-059, verifies relevant evidence freshness, and writes an inspected final report covering product behavior, actual sandbox runs, recorded replays, integrations, and remaining limitations.
   **Verify:** Complete the release audit before checking this item, then confirm the final count is 60/60. If any required item is blocked, failed, stale, or missing proof, report the exact count and do not declare the project complete. Preparing the handoff does not itself submit the project to Devpost.
 

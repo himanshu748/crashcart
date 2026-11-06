@@ -1,6 +1,6 @@
 # Design verification checklist
 
-Updated 6 November 2026. This translates the agreed design direction into observable checks; it does not approve a redesign or add features. **Original acceptance remains 47/60.** DV identifiers below organize UI verification only and are not additional CC requirements.
+Updated 6 November 2026. This translates the agreed design direction into observable checks. The [CC design amendment](DESIGN_CONTRACT_UPDATE.md) now updates the corresponding requirement descriptions and strengthens four open acceptance conditions; it adds no feature or new CC ID. **Original acceptance remains 47/60.** DV identifiers below organize UI verification only and are not additional CC requirements.
 
 ## Design decision and scope
 
@@ -22,7 +22,7 @@ This checklist uses existing results from [browser verification](JUDGE_VERIFICAT
 | Explain unavailable data without inventing a payment outcome. | A loading state remains distinct from a result. Network, HTML, malformed JSON and invalid comparison data produce understandable messages; recovery restores the same selected case without automatically retrying a financial action. | DV-11 covers the public recorded page. DV-13 separately covers the configured workspace API; its tested error-message candidate is not promoted. |
 | Treat saved footage as evidence, not a success animation. | Playback identifies its case and provenance; missing or partial footage remains explicit. A stopped recorder cannot be described as a completed checkout or used to close the export gate. | DV-14 and original CC-035/049/053. v69 failed before checkout; v70 is offline diagnostic preparation only. |
 
-These decisions refine verification coverage, not the agreed business promise: **one USD29 ticket within 60 seconds of confirmed payment**. They do not turn the broader requested marketing sections into new work during the feature freeze. An intentional change to an original CC acceptance condition still requires a separately recorded scope decision.
+The CC amendment applies these decisions to the requirement descriptions without changing the agreed business promise: **one USD29 ticket within 60 seconds of confirmed payment**. They do not turn the broader requested marketing sections into new work during the feature freeze. The owner-requested amendment is recorded separately and preserves the original conditions; any further scope change still requires an explicit decision.
 
 ## Surface and evidence boundaries
 

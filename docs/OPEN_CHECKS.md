@@ -1,6 +1,6 @@
 # Remaining acceptance work
 
-Reviewed 5 November 2026. The frozen private build has **47/60 verified** and
+Reviewed 6 November 2026. The frozen private build has **47/60 verified** and
 zero stale requirements. CC-023 and CC-024 were accepted after actual Sandbox execution and independent review.
 CC-052 combines its reviewed local concurrency proof with the now-satisfied recovery prerequisite.
 The public repository includes reproducible source tests and curated replay
@@ -9,6 +9,8 @@ has separate public tests and does not inherit live-provider acceptance.
 
 
 **Current priority:** on 5 November the owner resumed verification of all 13 open checks, while keeping features frozen. [Current verification results](REMAINING_VERIFICATION.md) distinguish freshly executed offline checks from missing original recording, held-out discovery and fresh-run proof. New scoped service/payment/recording grants remain separate; existing preparation is not an active experiment.
+
+The [design amendment](DESIGN_CONTRACT_UPDATE.md) updates current descriptions; historical partial evidence does not automatically satisfy the revised open conditions.
 
 ## Failed requirement
 
@@ -22,15 +24,15 @@ has separate public tests and does not inherit live-provider acceptance.
 | --- | --- |
 | CC-040 / in progress | Accepted reduced-witness lineage and CC-036/038; historical fresh transaction proof exists, but current service/store/paypal source bindings need impact review or a new matched run. |
 | CC-042 / in progress | Historical repaired payment and customer-view proof exist (one ticket at 3.360974s); current-source/provenance review and CC-040/041 remain open. CC-024 is satisfied. |
-| CC-059 / pending | An exported public video under three minutes showing the required original and fresh journey; script alone is insufficient. Depends on CC-038, CC-040, CC-042, CC-048 and CC-058. |
-| CC-046 / implemented, unverified | Complete actual Studio selection/comparison with provenance and no stale cross-case data; depends on CC-040. Recorded-only comparison is supplemental. |
-| CC-048 / implemented, unverified | Complete operator start/inspect/cancel/compare/export, keyboard and responsive states; depends on CC-046. |
+| CC-059 / pending | An exported public product-story video under three minutes showing the required original and fresh journey with accurate recorded/historical/fresh labels; script alone is insufficient. Depends on CC-038, CC-040, CC-042, CC-048 and CC-058. |
+| CC-046 / implemented, unverified | Complete actual Studio selection/comparison with readable labels, matching downloads/footage, provenance and no stale cross-case data; depends on CC-040. Recorded-only comparison is supplemental. |
+| CC-048 / implemented, unverified | Complete operator start/inspect/cancel/compare/export, understandable error recovery, keyboard/responsive/reduced-motion states and separately labelled keyless access; depends on CC-046. |
 | CC-050 / implemented, unverified | CC-035. Current exported collection was rerun on 4 November: 7 local assertions and 48 assertions across six GETs of copied historical Sandbox records passed; missing proof failed as expected. This is stored-observation inspection, not a fresh provider call. |
 | CC-057 / implemented, unverified | Independent complete acceptance review; depends on CC-050, CC-055 and CC-056. Partial review is not full acceptance. |
 | CC-036 / blocked | Complete regression from a clean environment; depends on the missing recording in CC-035. |
 | CC-038 / blocked | Real agent discovery of the still-undisclosed seeded defect and deterministic confirmation. Protocol CC-037 is accepted; known-case queries are not discovery. |
 | CC-041 / blocked | Same meaningful regression fails defective and passes repaired, with complete CC-035 artifact. A newly executed recorded pair is useful but does not replace the recording. |
-| CC-056 / blocked | Full clean-start fresh investigation, export and repair comparison; depends on CC-036, CC-042 and CC-048. Keyless replay access is a different, explicitly labelled path. |
+| CC-056 / blocked | Both keyless clean-start access and the full configured fresh investigation, export and repair comparison; depends on CC-036, CC-042 and CC-048. Keyless replay access is a different, explicitly labelled path. |
 | CC-060 / blocked | All earlier checks and required independent phase/release reviews. Project incomplete. |
 
 ## Dependencies for full acceptance

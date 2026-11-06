@@ -1,0 +1,32 @@
+test_acceptance_change_is_stale_but_checkbox_change_is_not (test_completion.CompletionCheckerTests.test_acceptance_change_is_stale_but_checkbox_change_is_not) ... ok
+test_duplicate_checklist_id_rejected (test_completion.CompletionCheckerTests.test_duplicate_checklist_id_rejected) ... ok
+test_duplicate_json_rule_id_rejected (test_completion.CompletionCheckerTests.test_duplicate_json_rule_id_rejected) ... ok
+test_environment_and_structured_assertions_required (test_completion.CompletionCheckerTests.test_environment_and_structured_assertions_required) ... ok
+test_expected_nonzero_regression_outcome_is_valid (test_completion.CompletionCheckerTests.test_expected_nonzero_regression_outcome_is_valid) ... ok
+test_failed_review_rejected (test_completion.CompletionCheckerTests.test_failed_review_rejected) ... ok
+test_honest_incomplete_progress_passes (test_completion.CompletionCheckerTests.test_honest_incomplete_progress_passes) ... ok
+test_malformed_record_is_error_not_checker_crash (test_completion.CompletionCheckerTests.test_malformed_record_is_error_not_checker_crash) ... ok
+test_missing_artifact_rejected (test_completion.CompletionCheckerTests.test_missing_artifact_rejected) ... ok
+test_missing_checklist_id_rejected (test_completion.CompletionCheckerTests.test_missing_checklist_id_rejected) ... ok
+test_missing_snapshot_rejected (test_completion.CompletionCheckerTests.test_missing_snapshot_rejected) ... ok
+test_omitting_fixed_dependency_is_rejected (test_completion.CompletionCheckerTests.test_omitting_fixed_dependency_is_rejected) ... ok
+test_open_blocking_review_finding_rejected (test_completion.CompletionCheckerTests.test_open_blocking_review_finding_rejected) ... ok
+test_outside_repository_artifact_rejected (test_completion.CompletionCheckerTests.test_outside_repository_artifact_rejected) ... ok
+test_phase_gate_rejects_incomplete_and_requires_review (test_completion.CompletionCheckerTests.test_phase_gate_rejects_incomplete_and_requires_review) ... ok
+test_release_requires_59_without_own_final_evidence (test_completion.CompletionCheckerTests.test_release_requires_59_without_own_final_evidence) ... ok
+test_runtime_exit_codes_must_match (test_completion.CompletionCheckerTests.test_runtime_exit_codes_must_match) ... ok
+test_snapshot_mismatch_rejected (test_completion.CompletionCheckerTests.test_snapshot_mismatch_rejected) ... ok
+test_stale_artifact_hash_rejected (test_completion.CompletionCheckerTests.test_stale_artifact_hash_rejected) ... ok
+test_stale_dependency_invalidates_its_dependent (test_completion.CompletionCheckerTests.test_stale_dependency_invalidates_its_dependent) ... ok
+test_stale_source_hash_rejected (test_completion.CompletionCheckerTests.test_stale_source_hash_rejected) ... ok
+test_symlink_escape_rejected (test_completion.CompletionCheckerTests.test_symlink_escape_rejected) ... ok
+test_unchecked_verified_record_rejected (test_completion.CompletionCheckerTests.test_unchecked_verified_record_rejected) ... ok
+test_unsupported_checkmark_rejected (test_completion.CompletionCheckerTests.test_unsupported_checkmark_rejected) ... ok
+test_unverified_dependency_rejected (test_completion.CompletionCheckerTests.test_unverified_dependency_rejected) ... ok
+test_verified_receipt_with_unborn_head_snapshot_passes (test_completion.CompletionCheckerTests.test_verified_receipt_with_unborn_head_snapshot_passes) ... ok
+test_wrong_mode_cannot_be_self_selected (test_completion.CompletionCheckerTests.test_wrong_mode_cannot_be_self_selected) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 1.291s
+
+OK

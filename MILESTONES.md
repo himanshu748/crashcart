@@ -1,10 +1,13 @@
 # CrashCart delivery milestones
 
-Updated **5 November 2026**. **47/60 verified; 13 original checks open; zero stale accepted checks.** Features are frozen. These milestones order work; they neither grant acceptance nor authorize new spending, provider calls or submission.
+Updated **6 November 2026**. **47/60 verified; 13 original checks open; zero stale accepted checks.** Features are frozen. These milestones order work; they neither grant acceptance nor authorize new spending, provider calls or submission.
 
 ## Verification resumed — 5 November
 
 The owner has now requested verification of all 13 open CC checks. [Current results](docs/REMAINING_VERIFICATION.md) supersede the deferral and next-action language below. Features remain frozen; no new service allowance or payment/recording window is created by this request. The recorded submission path remains available while original acceptance gaps are resolved.
+
+
+**Design amendment:** [updated CC descriptions](docs/DESIGN_CONTRACT_UPDATE.md) keep IDs stable and strengthen four open conditions. Current original count is 47/60. The 3 November plan inside the collapsed historical section retains its then-current counts and failures; it is not the active queue. The loading repair is pushed but not hosted because GitHub CI is blocked by the account billing lock.
 
 ## Current submission path
 
@@ -20,17 +23,17 @@ The owner has now requested verification of all 13 open CC checks. [Current resu
 
 Local Docker/Caddy and AWS Budget configuration are verified; an AWS compute instance and public TLS endpoint are **not deployed**. No existing hostname was supplied. This does not block runnable access because the current HTTPS demo and clean-clone path work. Budget emails are configured, but delivery is not verified and alerts are not spending caps. See [AWS plan and current results](docs/AWS_JUDGE_DEPLOY.md). Do not buy a domain or provision infrastructure merely to close this optional milestone.
 
-## Original release backlog — deferred, not passed
+## Original release backlog — verification resumed, not passed
 
 | Original state | IDs | Boundary |
 | --- | --- | --- |
 | Failed | CC-035 | Matching original faulty-checkout recording missing; preserve the failure. |
 | Blocked | CC-036, CC-038, CC-041, CC-056, CC-060 | Full export, held-out discovery, repair journey and release prerequisites remain unmet. |
 | Implemented, unverified | CC-046, CC-048, CC-050, CC-057 | Full linked workspace, operator journey, Postman artifact and complete acceptance review remain unverified. |
-| In progress, now deferred | CC-040, CC-042 | Fresh reduced-witness and repaired-payment experiments remain incomplete. |
+| In progress | CC-040, CC-042 | Fresh reduced-witness and repaired-payment experiments remain incomplete. |
 | Pending | CC-059 | Public video is active submission work; full original acceptance also requires the broader journey and dependencies. |
 
-The exact causes and original evidence requirements remain in [open checks](docs/OPEN_CHECKS.md). Resume these experiments only when the owner restores that scope and the necessary access, technical bounds and authorization exist. CC-060 remains the sole project-completion gate.
+The exact causes and original evidence requirements remain in [open checks](docs/OPEN_CHECKS.md). Verification is resumed; execute experiments only when their necessary access, technical bounds and specific authorization exist. CC-060 remains the sole project-completion gate.
 
 ## Preserved earlier planning
 
