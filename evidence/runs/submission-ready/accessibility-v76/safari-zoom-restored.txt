@@ -1,0 +1,1 @@
+Observed Safari Page Menu pop-up button 100% after Command-0; original setting restored.

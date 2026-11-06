@@ -1,0 +1,158 @@
+{
+  "date": "2026-11-06",
+  "mode": "LOCAL_BROWSER_AND_DOCUMENT_REVIEW",
+  "base_commit": "10796953ee3835c0bd8c741fa7c5acf19bfa8935",
+  "source_hashes": {
+    "web/judge/style.css": "791619b5b463fff734be072bd050d173c86efbca2f2f8603444a1d90a9ad3a52",
+    "web/judge/app.js": "77fb44e82cf2cd2376f280e0b071289d1a3e5a5512ecf30518cb6f9fff107e2b",
+    "web/judge/index.html": "7e72c2d95d71f91a888be26a045f8668523f4ac62747cf45318129d650f984d7",
+    "crashcart/judge.py": "f6d881a12fe185e73aca5e775156a4107ec8bf5f6211154549f42645515c238f",
+    "scripts/requirements.json": "5bb800db7ef82a60b5b4bb21b0b03287b3054a09ca284cb06bd0629c6bfa2f01"
+  },
+  "change": "Two selected-state outlines strengthened; dimensions, runtime rules, fixtures and acceptance conditions unchanged.",
+  "baseline_failures_preserved": [
+    {
+      "control": "1. Payment",
+      "indicator": "selected border",
+      "adjacent": [
+        231.0,
+        236.0,
+        217.0
+      ],
+      "inside": [
+        249.0,
+        250.0,
+        245.0
+      ],
+      "indicator_rgb": [
+        180.0,
+        193.0,
+        156.0
+      ],
+      "contrast_adjacent": 1.5746565903867793,
+      "contrast_inside": 1.8120407792726758,
+      "threshold": 3
+    },
+    {
+      "control": "Inspect the failed checkout\n\u2197",
+      "indicator": "selected border",
+      "adjacent": [
+        255.0,
+        255.0,
+        255.0
+      ],
+      "inside": [
+        246.0,
+        245.0,
+        240.0
+      ],
+      "indicator_rgb": [
+        126.0,
+        143.0,
+        96.0
+      ],
+      "contrast_adjacent": 3.508763787960877,
+      "contrast_inside": 3.214325588690992,
+      "threshold": 3
+    },
+    {
+      "control": "Failed checkout",
+      "indicator": "selected background",
+      "adjacent": [
+        228.0,
+        232.0,
+        219.0
+      ],
+      "inside": [
+        255.0,
+        255.0,
+        255.0
+      ],
+      "indicator_rgb": [
+        255.0,
+        255.0,
+        255.0
+      ],
+      "contrast_adjacent": 1.2452313722177395,
+      "contrast_inside": null,
+      "threshold": 3
+    }
+  ],
+  "observed": {
+    "selection_contrast_minimum": 3.214325588690992,
+    "selection_states": [
+      "Payment",
+      "The gap",
+      "The repair",
+      "Failed checkout",
+      "Repaired replay"
+    ],
+    "desktop_width": 1280,
+    "phone_width": 320,
+    "phone_scroll_width": 320,
+    "focus": "Repaired replay outline rgb(64,90,18) solid 3px; 5px offset; Space activates repaired case",
+    "safari_zoom": "Page menu readback 200%; walkthrough, repaired-case selection, PayPal filter 4/15 and expanded payment details exercised; restored100%. Native screenshots retained privately.",
+    "os_motion": "Originally off; dynamic on and on-before-load yield reduce-motion class, checked control, no animations and zero-duration transitions. Story/case/filter remain usable. Off restored and reload returns normal transitions.",
+    "motion_download": "Link activation exercised; new downloaded file not found. Delivery not verified.",
+    "voiceover": "Originally off; enabled; VO-Right and Tab produced no observable navigation change. Stopped after two no-change inputs. Actual announcements not verified; restored off.",
+    "cleanup": "OS preferences restored; Safari zoom restored; only temporary local tab closed, original hosted tab preserved; IAB viewport reset/tab closed; owned judge PID31379 stopped and confirmed absent."
+  },
+  "tests": {
+    "full_suite": {
+      "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v",
+      "output": "Ran 367 tests in 44.429s; OK"
+    },
+    "replay": {
+      "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -m unittest tests.test_public_replay -v",
+      "output": "Ran 3 tests in 0.195s; OK"
+    },
+    "ui_initial": {
+      "command": "node --test tests/test_judge_ui.mjs",
+      "output": "Could not find tests/test_judge_ui.mjs",
+      "exit": 1
+    },
+    "ui_corrected": {
+      "command": "node --test tests/test_judge_ui.cjs",
+      "output": "tests5;pass5;fail0"
+    },
+    "completion": {
+      "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -m unittest tests.test_completion -v",
+      "output": "Ran27tests in0.532s;OK"
+    }
+  },
+  "contract": {
+    "compared_ids": 60,
+    "private_public_acceptance_equal": true,
+    "checked": 47,
+    "unchecked": 13,
+    "progress_ok": true,
+    "errors": [],
+    "newly_verified_cc_ids": [],
+    "rules_unchanged": true,
+    "original_acceptance_changed": false
+  },
+  "scope": "Selected-control repair has fresh local interaction/layout proof. DV09 remains partial (download delivery); DV10 remains partial (screen-reader journey/announcements). No complete accessibility conformance claim. No provider/payment/capture/tunnel/model/hosting action.",
+  "hosted": "No new hosted verification; previously observed billing lock leaves deployed source older than local repairs.",
+  "artifact_sha256": {
+    "full-suite.log": "7774123deaca83e2456b4e358ccbd1ce377b92c662f7f1307a0e58fa59e9e63f",
+    "replay-tests.log": "ad3e97445312f98f2f8a04b049022e04eafc21c6fcec65c85af32e1042b2d045",
+    "ui-tests.log": "f72a09417cdb55b41534b5d91344cdd369390b10cbf91b1ae75fe3094656190e",
+    "ui-tests-corrected.log": "cd4e096df3c30f5d8230415b4efe3553f9de548beef44dece374d57e09583a50",
+    "completion-tests.log": "f896871a3bae737ef2615498aca4fe1064704ce91b925761b65a050251dec94f",
+    "selected-controls-all-states.json": "2346c4c1298d16685bf95ca019815b382d67fcbcf2319d6b8aba9caf78b82b1b",
+    "selection-contrast.json": "c61a54c084826626f253e704f0447efbc473e9769396caafafb3c54d462b2e99",
+    "os-motion.json": "2483f7f1ac8a32f46d36c492efde23419af5dc316f9555856345113ab02d0c7a",
+    "os-motion-beforeload-dom.txt": "b5bd7488e6204b3dc2b45063c3ab65731524dafb7040a1882f49decb16a857fd",
+    "desktop-focus.png": "948b76ea14fada162ce15c08e227fdc26df1a72766a590e6792406e43b6e2631",
+    "desktop-story-selected.png": "cd8f73e606b7cc79220a9c4f0adeadab77c54680469d56011e19ae7c40ff0cf0",
+    "mobile-story-selected.png": "1fdd4f38132c876517d6ec3d264f2f699c23259ef900c69e93720787aceda658",
+    "mobile-case-selected.png": "dcb11f340b641e89cfc332704b56ddd90e43554e977d8003f9e1bc5f7fd43d77",
+    "os-motion-on.txt": "b442ae6fb7fe81216b96b23eeede7ea38f09fbf33f75dfa76ce04ed55dabfd7d",
+    "os-motion-restored.txt": "848c1cdd629490cf7cccd2f0a496ccf0b290ae0003d7b9ba9ef71a9d1c520e91",
+    "voiceover-on.txt": "a59e810a78e4f0dcce4d3f0e02cc4efa294b38d16d985747dd2add5369a6927d",
+    "voiceover-restored.txt": "aaa69d2c649c6f0354e2c7ee1717eb1c36127e8bc50593cc14d3f363e13ffc15",
+    "voiceover-keyboard.txt": "6de880872b6a159779c0082924fe8370600cdac4967440fbf1fabfac210e1fa0",
+    "safari-zoom-menu.txt": "5257a32377c999938a44c303ff7a48bd6222173cbc412495d9b1052eb71c6bf5",
+    "safari-zoom-restored.txt": "5f5d42c70709c224c63493f0a5a7d51ec4dfd52646ba9169fb2df78d10b9de2e"
+  }
+}

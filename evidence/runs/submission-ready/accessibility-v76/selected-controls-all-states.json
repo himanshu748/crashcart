@@ -1,0 +1,197 @@
+[
+  {
+    "clicked": "1. Payment",
+    "observed": {
+      "scrollWidth": 1280,
+      "selected": [
+        {
+          "ancestors": [
+            "rgba(0, 0, 0, 0)",
+            "rgb(231, 236, 217)"
+          ],
+          "background": "rgb(249, 250, 245)",
+          "border": "rgb(101, 115, 79)",
+          "shadow": "none",
+          "text": "1. Payment"
+        },
+        {
+          "ancestors": [
+            "rgb(255, 255, 255)",
+            "rgba(0, 0, 0, 0)"
+          ],
+          "background": "rgb(246, 245, 240)",
+          "border": "rgb(126, 143, 96)",
+          "shadow": "rgb(126, 143, 96) 0px 0px 0px 1px inset",
+          "text": "Inspect the failed checkout ↗"
+        },
+        {
+          "ancestors": [
+            "rgb(228, 232, 219)",
+            "rgb(238, 239, 231)"
+          ],
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(25, 29, 27)",
+          "shadow": "rgb(101, 115, 79) 0px 0px 0px 2px inset, rgba(0, 0, 0, 0.067) 0px 1px 3px 0px",
+          "text": "Failed checkout"
+        }
+      ],
+      "width": 1280
+    }
+  },
+  {
+    "clicked": "2. The gap",
+    "observed": {
+      "scrollWidth": 1280,
+      "selected": [
+        {
+          "ancestors": [
+            "rgba(0, 0, 0, 0)",
+            "rgb(231, 236, 217)"
+          ],
+          "background": "rgb(249, 250, 245)",
+          "border": "rgb(101, 115, 79)",
+          "shadow": "none",
+          "text": "2. The gap"
+        },
+        {
+          "ancestors": [
+            "rgb(255, 255, 255)",
+            "rgba(0, 0, 0, 0)"
+          ],
+          "background": "rgb(246, 245, 240)",
+          "border": "rgb(126, 143, 96)",
+          "shadow": "rgb(126, 143, 96) 0px 0px 0px 1px inset",
+          "text": "Inspect the failed checkout ↗"
+        },
+        {
+          "ancestors": [
+            "rgb(228, 232, 219)",
+            "rgb(238, 239, 231)"
+          ],
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(25, 29, 27)",
+          "shadow": "rgb(101, 115, 79) 0px 0px 0px 2px inset, rgba(0, 0, 0, 0.067) 0px 1px 3px 0px",
+          "text": "Failed checkout"
+        }
+      ],
+      "width": 1280
+    }
+  },
+  {
+    "clicked": "3. The repair",
+    "observed": {
+      "scrollWidth": 1280,
+      "selected": [
+        {
+          "ancestors": [
+            "rgba(0, 0, 0, 0)",
+            "rgb(231, 236, 217)"
+          ],
+          "background": "rgb(249, 250, 245)",
+          "border": "rgb(101, 115, 79)",
+          "shadow": "none",
+          "text": "3. The repair"
+        },
+        {
+          "ancestors": [
+            "rgb(255, 255, 255)",
+            "rgba(0, 0, 0, 0)"
+          ],
+          "background": "rgb(246, 245, 240)",
+          "border": "rgb(126, 143, 96)",
+          "shadow": "rgb(126, 143, 96) 0px 0px 0px 1px inset",
+          "text": "Inspect the failed checkout ↗"
+        },
+        {
+          "ancestors": [
+            "rgb(228, 232, 219)",
+            "rgb(238, 239, 231)"
+          ],
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(25, 29, 27)",
+          "shadow": "rgb(101, 115, 79) 0px 0px 0px 2px inset, rgba(0, 0, 0, 0.067) 0px 1px 3px 0px",
+          "text": "Failed checkout"
+        }
+      ],
+      "width": 1280
+    }
+  },
+  {
+    "clicked": "Repaired replay",
+    "observed": {
+      "scrollWidth": 1280,
+      "selected": [
+        {
+          "ancestors": [
+            "rgba(0, 0, 0, 0)",
+            "rgb(231, 236, 217)"
+          ],
+          "background": "rgb(249, 250, 245)",
+          "border": "rgb(101, 115, 79)",
+          "shadow": "none",
+          "text": "3. The repair"
+        },
+        {
+          "ancestors": [
+            "rgb(255, 255, 255)",
+            "rgba(0, 0, 0, 0)"
+          ],
+          "background": "rgb(246, 245, 240)",
+          "border": "rgb(126, 143, 96)",
+          "shadow": "rgb(126, 143, 96) 0px 0px 0px 1px inset",
+          "text": "Inspect the repaired replay ↗"
+        },
+        {
+          "ancestors": [
+            "rgb(228, 232, 219)",
+            "rgb(238, 239, 231)"
+          ],
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(25, 29, 27)",
+          "shadow": "rgb(101, 115, 79) 0px 0px 0px 2px inset, rgba(0, 0, 0, 0.067) 0px 1px 3px 0px",
+          "text": "Repaired replay"
+        }
+      ],
+      "width": 1280
+    }
+  },
+  {
+    "clicked": "Failed checkout",
+    "observed": {
+      "scrollWidth": 1280,
+      "selected": [
+        {
+          "ancestors": [
+            "rgba(0, 0, 0, 0)",
+            "rgb(231, 236, 217)"
+          ],
+          "background": "rgb(249, 250, 245)",
+          "border": "rgb(101, 115, 79)",
+          "shadow": "none",
+          "text": "3. The repair"
+        },
+        {
+          "ancestors": [
+            "rgb(255, 255, 255)",
+            "rgba(0, 0, 0, 0)"
+          ],
+          "background": "rgb(246, 245, 240)",
+          "border": "rgb(126, 143, 96)",
+          "shadow": "rgb(126, 143, 96) 0px 0px 0px 1px inset",
+          "text": "Inspect the failed checkout ↗"
+        },
+        {
+          "ancestors": [
+            "rgb(228, 232, 219)",
+            "rgb(238, 239, 231)"
+          ],
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(25, 29, 27)",
+          "shadow": "rgb(101, 115, 79) 0px 0px 0px 2px inset, rgba(0, 0, 0, 0.067) 0px 1px 3px 0px",
+          "text": "Failed checkout"
+        }
+      ],
+      "width": 1280
+    }
+  }
+]

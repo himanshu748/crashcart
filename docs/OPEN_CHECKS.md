@@ -22,8 +22,8 @@ The [design amendment](DESIGN_CONTRACT_UPDATE.md) updates current descriptions; 
 
 | Check / state | Missing acceptance evidence or prerequisite |
 | --- | --- |
-| CC-040 / in progress | Accepted reduced-witness lineage and CC-036/038; historical fresh transaction proof exists, but current service/store/paypal source bindings need impact review or a new matched run. |
-| CC-042 / in progress | Historical repaired payment and customer-view proof exist (one ticket at 3.360974s); current-source/provenance review and CC-040/041 remain open. CC-024 is satisfied. |
+| CC-040 / in progress | Accepted reduced-witness lineage and CC-036/038. The v69 source-impact review retained historical transaction proof only; current timing/orchestration and matched fresh-run evidence remain missing. |
+| CC-042 / in progress | Historical repaired payment and customer-view proof exist (one ticket at 3.360974s); v69 source/provenance review is complete with historical partial support only. Current timing/agent-orchestration proof and CC-040/041 remain missing. CC-024 is satisfied. |
 | CC-059 / pending | An exported public product-story video under three minutes showing the required original and fresh journey with accurate recorded/historical/fresh labels; script alone is insufficient. Depends on CC-038, CC-040, CC-042, CC-048 and CC-058. |
 | CC-046 / implemented, unverified | Complete actual Studio selection/comparison with readable labels, matching downloads/footage, provenance and no stale cross-case data; depends on CC-040. Recorded-only comparison is supplemental. |
 | CC-048 / implemented, unverified | Complete operator start/inspect/cancel/compare/export, understandable error recovery, keyboard/responsive/reduced-motion states and separately labelled keyless access; depends on CC-046. |

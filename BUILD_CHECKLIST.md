@@ -16,6 +16,8 @@ Historical preparation evidence: the repaired recorder passed a bounded seventy-
 
 On 6 November, the approved replacement attempt failed before checkout on captured-frame freshness; no order or payment was created and all temporary processes closed. Its grant is consumed. The v70 recorder and error-message changes are isolated candidates with local/offline proof, not deployed fixes or fresh checkout acceptance. The updated design checklist separates public recorded-page, configured-workspace and native-recording checks, including DV-13/14. Historical repair evidence remains historical partial support only. See STATUS.md for evidence and the unchanged 47/60 count.
 
+Current freshness follow-through (6 November, v76): all 60 private/public acceptance entries agree; 47 checked records validate without stale hashes. Selected-control style changes have separate local rechecks, while OS-motion download delivery, screen-reader coverage and hosted promotion remain open. [Current audit](evidence/runs/submission-ready/accessibility-v76.json). No CC ID, acceptance condition, rule, dependency or checkbox changed.
+
 ## 1. What this build must achieve
 
 CrashCart investigates disagreements between the customer's checkout experience, independently observed PayPal sandbox payment state, and the owned merchant's delivered entitlement. It produces an executable reproduction, reduces unnecessary steps, and verifies a repaired merchant against the same business promise.

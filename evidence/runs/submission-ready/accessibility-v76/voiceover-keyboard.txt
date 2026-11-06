@@ -1,0 +1,2 @@
+There has been no change in the accessibility tree for Window: "CrashCart — from payment to promise".
+The focused UI element is 129 summary − PayPal Payment independently checked +32.26s, Value: on

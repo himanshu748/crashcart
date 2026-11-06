@@ -1,0 +1,4 @@
+The following is a diff from the previous accessibility tree for Window: "CrashCart — from payment to promise" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 594-605
+~									585 pop-up button 200%
+The focused UI element is 345 HTML content Description: CrashCart — from payment to promise, URL: 127.0.0.1:59455/

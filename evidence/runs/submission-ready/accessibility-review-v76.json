@@ -1,0 +1,42 @@
+{
+  "reviewer": "/root/current_contract_audit",
+  "mode": "INDEPENDENT_READ_ONLY_REVIEW",
+  "result": "PASS_SCOPED",
+  "base_commit": "10796953ee3835c0bd8c741fa7c5acf19bfa8935",
+  "findings": [],
+  "resolved_findings": [
+    "Latest-suite wording references v76 instead of v72",
+    "Copy mapping records DV-08 local acceptance",
+    "CC-042 distinguishes completed historical impact review from missing current timing/orchestration proof",
+    "Changed selected-state CSS has fresh local proof",
+    "DV-09 dates its earlier OS preference limitation"
+  ],
+  "verified": [
+    "All 5 source hashes and 23 artifact hashes match",
+    "Private/public acceptance entries identical across 60 IDs and unchanged from HEAD",
+    "Private completion progress independently ok true,47/60,errors[]",
+    "Independent replay rerun:3 tests in0.207s,OK",
+    "Actual full-suite/replay/UI/completion logs inspected; initial wrongfilename failure preserved",
+    "Computed selected states for all3story and bothcase selections inspected",
+    "4 public desktop/mobile screenshots and private Safari200% detail screenshot inspected",
+    "OS motion/VoiceOver/restoration artifacts inspected",
+    "git diff --check passed"
+  ],
+  "source_hashes": {
+    "web/judge/style.css": "791619b5b463fff734be072bd050d173c86efbca2f2f8603444a1d90a9ad3a52",
+    "web/judge/app.js": "77fb44e82cf2cd2376f280e0b071289d1a3e5a5512ecf30518cb6f9fff107e2b",
+    "web/judge/index.html": "7e72c2d95d71f91a888be26a045f8668523f4ac62747cf45318129d650f984d7",
+    "crashcart/judge.py": "f6d881a12fe185e73aca5e775156a4107ec8bf5f6211154549f42645515c238f",
+    "scripts/requirements.json": "5bb800db7ef82a60b5b4bb21b0b03287b3054a09ca284cb06bd0629c6bfa2f01"
+  },
+  "reviewed_receipt_sha256": "5a38cbb775910be312972e18fe48155da120e4943d3a9ddc5399d697610fcaae",
+  "design_verification_sha256": "301fcfd8f8a10c9b5c9fa3436028702e4af0c8a394fef6d13c70074c0ed07311",
+  "limits": [
+    "Browser evidence inspected, not independently re-executed by reviewer",
+    "No complete accessibility/WCAG conformance claim",
+    "DV09 open: actual download delivery under OS reduced motion",
+    "DV10 open: actual screen-reader navigation/announcements",
+    "No hosted promotion, fresh provider execution, payment or recording",
+    "No original CC requirement newly verified"
+  ]
+}

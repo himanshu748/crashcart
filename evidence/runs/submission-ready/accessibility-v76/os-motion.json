@@ -1,0 +1,32 @@
+[
+  {
+    "animated": [],
+    "checked": true,
+    "class": "reduce-motion",
+    "phase": "dynamic OS on",
+    "transitions": [
+      "0s",
+      "0s",
+      "0s"
+    ]
+  },
+  {
+    "animation": "none",
+    "checked": true,
+    "class": "reduce-motion",
+    "phase": "OS on before load and interactions",
+    "selected": [
+      "3. The repair",
+      "Inspect the repaired replay ↗",
+      "Repaired replay"
+    ],
+    "status": "Loading the recorded investigation…",
+    "transition": "0s"
+  },
+  {
+    "checked": false,
+    "class": "",
+    "phase": "OS restored off then reload",
+    "transition": "0.12s, 0.12s"
+  }
+]

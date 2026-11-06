@@ -12,7 +12,7 @@ This established short-capture behavior for the then-frozen recorder only. CC-03
 
 ## Recorded-checkout attempt — v66 failure
 
-After a separate scoped approval, the attempt stopped before checkout with `RECORDER_HEARTBEAT_STALE` in 53.639 seconds. All four owned child processes were confirmed absent; no order, capture or merchant operation exists. The private partial video has 710 frames / 51.525 seconds and no audio, but 26 decode timestamp warnings. It is not checkout proof. The encoder counter lagged final media and cannot establish whether real frame delivery stalled. An offline repair now uses valid advancing captured-frame callbacks and passes ten focused tests plus compilation; the five-second freshness guard remains unchanged. Actual capture with the new binary remains unverified. The one-attempt grant is consumed; further capture/payment needs applicable authorization.
+After a separate scoped approval, the attempt stopped before checkout with `RECORDER_HEARTBEAT_STALE` in 53.639 seconds. All four owned child processes were confirmed absent; no order, capture or merchant operation exists. The private partial video has 710 frames / 51.525 seconds and no audio, but 26 decode timestamp warnings. It is not checkout proof. The encoder counter lagged final media and cannot establish whether real frame delivery stalled. An offline repair now uses valid advancing captured-frame callbacks and passes ten focused tests plus compilation; the five-second freshness guard remains unchanged. At this v66 checkpoint actual capture with the new binary was unverified; the later v68 probe and v69 failure below supersede that checkpoint. The one-attempt grant is consumed; further capture/payment needs applicable authorization.
 
 ## What actually ran — v65
 
@@ -35,7 +35,7 @@ After a separate scoped approval, the attempt stopped before checkout with `RECO
 | CC-035 | FAILED | Matching original faulty-checkout recording is absent. Need that contemporaneous recording or a properly recorded replacement checkout with matching export. |
 | CC-036 | BLOCKED | Requires complete CC-035 artifact. Today's clean-directory run verifies the available ZIP only. |
 | CC-038 | BLOCKED | Actual undisclosed-seed LIVE_SANDBOX investigation, deterministic confirmation and controlled reveal. Accepted protocol and known-case model calls do not establish discovery. |
-| CC-040 | IN_PROGRESS | CC-036/038 and accepted reduced-witness lineage. Historical fresh proof exists, but service/store/paypal bindings differ from current source and need impact review or a new matched run. |
+| CC-040 | IN_PROGRESS | CC-036/038 and accepted reduced-witness lineage. The v69 source-impact review retained historical fresh proof only; changed source still lacks current timing/orchestration and matched-run proof. |
 | CC-041 | BLOCKED | Complete CC-035 export and same meaningful test against faulty/repaired code. Today's matching replay outcomes are supplemental. |
 | CC-042 | IN_PROGRESS | Historical repair delivered one ticket in 3.360974s. Independent v69 impact review retains it as historical partial support only; new Store locking/queries mean current timing and agent orchestration remain unproven. CC-024 is accepted; CC-040/041 remain open. |
 | CC-046 | IMPLEMENTED_UNVERIFIED | CC-040 and complete actual Studio comparison across required cases, with synchronized customer/provider/merchant/timeline panels. Saved-case selection is partial proof. |

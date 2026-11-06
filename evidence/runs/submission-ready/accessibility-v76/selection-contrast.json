@@ -1,0 +1,137 @@
+[
+  {
+    "action": "1. Payment",
+    "control": "1. Payment",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(249, 250, 245)",
+    "outside": "rgb(231, 236, 217)",
+    "inside_ratio": 4.861121172475029,
+    "outside_ratio": 4.224295931120791
+  },
+  {
+    "action": "1. Payment",
+    "control": "Inspect the failed checkout \u2197",
+    "cue": "rgb(126, 143, 96)",
+    "inside": "rgb(246, 245, 240)",
+    "outside": "rgb(255, 255, 255)",
+    "inside_ratio": 3.214325588690992,
+    "outside_ratio": 3.508763787960877
+  },
+  {
+    "action": "1. Payment",
+    "control": "Failed checkout",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(255, 255, 255)",
+    "outside": "rgb(228, 232, 219)",
+    "inside_ratio": 5.0988986747033,
+    "outside_ratio": 4.094739972397445
+  },
+  {
+    "action": "2. The gap",
+    "control": "2. The gap",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(249, 250, 245)",
+    "outside": "rgb(231, 236, 217)",
+    "inside_ratio": 4.861121172475029,
+    "outside_ratio": 4.224295931120791
+  },
+  {
+    "action": "2. The gap",
+    "control": "Inspect the failed checkout \u2197",
+    "cue": "rgb(126, 143, 96)",
+    "inside": "rgb(246, 245, 240)",
+    "outside": "rgb(255, 255, 255)",
+    "inside_ratio": 3.214325588690992,
+    "outside_ratio": 3.508763787960877
+  },
+  {
+    "action": "2. The gap",
+    "control": "Failed checkout",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(255, 255, 255)",
+    "outside": "rgb(228, 232, 219)",
+    "inside_ratio": 5.0988986747033,
+    "outside_ratio": 4.094739972397445
+  },
+  {
+    "action": "3. The repair",
+    "control": "3. The repair",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(249, 250, 245)",
+    "outside": "rgb(231, 236, 217)",
+    "inside_ratio": 4.861121172475029,
+    "outside_ratio": 4.224295931120791
+  },
+  {
+    "action": "3. The repair",
+    "control": "Inspect the failed checkout \u2197",
+    "cue": "rgb(126, 143, 96)",
+    "inside": "rgb(246, 245, 240)",
+    "outside": "rgb(255, 255, 255)",
+    "inside_ratio": 3.214325588690992,
+    "outside_ratio": 3.508763787960877
+  },
+  {
+    "action": "3. The repair",
+    "control": "Failed checkout",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(255, 255, 255)",
+    "outside": "rgb(228, 232, 219)",
+    "inside_ratio": 5.0988986747033,
+    "outside_ratio": 4.094739972397445
+  },
+  {
+    "action": "Repaired replay",
+    "control": "3. The repair",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(249, 250, 245)",
+    "outside": "rgb(231, 236, 217)",
+    "inside_ratio": 4.861121172475029,
+    "outside_ratio": 4.224295931120791
+  },
+  {
+    "action": "Repaired replay",
+    "control": "Inspect the repaired replay \u2197",
+    "cue": "rgb(126, 143, 96)",
+    "inside": "rgb(246, 245, 240)",
+    "outside": "rgb(255, 255, 255)",
+    "inside_ratio": 3.214325588690992,
+    "outside_ratio": 3.508763787960877
+  },
+  {
+    "action": "Repaired replay",
+    "control": "Repaired replay",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(255, 255, 255)",
+    "outside": "rgb(228, 232, 219)",
+    "inside_ratio": 5.0988986747033,
+    "outside_ratio": 4.094739972397445
+  },
+  {
+    "action": "Failed checkout",
+    "control": "3. The repair",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(249, 250, 245)",
+    "outside": "rgb(231, 236, 217)",
+    "inside_ratio": 4.861121172475029,
+    "outside_ratio": 4.224295931120791
+  },
+  {
+    "action": "Failed checkout",
+    "control": "Inspect the failed checkout \u2197",
+    "cue": "rgb(126, 143, 96)",
+    "inside": "rgb(246, 245, 240)",
+    "outside": "rgb(255, 255, 255)",
+    "inside_ratio": 3.214325588690992,
+    "outside_ratio": 3.508763787960877
+  },
+  {
+    "action": "Failed checkout",
+    "control": "Failed checkout",
+    "cue": "rgb(101, 115, 79)",
+    "inside": "rgb(255, 255, 255)",
+    "outside": "rgb(228, 232, 219)",
+    "inside_ratio": 5.0988986747033,
+    "outside_ratio": 4.094739972397445
+  }
+]
