@@ -4,7 +4,7 @@
   "status": "VERIFIED",
   "mode": "LOCAL_TEST",
   "proof_mode": "LOCAL_TEST",
-  "source_commit": null,
+  "source_commit": "ee088df303864776f7a9b418f5d24ff90aabced9",
   "source_snapshot": "evidence/snapshots/monitor-v2",
   "relevant_source_hashes": {
     "crashcart/monitor_store.py": "7702b3c5f244d68b33d1338e52f0d2f3fdc8e4c99e46a66d6bc775bfae4be1cd",
@@ -47,7 +47,7 @@
     "result": "PASS_LOCAL_PHASE"
   },
   "evidence_sha256": {
-    "evidence/runs/submission-ready/monitor-v2.json": "842d5574f7342773afc86b2f15a3573531b777bf3ffe19a7f2606a3356b7dd51",
+    "evidence/runs/submission-ready/monitor-v2.json": "b1670a2c9d9806873ba432b148238e3a9f976d48415782b80cff2e5619defceb",
     "evidence/runs/submission-ready/monitor-v2/full-suite.log": "866b79fc06bc2605170fac44c4950b623bad528cbcf0e98c5ab350dab8c6fb0e",
     "evidence/runs/submission-ready/monitor-v2/correctness-review.json": "f75b072ad65d6dc3dce480294f879661db2e23a7e36c1669aca14b23e91b47c4",
     "evidence/runs/submission-ready/monitor-v2/security-review.json": "505e7e379b42702dd24cb79c55f1d68177c734ef30ddb75ec80b2359734b35be",

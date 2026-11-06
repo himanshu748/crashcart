@@ -197,6 +197,12 @@
     "browser-visible/validation-notice.json": "3bb3e7dfe91a24595ba4ec49fcf26b983ec0e9ee643b6d315620793636851247",
     "browser-visible/validation.png": "da42b5ce96c018b38200ad82174748223d5738dbb8e59bf780803ef35be0d37d",
     "busy-wait-tests.log": "a6fe807f81ea4f10de2dd094e4070edc25ca0a4458781ed3b2d74df5c9d56cf3",
+    "clean-clone-cli.json": "d3efe341f15343fd709131b06f694368206fbeae30c30446cab5df61b41ab595",
+    "clean-clone-cli.log": "53a8fb956a10a849e4d020f42ab25c82cd1650712fd81cb11a837dc6360397e7",
+    "clean-clone.json": "d99a2ef05f3956ee0e6a71b2850a5f2b45bfa09fb22847f3cfcc78ab3bc81afb",
+    "clean-clone.log": "7a345c07eb7c07af055775677e97059372823bdd76746f36e01d39ddfd955cb2",
+    "clean_clone.py": "9167845abf93eb70d2d8a35525110d53389179901524b5fe2fe43f73b94531f8",
+    "clean_clone_cli.py": "7ed81876978383edb0d0d9e9953335c82f2c4ddb4d17efdee5bcb9f83442540b",
     "correctness-review.json": "f75b072ad65d6dc3dce480294f879661db2e23a7e36c1669aca14b23e91b47c4",
     "full-suite-visible.log": "27ef98e755506e14167e7ef1202a877147f76e8bee476d835e016200721bd079",
     "full-suite.log": "866b79fc06bc2605170fac44c4950b623bad528cbcf0e98c5ab350dab8c6fb0e",
@@ -222,5 +228,12 @@
   "secret_review": {
     "path": "evidence/runs/submission-ready/monitor-v2-secret-review.json",
     "sha256": "73fcd08b3b2fec1b79d6ebc2484de7e41b72727a8e0ca26f8990c35c7cbf6e29"
+  },
+  "tested_source_commit": "ee088df303864776f7a9b418f5d24ff90aabced9",
+  "clean_clone": {
+    "source_commit": "ee088df303864776f7a9b418f5d24ff90aabced9",
+    "factory_and_backup": "monitor-v2/clean-clone.json",
+    "documented_cli": "monitor-v2/clean-clone-cli.json",
+    "outcome": "PASS; sourcefresh localGitclone, no .env/providercredentials, actualHTTPentry/login/store/backup; ownedprocessesclosed"
   }
 }

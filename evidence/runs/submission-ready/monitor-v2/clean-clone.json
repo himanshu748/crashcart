@@ -1,0 +1,22 @@
+{
+  "mode": "LOCAL_TEST",
+  "source_commit": "ee088df303864776f7a9b418f5d24ff90aabced9",
+  "clone_kind": "Fresh local Git clone of committed source; no hidden working files",
+  "command": "git clone --quiet --no-hardlinks SOURCE TEMP; python3 clean-clone actual HTTP/backup probe",
+  "result": {
+    "status": "PASS",
+    "entry_http": 200,
+    "login_http": 200,
+    "create_store_http": 201,
+    "orders": [],
+    "connection_verified": false,
+    "backup_integrity": "ok",
+    "private_env_file_present": false,
+    "provider_keys_supplied": false,
+    "provider_calls": 0
+  },
+  "exit_code": 0,
+  "runtime": "Python3.13.15",
+  "cleanup": "Temporaryclone/database removed andserverclosed",
+  "log_sha256": "7a345c07eb7c07af055775677e97059372823bdd76746f36e01d39ddfd955cb2"
+}

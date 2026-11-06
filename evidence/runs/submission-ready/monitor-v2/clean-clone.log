@@ -1,0 +1,1 @@
+{"status": "PASS", "entry_http": 200, "login_http": 200, "create_store_http": 201, "orders": [], "connection_verified": false, "backup_integrity": "ok", "private_env_file_present": false, "provider_keys_supplied": false, "provider_calls": 0}
