@@ -1,0 +1,32 @@
+{
+  "reviewer": "/root/current_contract_audit",
+  "mode": "INDEPENDENT_READ_ONLY_REVIEW",
+  "result": "PASS_DV09_LOCAL_ONLY",
+  "source_commit": "f06137b7915c2ad921cf72403260a5aecb61c9e2",
+  "reviewed_receipt_sha256": "e68c93bb6eba5fbcb84f08b495d71b0e449f202ff8fa4aa917477edf763c963c",
+  "findings": [],
+  "source_hashes": {
+    "web/judge/style.css": "791619b5b463fff734be072bd050d173c86efbca2f2f8603444a1d90a9ad3a52",
+    "web/judge/app.js": "77fb44e82cf2cd2376f280e0b071289d1a3e5a5512ecf30518cb6f9fff107e2b",
+    "web/judge/index.html": "7e72c2d95d71f91a888be26a045f8668523f4ac62747cf45318129d650f984d7",
+    "crashcart/judge.py": "f6d881a12fe185e73aca5e775156a4107ec8bf5f6211154549f42645515c238f"
+  },
+  "checks": [
+    "All4source and8artifact hashes match; sources match reviewedv76",
+    "Native Safari screenshot/AX confirm Reduce motion checked; OSenabled/restored and VoiceOveroff inspected",
+    "Actual replay-3.zip exists:25516bytes, SHA256a17156fa13c2e37f64e9443f71d2d63920731381aa13fe5435ebc1ac88559e6b",
+    "Extracted files match archive bytes",
+    "Independent downloaded manifest PASSexit0",
+    "Independent downloaded defective FAILpaid_without_ticket zero tickets exit1",
+    "Independent downloaded healthy PASSticket_delivered_once_on_time one ticket exit0",
+    "v76 source-identical proof covers OSbeforeload/dynamic/normal restoration and story/case/filter interactions"
+  ],
+  "limits": [
+    "Local recorded page only; no hosted claim",
+    "DV10 remains open actual screen-reader navigation/announcements",
+    "No original CC closes:47/60",
+    "No OS network isolation claimed",
+    "Browser actions inspected, not independently repeated",
+    "Localhost download permission still allowed and temporary-tab closure unconfirmed after user takeover"
+  ]
+}

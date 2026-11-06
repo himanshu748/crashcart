@@ -1,0 +1,100 @@
+{
+  "date": "2026-11-06",
+  "mode": "LOCAL_BROWSER_RECORDED_REPLAY",
+  "source_commit": "f06137b7915c2ad921cf72403260a5aecb61c9e2",
+  "source_hashes": {
+    "web/judge/style.css": "791619b5b463fff734be072bd050d173c86efbca2f2f8603444a1d90a9ad3a52",
+    "web/judge/app.js": "77fb44e82cf2cd2376f280e0b071289d1a3e5a5512ecf30518cb6f9fff107e2b",
+    "web/judge/index.html": "7e72c2d95d71f91a888be26a045f8668523f4ac62747cf45318129d650f984d7",
+    "crashcart/judge.py": "f6d881a12fe185e73aca5e775156a4107ec8bf5f6211154549f42645515c238f"
+  },
+  "source_unchanged_from_v76": true,
+  "design_check": "DV-09",
+  "scope": "Completes the outstanding actual download-delivery step; combines with source-identical v76 OS-before-load/dynamic motion and interaction proof, and v75/v76 normal-motion evidence. Not original CC acceptance.",
+  "download": {
+    "download_name": "replay-3.zip",
+    "bytes": 25516,
+    "download_sha256": "a17156fa13c2e37f64e9443f71d2d63920731381aa13fe5435ebc1ac88559e6b",
+    "served_sha256": "a17156fa13c2e37f64e9443f71d2d63920731381aa13fe5435ebc1ac88559e6b",
+    "identical": true,
+    "source_commit": "f06137b7915c2ad921cf72403260a5aecb61c9e2",
+    "mode": "RECORDED_REPLAY_DOWNLOAD",
+    "os_reduce_motion": true,
+    "delivery": "Native Safari download after user-approved localhost download permission",
+    "new_payment": false
+  },
+  "execution": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+        "-m",
+        "crashcart.replay",
+        "verify-manifest",
+        "."
+      ],
+      "cwd": "downloaded-replay",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "log": "download-manifest.log"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+        "-m",
+        "crashcart.replay",
+        "run",
+        "input.json",
+        "--merchant",
+        "defective"
+      ],
+      "cwd": "downloaded-replay",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "log": "download-defective.log"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+        "-m",
+        "crashcart.replay",
+        "run",
+        "input.json",
+        "--merchant",
+        "healthy"
+      ],
+      "cwd": "downloaded-replay",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "log": "download-healthy.log"
+    }
+  ],
+  "observed": [
+    "Safari permission prompt blocked the first download; did not treat link activation as delivery. Cancelled while awaiting explicit permission.",
+    "Owner authorized local CrashCart downloads. Enabled OS Reduce Motion again; Safari exposed checked Reduce motion. Approved the requested download prompt.",
+    "Downloaded replay-3.zip exists and is byte-identical to served ZIP. Manifest passes. Same downloaded package produces defective FAIL paid_without_ticket and healthy PASS ticket_delivered_once_on_time.",
+    "macOS Reduce Motion and VoiceOver restored off. Owned local server PID33260 stopped and confirmed absent.",
+    "VoiceOver caption panel was already enabled, Control-Option/Caps Lock modifiers configured; no preference changed in utility. VoiceOver app access timed out. No screen-reader-navigation pass. Utility window closed.",
+    "Safari was taken over during permission cleanup; stopped control without disturbing mail. Localhost download permission remains allowed. Temporary tab closure not confirmed after takeover."
+  ],
+  "limitations": [
+    "DV-10 remains open; no screen-reader announcement or navigation claim",
+    "Normal and OS reduced-motion proof is local; deployment unchanged",
+    "No new payment, provider/model call, tunnel, recording, AWS resource or spending",
+    "All original CC states unchanged:47/60",
+    "Replay executions used normal local Python; no OS network isolation claimed"
+  ],
+  "artifact_sha256": {
+    "download-readback.json": "288d54095cf18e9e409def8f12a89b5910e89d8928baeff2d0ab51a2bb8b9fd7",
+    "download-execution.json": "05726bcafc3e70f96cb1ecbf6fc7c1aaf29abef6b8af70ec0840d75d27581f23",
+    "download-manifest.log": "4dbe35b0e69dbaff0aa7a35d70d58ad286c37ff9381c1dfac5198742e5438f3a",
+    "download-defective.log": "56a26ccf9c41c0f38a117d3c2fb547451b1852ca91a8f8745b310d6cd212e364",
+    "download-healthy.log": "f6fbd513488d54d823fdc756ff0e4ae7f3e49617e4e1702a5674a2073efb6c5c",
+    "os-motion-download-on.txt": "82b88edbd06fff2a9394263abdc0bd88036d2481a7ac09c8660c63f847eecc31",
+    "os-motion-restored.txt": "63aa41521e25a45dd8864b1798f9680cb419bd13bdfe6dc28c500579be11cba2",
+    "voiceover-off.txt": "cf4f6441abed06ed543e7f0c3d8c30cc6c50f1d4519f2476e75f8e929400270d"
+  },
+  "prior_source_bound_evidence": [
+    "accessibility-v76.json",
+    "product-readability-v75.json"
+  ]
+}

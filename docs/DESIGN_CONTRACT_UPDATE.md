@@ -43,3 +43,5 @@ The audit compares all 60 IDs, acceptance hashes and checkbox states, checks unc
 ## Current freshness follow-through — v76
 
 All 60 private/public acceptance entries still match and the original validator reports 47/60 with no stale checked records. The v76 selected-state CSS amendment was separately reverified for affected local selection/focus/layout behavior; historical hosted results were not transferred to it. Obsolete active copy-review, suite and CC-042 blocker wording was corrected. OS-motion and screen-reader coverage remains explicitly partial in [DESIGN_VERIFICATION.md](DESIGN_VERIFICATION.md). [Current source-bound audit](../evidence/runs/submission-ready/accessibility-v76.json).
+
+**v77 follow-through:** DV-09 now passes locally after actual Safari download delivery and independent execution of its exported replay on unchanged v76 source. DV-10 remains open. [Receipt](../evidence/runs/submission-ready/motion-download-v77.json). Original CC acceptance remains 47/60; no hosted or live-provider proof is inferred.

@@ -1,0 +1,14 @@
+The following is a diff from the previous accessibility tree for Window: "VoiceOver" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 74, 77-112
+~0 standard window VoiceOver, ID: Main, Secondary Actions: Raise
+~		72 scroll area Secondary Actions: Cancel
+~			73 switch To toggle VoiceOver, quickly press Touch ID three times while holding the Command key., Value: off, ID: AX_VOICEOVER_ENABLED
++			74 button Description: Open VoiceOver Tutorial…, ID: AX_VO_OPEN_TRAINING
+~			75 button Description: Open VoiceOver Utility…, ID: AX_VO_OPEN_UTILITY
+~			76 button Help
+~			61 menu button (disabled) Description: Go Forward, ID: chevron.forward
+~	65 text VoiceOver
+Selected:
+	17 row (selected)
+
+Note: Pay special attention to the content selected by the user. If the user asks a question or refers to the content they are looking at on-screen, they might be referring to the selected content (but they might be referring to something else that's visible, too).

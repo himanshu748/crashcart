@@ -18,6 +18,8 @@ On 6 November, the approved replacement attempt failed before checkout on captur
 
 Current freshness follow-through (6 November, v76): all 60 private/public acceptance entries agree; 47 checked records validate without stale hashes. Selected-control style changes have separate local rechecks, while OS-motion download delivery, screen-reader coverage and hosted promotion remain open. [Current audit](evidence/runs/submission-ready/accessibility-v76.json). No CC ID, acceptance condition, rule, dependency or checkbox changed.
 
+Subsequent v77 verification closes DV-09 for the local recorded page: the actual reduced-motion download and exported replay passed independent review on unchanged source. DV-10 screen-reader coverage and hosted promotion remain open. [Receipt](evidence/runs/submission-ready/motion-download-v77.json). Original acceptance remains **47/60**.
+
 ## 1. What this build must achieve
 
 CrashCart investigates disagreements between the customer's checkout experience, independently observed PayPal sandbox payment state, and the owned merchant's delivered entitlement. It produces an executable reproduction, reduces unnecessary steps, and verifies a repaired merchant against the same business promise.

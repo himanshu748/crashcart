@@ -1,0 +1,45 @@
+[
+  {
+    "command": [
+      "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+      "-m",
+      "crashcart.replay",
+      "verify-manifest",
+      "."
+    ],
+    "cwd": "downloaded-replay",
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "download-manifest.log"
+  },
+  {
+    "command": [
+      "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+      "-m",
+      "crashcart.replay",
+      "run",
+      "input.json",
+      "--merchant",
+      "defective"
+    ],
+    "cwd": "downloaded-replay",
+    "expected_exit": 1,
+    "actual_exit": 1,
+    "log": "download-defective.log"
+  },
+  {
+    "command": [
+      "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+      "-m",
+      "crashcart.replay",
+      "run",
+      "input.json",
+      "--merchant",
+      "healthy"
+    ],
+    "cwd": "downloaded-replay",
+    "expected_exit": 0,
+    "actual_exit": 0,
+    "log": "download-healthy.log"
+  }
+]

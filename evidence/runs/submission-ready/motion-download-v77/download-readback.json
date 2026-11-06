@@ -1,0 +1,12 @@
+{
+  "download_name": "replay-3.zip",
+  "bytes": 25516,
+  "download_sha256": "a17156fa13c2e37f64e9443f71d2d63920731381aa13fe5435ebc1ac88559e6b",
+  "served_sha256": "a17156fa13c2e37f64e9443f71d2d63920731381aa13fe5435ebc1ac88559e6b",
+  "identical": true,
+  "source_commit": "f06137b7915c2ad921cf72403260a5aecb61c9e2",
+  "mode": "RECORDED_REPLAY_DOWNLOAD",
+  "os_reduce_motion": true,
+  "delivery": "Native Safari download after user-approved localhost download permission",
+  "new_payment": false
+}
