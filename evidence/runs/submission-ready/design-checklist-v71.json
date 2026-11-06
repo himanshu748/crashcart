@@ -1,0 +1,54 @@
+{
+  "result": "PASS",
+  "date": "2026-11-06",
+  "documentation_baseline": "5113f8cabfb2374fa048718d567f04bd3924a275",
+  "design_checklist_sha256": "b291ecf58651cfe028da756cdafa52828d5ac64f08d1a02decbda8bb4e887484",
+  "acceptance_conditions_and_checkboxes_unchanged": true,
+  "requirements_compared": 60,
+  "private_public_acceptance_equal": true,
+  "verified_count": 47,
+  "new_cc_verifications": [],
+  "design_rows": {
+    "prior_scoped_passes": [
+      "DV-01",
+      "DV-02",
+      "DV-03",
+      "DV-04",
+      "DV-05",
+      "DV-06",
+      "DV-07"
+    ],
+    "open": [
+      "DV-08",
+      "DV-09",
+      "DV-10",
+      "DV-11",
+      "DV-12",
+      "DV-13",
+      "DV-14"
+    ]
+  },
+  "new_browser_execution": false,
+  "changed_runtime_files": [],
+  "keyless_runtime_changes_since_clean_clone": [],
+  "relative_links_checked": 63,
+  "missing_local_files": [],
+  "scope": "Documentation update only. Candidate diagnostics do not accept promoted behavior. Seven prior scoped design passes retain their dates and limitations.",
+  "evidence_separation": [
+    "Public recorded page DV-01 through DV-11",
+    "Configured workspace journey DV-12 and API candidate DV-13",
+    "Actual recorder/media DV-14"
+  ],
+  "retained_tests": {
+    "command_record": "evidence/runs/submission-ready/validation-v70.json",
+    "full_suite": "367 tests in 51.427s, OK",
+    "replay": "3 tests in 0.383s, OK",
+    "new_test_run": false,
+    "reason": "Only documents changed; relevant runtime, fixtures, assertions and test files are unchanged."
+  },
+  "progress": {
+    "ok": true,
+    "verified_count": 47,
+    "errors": []
+  }
+}

@@ -4,7 +4,7 @@ Prepared: 22 October 2026
 Historical starting status (22 October): 0/60 verified. Current acceptance is recorded in STATUS.md.
 Deployment constraint: Render is excluded.
 
-## Current execution scope — 5 November 2026
+## Current execution scope — 6 November 2026
 
 **47/60 verified; 13 original requirements remain open.** Features are frozen. On 5 November the owner resumed verification of all 13 open checks. New provider/payment/recording experiments still require their applicable authorization; the feature freeze remains in force. Use [STATUS.md](STATUS.md) for current evidence, [MILESTONES.md](MILESTONES.md) for execution order, and [submission gates](docs/SUBMISSION_GATES.md) for the official-deliverable mapping.
 
@@ -12,9 +12,9 @@ Deferral changes priority, not acceptance. All 60 IDs, checkboxes, Done when con
 
 The [design verification checklist](docs/DESIGN_VERIFICATION.md) maps the agreed UI direction to scoped browser checks, known gaps and reverification triggers. It supplements this contract; it does not add CC IDs or change acceptance.
 
-Latest preparation evidence: the repaired recorder passed a bounded seventy-second diagnostic (67.143333 seconds of video, 997 frames, no audio, clean decode and independent review). [Scoped capture receipt](evidence/runs/submission-ready/capture-v68.json). The earlier failures remain preserved. This closes no original requirement and does not prove a full checkout recording: matching faulty-checkout footage and export remain required. All 60 acceptance conditions and checkbox states are unchanged.
+Historical preparation evidence: the repaired recorder passed a bounded seventy-second diagnostic (67.143333 seconds of video, 997 frames, no audio, clean decode and independent review). [Scoped capture receipt](evidence/runs/submission-ready/capture-v68.json). The earlier failures remain preserved. This closes no original requirement and does not prove a full checkout recording: matching faulty-checkout footage and export remain required. All 60 acceptance conditions and checkbox states are unchanged.
 
-On 6 November, the fresh replacement checkout preparation passed independent review and remains inactive pending buyer readiness and a new scoped grant. Historical repair evidence was reviewed as partial support only; current timing is not freshly verified. See STATUS.md for the scoped evidence and unchanged 47/60 count.
+On 6 November, the approved replacement attempt failed before checkout on captured-frame freshness; no order or payment was created and all temporary processes closed. Its grant is consumed. The v70 recorder and error-message changes are isolated candidates with local/offline proof, not deployed fixes or fresh checkout acceptance. The updated design checklist separates public recorded-page, configured-workspace and native-recording checks, including DV-13/14. Historical repair evidence remains historical partial support only. See STATUS.md for evidence and the unchanged 47/60 count.
 
 ## 1. What this build must achieve
 

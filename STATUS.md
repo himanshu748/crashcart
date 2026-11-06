@@ -4,11 +4,15 @@
 
 ## Current delivery
 
+**6 November design-verification update:** [The checklist](docs/DESIGN_VERIFICATION.md) now maps each current design decision to observable acceptance, separates the public recorded page from the configured workspace and native recorder, and adds explicit checks for connection errors and truthful footage. DV-01–07 retain their prior scoped evidence; DV-08–14 remain open. Candidate-only results do not transfer to deployed behavior. All 60 original acceptance conditions, checkboxes and dependencies remain unchanged; **47/60**, no newly verified CC IDs.
+
+**Next design verification:** exercise DV-11 against an isolated copy of the public recorded page: delayed data, an unavailable response, malformed data and recovery. This requires no recording, payment or provider call.
+
 **6 November recorded-checkout result:** the approved v69 attempt failed before checkout when captured frames stopped. The unchanged five-second guard closed the gateway, tunnel and recorder in 87.881 seconds; all four processes are absent. No order or payment was created. Private video contains 81.551667 seconds / 1,209 frames, no audio and 33 timestamp warnings. The first capture error was not retained; the later cleanup error does not identify its cause. Independent review confirms this failed result. The grant is consumed. **47/60; no new CC IDs.** [Evidence](evidence/runs/submission-ready/checkout-failure-v69.json).
 
 The previously reviewed historical repair remains historical partial support only. Offline follow-through prepared an isolated recorder that retains the first lifecycle error; 12 lifecycle assertions, frame admission and both watchdog probes pass, with independent review. Actual capture with this candidate is **unverified**. An isolated UI candidate passed six tests and actual Safari checks: HTML error responses reproduce the old message, the candidate shows a clear connection error, and case selection recovers after valid responses return. The historical Safari response remains unknown. Neither candidate changes the frozen accepted or public runtime. [Diagnostic evidence](evidence/runs/submission-ready/diagnostics-v70.json).
 
-**Next:** review the prepared diagnostic for a separately bounded capture, before any new recorded checkout. Two failed recorded-checkout attempts are preserved; no automatic live retry. All temporary browser-test servers and capture/tunnel processes are closed. The public video and owner submission remain pending.
+**Next original-recording action:** review the prepared diagnostic for a separately bounded capture, before any new recorded checkout. Two failed recorded-checkout attempts are preserved; no automatic live retry. All temporary browser-test servers and capture/tunnel processes are closed. The public video and owner submission remain pending.
 
 **5 November recording verification:** the repaired recorder passed an independently reviewed bounded native-capture probe: 67.143333 seconds of video, 997 frames, no audio and clean decode. Process exit took 68.190 seconds; maximum observed frame-heartbeat age was 0.174427 seconds against the unchanged five-second limit. The prior failed checkout attempt remains preserved. **47/60; no new CC IDs.** Full matching checkout footage is still missing. [Scoped evidence](evidence/runs/submission-ready/capture-v68.json).
 
