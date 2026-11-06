@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-06",
+  "mode": "LOCAL_TEST_ACTUAL_BROWSER_SYNTHETIC_RESPONSES",
+  "base_commit": "27710b4e6e5a51263ddde7a1412719b2e898bff1",
+  "source_hashes": {
+    "web/app.js": "138d345648e9238c96983a35bd4d5c9cfd10b3c3c17583116bec627b17cd410b",
+    "web/index.html": "2895be7b6ad6cc4bdf7e6cf310552626715948757eafd38e34a44821081b638a",
+    "tests/test_workspace_api.cjs": "f964b8a0e8f7f6eb019b4220706991313178e032c295cdcda6ef91a26fb1159c"
+  },
+  "scope": "Actual public workspace JavaScript served byte-for-byte on loopback with two explicitly synthetic unpaid cases and controlled server responses. Local response handling, not actual provider integration or full CC043/044/048 acceptance.",
+  "repairs": [
+    "Unreadable HTML/empty/malformed/nonobject API responses now produce a connection error, retaining structured rejection codes.",
+    "Startup rejected responses now appear in a visible sign-in panel with Connection details, including landing links to selected cases."
+  ],
+  "observed": [
+    "HTML detail outage retained existing case/journal; technical details were inspectable.",
+    "Five failed POST modes on final source retained visible case and expected readable message/code.",
+    "Failed case change hid the old case; valid reselection restored the correct case and download URL.",
+    "Actual guarded checkout button dispatched exactly one order request; no capture request or automatic order retry. Synthetic server rejects all mutations.",
+    "Initial silent startup failure preserved. Independent hidden-panel finding fixed and final actual landing route has visible message/details.",
+    "Final valid-response case switching recovered BRAVO. All temporary tabs closed and both owned loopback servers stopped."
+  ],
+  "private_accepted_app_sha256": "768e5f6fa82e925397f1237df6479af0147fdc17ab336a43b1d42fc1b6eb047d",
+  "original_acceptance": "47/60 on frozen private accepted build only; no new CC checkmarks or rebinding of private records. Modified public workspace does not inherit those original acceptances.",
+  "limits": [
+    "No provider/model/payment/capture/browser-service call or public tunnel",
+    "No hosted deployment verified",
+    "No full operator start/cancel/compare/export acceptance or screen-reader proof",
+    "Earlier browser artifacts retain their initial source phase; final/ artifacts bind final source."
+  ],
+  "artifact_sha256": {
+    "browser-baseline.json": "5657e155487741ee55c88e88b2afecedb2807ecb0df03048a52dbd9e1d68792f",
+    "browser-html-failure.json": "97d3027641ae481e5699ff810bcd995fa09c6b078747a464839f92969dd0e7fc",
+    "browser-post-cases.json": "7a0e1b66f8422ce16b95d436e362bb7d93cb64e4078ff634ccf2fdb4d55b814b",
+    "startup-before-fix.json": "6998c93605e18591475dfa066722e9e27688eb90158a7927770b89c93514c5c8",
+    "startup-fixed.json": "8813ec5b48e8debf63daee98d00b7e2384b9abc3e694cea381e73005fb47b595",
+    "startup-cases.json": "e606112c74a4cced3de054f5f120402657da98635f7321096273afa429142b0e",
+    "reload-recovery.json": "2f85c9c15bdd10e23ffcc539ef532ba805b96df758020ef6b22bf0b33520a812",
+    "failed-case-switch.json": "f46655662944013f8a270e33cd021dc4cd839a20afd585d40fa98f918c84dd8c",
+    "case-recovery.json": "5657e155487741ee55c88e88b2afecedb2807ecb0df03048a52dbd9e1d68792f",
+    "failed-checkout-action.json": "97d3027641ae481e5699ff810bcd995fa09c6b078747a464839f92969dd0e7fc",
+    "request-counts.json": "173816ef24033550dc893ba07d74ee03d4537e0de2ba84fdee26a2ed3947a57f",
+    "checkout-error.png": "7241a25ed6ec313896b90b10b2c53335a74ee9fb6458a370d92ec3dbf912f10f",
+    "final/source.json": "6dc0bde14f3a45d686b71c9d96dc4d1e1c169d8c3e8e1b0a7fc6f325fd9cd564",
+    "final/landing-error.json": "e93c5f5ddc7be0a1423b2e9da250f3a71bf12d311a43ee21f22419edf6610606",
+    "final/landing-error.png": "fca9ed593e2a694fa7993501c2ec479319bdca60c8140de4b629e49da770d8c2",
+    "final/post-cases.json": "aff1736b1c1894c04a6051e2944a0d88d42825dc770ce1de176a86c1df223d71",
+    "final/recovered-dom.txt": "95a771d56ccc5616c8534a4a192d5247b39b58f6908b2d87ad34d2fe33cc62b2",
+    "requests.jsonl": "59444b1d6d17287787673072f37c8be1356a48c3aea016bb60dd876f8535a9b7",
+    "final/requests.jsonl": "c2d9d2db15af4f20922434a4d42d2d0a50d3375ed5ce4390db53876402823a71",
+    "serve.py": "e9618eaeb5343e32d48f8764d46745760a666f378268648707dbfd3a597cc037",
+    "reviewed-full-suite.log": "91742cc79cc22526e8c5cce158fad7036d76da6f165f1628f3c14a10f5973141",
+    "reviewed-replay.log": "924c032470f66271f6c433c1df73011c55e98847e7d7894010754155ace02d9b",
+    "reviewed-ui.log": "3b66b40ef18565a5097363bed870a3d19c73d641d675fc3edec5d54056bbca69"
+  },
+  "tests": {
+    "full": "367 tests in 53.446s, OK",
+    "replay": "3 tests in 0.210s, OK",
+    "ui": "14 pass, 0 fail (9 workspace + 5 recorded-page tests)",
+    "commands": [
+      "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v",
+      "python3 -m unittest tests.test_public_replay -v",
+      "node --test tests/test_judge_ui.cjs tests/test_workspace_api.cjs"
+    ]
+  }
+}

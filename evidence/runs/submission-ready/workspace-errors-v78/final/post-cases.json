@@ -1,0 +1,52 @@
+[
+  {
+    "mode": "structured401",
+    "observed": {
+      "caseHidden": false,
+      "code": "Operator access required",
+      "journal": "{\n  \"run\": {\n    \"id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"promise\": \"LOCAL_TEST ALPHA: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment.\",\n    \"state\": \"CREATED\",\n    \"mode\": \"LOCAL_TEST\",\n    \"fault\": {\n      \"kind\": \"response_loss\",\n      \"merchant\": \"defective\"\n    },\n    \"execution\": null\n  },\n  \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n  \"order_id\": null,\n  \"capture_id\": null,\n  \"payment_state\": \"UNPAID\",\n  \"merchant_status\": \"NOT_DELIVERED\",\n  \"browser\": {\n    \"id\": \"event_75b105fb385f4c048ff84d891118569a\",\n    \"run_id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n    \"order_id\": null,\n    \"operation_id\": null,\n    \"source\": \"browser\",\n    \"event_type\": \"customer_observation\",\n    \"event_time\": null,\n    \"observed_at\": \"2026-11-06T15:12:50.525747Z\",\n    \"caused_by\": null,\n    \"payload_json\": \"{\\\"browser_kind\\\":\\\"LOCAL_BROWSER\\\",\\\"url_path\\\":\\\"/\\\",\\\"visible_text\\\":\\\"LOCAL_TEST ALPHA observation: no payment attempted.\\\"}\",\n    \"payload\": {\n      \"browser_kind\": \"LOCAL_BROWSER\",\n      \"url_path\": \"/\",\n      \"visible_text\": \"LOCAL_TEST ALPHA observation: no payment attempted.\"\n    }\n  },\n  \"delivery_result\": null,\n  \"operations\": []\n}",
+      "message": "Sign in to your workspace to continue.",
+      "run": "run_c0e83cf19d1d4649915f85aff84215db"
+    }
+  },
+  {
+    "mode": "HTML502",
+    "observed": {
+      "caseHidden": false,
+      "code": "HTTP_RESPONSE_UNAVAILABLE",
+      "journal": "{\n  \"run\": {\n    \"id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"promise\": \"LOCAL_TEST ALPHA: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment.\",\n    \"state\": \"CREATED\",\n    \"mode\": \"LOCAL_TEST\",\n    \"fault\": {\n      \"kind\": \"response_loss\",\n      \"merchant\": \"defective\"\n    },\n    \"execution\": null\n  },\n  \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n  \"order_id\": null,\n  \"capture_id\": null,\n  \"payment_state\": \"UNPAID\",\n  \"merchant_status\": \"NOT_DELIVERED\",\n  \"browser\": {\n    \"id\": \"event_75b105fb385f4c048ff84d891118569a\",\n    \"run_id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n    \"order_id\": null,\n    \"operation_id\": null,\n    \"source\": \"browser\",\n    \"event_type\": \"customer_observation\",\n    \"event_time\": null,\n    \"observed_at\": \"2026-11-06T15:12:50.525747Z\",\n    \"caused_by\": null,\n    \"payload_json\": \"{\\\"browser_kind\\\":\\\"LOCAL_BROWSER\\\",\\\"url_path\\\":\\\"/\\\",\\\"visible_text\\\":\\\"LOCAL_TEST ALPHA observation: no payment attempted.\\\"}\",\n    \"payload\": {\n      \"browser_kind\": \"LOCAL_BROWSER\",\n      \"url_path\": \"/\",\n      \"visible_text\": \"LOCAL_TEST ALPHA observation: no payment attempted.\"\n    }\n  },\n  \"delivery_result\": null,\n  \"operations\": []\n}",
+      "message": "Connection interrupted. The server did not return usable data. Try again when the workspace is available.",
+      "run": "run_c0e83cf19d1d4649915f85aff84215db"
+    }
+  },
+  {
+    "mode": "empty503",
+    "observed": {
+      "caseHidden": false,
+      "code": "HTTP_RESPONSE_UNAVAILABLE",
+      "journal": "{\n  \"run\": {\n    \"id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"promise\": \"LOCAL_TEST ALPHA: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment.\",\n    \"state\": \"CREATED\",\n    \"mode\": \"LOCAL_TEST\",\n    \"fault\": {\n      \"kind\": \"response_loss\",\n      \"merchant\": \"defective\"\n    },\n    \"execution\": null\n  },\n  \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n  \"order_id\": null,\n  \"capture_id\": null,\n  \"payment_state\": \"UNPAID\",\n  \"merchant_status\": \"NOT_DELIVERED\",\n  \"browser\": {\n    \"id\": \"event_75b105fb385f4c048ff84d891118569a\",\n    \"run_id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n    \"order_id\": null,\n    \"operation_id\": null,\n    \"source\": \"browser\",\n    \"event_type\": \"customer_observation\",\n    \"event_time\": null,\n    \"observed_at\": \"2026-11-06T15:12:50.525747Z\",\n    \"caused_by\": null,\n    \"payload_json\": \"{\\\"browser_kind\\\":\\\"LOCAL_BROWSER\\\",\\\"url_path\\\":\\\"/\\\",\\\"visible_text\\\":\\\"LOCAL_TEST ALPHA observation: no payment attempted.\\\"}\",\n    \"payload\": {\n      \"browser_kind\": \"LOCAL_BROWSER\",\n      \"url_path\": \"/\",\n      \"visible_text\": \"LOCAL_TEST ALPHA observation: no payment attempted.\"\n    }\n  },\n  \"delivery_result\": null,\n  \"operations\": []\n}",
+      "message": "Connection interrupted. The server did not return usable data. Try again when the workspace is available.",
+      "run": "run_c0e83cf19d1d4649915f85aff84215db"
+    }
+  },
+  {
+    "mode": "malformed503",
+    "observed": {
+      "caseHidden": false,
+      "code": "HTTP_RESPONSE_UNAVAILABLE",
+      "journal": "{\n  \"run\": {\n    \"id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"promise\": \"LOCAL_TEST ALPHA: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment.\",\n    \"state\": \"CREATED\",\n    \"mode\": \"LOCAL_TEST\",\n    \"fault\": {\n      \"kind\": \"response_loss\",\n      \"merchant\": \"defective\"\n    },\n    \"execution\": null\n  },\n  \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n  \"order_id\": null,\n  \"capture_id\": null,\n  \"payment_state\": \"UNPAID\",\n  \"merchant_status\": \"NOT_DELIVERED\",\n  \"browser\": {\n    \"id\": \"event_75b105fb385f4c048ff84d891118569a\",\n    \"run_id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n    \"order_id\": null,\n    \"operation_id\": null,\n    \"source\": \"browser\",\n    \"event_type\": \"customer_observation\",\n    \"event_time\": null,\n    \"observed_at\": \"2026-11-06T15:12:50.525747Z\",\n    \"caused_by\": null,\n    \"payload_json\": \"{\\\"browser_kind\\\":\\\"LOCAL_BROWSER\\\",\\\"url_path\\\":\\\"/\\\",\\\"visible_text\\\":\\\"LOCAL_TEST ALPHA observation: no payment attempted.\\\"}\",\n    \"payload\": {\n      \"browser_kind\": \"LOCAL_BROWSER\",\n      \"url_path\": \"/\",\n      \"visible_text\": \"LOCAL_TEST ALPHA observation: no payment attempted.\"\n    }\n  },\n  \"delivery_result\": null,\n  \"operations\": []\n}",
+      "message": "Connection interrupted. The server did not return usable data. Try again when the workspace is available.",
+      "run": "run_c0e83cf19d1d4649915f85aff84215db"
+    }
+  },
+  {
+    "mode": "scalar200",
+    "observed": {
+      "caseHidden": false,
+      "code": "HTTP_RESPONSE_UNAVAILABLE",
+      "journal": "{\n  \"run\": {\n    \"id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"promise\": \"LOCAL_TEST ALPHA: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment.\",\n    \"state\": \"CREATED\",\n    \"mode\": \"LOCAL_TEST\",\n    \"fault\": {\n      \"kind\": \"response_loss\",\n      \"merchant\": \"defective\"\n    },\n    \"execution\": null\n  },\n  \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n  \"order_id\": null,\n  \"capture_id\": null,\n  \"payment_state\": \"UNPAID\",\n  \"merchant_status\": \"NOT_DELIVERED\",\n  \"browser\": {\n    \"id\": \"event_75b105fb385f4c048ff84d891118569a\",\n    \"run_id\": \"run_c0e83cf19d1d4649915f85aff84215db\",\n    \"purchase_id\": \"purchase_4ff37f3be3e44603bfb5f38faacefd0c\",\n    \"order_id\": null,\n    \"operation_id\": null,\n    \"source\": \"browser\",\n    \"event_type\": \"customer_observation\",\n    \"event_time\": null,\n    \"observed_at\": \"2026-11-06T15:12:50.525747Z\",\n    \"caused_by\": null,\n    \"payload_json\": \"{\\\"browser_kind\\\":\\\"LOCAL_BROWSER\\\",\\\"url_path\\\":\\\"/\\\",\\\"visible_text\\\":\\\"LOCAL_TEST ALPHA observation: no payment attempted.\\\"}\",\n    \"payload\": {\n      \"browser_kind\": \"LOCAL_BROWSER\",\n      \"url_path\": \"/\",\n      \"visible_text\": \"LOCAL_TEST ALPHA observation: no payment attempted.\"\n    }\n  },\n  \"delivery_result\": null,\n  \"operations\": []\n}",
+      "message": "Connection interrupted. The server did not return usable data. Try again when the workspace is available.",
+      "run": "run_c0e83cf19d1d4649915f85aff84215db"
+    }
+  }
+]

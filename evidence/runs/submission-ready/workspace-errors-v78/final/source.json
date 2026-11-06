@@ -1,0 +1,23 @@
+{
+  "mode": "LOCAL_TEST",
+  "source": {
+    "app.js": {
+      "sha256": "138d345648e9238c96983a35bd4d5c9cfd10b3c3c17583116bec627b17cd410b",
+      "bytes": 36850
+    },
+    "index.html": {
+      "sha256": "2895be7b6ad6cc4bdf7e6cf310552626715948757eafd38e34a44821081b638a",
+      "bytes": 23439
+    },
+    "style.css": {
+      "sha256": "3bba90b6d8a4eaa5141c5ca0b5f8d6b6ebe9e4317e5a94461d0858864d477dcd",
+      "bytes": 91249
+    },
+    "marketing.js": {
+      "sha256": "911c7f03ca69e88ce4a9a93a0a9194564775cf239af05f032ac99bcbc10b9136",
+      "bytes": 7299
+    }
+  },
+  "script_instrumentation": false,
+  "provider_calls": 0
+}

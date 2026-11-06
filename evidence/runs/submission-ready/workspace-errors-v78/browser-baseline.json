@@ -1,0 +1,12 @@
+{
+  "caseHidden": false,
+  "code": "",
+  "detailHidden": true,
+  "export": "/api/runs/run_69ad782df7a640559ad9e08179fce562/export",
+  "journal": "{\n  \"run\": {\n    \"id\": \"run_69ad782df7a640559ad9e08179fce562\",\n    \"promise\": \"LOCAL_TEST ALPHA: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment.\",\n    \"state\": \"CREATED\",\n    \"mode\": \"LOCAL_TEST\",\n    \"fault\": {\n      \"kind\": \"response_loss\",\n      \"merchant\": \"defective\"\n    },\n    \"execution\": null\n  },\n  \"purchase_id\": \"purchase_da1f57fc29c1445bacd2c49e0ca5f078\",\n  \"order_id\": null,\n  \"capture_id\": null,\n  \"payment_state\": \"UNPAID\",\n  \"merchant_status\": \"NOT_DELIVERED\",\n  \"browser\": {\n    \"id\": \"event_368262917842491f97d5f6c2e85e15b7\",\n    \"run_id\": \"run_69ad782df7a640559ad9e08179fce562\",\n    \"purchase_id\": \"purchase_da1f57fc29c1445bacd2c49e0ca5f078\",\n    \"order_id\": null,\n    \"operation_id\": null,\n    \"source\": \"browser\",\n    \"event_type\": \"customer_observation\",\n    \"event_time\": null,\n    \"observed_at\": \"2026-11-06T15:07:29.288738Z\",\n    \"caused_by\": null,\n    \"payload_json\": \"{\\\"browser_kind\\\":\\\"LOCAL_BROWSER\\\",\\\"url_path\\\":\\\"/\\\",\\\"visible_text\\\":\\\"LOCAL_TEST ALPHA observation: no payment attempted.\\\"}\",\n    \"payload\": {\n      \"browser_kind\": \"LOCAL_BROWSER\",\n      \"url_path\": \"/\",\n      \"visible_text\": \"LOCAL_TEST ALPHA observation: no payment attempted.\"\n    }\n  },\n  \"delivery_result\": null,\n  \"operations\": []\n}",
+  "loginMessage": "",
+  "message": "",
+  "run": "run_69ad782df7a640559ad9e08179fce562",
+  "title": "LOCAL_TEST ALPHA: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment.",
+  "workspaceHidden": false
+}

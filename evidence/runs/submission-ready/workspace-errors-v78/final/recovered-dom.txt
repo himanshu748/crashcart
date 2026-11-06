@@ -1,0 +1,86 @@
+- link "Skip to workspace":
+  - /url: "#main"
+- link "Skip to selected investigation":
+  - /url: "#case"
+- banner:
+  - link "CrashCart home":
+    - /url: /?view=home&run=run_fb721b2ba4f5401a9465ae77f94cd076
+    - generic: ↳
+    - text: CrashCart
+    - generic: Payment reliability
+  - navigation "Main navigation":
+    - link "Product":
+      - /url: /?view=home
+    - link "Workspace":
+      - /url: /
+    - link "Records":
+      - /url: /studio/index.html?run=run_fb721b2ba4f5401a9465ae77f94cd076
+  - generic: Test payments only · no real charges
+  - link "Test store":
+    - /url: /shop?run=run_fb721b2ba4f5401a9465ae77f94cd076
+- main:
+  - text: + + + + +
+  - status: ● Workspace connected
+  - generic: Test payments only / 60-second delivery promise
+  - heading "Investigations" [level=2]
+  - generic: 2 investigations
+  - link "Past investigations":
+    - /url: "#runs"
+  - link "Delivery timing":
+    - /url: /deadlines/index.html?run=run_fb721b2ba4f5401a9465ae77f94cd076
+  - link "New investigation +":
+    - /url: "#new-run"
+  - generic "+ Connected services Setup status":
+    - text: + Connected services
+    - generic: Setup status
+  - region "Selected investigation":
+    - generic: ↳
+    - heading "Start with a question. Follow the evidence." [level=2]:
+      - text: Start with a question.
+      - text: Follow the evidence.
+    - paragraph: Ready when you are. Start an investigation, approve a test checkout, then compare payment and delivery records.
+    - list:
+      - listitem: Recorded browser view
+      - listitem: Payment status from PayPal
+      - listitem: Ticket saved by the store
+    - text: +
+  - complementary "Investigation controls":
+    - heading "Your investigations" [level=3]
+    - generic: Search investigations
+    - searchbox "Search investigations"
+    - 'button "LOCAL_TEST ALPHA: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment. Ready to start. Local test · test data. Case f84215db"':
+      - generic: "LOCAL_TEST ALPHA: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment."
+      - generic: Ready to start. Local test · test data. Case f84215db
+    - 'button "LOCAL_TEST BRAVO: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment. Ready to start. Local test · test data. Case f94cd076" [active]':
+      - generic: "LOCAL_TEST BRAVO: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment."
+      - generic: Ready to start. Local test · test data. Case f94cd076
+    - heading "New investigation" [level=3]
+    - paragraph: Find the checkout issue. Describe the customer’s issue or the promise you want to check.
+    - generic: Workspace test store
+    - combobox "Workspace test store":
+      - option "Workshop store · approved test checkout" [selected]
+    - paragraph: Checks one USD 29 ticket delivered within 60 seconds of confirmed payment.
+    - generic: Promise or customer complaint
+    - textbox "Promise or customer complaint": One USD 29 workshop ticket within 60 seconds of confirmed payment.
+    - generic "Test options"
+    - option "No interruption" [selected]
+    - option "Lose the payment response"
+    - option "Delay ticket delivery"
+    - option "Repeat a delivery notification"
+    - option "Stop the store during payment"
+    - option "Recovers after interruptions" [selected]
+    - option "Cannot recover after interruptions"
+    - option "Initial test checkout" [selected]
+    - option "Verify a repair with a new checkout"
+    - paragraph: An investigation starts without a payment. A new test checkout needs buyer approval.
+    - paragraph: "Investigation limits: 8 steps, up to 180 seconds and 4 AI requests."
+    - button "Create investigation" [disabled]:
+      - text: Create investigation
+      - generic: +
+    - generic: Test store. No real charges.
+- contentinfo:
+  - link "↳ CrashCart":
+    - /url: /?view=home&run=run_fb721b2ba4f5401a9465ae77f94cd076
+  - paragraph: Find where a successful payment becomes a broken promise.
+  - text: Test payments only. No real charges.
+  - text: Saved records and new tests are clearly labelled.

@@ -1,0 +1,10 @@
+{
+  "POST_counts": {
+    "/api/runs/run_2ad92807b52f434681cf04d800013e1b/investigate": 5,
+    "/api/runs/run_69ad782df7a640559ad9e08179fce562/order": 1,
+    "/api/runs/run_69ad782df7a640559ad9e08179fce562/observation": 1
+  },
+  "order_dispatches": 1,
+  "capture_dispatches": 0,
+  "scope": "Synthetic loopback server rejects mutation; no provider or payment action."
+}

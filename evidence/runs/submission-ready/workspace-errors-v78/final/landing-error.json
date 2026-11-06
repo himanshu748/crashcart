@@ -1,0 +1,6 @@
+{
+  "code": "HTTP_RESPONSE_UNAVAILABLE",
+  "loginVisible": true,
+  "message": "Connection interrupted. The server did not return usable data. Try again when the workspace is available.",
+  "workspaceHidden": true
+}

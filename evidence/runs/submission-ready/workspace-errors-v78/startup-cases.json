@@ -1,0 +1,34 @@
+[
+  {
+    "mode": "structured401",
+    "observed": {
+      "code": "Operator access required",
+      "message": "Sign in to your workspace to continue.",
+      "workspaceHidden": true
+    }
+  },
+  {
+    "mode": "empty503",
+    "observed": {
+      "code": "HTTP_RESPONSE_UNAVAILABLE",
+      "message": "Connection interrupted. The server did not return usable data. Try again when the workspace is available.",
+      "workspaceHidden": true
+    }
+  },
+  {
+    "mode": "malformed503",
+    "observed": {
+      "code": "HTTP_RESPONSE_UNAVAILABLE",
+      "message": "Connection interrupted. The server did not return usable data. Try again when the workspace is available.",
+      "workspaceHidden": true
+    }
+  },
+  {
+    "mode": "scalar200",
+    "observed": {
+      "code": "HTTP_RESPONSE_UNAVAILABLE",
+      "message": "Connection interrupted. The server did not return usable data. Try again when the workspace is available.",
+      "workspaceHidden": true
+    }
+  }
+]

@@ -1,0 +1,48 @@
+{"at": "2026-11-06T15:13:09.638799+00:00", "method": "GET", "path": "/", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:09.649251+00:00", "method": "GET", "path": "/style.css", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:09.650811+00:00", "method": "GET", "path": "/app.js", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:09.659035+00:00", "method": "GET", "path": "/marketing.js", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:09.674330+00:00", "method": "GET", "path": "/healthz", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:09.674785+00:00", "method": "GET", "path": "/api/prerequisites", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:09.675048+00:00", "method": "GET", "path": "/api/runs", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:09.848384+00:00", "method": "GET", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:09.848796+00:00", "method": "GET", "path": "/favicon.ico", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.156858+00:00", "method": "GET", "path": "/", "response_mode": {"mode": "HTML502", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.174790+00:00", "method": "GET", "path": "/style.css", "response_mode": {"mode": "HTML502", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.175075+00:00", "method": "GET", "path": "/app.js", "response_mode": {"mode": "HTML502", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.182646+00:00", "method": "GET", "path": "/marketing.js", "response_mode": {"mode": "HTML502", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.190867+00:00", "method": "GET", "path": "/healthz", "response_mode": {"mode": "HTML502", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.191037+00:00", "method": "GET", "path": "/api/prerequisites", "response_mode": {"mode": "HTML502", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.191395+00:00", "method": "GET", "path": "/api/runs", "response_mode": {"mode": "HTML502", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.216449+00:00", "method": "GET", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db", "response_mode": {"mode": "HTML502", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.690220+00:00", "method": "GET", "path": "/", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.706469+00:00", "method": "GET", "path": "/style.css", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.706709+00:00", "method": "GET", "path": "/app.js", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.714970+00:00", "method": "GET", "path": "/marketing.js", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.722280+00:00", "method": "GET", "path": "/healthz", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.722613+00:00", "method": "GET", "path": "/api/prerequisites", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.722848+00:00", "method": "GET", "path": "/api/runs", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:28.744457+00:00", "method": "GET", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db", "response_mode": {"mode": "structured401", "target": "post"}}
+{"at": "2026-11-06T15:13:28.912767+00:00", "method": "POST", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db/investigate", "response_mode": {"mode": "structured401", "target": "post"}, "body": "{}"}
+{"at": "2026-11-06T15:13:28.916819+00:00", "method": "GET", "path": "/api/prerequisites", "response_mode": {"mode": "structured401", "target": "post"}}
+{"at": "2026-11-06T15:13:28.917167+00:00", "method": "GET", "path": "/api/runs", "response_mode": {"mode": "structured401", "target": "post"}}
+{"at": "2026-11-06T15:13:28.920110+00:00", "method": "GET", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db", "response_mode": {"mode": "structured401", "target": "post"}}
+{"at": "2026-11-06T15:13:29.214408+00:00", "method": "POST", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db/investigate", "response_mode": {"mode": "HTML502", "target": "post"}, "body": "{}"}
+{"at": "2026-11-06T15:13:29.222378+00:00", "method": "GET", "path": "/api/runs", "response_mode": {"mode": "HTML502", "target": "post"}}
+{"at": "2026-11-06T15:13:29.222060+00:00", "method": "GET", "path": "/api/prerequisites", "response_mode": {"mode": "HTML502", "target": "post"}}
+{"at": "2026-11-06T15:13:29.227737+00:00", "method": "GET", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db", "response_mode": {"mode": "HTML502", "target": "post"}}
+{"at": "2026-11-06T15:13:29.506264+00:00", "method": "POST", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db/investigate", "response_mode": {"mode": "empty503", "target": "post"}, "body": "{}"}
+{"at": "2026-11-06T15:13:29.521623+00:00", "method": "GET", "path": "/api/prerequisites", "response_mode": {"mode": "empty503", "target": "post"}}
+{"at": "2026-11-06T15:13:29.522035+00:00", "method": "GET", "path": "/api/runs", "response_mode": {"mode": "empty503", "target": "post"}}
+{"at": "2026-11-06T15:13:29.528054+00:00", "method": "GET", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db", "response_mode": {"mode": "empty503", "target": "post"}}
+{"at": "2026-11-06T15:13:29.804027+00:00", "method": "POST", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db/investigate", "response_mode": {"mode": "malformed503", "target": "post"}, "body": "{}"}
+{"at": "2026-11-06T15:13:29.819999+00:00", "method": "GET", "path": "/api/prerequisites", "response_mode": {"mode": "malformed503", "target": "post"}}
+{"at": "2026-11-06T15:13:29.820288+00:00", "method": "GET", "path": "/api/runs", "response_mode": {"mode": "malformed503", "target": "post"}}
+{"at": "2026-11-06T15:13:29.823375+00:00", "method": "GET", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db", "response_mode": {"mode": "malformed503", "target": "post"}}
+{"at": "2026-11-06T15:13:30.088317+00:00", "method": "POST", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db/investigate", "response_mode": {"mode": "scalar200", "target": "post"}, "body": "{}"}
+{"at": "2026-11-06T15:13:30.105857+00:00", "method": "GET", "path": "/api/prerequisites", "response_mode": {"mode": "scalar200", "target": "post"}}
+{"at": "2026-11-06T15:13:30.106090+00:00", "method": "GET", "path": "/api/runs", "response_mode": {"mode": "scalar200", "target": "post"}}
+{"at": "2026-11-06T15:13:30.109161+00:00", "method": "GET", "path": "/api/runs/run_c0e83cf19d1d4649915f85aff84215db", "response_mode": {"mode": "scalar200", "target": "post"}}
+{"at": "2026-11-06T15:13:30.375963+00:00", "method": "GET", "path": "/api/prerequisites", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:30.376519+00:00", "method": "GET", "path": "/api/runs", "response_mode": {"mode": "valid", "target": "detail"}}
+{"at": "2026-11-06T15:13:30.387369+00:00", "method": "GET", "path": "/api/runs/run_fb721b2ba4f5401a9465ae77f94cd076", "response_mode": {"mode": "valid", "target": "detail"}}

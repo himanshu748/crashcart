@@ -1,0 +1,12 @@
+{
+  "caseHidden": false,
+  "code": "",
+  "detailHidden": true,
+  "export": "/api/runs/run_2ad92807b52f434681cf04d800013e1b/export",
+  "journal": "{\n  \"run\": {\n    \"id\": \"run_2ad92807b52f434681cf04d800013e1b\",\n    \"promise\": \"LOCAL_TEST BRAVO: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment.\",\n    \"state\": \"CREATED\",\n    \"mode\": \"LOCAL_TEST\",\n    \"fault\": {\n      \"kind\": \"response_loss\",\n      \"merchant\": \"healthy\"\n    },\n    \"execution\": null\n  },\n  \"purchase_id\": \"purchase_8793d88cfa4e40bd89d08c50dcc26624\",\n  \"order_id\": null,\n  \"capture_id\": null,\n  \"payment_state\": \"UNPAID\",\n  \"merchant_status\": \"NOT_DELIVERED\",\n  \"browser\": {\n    \"id\": \"event_5a07627697244fddaefeb9347b01915a\",\n    \"run_id\": \"run_2ad92807b52f434681cf04d800013e1b\",\n    \"purchase_id\": \"purchase_8793d88cfa4e40bd89d08c50dcc26624\",\n    \"order_id\": null,\n    \"operation_id\": null,\n    \"source\": \"browser\",\n    \"event_type\": \"customer_observation\",\n    \"event_time\": null,\n    \"observed_at\": \"2026-11-06T15:07:29.293689Z\",\n    \"caused_by\": null,\n    \"payload_json\": \"{\\\"browser_kind\\\":\\\"LOCAL_BROWSER\\\",\\\"url_path\\\":\\\"/\\\",\\\"visible_text\\\":\\\"LOCAL_TEST BRAVO observation: no payment attempted.\\\"}\",\n    \"payload\": {\n      \"browser_kind\": \"LOCAL_BROWSER\",\n      \"url_path\": \"/\",\n      \"visible_text\": \"LOCAL_TEST BRAVO observation: no payment attempted.\"\n    }\n  },\n  \"delivery_result\": null,\n  \"operations\": []\n}",
+  "loginMessage": "",
+  "message": "",
+  "run": "run_2ad92807b52f434681cf04d800013e1b",
+  "title": "LOCAL_TEST BRAVO: USD29 buys one ticket within 60 seconds. Synthetic response-check data; no payment.",
+  "workspaceHidden": false
+}

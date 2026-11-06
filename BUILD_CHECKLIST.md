@@ -20,6 +20,8 @@ Current freshness follow-through (6 November, v76): all 60 private/public accept
 
 Subsequent v77 verification closes DV-09 for the local recorded page: the actual reduced-motion download and exported replay passed independent review on unchanged source. DV-10 screen-reader coverage and hosted promotion remain open. [Receipt](evidence/runs/submission-ready/motion-download-v77.json). Original acceptance remains **47/60**.
 
+Subsequent v78 public workspace error-recovery verification closes local DV-13 using controlled synthetic responses. It does not reaccept the original configured CC-043/044/048 journey. Private accepted source stays frozen at 47/60; no original checkmark changed. See current STATUS.md for source-bound evidence.
+
 ## 1. What this build must achieve
 
 CrashCart investigates disagreements between the customer's checkout experience, independently observed PayPal sandbox payment state, and the owned merchant's delivered entitlement. It produces an executable reproduction, reduces unnecessary steps, and verifies a repaired merchant against the same business promise.

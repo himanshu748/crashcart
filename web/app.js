@@ -56,6 +56,7 @@ const verdictReasons = new Map([
 ]);
 function errorMessage(value){
   const raw=String(value??'');
+  if(raw==='HTTP_RESPONSE_UNAVAILABLE')return 'Connection interrupted. The server did not return usable data. Try again when the workspace is available.';
   if(/BUDGET_EXHAUSTED/.test(raw))return 'The investigation stopped at its configured limit. Saved evidence remains available.';
   if(/CRASHCART_ALLOW_SANDBOX|SANDBOX_DISABLED/i.test(raw))return 'Test payments are disabled for this workspace. Ask your workspace owner to enable them.';
   if(/PAYPAL_CLIENT|PAYPAL_NOT|PAYPAL.*CONFIGURATION/i.test(raw))return 'Test payments are not set up. Ask your workspace owner to connect the test payment account.';
@@ -70,7 +71,8 @@ function errorMessage(value){
   return readableText(raw||'This action could not finish. Please try again.');
 }
 function showError(error,target='message'){
-  const raw=String(error?.message??error??'');text(target,errorMessage(raw));text('error-code',raw);$('error-details').hidden=false;
+  const raw=String(error?.message??error??'');text(target,errorMessage(raw));
+  const login=target==='login-message';text(login?'login-error-code':'error-code',raw);$(login?'login-error-details':'error-details').hidden=false;
 }
 let current = null;
 let recordingKey = null;
@@ -84,7 +86,10 @@ let timelineSource = 'all';
 function selectRun(id){timelineSource='all';text('copy-status','');$('error-details').hidden=true;selected=id;history.replaceState(null,'',`/?run=${id}`);current=null;renderSignature=null;refreshGeneration++;focusSelectedRun=true;text('message','');text('investigator-note','');$('investigator-note').hidden=true;$('case').hidden=true;$('empty').hidden=false;syncActionButtons();}
 async function api(path, body) {
   const res = await fetch(path, body !== undefined ? {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)} : {});
-  const data = await res.json();
+  let data;
+  try { data = await res.json(); }
+  catch { throw new Error('HTTP_RESPONSE_UNAVAILABLE'); }
+  if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('HTTP_RESPONSE_UNAVAILABLE');
   if (!res.ok) throw new Error(data.error || 'The request could not finish.');
   return data;
 }
@@ -278,5 +283,5 @@ $('reconcile').addEventListener('click',()=>action(async()=>{await api(`/api/run
 $('investigate').addEventListener('click',()=>action(async()=>{const runId=selected;text('investigator-note','');$('investigator-note').hidden=true;renderSignature=null;text('run-state','Starting investigation…');$('run-state').dataset.state='pending';let result;try{result=await api(`/api/runs/${runId}/investigate`,{});}catch(error){if(selected===runId){await refresh().catch(()=>{});if(current?.run.id===runId){text('run-state',statusLabel(current.run.state));$('run-state').dataset.state=current.run.state;}}throw error;}if(selected!==runId)return;await refresh();if(selected!==runId)return;if(['RUNNING','BUSY'].includes(result.status)){text('message','The assistant is already investigating this checkout. Its saved progress is shown below.');return;}if(result.status==='SUPERSEDED'){text('message','A newer investigation has already updated these records. Showing its saved result.');return;}const source=result.model_mode==='LOCAL_TEST'?'Test data · simulated response. ':result.model_mode==='LIVE_MODEL'?'':'Response source not recorded. ';$('investigator-note').dataset.mode=result.model_mode||'UNKNOWN';text('investigator-note',`${source}Assistant suggestion — the delivery result still comes from the recorded payment and ticket. ${statusLabel(result.status)}: ${errorMessage(result.reason)}`);$('investigator-note').hidden=false;const original=JSON.parse($('journal').textContent);original.assistant_response=result;text('journal',JSON.stringify(original,null,2));}));
 $('cancel-run').addEventListener('click',async()=>{if(!current||current.run.id!==selected||cancelPending)return;const runId=current.run.id;cancelPending=runId;syncActionButtons();try{await api(`/api/runs/${runId}/cancel`,{});await refresh();if(selected===runId)text('message','Investigation stopped. Saved evidence remains available.');}catch(e){if(selected===runId)showError(e);}finally{cancelPending=null;syncActionButtons();}});
 api('/healthz').then(d=>text('health',d.status==='ok'&&d.database==='ok'?'● Workspace connected':'Workspace connection needs attention')).catch(e=>text('health','Workspace unavailable. Check your connection and refresh.'));
-refresh().then(async()=>{if(selected&&location.pathname==='/cancel'){text('message','Buyer approval cancelled. This purchase is not completed.');await observe('buyer_cancelled');}else if(selected&&location.pathname==='/return'){if(current?.purchase.payment_confirmed!==1)text('message','Returned from PayPal. Check buyer approval before confirming this payment.');syncRecoveryNotice();await observe('buyer_returned');}}).catch(()=>{});
+refresh().then(async()=>{if(selected&&location.pathname==='/cancel'){text('message','Buyer approval cancelled. This purchase is not completed.');await observe('buyer_cancelled');}else if(selected&&location.pathname==='/return'){if(current?.purchase.payment_confirmed!==1)text('message','Returned from PayPal. Check buyer approval before confirming this payment.');syncRecoveryNotice();await observe('buyer_returned');}}).catch(e=>{if($('workspace').hidden){$('login-panel').hidden=false;showError(e,'login-message');}else showError(e);});
 setInterval(()=>{if(!document.hidden&&!$('workspace').hidden)refresh().catch(e=>showError(e));},5000);
