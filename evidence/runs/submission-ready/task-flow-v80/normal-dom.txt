@@ -1,0 +1,126 @@
+- link "Skip to workspace":
+  - /url: "#main"
+- link "Skip to selected investigation":
+  - /url: "#case"
+- banner:
+  - link "CrashCart home":
+    - /url: /?view=home&run=run_eec466313b9d4309bc64fc74ca313ae4
+    - generic: ↳
+    - text: CrashCart
+    - generic: Payment reliability
+  - navigation "Main navigation":
+    - link "Product":
+      - /url: /?view=home
+    - link "Workspace":
+      - /url: /
+    - link "Records":
+      - /url: /studio/index.html?run=run_eec466313b9d4309bc64fc74ca313ae4
+  - generic: Test payments only · no real charges
+  - link "Test store":
+    - /url: /shop?run=run_eec466313b9d4309bc64fc74ca313ae4
+- main:
+  - text: + + + + +
+  - status: ● Workspace connected
+  - generic: Test payments only / 60-second delivery promise
+  - heading "Investigations" [level=2]
+  - generic: 2 investigations
+  - link "Past investigations":
+    - /url: "#runs"
+  - link "Delivery timing":
+    - /url: /deadlines/index.html?run=run_eec466313b9d4309bc64fc74ca313ae4
+  - link "New investigation +":
+    - /url: "#new-run"
+  - generic "+ Connected services Setup status":
+    - text: + Connected services
+    - generic: Setup status
+  - region "Selected investigation":
+    - heading "Missing workshop ticket" [level=2]
+    - paragraph: Payment & delivery
+    - generic: Ready to start
+    - region "Ticket status":
+      - heading "Ticket status" [level=3]
+      - status: Start a test checkout to check ticket delivery.
+    - paragraph: Example data · no payment · delivery issue simulated
+    - generic: One $29 ticket, delivered within 60 seconds of confirmed payment.
+    - heading "Checkout details" [level=3]
+    - generic: Browser, PayPal and store
+    - article:
+      - heading "Checkout view" [level=3]:
+        - text: Checkout view
+      - paragraph: Investigation dashboard
+      - paragraph: Recorded local browser. Page address saved. 6 Nov, 20:54:19 GMT+5:30
+      - generic "Recorded page message"
+      - paragraph: No playable checkout recording is attached to this case.
+    - article:
+      - heading "Payment" [level=3]:
+        - text: Payment
+      - paragraph: Not checked with PayPal
+      - paragraph: Check payment status after checkout. An unanswered request does not mean the payment failed.
+    - article:
+      - heading "Delivery" [level=3]:
+        - text: Delivery
+      - paragraph: 0 tickets
+      - paragraph: No ticket delivered · checked 6 Nov, 20:54:19 GMT+5:30.
+    - button "Start test checkout"
+    - button "Check payment status" [disabled]
+    - button "Investigate"
+    - button "Stop investigation"
+    - generic "Evidence downloads":
+      - link "Download saved records":
+        - /url: /api/runs/run_eec466313b9d4309bc64fc74ca313ae4/export
+      - generic: A replay test becomes available when a lost payment response or interrupted store causes a confirmed payment to miss its ticket.
+    - region "Evidence timeline":
+      - heading "Activity" [level=3]
+      - generic: Checkout activity, in time order
+      - group "Filter timeline by source":
+        - button "All events" [pressed]
+        - button "Browser"
+        - button "PayPal"
+        - button "Store"
+        - status: 1 of 1 events
+      - generic "+ Browser Browser view recorded 6 Nov, 20:54:19 GMT+5:30":
+        - text: +
+        - generic: Browser
+        - strong: Browser view recorded
+        - time: 6 Nov, 20:54:19 GMT+5:30
+    - generic "Technical details"
+  - complementary "Investigation controls":
+    - heading "Your investigations" [level=3]
+    - generic: Search investigations
+    - searchbox "Search investigations"
+    - button "Missing workshop ticket Ready to start. Example data · no payment. Case ca313ae4":
+      - generic: Missing workshop ticket
+      - generic: Ready to start. Example data · no payment. Case ca313ae4
+    - button "Check ticket delivery Ready to start. Example data · no payment. Case 2d5cb324":
+      - generic: Check ticket delivery
+      - generic: Ready to start. Example data · no payment. Case 2d5cb324
+    - heading "New investigation" [level=3]
+    - paragraph: Find the checkout issue. Describe the customer’s issue or the promise you want to check.
+    - generic: Workspace test store
+    - combobox "Workspace test store":
+      - option "Workshop store · approved test checkout" [selected]
+    - paragraph: Checks one USD 29 ticket delivered within 60 seconds of confirmed payment.
+    - generic: Promise or customer complaint
+    - textbox "Promise or customer complaint": One USD 29 workshop ticket within 60 seconds of confirmed payment.
+    - generic "Test options"
+    - option "No interruption" [selected]
+    - option "Lose the payment response"
+    - option "Delay ticket delivery"
+    - option "Repeat a delivery notification"
+    - option "Stop the store during payment"
+    - option "Recovers after interruptions" [selected]
+    - option "Cannot recover after interruptions"
+    - option "Initial test checkout" [selected]
+    - option "Verify a repair with a new checkout"
+    - paragraph: An investigation starts without a payment. A new test checkout needs buyer approval.
+    - paragraph: "Investigation limits: 8 steps, up to 180 seconds and 4 AI requests."
+    - button "Create investigation":
+      - text: Create investigation
+      - generic: +
+    - generic: Test store. No real charges.
+- contentinfo:
+  - link "↳ CrashCart":
+    - /url: /?view=home&run=run_eec466313b9d4309bc64fc74ca313ae4
+  - paragraph: Find where a successful payment becomes a broken promise.
+  - text: Test payments only. No real charges.
+  - text: Saved records and new tests are clearly labelled.

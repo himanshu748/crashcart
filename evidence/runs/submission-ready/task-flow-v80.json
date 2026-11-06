@@ -1,0 +1,42 @@
+{
+  "mode": "LOCAL_BROWSER_SYNTHETIC_DATA",
+  "source_hashes": {
+    "web/app.js": "87a5e3853e37b1d89a628d54c065636e5580ec572c91483c8cf7f5b310d1ae97",
+    "web/index.html": "cb67746ac132c1deb612932e362eedfdc3bb3ca45882b012b3f12f386c8d88cc"
+  },
+  "scope": "Human-facing copy and action order; handlers/payment rules unchanged. Source.json from launch is earlier HTML; final source hashes here bind the final source read directly by the harness on reload. Actual final DOM has actions above provenance. No separately captured raw HTTP-body hash claimed.",
+  "verified": [
+    "Primarycheckoutactionvisible beforedetailedrecords",
+    "Tabfromcaseheading focusesStarttestcheckout withvisibleoutline",
+    "Technicaldetailsexpands actual8step180secondbudget andoriginaljournal",
+    "390pxviewport no pageoverflow:390/390",
+    "Investigatefailedresponse retainscase; validcase selection recovers",
+    "Finalguardedcheckoutbuttonerror remainsreadable"
+  ],
+  "tests": {
+    "full": "367 in66.784sOK",
+    "replay": "3 in0.210sOK",
+    "ui": "14pass0fail"
+  },
+  "review": {
+    "reviewer": "/root/current_contract_audit",
+    "result": "PASS_SCOPED_UI_BEHAVIOR",
+    "limits": "Reviewerflaggedlaunchsourcehash earlierHTML; preservedbaseline and addedfinalhashes + finalDOMhere; no broaderliveacceptance"
+  },
+  "artifact_sha256": {
+    "normal-dom.txt": "906ca02951635aea11fb54cde8e4cba6a3e201d1231ed5a68ca78e049d98f839",
+    "details.json": "1a9fab175323afe26152152068d48c1bfbf66d959d8ac0a24f435ccbfae2c40b",
+    "workspace.png": "16c35fb7397fce33d6e2304db353a27e3933701d1011a791efcdc4340a5bcdae",
+    "phone.png": "45dfef88b13b32bc1902957694b1f5d61f6df1e280744819bf8a0756d56c1349",
+    "final-error-dom.txt": "634f1d88f53f9b9aa844fe6d11eabb0b81f3308647e3c3e71b7072eb234f54f4",
+    "final-tests.log": "e97b09ae0ba33faee7880dfa8359efe03cce8c0f7232096097352e3946aa4336",
+    "final-replay.log": "924c032470f66271f6c433c1df73011c55e98847e7d7894010754155ace02d9b",
+    "final-ui.log": "21abc9daaffe33ac6f52c68cd781cf560cbd6513f0f7f2dff84a7fdda9f4e98d"
+  },
+  "acceptance": "Original47/60frozenprivate unchanged; no CC passes",
+  "limitations": [
+    "Local synthetic example only",
+    "Not full operator,screen-reader or hosted verification"
+  ],
+  "cleanup": "Testtabsclosed; viewportreset; server10787stopped"
+}

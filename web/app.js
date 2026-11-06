@@ -202,10 +202,11 @@ function render(data){
   const {run,purchase,merchant,events}=data;
   $('empty').hidden=true;$('case').hidden=false;
   $('case').dataset.runId=run.id;text('run-id',run.id);text('run-title',displayPromise(run.promise));text('run-state',statusLabel(run.state));$('run-state').dataset.state=run.state;$('merchant-link').href=`/shop?run=${run.id}`;$('studio-link').href=`/studio/index.html?run=${run.id}`;$('delivery-timing-link').href=`/deadlines/index.html?run=${encodeURIComponent(run.id)}`;
-  text('provenance',`${testType(run.mode)}. ${run.fault.merchant==='healthy'?'Recovery enabled':'Intentionally faulty store'}. ${faultLabel(run.fault.kind)}. ${purchase.order_id?'Saved payment record available.':'No payment recorded.'}`);
+  text('provenance',`${testType(run.mode)} · ${run.fault.merchant==='healthy'?'repair enabled':'delivery issue simulated'}`);
   const budget = run.budget;
   const budgetLabel = Number.isInteger(budget?.max_attempts) && budget.max_attempts > 0 && Number.isFinite(budget?.max_seconds) && budget.max_seconds > 0 ? `${budget.max_attempts} steps, up to ${budget.max_seconds} seconds` : 'limits not recorded';
-  text('invariant',`The promise: one USD 29 ticket within 60 seconds of confirmed payment. Investigation limit: ${budgetLabel}.`);
+  text('invariant','One $29 ticket, delivered within 60 seconds of confirmed payment.');
+  text('case-budget',`Investigation limits: ${budgetLabel}.`);
   const cancelled=!!run.cancel_requested||run.state==='cancelled';
   syncActionButtons(data);
   $('export').href=`/api/runs/${run.id}/export`;
@@ -232,7 +233,7 @@ function render(data){
   renderRecording(data);
   const provider=[...events].reverse().find(e=>e.event_type==='independent_order_read');
   text('provider-title',provider?(purchase.payment_confirmed?'Payment confirmed':'Payment not yet confirmed'):'Not checked with PayPal');
-  text('provider-detail',provider?`${statusLabel(purchase.payment_state)} · checked ${observedTime(provider.observed_at)}. Payment references are in Original records.`:'No separate payment check yet. A timeout does not prove failure.');
+  text('provider-detail',provider?`${statusLabel(purchase.payment_state)} · checked ${observedTime(provider.observed_at)}. Payment references are in Original records.`:'Check payment status after checkout. An unanswered request does not mean the payment failed.');
   text('merchant-title',merchant.known?`${merchant.ticket_count} ${merchant.ticket_count===1?'ticket':'tickets'}`:'Unknown purchase');
   text('merchant-detail',`${statusLabel(merchant.status)} · checked ${observedTime(merchant.observed_at)}.`);
   $('ticket-card').hidden=merchant.ticket_count!==1;
@@ -243,7 +244,7 @@ function render(data){
   $('regression').href=`/api/runs/${run.id}/regression.zip`;
   syncRecoveryNotice(data);
   $('verdict').dataset.verdict=result?result.payload.verdict:'INCONCLUSIVE';
-  text('verdict',result?`${verdictLabels.get(result.payload.verdict)||'More evidence needed'}: ${verdictReasons.get(result.payload.signature)||errorMessage(result.payload.reason)}`:'More evidence needed. Check payment and ticket records to evaluate this promise.');
+  text('verdict',result?`${verdictLabels.get(result.payload.verdict)||'More evidence needed'}: ${verdictReasons.get(result.payload.signature)||errorMessage(result.payload.reason)}`:(purchase.order_id?'Check payment status to see the result.':'Start a test checkout to check ticket delivery.'));
   renderTimeline(run.id,events);
   text('journal',JSON.stringify({run:{id:run.id,promise:run.promise,state:run.state,mode:run.mode,fault:run.fault,execution:run.execution||null},purchase_id:purchase.id,order_id:purchase.order_id,capture_id:purchase.capture_id,payment_state:purchase.payment_state,merchant_status:merchant.status,browser:customer||null,delivery_result:result?.payload||null,operations:data.operations},null,2));
   if(run.execution?.state==='interrupted'){text('investigator-note','The assistant stopped before its response could be confirmed. Saved records remain available.');$('investigator-note').dataset.mode='UNKNOWN';$('investigator-note').hidden=false;}

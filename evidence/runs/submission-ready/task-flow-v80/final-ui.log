@@ -1,0 +1,22 @@
+✔ Unavailable response explains recovery without provider claims (71.270667ms)
+✔ Malformed JSON does not expose parser jargon (1.800125ms)
+✔ Disconnected network leaves an understandable safe state (0.930416ms)
+✔ Invalid comparison never displays a successful result (1.399917ms)
+✔ Partially parsed case is discarded before walkthrough reuse (1.262292ms)
+✔ valid response retains identity and structured API rejection retains code (70.598708ms)
+✔ HTML failed POST is dispatched once with unchanged payload and a readable error (1.533792ms)
+✔ empty failed POST is dispatched once with unchanged payload and a readable error (0.823625ms)
+✔ malformed failed POST is dispatched once with unchanged payload and a readable error (0.69075ms)
+✔ null failed POST is dispatched once with unchanged payload and a readable error (1.2725ms)
+✔ array failed POST is dispatched once with unchanged payload and a readable error (0.554375ms)
+✔ string failed POST is dispatched once with unchanged payload and a readable error (0.744166ms)
+✔ connection rejection has one dispatch and no invented result (0.584917ms)
+✔ startup rejection reaches the visible login message and connection details (3.75825ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 290.725917
