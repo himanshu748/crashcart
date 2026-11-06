@@ -1,0 +1,22 @@
+- link "Skip to monitoring":
+  - /url: "#main"
+- banner:
+  - link "↳ CrashCart":
+    - /url: /
+  - generic: Store monitoring
+  - link "Recorded walkthrough ↗":
+    - /url: https://himanshu748.github.io/crashcart/
+- main:
+  - paragraph: PAYMENT TO FULFILMENT
+  - heading "Keep paid orders moving." [level=1]:
+    - text: Keep paid orders
+    - text: moving.
+  - paragraph: See which orders need attention before a customer has to ask.
+  - generic: Workspace access key
+  - textbox "Workspace access key"
+  - button "Open monitoring"
+  - paragraph: Use the private key supplied by your workspace owner.
+  - status: Signed out.
+- contentinfo:
+  - generic: CrashCart · payment-to-fulfilment monitoring
+  - generic: No store activity loaded

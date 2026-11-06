@@ -1,0 +1,27 @@
+{
+  "mode": "LOCAL_TEST; no provider call",
+  "commerce": {
+    "status": 200,
+    "body": {
+      "received": true
+    }
+  },
+  "paypal_with_stubbed_verification": {
+    "status": 200,
+    "body": {
+      "received": true
+    }
+  },
+  "duplicate": {
+    "status": 200,
+    "body": {
+      "received": true
+    }
+  },
+  "shopify_unmatched": {
+    "status": 200,
+    "body": {
+      "received": true
+    }
+  }
+}

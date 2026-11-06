@@ -1,0 +1,17 @@
+test_auth_csrf_and_secret_minimization (tests.test_monitor_http.MonitorHTTPTests.test_auth_csrf_and_secret_minimization) ... ok
+test_authenticated_store_readback_and_ack_isolation_survive_restart (tests.test_monitor_http.MonitorHTTPTests.test_authenticated_store_readback_and_ack_isolation_survive_restart)
+LOCAL_TEST seeds collide externally; actual HTTP reads remain store-scoped. ... ok
+test_background_scanner_creates_alert_without_inbox_request (tests.test_monitor_http.MonitorHTTPTests.test_background_scanner_creates_alert_without_inbox_request) ... ok
+test_body_limits_duplicate_json_and_no_payment_routes (tests.test_monitor_http.MonitorHTTPTests.test_body_limits_duplicate_json_and_no_payment_routes) ... ok
+test_failed_login_is_bounded (tests.test_monitor_http.MonitorHTTPTests.test_failed_login_is_bounded) ... ok
+test_https_proxy_origin_sets_secure_cookie_and_rejects_other_origin (tests.test_monitor_http.MonitorHTTPTests.test_https_proxy_origin_sets_secure_cookie_and_rejects_other_origin) ... ok
+test_invalid_deliveries_never_mutate (tests.test_monitor_http.MonitorHTTPTests.test_invalid_deliveries_never_mutate) ... ok
+test_missing_operator_token (tests.test_monitor_http.MonitorHTTPTests.test_missing_operator_token) ... ok
+test_scanner_failure_is_visible_in_health (tests.test_monitor_http.MonitorHTTPTests.test_scanner_failure_is_visible_in_health) ... ok
+test_shared_commerce_secret_refuses_relabelled_delivery_for_both_platforms (tests.test_monitor_http.MonitorHTTPTests.test_shared_commerce_secret_refuses_relabelled_delivery_for_both_platforms) ... ok
+test_signed_order_payment_and_persistent_inbox (tests.test_monitor_http.MonitorHTTPTests.test_signed_order_payment_and_persistent_inbox) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 9.723s
+
+OK

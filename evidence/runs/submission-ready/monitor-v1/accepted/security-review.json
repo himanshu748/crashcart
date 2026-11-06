@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "reviewer": "monitor_security",
+  "role": "independent read-only security reviewer",
+  "receipt_type": "Parent-saved summary of returned reviewer report",
+  "reviewed_at_utc": "2026-11-06T16:24:20Z",
+  "base_commit": "5b5553cf845ec473be1ac72d5b9787d7404ef17a",
+  "disposition": "Accepted for the scoped local loopback security boundary; M-01 closed",
+  "scope": "One merchant operator with multiple owned stores; local signed fixtures, loopback HTTP and Sandbox-only adapter. Not authentic provider execution, shared-app installation, customer SaaS or deployed HTTPS.",
+  "validation": {
+    "python": "3.13.15",
+    "command": "/opt/homebrew/bin/python3.13 -B with socket.socket.connect patched to reject any address outside 127.0.0.1, localhost or ::1; unittest loadTestsFromNames tests.test_monitor_connectors, tests.test_monitor_store, tests.test_monitor_http",
+    "result_summary_exact": "Ran 56 tests in 9.970s\n\nOK",
+    "network_result_exact": "external_network_attempts= 0",
+    "exit_code": 0,
+    "hashes_stable": true
+  },
+  "findings": [
+    {
+      "id": "M-01",
+      "severity": "Medium",
+      "status": "Closed for scoped implementation",
+      "title": "Reused commerce secrets allowed cross-store relabeling of valid signed bodies",
+      "reproduced_before_fix": "Local Woo HTTP fixture accepted unchanged signed body into another store sharing a secret after route/unsigned headers changed. Equivalent parser relabeling observed for Shopify.",
+      "fix": "Refuse ingestion/readiness for every store sharing a commerce signing secret; separate custom-app/webhook secret per store required.",
+      "fresh_evidence": "Both platforms: reused key returns503 before mutation; distinct key wrong-store replay401 and no persisted order; valid correct-store delivery200. Actual loopback HTTP regression in test_shared_commerce_secret_refuses_relabelled_delivery_for_both_platforms."
+    }
+  ],
+  "residual_public_ingress_blockers": [
+    {
+      "id": "R-01",
+      "severity": "Low, conditional availability risk",
+      "status": "Open before public ingress",
+      "cause": "Captured valid same-store body can be replayed with varied unsigned delivery IDs to amplify receipt rows.",
+      "required": "Define and exercise request rate/concurrency bounds and receipt retention/content deduplication before public ingress.",
+      "scope_effect": "No additional blocker for current loopback single-operator slice."
+    }
+  ],
+  "no_source_edits": true,
+  "no_external_network_calls": true,
+  "no_credentials_read": true,
+  "source_sha256": {
+    "crashcart/monitor_server.py": "96f6138e37b4215cb5955521823f49ac99f6b13c37d075b4c01e02227f254bc0",
+    "crashcart/monitor_store.py": "ad93fc729c5173bc511b47728f3e45551c1f436bbed618f5c472d1471d6256b4",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "web/monitor/index.html": "cbe78ddc9de11774c80490010bb5b62f2a14aa84d3f5ab5e68b9cf31722cacae",
+    "web/monitor/style.css": "8176eb1bbbd03990e8e6c811887790961f0f041efc22cbaa5c3fd11146ec1cfa"
+  },
+  "test_sha256": {
+    "tests/test_monitor_http.py": "6582f0f4f7078a63cb636f7cdd884e19dfcfa877dec965744c920ef0d0933864",
+    "tests/test_monitor_store.py": "9af7efe8afab93b7a628e624d4d5aebb07566047a0d7202fa148b048d1383129",
+    "tests/test_monitor_connectors.py": "482ab28fdd04729692c492cb739c1380e274786163c81f9beedaf1d98012c98f"
+  }
+}

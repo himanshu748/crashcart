@@ -1,0 +1,48 @@
+- link "Skip to monitoring":
+  - /url: "#main"
+- banner:
+  - link "↳ CrashCart":
+    - /url: /
+  - generic: Store monitoring
+  - button "Sign out"
+  - link "Recorded walkthrough ↗":
+    - /url: https://himanshu748.github.io/crashcart/
+- main:
+  - paragraph: YOUR STORES
+  - heading "Orders that need you." [level=1]
+  - paragraph: Track payment, fulfilment and the promise between them.
+  - button "Refresh"
+  - complementary:
+    - heading "Stores" [level=2]
+    - button "Example shop · local verification"
+    - button "Example Shopify · local verification"
+    - button "Keyboard example · local verification"
+    - generic "Add a store"
+    - generic: Store name
+    - textbox "Store name"
+    - generic: Platform
+    - combobox "Platform":
+      - option "Shopify" [selected]
+      - option "WooCommerce"
+    - generic: Store address
+    - textbox "Store address":
+      - /placeholder: https://your-store.com
+    - generic: Fulfil paid orders within
+    - spinbutton "Fulfil paid orders within": "24"
+    - generic: hours
+    - button "Add store"
+  - heading "Keyboard example · local verification" [level=2]
+  - paragraph: Shopify · wrong-shop.example.test. Store saved. Complete the connection setup to receive orders and payment checks.
+  - link "Connection setup ↗":
+    - /url: https://github.com/himanshu748/crashcart/blob/main/docs/MONITOR_SETUP.md
+  - group "Monitoring view":
+    - button "Needs attention 0"
+    - button "Orders" [pressed]
+  - region "Store orders":
+    - heading "Waiting for your first order" [level=3]
+    - paragraph: Orders appear after your store sends a verified update. Adding a store does not create an order or payment.
+  - paragraph: Fulfilment means the store has marked an order complete. It does not confirm parcel delivery.
+  - status: Couldn’t reach monitoring. Check your connection and refresh.
+- contentinfo:
+  - generic: CrashCart · payment-to-fulfilment monitoring
+  - generic: Last checked 22:00:14

@@ -1,0 +1,9 @@
+{
+  "mode": "LOCAL_TEST",
+  "outcome": "FAIL",
+  "observed": "PayPal ingress returned503; test OAuth reply omittedtoken_type",
+  "cause": "Local stub access_token/expires_in reply failed unchanged PayPalSandbox MALFORMED_TOKEN validator",
+  "provider_calls": 0,
+  "server_stopped": true,
+  "production_source_changed": false
+}

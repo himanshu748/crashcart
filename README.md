@@ -1,14 +1,40 @@
 # CrashCart
 
-**Find where a successful payment becomes a broken promise.**
+**Know which paid orders still need fulfilment.**
 
-A customer paid, but their ticket never arrived. Support sees the customer's
-complaint; engineering sees a successful payment. CrashCart connects the checkout,
-PayPal and ticket records, checks the promise, and gives the team a failure they
-can rerun against a repaired merchant.
+A successful payment should lead to a fulfilled order. When it does not, a small
+shop needs to know what went wrong and which customer order needs attention.
+CrashCart brings payment, order and fulfilment facts into a store-specific inbox.
 
-The test store sells one **$29 workshop ticket, delivered within 60 seconds of
-confirmed payment**. The deadline stays the same for both merchant versions.
+The monitoring preview runs locally. The separate recorded walkthrough shows the
+original problem: a **$29 workshop ticket promised within 60 seconds of confirmed
+payment**. It compares a faulty checkout and its repair under the same deadline.
+
+## Merchant monitoring preview
+
+New product direction: payment-to-fulfilment monitoring for small merchants,
+with an alert inbox and a fulfilment promise for each store.
+
+The local preview implements Shopify and WooCommerce webhook readers,
+store-scoped PayPal Sandbox verification, payment/order matching and durable
+alerts. **No real merchant store is connected yet.** Checks use signed fixtures
+and stubbed PayPal verification replies. Shopify capture matching still needs
+transaction data; its order webhook alone remains unmatched.
+
+With Python 3.13.15 and a privately configured `CRASHCART_MONITOR_TOKEN`, run:
+
+```sh
+python3 -m crashcart.monitor_server --db var/monitor.sqlite3 --port 8790
+```
+
+Open `http://127.0.0.1:8790/`. Follow [connection setup](docs/MONITOR_SETUP.md).
+This preview has one operator managing owned stores. Customer accounts, OAuth
+installation and per-store billing remain pending; no live charges are made.
+[Product acceptance](docs/MONITOR_PRODUCT.md) · [Local verification](evidence/runs/submission-ready/monitor-v1.json).
+
+![Monitoring inbox retaining an acknowledged overdue order in an explicitly labelled local verification store](evidence/runs/submission-ready/monitor-v1/workflow/final-inbox.png)
+
+*Local example records and stubbed payment verification; no connected merchant store.*
 
 ## Try the product in 60 seconds
 

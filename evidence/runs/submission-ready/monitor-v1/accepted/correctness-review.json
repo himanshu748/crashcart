@@ -1,0 +1,64 @@
+{
+  "reviewer": "current_contract_audit",
+  "role": "independent read-only reviewer",
+  "result": "PASS_LOCAL_REQUIREMENT_BOUNDARIES",
+  "findings": [],
+  "requirements": {
+    "PM-001": {
+      "eligible_for_local_verification": true,
+      "basis": "Identical external order, capture, reference and event IDs remain store-scoped after HTTP server recreation. The test rejects the previous session, authenticates again, reads distinct orders and alerts, and rejects cross-store acknowledgement without mutation."
+    },
+    "PM-005": {
+      "eligible_for_local_verification": true,
+      "basis": "Explicit tests exercise deadline boundaries, duplicate and out-of-order events, restart, immutable policy and original capture association, late fulfillment history and delayed on-time correction."
+    }
+  },
+  "independent_runs": [
+    {
+      "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -m unittest tests.test_monitor_store tests.test_monitor_connectors tests.test_monitor_http -q",
+      "result": "Ran 55 tests in 9.020s \u2014 OK",
+      "scope": "Final production source; before additional HTTP restart-isolation test."
+    },
+    {
+      "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -m unittest tests.test_monitor_http.MonitorHTTPTests.test_authenticated_store_readback_and_ack_isolation_survive_restart -v",
+      "result": "Ran 1 test in 1.072s \u2014 OK"
+    }
+  ],
+  "saved_results_inspected": [
+    {
+      "path": "accepted/full-suite.log",
+      "result": "Ran 422 tests in 61.905s \u2014 OK",
+      "scope": "Before additional HTTP restart-isolation test."
+    },
+    {
+      "path": "http/tests-restart-isolation-final.log",
+      "result": "Ran 11 tests in 9.723s \u2014 OK"
+    }
+  ],
+  "browser_evidence": {
+    "source_binding": "All six production hashes match browser-accepted/server.json.",
+    "observed": [
+      "Late fulfillment and delayed on-time correction retain distinct histories and reduce active count to zero.",
+      "Acknowledgement focus and subsequent polling preserve focus on the alert card.",
+      "Logout returns to the access form.",
+      "Replacement phone screenshots show legible full-width cards; metrics record 390x844, scale 1 and no horizontal overflow."
+    ]
+  },
+  "limitations": [
+    "Local records, locally signed commerce fixtures and stubbed PayPal verification; no authentic provider execution established.",
+    "HTTP server recreation uses the same database within the test process; host reboot and crash durability are not established.",
+    "Single-operator multi-store isolation does not establish separate merchant-account authorization.",
+    "Browser proof does not establish all PM-007 states.",
+    "Other PM requirements retain outstanding conditions.",
+    "No original CC acceptance changes; frozen private count remains 47/60."
+  ],
+  "sha256": {
+    "crashcart/monitor_server.py": "96f6138e37b4215cb5955521823f49ac99f6b13c37d075b4c01e02227f254bc0",
+    "crashcart/monitor_store.py": "ad93fc729c5173bc511b47728f3e45551c1f436bbed618f5c472d1471d6256b4",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "web/monitor/index.html": "cbe78ddc9de11774c80490010bb5b62f2a14aa84d3f5ab5e68b9cf31722cacae",
+    "web/monitor/style.css": "8176eb1bbbd03990e8e6c811887790961f0f041efc22cbaa5c3fd11146ec1cfa",
+    "tests/test_monitor_http.py": "6582f0f4f7078a63cb636f7cdd884e19dfcfa877dec965744c920ef0d0933864"
+  }
+}

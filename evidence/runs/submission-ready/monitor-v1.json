@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "proof_mode": "LOCAL_TEST",
+  "base_commit": "5b5553cf845ec473be1ac72d5b9787d7404ef17a",
+  "tested_source": "Monitoring addition on base commit; exact tested working source identified by hashes. Production source frozen before final suite, independent review and accepted browser check.",
+  "source_sha256": {
+    "crashcart/monitor_store.py": "aaedd2550a8b4810d05eeecb8fe7da4698bdaad03e63e1926fc1f2d49f57c4cf",
+    "crashcart/monitor_server.py": "b17b71516a6e6a2654f2f06f369de340b9ebb0141dc9d6cdd12d2f594bc38bc8",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "web/monitor/index.html": "cbe78ddc9de11774c80490010bb5b62f2a14aa84d3f5ab5e68b9cf31722cacae",
+    "web/monitor/style.css": "8176eb1bbbd03990e8e6c811887790961f0f041efc22cbaa5c3fd11146ec1cfa",
+    "tests/test_monitor_connectors.py": "482ab28fdd04729692c492cb739c1380e274786163c81f9beedaf1d98012c98f",
+    "tests/test_monitor_store.py": "9aae0faccb9ab235af61a3b5697e59387065b4a1bc75641b941b83c42d450cf1",
+    "tests/test_monitor_http.py": "c08c90a4af1cf6601bd6112d60cdf057630224ed2ce64b700a01aa66df9103c9"
+  },
+  "original_contract": {
+    "verified_count": 47,
+    "total": 60,
+    "newly_verified_ids": [],
+    "stale_on_frozen_accepted_source": [],
+    "validator_ok": true,
+    "open_states": {
+      "CC-035": "FAILED",
+      "CC-036": "BLOCKED",
+      "CC-038": "BLOCKED",
+      "CC-040": "IN_PROGRESS",
+      "CC-041": "BLOCKED",
+      "CC-042": "IN_PROGRESS",
+      "CC-046": "IMPLEMENTED_UNVERIFIED",
+      "CC-048": "IMPLEMENTED_UNVERIFIED",
+      "CC-050": "IMPLEMENTED_UNVERIFIED",
+      "CC-056": "BLOCKED",
+      "CC-057": "IMPLEMENTED_UNVERIFIED",
+      "CC-059": "PENDING",
+      "CC-060": "BLOCKED"
+    },
+    "boundary": "Private frozen accepted build only; monitoring does not inherit original acceptance."
+  },
+  "new_product_acceptance": {
+    "verified_local_ids": [
+      "PM-001",
+      "PM-005",
+      "PM-007"
+    ],
+    "not_verified": [
+      "PM-002",
+      "PM-003",
+      "PM-004",
+      "PM-006",
+      "PM-008",
+      "PM-009",
+      "PM-010"
+    ]
+  },
+  "commands": [
+    {
+      "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v",
+      "result": "Ran426 tests in62.086s; OK",
+      "artifact": "monitor-v1/accepted/full-suite-release.log"
+    },
+    {
+      "command": "python3 -m unittest tests.test_public_replay -v",
+      "python": "3.13.15",
+      "result": "Ran3 tests in0.314s; OK",
+      "artifact": "monitor-v1/accepted/replay-release.log",
+      "assertions": "Defective paid_without_ticket FAIL; healthy on-time PASS; historical late recording still rejected."
+    },
+    {
+      "command": "node --test tests/test_workspace_api.cjs tests/test_judge_ui.cjs",
+      "result": "14 pass,0 fail; duration_ms319.379041",
+      "artifact": "monitor-v1/accepted/ui-release.log"
+    },
+    {
+      "command": "node --check web/monitor/app.js",
+      "exit_code": 0
+    },
+    {
+      "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -m unittest tests.test_monitor_store tests.test_monitor_connectors tests.test_monitor_http -q",
+      "result": "59 tests in10.595s \u2014 OK",
+      "artifact": "monitor-v1/accepted/final-correctness-review.json"
+    },
+    {
+      "cwd": "private frozen accepted archive",
+      "command": "python3 scripts/check_completion.py progress --report evidence/runs/monitor-v1/accepted/original-progress.json",
+      "result": "ok:true; verified_count:47; errors:[]"
+    }
+  ],
+  "browser": {
+    "mode": "Actual loopback browser; synthetic records, locally signed commerce fixtures and stubbed PayPal verification transport. No provider calls.",
+    "source_binding": "monitor-v1/workflow/final-source.json",
+    "observed": [
+      "Add/select stores and empty inbox.",
+      "Woo order and stub-confirmed capture produce one alert; duplicate remains one.",
+      "Shopify order without capture reference remains unmatched.",
+      "Acknowledgement keeps overdue count and visible card focus across an observed poll.",
+      "Restart retains acknowledged alerts.",
+      "Signed completion distinguishes late fulfillment history from delayed on-time correction; active count becomes zero and histories remain.",
+      "Logout returns to sign-in.",
+      "390x844 phone cards: scale1, scrollWidth390, legible full width.",
+      "Finalsource: noncanonical Shopify address rejected with safe guidance and no saved store; mixedcase443 canonical address normalized.",
+      "Realserver unavailable message retains data; restart invalidates session, clearsworkspace; relogin restoresrecords.",
+      "Keyboard store switches show unmatched order and acknowledged history; newstore has no inventedorders.",
+      "Finalphone390x844, nooverflow; console[]; serverclosed."
+    ],
+    "limitations": [
+      "Earlier correction/history views bind preceding core hashes. Subsequent changes only canonical store creation/safe hint, not clock/history logic. Final fullsuite/review reaccept mechanics; UI source unchanged.",
+      "Session invalidation rather than elapsed eighthour expiry; browser phone emulation, not physical handset; no full accessibility certification."
+    ]
+  },
+  "reviews": [
+    "monitor-v1/accepted/correctness-review.json",
+    "monitor-v1/accepted/security-review.json",
+    "monitor-v1/accepted/final-correctness-review.json",
+    "monitor-v1/accepted/final-security-review.json"
+  ],
+  "preserved_failures": [
+    {
+      "artifact": "monitor-v1/browser/failure.json",
+      "cause": "Test OAuth reply omitted token_type; unchanged adapter rejected503. Stub fixed, validator unchanged."
+    },
+    {
+      "private_artifact": "browser-accepted/phone.png",
+      "sha256": "218bc85fa30c2c151467650934487f2303032e10647b47dc0f1af25994e411cf",
+      "cause": "390x219 scaled capture was unusable phone proof. Retained; replacement phone-alerts.png measured390x844."
+    },
+    {
+      "stage": "Evidence packaging",
+      "cause": "Initial packaging referenced an incorrect historical phone.png directory. No receipt was written; actual retained file located and dimensions inspected before corrected receipt."
+    },
+    {
+      "artifact": "monitor-v1/workflow/bad-shopify-address-accepted-dom.txt",
+      "cause": "Beforefix unusable Shopify address saved. Fresh no-save rejection/canonical success verified aftervalidator fix."
+    },
+    {
+      "stage": "Workflow fixture helper",
+      "cause": "Initial helper supplied datetime instead of ISOstring; unchanged validator rejected before server startup. FailedDB retained privately; retry uses valid ISO facts."
+    }
+  ],
+  "blockers": [
+    "No owned platform stores/authentic transaction samples.",
+    "Monitoring merchant-specific Sandbox notification registration/genuine verification unexercised.",
+    "Shopify capture matching needs verified transaction source or merchant mapping.",
+    "Public ingress needs rate/concurrency/retention/content-dedup bounds.",
+    "Installation/disconnection, customeraccounts, hosting and per-store billing remain open."
+  ],
+  "external_effects": {
+    "provider_calls": 0,
+    "payments": 0,
+    "webhook_registrations": 0,
+    "public_tunnels": 0,
+    "deployments": 0,
+    "spending": 0,
+    "recordings": 0
+  },
+  "cleanup": "Owned test servers and temporary browser tabs closed. Final server SIGINT exit130 was expected cleanup. No private database, cookie, access key or merchant credential published.",
+  "artifacts_sha256": {
+    "accepted/correctness-review.json": "dd071ea684493c0e196b7d24006e2e7f3b7f46248e29aaba4743e3ed70d76b65",
+    "accepted/final-correctness-review.json": "30134dd9d0c2309faff9aa4972fecad35ce4cd69e55cbf9dc9e56088d3472062",
+    "accepted/final-security-review.json": "46030e1b5a2225db4c7886be5aa26f97ccf7f657745ccdeba18df697e27cfe5e",
+    "accepted/full-suite-final.log": "8c1c0aa885db4a52b3d5b541d9a0224a7e0dd422c0f977101b230cc46c0dabad",
+    "accepted/full-suite-release.log": "94781325f97bd3f6ff770c6dd7ebc5335cff7ba71ca2a84f325b2e4f09ee6029",
+    "accepted/replay-final.log": "df45a054924d5c86f2f9d3f9cdaa1291c7898560e4f09ce9c77b936fc99e0390",
+    "accepted/replay-release.log": "4ee132e72e8adb6f7d97623a3f22dfc1b067681d2f732b811dd4950322127a68",
+    "accepted/security-review.json": "f2ded501eb3c129516ae221fe8fac798ab83683a6be16ca79e083b7ff60f9fc9",
+    "accepted/ui-final.log": "7c1cc4a5d215b508fa6a4403388edd77d12a994d8ecb7fb2dc7fa863f3aea45d",
+    "accepted/ui-release.log": "bf3a0b86ae74c5eeaef54c7b1acb2d102e4e27427411ff5516aca24f7d55de16",
+    "browser/failure.json": "581e4a1bf717cc0ebe700b896df4ce8e12958a6858b519d25f0fdf5ca915e967",
+    "browser-accepted/before-dom.txt": "55dc13fd85af5c50bd883e648202317c2a10d2a535cdb78deb8349dd8982be68",
+    "browser-accepted/completion-result.json": "ad9a85d04f5050131f453468cf59aae0d618cdfcf9be0e6964a24a85dd82fd47",
+    "browser-accepted/corrected-dom.txt": "c8baa2790b4ecb864bdffcf7b38574196fdd3bd515394ef7a93bcc4e3a871c85",
+    "browser-accepted/inbox.png": "b98b6059e4f61893f4e09189c159c3a458c83836169e9690a490eef30674889e",
+    "browser-accepted/logout-dom.txt": "ebe0509fa8701031ce323c7def223a4756b3e841c9dac08552d448e7f7d30e2d",
+    "browser-accepted/phone-alerts.png": "6ec3942fe741c042114f8a5a99bfc0163f6e14cc86624a19a1b82b67c595923e",
+    "browser-accepted/phone-dom.txt": "0dc0f7670627f0285b5cdc51b28acbec34fafd17a576c4c30668c71b6b4742c8",
+    "browser-accepted/phone-metrics.json": "a6bf62be33e95690a9fd84966ee4d462c2d28fb384650b8cfd5ccbaf4e0f9a8b",
+    "browser-accepted/server.json": "14f2f61f756dd543df8300259dcb7fb6bfaf65e5c3ede223859c8830c94f8e68",
+    "browser-accepted/transport-calls.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "browser-retry/ack-dom.txt": "4ca840072b7dc927d73c726d7c47babfc69989dd2265b878f434881d1da82a2e",
+    "browser-retry/alert-dom.txt": "651d7fb4ae2ab35ee972ad4c8017c1e8f945763747ec6b947f4b4cda5930e777",
+    "browser-retry/focus-after-ack.json": "317d77789b3d5d5cb392f1bfe7fcb05050bfc8b5a72ab0d1c38d49f9dd60c4c1",
+    "browser-retry/focus-after-poll.json": "27cdfcc6f6914ec2099fd396ad977197faaacb7e5e204c2328da8714408706f4",
+    "browser-retry/ingress-result-second.json": "17b2c4dc7a29a33abffdaaa33321185a19e265915b07be873e459def788afa0f",
+    "browser-retry/ingress-result.json": "17b2c4dc7a29a33abffdaaa33321185a19e265915b07be873e459def788afa0f",
+    "browser-retry/shopify-unmatched-dom.txt": "3cddd88c7573e03c87d510a18c907094ed9bf3dc46822ef96ef5156f396d21a9",
+    "http/tests-restart-isolation-final.log": "7eab8bcc394805fbb6cec0ecd05ef70a5c0ba3395edf1b9f5ce97ba4b9da5de9",
+    "store/shopify-domain-tests.log": "28a315fafbdc1c50f7d927da78f9af90c44f315e54bc38dc66fac7ce647505ff",
+    "workflow/address-rejected-dom.txt": "3000e7d595aad66c563d63ca56bc63ab92c0469bac6bf1eba0bdf7fba7254801",
+    "workflow/bad-shopify-address-accepted-dom.txt": "90c5ce91e11ff81bcd32be69691c7ed02983ac366fe1b88cab8da002cb0805ca",
+    "workflow/bad-shopify-address.png": "f4a33f9e36034e1ecfb44b89a3ea3c096d980a2711dcf5c8366384f645e5c0e1",
+    "workflow/console.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "workflow/expired-session-dom.txt": "02beafb0b90130dade1f8f8e4af325538d88358d0e14b169026b82b470e047f3",
+    "workflow/final-cleanup.json": "8f95759f0efb684a20d866619ea43804272fe4ae22b30a3f95adab220cca291d",
+    "workflow/final-inbox-dom.txt": "c0b5ac4288965a118a7e2892f9c06457e48a249677b3fba70cfd6ed7f515fe59",
+    "workflow/final-inbox.png": "9c815656d9691e7754f22b6456c411379647b46452167acaef37533556f7f2fa",
+    "workflow/final-logout-dom.txt": "ebe0509fa8701031ce323c7def223a4756b3e841c9dac08552d448e7f7d30e2d",
+    "workflow/final-source.json": "10837dd80581dd19d0e9dedda37142eccef3668694d45eeae0dfd9006e58ee52",
+    "workflow/final-unmatched-dom.txt": "1e3a683fe3a54521f9cf6b06e678ed819470ca2575b041fb32bda21a4330da12",
+    "workflow/phone-dom.txt": "719031f344e80c52bcb2172374efe75266017181990c08720705a88501b2923e",
+    "workflow/phone-inbox.png": "a5c9158382b07ae7f65dd4b4749796be2ddc4e1027613bd853a9890e76c10878",
+    "workflow/phone-metrics.json": "52c96aba811ee40fa4f486c17d1a37ebc0a4f45c19d60531cf35832fdc970816",
+    "workflow/store-added-dom.txt": "b2f961d5fb903303ab15749476a580d5e330bf0fd5383adfb8ae9b9f7c6624bf",
+    "workflow/store-added.png": "224ed53e29af7a061967b03cf0ea9c730a1ed433afbb14c226ef754a8184e885",
+    "workflow/unavailable-dom.txt": "b616d7aa6b02b8d70904527ec837f1217a02a96044e79099a5991bbce9107f85",
+    "workflow/unavailable.png": "e0568e50eb953d69f486a2ac9ea98d74b430fbc2c908bd208e2f49a4ed379c56"
+  }
+}

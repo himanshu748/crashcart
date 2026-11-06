@@ -1,6 +1,18 @@
 # CrashCart delivery milestones
 
-Updated **6 November 2026**. **47/60 verified; 13 original checks open; zero stale accepted checks.** Features are frozen. These milestones order work; they neither grant acceptance nor authorize new spending, provider calls or submission.
+## Merchant monitoring — 6 November
+
+Newly authorized scope, separate from the frozen investigation contract:
+
+1. Store ingestion, deadline engine and inbox: implemented. PM-001 store boundaries, PM-005 clock and PM-007 human workflow verified locally; PM-002/003/004/006 remain unverified in their full scope.
+2. Authentic stores, PayPal Sandbox notifications and capture matching: blocked on owned stores, credentials, webhook registration and approved HTTPS. PM-002/003/004/008. Shopify capture matching remains incomplete.
+3. Customer accounts, supported installation and hosted operation: pending. PM-008/009.
+4. Per-store subscription/cancellation: pending a separate billing decision and Sandbox implementation. PM-010. No live charges authorized.
+
+[Product acceptance](docs/MONITOR_PRODUCT.md). Original private acceptance stays 47/60; monitoring does not inherit it.
+
+
+Updated **6 November 2026**. **47/60 verified; 13 original checks open; zero stale accepted checks.** Original investigation features are frozen; the merchant-monitoring scope above is separately authorized. These milestones order work; they neither grant acceptance nor authorize new spending, provider calls or submission.
 
 ## Verification resumed — 5 November
 

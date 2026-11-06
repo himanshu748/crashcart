@@ -22,6 +22,8 @@ Subsequent v77 verification closes DV-09 for the local recorded page: the actual
 
 Subsequent v78 public workspace error-recovery verification closes local DV-13 using controlled synthetic responses. It does not reaccept the original configured CC-043/044/048 journey. Private accepted source stays frozen at 47/60; no original checkmark changed. See current STATUS.md for source-bound evidence.
 
+New product decision, 6 November: per-store merchant monitoring with Shopify, WooCommerce and an in-app inbox is separately authorized. [Product acceptance](docs/MONITOR_PRODUCT.md) governs this scope. This supersedes the original feature freeze only for merchant monitoring; original CC IDs, conditions, dependencies and historical failures remain intact. Monitoring does not inherit the private 47/60.
+
 ## 1. What this build must achieve
 
 CrashCart investigates disagreements between the customer's checkout experience, independently observed PayPal sandbox payment state, and the owned merchant's delivered entitlement. It produces an executable reproduction, reduces unnecessary steps, and verifies a repaired merchant against the same business promise.

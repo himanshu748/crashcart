@@ -1,0 +1,32 @@
+{
+  "mode": "LOCAL_TEST",
+  "url": "http://127.0.0.1:61529",
+  "pid": 37809,
+  "stores": [
+    {
+      "id": "store_de345e19a83a4834b0a8b9a454c96b4f",
+      "name": "Local verification \u00b7 Workshop shop",
+      "platform": "woocommerce",
+      "domain": "woo.example.test",
+      "promise_seconds": 60,
+      "created_at": "2026-11-06T15:51:35.548990+00:00"
+    },
+    {
+      "id": "store_dc0bf642c0cf4af08063577a3a91890b",
+      "name": "Local verification \u00b7 Shopify",
+      "platform": "shopify",
+      "domain": "verification.myshopify.com",
+      "promise_seconds": 60,
+      "created_at": "2026-11-06T15:51:35.549823+00:00"
+    }
+  ],
+  "provider": "PayPal verification transport stub; no provider calls",
+  "source_hashes": {
+    "crashcart/monitor_server.py": "96f6138e37b4215cb5955521823f49ac99f6b13c37d075b4c01e02227f254bc0",
+    "crashcart/monitor_store.py": "ad93fc729c5173bc511b47728f3e45551c1f436bbed618f5c472d1471d6256b4",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "web/monitor/index.html": "cbe78ddc9de11774c80490010bb5b62f2a14aa84d3f5ab5e68b9cf31722cacae",
+    "web/monitor/style.css": "8176eb1bbbd03990e8e6c811887790961f0f041efc22cbaa5c3fd11146ec1cfa"
+  }
+}

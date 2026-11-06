@@ -4,6 +4,10 @@
 
 ## Current delivery
 
+**6 November merchant monitoring:** Shopify and WooCommerce signed-ingress connectors, a separate store-scoped database, immutable fulfilment deadlines and an in-app inbox are implemented in the public source checkout. **PM-001, PM-005 and PM-007 verified locally (3/10 new product requirements)** after independent correctness/security review. Actual loopback HTTP, restart/isolation, signed fixtures and desktop/390px browser checks ran; PayPal replies were stubbed, with no provider call, payment or public ingress. Full suite **426 tests in 62.086s, OK**; replay **3 in 0.314s, OK**; existing UI **14 pass**. [Evidence](evidence/runs/submission-ready/monitor-v1.json); [product acceptance](docs/MONITOR_PRODUCT.md).
+
+**Original verified count remains 47/60; newly verified CC IDs: none.** Original failed CC-035, blocked CC-036/038/041/056/060, unverified CC-046/048/050/057, in-progress CC-040/042 and pending CC-059 are unchanged. No stale checks on frozen private source; monitoring does not inherit original acceptance. Both connectors and inbox are implemented but authentic integration remains unverified. Shopify capture matching, full accessibility certification, installation/disconnection, customer accounts, public-ingress bounds, hosting and per-store billing remain open. A later Shopify setup bug was preserved, fixed and reverified in the browser; earlier source proofs remain historical. **Next:** verify public-ingress rate/retention controls and obtain owned test stores with authentic transaction samples before a separately authorized provider test. No store is currently available; no live retry is implied. New source is not yet hosted.
+
 **6 November task-flow cleanup:** primary checkout controls moved above detailed records; plain Ticket status, Checkout details, Activity and Investigate labels; explicit next step; run limits remain inspectable in Technical details. Actual desktop/390px, keyboard focus, details, errors and recovery were exercised with synthetic data. Full suite **367 in 66.784s, OK**; replay **3 in 0.210s, OK**; UI **14 pass**. [Evidence](evidence/runs/submission-ready/task-flow-v80.json). **47/60 frozen private acceptance; no new CC IDs.** The owner subsequently approved a new per-store monitoring product direction, both commerce connectors and an in-app inbox. That new scope requires its own acceptance and does not replace old evidence.
 
 **6 November plain-language follow-through:** shortened the connection message and replaced the visible local-test label with “Example data · no payment.” Fresh UI examples have short titles; historical evidence and user-authored records remain intact. Actual browser error/recovery recheck and independent review passed. Full suite **367 in 51.063s, OK**; replay **3 in 0.217s, OK**; workspace tests **9 pass**. [Evidence](evidence/runs/submission-ready/plain-copy-v79.json). **47/60 on frozen private accepted source; no new CC IDs.** Public-source copy proof does not establish the full operator journey or hosted deployment.
@@ -59,7 +63,7 @@ Earlier in this batch, **CC-023** was verified through actual PayPal Sandbox ing
 
 [OPEN_CHECKS.md](docs/OPEN_CHECKS.md) records each exact missing result and dependency. Main gaps: original fault recording, held-out discovery, fresh repaired purchase, full operator journey and actual public video. All eight old remote-browser grants are consumed. AWS infrastructure under $10/month is now permitted; this does not renew model or browser test usage. No AWS resources or spending were needed for this batch. Render remains excluded.
 
-Features, including Part F, are frozen by the latest owner direction. The submission sprint closes only official delivery gates; unfinished original checks remain unchecked.
+Original investigation features, including Part F, remain frozen. The owner separately authorized merchant monitoring with both commerce connectors and an in-app inbox on 6 November; docs/MONITOR_PRODUCT.md governs it. No original CC requirement is removed or closed.
 
 ## Hosting and submission
 
@@ -75,7 +79,7 @@ A separate healthy-store experiment now verifies **CC-024**: after a real USD29 
 
 **CC-052** is also verified after independent review of the existing 17 local concurrency/restart groups and the newly satisfied CC-024 prerequisite. Those local tests used synthetic payment replies with actual competing workers, SIGKILL, default lease expiry and resumed work; they retained one ticket and the same operation identities. They are not evidence of concurrent live capture requests. The earlier interrupted recovery attempt and historical recovery proof remain preserved separately.
 
-Current priority: complete the resumed original verification and submission gates within available authorization. The dated submission-only plan below is historical. Missing recording, held-out discovery and fresh repair remain open, and new experiments still require their own permitted scope. Declare project completion only after CC-060 passes.
+Current priority: verify merchant monitoring and prepare authentic store access, preserving the original investigation evidence and open release gates. The dated submission-only plan below is historical. Missing recording, held-out discovery and fresh repair remain open, and new experiments still require their own permitted scope. Declare project completion only after CC-060 passes.
 
 ## Submission-only scope — step 1 — 4 November history
 

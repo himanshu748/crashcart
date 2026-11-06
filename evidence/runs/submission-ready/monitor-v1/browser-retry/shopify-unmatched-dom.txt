@@ -1,0 +1,39 @@
+- link "Skip to monitoring":
+  - /url: "#main"
+- banner:
+  - link "↳ CrashCart":
+    - /url: /
+  - generic: Store monitoring
+  - button "Sign out"
+  - link "Recorded walkthrough ↗":
+    - /url: https://himanshu748.github.io/crashcart/
+- main:
+  - paragraph: YOUR STORES
+  - heading "Orders that need you." [level=1]
+  - paragraph: Track payment, fulfilment and the promise between them.
+  - button "Refresh"
+  - complementary:
+    - heading "Stores" [level=2]
+    - button "Local verification · Workshop shop"
+    - button "Local verification · Shopify"
+    - generic "Add a store"
+    - option "Shopify" [selected]
+    - option "WooCommerce"
+  - heading "Local verification · Shopify" [level=2]
+  - paragraph: Shopify · verification.myshopify.com. Order events received. Waiting for matching verified PayPal test payments.
+  - link "Connection setup ↗":
+    - /url: https://github.com/himanshu748/crashcart/blob/main/docs/MONITOR_SETUP.md
+  - group "Monitoring view":
+    - button "Needs attention 0"
+    - button "Orders" [active] [pressed]
+  - region "Store orders":
+    - article:
+      - heading "Order S-2001" [level=3]
+      - paragraph: USD 29.00
+      - paragraph: Waiting for a matching PayPal payment
+      - paragraph: Awaiting fulfilment
+  - paragraph: Fulfilment means the store has marked an order complete. It does not confirm parcel delivery.
+  - status
+- contentinfo:
+  - generic: CrashCart · payment-to-fulfilment monitoring
+  - generic: Last checked 21:24:38

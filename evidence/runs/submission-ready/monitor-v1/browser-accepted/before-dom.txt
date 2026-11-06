@@ -1,0 +1,46 @@
+- link "Skip to monitoring":
+  - /url: "#main"
+- banner:
+  - link "↳ CrashCart":
+    - /url: /
+  - generic: Store monitoring
+  - button "Sign out"
+  - link "Recorded walkthrough ↗":
+    - /url: https://himanshu748.github.io/crashcart/
+- main:
+  - paragraph: YOUR STORES
+  - heading "Orders that need you." [level=1]
+  - paragraph: Track payment, fulfilment and the promise between them.
+  - button "Refresh"
+  - complementary:
+    - heading "Stores" [level=2]
+    - button "Local verification · Workshop shop"
+    - button "Local verification · Shopify"
+    - generic "Add a store"
+    - option "Shopify" [selected]
+    - option "WooCommerce"
+  - heading "Local verification · Workshop shop" [level=2]
+  - paragraph: WooCommerce · woo.example.test. Signed order data and verified PayPal test-payment records are available.
+  - link "Connection setup ↗":
+    - /url: https://github.com/himanshu748/crashcart/blob/main/docs/MONITOR_SETUP.md
+  - group "Monitoring view":
+    - button "Needs attention 2" [pressed]
+    - button "Orders"
+  - region "Alert inbox":
+    - article:
+      - generic: Acknowledged · fulfilment overdue
+      - heading "Order WC-1002" [level=3]
+      - paragraph: "Paid order missed its fulfilment deadline: 6 Nov 2026, 21:25."
+      - paragraph: Acknowledged 6 Nov 2026, 21:27.
+      - paragraph: First detected 6 Nov 2026, 21:26
+    - article:
+      - generic: Acknowledged · fulfilment overdue
+      - heading "Order WC-1001" [level=3]
+      - paragraph: "Paid order missed its fulfilment deadline: 6 Nov 2026, 21:23."
+      - paragraph: Acknowledged 6 Nov 2026, 21:24.
+      - paragraph: First detected 6 Nov 2026, 21:23
+  - paragraph: Fulfilment means the store has marked an order complete. It does not confirm parcel delivery.
+  - status
+- contentinfo:
+  - generic: CrashCart · payment-to-fulfilment monitoring
+  - generic: Last checked 21:40:56
