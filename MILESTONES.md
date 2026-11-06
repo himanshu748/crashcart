@@ -2,6 +2,8 @@
 
 ## Merchant monitoring — 6 November
 
+The exact overload-notice follow-up now passes locally as [OV-001](docs/OVERLOAD_VISIBILITY.md), with fresh desktop/phone captures and unchanged production guard limits. Historical fixture failures are preserved.
+
 Newly authorized scope, separate from the frozen investigation contract:
 
 1. Store ingestion, deadline engine and inbox: implemented. PM-001 store boundaries, PM-005 clock and PM-007 human workflow verified locally; PM-002/003/004/006 remain unverified in their full scope.

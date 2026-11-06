@@ -1,0 +1,17 @@
+[
+  {
+    "event": "server_started",
+    "at": "2026-11-06T18:25:08.606225+00:00",
+    "active": 0,
+    "peak": 0,
+    "limit": 16
+  },
+  {
+    "event": "pressure_ended",
+    "at": "2026-11-06T18:28:11.219223+00:00",
+    "opened": 266,
+    "connection_errors": 0,
+    "recycled": 224,
+    "elapsed": 89.04293612500078
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "reviewer": "current_contract_audit",
+  "receipt_type": "Parent-saved independent read-only review",
+  "check": "OVERLOAD_VISIBILITY",
+  "result": "PASS_LOCAL",
+  "findings": [],
+  "evidence": {
+    "desktop": "Inspected 1280 \u00d7 720 screenshot: notice legible, frontmost and fully in viewport.",
+    "phone": "Inspected 390 \u00d7 844 screenshot: notice legible and fully in viewport; scale 1, scroll width 390.",
+    "state": "Both geometry records retain the order and active count 1.",
+    "saturation": "Four capture-boundary receipts show active 16, peak 16, independent HTTP 503 and Retry-After 1.",
+    "maintenance": "89.043 seconds, 224 recycled leases, no connection errors.",
+    "recovery": "Active handlers 0, HTTP 200, unchanged facts; browser clears notice and retains order, count and control.",
+    "cleanup": "Closed; active 0; clients 0; worker stopped; provider calls 0; facts unchanged.",
+    "full_suite": "459 tests in 113.127s \u2014 OK",
+    "independent_fixture_tests": "3 tests in 3.411s \u2014 OK"
+  },
+  "independent_command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -W error::ResourceWarning -m unittest tests.test_overload_fixture -v",
+  "constraints": [
+    "Independent HTTP probes are not captured browser-network responses.",
+    "Capture-boundary observations do not prove uninterrupted saturation between them.",
+    "The order remains in the page; it need not be visible inside each screenshot.",
+    "Earlier failed attempts remain historical; this is a fresh pass.",
+    "No production guard change, provider execution, public exposure or original CC acceptance."
+  ],
+  "source_sha256": {
+    "tests/overload_fixture.py": "a27c8d34ad2fc1a4d19cb20c11855802cde7df1817e7c490321e60d26035c955",
+    "tests/test_overload_fixture.py": "402791108fef91dd2b5666f19eb9c77e2a0dac8cf5b9f1eaf103467331b73bd8",
+    "crashcart/monitor_server.py": "a86c3392181b0e3a34ad06fe0a63cc545cfbc3e06e3d11f12c936bf9e4bf5051",
+    "crashcart/monitor_ingress.py": "d2cf5918e06f0905e112dd5de1a305ba22d7facd422e9b3493ce13cf8fc57cfe",
+    "crashcart/monitor_store.py": "7702b3c5f244d68b33d1338e52f0d2f3fdc8e4c99e46a66d6bc775bfae4be1cd",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "web/monitor/index.html": "29ebe8980593027fb267e17ca88ddb50efe2724601137f11ba60f2413de99523",
+    "web/monitor/style.css": "ce5adf194fed6ebe1d08a31a05341b0508b60f9185ac5b5e353d0ed6d33f9f28",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a"
+  }
+}

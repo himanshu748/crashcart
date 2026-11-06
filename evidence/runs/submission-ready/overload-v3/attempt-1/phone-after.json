@@ -1,0 +1,21 @@
+{
+  "at": "2026-11-06T18:27:58.828485+00:00",
+  "before": {
+    "active": 16,
+    "peak": 16,
+    "limit": 16
+  },
+  "after": {
+    "active": 16,
+    "peak": 16,
+    "limit": 16
+  },
+  "probe": {
+    "status": 503,
+    "retry_after": "1",
+    "body": {
+      "error": "The workspace is busy. Try again shortly."
+    }
+  },
+  "provider_calls": 0
+}

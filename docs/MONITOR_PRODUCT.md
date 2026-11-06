@@ -33,7 +33,7 @@ Only an exercised complete condition is checked. PM-001, PM-005 and PM-007 have 
 
 Webhook safeguard changes have fresh source-bound reacceptance of PM-001/005/007. Full suite **456 tests in 103.486s, OK**, replay **3 in 1.295s, OK**, existing UI **14 pass**; both independent reviews passed. New supplemental WH-001–006 pass locally. [Current evidence](../evidence/runs/submission-ready/monitor-v2.json) and [exact guards/recovery limits](WEBHOOK_SAFEGUARDS.md).
 
-Initial browser pressure exercised the default 16-handler cap and retained records. A later screenshot found the notice below the viewport; the sticky repair has fresh validation/offline/session/acknowledgement visibility proof on desktop and phone. The exact repaired-notice/overload screenshot remains unverified after two stopped fixture failures. Unchanged-UI phone/empty/unmatched/setup evidence retains its earlier scope. This is not authentic delivery, physical-phone certification or deployed operation.
+Initial browser pressure exercised the default 16-handler cap and retained records. A later screenshot found the notice below the viewport; the sticky repair has fresh validation/offline/session/acknowledgement visibility proof on desktop and phone. That exact repaired-notice/overload check was initially stopped after two fixture failures; the resumed check now has a fresh independently reviewed local pass in [OV-001](OVERLOAD_VISIBILITY.md). Unchanged-UI phone/empty/unmatched/setup evidence retains its earlier scope. This is not authentic delivery, physical-phone certification or deployed operation.
 
 ## First preview — historical local verification
 

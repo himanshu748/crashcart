@@ -1,0 +1,23 @@
+{
+  "at": "2026-11-06T18:28:11.220084+00:00",
+  "handlers": {
+    "active": 0,
+    "peak": 16,
+    "limit": 16
+  },
+  "probe": {
+    "status": 200,
+    "retry_after": null,
+    "body": {
+      "status": "ok",
+      "mode": "monitor",
+      "payment_environment": "sandbox",
+      "scanner": {
+        "status": "running",
+        "last_scan_at": "2026-11-06T18:28:08.855623+00:00"
+      }
+    }
+  },
+  "facts_unchanged": true,
+  "provider_calls": 0
+}

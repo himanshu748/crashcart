@@ -1,0 +1,25 @@
+{
+  "mode": "LOCAL_TEST; synthetic facts; no provider calls",
+  "url": "http://127.0.0.1:50391",
+  "limits": {
+    "max_handlers": 16,
+    "global_burst": 60,
+    "global_per_second": 10.0,
+    "store_burst": 20,
+    "store_per_second": 2.0,
+    "max_store_buckets": 256,
+    "idle_seconds": 600.0,
+    "request_timeout": 10.0
+  },
+  "source_sha256": {
+    "crashcart/monitor_server.py": "a86c3392181b0e3a34ad06fe0a63cc545cfbc3e06e3d11f12c936bf9e4bf5051",
+    "crashcart/monitor_ingress.py": "d2cf5918e06f0905e112dd5de1a305ba22d7facd422e9b3493ce13cf8fc57cfe",
+    "crashcart/monitor_store.py": "7702b3c5f244d68b33d1338e52f0d2f3fdc8e4c99e46a66d6bc775bfae4be1cd",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "web/monitor/index.html": "29ebe8980593027fb267e17ca88ddb50efe2724601137f11ba60f2413de99523",
+    "web/monitor/style.css": "ce5adf194fed6ebe1d08a31a05341b0508b60f9185ac5b5e353d0ed6d33f9f28",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a"
+  },
+  "fixture_sha256": "a27c8d34ad2fc1a4d19cb20c11855802cde7df1817e7c490321e60d26035c955",
+  "max_pressure_seconds": 180
+}

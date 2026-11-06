@@ -1,0 +1,4 @@
+{
+  "available": false,
+  "reason": "Read-only browser evaluation does not expose Resource Timing; the optional inspection raised TypeError. No network trace is claimed."
+}

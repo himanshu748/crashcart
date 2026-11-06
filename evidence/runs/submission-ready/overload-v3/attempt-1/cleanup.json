@@ -1,0 +1,10 @@
+{
+  "closed": true,
+  "active": 0,
+  "peak": 16,
+  "limit": 16,
+  "clients": 0,
+  "worker_alive": false,
+  "provider_calls": 0,
+  "facts_unchanged": true
+}

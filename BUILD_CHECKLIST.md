@@ -24,7 +24,7 @@ Subsequent v78 public workspace error-recovery verification closes local DV-13 u
 
 New product decision, 6 November: per-store merchant monitoring with Shopify, WooCommerce and an in-app inbox is separately authorized. [Product acceptance](docs/MONITOR_PRODUCT.md) governs this scope. This supersedes the original feature freeze only for merchant monitoring; original CC IDs, conditions, dependencies and historical failures remain intact. Monitoring does not inherit the private 47/60.
 
-Local webhook safeguards and database recovery are tracked separately in [WH-001–006](docs/WEBHOOK_SAFEGUARDS.md). Their verified local proof does not close any original CC requirement or authentic-provider monitoring gate. Original acceptance remains 47/60.
+Local webhook safeguards and database recovery are tracked separately in [WH-001–006](docs/WEBHOOK_SAFEGUARDS.md). Their verified local proof does not close any original CC requirement or authentic-provider monitoring gate. Original acceptance remains 47/60. The separately resumed exact overload-notice check is recorded as [OV-001](docs/OVERLOAD_VISIBILITY.md), with actual local captures and no original CC acceptance changes.
 
 ## 1. What this build must achieve
 

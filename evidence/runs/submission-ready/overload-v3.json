@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "check": "OV-001",
+  "status": "VERIFIED",
+  "proof_mode": "LOCAL_TEST",
+  "application_source_commit": "2ea13b1ce737fa709203a79e1a558598bda3abdf",
+  "source_snapshot": "evidence/snapshots/overload-v3",
+  "source_sha256": {
+    "crashcart/monitor_server.py": "a86c3392181b0e3a34ad06fe0a63cc545cfbc3e06e3d11f12c936bf9e4bf5051",
+    "crashcart/monitor_ingress.py": "d2cf5918e06f0905e112dd5de1a305ba22d7facd422e9b3493ce13cf8fc57cfe",
+    "crashcart/monitor_store.py": "7702b3c5f244d68b33d1338e52f0d2f3fdc8e4c99e46a66d6bc775bfae4be1cd",
+    "crashcart/monitor_connectors.py": "155212240b576c5ea8c613ae8ec2eaa442bc14e34737db5bb5a1d881950d5ad6",
+    "web/monitor/index.html": "29ebe8980593027fb267e17ca88ddb50efe2724601137f11ba60f2413de99523",
+    "web/monitor/style.css": "ce5adf194fed6ebe1d08a31a05341b0508b60f9185ac5b5e353d0ed6d33f9f28",
+    "web/monitor/app.js": "299e9eeb00d0e76b097d0c98c1a5698ac32a34590d76eb9518c69bed5aba508a",
+    "tests/overload_fixture.py": "a27c8d34ad2fc1a4d19cb20c11855802cde7df1817e7c490321e60d26035c955",
+    "tests/test_overload_fixture.py": "402791108fef91dd2b5666f19eb9c77e2a0dac8cf5b9f1eaf103467331b73bd8"
+  },
+  "fixture_repair": "Single owner; actual counters and HTTP 503 readiness; bounded reset retries; staggered renewal; unchanged production defaults (16 handlers, 10-second socket deadline); capture checkpoints; explicit release and cleanup.",
+  "captures": {
+    "desktop": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "notice_in_viewport": true,
+      "frontmost": true,
+      "png_written_at": "2026-11-06T18:27:10.704406+00:00",
+      "saturation_before": "2026-11-06T18:27:09.524916+00:00",
+      "saturation_after": "2026-11-06T18:27:10.730269+00:00",
+      "order_retained_in_page": true
+    },
+    "phone": {
+      "viewport": [
+        390,
+        844
+      ],
+      "notice_in_viewport": true,
+      "frontmost": true,
+      "png_written_at": "2026-11-06T18:27:42.317880+00:00",
+      "saturation_before": "2026-11-06T18:27:26.359600+00:00",
+      "saturation_after": "2026-11-06T18:27:58.828485+00:00",
+      "order_retained_in_page": true
+    }
+  },
+  "runtime": {
+    "pressure_seconds": 89.04293612500078,
+    "leases_recycled": 224,
+    "connection_errors": 0,
+    "peak_handlers": 16,
+    "provider_calls": 0,
+    "facts_unchanged": true,
+    "cleanup_active_handlers": 0,
+    "cleanup_clients": 0,
+    "cleanup_worker_alive": false
+  },
+  "commands": [
+    {
+      "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v",
+      "result": "Ran 459 tests in 113.127s \u2014 OK",
+      "artifact": "overload-v3/full-suite.log"
+    },
+    {
+      "command": "python3 -W error::ResourceWarning -m unittest tests.test_overload_fixture -v",
+      "python": "3.13.15",
+      "result": "Ran 3 tests in 3.464s \u2014 OK",
+      "artifact": "overload-v3/fixture-tests.log"
+    },
+    {
+      "command": "python3 -m unittest tests.test_public_replay -v",
+      "python": "3.13.15",
+      "result": "Ran 3 tests in 0.357s \u2014 OK",
+      "artifact": "overload-v3/replay.log"
+    },
+    {
+      "command": "python3 -m tests.overload_fixture --output NEW_PRIVATE_RUN_DIRECTORY",
+      "result": "Exit 0; actual desktop/phone browser captures, confirmed HTTP 503 checkpoints, recovery HTTP 200, unchanged facts and clean termination."
+    }
+  ],
+  "independent_review": "overload-v3/independent-review.json",
+  "earlier_failures": "monitor-v2/browser-visible/pressure-followup-failures.json",
+  "limits": [
+    "Syntheticfacts;real loopbackHTTP andbrowser, notactualstore/payment/provider.",
+    "Captureboundaries areindependentHTTPprobes,notbrowsernetworktrace;no continuoussaturationclaim.",
+    "Order remainsloaded,notnecessarilyvisibleinsidephonePNG.",
+    "OptionalResourceTimingreadraisedTypeErrorbecausebrowserread-onlyscopeomitsperformance;unavailableartifactretained.",
+    "No applicationguard/deadline/validator change; original47/60 unchanged; no newCC IDs."
+  ],
+  "external_effects": {
+    "payments": 0,
+    "provider_calls": 0,
+    "public_exposure": 0,
+    "spending": 0
+  },
+  "artifacts_sha256": {
+    "attempt-1/baseline.json": "65ee18d8029b898ea970410a355fc6cb171e437a616e1005922670734e0c90dc",
+    "attempt-1/browser-network-unavailable.json": "7bc230629b15b8f4e43804d8a3acb035f64965fe0fdab8f4529fade9ea993381",
+    "attempt-1/cleanup.json": "0d267bbce2cd9bc2e97dde7bba1569466862ef8721528501840f426f09db55eb",
+    "attempt-1/console.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "attempt-1/desktop-after.json": "98852ecc9c136e8fbd252bfdb916ab8185879ef07434c50d8e3ce9eb522027b7",
+    "attempt-1/desktop-before.json": "67735c0faf43446507a1a565bfececeb3bacd1c825db66e31db6d3f4902f3d82",
+    "attempt-1/desktop-dom.txt": "3b7a669d5ef53237420ed28268ee20d1cc8d1a79abfe4a0bd0357bf386f318a5",
+    "attempt-1/desktop-geometry.json": "a4ce856fa6f9bff6143d8b54dff61a5039688a76e304927d6f9b31a4dac0d442",
+    "attempt-1/desktop.png": "2e349956cdd690fad59580a7fed67863089ef27f04b66cf7fe64af5ed78ccf58",
+    "attempt-1/events.json": "a4d2acf4d98fe85f66bfd50758e1092296d32da8c4c33088a376c82e857946a6",
+    "attempt-1/final-facts.json": "65ee18d8029b898ea970410a355fc6cb171e437a616e1005922670734e0c90dc",
+    "attempt-1/healthy-before-dom.txt": "edf6d48160252b6fb2b8ec30515baa15f8126c43c418425dede487c68027734d",
+    "attempt-1/phone-after.json": "e855032899018d69047ab226d06423dc08802fd0293bf9337a49e26a3959a770",
+    "attempt-1/phone-before.json": "e78776809804f2792c6e8288de7f371bff58f6880f98cd99ad30ba35d3081c42",
+    "attempt-1/phone-dom.txt": "3b7a669d5ef53237420ed28268ee20d1cc8d1a79abfe4a0bd0357bf386f318a5",
+    "attempt-1/phone-geometry.json": "7150e2516f665e39f640221174a8b41c97d81f0b8fab861d8138e32c2290eb59",
+    "attempt-1/phone.png": "9b30db32a469fdab982e6783b3766818095aa2aac13be1c4010c0f27b496b263",
+    "attempt-1/ready.json": "aab8f8a647380475724b489d2b4dfb64fb3ebd1cd064d5e82fc36f9cf87fc7b7",
+    "attempt-1/recovered-desktop-dom.txt": "78fa2aa372ccd8e0a9710acac2561ed4500dc73e9c69d8c1658499171efa133b",
+    "attempt-1/recovered-phone-dom.txt": "94b4bfb5ed8136ff726a3d0cd2ce87d83d7b852dcb3060ea762a253ecb742bd3",
+    "attempt-1/recovered.png": "a596f9d1732dc0ff35b8d964070f7e634d2bc2218be986fbed83f50b7c7fac60",
+    "attempt-1/recovery-ui.json": "74d9a76053a70136747b53f2d5afc84ea97b08d23158622fa97662aa02535a61",
+    "attempt-1/released.json": "4157dfb3260ccc466d29d00303a368a2fdf002cf071253137777060b2d615c6c",
+    "attempt-1/server.json": "cd364b68ee91f838b61ee99a7a9f3eadeadf3f5b0c13b65c672c124f44b0dffe",
+    "attempt-1-console.log": "ab24c28b8d453bfac76416fde2c8412a561a079a70e625662bccc006d829a9b3",
+    "fixture-tests.log": "a5b72cc504518c94dc59f73cf9a99e041f23f626e103a40660ba2f7320d24df2",
+    "full-suite.log": "62c5cfd316282717e5fe09a16c317566b84df01feb3c35429d54018e403a8d9a",
+    "independent-review.json": "7ed7c35c0dc106c556706605264cba786f51412699b90a1a666a18f31a5d08c3",
+    "replay.log": "13128e0a70b1e5f0b6829ad0dc337d83b21744c0cfd2a216e3d0e9c4e174ff42"
+  },
+  "original_contract": {
+    "verified": 47,
+    "total": 60,
+    "new_cc_ids": [],
+    "errors": [],
+    "boundary": "Frozen private accepted build; no original acceptance transferred to new monitoring proof."
+  },
+  "packaging_note": "Initial staging stopped because its extension whitelist omitted the HTML/CSS/JS application files already named in the exact source snapshot. The whitelist was corrected to that expected source set; no application validation or evidence assertion changed.",
+  "secret_review": {
+    "path": "evidence/runs/submission-ready/overload-v3-secret-review.json",
+    "sha256": "2be5f9b3a25815282b24dca0389393c5e06102b11ceeb3a8816d46f3370ce4ce"
+  }
+}

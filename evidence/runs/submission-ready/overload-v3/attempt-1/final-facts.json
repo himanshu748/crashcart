@@ -1,0 +1,40 @@
+{
+  "orders": [
+    {
+      "store_id": "store_b8c906ba2377442ea04e85b12a69113a",
+      "platform_order_id": "local-order",
+      "display_number": "EXAMPLE-101",
+      "currency": "USD",
+      "total_minor": 2900,
+      "payment_references": [
+        "LOCAL-CAPTURE"
+      ],
+      "fulfillment_status": "unfulfilled",
+      "fulfilled_at": null,
+      "updated_at": "2026-11-06T18:23:08.575360+00:00",
+      "promise_seconds": 60,
+      "payment_state": "confirmed",
+      "capture_id": "LOCAL-CAPTURE",
+      "paid_at": "2026-11-06T18:23:08.575360+00:00",
+      "deadline_at": "2026-11-06T18:24:08.575360+00:00",
+      "verified_by": "paypal_signature_verifier_caller",
+      "fulfillment_basis": "merchant_reported_completion_not_physical_delivery",
+      "fulfillment_timing": "recorded"
+    }
+  ],
+  "alerts": [
+    {
+      "id": "alert_c7788e92c56b40309f1cf5c20b379f31",
+      "store_id": "store_b8c906ba2377442ea04e85b12a69113a",
+      "platform_order_id": "local-order",
+      "kind": "late_fulfillment",
+      "capture_id": "LOCAL-CAPTURE",
+      "deadline_at": "2026-11-06T18:24:08.575360+00:00",
+      "detected_at": "2026-11-06T18:25:08.575360+00:00",
+      "resolved_at": null,
+      "acknowledged_at": null,
+      "retracted_at": null,
+      "resolution_reason": null
+    }
+  ]
+}

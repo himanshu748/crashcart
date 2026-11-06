@@ -1,0 +1,8 @@
+test_failed_admission_cannot_declare_readiness (tests.test_overload_fixture.OverloadFixtureTests.test_failed_admission_cannot_declare_readiness) ... ok
+test_output_directory_cannot_overwrite_previous_evidence (tests.test_overload_fixture.OverloadFixtureTests.test_output_directory_cannot_overwrite_previous_evidence) ... ok
+test_reset_recovery_real_saturation_and_clean_release (tests.test_overload_fixture.OverloadFixtureTests.test_reset_recovery_real_saturation_and_clean_release) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.464s
+
+OK
