@@ -1,0 +1,132 @@
+{
+  "result": "PASS_HISTORICAL_PARTIAL_SUPPORT_ONLY",
+  "verified_count": 47,
+  "newly_verified_cc_ids": [],
+  "historical_executed_at": "2026-10-22T09:31:52.298456Z",
+  "historical_ticket_delay_seconds": 3.360974,
+  "historical_run_id": "run_a756d142edcb4d118bc8307670d2a25c",
+  "source_comparison": {
+    "crashcart/service.py": {
+      "historical_sha256": "bb62b0157d8bff0c3da22cace42b8783bd69c095ad56dc8afa22365398014076",
+      "current_sha256": "2a969ecb47e7aee5447fa666c2f43cf7e242f0f45be4ea3094cfd707a401beb9",
+      "byte_identical": false,
+      "changed_functions": [
+        "MerchantService.webhook"
+      ],
+      "added_functions": [],
+      "removed_functions": []
+    },
+    "crashcart/store.py": {
+      "historical_sha256": "b09c64ce28f62ce7d93abcf6d0a24b872b05c2886bbc5e084513ccb13ea1cbe3",
+      "current_sha256": "86c2a1915e5b68ef9934db188bb6eae431732bb6c2e07b7e726b605da00b20c4",
+      "byte_identical": false,
+      "changed_functions": [
+        "Store.get_run",
+        "Store.list_runs",
+        "Store.update_run"
+      ],
+      "added_functions": [
+        "Store._end_investigation",
+        "Store._expire_investigations",
+        "Store._run_execution",
+        "Store.begin_investigation",
+        "Store.finish_investigation",
+        "Store.incomplete_investigation"
+      ],
+      "removed_functions": []
+    },
+    "crashcart/worker.py": {
+      "historical_sha256": "b0e409c5feb7d9ae0f850b953f5ece28d2e91903dbccff91052ae18daf23439d",
+      "current_sha256": "b0e409c5feb7d9ae0f850b953f5ece28d2e91903dbccff91052ae18daf23439d",
+      "byte_identical": true,
+      "changed_functions": [],
+      "added_functions": [],
+      "removed_functions": []
+    },
+    "crashcart/paypal.py": {
+      "historical_sha256": "34300988973ab7470042ad468d376ee0d268ecc6a7150b1cd52cd744ede00c77",
+      "current_sha256": "a69534358625888c52aac555346f79129bf2261b18ed9d16471fa136824715ae",
+      "byte_identical": false,
+      "changed_functions": [
+        "PayPalSandbox.verify_webhook"
+      ],
+      "added_functions": [
+        "parse_webhook_event"
+      ],
+      "removed_functions": []
+    },
+    "crashcart/invariant.py": {
+      "historical_sha256": "01c7007132e939716f5236322f40b175058981d21334c7add57dd4bb20007fea",
+      "current_sha256": "01c7007132e939716f5236322f40b175058981d21334c7add57dd4bb20007fea",
+      "byte_identical": true,
+      "changed_functions": [],
+      "added_functions": [],
+      "removed_functions": []
+    },
+    "migrations/001_initial.sql": {
+      "historical_sha256": "776c928b0b07da50b3773a9c2feae8dbe20670d553ebbe643683802767f74714",
+      "current_sha256": "776c928b0b07da50b3773a9c2feae8dbe20670d553ebbe643683802767f74714",
+      "byte_identical": true
+    },
+    "crashcart/faults.py": {
+      "historical_sha256": "57e052c295e8e77857f2c8336851e845781a29916cc2ae7f08a233a95b870462",
+      "current_sha256": "57e052c295e8e77857f2c8336851e845781a29916cc2ae7f08a233a95b870462",
+      "byte_identical": true,
+      "changed_functions": [],
+      "added_functions": [],
+      "removed_functions": []
+    }
+  },
+  "current_assertion_hashes": {
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/test_service.py": "639b26c9a967e2f0c621fb7ae15b8dec9915bdabdf7f17c0acdc94185f69e957",
+    "tests/test_store.py": "c0a3ffa5289e1e59033643fd4fc6248a0af1505c64aacbf7cfc814d9f12488f1",
+    "tests/test_run_state.py": "66c2e0df6f4eafe2bf6e3c5c4de67bac5b663d315d0bf37ab8422ac35cd7d45f",
+    "scripts/requirements.json": "5bb800db7ef82a60b5b4bb21b0b03287b3054a09ca284cb06bd0629c6bfa2f01",
+    "docs/evidence.md": "bc5b2d670a52489a1d04d9a2e5c4eb8ad038951f776630b206aa897ca2eb8f03"
+  },
+  "matched_persisted_hash_counts": {
+    "events": 16,
+    "operations": 2,
+    "jobs": 1
+  },
+  "known_record_change": {
+    "field": "purchase.updated_at",
+    "historical": "2026-10-22T09:21:49.310472Z",
+    "current": "2026-10-22T09:47:57.322913Z",
+    "limitation": "The original database is not wholly byte-immutable; carry-forward is confined to matched outcome fields and bound payloads."
+  },
+  "tests": {
+    "parent": "----------------------------------------------------------------------\nRan 34 tests in 2.307s\n\nOK",
+    "independent": "34 tests in 2.159s, OK",
+    "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -m unittest tests.test_service tests.test_store tests.test_run_state -v"
+  },
+  "independent_review": {
+    "independent": true,
+    "reviewer": "/root/probe_review_v68",
+    "result": "PASS",
+    "scope": "Retain October 22 actual recovery as historical partial evidence for uncancelled non-investigator case only",
+    "reviewed_verification_sha256": "31f7e3ebe8aa7eca1bcca37d2d55e72b4bf758e3cdb6092aab7d1c7ad142a083",
+    "tests": "34 tests in 2.159s, OK",
+    "findings": [],
+    "resolved_findings": [
+      "Added faults.py direct dependency and frozen assertion sources",
+      "Recorded purchase.updated_at change; database is not claimed wholly immutable"
+    ],
+    "limits": [
+      "Store.get_run now acquires BEGIN IMMEDIATE and adds queries; current contention/timing is not freshly proven",
+      "Current agent orchestration is not covered",
+      "Original3.360974s is historical only",
+      "CC-042 remains IN_PROGRESS through CC-040/041"
+    ],
+    "attribution": "Parent persisted independent reviewer messages"
+  },
+  "conclusion": "Retain the October 22 uncancelled, non-investigator payment recovery as historical partial support. Capture, reconciliation and fulfillment method bodies are unchanged. Store.get_run adds locking and queries; current contention, timing and investigator orchestration are not freshly proven. CC-040/041 prerequisites remain open.",
+  "evidence_sha256": {
+    "verification.json": "31f7e3ebe8aa7eca1bcca37d2d55e72b4bf758e3cdb6092aab7d1c7ad142a083",
+    "independent-review.json": "13ebe6cd677eec4b83052612b9bcb55505fef986354ee68777fc3d462bc1117b",
+    "source.diff": "a341dd48800dfe250c56195a5d05dadc98d0052d5862f5936990abdaa1437843",
+    "audit.py": "b45680c9075759325296653871db07e101eb56a1c3f44d8fd0f52663458a9ce3",
+    "tests.log": "474960fe1786dd78c0bc5d5a2d250753aacf4f4223daf89704e385afe549630c"
+  }
+}

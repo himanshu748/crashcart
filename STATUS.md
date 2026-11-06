@@ -1,8 +1,10 @@
 # CrashCart development status
 
-**Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 5 November 2026 (India).
+**Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 6 November 2026 (India).
 
 ## Current delivery
+
+**6 November verification:** the replacement checkout preparation and historical repair impact review passed independent review. The checkout remains inactive: buyer readiness and the new scoped grant are pending. Historical delivery timing is preserved as historical only. **47/60; no new CC IDs.**
 
 **5 November recording verification:** the repaired recorder passed an independently reviewed bounded native-capture probe: 67.143333 seconds of video, 997 frames, no audio and clean decode. Process exit took 68.190 seconds; maximum observed frame-heartbeat age was 0.174427 seconds against the unchanged five-second limit. The prior failed checkout attempt remains preserved. **47/60; no new CC IDs.** Full matching checkout footage is still missing. [Scoped evidence](evidence/runs/submission-ready/capture-v68.json).
 
@@ -144,3 +146,11 @@ Native Safari control failed twice during temporary-window cleanup, so that UI s
 The intended CrashCart window appears at the beginning, middle and end. A harmless local licence window covered it for approximately the final seven seconds; the recording continued to show CrashCart. Return to the foreground happened after recording ended and is not claimed as captured. This verifies only the bounded diagnostic, not a 600-second checkout recording. No payment, login, provider call, public tunnel or upload occurred. The one-use capture grant is consumed; recorder and temporary local server are stopped, the cover window is closed, and Safari shows the public demo.
 
 CC-035 remains FAILED because matching checkout footage/export is still missing. CC-036/038/041/056/060 remain BLOCKED; CC-046/048/050/057 IMPLEMENTED_UNVERIFIED; CC-040/042 IN_PROGRESS; CC-059 PENDING. Next: prepare a fresh recorded Sandbox checkout with independent review and scoped authorization, preserving the consumed failed attempt. Held-out investigation inputs and the owner video/submission remain separate gaps. Public runtime and tests are unchanged; the previously recorded 367-test and three-test replay passes are retained, not represented as new executions.
+
+## Reviewed checkout preparation and repair provenance — 6 November
+
+**47/60 verified; newly verified CC IDs: none; stale accepted checks: none.** The fresh, unpaid CC-035 attempt is prepared and independently reviewed. Ten offline guards passed (0.952s; independent rerun 1.007s), and missing authorization stops the real entry point before launch. The recorder is the same binary verified by the bounded v68 diagnostic. No checkout, capture or public window has started; new scoped approval and fresh buyer readiness remain required. Previous grants and failed attempts are preserved.
+
+The independent [repair impact review](evidence/runs/submission-ready/repair-impact-v69.json) retains the October 22 uncancelled, non-investigator recovery as **historical partial support**. Sixteen stored event hashes, two operation-body hashes and one job-result hash match. Current local recovery/cancellation tests passed: 34 in 2.307s; independent rerun 34 in 2.159s. Payment recovery method bodies are unchanged, but Store.get_run adds locking/queries, so current contention, timing and investigator orchestration remain unproven. The historical 3.360974-second delivery is not a new result. The purchase updated_at timestamp differs; the database is not claimed wholly immutable.
+
+The scoped gateway also passed 21 local tests in 11.536s. This does not reproduce or resolve the earlier Safari login error or prove public ingress. CC-035 remains FAILED; CC-036/038/041/056/060 BLOCKED; CC-046/048/050/057 IMPLEMENTED_UNVERIFIED; CC-040/042 IN_PROGRESS; CC-059 PENDING. Next: complete Sandbox buyer readiness and obtain the already-requested exact one-payment/capture/HTTPS grant, then run the reviewed checkout and inspect its original footage and matching replay. No acceptance condition or checkbox changed.

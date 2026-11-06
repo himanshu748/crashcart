@@ -14,6 +14,8 @@ The [design verification checklist](docs/DESIGN_VERIFICATION.md) maps the agreed
 
 Latest preparation evidence: the repaired recorder passed a bounded seventy-second diagnostic (67.143333 seconds of video, 997 frames, no audio, clean decode and independent review). [Scoped capture receipt](evidence/runs/submission-ready/capture-v68.json). The earlier failures remain preserved. This closes no original requirement and does not prove a full checkout recording: matching faulty-checkout footage and export remain required. All 60 acceptance conditions and checkbox states are unchanged.
 
+On 6 November, the fresh replacement checkout preparation passed independent review and remains inactive pending buyer readiness and a new scoped grant. Historical repair evidence was reviewed as partial support only; current timing is not freshly verified. See STATUS.md for the scoped evidence and unchanged 47/60 count.
+
 ## 1. What this build must achieve
 
 CrashCart investigates disagreements between the customer's checkout experience, independently observed PayPal sandbox payment state, and the owned merchant's delivered entitlement. It produces an executable reproduction, reduces unnecessary steps, and verifies a repaired merchant against the same business promise.

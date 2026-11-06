@@ -35,7 +35,7 @@ After a separate scoped approval, the attempt stopped before checkout with `RECO
 | CC-038 | BLOCKED | Actual undisclosed-seed LIVE_SANDBOX investigation, deterministic confirmation and controlled reveal. Accepted protocol and known-case model calls do not establish discovery. |
 | CC-040 | IN_PROGRESS | CC-036/038 and accepted reduced-witness lineage. Historical fresh proof exists, but service/store/paypal bindings differ from current source and need impact review or a new matched run. |
 | CC-041 | BLOCKED | Complete CC-035 export and same meaningful test against faulty/repaired code. Today's matching replay outcomes are supplemental. |
-| CC-042 | IN_PROGRESS | Historical fresh repair delivered one ticket in 3.360974s, with later customer-view review. CC-024 is accepted; CC-040/041 and current-source/provenance review remain open. |
+| CC-042 | IN_PROGRESS | Historical repair delivered one ticket in 3.360974s. Independent v69 impact review retains it as historical partial support only; new Store locking/queries mean current timing and agent orchestration remain unproven. CC-024 is accepted; CC-040/041 remain open. |
 | CC-046 | IMPLEMENTED_UNVERIFIED | CC-040 and complete actual Studio comparison across required cases, with synchronized customer/provider/merchant/timeline panels. Saved-case selection is partial proof. |
 | CC-048 | IMPLEMENTED_UNVERIFIED | CC-046 and complete start/inspect/cancel/compare/export journey, specified failure states, keyboard and viewport checks. |
 | CC-050 | IMPLEMENTED_UNVERIFIED | Collection execution passed again; CC-035 prerequisite remains unmet. |
@@ -63,3 +63,7 @@ AG Studio is configured through 17 December; no replacement key is needed. Held-
 The earlier capture blocker is resolved for a bounded harmless probe of the repaired binary: independent review passed, video is 67.143333 seconds / 997 frames / no audio, full decode emits no warnings, and process exit took 68.190 seconds. The five-second freshness guard is unchanged (maximum observed age 0.174427 seconds). Covering the window was exercised only for the final approximately seven seconds; return happened after capture. This does not prove a 600-second recording or a checkout. The one-use grant is consumed and all probe processes are stopped. [Scoped receipt](../evidence/runs/submission-ready/capture-v68.json).
 
 **All 13 requirement states above remain unchanged; 47/60 verified.** Next: prepare and review a fresh recorded Sandbox checkout before obtaining its scoped execution authorization. No old attempt, payment or recording allowance is reused.
+
+## Historical repair review — v69
+
+[Scoped source and evidence review](../evidence/runs/submission-ready/repair-impact-v69.json) passed, including frozen dependencies/assertions and independent local tests. It preserves the original execution date and records the changed purchase updated_at timestamp. This adds historical partial support, not current provider/timing proof or a CC checkmark. A fresh CC-035 checkout is independently prepared; buyer readiness and new scoped authorization remain pending.
