@@ -1,0 +1,20 @@
+{
+  "reviewer": "/root/v69_publication_review",
+  "independent": true,
+  "result": "PASS",
+  "findings": [],
+  "source_freeze": {
+    "files": {
+      "web/judge/app.js": "b2856f33289816631a1e0dd5a0cec731ef4c6049c911863c0e95f803fa4a61f9",
+      "tests/test_judge_ui.cjs": "1dd2cba742118ccccc7e6c666a90864b5f292d37cbcd752d6f92b4793cd2693e",
+      ".github/workflows/ci.yml": "a30c66a1d95e3b82e9160eddcc8eca361b2dee7acb40804666e6300290e099cd",
+      "STATUS.md": "d99461d470f09444705cff993718bda556d8415ef7a5be673ab8d171fd31943f",
+      "docs/DESIGN_VERIFICATION.md": "9001d16fbf9fb62783501b6981cc4d091ab5dec439018f8a74e65209380693d6",
+      "docs/JUDGE_VERIFICATION.md": "5ff99dbdbccc858b2f11a072b2e71ebf29a0804d3d0cf882d77cfe1b86ef4fdf"
+    },
+    "scope": "Public keyless loading-state repair; frozen private acceptance runtime unchanged"
+  },
+  "rerun": "node --test tests/test_judge_ui.cjs: 5 passed, 0 failed",
+  "confirmed": "Catch-only repair; success path, HTML, styles, original CC acceptance unchanged; source/artifact bindings match; 320px screenshot inspected; no sensitive payload.",
+  "limits": "Hosted readback not yet executed; no new original CC acceptance."
+}

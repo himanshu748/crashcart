@@ -1,0 +1,13 @@
+✔ Unavailable response explains recovery without provider claims (50.594542ms)
+✔ Malformed JSON does not expose parser jargon (0.924541ms)
+✔ Disconnected network leaves an understandable safe state (0.450083ms)
+✔ Invalid comparison never displays a successful result (0.612667ms)
+✔ Partially parsed case is discarded before walkthrough reuse (0.58125ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 168.735833

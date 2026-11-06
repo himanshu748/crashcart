@@ -84,4 +84,11 @@ fetch("data.json",{cache:"no-store"}).then(response=>{if(!response.ok)throw new 
   // The launch URL may target the finished case before its records arrive.
   const anchor=byId(window.location.hash.slice(1));
   if(anchor)anchor.scrollIntoView({block:"start",behavior:"auto"});
-}).catch(error=>{byId("load-state").classList.add("error");byId("load-state").textContent=`${error.message}. Restart the recorded review or reload the page; no live action was attempted.`;});
+}).catch(()=>{
+  // A structurally incomplete response may fail after parsing. Discard it so
+  // the walkthrough and case controls cannot reuse a partial investigation.
+  review=null;
+  byId("review").hidden=true;
+  const notice=byId("load-state");notice.hidden=false;notice.classList.add("error");
+  notice.textContent="The saved investigation could not be opened. Reload this page to try again. No new payment or AI request was made.";
+});

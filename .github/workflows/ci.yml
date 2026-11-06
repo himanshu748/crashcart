@@ -19,6 +19,7 @@ jobs:
       - run: python -m compileall -q crashcart scripts tests
       - run: node --check web/app.js
       - run: node --check web/marketing.js
+      - run: node --test tests/test_judge_ui.cjs
       - run: python -m unittest discover -v
       - run: python scripts/verify_foundation.py
       - run: python -m crashcart prerequisites
