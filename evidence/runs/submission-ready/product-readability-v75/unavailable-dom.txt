@@ -1,0 +1,64 @@
+- link "Skip to checkout review":
+  - /url: "#main"
+- banner:
+  - link "CrashCart home":
+    - /url: "#home"
+    - generic: ↳
+    - text: CrashCart
+  - navigation "Main navigation":
+    - link "Product":
+      - /url: "#home"
+    - link "Investigation":
+      - /url: "#investigation"
+    - link "Evidence":
+      - /url: "#evidence"
+  - generic: Recorded example · no new payment
+- main:
+  - region "Paid is only half the story.":
+    - paragraph: PAYMENT & DELIVERY, TOGETHER
+    - heading "Paid is only half the story." [level=1]:
+      - text: Paid is only
+      - text: half the story.
+    - paragraph: Your customer paid. Their ticket didn’t arrive. CrashCart connects the checkout, payment and delivery records—so you can find the gap and test the repair.
+    - link "Explore an investigation":
+      - /url: "#investigation"
+      - text: Explore an investigation
+      - generic: ↘
+    - paragraph: A working recorded example. No account or keys needed.
+    - complementary "Interactive checkout walkthrough":
+      - generic: FOLLOW ONE $29 CHECKOUT
+      - generic: 01 / 03
+      - img "A confirmed payment flows through the store to a ticket. The walkthrough highlights the missing delivery and the repaired replay."
+      - text: Payment confirmed
+      - heading "The payment went through." [level=2]
+      - paragraph: PayPal’s saved record confirms the $29 payment. That tells us the money arrived—not whether the customer got their ticket.
+      - generic "Walk through the checkout":
+        - button "1. Payment" [pressed]
+        - button "2. The gap"
+        - button "3. The repair"
+      - paragraph:
+        - text: One ticket. $29. Within 60 seconds.
+        - text: The same promise throughout.
+  - region "How CrashCart helps":
+    - text: "01"
+    - heading "See the whole checkout." [level=2]
+    - paragraph: Bring the customer’s view, payment status and ticket record together.
+    - text: "02"
+    - heading "Test the customer promise." [level=2]
+    - paragraph: Check the payment amount, ticket count and delivery deadline against fixed rules.
+    - text: "03"
+    - heading "Keep a replay of the finding." [level=2]
+    - paragraph: Compare the failed checkout and the repair using the same saved checkout records.
+  - status: The saved investigation could not be opened. Reload this page to try again. No new payment or AI request was made.
+  - text: +
+- contentinfo:
+  - link "CrashCart":
+    - /url: "#home"
+    - generic: ↳
+    - text: CrashCart
+  - paragraph: From a successful payment to a delivered promise.
+  - checkbox "Reduce motion"
+  - text: Reduce motion
+  - link "MIT licence":
+    - /url: LICENSE
+  - generic: Saved evidence. Honest boundaries.

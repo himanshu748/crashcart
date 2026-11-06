@@ -1,0 +1,154 @@
+- link "Skip to checkout review":
+  - /url: "#main"
+- banner:
+  - link "CrashCart home":
+    - /url: "#home"
+    - generic: ↳
+    - text: CrashCart
+  - navigation "Main navigation":
+    - link "Product":
+      - /url: "#home"
+    - link "Investigation":
+      - /url: "#investigation"
+    - link "Evidence":
+      - /url: "#evidence"
+  - generic: Recorded example · no new payment
+- main:
+  - region "Paid is only half the story.":
+    - paragraph: PAYMENT & DELIVERY, TOGETHER
+    - heading "Paid is only half the story." [level=1]:
+      - text: Paid is only
+      - text: half the story.
+    - paragraph: Your customer paid. Their ticket didn’t arrive. CrashCart connects the checkout, payment and delivery records—so you can find the gap and test the repair.
+    - link "Explore an investigation":
+      - /url: "#investigation"
+      - text: Explore an investigation
+      - generic: ↘
+    - paragraph: A working recorded example. No account or keys needed.
+    - complementary "Interactive checkout walkthrough":
+      - generic: FOLLOW ONE $29 CHECKOUT
+      - generic: 01 / 03
+      - img "A confirmed payment flows through the store to a ticket. The walkthrough highlights the missing delivery and the repaired replay."
+      - text: Payment confirmed
+      - heading "The payment went through." [level=2]
+      - paragraph: PayPal’s saved record confirms the $29 payment. That tells us the money arrived—not whether the customer got their ticket.
+      - generic "Walk through the checkout":
+        - button "1. Payment" [pressed]
+        - button "2. The gap"
+        - button "3. The repair"
+      - paragraph:
+        - text: One ticket. $29. Within 60 seconds.
+        - text: The same promise throughout.
+  - region "How CrashCart helps":
+    - text: "01"
+    - heading "See the whole checkout." [level=2]
+    - paragraph: Bring the customer’s view, payment status and ticket record together.
+    - text: "02"
+    - heading "Test the customer promise." [level=2]
+    - paragraph: Check the payment amount, ticket count and delivery deadline against fixed rules.
+    - text: "03"
+    - heading "Keep a replay of the finding." [level=2]
+    - paragraph: Compare the failed checkout and the repair using the same saved checkout records.
+  - region "About these results":
+    - strong: Real records. Recorded replay.
+    - paragraph: Both outcomes were recomputed during app launch (6 Nov 2026, 07:35:18 UTC). The checkout observations were recorded in October 2026.
+    - paragraph: These historical PayPal test observations drive the actual ticket rules again. No PayPal account, AI model, browser service or licence is used by this review.
+  - region "One checkout. Two outcomes.":
+    - paragraph: 01 / THE RESULT
+    - heading "One checkout. Two outcomes." [level=2]
+    - generic: Same $29 · same 60-second promise
+    - article:
+      - generic: FAILED CHECKOUT
+      - generic: Promise broken
+      - heading "Payment arrived. The ticket didn’t." [level=3]:
+        - text: Payment arrived.
+        - text: The ticket didn’t.
+      - paragraph: The payment reply was lost. The store failed to recover and deliver the ticket.
+      - term: Confirmed payment
+      - definition: $29.00
+      - term: Tickets delivered
+      - definition: "0"
+      - term: Delivery deadline
+      - definition: 60s
+      - paragraph: Confirmed payment, zero tickets beyond the deadline. CrashCart marks the customer promise as broken.
+      - button "Inspect the failed checkout" [pressed]:
+        - text: Inspect the failed checkout
+        - generic: ↗
+    - article:
+      - generic: REPAIRED CHECKOUT · REPLAY
+      - generic: Promise kept
+      - heading "A second check. One delivered ticket." [level=3]:
+        - text: A second check.
+        - text: One delivered ticket.
+      - paragraph: In this replay, the repaired store checks the payment again, then saves exactly one ticket.
+      - term: Confirmed payment
+      - definition: $29.00
+      - term: Tickets delivered
+      - definition: "1"
+      - term: Ticket after payment
+      - definition: 32.26s
+      - paragraph: Re-executed using the same saved observations. This is a repaired replay, not a new test payment or a deployed fix.
+      - button "Inspect the repaired replay":
+        - text: Inspect the repaired replay
+        - generic: ↗
+  - region "Follow the payment.":
+    - paragraph: 02 / THE EVIDENCE
+    - heading "Follow the payment." [level=2]
+    - link "Download these records ↓":
+      - /url: downloads/defective.json
+    - text: VIEWING
+    - paragraph: Failed checkout · saved payment response lost
+    - generic "Choose checkout":
+      - button "Failed checkout" [pressed]
+      - button "Repaired replay"
+    - text: 01 / PAYMENT
+    - heading "$29.00 confirmed" [level=3]
+    - paragraph: "Historical completion: 22 Oct 2026, 09:31:52 UTC."
+    - text: 02 / DELIVERY
+    - heading "0 tickets" [level=3]
+    - paragraph: No ticket remained after the 60-second deadline in the faulty replay.
+    - text: 03 / DEADLINE
+    - heading "60 seconds" [level=3]
+    - paragraph: "Unchanged deadline: 22 Oct 2026, 09:32:52 UTC. Outcome: promise broken."
+    - heading "What happened, and when" [level=3]
+    - text: Show records from
+    - combobox "Show records from":
+      - option "All sources" [selected]
+      - option "PayPal"
+      - option "Checkout page"
+      - option "Ticket store"
+      - option "Test interruption"
+    - status: 0 of 0 saved observations. Times are relative to confirmed payment; order alone does not establish cause.
+    - list
+    - generic "+ Input identity and technical result"
+  - region "A result you can rerun.":
+    - paragraph: 03 / TRY IT YOURSELF
+    - heading "A result you can rerun." [level=2]
+    - paragraph: Download the replay, unzip it, and run the two commands below with Python 3.11 or newer. No credentials or package installation needed.
+    - link "Download executable replay":
+      - /url: downloads/replay.zip
+      - text: Download executable replay
+      - generic: ↓
+    - text: FROM THE EXTRACTED FOLDER
+    - generic: "python3 -m crashcart.replay run input.json --merchant defective # Expected: FAIL · paid_without_ticket · exit 1 python3 -m crashcart.replay run input.json --merchant healthy # Expected: PASS · ticket_delivered_once_on_time · exit 0"
+    - link "Download the original input only ↓":
+      - /url: downloads/input.json
+  - region "What this review does—and doesn’t—show":
+    - heading "What this review does—and doesn’t—show" [level=2]
+    - paragraph: The failure is in our intentionally faulty test store, not a PayPal vulnerability. The original fault video is unavailable; the recorded page messages, payment observations and store state are available above. No new AI investigation runs here.
+    - paragraph:
+      - text: The normal CrashCart workspace remains available separately for authorized live test payments when service credentials are configured.
+      - link "Read the workspace setup instructions":
+        - /url: https://github.com/himanshu748/crashcart#readme
+      - text: .
+- contentinfo:
+  - link "CrashCart":
+    - /url: "#home"
+    - generic: ↳
+    - text: CrashCart
+  - paragraph: From a successful payment to a delivered promise.
+  - checkbox "Reduce motion"
+  - text: Reduce motion
+  - link "MIT licence":
+    - /url: LICENSE
+  - generic: Saved evidence. Honest boundaries.

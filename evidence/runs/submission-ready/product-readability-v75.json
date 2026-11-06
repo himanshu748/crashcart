@@ -1,0 +1,219 @@
+{
+  "mode": "LOCAL_TEST actual browser over RECORDED_REPLAY, plus injected empty/error/loading responses",
+  "date": "2026-11-06",
+  "base_commit": "c191608100f65a2f5f58bbe71554d63e468b2a11",
+  "source_hashes": {
+    "web/judge/index.html": "7e72c2d95d71f91a888be26a045f8668523f4ac62747cf45318129d650f984d7",
+    "web/judge/app.js": "77fb44e82cf2cd2376f280e0b071289d1a3e5a5512ecf30518cb6f9fff107e2b",
+    "web/judge/style.css": "1a60cf8ca1ab53b0f746aff1beaa03cf5d28bb71c7d09abd6e98818141ae950b"
+  },
+  "source_patch": "product-readability-v75.patch",
+  "verified_count": 47,
+  "new_cc_ids": [],
+  "new_design_passes": [
+    "DV-08 local public-page copy and hierarchy only"
+  ],
+  "rechecked_scopes": [
+    "Walkthrough selection and keyboard activation",
+    "Failed/repaired case selection and download identity",
+    "390px and 320px without horizontal overflow",
+    "Keyboard traversal and expandable records",
+    "In-product reduced-motion control",
+    "Actual browser ZIP download and both replay outcomes",
+    "Loading/error/empty wording and recovery"
+  ],
+  "changes": [
+    "Replace deterministic and merchant terminology in primary product copy",
+    "Link to workspace setup instructions",
+    "Darken small story/section counters after measured contrast failures"
+  ],
+  "baseline_failures": {
+    "text_contrast": [
+      {
+        "text": "01 / 03",
+        "ratio": 4.445,
+        "minimum": 4.5
+      },
+      {
+        "text": "01, 02, 03 section labels",
+        "ratio": 4.22,
+        "minimum": 4.5
+      }
+    ],
+    "details": "Baseline measurements preserved; no threshold or historical output changed. Initial exploratory browser server used system Python 3.9; all final source-bound browser and execution checks used Python 3.13.15."
+  },
+  "browser": "Codex in-app browser on macOS",
+  "python": "3.13.15 (main, Aug  5 2026, 12:25:43) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "routes": [
+    "/",
+    "#home",
+    "#investigation",
+    "#evidence"
+  ],
+  "normal_records": "Actual generated recorded comparison; no credentials or new provider calls",
+  "synthetic_ui_cases": [
+    "data.json delayed until valid response",
+    "503 unavailable HTML response",
+    "valid projection with events removed for empty-list inspection"
+  ],
+  "motion": {
+    "normalMotion": {
+      "animation": "0.22s cubic-bezier(0.2, 0, 0, 1) both arrive",
+      "flowTransition": "0.22s, 0.22s",
+      "reducedClass": false,
+      "story": "A second check closes the gap."
+    },
+    "reducedMotion": {
+      "animation": "none",
+      "flowTransition": "0s",
+      "reducedClass": true,
+      "story": "The payment went through."
+    },
+    "scope": "In-product control only; OS preference before load and dynamic change are not exercised"
+  },
+  "keyboard": {
+    "observations": 52,
+    "focus_outlines_present": true,
+    "scope": "Tab traversal to footer, Enter/Space activation, expanded record scrolling targets, native dropdown selection, keyboard ZIP download. Not a screen-reader audit.",
+    "dropdown": "First Down/Enter did not change All sources; opening with Space then Down/Enter selected PayPal (4 of 15). Both observations retained."
+  },
+  "layout_390": {
+    "headings": [
+      "Paid is only\nhalf the story.",
+      "But the ticket never arrived.",
+      "See the whole checkout.",
+      "Test the customer promise.",
+      "Keep a replay of the finding.",
+      "One checkout. Two outcomes.",
+      "Payment arrived.\nThe ticket didn\u2019t.",
+      "A second check.\nOne delivered ticket.",
+      "Follow the payment.",
+      "$29.00 confirmed",
+      "1 ticket",
+      "60 seconds",
+      "What happened, and when",
+      "A result you can rerun.",
+      "What this review does\u2014and doesn\u2019t\u2014show"
+    ],
+    "viewport": 390,
+    "width": 390
+  },
+  "layout_320": {
+    "cards": [
+      {
+        "text": "FAILED CHECKOUT\nPromise broken\nPayment arrived.\nThe ticket didn\u2019t.\n\nThe payment reply was lost. The store failed to recover and deliver the ticket.\n\nConfirmed payment\n$29.00\nTickets delivered\n0\nDelivery deadline\n60s\n\nConfirmed payment, zero tickets beyond the deadline. CrashCart marks the customer promise as broken.\n\nInspect the failed checkout\n\u2197",
+        "width": 280
+      },
+      {
+        "text": "REPAIRED CHECKOUT \u00b7 REPLAY\nPromise kept\nA second check.\nOne delivered ticket.\n\nIn this replay, the repaired store checks the payment again, then saves exactly one ticket.\n\nConfirmed payment\n$29.00\nTickets delivered\n1\nTicket after payment\n32.26s\n\nRe-executed using the same saved observations. This is a repaired replay, not a new test payment or a deployed fix.\n\nInspect the repaired replay\n\u2197",
+        "width": 280
+      }
+    ],
+    "viewport": 320,
+    "width": 320
+  },
+  "loading": {
+    "message": "Loading the recorded investigation\u2026",
+    "resultsHidden": true,
+    "viewport": 320,
+    "width": 320
+  },
+  "recovery": {
+    "count": "4 of 15 saved observations. Times are relative to confirmed payment; order alone does not establish cause.",
+    "healthyTime": "32.26s",
+    "link": "downloads/healthy.json",
+    "resultsHidden": false,
+    "selection": "Repaired replay \u00b7 same saved payment response lost"
+  },
+  "workspace_readme_link": {
+    "url": "https://github.com/himanshu748/crashcart#readme",
+    "status": 200
+  },
+  "artifact_verification": {
+    "text_elements_measured": 123,
+    "text_contrast_failures": 0,
+    "minimum_measured_ratio": 4.852803179958515,
+    "limits": "Computed text foreground and ancestor background colors only; not non-text controls, screen-reader or complete WCAG proof.",
+    "threshold_source": "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+    "zip_sha256": "34fd38ff2bdfd3c7ed990760ecf6fb47ae540db412424c3096d3957dc7170d30",
+    "matches_served_download": true,
+    "network": "Python socket connection entry points denied, not OS network isolation",
+    "replay": [
+      {
+        "variant": "defective",
+        "command": [
+          "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+          "-m",
+          "crashcart.replay",
+          "run",
+          "input.json",
+          "--merchant",
+          "defective"
+        ],
+        "exit": 1,
+        "signature": "paid_without_ticket"
+      },
+      {
+        "variant": "healthy",
+        "command": [
+          "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+          "-m",
+          "crashcart.replay",
+          "run",
+          "input.json",
+          "--merchant",
+          "healthy"
+        ],
+        "exit": 0,
+        "signature": "ticket_delivered_once_on_time"
+      }
+    ]
+  },
+  "tests": {
+    "full_suite": {
+      "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v",
+      "exit": 0,
+      "summary": "367 tests in 44.927s, OK"
+    },
+    "replay": {
+      "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin python3 -m unittest tests.test_public_replay -v",
+      "exit": 0,
+      "summary": "3 tests in 0.144s, OK"
+    },
+    "ui": {
+      "command": "node --test tests/test_judge_ui.cjs",
+      "exit": 0,
+      "passed": 5,
+      "failed": 0
+    }
+  },
+  "remaining": [
+    "DV-09: actual OS/browser reduced-motion before load and preference changes not exercised",
+    "DV-10: screen-reader announcements, 200% zoom and non-text control contrast still unverified; partial keyboard/text-contrast proof does not close it",
+    "DV-12\u201314: complete configured workspace, promoted API candidate and actual recording proof remain open",
+    "Hosted changes not verified; GitHub account billing lock blocks publishing"
+  ],
+  "original_acceptance": "Unchanged private accepted runtime and all 60 contract conditions. This additive public UI work accepts no original CC requirement.",
+  "artifact_sha256": {
+    "product-readability-v75/keyboard.json": "d029bb5091684af2e9dbb93d45cb26f6a831a71ff316ecdff0bad5f9ea762285",
+    "product-readability-v75/filter-keyboard.json": "c9fa78f8e8517b7890bc63eeb62f9d855aba7f28444f7d95c30d249495cd5cfa",
+    "product-readability-v75/motion-toggle.json": "8a1208906abb8a6bd9573243c5be44561abb5a1068ab80fc014759eaddd8c826",
+    "product-readability-v75/desktop-dom.txt": "e27300de0ec2cceff8553ca9696ba38bba5cac7cb6cccf17cacb023371d9e326",
+    "product-readability-v75/loading-dom.txt": "00d240e6034fcbaf3921ab454ce5be33009f5e878d694f20726e783c9df5facd",
+    "product-readability-v75/unavailable-dom.txt": "99b2c20325af8e172d8856fed1c7b3ba71ae358b6ae483560ae11576a01c36d7",
+    "product-readability-v75/empty-dom.txt": "7281eb14d49f0edefd8dc83e81c6fd2bc6a9cc9a998acfa9e3d163b5cdfec8d5",
+    "product-readability-v75/recovered-dom.txt": "6da7db246f60cb783a4dda5900a3b53dba2cb27a834ca3d1aff830a9f1567602",
+    "product-readability-v75/text-styles.json": "012728dfa64ed2c538738731e34c6dba14f950baf8f59d3aec892013f20de6cf",
+    "product-readability-v75/text-contrast.json": "713fe5861d26813b1723260842e96e13115d56b1846013eb345323c39e36d931",
+    "product-readability-v75/landing.png": "6bec50a79160009f76284ef1fe52f1976a9cc2c441a80683c6e850c62fb2d0e9",
+    "product-readability-v75/phone-390.png": "58902d24f9ba60e36e1b6e0cc5a7f58bd6a03570456685537ed93f9946c98cb9",
+    "product-readability-v75/comparison-320.png": "08622f08aa487da228903cc95e4af8a9a04896c129d33ac5042751363ee9fe84",
+    "product-readability-v75/empty-message-320.png": "9c5c3b37cc5ac0fbfbee11b489faacba48b578ed7e19853514002248e8a9928e",
+    "product-readability-v75/unavailable-320.png": "5f4d17029edf91a6d96e486d4623417364219885d3e428acd75296e3dab2766f",
+    "product-readability-v75/full-suite.log": "6f2eee87058d9af14087a29053f2febd9aadd50065eed51e2ca16f3b3dd9fb81",
+    "product-readability-v75/replay.log": "830a5fca9d43f85b2a4af4d6efa485844b6e900075398a347c976c87d3cfd503",
+    "product-readability-v75/ui-tests.log": "87af721e3707f72948a17c7b8742e8f7a14549faee1bf2d02066b4f078c7d7c6",
+    "product-readability-v75/download-defective.log": "bcdb37ea7fa14703c101ae23c4d2d510376dbcc777c1389460e3fcf88d748732",
+    "product-readability-v75/download-healthy.log": "7f877f367ecb65a1c7275f898d19082606e807fad5e5b9e6cf54e8ed92bb048f"
+  }
+}

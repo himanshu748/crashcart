@@ -1,0 +1,15 @@
+{
+  "normalMotion": {
+    "animation": "0.22s cubic-bezier(0.2, 0, 0, 1) both arrive",
+    "flowTransition": "0.22s, 0.22s",
+    "reducedClass": false,
+    "story": "A second check closes the gap."
+  },
+  "reducedMotion": {
+    "animation": "none",
+    "flowTransition": "0s",
+    "reducedClass": true,
+    "story": "The payment went through."
+  },
+  "scope": "In-product control only; OS preference before load and dynamic change are not exercised"
+}

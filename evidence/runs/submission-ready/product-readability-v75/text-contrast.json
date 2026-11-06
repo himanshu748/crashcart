@@ -1,0 +1,1970 @@
+[
+  {
+    "text": "Skip to checkout review",
+    "ratio": 14.224727856801147,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      221.0,
+      246.0,
+      122.0
+    ]
+  },
+  {
+    "text": "\u21b3 CrashCart",
+    "ratio": 15.603597446584626,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "\u21b3",
+    "ratio": 14.224727856801147,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      221.0,
+      246.0,
+      122.0
+    ]
+  },
+  {
+    "text": "Product",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Investigation",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Evidence",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Recorded example \u00b7 no new payment",
+    "ratio": 6.757960185287982,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      74.0,
+      91.0,
+      57.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "PAYMENT & DELIVERY, TOGETHER",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Paid is onlyhalf the story.",
+    "ratio": 15.603597446584626,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Your customer paid. Their ticket didn\u2019t arrive. CrashCart connects the checkout, payment and delivery records\u2014so you can find the gap and test the repair.",
+    "ratio": 5.93931843130436,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      90.0,
+      96.0,
+      85.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Explore an investigation \u2198",
+    "ratio": 17.03291597936448,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      255.0,
+      255.0,
+      255.0
+    ],
+    "background": [
+      25.0,
+      29.0,
+      27.0
+    ]
+  },
+  {
+    "text": "\u2198",
+    "ratio": 17.03291597936448,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      255.0,
+      255.0,
+      255.0
+    ],
+    "background": [
+      25.0,
+      29.0,
+      27.0
+    ]
+  },
+  {
+    "text": "A working recorded example. No account or keys needed.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "FOLLOW ONE $29 CHECKOUT",
+    "ratio": 4.852803179958515,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      231.0,
+      236.0,
+      217.0
+    ]
+  },
+  {
+    "text": "02 / 03",
+    "ratio": 4.852803179958515,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      231.0,
+      236.0,
+      217.0
+    ]
+  },
+  {
+    "text": "Customer promise broken",
+    "ratio": 15.54852380389586,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      243.0,
+      246.0,
+      233.0
+    ]
+  },
+  {
+    "text": "But the ticket never arrived.",
+    "ratio": 14.111297803135598,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      231.0,
+      236.0,
+      217.0
+    ]
+  },
+  {
+    "text": "The response was lost. The faulty store recorded no ticket even after its 60-second delivery promise expired.",
+    "ratio": 5.330873909653342,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      88.0,
+      98.0,
+      75.0
+    ],
+    "background": [
+      231.0,
+      236.0,
+      217.0
+    ]
+  },
+  {
+    "text": "1. Payment",
+    "ratio": 14.111297803135598,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      231.0,
+      236.0,
+      217.0
+    ]
+  },
+  {
+    "text": "2. The gap",
+    "ratio": 16.23861813670869,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      249.0,
+      250.0,
+      245.0
+    ]
+  },
+  {
+    "text": "3. The repair",
+    "ratio": 14.111297803135598,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      231.0,
+      236.0,
+      217.0
+    ]
+  },
+  {
+    "text": "One ticket. $29. Within 60 seconds.The same promise throughout.",
+    "ratio": 5.330873909653342,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      88.0,
+      98.0,
+      75.0
+    ],
+    "background": [
+      231.0,
+      236.0,
+      217.0
+    ]
+  },
+  {
+    "text": "01",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "See the whole checkout.",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Bring the customer\u2019s view, payment status and ticket record together.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "02",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Test the customer promise.",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Check the payment amount, ticket count and delivery deadline against fixed rules.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "03",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Keep a replay of the finding.",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Compare the failed checkout and the repair using the same saved checkout records.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Real records. Recorded replay.",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Both outcomes were recomputed during app launch (6 Nov 2026, 07:35:18 UTC). The checkout observations were recorded in October 2026.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "These historical PayPal test observations drive the actual ticket rules again. No PayPal account, AI model, browser service or licence is used by this review.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "01 / THE RESULT",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "One checkout. Two outcomes.",
+    "ratio": 15.603597446584626,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Same $29 \u00b7 same 60-second promise",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "FAILED CHECKOUT",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Promise broken",
+    "ratio": 5.910198107741382,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      136.0,
+      75.0,
+      52.0
+    ],
+    "background": [
+      247.0,
+      238.0,
+      231.0
+    ]
+  },
+  {
+    "text": "Payment arrived.The ticket didn\u2019t.",
+    "ratio": 17.03291597936448,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "The payment reply was lost. The store failed to recover and deliver the ticket.",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Confirmed payment",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "$29.00",
+    "ratio": 17.03291597936448,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Tickets delivered",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "0",
+    "ratio": 17.03291597936448,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Delivery deadline",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "60s",
+    "ratio": 17.03291597936448,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Confirmed payment, zero tickets beyond the deadline. CrashCart marks the customer promise as broken.",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Inspect the failed checkout \u2197",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "\u2197",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "REPAIRED CHECKOUT \u00b7 REPLAY",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Promise kept",
+    "ratio": 8.448258952765547,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      53.0,
+      76.0,
+      36.0
+    ],
+    "background": [
+      239.0,
+      244.0,
+      223.0
+    ]
+  },
+  {
+    "text": "A second check.One delivered ticket.",
+    "ratio": 17.03291597936448,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "In this replay, the repaired store checks the payment again, then saves exactly one ticket.",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Confirmed payment",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "$29.00",
+    "ratio": 17.03291597936448,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Tickets delivered",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "1",
+    "ratio": 17.03291597936448,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Ticket after payment",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "32.26s",
+    "ratio": 17.03291597936448,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Re-executed using the same saved observations. This is a repaired replay, not a new test payment or a deployed fix.",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Inspect the repaired replay \u2197",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "\u2197",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "02 / THE EVIDENCE",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Follow the payment.",
+    "ratio": 15.603597446584626,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Download these records \u2193",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "VIEWING",
+    "ratio": 5.05865835105878,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      238.0,
+      239.0,
+      231.0
+    ]
+  },
+  {
+    "text": "Repaired replay \u00b7 same saved payment response lost",
+    "ratio": 14.709896904724568,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      238.0,
+      239.0,
+      231.0
+    ]
+  },
+  {
+    "text": "Failed checkout",
+    "ratio": 13.678514980737353,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      228.0,
+      232.0,
+      219.0
+    ]
+  },
+  {
+    "text": "Repaired replay",
+    "ratio": 17.03291597936448,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "01 / PAYMENT",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "$29.00 confirmed",
+    "ratio": 17.03291597936448,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Historical completion: 22 Oct 2026, 09:31:52 UTC.",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "02 / DELIVERY",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "1 ticket",
+    "ratio": 17.03291597936448,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Replay creation: 22 Oct 2026, 09:32:24 UTC \u00b7 32.26s after payment.",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "03 / DEADLINE",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "60 seconds",
+    "ratio": 17.03291597936448,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "Unchanged deadline: 22 Oct 2026, 09:32:52 UTC. Outcome: promise kept.",
+    "ratio": 5.857532735951422,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      255.0,
+      255.0,
+      255.0
+    ]
+  },
+  {
+    "text": "What happened, and when",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Show records from All sourcesPayPalCheckout pageTicket storeTest interruption",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "4 of 15 saved observations. Times are relative to confirmed payment; order alone does not establish cause.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "PayPal",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Checkout created",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "-91.44s",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "22 Oct 2026, 09:30:20 UTC \u00b7 Preserved historical observation; no new service request.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "{\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"currency_code\": \"USD\",\n        \"value\": \"29",
+    "ratio": 14.938274722406996,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      239.0,
+      241.0,
+      232.0
+    ]
+  },
+  {
+    "text": "PayPal",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Buyer approval checked",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "-0.86s",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "22 Oct 2026, 09:31:51 UTC \u00b7 Preserved historical observation; no new service request.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "{\n  \"create_time\": \"2026-10-22T09:30:19Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"cu",
+    "ratio": 14.938274722406996,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      239.0,
+      241.0,
+      232.0
+    ]
+  },
+  {
+    "text": "PayPal",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Payment independently checked",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "+32.26s",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "22 Oct 2026, 09:32:24 UTC \u00b7 Preserved historical observation; no new service request.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "{\n  \"create_time\": \"2026-10-22T09:31:52Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"cu",
+    "ratio": 14.938274722406996,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      239.0,
+      241.0,
+      232.0
+    ]
+  },
+  {
+    "text": "PayPal",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Payment independently checked",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "+93.86s",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "22 Oct 2026, 09:33:25 UTC \u00b7 Preserved historical observation; no new service request.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "{\n  \"create_time\": \"2026-10-22T09:31:52Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"cu",
+    "ratio": 14.938274722406996,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      239.0,
+      241.0,
+      232.0
+    ]
+  },
+  {
+    "text": "Input identity and technical result",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Both variants use this identical recorded input. The saved source labels document provenance; they do not independently authenticate historical provider activity.",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "{\n  \"mode\": \"RECORDED_REPLAY\",\n  \"new_payment\": false,\n  \"computed_when\": \"app launch\",\n  \"computed_at\": \"2026-11-06T07:35:18.351030+00:00\",\n  \"input_file_sha256\": \"07609306e131042",
+    "ratio": 14.938274722406996,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      239.0,
+      241.0,
+      232.0
+    ]
+  },
+  {
+    "text": "03 / TRY IT YOURSELF",
+    "ratio": 5.097615730044695,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      91.0,
+      102.0,
+      80.0
+    ],
+    "background": [
+      233.0,
+      237.0,
+      223.0
+    ]
+  },
+  {
+    "text": "A result you can rerun.",
+    "ratio": 14.310849144218297,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      233.0,
+      237.0,
+      223.0
+    ]
+  },
+  {
+    "text": "Download the replay, unzip it, and run the two commands below with Python 3.11 or newer. No credentials or package installation needed.",
+    "ratio": 5.097615730044695,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      91.0,
+      102.0,
+      80.0
+    ],
+    "background": [
+      233.0,
+      237.0,
+      223.0
+    ]
+  },
+  {
+    "text": "Download executable replay \u2193",
+    "ratio": 17.03291597936448,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      255.0,
+      255.0,
+      255.0
+    ],
+    "background": [
+      25.0,
+      29.0,
+      27.0
+    ]
+  },
+  {
+    "text": "\u2193",
+    "ratio": 17.03291597936448,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      255.0,
+      255.0,
+      255.0
+    ],
+    "background": [
+      25.0,
+      29.0,
+      27.0
+    ]
+  },
+  {
+    "text": "FROM THE EXTRACTED FOLDER",
+    "ratio": 4.921427866084545,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      233.0,
+      237.0,
+      223.0
+    ]
+  },
+  {
+    "text": "python3 -m crashcart.replay run input.json --merchant defective\n# Expected: FAIL \u00b7 paid_without_ticket \u00b7 exit 1\n\npython3 -m crashcart.replay run input.json --merchant healthy\n# Exp",
+    "ratio": 15.810639210672948,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      247.0,
+      241.0
+    ]
+  },
+  {
+    "text": "Download the original input only \u2193",
+    "ratio": 14.310849144218297,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      233.0,
+      237.0,
+      223.0
+    ]
+  },
+  {
+    "text": "What this review does\u2014and doesn\u2019t\u2014show",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "The failure is in our intentionally faulty test store, not a PayPal vulnerability. The original fault video is unavailable; the recorded page messages, payment observations and sto",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "The normal CrashCart workspace remains available separately for authorized live test payments when service credentials are configured. Read the workspace setup instructions.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Read the workspace setup instructions",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "\u21b3 CrashCart",
+    "ratio": 15.603597446584626,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "\u21b3",
+    "ratio": 14.224727856801147,
+    "minimum": 3,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      221.0,
+      246.0,
+      122.0
+    ]
+  },
+  {
+    "text": "From a successful payment to a delivered promise.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Reduce motion",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "MIT licence",
+    "ratio": 15.603597446584626,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      25.0,
+      29.0,
+      27.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  },
+  {
+    "text": "Saved evidence. Honest boundaries.",
+    "ratio": 5.365997398960203,
+    "minimum": 4.5,
+    "passes_text_threshold": true,
+    "foreground": [
+      98.0,
+      102.0,
+      95.0
+    ],
+    "background": [
+      246.0,
+      245.0,
+      240.0
+    ]
+  }
+]

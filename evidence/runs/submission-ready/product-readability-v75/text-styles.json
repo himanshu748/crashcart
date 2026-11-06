@@ -1,0 +1,2047 @@
+[
+  {
+    "backgrounds": [
+      "rgb(221, 246, 122)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "tag": "A",
+    "text": "Skip to checkout review"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "25px",
+    "fontWeight": "750",
+    "tag": "A",
+    "text": "↳ CrashCart"
+  },
+  {
+    "backgrounds": [
+      "rgb(221, 246, 122)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "31px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "↳"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "tag": "A",
+    "text": "Product"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "tag": "A",
+    "text": "Investigation"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "tag": "A",
+    "text": "Evidence"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(74, 91, 57)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "Recorded example · no new payment"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "750",
+    "tag": "P",
+    "text": "PAYMENT & DELIVERY, TOGETHER"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "75.52px",
+    "fontWeight": "650",
+    "tag": "H1",
+    "text": "Paid is onlyhalf the story."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(90, 96, 85)",
+    "fontSize": "17px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Your customer paid. Their ticket didn’t arrive. CrashCart connects the checkout, payment and delivery records—so you can find the gap and test the repair."
+  },
+  {
+    "backgrounds": [
+      "rgb(25, 29, 27)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(255, 255, 255)",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "tag": "A",
+    "text": "Explore an investigation ↘"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(25, 29, 27)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(255, 255, 255)",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "tag": "SPAN",
+    "text": "↘"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "A working recorded example. No account or keys needed."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(231, 236, 217)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "750",
+    "tag": "SPAN",
+    "text": "FOLLOW ONE $29 CHECKOUT"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(231, 236, 217)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "02 / 03"
+  },
+  {
+    "backgrounds": [
+      "rgb(243, 246, 233)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(231, 236, 217)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "Customer promise broken"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(231, 236, 217)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "27px",
+    "fontWeight": "650",
+    "tag": "H2",
+    "text": "But the ticket never arrived."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(231, 236, 217)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(88, 98, 75)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "The response was lost. The faulty store recorded no ticket even after its 60-second delivery promise expired."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(231, 236, 217)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "tag": "BUTTON",
+    "text": "1. Payment"
+  },
+  {
+    "backgrounds": [
+      "rgb(249, 250, 245)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(231, 236, 217)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "10px",
+    "fontWeight": "650",
+    "tag": "BUTTON",
+    "text": "2. The gap"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(231, 236, 217)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "tag": "BUTTON",
+    "text": "3. The repair"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(231, 236, 217)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(88, 98, 75)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "One ticket. $29. Within 60 seconds.The same promise throughout."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "01"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "18px",
+    "fontWeight": "650",
+    "tag": "H2",
+    "text": "See the whole checkout."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Bring the customer’s view, payment status and ticket record together."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "02"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "18px",
+    "fontWeight": "650",
+    "tag": "H2",
+    "text": "Test the customer promise."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Check the payment amount, ticket count and delivery deadline against fixed rules."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "03"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "18px",
+    "fontWeight": "650",
+    "tag": "H2",
+    "text": "Keep a replay of the finding."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Compare the failed checkout and the repair using the same saved checkout records."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "14px",
+    "fontWeight": "700",
+    "tag": "STRONG",
+    "text": "Real records. Recorded replay."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Both outcomes were recomputed during app launch (6 Nov 2026, 07:35:18 UTC). The checkout observations were recorded in October 2026."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "These historical PayPal test observations drive the actual ticket rules again. No PayPal account, AI model, browser service or licence is used by this review."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "750",
+    "tag": "P",
+    "text": "01 / THE RESULT"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "35px",
+    "fontWeight": "650",
+    "tag": "H2",
+    "text": "One checkout. Two outcomes."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "Same $29 · same 60-second promise"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "750",
+    "tag": "SPAN",
+    "text": "FAILED CHECKOUT"
+  },
+  {
+    "backgrounds": [
+      "rgb(247, 238, 231)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(136, 75, 52)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "Promise broken"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "27px",
+    "fontWeight": "650",
+    "tag": "H3",
+    "text": "Payment arrived.The ticket didn’t."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "14px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "The payment reply was lost. The store failed to recover and deliver the ticket."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "DT",
+    "text": "Confirmed payment"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "26px",
+    "fontWeight": "650",
+    "tag": "DD",
+    "text": "$29.00"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "DT",
+    "text": "Tickets delivered"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "26px",
+    "fontWeight": "650",
+    "tag": "DD",
+    "text": "0"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "DT",
+    "text": "Delivery deadline"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "26px",
+    "fontWeight": "650",
+    "tag": "DD",
+    "text": "60s"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Confirmed payment, zero tickets beyond the deadline. CrashCart marks the customer promise as broken."
+  },
+  {
+    "backgrounds": [
+      "rgb(246, 245, 240)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "12px",
+    "fontWeight": "650",
+    "tag": "BUTTON",
+    "text": "Inspect the failed checkout ↗"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "12px",
+    "fontWeight": "650",
+    "tag": "SPAN",
+    "text": "↗"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "750",
+    "tag": "SPAN",
+    "text": "REPAIRED CHECKOUT · REPLAY"
+  },
+  {
+    "backgrounds": [
+      "rgb(239, 244, 223)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(53, 76, 36)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "Promise kept"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "27px",
+    "fontWeight": "650",
+    "tag": "H3",
+    "text": "A second check.One delivered ticket."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "14px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "In this replay, the repaired store checks the payment again, then saves exactly one ticket."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "DT",
+    "text": "Confirmed payment"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "26px",
+    "fontWeight": "650",
+    "tag": "DD",
+    "text": "$29.00"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "DT",
+    "text": "Tickets delivered"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "26px",
+    "fontWeight": "650",
+    "tag": "DD",
+    "text": "1"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "DT",
+    "text": "Ticket after payment"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "26px",
+    "fontWeight": "650",
+    "tag": "DD",
+    "text": "32.26s"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Re-executed using the same saved observations. This is a repaired replay, not a new test payment or a deployed fix."
+  },
+  {
+    "backgrounds": [
+      "rgb(246, 245, 240)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "12px",
+    "fontWeight": "650",
+    "tag": "BUTTON",
+    "text": "Inspect the repaired replay ↗"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "12px",
+    "fontWeight": "650",
+    "tag": "SPAN",
+    "text": "↗"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "750",
+    "tag": "P",
+    "text": "02 / THE EVIDENCE"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "35px",
+    "fontWeight": "650",
+    "tag": "H2",
+    "text": "Follow the payment."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "A",
+    "text": "Download these records ↓"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(238, 239, 231)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "750",
+    "tag": "SPAN",
+    "text": "VIEWING"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(238, 239, 231)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "14px",
+    "fontWeight": "650",
+    "tag": "P",
+    "text": "Repaired replay · same saved payment response lost"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(228, 232, 219)",
+      "rgb(238, 239, 231)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "BUTTON",
+    "text": "Failed checkout"
+  },
+  {
+    "backgrounds": [
+      "rgb(255, 255, 255)",
+      "rgb(228, 232, 219)",
+      "rgb(238, 239, 231)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "12px",
+    "fontWeight": "650",
+    "tag": "BUTTON",
+    "text": "Repaired replay"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "750",
+    "tag": "SPAN",
+    "text": "01 / PAYMENT"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "21px",
+    "fontWeight": "650",
+    "tag": "H3",
+    "text": "$29.00 confirmed"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Historical completion: 22 Oct 2026, 09:31:52 UTC."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "750",
+    "tag": "SPAN",
+    "text": "02 / DELIVERY"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "21px",
+    "fontWeight": "650",
+    "tag": "H3",
+    "text": "1 ticket"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Replay creation: 22 Oct 2026, 09:32:24 UTC · 32.26s after payment."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "750",
+    "tag": "SPAN",
+    "text": "03 / DEADLINE"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "21px",
+    "fontWeight": "650",
+    "tag": "H3",
+    "text": "60 seconds"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(255, 255, 255)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Unchanged deadline: 22 Oct 2026, 09:32:52 UTC. Outcome: promise kept."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "21px",
+    "fontWeight": "650",
+    "tag": "H3",
+    "text": "What happened, and when"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "LABEL",
+    "text": "Show records from All sourcesPayPalCheckout pageTicket storeTest interruption"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "4 of 15 saved observations. Times are relative to confirmed payment; order alone does not establish cause."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "PayPal"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "13px",
+    "fontWeight": "600",
+    "tag": "SPAN",
+    "text": "Checkout created"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "-91.44s"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "22 Oct 2026, 09:30:20 UTC · Preserved historical observation; no new service request."
+  },
+  {
+    "backgrounds": [
+      "rgb(239, 241, 232)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "PRE",
+    "text": "{\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"currency_code\": \"USD\",\n        \"value\": \"29"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "PayPal"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "13px",
+    "fontWeight": "600",
+    "tag": "SPAN",
+    "text": "Buyer approval checked"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "-0.86s"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "22 Oct 2026, 09:31:51 UTC · Preserved historical observation; no new service request."
+  },
+  {
+    "backgrounds": [
+      "rgb(239, 241, 232)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "PRE",
+    "text": "{\n  \"create_time\": \"2026-10-22T09:30:19Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"cu"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "PayPal"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "13px",
+    "fontWeight": "600",
+    "tag": "SPAN",
+    "text": "Payment independently checked"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "+32.26s"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "22 Oct 2026, 09:32:24 UTC · Preserved historical observation; no new service request."
+  },
+  {
+    "backgrounds": [
+      "rgb(239, 241, 232)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "PRE",
+    "text": "{\n  \"create_time\": \"2026-10-22T09:31:52Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"cu"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "PayPal"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "13px",
+    "fontWeight": "600",
+    "tag": "SPAN",
+    "text": "Payment independently checked"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "+93.86s"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "22 Oct 2026, 09:33:25 UTC · Preserved historical observation; no new service request."
+  },
+  {
+    "backgrounds": [
+      "rgb(239, 241, 232)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "PRE",
+    "text": "{\n  \"create_time\": \"2026-10-22T09:31:52Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"cu"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "SUMMARY",
+    "text": "Input identity and technical result"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Both variants use this identical recorded input. The saved source labels document provenance; they do not independently authenticate historical provider activity."
+  },
+  {
+    "backgrounds": [
+      "rgb(239, 241, 232)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "PRE",
+    "text": "{\n  \"mode\": \"RECORDED_REPLAY\",\n  \"new_payment\": false,\n  \"computed_when\": \"app launch\",\n  \"computed_at\": \"2026-11-06T07:35:18.351030+00:00\",\n  \"input_file_sha256\": \"07609306e131042"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(233, 237, 223)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(91, 102, 80)",
+    "fontSize": "14px",
+    "fontWeight": "750",
+    "tag": "P",
+    "text": "03 / TRY IT YOURSELF"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(233, 237, 223)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "34px",
+    "fontWeight": "650",
+    "tag": "H2",
+    "text": "A result you can rerun."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(233, 237, 223)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(91, 102, 80)",
+    "fontSize": "14px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "Download the replay, unzip it, and run the two commands below with Python 3.11 or newer. No credentials or package installation needed."
+  },
+  {
+    "backgrounds": [
+      "rgb(25, 29, 27)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(233, 237, 223)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(255, 255, 255)",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "tag": "A",
+    "text": "Download executable replay ↓"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgb(25, 29, 27)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(233, 237, 223)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(255, 255, 255)",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "tag": "SPAN",
+    "text": "↓"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(233, 237, 223)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "10px",
+    "fontWeight": "750",
+    "tag": "SPAN",
+    "text": "FROM THE EXTRACTED FOLDER"
+  },
+  {
+    "backgrounds": [
+      "rgb(246, 247, 241)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(233, 237, 223)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "PRE",
+    "text": "python3 -m crashcart.replay run input.json --merchant defective\n# Expected: FAIL · paid_without_ticket · exit 1\n\npython3 -m crashcart.replay run input.json --merchant healthy\n# Exp"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(233, 237, 223)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "A",
+    "text": "Download the original input only ↓"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "21px",
+    "fontWeight": "650",
+    "tag": "H2",
+    "text": "What this review does—and doesn’t—show"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "The failure is in our intentionally faulty test store, not a PayPal vulnerability. The original fault video is unavailable; the recorded page messages, payment observations and sto"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "The normal CrashCart workspace remains available separately for authorized live test payments when service credentials are configured. Read the workspace setup instructions."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "A",
+    "text": "Read the workspace setup instructions"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "21px",
+    "fontWeight": "750",
+    "tag": "A",
+    "text": "↳ CrashCart"
+  },
+  {
+    "backgrounds": [
+      "rgb(221, 246, 122)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "31px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "↳"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "P",
+    "text": "From a successful payment to a delivered promise."
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "12px",
+    "fontWeight": "400",
+    "tag": "LABEL",
+    "text": "Reduce motion"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(25, 29, 27)",
+    "fontSize": "13px",
+    "fontWeight": "400",
+    "tag": "A",
+    "text": "MIT licence"
+  },
+  {
+    "backgrounds": [
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgba(0, 0, 0, 0)",
+      "rgb(246, 245, 240)"
+    ],
+    "color": "rgb(98, 102, 95)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "tag": "SPAN",
+    "text": "Saved evidence. Honest boundaries."
+  }
+]

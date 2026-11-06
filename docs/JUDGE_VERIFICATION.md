@@ -86,3 +86,9 @@ CC-052 uses the existing source-bound local contention experiment: 17/17 groups 
 ## Loading-state repair — 6 November
 
 The v72 change affects only failed data loading in the public recorded page. Original mode/signature checks, success-path rendering, styles and replay source remain unchanged. Actual local browser verification covered delayed, unavailable, malformed and partial data, phone layouts, normal recovery, filtering and an executable download. [Fresh scoped result](../evidence/runs/submission-ready/loading-states-v72.json). Earlier browser checks retain their original date/scope; this is not a new provider execution or a full accessibility audit.
+
+## Local product readability — 6 November
+
+On the source hashes in [v75 evidence](../evidence/runs/submission-ready/product-readability-v75.json), the public recorded page has simpler customer-facing copy, a working workspace setup link and repaired small-label contrast. The actual browser exercised desktop, 390px and 320px layouts, all story states, both cases, filters, details, keyboard traversal, the product motion control and keyboard download. Local injected responses exercised loading, error, empty records and recovery; no provider calls or new payment occurred.
+
+The downloaded executable ZIP matched the served hash and produced expected defective exit 1 / `paid_without_ticket` and healthy exit 0 / `ticket_delivered_once_on_time`, with Python socket connection entry points denied (not OS network isolation). Full suite: **367 tests in 44.927s, OK**; replay: **3 tests in 0.144s, OK**; UI error tests: **5 pass**. DV-08 is a local pass; actual OS motion preferences, screen-reader/zoom/non-text contrast and hosted updates remain unverified. No original CC check is newly accepted; **47/60**.

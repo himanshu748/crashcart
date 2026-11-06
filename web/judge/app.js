@@ -54,7 +54,7 @@ function showStory(stage){
   const descriptions={
     payment:["01 / 03","Payment confirmed","The payment went through.","PayPal’s saved record confirms the $29 payment. That tells us the money arrived—not whether the customer got their ticket."],
     delivery:["02 / 03","Customer promise broken","But the ticket never arrived.","The response was lost. The faulty store recorded no ticket even after its 60-second delivery promise expired."],
-    repair:["03 / 03","Healthy merchant replay","A second check closes the gap.",review?`The healthy merchant checks the same saved payment record and creates exactly one ticket after ${duration(seconds(review.cases.healthy.merchant.tickets[0].created_at,review.cases.healthy.purchase.capture_completed_at))}. Same input. Same deadline.`:"The healthy merchant rechecks the saved payment record and delivers one ticket within the unchanged 60-second promise."]
+    repair:["03 / 03","Repaired checkout replay","A second check closes the gap.",review?`The repaired store checks the same saved payment record and creates exactly one ticket after ${duration(seconds(review.cases.healthy.merchant.tickets[0].created_at,review.cases.healthy.purchase.capture_completed_at))}. Same input. Same deadline.`:"The repaired store rechecks the saved payment record and delivers one ticket within the unchanged 60-second promise."]
   };
   const values=descriptions[stage];
   document.querySelector(".promise").dataset.story=stage;
@@ -79,7 +79,7 @@ fetch("data.json",{cache:"no-store"}).then(response=>{if(!response.ok)throw new 
   byId("healthy-count").textContent=data.cases.healthy.receipt.ticket_count;
   const healthy=data.cases.healthy;
   byId("healthy-time").textContent=duration(seconds(healthy.merchant.tickets[0].created_at,healthy.purchase.capture_completed_at));
-  byId("defective-finding").textContent="Confirmed payment, zero tickets beyond the deadline. The deterministic checker marks the customer promise as broken.";
+  byId("defective-finding").textContent="Confirmed payment, zero tickets beyond the deadline. CrashCart marks the customer promise as broken.";
   renderCase();byId("load-state").hidden=true;byId("review").hidden=false;
   // The launch URL may target the finished case before its records arrive.
   const anchor=byId(window.location.hash.slice(1));

@@ -1,0 +1,506 @@
+[
+  {
+    "id": "",
+    "label": "CrashCart home",
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "↳ CrashCart"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "Product"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "Investigation"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "Evidence"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "Explore an investigation ↘"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": "true",
+    "tag": "BUTTON",
+    "text": "1. Payment",
+    "after": {
+      "download": "downloads/defective.json",
+      "pressed": "true",
+      "selection": "Failed checkout · saved payment response lost",
+      "story": "The payment went through."
+    }
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": "false",
+    "tag": "BUTTON",
+    "text": "2. The gap",
+    "after": {
+      "download": "downloads/defective.json",
+      "pressed": "true",
+      "selection": "Failed checkout · saved payment response lost",
+      "story": "But the ticket never arrived."
+    }
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": "false",
+    "tag": "BUTTON",
+    "text": "3. The repair",
+    "after": {
+      "download": "downloads/defective.json",
+      "pressed": "true",
+      "selection": "Failed checkout · saved payment response lost",
+      "story": "A second check closes the gap."
+    }
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": "true",
+    "tag": "BUTTON",
+    "text": "Inspect the failed checkout ↗"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": "false",
+    "tag": "BUTTON",
+    "text": "Inspect the repaired replay ↗"
+  },
+  {
+    "id": "download-case",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "Download these records ↓"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": "true",
+    "tag": "BUTTON",
+    "text": "Failed checkout",
+    "after": {
+      "download": "downloads/defective.json",
+      "pressed": "true",
+      "selection": "Failed checkout · saved payment response lost",
+      "story": "A second check closes the gap."
+    }
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": "false",
+    "tag": "BUTTON",
+    "text": "Repaired replay",
+    "after": {
+      "download": "downloads/healthy.json",
+      "pressed": "true",
+      "selection": "Repaired replay · same saved payment response lost",
+      "story": "A second check closes the gap."
+    }
+  },
+  {
+    "id": "source-filter",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SELECT",
+    "text": "All sourcesPayPalCheckout pageTicket storeTest interruption",
+    "after": {
+      "count": "15 of 15 saved observations. Times are relative to confirmed payment; order alone does not establish cause.",
+      "filter": "all"
+    }
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Checkout pageCustomer page observed-113.36s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Customer page observed",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"action\": \"investigation_created\",\n  \"browser_kind\": \"LOCAL_BROWSER\",\n  \"recorded_payload\": {\n    \"action\": \"investigation_created\",\n    \"browser_kind\": \"LOCAL_BROWSER\",\n    \"url_path\": \"/\",\n    \"visible_text\": \"CREATED | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | \"\n  },\n  \"url_path\": \"/\",\n  \"visible_text\": \"CREATED | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | \"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "PayPalCheckout created-91.44s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Checkout created",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"currency_code\": \"USD\",\n        \"value\": \"29.00\"\n      },\n      \"custom_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n      \"reference_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\"\n    }\n  ],\n  \"recorded_payload\": {\n    \"id\": \"96L27649A64155625\",\n    \"intent\": \"CAPTURE\",\n    \"purchase_units\": [\n      {\n        \"amount\": {\n          \"currency_code\": \"USD\",\n          \"value\": \"29.00\"\n        },\n        \"custom_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n        \"reference_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\"\n      }\n    ],\n    \"status\": \"PAYER_ACTION_REQUIRED\"\n  },\n  \"status\": \"PAYER_ACTION_REQUIRED\"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Checkout pageCustomer page observed-91.21s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Customer page observed",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"action\": \"leaving_for_buyer_approval\",\n  \"browser_kind\": \"LOCAL_BROWSER\",\n  \"recorded_payload\": {\n    \"action\": \"leaving_for_buyer_approval\",\n    \"browser_kind\": \"LOCAL_BROWSER\",\n    \"url_path\": \"/\",\n    \"visible_text\": \"awaiting_approval | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | \"\n  },\n  \"url_path\": \"/\",\n  \"visible_text\": \"awaiting_approval | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | \"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Checkout pageCustomer page observed-46.32s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Customer page observed",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"action\": \"buyer_returned\",\n  \"browser_kind\": \"LOCAL_BROWSER\",\n  \"recorded_payload\": {\n    \"action\": \"buyer_returned\",\n    \"browser_kind\": \"LOCAL_BROWSER\",\n    \"url_path\": \"/return\",\n    \"visible_text\": \"awaiting_approval | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | Returned from PayPal. Confirming capture requires an independent approval read.\"\n  },\n  \"url_path\": \"/return\",\n  \"visible_text\": \"awaiting_approval | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | Returned from PayPal. Confirming capture requires an independent approval read.\"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "PayPalBuyer approval checked-0.86s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Buyer approval checked",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"create_time\": \"2026-10-22T09:30:19Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"currency_code\": \"USD\",\n        \"value\": \"29.00\"\n      },\n      \"custom_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n      \"reference_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\"\n    }\n  ],\n  \"recorded_payload\": {\n    \"create_time\": \"2026-10-22T09:30:19Z\",\n    \"id\": \"96L27649A64155625\",\n    \"intent\": \"CAPTURE\",\n    \"purchase_units\": [\n      {\n        \"amount\": {\n          \"currency_code\": \"USD\",\n          \"value\": \"29.00\"\n        },\n        \"custom_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n        \"reference_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\"\n      }\n    ],\n    \"status\": \"APPROVED\"\n  },\n  \"status\": \"APPROVED\"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Test interruptionPayment response interruption started-0.83s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Payment response interruption started",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"kind\": \"response_loss\",\n  \"merchant\": \"defective\",\n  \"recorded_payload\": {\n    \"kind\": \"response_loss\",\n    \"merchant\": \"defective\"\n  }\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Test interruptionPayment reply recorded+1.44s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Payment reply recorded",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"create_time\": \"2026-10-22T09:30:19Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"currency_code\": \"USD\",\n        \"value\": \"29.00\"\n      },\n      \"custom_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n      \"payments\": {\n        \"captures\": [\n          {\n            \"amount\": {\n              \"currency_code\": \"USD\",\n              \"value\": \"29.00\"\n            },\n            \"create_time\": \"2026-10-22T09:31:52Z\",\n            \"custom_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n            \"id\": \"replay_capture_0de0832e34ff45f39c536fa77706efa0\",\n            \"status\": \"COMPLETED\",\n            \"update_time\": \"2026-10-22T09:31:52Z\"\n          }\n        ]\n      },\n      \"reference_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\"\n    }\n  ],\n  \"recorded_payload\": {\n    \"create_time\": \"2026-10-22T09:30:19Z\",\n    \"id\": \"96L27649A64155625\",\n    \"intent\": \"CAPTURE\",\n    \"purchase_units\": [\n      {\n        \"amount\": {\n          \"currency_code\": \"USD\",\n          \"value\": \"29.00\"\n        },\n        \"custom_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n        \"payments\": {\n          \"captures\": [\n            {\n              \"amount\": {\n                \"currency_code\": \"USD\",\n                \"value\": \"29.00\"\n              },\n              \"create_time\": \"2026-10-22T09:31:52Z\",\n              \"custom_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n              \"id\": \"8HU12237PW709410S\",\n              \"status\": \"COMPLETED\",\n              \"update_time\": \"2026-10-22T09:31:52Z\"\n            }\n          ]\n        },\n        \"reference_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\"\n      }\n    ],\n    \"status\": \"COMPLETED\",\n    \"update_time\": \"2026-10-22T09:31:52Z\"\n  },\n  \"status\": \"COMPLETED\",\n  \"update_time\": \"2026-10-22T09:31:52Z\"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Checkout pageCustomer page observed+1.54s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Customer page observed",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"action\": \"capture_result\",\n  \"browser_kind\": \"LOCAL_BROWSER\",\n  \"recorded_payload\": {\n    \"action\": \"capture_result\",\n    \"browser_kind\": \"LOCAL_BROWSER\",\n    \"url_path\": \"/return\",\n    \"visible_text\": \"inconclusive | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | Payment could not be confirmed. No ticket is available yet.\"\n  },\n  \"url_path\": \"/return\",\n  \"visible_text\": \"inconclusive | No verdict. Collect independent payment and delivery evidence to evaluate this promise. | 0 tickets | Payment could not be confirmed. No ticket is available yet.\"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "PayPalPayment independently checked+32.26s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Payment independently checked",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"create_time\": \"2026-10-22T09:31:52Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"currency_code\": \"USD\",\n        \"value\": \"29.00\"\n      },\n      \"custom_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n      \"payments\": {\n        \"captures\": [\n          {\n            \"amount\": {\n              \"currency_code\": \"USD\",\n              \"value\": \"29.00\"\n            },\n            \"create_time\": \"2026-10-22T09:31:52Z\",\n            \"custom_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n            \"id\": \"replay_capture_0de0832e34ff45f39c536fa77706efa0\",\n            \"status\": \"COMPLETED\",\n            \"update_time\": \"2026-10-22T09:31:52Z\"\n          }\n        ]\n      },\n      \"reference_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\"\n    }\n  ],\n  \"recorded_payload\": {\n    \"create_time\": \"2026-10-22T09:31:52Z\",\n    \"id\": \"96L27649A64155625\",\n    \"intent\": \"CAPTURE\",\n    \"purchase_units\": [\n      {\n        \"amount\": {\n          \"currency_code\": \"USD\",\n          \"value\": \"29.00\"\n        },\n        \"custom_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n        \"payments\": {\n          \"captures\": [\n            {\n              \"amount\": {\n                \"currency_code\": \"USD\",\n                \"value\": \"29.00\"\n              },\n              \"create_time\": \"2026-10-22T09:31:52Z\",\n              \"custom_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n              \"id\": \"8HU12237PW709410S\",\n              \"status\": \"COMPLETED\",\n              \"update_time\": \"2026-10-22T09:31:52Z\"\n            }\n          ]\n        },\n        \"reference_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\"\n      }\n    ],\n    \"status\": \"COMPLETED\",\n    \"update_time\": \"2026-10-22T09:31:52Z\"\n  },\n  \"status\": \"COMPLETED\",\n  \"update_time\": \"2026-10-22T09:31:52Z\"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Ticket storeTicket store checked+32.29s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Ticket store checked",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"known\": true,\n  \"observed_at\": \"2026-10-22T09:32:24.286225Z\",\n  \"order_id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"payment_state\": \"COMPLETED\",\n  \"purchase_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n  \"recorded_payload\": {\n    \"known\": true,\n    \"observed_at\": \"2026-10-22T09:32:24.286225Z\",\n    \"order_id\": \"96L27649A64155625\",\n    \"purchase_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n    \"run_id\": \"run_4f97529ceecc4901a478316830264ebf\",\n    \"ticket_count\": 0,\n    \"tickets\": []\n  },\n  \"run_id\": \"run_0de0832e34ff45f39c536fa77706efa0\",\n  \"status\": \"DELIVERED\",\n  \"ticket_count\": 1,\n  \"tickets\": [\n    {\n      \"created_at\": \"2026-10-22T09:32:24.261423Z\",\n      \"id\": \"ticket_812b3d1e4d0b4be9a9dda8e0a68224ef\",\n      \"purchase_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\"\n    }\n  ]\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Checkout pageCustomer page observed+32.39s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Customer page observed",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"action\": \"reconciliation_result\",\n  \"browser_kind\": \"LOCAL_BROWSER\",\n  \"recorded_payload\": {\n    \"action\": \"reconciliation_result\",\n    \"browser_kind\": \"LOCAL_BROWSER\",\n    \"url_path\": \"/return\",\n    \"visible_text\": \"inconclusive | INCONCLUSIVE: The fixed recovery window is still open; zero tickets is not yet a failure. | 0 tickets | \"\n  },\n  \"url_path\": \"/return\",\n  \"visible_text\": \"inconclusive | INCONCLUSIVE: The fixed recovery window is still open; zero tickets is not yet a failure. | 0 tickets | \"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "PayPalPayment independently checked+93.86s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Payment independently checked",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"create_time\": \"2026-10-22T09:31:52Z\",\n  \"id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"intent\": \"CAPTURE\",\n  \"purchase_units\": [\n    {\n      \"amount\": {\n        \"currency_code\": \"USD\",\n        \"value\": \"29.00\"\n      },\n      \"custom_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n      \"payments\": {\n        \"captures\": [\n          {\n            \"amount\": {\n              \"currency_code\": \"USD\",\n              \"value\": \"29.00\"\n            },\n            \"create_time\": \"2026-10-22T09:31:52Z\",\n            \"custom_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n            \"id\": \"replay_capture_0de0832e34ff45f39c536fa77706efa0\",\n            \"status\": \"COMPLETED\",\n            \"update_time\": \"2026-10-22T09:31:52Z\"\n          }\n        ]\n      },\n      \"reference_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\"\n    }\n  ],\n  \"recorded_payload\": {\n    \"create_time\": \"2026-10-22T09:31:52Z\",\n    \"id\": \"96L27649A64155625\",\n    \"intent\": \"CAPTURE\",\n    \"purchase_units\": [\n      {\n        \"amount\": {\n          \"currency_code\": \"USD\",\n          \"value\": \"29.00\"\n        },\n        \"custom_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n        \"payments\": {\n          \"captures\": [\n            {\n              \"amount\": {\n                \"currency_code\": \"USD\",\n                \"value\": \"29.00\"\n              },\n              \"create_time\": \"2026-10-22T09:31:52Z\",\n              \"custom_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n              \"id\": \"8HU12237PW709410S\",\n              \"status\": \"COMPLETED\",\n              \"update_time\": \"2026-10-22T09:31:52Z\"\n            }\n          ]\n        },\n        \"reference_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\"\n      }\n    ],\n    \"status\": \"COMPLETED\",\n    \"update_time\": \"2026-10-22T09:31:52Z\"\n  },\n  \"status\": \"COMPLETED\",\n  \"update_time\": \"2026-10-22T09:31:52Z\"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Ticket storeTicket store checked+93.87s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Ticket store checked",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"known\": true,\n  \"observed_at\": \"2026-10-22T09:33:25.872684Z\",\n  \"order_id\": \"replay_order_0de0832e34ff45f39c536fa77706efa0\",\n  \"payment_state\": \"COMPLETED\",\n  \"purchase_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\",\n  \"recorded_payload\": {\n    \"known\": true,\n    \"observed_at\": \"2026-10-22T09:33:25.872684Z\",\n    \"order_id\": \"96L27649A64155625\",\n    \"purchase_id\": \"purchase_3c631279505b4ce0842e48fd02705caf\",\n    \"run_id\": \"run_4f97529ceecc4901a478316830264ebf\",\n    \"ticket_count\": 0,\n    \"tickets\": []\n  },\n  \"run_id\": \"run_0de0832e34ff45f39c536fa77706efa0\",\n  \"status\": \"DELIVERED\",\n  \"ticket_count\": 1,\n  \"tickets\": [\n    {\n      \"created_at\": \"2026-10-22T09:32:24.261423Z\",\n      \"id\": \"ticket_812b3d1e4d0b4be9a9dda8e0a68224ef\",\n      \"purchase_id\": \"purchase_de9dcf306ba94fb49ff1fd81581a70b9\"\n    }\n  ]\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Checkout pageCustomer page observed+93.92s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Customer page observed",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"action\": \"reconciliation_result\",\n  \"browser_kind\": \"LOCAL_BROWSER\",\n  \"recorded_payload\": {\n    \"action\": \"reconciliation_result\",\n    \"browser_kind\": \"LOCAL_BROWSER\",\n    \"url_path\": \"/return\",\n    \"visible_text\": \"failed | FAIL: Confirmed payment has zero tickets beyond the fixed recovery deadline. | 0 tickets | \"\n  },\n  \"url_path\": \"/return\",\n  \"visible_text\": \"failed | FAIL: Confirmed payment has zero tickets beyond the fixed recovery deadline. | 0 tickets | \"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Checkout pageCustomer page observed+309.52s",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "",
+    "label": "Original details: Customer page observed",
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"action\": \"buyer_returned\",\n  \"browser_kind\": \"LOCAL_BROWSER\",\n  \"recorded_payload\": {\n    \"action\": \"buyer_returned\",\n    \"browser_kind\": \"LOCAL_BROWSER\",\n    \"url_path\": \"/return\",\n    \"visible_text\": \"failed | FAIL: Confirmed payment has zero tickets beyond the fixed recovery deadline. | 0 tickets | Returned from PayPal. Confirming capture requires an independent approval read.\"\n  },\n  \"url_path\": \"/return\",\n  \"visible_text\": \"failed | FAIL: Confirmed payment has zero tickets beyond the fixed recovery deadline. | 0 tickets | Returned from PayPal. Confirming capture requires an independent approval read.\"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "SUMMARY",
+    "text": "Input identity and technical result",
+    "after": {
+      "open": true
+    }
+  },
+  {
+    "id": "technical-result",
+    "label": null,
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "PRE",
+    "text": "{\n  \"mode\": \"RECORDED_REPLAY\",\n  \"new_payment\": false,\n  \"computed_when\": \"app launch\",\n  \"computed_at\": \"2026-11-06T07:35:18.351030+00:00\",\n  \"input_file_sha256\": \"07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288\",\n  \"canonical_input_sha256\": \"19c9e1bfb3f03b21f295c3e55e3d10b567fa1fc1b631680a56fe32da56aaf308\",\n  \"merchant_variant\": \"healthy\",\n  \"verdict\": \"PASS\",\n  \"signature\": \"ticket_delivered_once_on_time\",\n  \"invariant\": {\n    \"version\": \"ticket-v1\",\n    \"amount\": 2900,\n    \"currency\": \"USD\",\n    \"ticket_count\": 1,\n    \"recovery_seconds\": 60\n  },\n  \"source_authenticity\": \"not authenticated by replay; inspect original service evidence\"\n}"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "Download executable replay ↓"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "Download the original input only ↓"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "Read the workspace setup instructions"
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "↳ CrashCart"
+  },
+  {
+    "id": "reduce-motion",
+    "label": null,
+    "outline": "rgb(0, 95, 204) auto 1px",
+    "pressed": null,
+    "tag": "INPUT",
+    "text": "",
+    "after": {
+      "animation": "none",
+      "checked": true,
+      "class": "reduce-motion",
+      "transition": "0s"
+    }
+  },
+  {
+    "id": "",
+    "label": null,
+    "outline": "rgb(64, 90, 18) solid 3px",
+    "pressed": null,
+    "tag": "A",
+    "text": "MIT licence"
+  }
+]
