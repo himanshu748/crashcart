@@ -1,0 +1,15 @@
+{
+  "scope": "Evidence patch formatting only; runtime and prior test results unchanged",
+  "cause": "git diff --cached --check flagged a single-space blank context line inside the archived unified diff; source files were clean. The shell continued to commit/push, so that formatting failure is preserved here.",
+  "previous_source_commit": "ccf283b293fa9867156169238e61a09e3b68f9bb",
+  "old_patch_sha256": "959026597352ca85fb67c81974fb1fb7dcf075c22da2c268ab1a92005a0818db",
+  "new_patch_sha256": "c0b4a5719c40f342db0c173d43503e2583d57ccd5b95bfaf0107af2a9323f041",
+  "repair": "Regenerated the exact three-file diff with zero context; no source changes and no whitespace checker relaxed.",
+  "verification": "Applied using git apply --unidiff-zero in a disposable directory initialized from the parent source; all three resulting files byte-match the tested source.",
+  "source_files": [
+    "web/judge/app.js",
+    "web/judge/index.html",
+    "web/judge/style.css"
+  ],
+  "result": "PASS"
+}
