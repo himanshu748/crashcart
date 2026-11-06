@@ -1,0 +1,44 @@
+{
+  "source_commit": "1cfad2ca0ded1035a68ed885ba0aac93d912ff4e",
+  "runtime_changed": false,
+  "full_suite": {
+    "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest discover -v",
+    "cwd": "public repository",
+    "exit_code": 0,
+    "summary": "Ran 367 tests in 51.427s; OK",
+    "log_sha256": "4e099c420370b60cde17be79d281de27ea64f936e5ce0219a239a80c9890bbce"
+  },
+  "replay": {
+    "command": "env PATH=/opt/homebrew/opt/python@3.13/libexec/bin:/opt/homebrew/bin:/usr/bin:/bin PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 python3 -m unittest tests.test_public_replay -v",
+    "exit_code": 0,
+    "summary": "Ran 3 tests in 0.383s; OK",
+    "outcomes": [
+      "Defective paid_without_ticket",
+      "Timely healthy ticket_delivered_once_on_time",
+      "Original late healthy ticket_delivered_late"
+    ],
+    "log_sha256": "63f3a5eeacdfb7b805a1cacd85f63f6c55bad3fc9303c4078b06e0df11cb49cc"
+  },
+  "acceptance_progress": {
+    "command": "python3 scripts/check_completion.py progress --report evidence/runs/continuation-v70/progress.json",
+    "verified_count": 47,
+    "total": 60,
+    "errors": []
+  },
+  "cleanup": {
+    "absent_pids": [
+      9246,
+      14177,
+      13815,
+      9496,
+      9539,
+      9511,
+      9512
+    ],
+    "command": "ps -p 9246,14177,13815,9496,9539,9511,9512 -o pid=,command=",
+    "output": "",
+    "exit_code": 1
+  },
+  "safari_handoff": "https://himanshu748.github.io/crashcart/ rendered with Recorded example label",
+  "provider_or_capture_acceptance": false
+}

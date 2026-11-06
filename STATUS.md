@@ -4,7 +4,11 @@
 
 ## Current delivery
 
-**6 November verification:** the replacement checkout preparation and historical repair impact review passed independent review. The checkout remains inactive: buyer readiness and the new scoped grant are pending. Historical delivery timing is preserved as historical only. **47/60; no new CC IDs.**
+**6 November recorded-checkout result:** the approved v69 attempt failed before checkout when captured frames stopped. The unchanged five-second guard closed the gateway, tunnel and recorder in 87.881 seconds; all four processes are absent. No order or payment was created. Private video contains 81.551667 seconds / 1,209 frames, no audio and 33 timestamp warnings. The first capture error was not retained; the later cleanup error does not identify its cause. Independent review confirms this failed result. The grant is consumed. **47/60; no new CC IDs.** [Evidence](evidence/runs/submission-ready/checkout-failure-v69.json).
+
+The previously reviewed historical repair remains historical partial support only. Offline follow-through prepared an isolated recorder that retains the first lifecycle error; 12 lifecycle assertions, frame admission and both watchdog probes pass, with independent review. Actual capture with this candidate is **unverified**. An isolated UI candidate passed six tests and actual Safari checks: HTML error responses reproduce the old message, the candidate shows a clear connection error, and case selection recovers after valid responses return. The historical Safari response remains unknown. Neither candidate changes the frozen accepted or public runtime. [Diagnostic evidence](evidence/runs/submission-ready/diagnostics-v70.json).
+
+**Next:** review the prepared diagnostic for a separately bounded capture, before any new recorded checkout. Two failed recorded-checkout attempts are preserved; no automatic live retry. All temporary browser-test servers and capture/tunnel processes are closed. The public video and owner submission remain pending.
 
 **5 November recording verification:** the repaired recorder passed an independently reviewed bounded native-capture probe: 67.143333 seconds of video, 997 frames, no audio and clean decode. Process exit took 68.190 seconds; maximum observed frame-heartbeat age was 0.174427 seconds against the unchanged five-second limit. The prior failed checkout attempt remains preserved. **47/60; no new CC IDs.** Full matching checkout footage is still missing. [Scoped evidence](evidence/runs/submission-ready/capture-v68.json).
 
@@ -20,7 +24,7 @@ The existing live workspace and sponsor integrations remain separate and require
 
 ## Verification
 
-Latest local suite on Python 3.13.15 (5 November): **367 tests in 70.969s, OK**. Replay suite: **3 tests in 0.285s, OK**. An initial attempt accidentally used unsupported Python 3.9 and failed; its output is retained. No source or assertion was changed for the corrected run. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
+Latest local suite on Python 3.13.15 (6 November): **367 tests in 51.427s, OK**. Replay suite: **3 tests in 0.383s, OK**. [Current commands and results](evidence/runs/submission-ready/validation-v70.json). Earlier validation accidentally used unsupported Python 3.9 and failed; its output is retained. No source or assertion was changed for the corrected run. Timing tests: **45 pass, 0 fail**. Build/typecheck, syntax, compilation and clean foundation checks passed. Actual browser checks covered desktop, 390px/320px, keyboard, filtering, details, downloads and reduced-motion override. Independent review passed after fixing the ZIP licence notice. See [exact commands and evidence](docs/JUDGE_VERIFICATION.md).
 
 Current Postman execution passed seven local assertions and 48 assertions against copied historical Sandbox observations (six GETs); missing proof still fails. No new provider call was made. CC-050 remains open through CC-035.
 

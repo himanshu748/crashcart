@@ -66,4 +66,16 @@ The earlier capture blocker is resolved for a bounded harmless probe of the repa
 
 ## Historical repair review — v69
 
-[Scoped source and evidence review](../evidence/runs/submission-ready/repair-impact-v69.json) passed, including frozen dependencies/assertions and independent local tests. It preserves the original execution date and records the changed purchase updated_at timestamp. This adds historical partial support, not current provider/timing proof or a CC checkmark. A fresh CC-035 checkout is independently prepared; buyer readiness and new scoped authorization remain pending.
+[Scoped source and evidence review](../evidence/runs/submission-ready/repair-impact-v69.json) passed, including frozen dependencies/assertions and independent local tests. It preserves the original execution date and records the changed purchase updated_at timestamp. This adds historical partial support, not current provider/timing proof or a CC checkmark. The subsequently approved v69 attempt failed before checkout, as recorded below.
+
+## Recorded-checkout attempt — v69 failure
+
+The approved attempt failed on the unchanged five-second captured-frame guard and closed in 87.881 seconds. Read-only records contain no order, capture, operation, event, ticket or job; all four owned processes are absent. Private video has 1,209 frames / 81.551667 seconds, no audio and 33 timestamp warnings. The original stream error was discarded, so its cause is unknown; Safari’s later pattern error has no proven causal relation. The grant is consumed, and two failed recorded-checkout attempts remain preserved. No automatic live retry is planned. [Independent failed-attempt accounting](../evidence/runs/submission-ready/checkout-failure-v69.json).
+
+**47/60; no new CC IDs.** Next: offline lifecycle diagnostics and local Safari response tests. All original acceptance conditions and unchecked items remain unchanged.
+
+## Offline diagnostics — v70
+
+The isolated recorder now preserves original lifecycle errors separately from cleanup errors. Swift 6 final compilation, 12 lifecycle assertions (including 1,000 concurrent transitions), unchanged frame-admission checks and both bounded watchdog probes pass. Independent review accepts diagnostic behavior only; the new capture binary has never run.
+
+Actual Safari locally reproduced the exact pattern error for an HTML 502 API response, while valid JSON rendered normally. An isolated error-handling candidate passed six tests and browser checks for a clear connection message and recovery. This does not establish the historical v69 response or recorder cause. Neither candidate is promoted into accepted or public application source. [Scoped results](../evidence/runs/submission-ready/diagnostics-v70.json). **47/60; no new checks.**

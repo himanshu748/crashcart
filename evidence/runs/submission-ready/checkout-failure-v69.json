@@ -1,0 +1,68 @@
+{
+  "verification_kind": "FAILED_CAPTURE_BEFORE_CHECKOUT",
+  "checked_at": "2026-11-06T06:39:10.487990+00:00",
+  "run_id": "run_4836246736a0450597dcdada15166fcd",
+  "requirement": "CC-035",
+  "status": "FAILED",
+  "verified_count": 47,
+  "newly_verified": [],
+  "source_freeze_files_checked": 51,
+  "source_freeze_matches": true,
+  "grant": "CONSUMED",
+  "elapsed_seconds": 87.881,
+  "failure": "RECORDER_HEARTBEAT_STALE",
+  "last_complete_frame_at": "2026-11-06T06:27:23.531Z",
+  "cleanup_within_window": true,
+  "owned_processes_absent": [
+    9496,
+    9539,
+    9511,
+    9512
+  ],
+  "provider_state": {
+    "order_id": null,
+    "capture_id": null,
+    "operations": 0,
+    "events": 0,
+    "tickets": 0,
+    "jobs": 0,
+    "new_payments": 0
+  },
+  "media": {
+    "duration_seconds": 81.551667,
+    "frames": 1209,
+    "width": 2648,
+    "height": 1846,
+    "video_streams": 1,
+    "audio_streams": 0,
+    "decode_exit_code": 0,
+    "non_monotonic_dts_warnings": 33,
+    "final_receipt_present": false,
+    "uploaded": false
+  },
+  "cause": "Original stream-stop reason was not recorded. Later cleanup reports SCStreamErrorDomain -3808; it does not establish the initial cause.",
+  "ui_error": "Safari pattern error observed after failure; chronology and causal relation to recording remain unproven.",
+  "independent_review": {
+    "reviewer": "/root/v69_failure_review",
+    "decision": "PASS_FOR_FAILED_ATTEMPT_ACCOUNTING_ONLY",
+    "checks": [
+      "51 source bindings and prepared/review hashes match",
+      "Read-only unpaid SQLite state",
+      "Exact child PIDs absent",
+      "ffprobe metadata and full decode",
+      "Private frames at 55,70,75,81 seconds"
+    ],
+    "limits": [
+      "No checkout acceptance",
+      "No clean decode claim",
+      "No supported causal ordering of UI error and stream stop"
+    ]
+  },
+  "artifacts": {
+    "window.json": "fcf5d819c363fe79b1ad4802383ba201f1b7181c159035376edacd5d00f5c007",
+    "recorder.log": "c7ae4704ecd2d632853c72250da7b6b3054d3f7ed6f5adddfaf4e683e19f37a9",
+    "original.mov": "0000aab50ba36f38f813e621f0f784659c3546284b5aee6ebf63b68161ec51ad",
+    "heartbeat.json": "92ea88d1b326c9deb515fd630c3b76e785cb2fd991e07c22f196094994ece679"
+  },
+  "next_action": "Preserve first recorder lifecycle error and test offline; isolate Safari error locally. No automatic recorded-checkout retry after two failed attempts."
+}

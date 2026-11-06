@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-06",
+  "verified_count": 47,
+  "newly_verified": [],
+  "accepted_runtime_changed": false,
+  "public_runtime_changed": false,
+  "actual_capture_performed": false,
+  "provider_calls": 0,
+  "exposure": false,
+  "recorder": {
+    "candidate_binary_sha256": "9ec6e6b46915375109c240f751c71c9e56c3559cda679b8118193ef86e8eae47",
+    "compile": "Swift 6 final compiles pass; initial failures preserved",
+    "lifecycle_assertions": 12,
+    "concurrent_transitions": 1000,
+    "frame_admission": "PASS; invalid/idle/repeated samples do not refresh heartbeat",
+    "watchdog": "startup and finalization stalls exit 124 as expected",
+    "independent_review": "PASS for offline diagnostics only",
+    "actual_capture": "NOT_EXECUTED",
+    "native_failure_cause": "UNKNOWN",
+    "limits": [
+      "Synthetic probes do not establish ScreenCaptureKit callback ordering.",
+      "A concurrent late callback during final receipt writing was not exercised.",
+      "Capture binary was never launched."
+    ]
+  },
+  "safari": {
+    "baseline": "Actual Safari reproduces the exact pattern message when a synthetic API returns HTML 502; valid JSON renders successfully.",
+    "candidate": "Six local tests pass; actual Safari shows clear connection message, keeps displayed unpaid records and recovers on case reselection with valid responses.",
+    "scope": "Isolated candidate only. This does not prove which HTTP response occurred in v69.",
+    "source_sha256": {
+      "accepted_app": "768e5f6fa82e925397f1237df6479af0147fdc17ab336a43b1d42fc1b6eb047d",
+      "candidate_app": "d93f32571100f774066d10c919c9f4ba6051b2cfdf27197383d51e09c32d01ec",
+      "test": "3d1e51bcd0548bafdcf24c10fe8196ebffa6c10a9ac40d0aed59ddb391e62bb7",
+      "harness": "c7b7272451f5ac971765f6b04a16c8c3e863b2910ed6446c08ea3542c04b524f"
+    }
+  },
+  "next_action": "Independent recorder diagnostic is prepared. Stop live retries after two failed recorded-checkout attempts; any further capture requires a new bounded owner grant. Full checkout evidence remains absent."
+}
