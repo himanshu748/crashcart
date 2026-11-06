@@ -2,7 +2,7 @@ const $ = (id) => document.getElementById(id);
 let selected = new URLSearchParams(location.search).get('run');
 let landingView = location.pathname === '/' && new URLSearchParams(location.search).get('view') === 'home';
 document.querySelector(landingView ? '.nav-home' : '.nav-desk')?.setAttribute('aria-current','page');
-const testType = mode => new Map([['LIVE_SANDBOX','Initial test checkout'],['FRESH_SANDBOX','Repair verification · new test checkout'],['RECORDED_REPLAY','Replay of a saved checkout'],['LOCAL_TEST','Local test · test data']]).get(mode) || 'Unknown test type';
+const testType = mode => new Map([['LIVE_SANDBOX','Initial test checkout'],['FRESH_SANDBOX','Repair verification · new test checkout'],['RECORDED_REPLAY','Replay of a saved checkout'],['LOCAL_TEST','Example data · no payment']]).get(mode) || 'Unknown test type';
 const faultLabel = kind => new Map([['none','No fault introduced'],['response_loss','Lost payment response'],['event_delay','Delayed delivery'],['event_duplicate','Repeated delivery event'],['process_interrupt','Interrupted store process']]).get(kind) || 'Unknown fault';
 const statusLabel = value => new Map([['created','Ready to start'],['running','In progress'],['awaiting_approval','Waiting for approval'],['completed','Completed'],['failed','Needs attention'],['cancelled','Stopped'],['inconclusive','More evidence needed'],['blocked','Needs setup'],['pending','Waiting'],['unresolved','Not yet confirmed'],['delivered','Ticket delivered'],['not_delivered','No ticket delivered'],['missing_purchase','Purchase not found'],['not_started','Not started'],['needs_input','More information needed'],['budget_exhausted','Investigation limit reached'],['awaiting_payment','Waiting for payment']]).get(String(value).toLowerCase()) || 'Status not available';
 const sourceLabel = value => new Map([['browser','Browser'],['provider','PayPal'],['merchant','Store'],['checker','Delivery check'],['investigator','Assistant'],['operator','Workspace'],['model','Assistant'],['system','Workspace'],['worker','Delivery service'],['harness','Test controls']]).get(value) || 'Other activity';
@@ -56,7 +56,7 @@ const verdictReasons = new Map([
 ]);
 function errorMessage(value){
   const raw=String(value??'');
-  if(raw==='HTTP_RESPONSE_UNAVAILABLE')return 'Connection interrupted. The server did not return usable data. Try again when the workspace is available.';
+  if(raw==='HTTP_RESPONSE_UNAVAILABLE')return 'Couldn’t load this update. Refresh the page.';
   if(/BUDGET_EXHAUSTED/.test(raw))return 'The investigation stopped at its configured limit. Saved evidence remains available.';
   if(/CRASHCART_ALLOW_SANDBOX|SANDBOX_DISABLED/i.test(raw))return 'Test payments are disabled for this workspace. Ask your workspace owner to enable them.';
   if(/PAYPAL_CLIENT|PAYPAL_NOT|PAYPAL.*CONFIGURATION/i.test(raw))return 'Test payments are not set up. Ask your workspace owner to connect the test payment account.';

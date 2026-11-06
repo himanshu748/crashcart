@@ -21,7 +21,7 @@ for(const [name,body,status] of [['HTML','<html>unavailable</html>',502],['empty
   await assert.rejects(result,{message:'HTTP_RESPONSE_UNAVAILABLE'});
   assert.equal(calls.length,1);assert.equal(calls[0].options.method,'POST');
   assert.equal(calls[0].options.body,JSON.stringify(payload));
-  assert.match(context.errorMessage('HTTP_RESPONSE_UNAVAILABLE'),/^Connection interrupted\./);
+  assert.match(context.errorMessage('HTTP_RESPONSE_UNAVAILABLE'),/^Couldn’t load this update\./);
   assert.doesNotMatch(context.errorMessage('HTTP_RESPONSE_UNAVAILABLE'),/payment failed|SyntaxError|Unexpected token/i);
  });
 }
@@ -35,5 +35,5 @@ test('startup rejection reaches the visible login message and connection details
  const boot=source.slice(source.lastIndexOf("refresh().then(async"),source.lastIndexOf('\nsetInterval('));
  const context=vm.createContext({$,text:(id,value)=>$(id).textContent=value,readableText:x=>x,refresh:()=>Promise.reject(new Error('HTTP_RESPONSE_UNAVAILABLE'))});
  $('login-panel').hidden=true;vm.runInContext(messages+'\n'+show+'\n'+boot,context);await new Promise(resolve=>setImmediate(resolve));
- assert.equal($('login-panel').hidden,false);assert.match($('login-message').textContent,/Connection interrupted/);assert.equal($('login-error-details').hidden,false);assert.equal($('login-error-code').textContent,'HTTP_RESPONSE_UNAVAILABLE');
+ assert.equal($('login-panel').hidden,false);assert.match($('login-message').textContent,/Couldn’t load this update/);assert.equal($('login-error-details').hidden,false);assert.equal($('login-error-code').textContent,'HTTP_RESPONSE_UNAVAILABLE');
 });

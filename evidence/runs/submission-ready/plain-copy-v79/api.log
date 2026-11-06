@@ -1,0 +1,17 @@
+✔ valid response retains identity and structured API rejection retains code (70.348041ms)
+✔ HTML failed POST is dispatched once with unchanged payload and a readable error (1.411334ms)
+✔ empty failed POST is dispatched once with unchanged payload and a readable error (0.693625ms)
+✔ malformed failed POST is dispatched once with unchanged payload and a readable error (0.581833ms)
+✔ null failed POST is dispatched once with unchanged payload and a readable error (1.003625ms)
+✔ array failed POST is dispatched once with unchanged payload and a readable error (0.497958ms)
+✔ string failed POST is dispatched once with unchanged payload and a readable error (0.507334ms)
+✔ connection rejection has one dispatch and no invented result (0.504458ms)
+✔ startup rejection reaches the visible login message and connection details (4.223834ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 276.210375

@@ -77,3 +77,5 @@ The current local stylesheet has fresh evidence for its changed cues; the deploy
 5. Obtain independent review at the relevant phase boundary. A screenshot, build or code inspection alone cannot check a runtime item. Update STATUS.md and the checklist together; only original CC acceptance changes the 60-check count.
 
 The next submission action remains the owner-recorded public video and owner submission. This document does not imply the full live operator journey or CC-059/CC-060 is complete.
+
+**v79 copy recheck:** changed only the connection message and local-test display label. Actual browser error retained the selected case and showed shorter wording; valid case selection recovered. API error code and no-retry behavior remain tested. [Evidence](../evidence/runs/submission-ready/plain-copy-v79.json). DV-13 retains its local scope; original CC and hosted acceptance are unchanged.

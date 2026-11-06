@@ -1,0 +1,45 @@
+{
+  "mode": "LOCAL_BROWSER_COPY_RECHECK",
+  "base_commit": "c3e2a0aa7c8b4bdd4a81e29739b28b0a1449e04d",
+  "source_sha256": {
+    "web/app.js": "2ae95b79e68654334674414689a073d0d699767676248b1d3ed8522658b57544",
+    "tests/test_workspace_api.cjs": "56d9f33820c8a179257ced81768160441729bcc15534924d6bfe44e62e4f127d"
+  },
+  "changes": [
+    "Short error text; refresh instruction does not request another payment",
+    "LOCAL_TEST displayed as Example data \u00b7 no payment",
+    "Fresh isolated examples use short titles; user-authored and historical records untouched"
+  ],
+  "browser": {
+    "caseHidden": false,
+    "message": "Couldn\u2019t load this update. Refresh the page.",
+    "provenance": "Example data \u00b7 no payment. Intentionally faulty store. Lost payment response. No payment recorded.",
+    "title": "Missing workshop ticket"
+  },
+  "recovery": "Actual valid-response selection showed Check ticket delivery after error",
+  "tests": {
+    "full": "367 in51.063sOK",
+    "replay": "3 in0.217sOK",
+    "workspace": "9pass0fail"
+  },
+  "artifact_sha256": {
+    "browser.json": "9947c25432b4ea4b5a9e7ba4d0f1a092b54fa18c0d1e3ed00ee8e4175d8ab0dc",
+    "workspace.png": "836fa2e717f2e36d7e46ba90a30038becb06f50048885cbb9f12821fc5b519ef",
+    "tests.log": "d90bc466b4018b30116f07065e16965d90f2dfac97fd0e69e0946a767276d3d1",
+    "replay.log": "249d075e8fe0d7f4f5ba01008411f9d653657edecda2ee795bab43fcf35de375",
+    "api.log": "e078aadcf181d52f32e14547f1b8f6a0bfe2cff87e8845b028c4cc6c8cdb26a3"
+  },
+  "review": {
+    "reviewer": "/root/current_contract_audit",
+    "result": "PASS_SCOPED_COPY",
+    "findings": [],
+    "independent_tests": "9pass0fail",
+    "observed": "Inspected actual screenshot/readback, retained case, clear example label; errorcode/request/single-dispatch assertions unchanged"
+  },
+  "limits": [
+    "Local synthetic response check; no provider/live/operator acceptance",
+    "47/60privatefrozen unchanged; no new CCchecks",
+    "Hosted update unverified"
+  ],
+  "cleanup": "Temporary tabsclosed; loopbackserver8912stopped"
+}
