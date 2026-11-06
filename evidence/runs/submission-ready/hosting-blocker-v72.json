@@ -1,0 +1,19 @@
+{
+  "observed_at": "2026-11-06T07:22:36.935269+00:00",
+  "source_commit": "2f7ffe367d1213ca5967301ba0e7b6af1d2336b4",
+  "workflow_url": "https://github.com/himanshu748/crashcart/actions/runs/42179848650",
+  "workflow_result": "failure before any test steps started",
+  "blocking_annotation": [
+    "The job was not started because your account is locked due to a billing issue."
+  ],
+  "hosted_asset": {
+    "url": "https://himanshu748.github.io/crashcart/app.js",
+    "status": 200,
+    "sha256": "3dca66869819777543745213b065c6541a2cf8393a293438ea4a4b205d0d5f6d"
+  },
+  "local_repaired_asset_sha256": "b2856f33289816631a1e0dd5a0cec731ef4c6049c911863c0e95f803fa4a61f9",
+  "hosted_repair_verified": false,
+  "verified_cc_count": 47,
+  "new_cc_ids": [],
+  "next_action": "Owner resolves GitHub account billing lock; rerun Source behavior for the pushed source, then verify Pages deployment and hosted behavior. No paid plan or billing change was attempted."
+}
