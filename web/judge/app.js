@@ -1,5 +1,5 @@
 "use strict";
-const sourceNames = {provider:"PayPal",browser:"Checkout page",merchant:"Ticket store",harness:"Test interruption"};
+const sourceNames = {provider:"PayPal",browser:"Checkout page",merchant:"Ticket store",harness:"Connection interruption"};
 const eventNames = {customer_observation:"Customer page observed",order_created:"Checkout created",pre_capture_read:"Buyer approval checked",fault_activated:"Payment response interruption started",capture_transport_response:"Payment reply recorded",independent_order_read:"Payment independently checked",entitlement_read:"Ticket store checked",process_exit_boundary:"Merchant process interrupted"};
 let review, selected = "defective";
 const byId = id => document.getElementById(id);
@@ -21,13 +21,13 @@ function renderCase(){
   const item=review.cases[selected], receipt=item.receipt;
   const paymentTime=item.purchase.capture_completed_at;
   const ticket=item.merchant.tickets[0];
-  byId("selected-name").textContent=selected==="defective"?"Failed checkout · saved payment response lost":"Repaired replay · same saved payment response lost";
+  byId("selected-name").textContent=selected==="defective"?"Missed order":"Recovered order · replay";
   document.querySelectorAll("[data-case]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.case===selected)));
   byId("download-case").href=`downloads/${selected}.json`;
   byId("facts").replaceChildren(
-    fact("01 / PAYMENT","$29.00 confirmed",`Historical completion: ${instant(paymentTime)}.`),
-    fact("02 / DELIVERY",`${receipt.ticket_count} ${receipt.ticket_count===1?"ticket":"tickets"}`,ticket?`Replay creation: ${instant(ticket.created_at)} · ${duration(seconds(ticket.created_at,paymentTime))} after payment.`:"No ticket remained after the 60-second deadline in the faulty replay."),
-    fact("03 / DEADLINE","60 seconds",`Unchanged deadline: ${instant(item.execution.deadline)}. Outcome: ${receipt.verdict==="PASS"?"promise kept":"promise broken"}.`));
+    fact("01 / PAYMENT","$29.00 confirmed",`Payment received: ${instant(paymentTime)}.`),
+    fact("02 / DELIVERY",`${receipt.ticket_count} ${receipt.ticket_count===1?"ticket":"tickets"}`,ticket?`Ticket created in replay: ${instant(ticket.created_at)} · ${duration(seconds(ticket.created_at,paymentTime))} after payment.`:"The customer was still waiting after the 60-second promise."),
+    fact("03 / DEADLINE","60 seconds",`Promised by: ${instant(item.execution.deadline)}. Outcome: ${receipt.verdict==="PASS"?"promise kept":"promise broken"}.`));
   byId("technical-result").textContent=JSON.stringify({mode:review.mode,new_payment:false,computed_when:review.computed_when,computed_at:review.computed_at,input_file_sha256:review.input_file_sha256,canonical_input_sha256:receipt.input_sha256,merchant_variant:selected,verdict:receipt.verdict,signature:receipt.signature,invariant:review.invariant,source_authenticity:receipt.source_authenticity},null,2);
   renderTimeline();
 }
@@ -37,7 +37,7 @@ function renderTimeline(){
   // comes from this variant's replay; its historical source remains nested.
   const records=item.events.filter(event=>sourceNames[event.source]);
   const visible=records.filter(event=>source==="all"||event.source===source);
-  byId("timeline-count").textContent=`${visible.length} of ${records.length} saved observations. Times are relative to confirmed payment; order alone does not establish cause.`;
+  byId("timeline-count").textContent=`${visible.length} of ${records.length} steps. Times are measured from payment confirmation.`;
   const entries=visible.map(event=>{
     const li=document.createElement("li"), details=document.createElement("details"), summary=document.createElement("summary");
     const relative=seconds(event.event_time,item.purchase.capture_completed_at);
@@ -68,7 +68,7 @@ byId("story-copy").addEventListener("animationend",()=>byId("story-copy").classL
 document.querySelectorAll("button[data-story]").forEach(button=>button.addEventListener("click",()=>showStory(button.dataset.story)));
 document.querySelectorAll("[data-case]").forEach(button=>button.addEventListener("click",()=>{
   if(!review)return;selected=button.dataset.case;renderCase();
-  if(button.classList.contains("select-case")){byId("evidence-title").focus();byId("evidence").scrollIntoView({block:"start",behavior:"instant"});}
+  if(button.classList.contains("select-case")){document.querySelector(".order-records").open=true;byId("evidence-title").focus();byId("evidence").scrollIntoView({block:"start",behavior:"instant"});}
 }));
 byId("source-filter").addEventListener("change",()=>{if(review)renderTimeline();});
 fetch("data.json",{cache:"no-store"}).then(response=>{if(!response.ok)throw new Error("Saved results could not be loaded");return response.json();}).then(data=>{
@@ -90,5 +90,6 @@ fetch("data.json",{cache:"no-store"}).then(response=>{if(!response.ok)throw new 
   review=null;
   byId("review").hidden=true;
   const notice=byId("load-state");notice.hidden=false;notice.classList.add("error");
+  document.querySelectorAll('a[href="#investigation"]').forEach(link=>link.setAttribute("href","#load-state"));
   notice.textContent="The saved investigation could not be opened. Reload this page to try again. No new payment or AI request was made.";
 });

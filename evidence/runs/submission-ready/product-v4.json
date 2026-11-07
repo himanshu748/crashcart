@@ -1,0 +1,103 @@
+{
+  "scope": "Local product presentation and working recorded demo; not hosted acceptance or real merchant integration",
+  "base_revision": "4646c16cef6d0f460e443b683598b788e1536119",
+  "source_sha256": {
+    "web/judge/index.html": "7977d26e8e3cbdc15b7775862a8f8e802f901c95685e78b86faf4167fcce6b6e",
+    "web/judge/app.js": "f0e11272ce7c62e6311fca6a6d62b3c7b9a9bb3408c8e65aad11e3455413eec0",
+    "web/judge/style.css": "996ad25ea2de7f86d866e0bfe761141103fdfb689a72bd4a11de8bcf58de3a77",
+    "tests/test_judge_ui.cjs": "46531fd76b1b5949ea70887054b55109798cda449977ae3acb5ee6c419ff627a",
+    "README.md": "17993eb7cfab752c4d5351969c6d8db179bf6e047d5c076de004c4a7606a67a2"
+  },
+  "tests": {
+    "full": "Ran 459 tests in 97.027s; OK",
+    "ui": "14 pass, 0 fail",
+    "replay": "test_both_variants_import_as_separate_finished_replay_cases (tests.test_public_replay.PublicReplayTests.test_both_variants_import_as_separate_finished_replay_cases) ... ok\ntest_early_recording_fails_defective_and_passes_healthy_with_same_promise (tests.test_public_replay.PublicReplayTests.test_early_recording_fails_defective_and_passes_healthy_with_same_promise) ... ok\ntest_original_late_recording_still_rejects_late_healthy_delivery (tests.test_public_replay.PublicReplayTests.test_original_late_recording_still_rejects_late_healthy_delivery) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.141s\n\nOK\n"
+  },
+  "browser": {
+    "desktop": {
+      "childSymbol": "\"+\"",
+      "focus": "evidence-title",
+      "scrollWidth": 1280,
+      "selected": "Recovered order \u00b7 replay",
+      "timelineOpen": true,
+      "viewport": [
+        1280,
+        720
+      ]
+    },
+    "phone": {
+      "facts": "01 / PAYMENT\n$29.00 confirmed\n\nPayment received: 22 Oct 2026, 09:31:52 UTC.\n\n02 / DELIVERY\n0 tickets\n\nThe customer was still waiting after the 60-second promise.\n\n03 / DEADLINE\n60 seconds\n\nPromised by: 22 Oct 2026, 09:32:52 UTC. Outcome: promise broken.",
+      "focus": "evidence-title",
+      "scrollWidth": 390,
+      "selected": "Missed order",
+      "viewport": [
+        390,
+        844
+      ]
+    },
+    "motion": {
+      "animation": "none",
+      "reduced": true,
+      "story": "A second check closes the gap.",
+      "transition": "0s"
+    },
+    "narrow": {
+      "childClosed": true,
+      "childSymbol": "\"+\"",
+      "facts": "01 / PAYMENT\n$29.00 confirmed\n\nPayment received: 22 Oct 2026, 09:31:52 UTC.\n\n02 / DELIVERY\n1 ticket\n\nTicket created in replay: 22 Oct 2026, 09:32:24 UTC \u00b7 32.26s after payment.\n\n03 / DEADLINE\n60 seconds\n\nPromised by: 22 Oct 2026, 09:32:52 UTC. Outcome: promise kept.",
+      "focus": "evidence-title",
+      "selected": "Recovered order \u00b7 replay",
+      "timelineOpen": true,
+      "viewport": [
+        320,
+        740
+      ],
+      "width": 320
+    },
+    "limitations": [
+      "Local browser only; no new provider calls or real merchant store",
+      "OS motion, VoiceOver, browser zoom not reverified in this change"
+    ]
+  },
+  "additional_observed": [
+    "Payment, gap and repair controls update story",
+    "Healthy shows one ticket at32.26s; faulty zero beyond60s",
+    "PayPal filter changes15 records to4",
+    "Case buttons open timeline and focus heading",
+    "Collapsed nested summaries show +",
+    "Browser download matches served bytes and executes both expected outcomes",
+    "Malformed data hides result; CTA reaches visible recovery; FAQ remains usable",
+    "No error/warn console logs on working page"
+  ],
+  "fixed_finding": {
+    "before": "On load failure CTA and FAQ navigation led to hidden sections",
+    "after": "FAQ stays outside data-dependent result; demo links reach recovery message",
+    "regression": "Five Node failure tests assert recovery link target"
+  },
+  "review": {
+    "agent": "/root/product_review",
+    "result": "No blocking findings; independently reran14 Node tests and diff check",
+    "note": "Parent attribution of returned review, not a raw tool transcript"
+  },
+  "limitations": [
+    "Recorded historical checkout; no new payment or provider call",
+    "No real store connected; Shopify matching, installation and accounts unfinished",
+    "OS Reduce Motion, VoiceOver and zoom not reverified on changed design",
+    "Previous UI snapshots historical for changed surface; original frozen CC runtime unchanged",
+    "Hosted source not reverified"
+  ],
+  "artifact_sha256": {
+    "download-result.json": "e9920bbafcf715209c91b34a20da300ccbe04329357b2f8af553cee11c467e95",
+    "missed-phone.png": "145c74cb358ed8f39f97dc894ef33547d4b155dbbbf616288848a2b8fcec43be",
+    "python-suite.log": "3120914055ffa1759e036a80a36eb1ce3478839a2b29c4818464c8c3b28e09d3",
+    "landing-phone.png": "b55cfad9cce94b111c79208791b2617e8c123b81ce86b4546881054b8e380fe6",
+    "phone-preview-limits.png": "5594a07f65a65fd778d5264292b2c6ed65bdaf9c13a9f3ddf2cee7c32a000360",
+    "unavailable-desktop.png": "8efb9bebd42769708cf5acc7be4b4b345d75004ad047a3061d39c5b1e57a6c66",
+    "replay-tests.log": "af37cbeec986a1a1b490bed30d1bd7b23ec03789f7fbdc0e14bbc1bdf345fcaf",
+    "comparison-desktop.png": "9a2d1fcb2ca3509fca4b2f3f910b570e67d198089c93a45cdc9e629369debc02",
+    "node-tests.log": "9322120eb49df591ab105fc7626b6fba76490200aa9e2258efee8608834b7e07",
+    "recovered-desktop.png": "fe5e3ba17ecae65685f76125fadf5b08dc226f880aaa03ab1494f13ccb64cdb2",
+    "browser-results.json": "c5440e4bcd03461a933748d6b5444ab646009e5a7e4fa18ad2e110e72bd8c60d",
+    "landing-desktop.png": "79a0416609ae2324929bab3827d86839519e52fccf7b62ca6768995b48c8ed6e"
+  }
+}

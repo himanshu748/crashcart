@@ -1,47 +1,32 @@
 # CrashCart
 
-**Know which paid orders still need fulfilment.**
+**A successful payment should lead to a fulfilled order.**
 
-A successful payment should lead to a fulfilled order. When it does not, a small
-shop needs to know what went wrong and which customer order needs attention.
-CrashCart brings payment, order and fulfilment facts into a store-specific inbox.
+“I paid, but nothing arrived.” For a small shop, that message means searching
+payment records, order history and fulfilment updates while a customer waits.
+CrashCart brings those pieces together so the missing step is easier to find.
 
-The monitoring preview runs locally. The separate recorded walkthrough shows the
-original problem: a **$29 workshop ticket promised within 60 seconds of confirmed
-payment**. It compares a faulty checkout and its repair under the same deadline.
+**[Explore the interactive demo →](https://himanshu748.github.io/crashcart/)**
+No account needed. Follow a recorded $29 ticket purchase from payment to the
+missing ticket, then compare the repaired checkout.
 
-## Merchant monitoring preview
+## See what happened
 
-New product direction: payment-to-fulfilment monitoring for small merchants,
-with an alert inbox and a fulfilment promise for each store.
+The example starts with a simple promise: **one workshop ticket within 60
+seconds of payment**. PayPal confirms the payment, but the store loses its reply
+and never delivers the ticket. CrashCart puts the payment and ticket records
+side by side. The repaired checkout checks again and delivers one ticket within
+the same deadline.
 
-The local preview implements Shopify and WooCommerce webhook readers,
-store-scoped PayPal Sandbox verification, payment/order matching and durable
-alerts. **No real merchant store is connected yet.** Checks use signed fixtures
-and stubbed PayPal verification replies. Shopify capture matching still needs
-transaction data; its order webhook alone remains unmatched.
+Explore the failed checkout, switch to its repair and follow the timeline.
+The records and an executable replay are available if you want to look closer.
+This is a recorded example, not a new payment or a live merchant connection.
 
-With Python 3.13.15 and a privately configured `CRASHCART_MONITOR_TOKEN`, run:
+<a id="try-the-product-in-60-seconds"></a>
 
-```sh
-python3 -m crashcart.monitor_server --db var/monitor.sqlite3 --port 8790
-```
+## Run it locally
 
-Open `http://127.0.0.1:8790/`. Follow [connection setup](docs/MONITOR_SETUP.md).
-This preview has one operator managing owned stores. Customer accounts, OAuth
-installation and per-store billing remain pending; no live charges are made.
-[Product acceptance](docs/MONITOR_PRODUCT.md) · [Local verification](evidence/runs/submission-ready/monitor-v2.json) · [Webhook limits and backup/restore](docs/WEBHOOK_SAFEGUARDS.md).
-
-![Monitoring inbox retaining an acknowledged overdue order in an explicitly labelled local verification store](evidence/runs/submission-ready/monitor-v2/browser-visible/recovered-desktop.png)
-
-*Local example records and stubbed payment verification; no connected merchant store.*
-
-## Try the product in 60 seconds
-
-**[Open the interactive recorded walkthrough](https://himanshu748.github.io/crashcart/)** — no account required. Hosted results are computed during site build.
-
-
-Have Python installed, then run from a terminal:
+With Python 3.11 or newer:
 
 ```sh
 git clone https://github.com/himanshu748/crashcart.git
@@ -49,46 +34,61 @@ cd crashcart
 ./scripts/judge.sh
 ```
 
-Tested with Python **3.13.15**; the keyless entry point accepts Python 3.11 or newer.
-It opens the finished investigation at <http://127.0.0.1:8766/#investigation>.
-If your browser does not open, visit that address.
-No Node installation, API key, PayPal login, AG Studio licence or package download
-is needed. Stop the local app with **Ctrl+C**. For a machine without a desktop,
-use `./scripts/judge.sh --no-open`; choose another port with `--port 8767`.
+It opens the comparison at <http://127.0.0.1:8766/#investigation>. No API keys,
+PayPal login, vendor licence, Node installation or package download is needed.
+Tested with Python **3.13.15**. Stop with **Ctrl+C**; use `--no-open` on a machine
+without a desktop or `--port 8767` if the default port is busy.
 
-1. Read **One checkout. Two outcomes.** The faulty merchant has no ticket; the
-   healthy merchant delivers one ticket within the same promise.
-2. Choose **Inspect the failed checkout**, then **Repaired replay**. Compare the
-   checkout message, payment and ticket observations. Filter the event timeline.
-3. Download the records or executable replay to inspect and rerun the finding.
+The local command runs both checkout variants against the same saved inputs and
+clock using CrashCart's payment and ticket rules. The hosted demo displays those
+results computed at site-build time. Neither path makes new payments or model
+calls. The original faulty-checkout video is unavailable; the saved page and
+payment observations are included. See [replay details](#reproduce-the-comparison)
+for the commands and [the recorded AI investigation](docs/AI_EVIDENCE.md) for
+the separate historical DeepSeek workflow.
 
-**This is recorded replay.** The local command executes both merchant variants
-at launch against the same historical input and recorded clock. It does not
-make a new payment, call an AI model or use a remote browser. The results are
-computed by the actual Store and invariant code, not supplied verdict labels.
-The read-only review neither loads your `.env` nor starts the live worker.
+## A daily inbox for paid orders
 
-A hosted export uses that same replay at **site-build time** and displays the
-saved results. Reloading a hosted page does not execute Python or contact PayPal.
-The original faulty-checkout video is unavailable; saved page observations are
-included. A repaired replay does not establish a fresh test payment or deployed fix.
+The merchant monitoring preview extends that same idea across a store's orders:
+bring payment, order and fulfilment facts together, flag a missed promise, and
+keep the history when someone acknowledges or fulfils the order. Each store has
+its own inbox and fulfilment deadline.
 
-The [recorded AI investigation](docs/AI_EVIDENCE.md) shows how actual DeepSeek calls used a PayPal Sandbox read to choose the next evidence check. It is a separate historical case, not AI running inside this keyless walkthrough.
+![CrashCart's monitoring inbox showing an overdue example order and its history](evidence/runs/submission-ready/monitor-v2/browser-visible/recovered-desktop.png)
+
+*Local example data; no real merchant store is connected yet.*
+
+The preview has Shopify and WooCommerce webhook readers and store-scoped PayPal
+Sandbox matching. So far it has been exercised with signed example events and
+stubbed PayPal replies. Shopify still needs transaction data to match a payment;
+its order webhook alone stays unmatched. “Fulfilled” means the merchant has
+marked the order complete, not that a physical parcel has arrived.
+
+With Python **3.13.15**, configure a private `CRASHCART_MONITOR_TOKEN` and run:
+
+```sh
+python3 -m crashcart.monitor_server --db var/monitor.sqlite3 --port 8790
+```
+
+Open <http://127.0.0.1:8790/>. [Connection setup](docs/MONITOR_SETUP.md) explains
+the access key and per-store settings. This is a local preview for one operator
+managing owned stores. Customer accounts, app installation and per-store billing
+are still pending.
 
 ## What powers CrashCart
 
-| Technology | Its actual job | Available in keyless review? |
-| --- | --- | --- |
-| PayPal Sandbox | Approve and capture test payments; independently retrieve payment state | Historical payment observations, replayed locally; no new PayPal request |
-| AG Grid's AG Studio | Linked browser, payment, ticket and comparison widgets; bounded questions over saved cases | No. Available in the separately configured full workspace, subject to licensing |
-| Bryntum Community Scheduler | Read-only chart comparing saved ticket timings with the 60-second window | No. The full workspace uses the real MIT Community SDK |
-| KERNEL | Remote checkout browser sessions and recordings | No. Saved observations only; remote use needs configured access and allowance |
-| Modal + DeepSeek | Evidence-grounded hypotheses and bounded investigation calls | No. Historical model use; no AI inference in the keyless review. Modal is an AI provider, not a listed event tool sponsor |
-| Postman | Executable API checks and linked-record verification | Collection included; no Postman account is needed for its local runner |
+| Technology | Role in CrashCart |
+| --- | --- |
+| PayPal Sandbox | Test checkout and independent payment reads. The public demo uses saved observations. |
+| AG Grid's AG Studio | Linked payment, ticket and browser views in the configured full workspace. Requires an applicable licence. |
+| Bryntum Community Scheduler | Compares saved ticket timings with the delivery window in the full workspace. |
+| KERNEL | Remote test-checkout browser sessions and recordings; separately configured and authorized. |
+| Modal + DeepSeek | Hypotheses and bounded investigation calls in the historical AI workflow. Modal is the model host, not a listed event sponsor. |
+| Postman | Runnable API checks and linked-record checks; the local runner needs no Postman account. |
 
-See the [integration ledger](docs/sponsor-ledger.md) for exact implementation,
-historical observations and remaining verification. Sponsor names describe
-working integration roles, not endorsements or claims of prize eligibility.
+The account-free demo needs none of these service keys. The
+[integration ledger](docs/sponsor-ledger.md) records the scope and current status
+of each integration.
 
 ## Reproduce the comparison
 

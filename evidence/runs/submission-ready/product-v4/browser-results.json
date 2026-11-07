@@ -1,0 +1,46 @@
+{
+  "desktop": {
+    "childSymbol": "\"+\"",
+    "focus": "evidence-title",
+    "scrollWidth": 1280,
+    "selected": "Recovered order · replay",
+    "timelineOpen": true,
+    "viewport": [
+      1280,
+      720
+    ]
+  },
+  "phone": {
+    "facts": "01 / PAYMENT\n$29.00 confirmed\n\nPayment received: 22 Oct 2026, 09:31:52 UTC.\n\n02 / DELIVERY\n0 tickets\n\nThe customer was still waiting after the 60-second promise.\n\n03 / DEADLINE\n60 seconds\n\nPromised by: 22 Oct 2026, 09:32:52 UTC. Outcome: promise broken.",
+    "focus": "evidence-title",
+    "scrollWidth": 390,
+    "selected": "Missed order",
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "motion": {
+    "animation": "none",
+    "reduced": true,
+    "story": "A second check closes the gap.",
+    "transition": "0s"
+  },
+  "narrow": {
+    "childClosed": true,
+    "childSymbol": "\"+\"",
+    "facts": "01 / PAYMENT\n$29.00 confirmed\n\nPayment received: 22 Oct 2026, 09:31:52 UTC.\n\n02 / DELIVERY\n1 ticket\n\nTicket created in replay: 22 Oct 2026, 09:32:24 UTC · 32.26s after payment.\n\n03 / DEADLINE\n60 seconds\n\nPromised by: 22 Oct 2026, 09:32:52 UTC. Outcome: promise kept.",
+    "focus": "evidence-title",
+    "selected": "Recovered order · replay",
+    "timelineOpen": true,
+    "viewport": [
+      320,
+      740
+    ],
+    "width": 320
+  },
+  "limitations": [
+    "Local browser only; no new provider calls or real merchant store",
+    "OS motion, VoiceOver, browser zoom not reverified in this change"
+  ]
+}
