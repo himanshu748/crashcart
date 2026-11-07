@@ -1,0 +1,10 @@
+{
+  "source_commit": "3fbc373827f82235741a2c8ed2d311addafeae00",
+  "main_readback": "3fbc373827f82235741a2c8ed2d311addafeae00",
+  "ci": "https://github.com/himanshu748/crashcart/actions/runs/42368806683",
+  "ci_steps_started": false,
+  "annotation": "The job was not started because your account is locked due to a billing issue.",
+  "pages": "https://github.com/himanshu748/crashcart/actions/runs/42368813971",
+  "pages_result": "build and deploy skipped because prerequisite Source behavior did not succeed",
+  "claim": "Source pushed. Redesign verified locally, not newly deployed."
+}

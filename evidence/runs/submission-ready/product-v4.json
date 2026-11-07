@@ -88,16 +88,16 @@
   ],
   "artifact_sha256": {
     "download-result.json": "e9920bbafcf715209c91b34a20da300ccbe04329357b2f8af553cee11c467e95",
-    "missed-phone.png": "145c74cb358ed8f39f97dc894ef33547d4b155dbbbf616288848a2b8fcec43be",
+    "missed-phone.jpg": "145c74cb358ed8f39f97dc894ef33547d4b155dbbbf616288848a2b8fcec43be",
+    "landing-phone.jpg": "b55cfad9cce94b111c79208791b2617e8c123b81ce86b4546881054b8e380fe6",
     "python-suite.log": "3120914055ffa1759e036a80a36eb1ce3478839a2b29c4818464c8c3b28e09d3",
-    "landing-phone.png": "b55cfad9cce94b111c79208791b2617e8c123b81ce86b4546881054b8e380fe6",
-    "phone-preview-limits.png": "5594a07f65a65fd778d5264292b2c6ed65bdaf9c13a9f3ddf2cee7c32a000360",
-    "unavailable-desktop.png": "8efb9bebd42769708cf5acc7be4b4b345d75004ad047a3061d39c5b1e57a6c66",
+    "unavailable-desktop.jpg": "8efb9bebd42769708cf5acc7be4b4b345d75004ad047a3061d39c5b1e57a6c66",
+    "phone-preview-limits.jpg": "5594a07f65a65fd778d5264292b2c6ed65bdaf9c13a9f3ddf2cee7c32a000360",
     "replay-tests.log": "af37cbeec986a1a1b490bed30d1bd7b23ec03789f7fbdc0e14bbc1bdf345fcaf",
-    "comparison-desktop.png": "9a2d1fcb2ca3509fca4b2f3f910b570e67d198089c93a45cdc9e629369debc02",
+    "comparison-desktop.jpg": "9a2d1fcb2ca3509fca4b2f3f910b570e67d198089c93a45cdc9e629369debc02",
     "node-tests.log": "9322120eb49df591ab105fc7626b6fba76490200aa9e2258efee8608834b7e07",
-    "recovered-desktop.png": "fe5e3ba17ecae65685f76125fadf5b08dc226f880aaa03ab1494f13ccb64cdb2",
+    "recovered-desktop.jpg": "fe5e3ba17ecae65685f76125fadf5b08dc226f880aaa03ab1494f13ccb64cdb2",
     "browser-results.json": "c5440e4bcd03461a933748d6b5444ab646009e5a7e4fa18ad2e110e72bd8c60d",
-    "landing-desktop.png": "79a0416609ae2324929bab3827d86839519e52fccf7b62ca6768995b48c8ed6e"
+    "landing-desktop.jpg": "79a0416609ae2324929bab3827d86839519e52fccf7b62ca6768995b48c8ed6e"
   }
 }
