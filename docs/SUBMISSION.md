@@ -10,7 +10,7 @@ gates from deferred checks; unverified requirements remain unchecked.
 [VIDEO_SCRIPT.md](VIDEO_SCRIPT.md) is the current 175-second recording plan.
 The owner must still record, upload and verify the actual public YouTube video.
 A recorded repair comparison does not establish full acceptance or a fresh
-repaired payment. AWS remains a plan, not a deployed service.
+repaired payment. The recorded demo is verified on an existing Lightsail host; it does not host the live merchant API or AI worker.
 
 ## Tagline
 
@@ -146,6 +146,8 @@ impact, innovation and presentation. The organizers determine eligibility.
 
 ## Testing instructions and links
 
+- [Current interactive recorded demo](https://crashcart.52.202.25.181.sslip.io/)
+
 - [Public repository](https://github.com/himanshu748/crashcart)
 - [Current runnable build and setup](https://github.com/himanshu748/crashcart#run-it-locally)
 - [Older hosted recorded preview](https://himanshu748.github.io/crashcart/)
@@ -158,9 +160,8 @@ impact, innovation and presentation. The organizers determine eligibility.
 - [Historical PayPal-plus-AI explanation](AI_EVIDENCE.md)
 - [Existing Devpost project page](https://devpost.com/software/crashcart-87asqz)
 
-The GitHub Pages URL above is the older hosted preview. The current runnable
-build is linked separately. Do not advertise an AWS URL until that deployment
-and its downloads have been verified.
+The Lightsail URL above is the verified current recorded demo. GitHub Pages is
+an older fallback. The local command is a separate runnable path.
 The hosted review displays build-time replay results; the local command executes
 the replay. Neither is a hosted live-payment backend.
 Keep access free through the 21 December winner announcement and retain the runnable source.

@@ -6,15 +6,17 @@
 payment records, order history and fulfilment updates while a customer waits.
 CrashCart brings those pieces together so the missing step is easier to find.
 
-**[Run the current build →](#run-it-locally)** · [Preview the hosted recording](https://himanshu748.github.io/crashcart/)
+**[Open CrashCart →](https://crashcart.52.202.25.181.sslip.io/)** · [Run it locally](#run-it-locally)
 No account needed. Follow a recorded $29 ticket purchase from payment to the
-missing ticket, then compare the repaired checkout. Run locally for the latest
-experience; the hosted demo is on an earlier release.
+missing ticket, then compare the repaired checkout. The hosted demo shows results
+computed during export; the local command recomputes them at startup.
 
 ## Judge access
 
-Run the current build with `./scripts/judge.sh` below. Hosting is optional under
-the event rules; the hosted link is an older recorded preview. This local command
+The [current HTTPS demo](https://crashcart.52.202.25.181.sslip.io/) runs without an account.
+Hosting is optional under the event rules; `./scripts/judge.sh` below is the local
+alternative. The [older Pages preview](https://himanshu748.github.io/crashcart/)
+remains a fallback. The local command
 recomputes the two merchant outcomes from saved Sandbox input, without new
 payment or AI calls. The full configured PayPal-plus-AI workspace has separate
 access requirements.
@@ -343,4 +345,4 @@ from this source repository; submission and final release remain unfinished.
 
 ## Submission materials
 
-[Verified clean-clone path](docs/SUBMISSION_VERIFICATION.md) · [Submission scope](docs/SUBMISSION_GATES.md) · [AWS Docker/HTTPS commands](docs/AWS_JUDGE_DEPLOY.md) · [Video script](docs/VIDEO_SCRIPT.md) · [Devpost draft](docs/DEVPOST.md). AWS hosting is prepared, not deployed. The public YouTube video and final submission are still owner actions.
+[Verified clean-clone path](docs/SUBMISSION_VERIFICATION.md) · [Submission scope](docs/SUBMISSION_GATES.md) · [Shared Lightsail hosting](docs/LIGHTSAIL_SHARED_HOST.md) · [Video script](docs/VIDEO_SCRIPT.md) · [Devpost draft](docs/DEVPOST.md). The current recorded demo is verified on the existing Lightsail host. The public YouTube video and final submission are still owner actions.

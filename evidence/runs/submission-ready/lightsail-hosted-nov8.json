@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-08",
+  "source_revision_exported": "b0e304af19c66164fbf521c8c907d88feb6e058d",
+  "fixture_repair_revision": "71275531dfec6cc6aef6f597d8d3f8ba72825f0c",
+  "scope": "Actual shared Lightsail hosting of recorded public export; historical AI is separate. No live merchant API or model service hosted.",
+  "url": "https://crashcart.52.202.25.181.sslip.io/",
+  "mode": "RECORDED_REPLAY",
+  "computed_when": "site build/export",
+  "fresh_execution": false,
+  "payPal_model_kernel_calls_now": 0,
+  "runtime": {
+    "host": "embodiweave-demo",
+    "region": "us-east-1",
+    "proxy_container": "ew-proxy",
+    "caddy_version": "2.11.7",
+    "proxy_image_id": "sha256:685ae3d7c34d9b5f8caeddc5d14051db7bbd88ff1f5a2fa0c16bd8ca328fb7af",
+    "static_root": "/data/crashcart/site-b0e304a",
+    "restart_policy": "unless-stopped",
+    "docker_enabled_at_boot": true,
+    "new_permanent_container_network_listener": false,
+    "new_instance": false,
+    "crashcart_provider_credentials_uploaded": false
+  },
+  "checks": {
+    "trusted_https": 200,
+    "defective": [
+      "FAIL",
+      "paid_without_ticket",
+      0
+    ],
+    "healthy": [
+      "PASS",
+      "ticket_delivered_once_on_time",
+      1
+    ],
+    "write_request": 405,
+    "private_env_and_live_api": 404,
+    "public_file_hashes_matched": 10,
+    "browser": "Story3states,repaircase,PayPal4/15filter,historicalAI3steps,Enter/Space,390/320layouts,reducedmotion,reloadready;nowarn/errorlogs",
+    "actual_browser_zip": "DirectdownloadAPIsavedZIP;hashmatchesHTTPS;manifest/defective/healthyexits0/1/0",
+    "existing_sites": "6statusesand4successfulHTMLhashesunchanged;fulloriginalroutes/container/image/start/mountobjects/routingpreserved",
+    "tests": "Linux:491 tests in100.052s,OK;Node:30pass;judge command:15tests in29.283s,OK. Mac full-suite failures retained; no full Mac success claimed."
+  },
+  "cost_and_lifetime": {
+    "existing_plan_base_monthly_usd": 12,
+    "incremental_instance_base_monthly_usd": 0,
+    "budget_alert_thresholds_usd": [
+      20,
+      50
+    ],
+    "email_delivery_tested": false,
+    "retain_through_utc": "2026-12-22",
+    "retention_tag_read_back": true,
+    "future_uptime_verified": false,
+    "transfer_tax_and_existing_account_limits_apply": true
+  },
+  "original_acceptance": "47/60 on the frozen private accepted build; no new CC IDs; project incomplete",
+  "remaining": [
+    "Publicvideoandownersubmission",
+    "CompleteconfiguredPayPal-plus-AIandoptionallicensedworkspaceaccess",
+    "Original13openCCchecks",
+    "Futureavailabilitythroughwinnerannouncement"
+  ],
+  "source_sha256": {
+    "crashcart/judge.py": "2245b5beae4996378fb76430712ab936a085a092ba8c612dacfa7f3209314ba7",
+    "web/judge/index.html": "313e7812e933f848ebaf843ab5300ea74039f667d4494a5d917106ee47701fef",
+    "web/judge/app.js": "bba5675fb97175c28781c60092ec402cf8813aac1ffed9e80fdba49a3c645ce5",
+    "web/judge/style.css": "7d9dff8336724caa7454685012c3db7657903cfadc80cfbb3be21a883644402b",
+    "evidence/runs/paypal-live/early-response-loss-input.json": "07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288",
+    "evidence/runs/submission-ready/ai-historical-summary.json": "152c1c77dfcc219b32d7ae36c06ad7b39a35656e95f54f87a6691fe95010c8fb",
+    "deploy/judge/Caddyfile.shared-static": "17e2a89a6d9361532d85740e7917ba0e31f864f5ad8b8aa75584e9a33fdb47b7"
+  },
+  "artifact_sha256": {
+    "activation.log": "39980a3f606c661d4847879539b98f13e7f9bdf80e5300c79d40cf5369e03893",
+    "ai-desktop.jpg": "258693f10ba9975a346614f72d59b2870c6200da4b3aea0304d129e8e90403c6",
+    "ai-phone.jpg": "2381b6d7d576e1cc0075ed2bb96aca30a073c87869d36f9e568f6a8eeac3d795",
+    "browser.json": "97078acaecc4f8f6ff338ebe6b6e99855f8d59fc32cd9d2dcb0a6b94538bcd8e",
+    "cleanup.json": "4d7f3311314e97b984df6eb0bd6c2d35568fda73fd2b9f475ca50592697b63cb",
+    "cost.json": "c3021d81853872a6562679cd812abae9976b126b32d3862e17a72b8b39ee8e19",
+    "http-download.json": "faaf43d12c16f4c0f98835083ab7d3911a49226dc727e8d025f32341aa4efafe",
+    "https.json": "e64ab5b80b3963ac06caa5f1c8ba83e4bd7c7f1dbc42170a5a91886728b886c1",
+    "inventory.json": "b196e811032b7fefd10a2a77205ab4677378ad249dde7d53ba695a359c185faf",
+    "landing-desktop.jpg": "1a53fdbf9bb0256b136847274d1d8b32adf8f3649c31edeef7e9f88e67681aff",
+    "landing-phone.jpg": "94d651d300a8c31da50bb2b43dfbfb2ff854ba4e2da37b041749f991247c0385",
+    "preservation.json": "7da26cc8b29cf8746d34c8567eb4cb92fb4739b4c85f7ea651e9fbae187af0d1",
+    "public-files.json": "9436acb73101571892ac36f8194eb77f91e9c5b6177873e3ef727c6687f908f8",
+    "replay-execution.json": "69c42220af6fd0773a732084a14e9603f36f271a9d090725b8215d12f90cb3ac",
+    "retained-probes.json": "17d6d8df66a5e6623be21afadcf16f7b8318360bb1725c8fb0c68d1926ef136e"
+  },
+  "independent_review": {
+    "reviewer": "/root/aws_demo_preflight",
+    "result": "No blocking finding;7sourceand15initialartifacthashesmatched;4screenshotsreviewed;actualevidencescopesandcleanup/modes/costsconsistent",
+    "scope": "Source,savedactualartifactsandscreenshots;noextraAWS/providercalls. Futureavailabilitynotverified.",
+    "followthrough": "Correctedcleanupreceiptpublicpointertopreservation.jsonandrefreshedhash"
+  }
+}

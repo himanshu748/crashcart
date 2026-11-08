@@ -1,63 +1,44 @@
 # Recorded walkthrough hosting
 
-**8 November:** the latest source is locally verified and pushed. Pages still serves an older release because GitHub blocked Actions on the account. An approved AWS attempt stopped before SSH and was cleaned up; no AWS demo is deployed. See [the current AWS plan and exact blocker](AWS_JUDGE_DEPLOY.md).
+**Current demo:** https://crashcart.52.202.25.181.sslip.io/
 
-The existing public target is **GitHub Pages on this repository**. It needs no
-payment card or paid plan. It serves a read-only project demonstration, not a
-commercial SaaS, payment form, production checkout or live backend.
+Verified 8 November 2026 on the existing Lightsail host. Its existing Docker/Caddy
+proxy serves the frozen public export; no additional instance or plan upgrade was
+needed. The server holds no CrashCart provider credentials or licensed workspace
+bundle. [Configuration, cost, retention and rollback](LIGHTSAIL_SHARED_HOST.md).
+[Actual deployment and browser evidence](../evidence/runs/submission-ready/lightsail-hosted-nov8.json).
 
-The `Recorded walkthrough` workflow waits for `Source behavior` to pass on a
-push to `main`. It checks out that exact tested revision, runs the replay and
-judge-mode tests, and executes both merchant variants while exporting the site.
-Only the generated static directory is uploaded. No credentials, private
-database, AG Studio bundle, model call or live transaction is deployed.
+The hosted page is an interactive recorded example. Results are computed during
+export, not on each click. The local `./scripts/judge.sh` command executes both
+merchant variants at startup. Neither mode creates a payment or calls AI. The
+historical AI section is a separate dated case. Full live merchant/model access
+remains outside this hosted deployment.
 
-```sh
-python3 -m crashcart.judge --export-site _site
-```
+Trusted HTTPS, the defective failure and healthy pass, both desktop and phone
+interactions, HTTP write rejection and the actual downloaded executable ZIP were
+exercised. All ten exported files match their frozen hashes. The six earlier
+sites retain their routes, HTTP statuses and successful-page hashes. The shared
+proxy container/image/start time/mounts and original routing table are unchanged.
 
-The local judge command recomputes both outcomes at launch. The hosted page
-displays outcomes recomputed **during the site build**. Interactions inspect
-those saved records; opening the site does not rerun the Python engine or make
-a payment. Download the exact input and run the documented commands to repeat
-the check locally.
+Keep access through the 21 December winner announcement, with a 22 December UTC
+buffer. The instance has an additive CrashCart retention tag. No automatic
+teardown is installed and future uptime is not established by these tests.
+Freeze submitted source, video and linked materials after the deadline until
+winners are announced. Do not stop/delete this shared host to remove CrashCart.
 
-Repository Pages settings must use **GitHub Actions** as the source. The owner
-has authorized this free deployment. Keep Pages enabled and this public source
-available through **22 December 2026 UTC**; there is no automatic expiry or teardown
-in the workflow. Platform availability remains subject to GitHub's service and
-usage limits, not an uptime guarantee made by CrashCart. No paid upgrade or
-custom domain is required.
+## Fallback and retained failures
 
-Published: **https://himanshu748.github.io/crashcart/**. Source checks and Pages
-deployment passed on `ba7ac9c`; see STATUS.md for the linked runs. The hosted
-landing, walkthrough, case switch, PayPal filter and 390px layout were exercised.
-Two hosted download attempts timed out in the task browser; that check stopped.
-A separate native Safari check successfully downloaded JSON and ZIP after site
-download permission was granted. Both matched the independently fetched HTTPS
-artifacts, whose manifest and defective/healthy execution passed. See
-[JUDGE_VERIFICATION.md](JUDGE_VERIFICATION.md) for hashes and retained limitations.
-The clone-based command also remains a verified download-independent path.
+The [GitHub Pages preview](https://himanshu748.github.io/crashcart/) remains
+available on an older release. Its current workflow is blocked by an account
+billing lock. No Pages settings, unrelated project or existing public site was
+removed or replaced. Complete local setup is also an accepted judging path.
 
-AWS infrastructure below $10/month is authorized. The 8 November attempt briefly
-provisioned a $7/month instance and attached IP, then removed both after a stopped
-SSH setup. Actual brief-use billing is unknown; no ongoing compute/IP remains.
+The earlier dedicated $7/month Lightsail attempt stopped before SSH and was
+cleaned up; [that failure remains recorded](../evidence/runs/submission-ready/aws-attempt-nov8.json).
+The current deployment reuses an existing $12/month host, adding no instance base
+fee. Existing transfer/tax/account charges still apply. Account-wide $20/$50
+budget alerts are configured, not hard caps. Email delivery is untested.
 
-The organizer’s 5 November update extends access through the 21 December winner
-announcement. Do not edit submitted source, video or linked materials after the
-deadline until then. Hosting is optional; complete runnable repository instructions
-are an accepted access path. [Current readiness](RULES_READINESS.md).
-
-## Why not a hosted live server?
-
-Hugging Face's current documentation says new Docker/Gradio compute Spaces
-require a paid plan even though CPU Basic hardware has no hourly charge. Static
-Spaces remain free, but an additional service is unnecessary here. We did not
-create a paid Space or add billing. Render remains excluded. A live backend
-would additionally require permitted provider credentials, reachable notification
-ingress and bounded service usage; none is implied by this recorded walkthrough.
-
-Verified 4 November 2026 against [GitHub Pages availability](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages),
-[custom publishing workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages),
-[Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)
-and [Hugging Face Spaces](https://huggingface.co/docs/hub/spaces-overview).
+The [dedicated-host plan](AWS_JUDGE_DEPLOY.md) is an alternative, not the deployed
+architecture. Render remains excluded. No new PayPal, model or KERNEL execution,
+Devpost edit or submission was performed as part of hosting.

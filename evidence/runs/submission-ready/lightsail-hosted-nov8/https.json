@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-11-08T08:00:33.683862+00:00",
+  "url": "https://crashcart.52.202.25.181.sslip.io",
+  "trusted_https": true,
+  "tls_verification_bypass": false,
+  "http": 200,
+  "outcomes": {
+    "defective": [
+      "FAIL",
+      "paid_without_ticket",
+      0
+    ],
+    "healthy": [
+      "PASS",
+      "ticket_delivered_once_on_time",
+      1
+    ]
+  },
+  "mode": "RECORDED_REPLAY",
+  "fresh_execution": false,
+  "model_calls_now": 0,
+  "tls_readiness_observations": []
+}

@@ -1,0 +1,41 @@
+{
+  "GET /": 200,
+  "security_headers": {
+    "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+    "Referrer-Policy": "no-referrer",
+    "X-Content-Type-Options": "nosniff",
+    "Cache-Control": "no-store"
+  },
+  "POST /": 405,
+  "GET /.env": 404,
+  "GET /api/runs": 404,
+  "GET /%2e%2e/acme": 404,
+  "zip_content_disposition": "attachment",
+  "tls": {
+    "version": "TLSv1.3",
+    "issuer": [
+      [
+        [
+          "countryName",
+          "US"
+        ]
+      ],
+      [
+        [
+          "organizationName",
+          "Let's Encrypt"
+        ]
+      ],
+      [
+        [
+          "commonName",
+          "YE2"
+        ]
+      ]
+    ],
+    "notBefore": "Nov  8 07:01:33 2026 GMT",
+    "notAfter": "Feb  6 07:01:32 2027 GMT"
+  },
+  "browser_and_https_zip_sha256": "cde1205b8b1af72b405584666379019e87b7be2a44a83df3b540bf999daba029",
+  "browser_zip_matches_https": true
+}

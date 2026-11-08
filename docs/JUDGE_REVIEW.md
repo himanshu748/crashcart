@@ -39,7 +39,7 @@ Enable only explicitly authorized provider usage. One background investigation i
 ## Assessment against the rubric
 
 - **Technological implementation:** substantive payment/recovery logic and historical real AI use. The new source walkthrough explains the historical AI/payment sequence; it does not show the full live integration operating now.
-- **Design:** current source has a product-first landing page and clearer workflow. Public hosting still serves an older build because GitHub is billing-locked.
+- **Design:** current source has a product-first landing page and clearer workflow. The current Lightsail recorded demo is verified; the Pages fallback is older because GitHub is billing-locked.
 - **Potential impact:** a specific merchant pain and credible mechanism. No connected merchant store, adoption or measured business impact is established. Shopify matching, installation and accounts remain unfinished.
 - **Innovation:** correlation and reproducible failure recovery are the concrete mechanism. Market novelty is not established.
 - **Presentation:** the missing public end-to-end video and inaccessible configured sponsor screens are material weaknesses. Use the [video script](VIDEO_SCRIPT.md); show historical AI as a separate dated case, and actual sponsor screens when they run.

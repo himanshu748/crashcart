@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-11-08T08:17:55.518389+00:00",
+  "original_sites": 6,
+  "same_http_statuses": true,
+  "four_successful_html_hashes_unchanged": true,
+  "existing_401_and_410_preserved": true,
+  "all_six_original_complete_active_routes_unchanged": true,
+  "active_config_equals_frozen_source_adapted_at_deployment_path": true,
+  "proxy_identity_image_start_mount_objects_unchanged": true,
+  "original_routing_table_restored_unchanged": true,
+  "proxy_restarted": false,
+  "prior_probe_limits": [
+    "DockerreorderedMountsarray,butallcompleteobjectsidentical",
+    "Caddyfile_serverautomaticallyhidesitsconfigfile:temporarycandidatepathdiffersfromdeploymentpath;freshadaptatdeploymentpathmatchesactiveexactly"
+  ]
+}

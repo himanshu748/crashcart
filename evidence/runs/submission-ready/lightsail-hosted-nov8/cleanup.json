@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-11-08T08:31:04.661081+00:00",
+  "temporary_ssh_allowlist_entry_removed": true,
+  "all_original_firewall_rules_restored": true,
+  "control_connection_closed": true,
+  "temporary_access_files_deleted": [
+    "embodiweave-demo/access.json",
+    "embodiweave-demo/access",
+    "embodiweave-demo/access-cert.pub",
+    "foley-judging/access.json"
+  ],
+  "no_new_crashcart_container_or_network_remains": true,
+  "only_existing_proxy_serves_public_static_release": true,
+  "dedicated_instance_created": false,
+  "existing_sites_preserved": "See preservation.json",
+  "control_exit_code": 0,
+  "control_exit_provenance": "Actual cleanup tool output confirmed control_connection_exit0"
+}

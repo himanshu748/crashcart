@@ -51,3 +51,7 @@ proof. Current replay and historical AI are separate cases and must stay labelle
 The original private acceptance remains **47/60**, with no new CC IDs or weakened
 conditions. Submission rules and the 60-item full-release contract are different
 boundaries. This review neither closes CC-059/060 nor declares the entry compliant.
+
+## Current hosted access — 8 November
+
+The [current recorded demo](https://crashcart.52.202.25.181.sslip.io/) is verified on an existing Lightsail host, without a new instance or plan upgrade. The Pages link remains an older fallback. The hosted example includes historical AI, not a current model endpoint; complete configured PayPal-plus-AI access remains open. The public video and owner submission are still missing. A retention tag and a valid certificate support the plan through the winner announcement; future uptime is not a verified result. [Hosting evidence and limits](LIGHTSAIL_SHARED_HOST.md).

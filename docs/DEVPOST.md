@@ -1,6 +1,6 @@
 # CrashCart — paste-ready Devpost copy
 
-Draft for the owner. **Do not submit automatically.** The required public YouTube video still awaits recording and upload. AWS is planned, not deployed. The sections below distinguish the working recorded demonstration from separately exercised integrations.
+Draft for the owner. **Do not submit automatically.** The required public YouTube video still awaits recording and upload. The recorded demo is hosted on an existing Lightsail server; no live merchant API or model service is hosted. The sections below distinguish the working recorded demonstration from separately exercised integrations.
 
 ## Project name
 
@@ -65,6 +65,8 @@ Broaden the evidence model beyond workshop tickets, test the workflow with merch
 Python, SQLite, JavaScript, TypeScript, PayPal Sandbox, AG Studio, Bryntum Community Scheduler, KERNEL, Modal, DeepSeek, Postman, Newman, unittest.
 
 ## Try-it links
+
+- Current interactive recorded demo: https://crashcart.52.202.25.181.sslip.io/
 
 - Current working build and complete setup: https://github.com/himanshu748/crashcart#run-it-locally
 - Older hosted recorded preview: https://himanshu748.github.io/crashcart/

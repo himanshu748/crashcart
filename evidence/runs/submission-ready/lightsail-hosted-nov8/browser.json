@@ -1,0 +1,55 @@
+{
+  "url": "https://crashcart.52.202.25.181.sslip.io/",
+  "storySteps": [
+    "Payment confirmed",
+    "Missing ticket after deadline",
+    "Repaired32.26s"
+  ],
+  "selectedRepair": {
+    "tickets": 1,
+    "time": "32.26s"
+  },
+  "paypalFilter": "4of15steps",
+  "historicalAiSteps": 3,
+  "historicalAiSeparateCase": true,
+  "keyboard": [
+    "Enter activated AI promise",
+    "Space activated payment and AI first step"
+  ],
+  "phone": {
+    "activeQuestion": "Did delivery meet the promise?",
+    "animatedElement": {
+      "className": "",
+      "id": "ai-answer-copy"
+    },
+    "animationName": "none",
+    "reducedMotionChecked": true,
+    "scrollWidth": 390,
+    "transitionDuration": "0s",
+    "width": 390
+  },
+  "narrow": {
+    "width": 320,
+    "scrollWidth": 320
+  },
+  "browserDownload": {
+    "initialEventWait": "timedout15s",
+    "directDownloadApi": "savedReplayZip",
+    "file_sha256": "cde1205b8b1af72b405584666379019e87b7be2a44a83df3b540bf999daba029"
+  },
+  "reducedMotionAndViewportRestored": true,
+  "consoleWarningsAndErrors": [],
+  "reload_readiness": {
+    "comparison_heading": "Payment received. Customer still waiting.",
+    "ai_question": "Was the payment completed?",
+    "motion_restored": true,
+    "viewport_restored": {
+      "width": 855,
+      "height": 827
+    }
+  },
+  "probe_corrections": [
+    "Firsttext-basedbuttonlookupmissedarrow-containingtext;accessiblebuttonroleworked.",
+    "InitialstylemeasurementusedclassselectorforanID;actualanimatedparentwasmeasuredaftercorrection."
+  ]
+}

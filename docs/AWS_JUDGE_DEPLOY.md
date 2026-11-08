@@ -1,6 +1,8 @@
-# AWS recorded demo deployment
+# AWS dedicated-host alternative
 
-**8 November: provisioned, then cleaned up; not deployed.** One $7/month
+**Current hosting reuses an existing server:** see [the shared-host deployment](LIGHTSAIL_SHARED_HOST.md). Do not run this dedicated-host plan on that shared server.
+
+**Earlier 8 November dedicated-host attempt: provisioned, then cleaned up.** One $7/month
 Lightsail host and attached static IP were created under the existing AWS
 allowance. SSH preparation stopped after two failures: the local helper assumed
 an optional API field; the corrected helper then rejected an empty `hostKeys`
@@ -12,7 +14,7 @@ provisioning may incur a small charge; its actual billed amount is not yet known
 The latest product is runnable with `./scripts/judge.sh`. The existing
 [Pages demo](https://himanshu748.github.io/crashcart/) remains available on an
 older release; GitHub's account billing lock prevents its current workflow from
-starting. Do not replace that link with an unverified AWS address.
+starting. The new shared-host address is verified separately; the failure below remains historical.
 
 Hosting is optional; a complete runnable local path is accepted. AWS is not a
 submission gate. Follow [current access and freeze guidance](RULES_READINESS.md).

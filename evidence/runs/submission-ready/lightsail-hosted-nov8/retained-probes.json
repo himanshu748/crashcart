@@ -1,0 +1,18 @@
+{
+  "ssh_expiry": {
+    "prior_two_commands": "Permission denied(publickey), before mkdir/upload/build",
+    "prior_certificate_valid_until_local": "2026-11-08T13:15:25",
+    "cause": "expired AWS ephemeral SSH certificate",
+    "fix": "Renew ephemeral key; retain one authenticated multiplexed connection; same trusted local host pins, no persistent key or bypass"
+  },
+  "extra_network": {
+    "guard_fired": true,
+    "original_and_restored_table_sha256": "2d826e815249998b91823300d9253589abc577ae96f3fafd271b23ffce52fbf1",
+    "restored_matches_original": true,
+    "default_gateway_change": false,
+    "explanation": "BusyBox returned the full table, including added private route. Extra topology abandoned; original guard not suppressed."
+  },
+  "mount_comparison": "Docker reordered list only. All complete original mount objects match; no permissions or source changes ignored.",
+  "caddy_comparison": "Temporary adaptation auto-hid its temporary config path. Fresh adaptation at actual deployment path exactly matches loaded config. All6originalactive routeobjects match their baseline.",
+  "discarded_resources": "New backend container,anonymous volumes,internal network,own image tag and temporary full-source verification removed. Final deployment uses only existing proxy."
+}

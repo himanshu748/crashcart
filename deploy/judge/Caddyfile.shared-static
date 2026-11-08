@@ -1,0 +1,16 @@
+# Append this exact-host block to the existing proxy after validation.
+# Retain the static release through 2026-12-22 UTC. No globals or other routes.
+crashcart.52.202.25.181.sslip.io {
+	root * /data/crashcart/site-b0e304a
+	encode zstd gzip
+	@writes not method GET HEAD
+	respond @writes "Recorded example is read-only" 405
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+		Cache-Control no-store
+	}
+	header /downloads/* Content-Disposition "attachment"
+	file_server
+}

@@ -1,0 +1,27 @@
+{
+  "existing_plan_id": "small_3_0",
+  "existing_base_monthly_usd": 12.0,
+  "new_instances_created": 0,
+  "plan_upgrades": 0,
+  "new_disks_or_loadbalancers": 0,
+  "incremental_instance_monthly_base_usd": 0,
+  "transfer_overage_and_tax": "notahardcap;existingaccountlimitsapply",
+  "existing_static_ip_attached": true,
+  "budget_notifications": [
+    {
+      "NotificationType": "ACTUAL",
+      "ComparisonOperator": "GREATER_THAN",
+      "Threshold": 20.0,
+      "ThresholdType": "ABSOLUTE_VALUE",
+      "NotificationState": "OK"
+    },
+    {
+      "NotificationType": "ACTUAL",
+      "ComparisonOperator": "GREATER_THAN",
+      "Threshold": 50.0,
+      "ThresholdType": "ABSOLUTE_VALUE",
+      "NotificationState": "OK"
+    }
+  ],
+  "email_delivery": "not tested"
+}

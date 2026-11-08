@@ -1,0 +1,32 @@
+{
+  "regions_attempted": 19,
+  "regions_with_successful_read": 15,
+  "regions_not_inspected": [
+    {
+      "region": "eu-south-2",
+      "code": "UnrecognizedClientException"
+    },
+    {
+      "region": "ap-southeast-3",
+      "code": "UnrecognizedClientException"
+    },
+    {
+      "region": "ap-southeast-5",
+      "code": "UnrecognizedClientException"
+    },
+    {
+      "region": "ap-east-1",
+      "code": "UnrecognizedClientException"
+    }
+  ],
+  "running_instances_seen": 2,
+  "selected": {
+    "name": "embodiweave-demo",
+    "region": "us-east-1",
+    "state": "running",
+    "ram_gb": 2,
+    "bundle": "small_3_0"
+  },
+  "other_instances_modified": false,
+  "scope_limit": "Fourregionsreturnedclientcredentialerrors;notassertedempty."
+}
