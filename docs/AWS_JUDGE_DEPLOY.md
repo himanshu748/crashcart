@@ -14,6 +14,9 @@ The latest product is runnable with `./scripts/judge.sh`. The existing
 older release; GitHub's account billing lock prevents its current workflow from
 starting. Do not replace that link with an unverified AWS address.
 
+Hosting is optional; a complete runnable local path is accepted. AWS is not a
+submission gate. Follow [current access and freeze guidance](RULES_READINESS.md).
+
 ## Cost and lifetime
 
 The selected `micro_3_0` Linux/public-IPv4 bundle in `us-east-1` is **$7/month
@@ -29,10 +32,10 @@ email delivery is untested. They cover the whole account, including other projec
 and are alerts, not hard caps. Do not create duplicate budgets.
 
 A successful deployment must retain its instance, IP and certificate volumes
-through **15 December 2026**. No scheduled teardown is installed. Daily checks
+through **22 December 2026 UTC**. No scheduled teardown is installed. Daily checks
 and certificate renewal remain operational responsibilities; future availability
 cannot be established by one test. Remove resources only after judging, on or
-after 16 December IST. Stopping a Lightsail instance does not eliminate its bill.
+after 23 December UTC. Stopping a Lightsail instance does not eliminate its bill.
 
 ## Reproducible commands for a resumed deployment
 
@@ -66,7 +69,7 @@ aws lightsail create-instances --region "$AWS_REGION" \
   --blueprint-id ubuntu_24_04 --bundle-id micro_3_0 --ip-address-type ipv4 \
   --user-data file://deploy/judge/bootstrap.sh \
   --tags key=Project,value=CrashCart key=Purpose,value=Recorded-judge-demo \
-         key=RetainThrough,value=2026-12-15 key=MonthlyBaseUSD,value=7
+         key=RetainThrough,value=2026-12-22 key=MonthlyBaseUSD,value=7
 aws lightsail get-instance --region "$AWS_REGION" --instance-name "$CC_INSTANCE" \
   --query 'instance.[state.name,bundleId,blueprintId]'
 # Wait for running; read back, do not create another instance.
@@ -168,7 +171,7 @@ review, isolated export or old container result does not establish these checks.
 
 Only target this dedicated named instance and its attached address after verifying
 ownership/tags. Never delete other projects. For a deployed demo, wait until
-16 December 2026; an unused failed attempt can be cleaned up immediately.
+23 December 2026 UTC; an unused failed attempt can be cleaned up immediately.
 
 ```sh
 aws lightsail delete-instance --region "$AWS_REGION" --instance-name "$CC_INSTANCE"

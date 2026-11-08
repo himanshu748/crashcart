@@ -135,3 +135,7 @@ Official references: [rules](https://paypalaihackathon.devpost.com/rules),
 [Bryntum](https://paypalaihackathon.devpost.com/details/bryntum),
 [KERNEL](https://paypalaihackathon.devpost.com/details/kernel) and
 [Postman](https://paypalaihackathon.devpost.com/details/postman).
+
+## Access and freeze — reviewed 8 November
+
+Keep the demonstrated build and credentials/trials through the 21 December winner announcement, with a 22 December UTC buffer. Freeze submitted source, video and links after the deadline until then. Hosting is optional. The required public video and complete PayPal-plus-AI access remain open; the private AG trial ends 17 December. [Current readiness and source](RULES_READINESS.md).

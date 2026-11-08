@@ -10,7 +10,7 @@ The problem is clear: a payment can complete while an order remains unfulfilled.
 | --- | --- | --- |
 | PayPal REST APIs | OAuth, order creation/capture, durable request identity, independent retrieval, authenticated payment notifications and exact purchase/amount/ticket correlation. | Recorded comparison and historical authentic webhook/recovery results. This is a handwritten API adapter, not a PayPal SDK. |
 | Modal + DeepSeek | Chooses the next evidence read; deterministic code decides the outcome. Operator-requested investigations now run in a durable background worker. | Historical real model sequence in [AI evidence](AI_EVIDENCE.md); new queue and endpoint configuration tested locally with injected replies. No current hosted inference claimed. |
-| AG Studio | Actual SDK with linked custom widgets, saved-record queries and a native agent harness. | Separate configured Records workspace; not loaded by the keyless page. Licence and full operator access still need provision. |
+| AG Studio | Actual SDK with linked custom widgets, saved-record queries and a native agent harness. | Separate configured Records workspace; not loaded by the keyless page. Private trial ends 17 December; extended access through the winner announcement and full operator access remain open. |
 | Bryntum Community Scheduler | Actual SDK plots payment-relative promises and ticket milestones and links to their investigations. | Separate Delivery timing page; refuses uncorrelated data rather than inventing a timeline. Full operator journey remains open. |
 | KERNEL | Explicitly granted remote browser observation and recording, correlated to the existing checkout. | New [observation runner](kernel-runner.md) calls the actual bounded adapter. Tests inject KERNEL replies; no fresh session was run. Review is required before receipt import. |
 | Postman / Newman | Actual collection checks API health and selected purchase/payment/ticket identities. Missing payment proof fails instead of being skipped. | Runnable local collection, no cloud account. It makes no new payment or provider request. |
@@ -58,7 +58,7 @@ npm run test:deadlines --prefix studio
 
 Local tests use injected provider/model replies where specified. They do not establish fresh PayPal, model or KERNEL execution. [Historical webhook result](../evidence/runs/judge-ready/webhook-v55.json), [recovery](../evidence/runs/judge-ready/recovery-v56.json) and [AI](AI_EVIDENCE.md) keep their original dates and scope.
 
-Next: restore public publication, provide the configured sponsor workspace and end-to-end video, then verify owned test-store data with separately authorized provider use. Original acceptance remains **47/60**; no original requirement is closed by this review.
+Next: finish the required public end-to-end video and accessible PayPal-plus-AI test path. Hosting is optional; local setup is accepted. Provide sponsor-workspace access only if that experience is claimed. Follow the longer availability and submission-freeze guidance in [current readiness](RULES_READINESS.md). Original acceptance remains **47/60**; no original requirement is closed by this review.
 
 ## Hosting recovery boundary
 

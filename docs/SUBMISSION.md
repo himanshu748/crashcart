@@ -147,7 +147,8 @@ impact, innovation and presentation. The organizers determine eligibility.
 ## Testing instructions and links
 
 - [Public repository](https://github.com/himanshu748/crashcart)
-- [Working interactive recorded walkthrough](https://himanshu748.github.io/crashcart/)
+- [Current runnable build and setup](https://github.com/himanshu748/crashcart#run-it-locally)
+- [Older hosted recorded preview](https://himanshu748.github.io/crashcart/)
 - [Keyless setup and 60-second path](../README.md#try-the-product-in-60-seconds)
 - [Recorded replay commands](../README.md#reproduce-the-comparison)
 - [Optional test-buyer path](../README.md#optional-sandbox-test-buyer-path)
@@ -157,11 +158,12 @@ impact, innovation and presentation. The organizers determine eligibility.
 - [Historical PayPal-plus-AI explanation](AI_EVIDENCE.md)
 - [Existing Devpost project page](https://devpost.com/software/crashcart-87asqz)
 
-The published GitHub Pages URL above is the working try-it link. Do not replace
-it with an AWS URL until that deployment and its downloads have been verified.
+The GitHub Pages URL above is the older hosted preview. The current runnable
+build is linked separately. Do not advertise an AWS URL until that deployment
+and its downloads have been verified.
 The hosted review displays build-time replay results; the local command executes
 the replay. Neither is a hosted live-payment backend.
-Keep judge access free through the end of judging and retain the runnable source.
+Keep access free through the 21 December winner announcement and retain the runnable source.
 Do not publish real test-buyer or service credentials with the source.
 
 The owner must watch the exported video, verify a duration under three minutes,
@@ -174,3 +176,7 @@ Official dates checked on 4 November 2026: submissions close **13 November 2026,
 01:30 IST** (12 November, noon Pacific). Judging ends **15 December 2026,
 21:30 IST** (08:00 Pacific). Use the [official rules](https://paypalaihackathon.devpost.com/rules)
 and [event page](https://paypalaihackathon.devpost.com/) if organizer guidance changes.
+
+## Access and freeze — reviewed 8 November
+
+Keep the demonstrated build and credentials/trials through the 21 December winner announcement, with a 22 December UTC buffer. Freeze submitted source, video and links after the deadline until then. Hosting is optional. The required public video and complete PayPal-plus-AI access remain open; the private AG trial ends 17 December. [Current readiness and source](RULES_READINESS.md).

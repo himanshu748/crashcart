@@ -1,0 +1,170 @@
+{
+  "checked_at": "2026-11-08T07:24:54Z",
+  "event": {
+    "id": 31302,
+    "slug": "paypalaihackathon",
+    "title": "PayPal AI Hackathon"
+  },
+  "source": "Official Devpost connected read APIs; browser rules page403; announcement47307 also read on its public URL",
+  "source_urls": [
+    "https://paypalaihackathon.devpost.com/rules",
+    "https://paypalaihackathon.devpost.com/updates/47307-submission-checklist-it-s-go-time"
+  ],
+  "tool_fetches": {
+    "rules": {
+      "fetched_at": "2026-11-08T07:24:54Z",
+      "data_completeness": "complete"
+    },
+    "requirements": {
+      "fetched_at": "2026-11-08T07:24:54Z",
+      "data_completeness": "complete"
+    },
+    "criteria": {
+      "fetched_at": "2026-11-08T07:24:54Z",
+      "data_completeness": "complete"
+    },
+    "dates": {
+      "fetched_at": "2026-11-08T07:24:53Z",
+      "data_completeness": "complete"
+    },
+    "announcements": {
+      "fetched_at": "2026-11-08T07:24:54Z",
+      "data_completeness": "complete"
+    },
+    "prizes": {
+      "fetched_at": "2026-11-08T07:24:53Z",
+      "data_completeness": "complete"
+    }
+  },
+  "dates": {
+    "submissions_start_at": "2026-10-01T16:15:00Z",
+    "submissions_end_at": "2026-11-12T20:00:00Z",
+    "judging_starts_at": "2026-12-01T22:00:00Z",
+    "judging_ends_at": "2026-12-15T16:00:00Z",
+    "public_voting_starts_at": null,
+    "public_voting_ends_at": null,
+    "winners_announced_at": "2026-12-21T17:00:00Z",
+    "published_at": "2026-10-01T16:00:26Z"
+  },
+  "judging": [
+    "Technological Implementation",
+    "Design",
+    "Potential Impact",
+    "Innovation/Idea",
+    "Presentation"
+  ],
+  "equal_weights_from_formal_rules": true,
+  "judging_scale": 5,
+  "deliverables": {
+    "submission_object": "submission",
+    "video_required": true,
+    "website_required": false,
+    "zip_file_required": false
+  },
+  "required_field_ids": [
+    28778,
+    28779,
+    28780,
+    28781,
+    28782,
+    28783,
+    28784,
+    28786,
+    28788,
+    28787,
+    28790,
+    28791,
+    28792,
+    28794,
+    28795,
+    28796,
+    29053,
+    29054,
+    29055
+  ],
+  "latest_announcement": {
+    "id": 47307,
+    "sent_at": "2026-11-05T17:01:41Z",
+    "title": "Submission checklist: it's go time! \u23f3"
+  },
+  "applied_decisions": {
+    "hosting": "optional; working local build with complete setup is allowed",
+    "retention": "Through22DecemberUTC as timezone buffer; actual update requires until21Decemberwinnerannouncement",
+    "freeze": "Afterdeadline untilafterwinnerannouncement; no linkedrepo/video/material edits",
+    "sponsors": "optional; PayPalSandbox and meaningfulAI required",
+    "licence": "privateAGtrial17December does not coverextendedwindow; keylesspathneedsnone"
+  },
+  "date_discrepancy": "Formalrules say winners21Dec14:00Pacific; keydatesAPI says21Dec17:00UTC. Keepuntilactualannouncement; conservative22DecUTCbuffercoversboth, no exacttimeguarantee.",
+  "project_readback": {
+    "name": "CrashCart",
+    "state": "published",
+    "url": "https://devpost.com/software/crashcart-87asqz",
+    "video_url_present": false,
+    "submitted_at": null,
+    "read_scope": "Editableprojectandentrymetadata only; notcustomformanswers"
+  },
+  "github_readback": {
+    "public": true,
+    "default_branch": "main",
+    "detected_licence": "MIT"
+  },
+  "original_acceptance": "47/60 frozenbuild;none newlyaccepted",
+  "non_actions": [
+    "No registration,formwrite,submission,rulesacknowledgement,providercall,spending or deployment"
+  ],
+  "artifact_sha256": {
+    "clean-clone.json": "4ee4c7b1d3cc13af2020667acf6672f791a504ce4d5c748ee82db534732075d6",
+    "judge-tests.log": "c28bbdc83bd143af868593071183b3225bc1c79f71811c8750543d5f6246ebcd"
+  },
+  "clean_clone_result": {
+    "checked_at": "2026-11-08T07:29:53.958187+00:00",
+    "source_revision": "cb32d111b026cf4ac8097f02000fdd02678a3db7",
+    "clone": "fresh public HTTPS depth1 clone, temporary HOME and credential helper disabled",
+    "environment": "PATH,HOME,PYTHON,PYTHONDONTWRITEBYTECODE,GIT_TERMINAL_PROMPT only; no.env or provider keys",
+    "entrypoint": "./scripts/judge.sh --no-open --port0",
+    "startup_stdout": "CrashCart recorded review: http://127.0.0.1:59441/#investigation",
+    "mode": "RECORDED_REPLAY",
+    "fresh_execution": false,
+    "external_calls_during_replay": 0,
+    "cases": {
+      "defective": [
+        "FAIL",
+        "paid_without_ticket",
+        0
+      ],
+      "healthy": [
+        "PASS",
+        "ticket_delivered_once_on_time",
+        1
+      ]
+    },
+    "http": {
+      "POST /": 405,
+      "GET /.env": 404
+    },
+    "historical_ai_is_separate_recorded_case": true,
+    "judge_command_tests": 15,
+    "live_payment_or_AI_proof": false,
+    "cleanup": "server exited and temporary clone removed"
+  },
+  "judge_tests_actual_output": "Ran15tests in1.963s OK",
+  "source_scope": "Docs-only correction; original runtime unchanged from verified public clonecb32d11",
+  "changed_document_sha256": {
+    "README.md": "482421253c584f0561403afd66a681c282e3d8022b9070aaeacf61d6294893ff",
+    "docs/AWS_JUDGE_DEPLOY.md": "ec71335171b3d0674c820296e4429db4325b8c00eb5fbc4a15a8ae34fbc714ec",
+    "docs/DEVPOST.md": "17049bf9149e5d7318a163f08c91ed886f99947eac0dcd6c273249d0b440b99a",
+    "docs/HOSTING.md": "913d04a84a6abbc9a03edfd93eb93d127fe7cb1f73f5d92aab2dc9cc879d0feb",
+    "docs/JUDGE_REVIEW.md": "7b2ccf4d47b62a7f20aa2253b2830d2f39e1992ee157c76b16149bc2cfcc95cc",
+    "docs/OPEN_CHECKS.md": "1d9b0f8d5349e174b4c43ba4cfe5b93c6b8d646f68664a03c23b26add745e044",
+    "docs/REMAINING_VERIFICATION.md": "3fb91a2ba9fae2aa20a39ef8798694a2e38937a46dc9eda1a8e384ab424a3368",
+    "docs/RULES_READINESS.md": "95294821ab362d901fd2fd1c31327ad8a3b4e9c57434cd25edc69ab406759cdb",
+    "docs/SUBMISSION.md": "a651c0a09e54a7b3ef981d58c36cacedb004c884b98503b27f038a33491b7e58",
+    "docs/VIDEO_SCRIPT.md": "1f711db46cf5b6712dceacad7bb86004ffccbdf18f155b13b7c4224bb50f4cb8",
+    "docs/sponsor-ledger.md": "7885ba937fa7ccf3e31494d722e33e8fad52ab9cf04b4b4553b06a7f907d93be"
+  },
+  "independent_review": {
+    "reviewer": "/root/judge_sponsor_review",
+    "result": "No blocking finding; optional-hosting, extended-retention, freeze and preserved47acceptance reviewed; minor Pages label corrected",
+    "boundary": "Reviewed source and actual recorded artifacts; independently fetched official rules; no new provider execution or future-uptime verification"
+  }
+}

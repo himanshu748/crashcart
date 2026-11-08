@@ -45,7 +45,10 @@ The [design amendment](DESIGN_CONTRACT_UPDATE.md) updates current descriptions; 
 - The original faulty-checkout recording, or access/authorization to create a
   properly recorded replacement experiment.
 - AG Studio licence access is already resolved: the privately configured trial expires
-  17 December 2026, after judging. No new key is requested. Full sponsor-workspace
+  17 December 2026. This covers formal judging but not the organizer’s newly
+  confirmed access window through the 21 December winner announcement. Extended
+  licensed access remains open if this workspace is submitted. The keyless path
+  needs no licence. Full sponsor-workspace
   acceptance still needs the operator journey above; the keyless page does not
   require or redistribute this licence.
 - The final demonstration video, which the owner will record; review its contents,

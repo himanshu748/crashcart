@@ -24,7 +24,7 @@ the check locally.
 
 Repository Pages settings must use **GitHub Actions** as the source. The owner
 has authorized this free deployment. Keep Pages enabled and this public source
-available through **15 December 2026**; there is no automatic expiry or teardown
+available through **22 December 2026 UTC**; there is no automatic expiry or teardown
 in the workflow. Platform availability remains subject to GitHub's service and
 usage limits, not an uptime guarantee made by CrashCart. No paid upgrade or
 custom domain is required.
@@ -42,6 +42,11 @@ The clone-based command also remains a verified download-independent path.
 AWS infrastructure below $10/month is authorized. The 8 November attempt briefly
 provisioned a $7/month instance and attached IP, then removed both after a stopped
 SSH setup. Actual brief-use billing is unknown; no ongoing compute/IP remains.
+
+The organizer’s 5 November update extends access through the 21 December winner
+announcement. Do not edit submitted source, video or linked materials after the
+deadline until then. Hosting is optional; complete runnable repository instructions
+are an accepted access path. [Current readiness](RULES_READINESS.md).
 
 ## Why not a hosted live server?
 

@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-11-08T07:29:53.958187+00:00",
+  "source_revision": "cb32d111b026cf4ac8097f02000fdd02678a3db7",
+  "clone": "fresh public HTTPS depth1 clone, temporary HOME and credential helper disabled",
+  "environment": "PATH,HOME,PYTHON,PYTHONDONTWRITEBYTECODE,GIT_TERMINAL_PROMPT only; no.env or provider keys",
+  "entrypoint": "./scripts/judge.sh --no-open --port0",
+  "startup_stdout": "CrashCart recorded review: http://127.0.0.1:59441/#investigation",
+  "mode": "RECORDED_REPLAY",
+  "fresh_execution": false,
+  "external_calls_during_replay": 0,
+  "cases": {
+    "defective": [
+      "FAIL",
+      "paid_without_ticket",
+      0
+    ],
+    "healthy": [
+      "PASS",
+      "ticket_delivered_once_on_time",
+      1
+    ]
+  },
+  "http": {
+    "POST /": 405,
+    "GET /.env": 404
+  },
+  "historical_ai_is_separate_recorded_case": true,
+  "judge_command_tests": 15,
+  "live_payment_or_AI_proof": false,
+  "cleanup": "server exited and temporary clone removed"
+}

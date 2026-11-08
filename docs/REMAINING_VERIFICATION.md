@@ -58,7 +58,7 @@ Five stale blocker descriptions were corrected without changing states: CC-040 p
 
 The owner approved a harmless five-second exact-window capture probe. No capture started: initial window identification failed twice; after the owner confirmed visibility, on-screen matching failed twice again, including after a UI Raise. UI control renders CrashCart while native capture reports no on-screen matching window. The step is stopped and the capture allowance is unused. Next: resolve this visibility mismatch, then inspect actual frames, audio absence and finalization before proposing a scoped recorded Sandbox checkout. Compilation and watchdog probes are not actual recorder proof.
 
-AG Studio is configured through 17 December; no replacement key is needed. Held-out execution still needs independently bound actual-trial inputs and applicable provider/model access and allowance. No new spending/service setup is authorized by this report. Owner video and final Devpost submission remain separate.
+AG Studio is configured through 17 December. That does not cover the organizer’s access window through the 21 December winner announcement. Extended licensed access remains open if submitted; the keyless path needs no licence. Held-out execution still needs independently bound actual-trial inputs and applicable provider/model access and allowance. No new spending/service setup is authorized by this report. Owner video and final Devpost submission remain separate.
 
 ## Current recorder diagnostic — v68
 

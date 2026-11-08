@@ -66,8 +66,9 @@ Python, SQLite, JavaScript, TypeScript, PayPal Sandbox, AG Studio, Bryntum Commu
 
 ## Try-it links
 
-- Interactive recorded walkthrough: https://himanshu748.github.io/crashcart/
-- Public source and setup: https://github.com/himanshu748/crashcart
+- Current working build and complete setup: https://github.com/himanshu748/crashcart#run-it-locally
+- Older hosted recorded preview: https://himanshu748.github.io/crashcart/
+- Public source: https://github.com/himanshu748/crashcart
 - Historical AI evidence: https://github.com/himanshu748/crashcart/blob/main/docs/AI_EVIDENCE.md
 - Optional Sandbox instructions: https://github.com/himanshu748/crashcart#optional-sandbox-test-buyer-path
 
@@ -82,3 +83,7 @@ Python, SQLite, JavaScript, TypeScript, PayPal Sandbox, AG Studio, Bryntum Commu
 - **AG Grid / Bryntum lanes:** do not present the keyless demo as proof of these optional full-workspace experiences. Their complete operator journey remains unverified; this submission scope adds no sponsor features to claim those lanes.
 
 The organizers determine eligibility. Video, repository and final form must agree with these claims. Submission deadline: **13 November 2026, 01:30 IST**. Judging ends **15 December 2026, 21:30 IST**. Sources: [event](https://paypalaihackathon.devpost.com/) and [rules](https://paypalaihackathon.devpost.com/rules), checked 4 November 2026.
+
+## Access and freeze — reviewed 8 November
+
+Keep the demonstrated build and credentials/trials through the 21 December winner announcement, with a 22 December UTC buffer. Freeze submitted source, video and links after the deadline until then. Hosting is optional. The required public video and complete PayPal-plus-AI access remain open; the private AG trial ends 17 December. [Current readiness and source](RULES_READINESS.md).

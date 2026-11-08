@@ -6,10 +6,25 @@
 payment records, order history and fulfilment updates while a customer waits.
 CrashCart brings those pieces together so the missing step is easier to find.
 
-**[Explore the interactive demo →](https://himanshu748.github.io/crashcart/)**
+**[Run the current build →](#run-it-locally)** · [Preview the hosted recording](https://himanshu748.github.io/crashcart/)
 No account needed. Follow a recorded $29 ticket purchase from payment to the
 missing ticket, then compare the repaired checkout. Run locally for the latest
 experience; the hosted demo is on an earlier release.
+
+## Judge access
+
+Run the current build with `./scripts/judge.sh` below. Hosting is optional under
+the event rules; the hosted link is an older recorded preview. This local command
+recomputes the two merchant outcomes from saved Sandbox input, without new
+payment or AI calls. The full configured PayPal-plus-AI workspace has separate
+access requirements.
+
+Submissions close **13 November 2026, 01:30 IST**. Keep the demonstrated build and
+required credentials/trials through the **21 December winner announcement**; plan
+retention through **22 December UTC**. Freeze submitted source, video and linked
+materials after the deadline until the announcement. The private AG Studio trial
+ends 17 December and does not cover that window; the keyless path needs no licence.
+[Current readiness and remaining gaps](docs/RULES_READINESS.md).
 
 ## See what happened
 
