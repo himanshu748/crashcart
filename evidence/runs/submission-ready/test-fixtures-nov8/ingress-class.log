@@ -1,0 +1,17 @@
+test_actual_receipt_alias_capacity_returns_503_without_acknowledging_alias (tests.test_monitor_ingress.IngressHTTPTests.test_actual_receipt_alias_capacity_returns_503_without_acknowledging_alias) ... ok
+test_all_consumed_critical_header_duplicates_are_rejected (tests.test_monitor_ingress.IngressHTTPTests.test_all_consumed_critical_header_duplicates_are_rejected) ... ok
+test_close_shuts_partial_request_socket_and_releases_handler (tests.test_monitor_ingress.IngressHTTPTests.test_close_shuts_partial_request_socket_and_releases_handler) ... ok
+test_concurrency_cap_slow_body_deadline_and_permit_recovery (tests.test_monitor_ingress.IngressHTTPTests.test_concurrency_cap_slow_body_deadline_and_permit_recovery) ... ok
+test_duplicate_headers_bad_framing_deep_json_and_disconnect_release_permits (tests.test_monitor_ingress.IngressHTTPTests.test_duplicate_headers_bad_framing_deep_json_and_disconnect_release_permits) ... ok
+test_global_rejects_before_body_database_or_verifier_then_recovers (tests.test_monitor_ingress.IngressHTTPTests.test_global_rejects_before_body_database_or_verifier_then_recovers) ... ok
+test_handler_setup_and_thread_spawn_failures_release_capacity (tests.test_monitor_ingress.IngressHTTPTests.test_handler_setup_and_thread_spawn_failures_release_capacity) ... ok
+test_intentional_receipt_capacity_is_retryable_not_acknowledged (tests.test_monitor_ingress.IngressHTTPTests.test_intentional_receipt_capacity_is_retryable_not_acknowledged) ... ok
+test_missing_invalid_and_duplicate_signature_metadata_never_dispatch_provider (tests.test_monitor_ingress.IngressHTTPTests.test_missing_invalid_and_duplicate_signature_metadata_never_dispatch_provider) ... ok
+test_real_database_lock_returns_retryable_error_and_rolls_back (tests.test_monitor_ingress.IngressHTTPTests.test_real_database_lock_returns_retryable_error_and_rolls_back) ... ok
+test_store_budget_shared_across_routes_headers_and_providers (tests.test_monitor_ingress.IngressHTTPTests.test_store_budget_shared_across_routes_headers_and_providers) ... ok
+test_total_socket_deadline_survives_header_and_body_drip (tests.test_monitor_ingress.IngressHTTPTests.test_total_socket_deadline_survives_header_and_body_drip) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 12.675s
+
+OK

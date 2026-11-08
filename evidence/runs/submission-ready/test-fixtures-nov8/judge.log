@@ -1,0 +1,20 @@
+test_changed_example_is_rejected_before_publication (tests.test_judge.JudgeReviewTests.test_changed_example_is_rejected_before_publication) ... ok
+test_changed_historical_ai_source_prevents_publication (tests.test_judge.JudgeReviewTests.test_changed_historical_ai_source_prevents_publication) ... ok
+test_downloaded_zip_is_executable_with_expected_pair (tests.test_judge.JudgeReviewTests.test_downloaded_zip_is_executable_with_expected_pair) ... ok
+test_downloads_match_rendered_data_without_credentials (tests.test_judge.JudgeReviewTests.test_downloads_match_rendered_data_without_credentials) ... ok
+test_exact_mit_notice_survives_static_and_zip_distribution (tests.test_judge.JudgeReviewTests.test_exact_mit_notice_survives_static_and_zip_distribution) ... ok
+test_historical_ai_is_an_explicit_separate_recorded_case (tests.test_judge.JudgeReviewTests.test_historical_ai_is_an_explicit_separate_recorded_case) ... ok
+test_historical_ai_projection_has_no_private_bindings_or_unknown_fields (tests.test_judge.JudgeReviewTests.test_historical_ai_projection_has_no_private_bindings_or_unknown_fields) ... ok
+test_historical_ai_scope_and_sequence_are_validated_independently_of_hash (tests.test_judge.JudgeReviewTests.test_historical_ai_scope_and_sequence_are_validated_independently_of_hash) ... ok
+test_http_only_serves_frozen_allowlist_and_rejects_live_actions (tests.test_judge.JudgeReviewTests.test_http_only_serves_frozen_allowlist_and_rejects_live_actions) ... ok
+test_same_input_runs_both_real_variants_under_network_denial (tests.test_judge.JudgeReviewTests.test_same_input_runs_both_real_variants_under_network_denial) ... ok
+test_shell_command_exports_without_keys_or_installation (tests.test_judge.JudgeReviewTests.test_shell_command_exports_without_keys_or_installation) ... ok
+test_static_export_executes_and_labels_build_time (tests.test_judge.JudgeReviewTests.test_static_export_executes_and_labels_build_time) ... ok
+test_both_variants_import_as_separate_finished_replay_cases (tests.test_public_replay.PublicReplayTests.test_both_variants_import_as_separate_finished_replay_cases) ... ok
+test_early_recording_fails_defective_and_passes_healthy_with_same_promise (tests.test_public_replay.PublicReplayTests.test_early_recording_fails_defective_and_passes_healthy_with_same_promise) ... ok
+test_original_late_recording_still_rejects_late_healthy_delivery (tests.test_public_replay.PublicReplayTests.test_original_late_recording_still_rejects_late_healthy_delivery) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 29.283s
+
+OK

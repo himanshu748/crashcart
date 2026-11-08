@@ -58,8 +58,15 @@ class IngressHTTPTests(unittest.TestCase):
     def payload(self):return json.dumps({'id':'local-event','event_type':'PAYMENT.CAPTURE.PENDING'}).encode()
     def request(self,path,*,raw=None,headers=None,method='POST',timeout=2):
         c=http.client.HTTPConnection('127.0.0.1',self.server.server_port,timeout=timeout)
-        c.request(method,path,body=self.payload() if raw is None else raw,headers=headers or self.headers())
-        r=c.getresponse();result=(r.status,r.read(),dict(r.getheaders()));c.close();return result
+        # Read-only probes must not send a webhook payload in a second write:
+        # admission overload can reply and close before that write is possible.
+        readonly=method.upper() in {'GET','HEAD'}
+        body=None if readonly else self.payload() if raw is None else raw
+        request_headers=({} if readonly else self.headers()) if headers is None else headers
+        try:
+            c.request(method,path,body=body,headers=request_headers)
+            r=c.getresponse();return r.status,r.read(),dict(r.getheaders())
+        finally:c.close()
     def wire(self,data):
         c=socket.create_connection(('127.0.0.1',self.server.server_port),timeout=2);c.sendall(data);result=b''
         try:
@@ -99,6 +106,7 @@ class IngressHTTPTests(unittest.TestCase):
     def test_concurrency_cap_slow_body_deadline_and_permit_recovery(self):
         self.start(max_handlers=1,request_timeout=.2)
         slow=socket.create_connection(('127.0.0.1',self.server.server_port),timeout=2)
+        self.addCleanup(slow.close)
         slow.sendall(b'POST /api/login HTTP/1.1\r\nHost: localhost\r\nContent-Length: 100\r\n\r\nx')
         self.await_handlers(1)
         status,_,headers=self.request('/healthz',method='GET');self.assertEqual(status,503);self.assertEqual(headers['Retry-After'],'1')

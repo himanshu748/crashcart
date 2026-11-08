@@ -173,17 +173,21 @@ class RunStateTests(unittest.TestCase):
         with patch("crashcart.store.time.time", side_effect=lambda: clocks["wall"]):
             outcome = Investigation(self.store, self.service, model_factory=lambda: model,
                                     clock=lambda: clocks["monotonic"]).run(self.run["id"])
-        self.assertEqual(model.calls, 1, "A late in-flight response requires an actual model entry")
-        self.assertEqual(outcome["status"], "INTERRUPTED")
-        self.assertEqual(outcome["reason"], "INVESTIGATION_DEADLINE_EXPIRED")
-        self.assertEqual(outcome["final_verdict"]["verdict"], "INCONCLUSIVE")
-        self.assertEqual(self.models()[0]["result"]["usage"], {"total_tokens": 7})
-        self.assertEqual(len(self.endings()), 1)
-        self.assertEqual(self.store.get_run(self.run["id"])["state"], "inconclusive")
-        retry = LocalModel(lambda context: plan(context))
-        self.assertEqual(self.execute(retry)["status"], "BUDGET_EXHAUSTED")
-        self.assertEqual(retry.calls, 0)
-        self.assertEqual(len(self.models()), 1)
+            self.assertEqual(model.calls, 1, "A late in-flight response requires an actual model entry")
+            self.assertEqual(outcome["status"], "INTERRUPTED")
+            self.assertEqual(outcome["reason"], "INVESTIGATION_DEADLINE_EXPIRED")
+            self.assertEqual(outcome["final_verdict"]["verdict"], "INCONCLUSIVE")
+            self.assertEqual(self.models()[0]["result"]["usage"], {"total_tokens": 7})
+            self.assertEqual(len(self.endings()), 1)
+            self.assertEqual(self.store.get_run(self.run["id"])["state"], "inconclusive")
+            # Keep both clocks advanced: restoring real wall time here could
+            # resurrect the expired deadline before the retry is checked.
+            retry = LocalModel(lambda context: plan(context))
+            retried = Investigation(self.store, self.service, model_factory=lambda: retry,
+                                    clock=lambda: clocks["monotonic"]).run(self.run["id"])
+            self.assertEqual(retried["status"], "BUDGET_EXHAUSTED")
+            self.assertEqual(retry.calls, 0)
+            self.assertEqual(len(self.models()), 1)
 
     def test_process_exit_leaves_unknown_model_receipt_and_expires_without_retry(self):
         self.run = self.store.create_run("One USD29 ticket", mode="LOCAL_TEST", budget={"max_seconds": .15, "max_model_calls": 1, "max_attempts": 1})

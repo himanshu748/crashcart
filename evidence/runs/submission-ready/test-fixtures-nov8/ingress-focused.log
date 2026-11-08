@@ -1,0 +1,6 @@
+test_concurrency_cap_slow_body_deadline_and_permit_recovery (tests.test_monitor_ingress.IngressHTTPTests.test_concurrency_cap_slow_body_deadline_and_permit_recovery) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.315s
+
+OK

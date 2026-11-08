@@ -1,0 +1,38 @@
+✔ queued and running never claim finished analysis or successful delivery (56.461042ms)
+✔ failed, cancelled and missing final results retain uncertainty (2.2385ms)
+✔ local simulated analysis stays labelled and never decides payment (5.85875ms)
+✔ background lifecycle never leaves a stale queue acknowledgement: false (5.135417ms)
+✔ background lifecycle never leaves a stale queue acknowledgement: true (80.941666ms)
+✔ finding is presented only for the selected case: null (6.247916ms)
+✔ finding is presented only for the selected case: run_id (2.632042ms)
+✔ finding is presented only for the selected case: purchase_id (10.005459ms)
+✔ finding is presented only for the selected case: order_id (2.474375ms)
+✔ Unavailable response explains recovery without provider claims (484.95525ms)
+✔ Malformed JSON does not expose parser jargon (25.439ms)
+✔ Disconnected network leaves an understandable safe state (3.323167ms)
+✔ Invalid comparison never displays a successful result (52.626292ms)
+✔ Partially parsed case is discarded before walkthrough reuse (25.335416ms)
+✔ recorded AI stages expose the actual knowledge progression without mutating the case (425.283625ms)
+✔ unusable optional AI history leaves the recorded checkout working: missing (26.549583ms)
+✔ unusable optional AI history leaves the recorded checkout working: fresh (19.405459ms)
+✔ unusable optional AI history leaves the recorded checkout working: same-case (20.938416ms)
+✔ unusable optional AI history leaves the recorded checkout working: wrong-tools (27.774084ms)
+✔ unusable optional AI history leaves the recorded checkout working: missing-payment-read (7.086917ms)
+✔ unusable optional AI history leaves the recorded checkout working: invented-time (16.776959ms)
+✔ valid response retains identity and structured API rejection retains code (444.752292ms)
+✔ HTML failed POST is dispatched once with unchanged payload and a readable error (4.745458ms)
+✔ empty failed POST is dispatched once with unchanged payload and a readable error (3.132958ms)
+✔ malformed failed POST is dispatched once with unchanged payload and a readable error (4.605792ms)
+✔ null failed POST is dispatched once with unchanged payload and a readable error (23.837625ms)
+✔ array failed POST is dispatched once with unchanged payload and a readable error (13.87225ms)
+✔ string failed POST is dispatched once with unchanged payload and a readable error (4.367084ms)
+✔ connection rejection has one dispatch and no invented result (3.32ms)
+✔ startup rejection reaches the visible login message and connection details (40.311708ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2803.229833

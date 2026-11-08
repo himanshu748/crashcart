@@ -1,0 +1,6 @@
+{
+  "provenance": "Exact remote command recorded from the operator tool invocation; disposable container removed on exit, not a post-exit inspect",
+  "command": "sudo timeout 420 docker run --rm --name crashcart-verify-nov8 --network none --cpus 1 --memory 384m --memory-swap 768m --pids-limit 128 --read-only --tmpfs /tmp:rw,size=128m,mode=1777 --user 65532:65532 --workdir /src --mount type=bind,source=/opt/crashcart/verification/public-source,destination=/src,readonly --env PYTHONDONTWRITEBYTECODE=1 --env HOME=/tmp python:3.13-slim python -m unittest discover -v",
+  "base_image_repo_digest": "python@sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+  "exit_code": 0
+}

@@ -1,0 +1,76 @@
+{
+  "base_revision": "b0e304af19c66164fbf521c8c907d88feb6e058d",
+  "scope": "Two test-fixture repairs only; no application, budget, invariant, deadline or acceptance change",
+  "preserved_failures": [
+    {
+      "platform": "macOS",
+      "tests": 491,
+      "duration_seconds": 113.305,
+      "result": "1failure",
+      "check": "Expired model owner retry: interrupted instead of budget exhausted",
+      "cause": "Fixture restored real wall clock before retry, making synthetic expired deadline appear future."
+    },
+    {
+      "platform": "macOS",
+      "tests": 491,
+      "duration_seconds": 151.332,
+      "result": "1error",
+      "check": "Overload health GET BrokenPipe",
+      "cause": "HTTP test helper sent webhook body on GET; immediate503 could close before second client write."
+    }
+  ],
+  "repairs": [
+    "Keep simulated wall and monotonic clocks advanced across retry; unchanged40ms deadline,60ms advance,caps and assertions.",
+    "GET/HEAD probes send no body or default webhook headers; close connections on errors and register slow-socket cleanup. Existing overload/deadline/recovery assertions remain."
+  ],
+  "checks": {
+    "clock_focused": "1test0.073sOK",
+    "ingress_focused": "1test1.315sOK,ResourceWarning treated as error",
+    "ingress_class": "12tests12.675sOK,ResourceWarning treated as error",
+    "full_linux": "491tests100.052sOK",
+    "node": "30pass,0fail,0skipped",
+    "judge_command": "15tests29.283sOK"
+  },
+  "full_linux_environment": {
+    "source": "Tracked public b0e304a archive plus two fixture changes; no private.env or credentials",
+    "image": "python:3.13-slim",
+    "network": "none",
+    "read_only_root_and_source": true,
+    "user": "65532:65532",
+    "cpu_limit": 1,
+    "memory_limit_mib": 384,
+    "memory_and_swap_mib": 768,
+    "pids_limit": 128,
+    "timeout_seconds": 420,
+    "cleanup": "Disposable container removed on exit",
+    "base_repo_digest": "python@sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90"
+  },
+  "mode": "LOCAL_TEST, injected providers; no live payment,model orKERNEL execution",
+  "mac_full_reruns": "Stopped after two full-suite failures; independent clean Linux verification after fixture repairs is recorded separately.",
+  "original_acceptance": "47/60 frozen private build; no newCC IDs",
+  "source_sha256": {
+    "tests/test_run_state.py": "71d409860943d2c35978b0f12c12f3c8d2c55a5ba2ec1a708773215bc973985b",
+    "tests/test_monitor_ingress.py": "3aeddf88765a8f82787eec14243ea4ef6c00e5f88b1278767e1f51f4ed2849d0",
+    "crashcart/investigator.py": "15753d31a91270b5a22328696f3572119051604812a1fbb8d9e20464aac0af87",
+    "crashcart/store.py": "86c2a1915e5b68ef9934db188bb6eae431732bb6c2e07b7e726b605da00b20c4"
+  },
+  "artifact_sha256": {
+    "judge.log": "2029cea76c1116e9a5ce7734b59db16bbea16b3d5fcf728c40b977ca7b9f19d3",
+    "mac-second-error.log": "f50db261bc9b64122f9d64d62d7a4b46371b04dbe9b6d20e43c98f5e5446fd8d",
+    "linux-suite.log": "ff7a1ae22591cce1f37ec73040932f47cfe6556ceff6d7e7491aa4444f1db21b",
+    "node.log": "a932a884f3ad7e04e2405b7019ae691729458b68d40fae4a6c1d3017b98cf0ac",
+    "ingress-focused.log": "04a1e38bd83168da24f550950132f60abb166df9447bfd8ed84b24727d0836f8",
+    "clock-focused.log": "35d9f162c686546093ac263d2358bcc5a115fc08dc3e9fda4510324206dfb44a",
+    "mac-initial-failure.log": "b6160090b011f84e702f8e95e6f4cabdaad85943ed5c6e9c0a73482aa661195c",
+    "ingress-class.log": "19d39d4fc4ab3771e5bfb416ce9b925a138d7e5f7488c5da95e924427a0d7d9f",
+    "linux-invocation.json": "3543af0bc473735c35f606d9126fcc57b83bab926c60969d4faba58f72ae4052",
+    "secret-review.json": "ca7370e65fa33271769722b856932cea8124fb481db2c2113b721f3c97b880f9"
+  },
+  "redaction": "Public logs replace the local checkout prefix; original raw logs retained privately.",
+  "independent_review": {
+    "reviewer": "/root/judge_sponsor_review",
+    "result": "No blocking findings;4sourceand8initialartifacthashesmatched;bothfailedMacrunsretained;LinuxproofdistinctfromMac/liveacceptance",
+    "followthrough": "AddedexactsanitizedLinuxinvocationandobservedbasedigestasrequested"
+  },
+  "secret_scan": "Two unchanged local-test token literals flagged; contextual review recorded. No real credentials identified, scanner unchanged."
+}
