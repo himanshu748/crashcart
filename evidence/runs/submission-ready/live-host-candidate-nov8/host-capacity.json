@@ -1,0 +1,30 @@
+{
+  "instance": "existing embodiweave-demo, us-east-1",
+  "memory_available_mib": 855,
+  "host_total_gib": 1.86,
+  "free_disk_gib": 10.98,
+  "docker_version": "29.1.3",
+  "compose_version": "2.40.3+ds1-0ubuntu1~24.04.1",
+  "existing_proxy_network_count": 4,
+  "planned_stack_mib": 384,
+  "planned_stack_cpus": 0.35,
+  "planned_total_pids": 128,
+  "no_new_instance_or_paid_plan": true,
+  "incremental_instance_base_fee": 0,
+  "transfer_and_tax_not_a_hard_cap": true,
+  "provider_secrets_uploaded": false,
+  "application_mutations": false,
+  "cleanup": {
+    "completed_at": 1794133540.37662,
+    "existing_master_closed": true,
+    "original_firewall_exactly_restored": true,
+    "temporary_credentials_removed": [
+      "key.pem",
+      "key.pem.pub",
+      "key-cert.pub",
+      "access.private.json"
+    ],
+    "provider_credentials_uploaded": false,
+    "application_changes": false
+  }
+}

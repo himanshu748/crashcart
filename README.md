@@ -34,6 +34,12 @@ payment and ticket records in three calls, and CrashCart identified the missing
 ticket. [See the actual local flow and its limits](docs/LIVE_FLOW.md). This
 execution is separate from the account-free hosted replay.
 
+A [protected hosting candidate](deploy/live/README.md) is prepared for that
+connected workflow on the existing host. Its local tests and secret-free
+container checks are recorded; it has **not been activated**, and no provider
+credentials have been uploaded. Activation requires approval to change the
+recorded-only hosting scope and extend the bounded model allowance.
+
 ## See what happened
 
 The example starts with a simple promise: **one workshop ticket within 60

@@ -1,0 +1,19 @@
+{
+  "scope": "Full staged blobs plus exact known private credential/origin values; no history scan.",
+  "known_pattern_scanner_exit": 1,
+  "omitted_files": 0,
+  "findings": [
+    {
+      "path": "tests/test_hosted_live.py",
+      "line": 19,
+      "kind": "Credential assignment",
+      "review": "Explicit synthetic loopback test password, generated for this fixture and never issued by a provider. Not a real credential; retained source unchanged."
+    }
+  ],
+  "actual_private_value_matches": 0,
+  "real_credential_findings": 0,
+  "decision": "PASS_WITH_REVIEWED_SYNTHETIC_FIXTURE",
+  "original_scanner_output": "secret-scan.log",
+  "known_pattern_files_checked": 25,
+  "additional_files_reviewed": "Generated scan output, this review receipt and manifest contain only redacted results, public source paths and hashes."
+}

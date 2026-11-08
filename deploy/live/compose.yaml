@@ -1,0 +1,63 @@
+name: crashcart-live
+x-core: &core
+  image: crashcart-live:${CRASHCART_LIVE_TAG:?Use a reviewed immutable source tag}
+  build:
+    context: ../..
+    dockerfile: deploy/live/Dockerfile
+    args:
+      PYTHON_IMAGE: ${CRASHCART_PYTHON_IMAGE:?Pin an approved existing Python 3.13 image digest}
+  user: "10001:10001"
+  init: true
+  oom_score_adj: 500
+  restart: unless-stopped
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  tmpfs:
+    - /tmp:size=16m,mode=1777,noexec,nosuid,nodev
+  volumes:
+    - type: bind
+      source: ${CRASHCART_LIVE_STATE_DIR:?Private existing host state directory}
+      target: /data
+      bind:
+        create_host_path: false
+    - type: bind
+      source: ${CRASHCART_LIVE_CREDENTIAL_FILE:?Private approved 0600 host credential file}
+      target: /run/secrets/crashcart.env
+      read_only: true
+      bind:
+        create_host_path: false
+  logging:
+    driver: json-file
+    options:
+      max-size: "5m"
+      max-file: "2"
+  networks: [proxy]
+services:
+  api:
+    <<: *core
+    command: [api, --env-file, /run/secrets/crashcart.env, --db, /data/workspace.sqlite3]
+    mem_limit: 192m
+    memswap_limit: 192m
+    cpus: 0.15
+    pids_limit: 64
+    networks:
+      proxy:
+        aliases: [crashcart-live-api]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8765/healthz',timeout=2).read()"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+  worker:
+    <<: *core
+    command: [worker, --env-file, /run/secrets/crashcart.env, --db, /data/workspace.sqlite3]
+    mem_limit: 192m
+    memswap_limit: 192m
+    cpus: 0.20
+    pids_limit: 64
+networks:
+  proxy:
+    external: true
+    name: ${CRASHCART_PROXY_NETWORK:?Use the exact existing ew-proxy bridge network}

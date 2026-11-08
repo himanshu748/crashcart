@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-08",
+  "status": "PREPARED_NOT_ACTIVATED",
+  "base_commit": "8f96ac47d08827d87dedecae80d31988c4b009dc",
+  "source": "tested-source.json",
+  "original_acceptance": {
+    "verified": 47,
+    "total": 60,
+    "newly_verified_ids": [],
+    "newly_stale_on_frozen_private_build": []
+  },
+  "full_suite": {
+    "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -W error::ResourceWarning -m unittest discover -v",
+    "result": "PASS",
+    "tests": 549,
+    "elapsed_seconds": 101.767,
+    "log": "full-suite-final.log"
+  },
+  "focused_suite": {
+    "command": "python3.13 -W error::ResourceWarning -m unittest tests.test_hosted_live -v",
+    "result": "PASS",
+    "tests": 26,
+    "elapsed_seconds": 11.923,
+    "log": "focused-final.log"
+  },
+  "judge_replay": {
+    "command": "PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 ./scripts/test-judge.sh",
+    "result": "PASS",
+    "tests": 15,
+    "elapsed_seconds": 2.696,
+    "log": "judge-final.log"
+  },
+  "container_probes": {
+    "overall_results": [
+      "FAIL",
+      "FAIL"
+    ],
+    "receipt": "container-preflight.json",
+    "individual_passes": [
+      "cached offline image build",
+      "Compose validation",
+      "nonroot read-only limits",
+      "private HTTP/login/secure cookies",
+      "two worker roles",
+      "durable file-bind installer visibility",
+      "clean shutdown and no model usage"
+    ],
+    "further_full_probes": "STOPPED under two-failure rule"
+  },
+  "targeted_caddy": {
+    "result": "PASS",
+    "scope": "Fragment adaptation only in unchanged existing Caddy execution context",
+    "receipt": "caddy-syntax.json",
+    "cleanup": "caddy-syntax-cleanup.json",
+    "full_combined_config_validation": "NOT_RUN; required before any deployment"
+  },
+  "independent_review": "review.json",
+  "ci": "github-ci-block.json",
+  "provider_credentials_uploaded": false,
+  "provider_calls_during_hosting_preflight": 0,
+  "public_live_route_activated": false,
+  "public_recorded_demo": "https://crashcart.52.202.25.181.sslip.io/",
+  "new_model_token_created": false,
+  "remaining_original_model_calls": 1,
+  "pending_owner_input": "Changed hosting scope, separate proxy credential server storage, supplemental 24-call/$1 grant and eight Sandbox case allowance."
+}

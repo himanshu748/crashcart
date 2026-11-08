@@ -1,0 +1,112 @@
+{
+  "source_mode": "SYNTHETIC container/configuration verification, not new provider execution or public deployment",
+  "first_probe": {
+    "result": "FAIL",
+    "scope": "Secret-free packaging preflight, not deployment or provider proof",
+    "image_id": "sha256:9c2f4cebd3390005d0e7a81c3e258cc159379d7cfa555037677725fed8298bc9",
+    "image_tag": "crashcart-live:preflight-60e485b5afe0",
+    "image_user": "10001:10001",
+    "cached_base_id": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+    "memory_available_before_mib": 897,
+    "http_checks": {
+      "health": 200,
+      "unauthenticated_records": 401,
+      "login": 200,
+      "secure_cookie_flags": true,
+      "empty_granted_cases": true,
+      "env_file": 404,
+      "html_css": 200
+    },
+    "error": "RuntimeError",
+    "message": "Command failed: 11",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 211, in <module>\n  File \"<stdin>\", line 137, in main\n  File \"<stdin>\", line 30, in run\nRuntimeError: Command failed: 11\n"
+  },
+  "first_failure": "Docker top requires PID column; corrected only verification query",
+  "second_probe": {
+    "result": "FAIL",
+    "scope": "Secret-free packaging preflight, not deployment or provider proof",
+    "image_id": "sha256:eccdbb083c5a87227e8d0be9ff9a78fc975765426c68abfbe877f94ce0fe1608",
+    "image_tag": "crashcart-live:preflight-c66d7d33c79b",
+    "image_user": "10001:10001",
+    "cached_base_id": "sha256:e48f59cdba69a3cbd9ed2cf0f348d90d45a8d350d98134cf1070bc106ee9ed90",
+    "memory_available_before_mib": 865,
+    "http_checks": {
+      "health": 200,
+      "unauthenticated_records": 401,
+      "login": 200,
+      "secure_cookie_flags": true,
+      "empty_granted_cases": true,
+      "env_file": 404,
+      "html_css": 200
+    },
+    "worker_roles_running": [
+      "reconcile",
+      "investigate"
+    ],
+    "runtime_limits": {
+      "api_memory_bytes": 201326592,
+      "worker_memory_bytes": 201326592,
+      "api_nano_cpus": 150000000,
+      "worker_nano_cpus": 200000000,
+      "pids_each": 64,
+      "read_only": true,
+      "oom_score": 500,
+      "network": "none",
+      "published_ports": 0
+    },
+    "normal_stop_exit_codes": [
+      0,
+      0
+    ],
+    "synthetic_model_reservations": 0,
+    "actual_file_bind_check": {
+      "same_host_inode": true,
+      "container_saw_new_content": true,
+      "durable_backup_matches": true,
+      "shared_proxy_file_touched": false
+    },
+    "error": "RuntimeError",
+    "message": "Command failed: 19",
+    "traceback": "Traceback (most recent call last):\n  File \"<stdin>\", line 211, in <module>\n  File \"<stdin>\", line 196, in main\n  File \"<stdin>\", line 30, in run\nRuntimeError: Command failed: 19\n"
+  },
+  "second_failure": {
+    "command": "isolated Caddy-image adapt under UID10001/cap-dropALL/no-new-privileges",
+    "stderr": "exec /usr/bin/caddy: operation not permitted\n",
+    "meaning": "The binary did not execute. This is not a Caddy syntax verdict. File-capability mismatch is an inference, not directly proven."
+  },
+  "further_full_probes": "STOPPED after two failed overall probes; app checks that passed stay separately identified",
+  "cleanup_first": {
+    "provider_credentials_uploaded": false,
+    "public_exposure": false,
+    "own_remote_probe_resources_removed": true,
+    "master_closed": true,
+    "operator_cidr_removed": true,
+    "original_firewall_exactly_restored": true,
+    "temporary_key_files_removed": [
+      "key.pem",
+      "key.pem.pub",
+      "key-cert.pub"
+    ],
+    "finished_at": 1794138596.1624472
+  },
+  "cleanup_second": {
+    "provider_credentials_uploaded": false,
+    "public_exposure": false,
+    "own_remote_probe_resources_removed": true,
+    "master_closed": true,
+    "operator_cidr_removed": true,
+    "original_firewall_exactly_restored": true,
+    "temporary_key_files_removed": [
+      "key.pem",
+      "key.pem.pub",
+      "key-cert.pub"
+    ],
+    "finished_at": 1794138940.5767832
+  },
+  "public_ports": 0,
+  "provider_calls": 0,
+  "actual_model_ledger_unchanged_by_probes": true,
+  "provider_credentials_uploaded": false,
+  "next_action": "Await owner consent to changed hosting scope, private server credentials and a separate model allowance. Before any rollout validate the complete current combined Caddy configuration and preserve inode/checksum/route checks.",
+  "targeted_caddy_syntax": "PASS; see caddy-syntax.json. Uses existing execution context without changing capabilities, configuration or routes. Does not supersede either overall FAIL."
+}

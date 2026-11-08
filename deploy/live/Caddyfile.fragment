@@ -1,0 +1,16 @@
+# Append only after candidate approval and a backup/validation of the existing
+# ew-proxy configuration. Do not replace globals or any existing host block.
+workspace-crashcart.52.202.25.181.sslip.io {
+	encode zstd gzip
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		Cache-Control no-store
+	}
+	reverse_proxy crashcart-live-api:8765 {
+		transport http {
+			dial_timeout 3s
+			response_header_timeout 12s
+		}
+	}
+}

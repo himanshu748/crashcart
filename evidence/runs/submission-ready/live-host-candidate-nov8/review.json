@@ -1,0 +1,82 @@
+{
+  "reviewed_at": "2026-11-08T12:20:29.053032+00:00",
+  "reviewer": "Independent source and evidence reviewer",
+  "decision": "PASS_CANDIDATE_SOURCE_AND_SCOPED_CHECKS",
+  "blocking_findings": [],
+  "source_sha256": {
+    "crashcart/hosted_live.py": "6490b5c89e6b2ab7db66ac096d12d96bde96196597bc048b0dcb41ee0badc10b",
+    "deploy/live/install_caddy.py": "2b9be2aac3645b546aa14320dc888eecb4367a1022fd91116ea228e44dcca04e",
+    "tests/test_hosted_live.py": "4e9f5a04c4b8b2169914d2ea51ce018dcaca6d9b5a651e0a0c3554f158b496fa"
+  },
+  "resolved_findings": [
+    "Partial case creation consumes its quota slot while quarantining ungranted records; earlier cases remain available after restart.",
+    "Shared Caddy installation preserves the mounted inode, validates exact append-only bytes, retains a durable exclusive backup and restores the original open inode on write or pathname-interference failure."
+  ],
+  "independent_local_verification": {
+    "command": "env -i PATH=/opt/homebrew/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 python3.13 -W error::ResourceWarning -m unittest tests.test_hosted_live -v",
+    "output": "Ran 26 tests in 11.992s\n\nOK",
+    "scope": "Synthetic loopback HTTP, temporary SQLite/credentials/ledgers and local installer files; no provider execution."
+  },
+  "container_preflight": {
+    "evidence": "container-preflight.json",
+    "sha256": "1703e644aac5793ef4d05a053d88441efe936c1b06cbe56ee0e698db29dbc874",
+    "overall_results": [
+      "FAIL",
+      "FAIL"
+    ],
+    "failures_retained": true,
+    "first_failure": "Verification harness omitted the Docker top PID column.",
+    "second_failure": "Isolated Caddy binary could not execute under the probe UID/capability context; no syntax verdict was obtained. File-capability mismatch remains an inference.",
+    "separately_passed_checks": [
+      "Secret-free API HTTP/auth/cookie/private-path checks",
+      "Both worker roles",
+      "Configured resource and filesystem restrictions with network none and no published ports",
+      "Normal container shutdown",
+      "Zero synthetic model reservations",
+      "Actual file-bind inode preservation and backup"
+    ],
+    "full_probe_pass_claimed": false
+  },
+  "targeted_caddy_syntax": {
+    "evidence": "Operator-supplied targeted proof.json",
+    "sha256": "4486c62f8a50e718cc425468b82d189fe17711bc3e7062e8dbe75dd3208ca54c",
+    "result": "PASS",
+    "command": [
+      "docker",
+      "exec",
+      "-i",
+      "ew-proxy",
+      "caddy",
+      "adapt",
+      "--config",
+      "-",
+      "--adapter",
+      "caddyfile"
+    ],
+    "fragment_sha256": "4b73d6bbe319af91131d375f2e905a6fb41670450bb94a02aa3ee9420db3eba8",
+    "caddy_version": "v2.11.7 h1:yj0Y4fYZGPkSvibBJ1sTWE33xC0fxztVyXEW5iIdUT4=",
+    "exit_code": 0,
+    "parsed_hostname": "workspace-crashcart.52.202.25.181.sslip.io",
+    "parsed_backend": "crashcart-live-api:8765",
+    "scope": "Fragment adaptation only in the existing Caddy execution context; no permission change, configuration write/reload, new listener, TLS proof, deployment or provider execution.",
+    "does_not_override_failed_full_probes": true
+  },
+  "activation": {
+    "state": "AWAITING_OWNER_CONSENT",
+    "reason": "Hosting provider credentials and the reviewed model allowance on this server changes the prior secret-free hosting scope.",
+    "required_before_rollout": [
+      "Explicit consent to the exact server-secret, case and model-allowance scope",
+      "Validation of the complete combined Caddy configuration",
+      "Quiet deployment window and host/container checksum/inode guards",
+      "Actual hosted journey, resource limits and existing-route preservation proof"
+    ],
+    "deployed_or_provider_verified_by_this_review": false
+  },
+  "review_actions": {
+    "provider_calls": 0,
+    "ssh_or_cloud_calls": 0,
+    "deployment_changes": 0,
+    "private_credentials_or_actual_ledger_read": false,
+    "commit_created": false
+  }
+}

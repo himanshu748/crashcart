@@ -1,0 +1,9 @@
+{
+  "source_commit": "8f96ac47d08827d87dedecae80d31988c4b009dc",
+  "run_url": "https://github.com/himanshu748/crashcart/actions/runs/42469648922",
+  "result": "NOT_STARTED_ACCOUNT_BLOCKED",
+  "annotation": "The job was not started because your account is locked due to a billing issue.",
+  "read_back_date": "2026-11-08",
+  "billing_changes": false,
+  "local_tests_reported_separately": true
+}

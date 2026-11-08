@@ -1,0 +1,15 @@
+**
+!crashcart/
+!crashcart/*.py
+!migrations/
+!migrations/*.sql
+!web/
+!web/index.html
+!web/app.js
+!web/style.css
+!web/marketing.js
+!LICENSE
+!deploy/
+!deploy/live/
+!deploy/live/Dockerfile
+!deploy/live/Dockerfile.dockerignore

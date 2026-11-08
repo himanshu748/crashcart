@@ -1,0 +1,28 @@
+{
+  "scope": "One targeted Caddy fragment syntax check in the existing execution context; not a full image probe, deployment, TLS proof or provider execution",
+  "command": [
+    "docker",
+    "exec",
+    "-i",
+    "ew-proxy",
+    "caddy",
+    "adapt",
+    "--config",
+    "-",
+    "--adapter",
+    "caddyfile"
+  ],
+  "fragment_sha256": "4b73d6bbe319af91131d375f2e905a6fb41670450bb94a02aa3ee9420db3eba8",
+  "caddy_version": "v2.11.7 h1:yj0Y4fYZGPkSvibBJ1sTWE33xC0fxztVyXEW5iIdUT4=",
+  "exit_code": 0,
+  "stderr": "",
+  "result": "PASS",
+  "public_ports": 0,
+  "provider_calls": 0,
+  "provider_credentials_uploaded": false,
+  "existing_permissions_changed": false,
+  "config_written_or_reloaded": false,
+  "parsed_hostname": "workspace-crashcart.52.202.25.181.sslip.io",
+  "parsed_backend": "crashcart-live-api:8765",
+  "proxy_unchanged": true
+}

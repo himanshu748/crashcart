@@ -1,0 +1,82 @@
+{
+  "base_commit": "8f96ac47d08827d87dedecae80d31988c4b009dc",
+  "scope": "Frozen candidate source and actual verification artifacts; no live-host activation. Runtime source is hashed in tested-source.json. Documentation updated after verification.",
+  "receipt_correction": "Final check caught an outdated preliminary container receipt hash; independent reviewer re-read final metadata and updated the hash without changing either failed probe result.",
+  "artifacts": [
+    {
+      "path": "caddy-syntax-cleanup.json",
+      "sha256": "c108c135cab11b0999dc8451168049f5ed889455f8301734dd3cbb403ba81c8d",
+      "bytes": 352
+    },
+    {
+      "path": "caddy-syntax.json",
+      "sha256": "4486c62f8a50e718cc425468b82d189fe17711bc3e7062e8dbe75dd3208ca54c",
+      "bytes": 845
+    },
+    {
+      "path": "container-preflight.json",
+      "sha256": "1703e644aac5793ef4d05a053d88441efe936c1b06cbe56ee0e698db29dbc874",
+      "bytes": 4572
+    },
+    {
+      "path": "focused-final.log",
+      "sha256": "5c6a00dc69a9a03e9a037f10c9be4d12d217a9753508f9f1f0181c2217d51067",
+      "bytes": 4240
+    },
+    {
+      "path": "full-suite-before-installer-hardening.log",
+      "sha256": "5cdbeacc47f0230022b980921ef5f1976e7112fcca592f1ac6c846ea3f25078a",
+      "bytes": 98581
+    },
+    {
+      "path": "full-suite-final.log",
+      "sha256": "d6c962156bd62a3624fd9e695c2b31927605fa33efe3fce2f72f5e5f4bce58e0",
+      "bytes": 96667
+    },
+    {
+      "path": "github-ci-block.json",
+      "sha256": "eb619b7fd4d86d54c6359bf8a697656f93d831d3165d2a8b0c2506682fef66fa",
+      "bytes": 394
+    },
+    {
+      "path": "host-capacity.json",
+      "sha256": "c6535760a5cb784f82f7ac30cb0e08e459d1c5928b9a160410386426f585a48c",
+      "bytes": 892
+    },
+    {
+      "path": "judge-final.log",
+      "sha256": "3cf6706f59b258b4abd6e7462ef1d5386bf1b64b1a854d0b218fac02d8c03c55",
+      "bytes": 2585
+    },
+    {
+      "path": "preserved-fixture-failure.log",
+      "sha256": "1a07299730ee8ca7360114f06098ee38810d510383b6f8dcc6021f7e092965a8",
+      "bytes": 4837
+    },
+    {
+      "path": "proof.json",
+      "sha256": "67a2401a32a6c33cc0ef155766e15a5b6bda4270639714e153a76a3d65a602e6",
+      "bytes": 2277
+    },
+    {
+      "path": "publication-scan.json",
+      "sha256": "1810270a04b50b302d29a3e5a5b24e8fcebd034050d0b2eea8d1e6643a9c2030",
+      "bytes": 825
+    },
+    {
+      "path": "review.json",
+      "sha256": "9826b2e76899e920ce7fb820f9b945a4f792f7404579e587fdcc2ef68ddb11d7",
+      "bytes": 3922
+    },
+    {
+      "path": "secret-scan.log",
+      "sha256": "dbecaa0d9a38a36ec9d15f53fd6c32b2369d28eebe7008ec6bdf31034ec257b6",
+      "bytes": 305
+    },
+    {
+      "path": "tested-source.json",
+      "sha256": "c6ac74bf6a09aab7a02866490364295f60ec61bfb51fd7247d8ff30cdb82ef37",
+      "bytes": 13443
+    }
+  ]
+}

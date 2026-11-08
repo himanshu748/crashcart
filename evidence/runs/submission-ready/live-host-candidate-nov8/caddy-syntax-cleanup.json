@@ -1,0 +1,14 @@
+{
+  "provider_credentials_uploaded": false,
+  "public_exposure": false,
+  "own_remote_probe_resources_removed": true,
+  "master_closed": true,
+  "operator_cidr_removed": true,
+  "original_firewall_exactly_restored": true,
+  "temporary_key_files_removed": [
+    "key.pem",
+    "key.pem.pub",
+    "key-cert.pub"
+  ],
+  "finished_at": 1794139979.909534
+}
