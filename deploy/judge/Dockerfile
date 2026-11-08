@@ -8,7 +8,7 @@ COPY evidence/runs/submission-ready/ai-historical-summary.json evidence/runs/sub
 COPY LICENSE LICENSE
 RUN python -m crashcart.judge --export-site /site
 
-FROM caddy:2-alpine
+FROM caddy:2.11.9-alpine
 COPY --from=export /site /srv
 COPY deploy/judge/Caddyfile /etc/caddy/Caddyfile
 # Runtime contains exported review assets only; no Python, provider adapters or .env.

@@ -1,6 +1,8 @@
-# Free recorded walkthrough hosting
+# Recorded walkthrough hosting
 
-The deploy target is **GitHub Pages on this public repository**. It needs no
+**8 November:** the latest source is locally verified and pushed. Pages still serves an older release because GitHub blocked Actions on the account. An approved AWS attempt stopped before SSH and was cleaned up; no AWS demo is deployed. See [the current AWS plan and exact blocker](AWS_JUDGE_DEPLOY.md).
+
+The existing public target is **GitHub Pages on this repository**. It needs no
 payment card or paid plan. It serves a read-only project demonstration, not a
 commercial SaaS, payment form, production checkout or live backend.
 
@@ -37,8 +39,9 @@ artifacts, whose manifest and defective/healthy execution passed. See
 [JUDGE_VERIFICATION.md](JUDGE_VERIFICATION.md) for hashes and retained limitations.
 The clone-based command also remains a verified download-independent path.
 
-AWS infrastructure below $10/month is authorized, but no AWS resources or paid
-services were needed for this free recorded demo.
+AWS infrastructure below $10/month is authorized. The 8 November attempt briefly
+provisioned a $7/month instance and attached IP, then removed both after a stopped
+SSH setup. Actual brief-use billing is unknown; no ongoing compute/IP remains.
 
 ## Why not a hosted live server?
 

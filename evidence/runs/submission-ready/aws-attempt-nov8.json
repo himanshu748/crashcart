@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-08T07:17:23.186896+00:00",
+  "instance": "crashcart-judge-20261108",
+  "bundle": "micro_3_0",
+  "state": "running",
+  "tags": {
+    "Project": "CrashCart",
+    "RetainThrough": "2026-12-15",
+    "Purpose": "Recorded-judge-demo",
+    "MonthlyBaseUSD": "7"
+  },
+  "static_ip_attached_to_named_instance": true,
+  "bootstrap_and_container": "Not accessed; no SSH connection or image build",
+  "ssh_failures": [
+    "KeyError: 'expiresAt' in helper metadata output; no SSH credential setup completed",
+    "AssertionError at required hostKeys guard; AWS response hostKeys=[]; no SSH connection attempted"
+  ],
+  "decision": "Stop after two setup failures; delete this newly created unused instance and release its IP. No user data or other resources affected.",
+  "cleanup": {
+    "checked_at": "2026-11-08T07:19:40.040419+00:00",
+    "instances": [],
+    "static_ips": [],
+    "explicit_cleanup_scope": "Only crashcart-judge-20261108 and crashcart-judge-ip-20261108; provider-managed implicit state not audited"
+  },
+  "budget_readback": {
+    "name": "CrashCart-account-monthly-alerts",
+    "scope": "account-wide",
+    "period": "MONTHLY",
+    "limit_usd": 50,
+    "actual_notification_thresholds_usd": [
+      20,
+      50
+    ],
+    "notification_configuration_states": [
+      "OK",
+      "OK"
+    ],
+    "email_delivery": "not tested",
+    "hard_cap": false
+  },
+  "cost": {
+    "bundle_monthly_base_usd": 7,
+    "ram_gb": 1,
+    "root_disk_gb": 40,
+    "included_transfer_gb": 2048,
+    "actual_billed_amount": "unknown; brief provisioned usage may be charged",
+    "no_instance_or_ip_remains": true
+  },
+  "source_sha256": {
+    "deploy/judge/Caddyfile": "a6cf5730b23fc89aba1178939c9a024ba25e3c5eb605b769ce73f71fa7a2d47d",
+    "deploy/judge/Dockerfile": "ff30ed956be565c5cbacf2cd69db043894d43ae544a9f4dd11176d2782d8ed77",
+    "deploy/judge/Dockerfile.dockerignore": "e23e1cacb6a41ece5aab7b13c32a64c2632f1538ecb5a9d5fb55d2d22df06f1d",
+    "deploy/judge/compose.yaml": "869a3f2e4f742bf2dcd3d2ca037b1f3013bdf718e53e3edeee2c5f7ba4326908",
+    "deploy/judge/bootstrap.sh": "055b1d21d0c65a211b3a66e693c359a53a3b47d9a509a9419d68130342a36dc2"
+  },
+  "limits": [
+    "No successful SSH, actual current image build or public certificate verification",
+    "Latest bootstrap adds explicit Buildx; source-reviewed and shell-syntax checked only",
+    "GitHub Pages remains older under account lock",
+    "No new PayPal,model,KERNEL call; original CC count remains47/60",
+    "Secure SSH preparation stopped after two failures; requires resumed investigation, not automatic retry"
+  ],
+  "base_revision": "ca5f5dc37ff776184393e7f5ccaca76c6d38912d",
+  "checks": {
+    "full_python": "491 tests in97.819s OK",
+    "node": "30 pass,0 fail,0 skipped",
+    "judge_command": "15 tests in3.813s OK",
+    "replay": "3 tests in0.818s OK",
+    "shell_syntax": "4 documented blocks and bootstrap pass bash/sh -n",
+    "current_image_and_https": "NOT_RUN: stopped before SSH, no image or TLS proof"
+  },
+  "artifact_sha256": {
+    "judge.log": "1bb3ad061353a3e6626189e682132c9175c9b10c802c3768cadfd24f96a480fb",
+    "node.log": "ff08115de1481cc65157e4145aea9b8ec6a568d5106b82ce0d9dfbfd9df5e2d5",
+    "replay.log": "283db0f91b07448c4d02871a8488dd0eb5eb014ca989053eeec94183d35041dd",
+    "python.log": "303f6fb0e5b4e96b08e16b78cb57356c4085962d991d4591294340402755b46a",
+    "publication-ca5f5dc.json": "1ab78745a9c57cad6fff7f65f4f6d1b5ed811b05aebeb48f350c592e6dfa41f1"
+  },
+  "independent_review": {
+    "reviewer": "/root/judge_sponsor_review",
+    "scope": "Source and recorded receipt review; no independent cloud query or current-image execution",
+    "result": "Five source hashes match; no credential finding; remote prerequisite masking fixed with set-e and cloud-init wait"
+  }
+}

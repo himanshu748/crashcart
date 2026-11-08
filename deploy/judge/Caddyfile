@@ -1,9 +1,13 @@
 {
 	admin off
-	email {$ACME_EMAIL}
 }
 
-{$JUDGE_DOMAIN} {
+https://{$JUDGE_ADDRESS} {
+	tls {
+		issuer acme https://acme-v02.api.letsencrypt.org/directory {
+			profile shortlived
+		}
+	}
 	root * /srv
 	@writes not method GET HEAD
 	respond @writes "Recorded review is read-only" 405

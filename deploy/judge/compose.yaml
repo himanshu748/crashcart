@@ -6,8 +6,7 @@ services:
       dockerfile: deploy/judge/Dockerfile
     restart: unless-stopped
     environment:
-      JUDGE_DOMAIN: ${JUDGE_DOMAIN:?Set the owned public DNS name}
-      ACME_EMAIL: ${ACME_EMAIL:?Set the certificate contact email}
+      JUDGE_ADDRESS: ${JUDGE_ADDRESS:?Set the owned public IPv4 or DNS name}
     ports:
       - "80:80"
       - "443:443"

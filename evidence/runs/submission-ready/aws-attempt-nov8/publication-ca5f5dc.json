@@ -1,0 +1,24 @@
+{
+  "commit": "ca5f5dc37ff776184393e7f5ccaca76c6d38912d",
+  "checks": [
+    {
+      "name": "build",
+      "conclusion": "skipped",
+      "url": "https://github.com/himanshu748/crashcart/actions/runs/42457935944/job/128660867404"
+    },
+    {
+      "name": "deploy",
+      "conclusion": "skipped",
+      "url": "https://github.com/himanshu748/crashcart/actions/runs/42457935944/job/128660846613"
+    },
+    {
+      "name": "offline",
+      "conclusion": "failure",
+      "url": "https://github.com/himanshu748/crashcart/actions/runs/42457928610/job/128660824220",
+      "messages": [
+        "The job was not started because your account is locked due to a billing issue.",
+        "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\""
+      ]
+    }
+  ]
+}
