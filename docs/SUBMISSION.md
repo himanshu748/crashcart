@@ -52,6 +52,13 @@ The [sanitized trace and model excerpt](AI_EVIDENCE.md) show observation-depende
 reasoning. That historical healthy case is different from the public faulty
 replay; its model calls are not rerun by the keyless page.
 
+The [8 November local flow](LIVE_FLOW.md) now adds a new $29 Sandbox checkout
+and real DeepSeek investigation on that same order. Three requests selected
+PayPal and ticket observations, then finished with citations; the deterministic
+check retained `paid_without_ticket`. The authenticated workspace and actual
+download were exercised. This known-fault test does not prove a fresh healthy
+repair, held-out discovery or hosted live access.
+
 ## How it's built
 
 A Python backend and worker use SQLite to keep purchases, immutable operation
@@ -139,7 +146,7 @@ impact, innovation and presentation. The organizers determine eligibility.
 
 | Target lane | Product reason and one line of evidence | Remaining boundary |
 | --- | --- | --- |
-| Best Use of PayPal + AI | Payment state is central to every verdict; [historical real AI evidence](AI_EVIDENCE.md) shows the model selecting a real existing-order read and then matching merchant evidence. | Different historical case from the faulty replay; no new checkout during that investigation. The keyless review does not run AI. Private artifact hashes are provenance bindings, not independently accessible provider receipts. |
+| Best Use of PayPal + AI | The [fresh local flow](LIVE_FLOW.md) joins a new Sandbox capture with three actual DeepSeek requests selecting payment and ticket evidence, then a cited missing-ticket finding. | Known-fault local execution; no fresh healthy repair or hosted live access. The keyless review does not run AI. Sanitized response IDs and artifact hashes do not independently authenticate provider execution. |
 | Most Impactful | A specific support problem—paid but no ticket—becomes an inspectable failure and repair comparison; `tests/test_public_replay.py` exercises both outcomes with the same promise. | No customer validation, adoption or measured support-time reduction is claimed. |
 | AG Grid — not claimed by this submission scope | `studio/src/` implements actual AG Studio evidence widgets and saved-record queries in the full workspace. | The keyless review does not load AG Studio; complete operator proof remains unverified. |
 | Bryntum — not claimed by this submission scope | `studio/src/deadlines.ts` uses the Community Scheduler and `deadlines-model.ts` validates payment-relative timing. | The keyless review is not the Bryntum view; this scope does not present its full-workspace journey as verified. |

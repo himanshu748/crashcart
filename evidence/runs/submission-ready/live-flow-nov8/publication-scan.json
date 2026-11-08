@@ -1,0 +1,20 @@
+{
+  "known_pattern_text_scan": {
+    "command": "bash /Users/himanshujha/.codex/skills/secret-scan/scan.sh <public-repository>",
+    "scope": "full staged text file contents before binary artifacts were added",
+    "exit_code": 0,
+    "findings": 0,
+    "omitted": 0
+  },
+  "additional_private_value_check": {
+    "staged_files": 27,
+    "export_members": 8,
+    "exact_known_credentials_and_private_origin_matches": 0,
+    "values_never_printed": true
+  },
+  "binary_review": {
+    "jpeg": "visually inspected own CrashCart result; no credential or buyer details",
+    "zip": "all members inspected for exact private values; independent manifest and socket-denied execution passed"
+  },
+  "limits": "Known patterns and actual configured private values only; not a Git-history or unknown-format guarantee."
+}

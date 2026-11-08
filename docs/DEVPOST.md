@@ -24,13 +24,13 @@ The public walkthrough opens a finished investigation without accounts, keys or 
 
 The hosted walkthrough displays replay results computed when the site was built. Running the keyless app locally recomputes both merchant outcomes. Neither path creates a new payment or calls an AI model.
 
-The separately configured workspace uses AI to choose what evidence to inspect next. In a historical real DeepSeek investigation, the model requested an existing PayPal Sandbox payment, then matching merchant ticket records before finishing. It cited those observations; deterministic code made the final decision. That recorded AI investigation is a different case from the faulty checkout in the public walkthrough.
+The separately configured workspace uses AI to choose what evidence to inspect next. On 8 November, we ran a new $29 Sandbox checkout and real DeepSeek investigation on the same case. The model requested PayPal's capture record, then the store's ticket records, and finished with citations. The unchanged delivery check identified the missing ticket. This actual local execution is separate from the recorded public walkthrough; live server access is not yet hosted. [Working flow and evidence](LIVE_FLOW.md).
 
 ## How we built it
 
 Python and SQLite hold purchases, payment-operation identities, observations, tickets and resumable jobs. A worker can recover interrupted fulfillment without treating a lost response as a failed payment. The PayPal Sandbox integration creates and captures orders, retrieves payment state independently and verifies payment notifications.
 
-The AI investigator uses structured, bounded tool calls. Actual historical investigations used DeepSeek-V4.1-Flash served through Modal. The model proposes hypotheses and selects observations; it cannot replace fixed payment and delivery rules with its own verdict.
+The AI investigator uses structured, bounded tool calls. The fresh local flow and earlier investigations used DeepSeek-V4.1-Flash served through Modal. The model proposes hypotheses and selects observations; it cannot replace fixed payment and delivery rules with its own verdict. The latest run enforced the existing shared call allowance across worker and API processes.
 
 The replay engine runs the merchant's confirmation and fulfillment code against preserved input and a recorded clock. Faulty and healthy variants share the same promise. A separate late-delivery case remains a failure, protecting the 60-second deadline.
 
@@ -80,7 +80,7 @@ Python, SQLite, JavaScript, TypeScript, PayPal Sandbox, AG Studio, Bryntum Commu
 
 ## Prize selection notes — not part of the project story
 
-- **Best Use of PayPal + AI:** target. PayPal supplies payment evidence; the [historical real model trace](AI_EVIDENCE.md) shows observation-dependent tool selection in the same investigation workflow. The keyless walkthrough makes no AI calls.
+- **Best Use of PayPal + AI:** target. The [fresh local payment-and-AI flow](LIVE_FLOW.md) joins a newly captured Sandbox order, three actual model requests, cited delivery observations and a deterministic missing-ticket finding. Hosted live access remains open; the keyless walkthrough makes no AI calls.
 - **Most Impactful:** target. The [public replay tests](../tests/test_public_replay.py) demonstrate a concrete paid-without-ticket problem and timely healthy comparison. No adoption, support-time saving or commercial impact has been measured.
 - **AG Grid / Bryntum lanes:** do not present the keyless demo as proof of these optional full-workspace experiences. Their complete operator journey remains unverified; this submission scope adds no sponsor features to claim those lanes.
 

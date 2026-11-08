@@ -105,8 +105,9 @@ def configuration(environ, *, injected=False):
         origin = environ.get("MODAL_ALLOWED_ORIGIN", MODAL_ORIGIN if injected else None)
         base = environ.get("MODAL_BASE_URL", MODAL_ORIGIN if injected else None)
         local_placeholder = injected and origin == base == MODAL_ORIGIN
+        dns_label = r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?"
         canonical_modal = (isinstance(origin, str) and re.fullmatch(
-            r"https://[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.modal\.run", origin))
+            rf"https://(?:{dns_label}\.modal\.run|{dns_label}\.{dns_label}\.modal\.direct)", origin))
         if base != origin or model != MODAL_MODEL or not (local_placeholder or canonical_modal):
             raise ModelTransportError("INVALID_MODAL_ENDPOINT_OR_MODEL")
         return ModelConfig(provider, "chat_completions", origin, origin + "/v1/chat/completions", model, key)
@@ -143,6 +144,57 @@ def _worker_reply(raw):
 
 
 def http(request, timeout):
+    """Apply an operator-supplied account allowance before the real transport.
+
+    The optional v1 ledger is shared by API and worker processes, including
+    historical calls. It is never initialized or reset by the runtime. Tests
+    with injected transports do not reach this provider boundary.
+    """
+    path = os.environ.get("CRASHCART_MODEL_ALLOWANCE_PATH")
+    if path is None:
+        return _bounded_http(request, timeout)
+    from .model_allowance import ModelAllowanceError, reserve, finish
+    started = time.monotonic()
+    config = configuration(os.environ)
+    if config.provider != "modal":
+        raise ModelTransportError("MODEL_ALLOWANCE_PROVIDER_UNSUPPORTED")
+    try:
+        reservation = reserve(path, request, expected_origin=config.origin,
+                              expected_model=config.model, lock_timeout=timeout)
+    except ModelAllowanceError as exc:
+        raise ModelTransportError(exc.code) from None
+    try:
+        remaining = timeout - (time.monotonic() - started)
+        if remaining <= 0:
+            raise ModelTransportError("MODEL_TIMEOUT")
+        response = _bounded_http(request, remaining)
+    except BaseException as exc:
+        remaining = timeout - (time.monotonic() - started)
+        if remaining <= 0:
+            # No extra lock budget after the request deadline. Retain the
+            # reservation as unknown; caller still receives observed usage.
+            raise ModelTransportError("MODEL_TIMEOUT", response=getattr(exc, "response", None)) from None
+        try:
+            finish(path, reservation, error=exc, lock_timeout=remaining)
+        except ModelAllowanceError as ledger_error:
+            raise ModelTransportError(ledger_error.code, response=getattr(exc, "response", None)) from None
+        raise
+    remaining = timeout - (time.monotonic() - started)
+    if remaining <= 0:
+        raise ModelTransportError("MODEL_TIMEOUT", response=response)
+    try:
+        finish(path, reservation, response=response, lock_timeout=remaining)
+    except ModelAllowanceError as exc:
+        # Keep observed usage available even when completion persistence fails.
+        # A still-RESERVED entry blocks another dispatch. If replacement already
+        # occurred before directory fsync failed, its reservation remains charged.
+        raise ModelTransportError(exc.code, response=response) from None
+    if time.monotonic() - started >= timeout:
+        raise ModelTransportError("MODEL_TIMEOUT", response=response)
+    return response
+
+
+def _bounded_http(request, timeout):
     """One isolated HTTP worker with a parent-enforced total wall-clock deadline.
 
     urllib's socket timeout only limits inactivity, so it is not the deadline.

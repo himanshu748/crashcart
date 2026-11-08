@@ -1,0 +1,6 @@
+{
+  "http_status": 400,
+  "offline_reproduction": "Missing actual source observations: customer_observation",
+  "cause": "The API-driven test had not yet stored the browser observation required for an executable export.",
+  "validator_unchanged": true
+}

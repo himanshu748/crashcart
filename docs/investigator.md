@@ -78,7 +78,7 @@ the fixed OpenAI Responses endpoint. Selecting `modal` requires `MODAL_API_KEY`,
 `MODAL_BASE_URL`. Set the two origin values privately to the identical owned
 Modal deployment origin, for example `https://your-deployment.modal.run`.
 Only canonical lowercase HTTPS origins with one DNS label before `.modal.run`
-are accepted. Paths, trailing slashes, ports, queries, fragments, user information
+or a tenant and region before `.modal.direct` are accepted. Paths, trailing slashes, ports, queries, fragments, user information
 and non-Modal hosts are rejected before a request is constructed. The operator's
 allowlist pin is server configuration; it cannot be changed by a model response
 or a browser request.
@@ -95,6 +95,24 @@ time budgets still apply; there is no arbitrary-origin fallback.
 The fixed `/v1/chat/completions` route uses the combined proxy credential as a
 server-only Bearer value. No CLI login, management token or unrelated provider
 credential is substituted.
+
+For the owner's bounded Modal verification, set `CRASHCART_MODEL_ALLOWANCE_PATH`
+to the absolute path of the existing private v1 ledger in **both** the API and
+worker processes. The provider transport then reserves against the same
+24-call / USD1 history before each request. Runtime code cannot create or reset
+the ledger. Each attempt reserves USD0.04; errors consume their reservation,
+and an unresolved dispatch blocks further calls. Reservations use a stable
+process lock and fsynced atomic writes. The ledger stores request hashes and
+usage metadata, never credentials or model content. Lock acquisition is bounded;
+reservation time comes out of the existing request deadline. This is a specific
+operator allowance guard, not a general billing system or a provider-side
+spending cap. An unset variable retains the existing per-run limits; it does
+not grant permission for inference or unlimited public use.
+
+The shared endpoint's published rates were checked on 8 November 2026:
+USD0.30 per million input tokens and USD1.20 per million output tokens. The
+ledger counts uncached input conservatively; estimates are not an invoice.
+[Modal model and Shared Endpoint pricing](https://modal.com/library/deepseek/deepseek-v4-1-flash).
 
 The shared `model_transport` module sends one strict JSON-schema request. Modal
 uses `response_format`, `reasoning_effort: none`, `stream: false`, and bounded

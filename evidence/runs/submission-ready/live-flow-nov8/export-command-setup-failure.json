@@ -1,0 +1,23 @@
+{
+  "source": "fresh Sandbox export, offline replay; no new provider calls",
+  "outcomes": [
+    {
+      "command": "python3 verify_manifest.py",
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "Python exited2: supplied standalone filenames do not exist in this module-based export. Correct commands are in the included README."
+    },
+    {
+      "command": "python3 replay.py run replay-input.json --merchant defective",
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "Python exited2: supplied standalone filenames do not exist in this module-based export. Correct commands are in the included README."
+    },
+    {
+      "command": "python3 replay.py run replay-input.json --merchant healthy",
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "Python exited2: supplied standalone filenames do not exist in this module-based export. Correct commands are in the included README."
+    }
+  ]
+}

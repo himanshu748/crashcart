@@ -28,6 +28,12 @@ materials after the deadline until the announcement. The private AG Studio trial
 ends 17 December and does not cover that window; the keyless path needs no licence.
 [Current readiness and remaining gaps](docs/RULES_READINESS.md).
 
+The configured workspace also completed a **new Sandbox checkout and real AI
+investigation on 8 November**: PayPal confirmed the $29 capture, DeepSeek checked
+payment and ticket records in three calls, and CrashCart identified the missing
+ticket. [See the actual local flow and its limits](docs/LIVE_FLOW.md). This
+execution is separate from the account-free hosted replay.
+
 ## See what happened
 
 The example starts with a simple promise: **one workshop ticket within 60
@@ -101,7 +107,7 @@ are still pending.
 | AG Grid's AG Studio | Linked payment, ticket and browser views in the configured full workspace. Requires an applicable licence. |
 | Bryntum Community Scheduler | Compares saved ticket timings with the delivery window in the full workspace. |
 | KERNEL | Remote test-checkout browser sessions and recordings; separately configured and authorized. |
-| Modal + DeepSeek | Hypotheses and bounded investigation calls in the historical AI workflow. Modal is the model host, not a listed event sponsor. |
+| Modal + DeepSeek | Selects payment and ticket observations in bounded investigations; the fresh local 8 November flow used three real requests. Modal is the model host, not a listed event sponsor. |
 | Postman | Runnable API checks and linked-record checks; the local runner needs no Postman account. |
 
 The account-free demo needs none of these service keys. The
@@ -193,9 +199,12 @@ follow the vendor's redistribution terms. See
 
 For AI, configure your own OpenAI key and model, or follow the
 [explicit Modal setup](docs/investigator.md#authorization-and-configuration).
-The public Modal origin is a nonworking `.invalid` placeholder; using an owned
-deployment requires a reviewed source allowlist change as well as environment
-configuration. No inference credentials or provider allowance are included.
+Configure the identical owned origin in `MODAL_BASE_URL` and
+`MODAL_ALLOWED_ORIGIN`; canonical `modal.run` and tenant/region `modal.direct`
+origins are supported. The `.invalid` default is for injected local tests only.
+For a bounded owner test, both API and worker can share the existing private
+`CRASHCART_MODEL_ALLOWANCE_PATH` ledger. No inference credentials or provider
+allowance are included.
 
 The local application fails explicitly when service configuration is missing.
 Do not interpret `configured` as a successful connectivity check. The [sponsor ledger](docs/sponsor-ledger.md) distinguishes implemented

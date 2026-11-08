@@ -1,0 +1,339 @@
+{
+  "verified_at": 1794131390.8646889,
+  "scope": "One actual owned PayPal Sandbox checkout followed by one actual Modal DeepSeek background investigation on the same case. This is a known-fault integration test, not a held-out discovery or healthy repair pass.",
+  "run_id": "run_fe3038da3c4a443189aad5c92f57d1ed",
+  "base_commit": "961bccda76d889bf314045d6b82298d6957f5d89",
+  "source_sha256": {
+    "crashcart/model_transport.py": "d2f51695bd6ad905f155be1754910cc4646daf1050d0c0304e2d044bf19e7191",
+    "crashcart/model_allowance.py": "cfeede66b4423263197d397f6ed314d41753a7734d5b7460a7c70dd67e03aacc",
+    "crashcart/investigator.py": "15753d31a91270b5a22328696f3572119051604812a1fbb8d9e20464aac0af87",
+    "crashcart/worker.py": "978d26fa1d848add7bb51eec14d072eead59017ac5bf12c18557d27295ab54d6",
+    "crashcart/service.py": "2a969ecb47e7aee5447fa666c2f43cf7e242f0f45be4ea3094cfd707a401beb9",
+    "crashcart/paypal.py": "a69534358625888c52aac555346f79129bf2261b18ed9d16471fa136824715ae",
+    "crashcart/server.py": "fcdd5761c829968776417067df9a2c461b61ec498d9782283d478e5207016736",
+    "crashcart/store.py": "86c2a1915e5b68ef9934db188bb6eae431732bb6c2e07b7e726b605da00b20c4",
+    "crashcart/invariant.py": "01c7007132e939716f5236322f40b175058981d21334c7add57dd4bb20007fea",
+    "crashcart/promise.py": "cd4e20e9a1c7b9a93e337edcc1ca35a01a22eebe98b8899527f18c8a7b3ca0e2",
+    "migrations/001_initial.sql": "776c928b0b07da50b3773a9c2feae8dbe20670d553ebbe643683802767f74714"
+  },
+  "payment": {
+    "verdict": "FAIL",
+    "reason": "Confirmed payment has zero tickets beyond the fixed recovery deadline.",
+    "signature": "paid_without_ticket",
+    "invariant_version": "ticket-v1",
+    "source_ids": {
+      "run_id": "run_fe3038da3c4a443189aad5c92f57d1ed",
+      "purchase_id": "purchase_afc9c55700de40a090ea1a69c96187be",
+      "order_id": "4HJ31244AH4428038",
+      "capture_id": "9U732141TN8280908",
+      "provider_observation_id": "event_268271a9ffb04f61bdf6aa7cd94cadbd",
+      "merchant_observation_id": "event_12102dee544b4105a1b17ed0eec207ec",
+      "ticket_ids": []
+    },
+    "deadline": "2026-11-08T09:24:15Z",
+    "payment": {
+      "order_id": "4HJ31244AH4428038",
+      "purchase_id": "purchase_afc9c55700de40a090ea1a69c96187be",
+      "capture_id": "9U732141TN8280908",
+      "amount": 2900,
+      "currency": "USD",
+      "completed_at": "2026-11-08T09:23:15Z",
+      "order_amount": 2900,
+      "order_currency": "USD",
+      "provider_response": {
+        "id": "4HJ31244AH4428038",
+        "status": "COMPLETED",
+        "intent": "CAPTURE",
+        "create_time": "2026-11-08T09:23:15Z",
+        "update_time": "2026-11-08T09:23:15Z",
+        "purchase_units": [
+          {
+            "reference_id": "purchase_afc9c55700de40a090ea1a69c96187be",
+            "custom_id": "purchase_afc9c55700de40a090ea1a69c96187be",
+            "amount": {
+              "currency_code": "USD",
+              "value": "29.00"
+            },
+            "payments": {
+              "captures": [
+                {
+                  "id": "9U732141TN8280908",
+                  "status": "COMPLETED",
+                  "custom_id": "purchase_afc9c55700de40a090ea1a69c96187be",
+                  "create_time": "2026-11-08T09:23:15Z",
+                  "update_time": "2026-11-08T09:23:15Z",
+                  "amount": {
+                    "currency_code": "USD",
+                    "value": "29.00"
+                  },
+                  "links": []
+                }
+              ]
+            }
+          }
+        ],
+        "links": []
+      },
+      "run_id": "run_fe3038da3c4a443189aad5c92f57d1ed",
+      "status": "COMPLETED",
+      "confirmed": true,
+      "capture_completed_at": "2026-11-08T09:23:15Z",
+      "observed_at": "2026-11-08T09:25:44.918465Z",
+      "observation_id": "event_268271a9ffb04f61bdf6aa7cd94cadbd"
+    },
+    "merchant": {
+      "purchase_id": "purchase_afc9c55700de40a090ea1a69c96187be",
+      "run_id": "run_fe3038da3c4a443189aad5c92f57d1ed",
+      "order_id": "4HJ31244AH4428038",
+      "known": true,
+      "status": "NOT_DELIVERED",
+      "payment_state": "COMPLETED",
+      "ticket_count": 0,
+      "tickets": [],
+      "observed_at": "2026-11-08T09:25:44.928865Z",
+      "observation_id": "event_12102dee544b4105a1b17ed0eec207ec"
+    }
+  },
+  "investigation_job": {
+    "id": "job_57edbae5c98e4ff98dda33708058f33d",
+    "state": "COMPLETED",
+    "updated_at": "2026-11-08T09:36:43.160998Z",
+    "result": {
+      "status": "COMPLETED",
+      "reason": "Model investigation ended; deterministic verdict follows.",
+      "model_mode": "LIVE_MODEL",
+      "final_verdict": {
+        "deadline": "2026-11-08T09:24:15Z",
+        "invariant_version": "ticket-v1",
+        "reason": "Confirmed payment has zero tickets beyond the fixed recovery deadline.",
+        "signature": "paid_without_ticket",
+        "source_ids": {
+          "capture_id": "9U732141TN8280908",
+          "merchant_observation_id": "event_41669261106d47a69a88b619c9228e1d",
+          "order_id": "4HJ31244AH4428038",
+          "provider_observation_id": "event_8c499bbe6d6443eaaebcf2f73daa6e0d",
+          "purchase_id": "purchase_afc9c55700de40a090ea1a69c96187be",
+          "run_id": "run_fe3038da3c4a443189aad5c92f57d1ed",
+          "ticket_ids": []
+        },
+        "verdict": "FAIL"
+      }
+    }
+  },
+  "actual_model_calls": [
+    {
+      "ordinal": 2,
+      "state": "COMPLETED",
+      "mode": "LIVE_MODEL",
+      "provider": "modal",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "response_id": "6a491d915a044f31ac0b0e0fccf08ece",
+      "usage": {
+        "input_tokens": 1060,
+        "output_tokens": 179,
+        "total_tokens": 1239
+      },
+      "request_sha256": "6c3cb335bde0da5884812d7bd7e27663cf4c5909e2e24a8c6e38343e1bcaa26f",
+      "request_bytes": 7239,
+      "input_sha256": "8feba45d3b249d77e96d54e158b578e93ba01e40cdb95fc8c1881e226774d445",
+      "input_version": "investigator-v4",
+      "tool": "read_provider",
+      "hypothesis": "The promise requests one USD 29 workshop ticket delivered within 60 seconds of confirmed payment. The timing phrase 'confirmed payment' most naturally maps to confirmed provider capture completion (capture_completed), but no payment, merchant, or browser evidence has been collected yet, so the timing evidence gap remains open.",
+      "findings": [],
+      "arguments": {
+        "fault": null,
+        "run_id": "run_fe3038da3c4a443189aad5c92f57d1ed"
+      }
+    },
+    {
+      "ordinal": 3,
+      "state": "COMPLETED",
+      "mode": "LIVE_MODEL",
+      "provider": "modal",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "response_id": "559cab16e8b740d39deba21063400abe",
+      "usage": {
+        "input_tokens": 1785,
+        "output_tokens": 221,
+        "total_tokens": 2006
+      },
+      "request_sha256": "4307d6aba9e264c0e0211c922d212bce1627040949298991b1b72985fae72a48",
+      "request_bytes": 9590,
+      "input_sha256": "a1fb8744eec9a1e50de6e2524a69e0c1b9a2465bfbfce09cb33a77b9f2f0a84b",
+      "input_version": "investigator-v4",
+      "tool": "read_merchant",
+      "hypothesis": "Hypothesis: capture completion is confirmed, so the timing_start anchor exists; delivery evidence (merchant ticket records) is still missing and must be read to evaluate the 60-second window.",
+      "findings": [
+        {
+          "claim": "Provider capture completed for USD 29.00 (amount 2900) at 2026-11-08T09:23:15Z, capture_id 9U732141TN8280908, status COMPLETED.",
+          "evidence_ids": [
+            "event_8c499bbe6d6443eaaebcf2f73daa6e0d"
+          ],
+          "kind": "observed"
+        }
+      ],
+      "arguments": {
+        "fault": null,
+        "run_id": "run_fe3038da3c4a443189aad5c92f57d1ed"
+      }
+    },
+    {
+      "ordinal": 4,
+      "state": "COMPLETED",
+      "mode": "LIVE_MODEL",
+      "provider": "modal",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "response_id": "e3ca2ef1433a46e1bdce4bef44dcbde4",
+      "usage": {
+        "input_tokens": 2270,
+        "output_tokens": 388,
+        "total_tokens": 2658
+      },
+      "request_sha256": "20f33a6fc5c4bb497736b429cacf277d63f25061790fc346a23e0d6aba2d32a8",
+      "request_bytes": 11169,
+      "input_sha256": "73972b6d8c713ec7fb8ecb37207ef2a09d21aa463485eb0833673753d279eb3c",
+      "input_version": "investigator-v4",
+      "tool": "finish",
+      "hypothesis": "Hypothesis: the promise requests one workshop ticket delivered within 60 seconds of confirmed provider capture completion; the amount, currency, ticket count, deadline, timing trigger and delivery kind are all specified, and the payment and merchant evidence are sufficient to evaluate the timing. No further read is needed.",
+      "findings": [
+        {
+          "claim": "Provider capture completed for USD 29.00 (amount 2900) at 2026-11-08T09:23:15Z, capture_id 9U732141TN8280908, status COMPLETED.",
+          "evidence_ids": [
+            "event_8c499bbe6d6443eaaebcf2f73daa6e0d"
+          ],
+          "kind": "observed"
+        },
+        {
+          "claim": "Merchant order 4HJ31244AH4428038 shows status NOT_DELIVERED, ticket_count 0, and no ticket records as of 2026-11-08T09:36:40Z, well past the 60-second window from capture completion.",
+          "evidence_ids": [
+            "event_41669261106d47a69a88b619c9228e1d"
+          ],
+          "kind": "observed"
+        }
+      ],
+      "arguments": {
+        "fault": null,
+        "run_id": "run_fe3038da3c4a443189aad5c92f57d1ed"
+      }
+    }
+  ],
+  "global_meter": {
+    "calls_before": 20,
+    "calls_after": 23,
+    "calls_remaining": 1,
+    "limit": 24,
+    "ceiling_usd": 1,
+    "new_reservations_usd": 0.12,
+    "reserved_total_usd": 0.92,
+    "new_observed_token_rate_estimate_usd": 0.0024801,
+    "prior_20_entries_byte_reconstruction_sha256": "ea1172a0083fcbaaa7a80b997d6f4f835bf0744e2d5d96437d3ee03079e5774b",
+    "history_preserved": true,
+    "new_entries": [
+      {
+        "call": 21,
+        "state": "RESPONDED",
+        "started_at": "2026-11-08T09:36:33.402881+00:00",
+        "finished_at": "2026-11-08T09:36:35.672964+00:00",
+        "response_id": "6a491d915a044f31ac0b0e0fccf08ece",
+        "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+        "usage": {
+          "prompt_tokens": 1060,
+          "completion_tokens": 179,
+          "total_tokens": 1239
+        },
+        "request_sha256": "6c3cb335bde0da5884812d7bd7e27663cf4c5909e2e24a8c6e38343e1bcaa26f",
+        "request_bytes": 7239,
+        "reserved_micro_usd": 40000,
+        "observed_rate_cost_micro_usd": 532.8,
+        "duration_seconds": 2.264687333999973
+      },
+      {
+        "call": 22,
+        "state": "RESPONDED",
+        "started_at": "2026-11-08T09:36:38.638123+00:00",
+        "finished_at": "2026-11-08T09:36:40.731758+00:00",
+        "response_id": "559cab16e8b740d39deba21063400abe",
+        "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+        "usage": {
+          "prompt_tokens": 1785,
+          "completion_tokens": 221,
+          "total_tokens": 2006
+        },
+        "request_sha256": "4307d6aba9e264c0e0211c922d212bce1627040949298991b1b72985fae72a48",
+        "request_bytes": 9590,
+        "reserved_micro_usd": 40000,
+        "observed_rate_cost_micro_usd": 800.7,
+        "duration_seconds": 2.0925546670005133
+      },
+      {
+        "call": 23,
+        "state": "RESPONDED",
+        "started_at": "2026-11-08T09:36:40.757620+00:00",
+        "finished_at": "2026-11-08T09:36:43.142708+00:00",
+        "response_id": "e3ca2ef1433a46e1bdce4bef44dcbde4",
+        "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+        "usage": {
+          "prompt_tokens": 2270,
+          "completion_tokens": 388,
+          "total_tokens": 2658
+        },
+        "request_sha256": "20f33a6fc5c4bb497736b429cacf277d63f25061790fc346a23e0d6aba2d32a8",
+        "request_bytes": 11169,
+        "reserved_micro_usd": 40000,
+        "observed_rate_cost_micro_usd": 1146.6,
+        "duration_seconds": 2.3840288749997853
+      }
+    ],
+    "pricing_source": "https://modal.com/library/deepseek/deepseek-v4-1-flash",
+    "current_endpoint_type": "Shared, observed on the signed-in dashboard; no deployment or account change"
+  },
+  "browser": {
+    "actual": "Safari Sandbox buyer approval, returned to local CrashCart, owner authenticated the local workspace, completed job and finding visible after reload",
+    "filter": "PayPal3of22, All22of22",
+    "download": {
+      "file": "run_fe3038da3c4a443189aad5c92f57d1ed-regression.zip",
+      "sha256": "765a4a874a9cfbca260067fb415527738e9d81d28490ef2cfccb9984346155b2",
+      "api_archive_sha256": "a8e1a49334c765afd26650571a6553a738929d1d6ea09793e931ff3135751432",
+      "all_members_equal": true
+    },
+    "observation_limitation": "Post-investigation result-page observation added after the AI finished; no checkout video or KERNEL recording. The model did not consume login/account pages or that result-page observation."
+  },
+  "cleanup": {
+    "worker_stopped": true,
+    "provider_enabled_server_stopped": true,
+    "remaining_server": "loopback-only, authenticated saved-result inspection; no provider credentials loaded",
+    "denied_writes": [
+      {
+        "action": "order",
+        "status": 403
+      },
+      {
+        "action": "capture",
+        "status": 403
+      },
+      {
+        "action": "reconcile",
+        "status": 403
+      },
+      {
+        "action": "investigation-job",
+        "status": 403
+      }
+    ],
+    "no_public_tunnel": true,
+    "no_kernel": true,
+    "no_webhook": true,
+    "no_real_money": true,
+    "no_upload_of_secrets": true
+  },
+  "failures_preserved": [
+    "export-first-failure.json",
+    "export-command-setup-failure.json"
+  ],
+  "repair_limit": "Fresh export defective reproduces paid_without_ticket. Its healthy variant correctly fails ticket_delivered_late because the first independent read occurred after60s. No timestamp/deadline changed. Curated early public replay has separate passing15-test proof.",
+  "original_acceptance": {
+    "verified": 47,
+    "total": 60,
+    "newly_verified_ids": []
+  }
+}

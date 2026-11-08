@@ -170,6 +170,59 @@ class ModalOriginConfigurationTests(unittest.TestCase):
         self.assertEqual(result["model"], wire.MODAL_MODEL)
         self.assertNotIn(env["MODAL_API_KEY"], repr(wire.configuration(env)))
 
+    def test_owned_direct_origin_selects_exact_bearer_request_with_canonical_labels(self):
+        origins = ["https://" + "t" * 46 + ".us-east.modal.direct",
+                   "https://a.b.modal.direct",
+                   "https://" + "t" * 63 + "." + "r" * 63 + ".modal.direct"]
+        for origin in origins:
+            with self.subTest(origin=origin):
+                env = {**ENV, "MODAL_ALLOWED_ORIGIN": origin, "MODAL_BASE_URL": origin}
+                config = wire.configuration(env)
+                transport = Transport()
+                result = wire.complete(config, system="JSON", context={}, schema=SCHEMA,
+                    schema_name="test", environ=env, timeout=5, transport=transport)
+                self.assertEqual(len(transport.requests), 1)
+                request, timeout = transport.requests[0]
+                self.assertEqual(request.full_url, origin + "/v1/chat/completions")
+                self.assertEqual(request.get_header("Authorization"), "Bearer " + env["MODAL_API_KEY"])
+                self.assertGreater(timeout, 0); self.assertLessEqual(timeout, 5)
+                body = json.loads(request.data)
+                self.assertEqual((body["model"], body["stream"], body["n"], body["max_tokens"]),
+                                 (wire.MODAL_MODEL, False, 1, wire.MAX_OUTPUT_TOKENS))
+                self.assertTrue(body["response_format"]["json_schema"]["strict"])
+                self.assertEqual((config.origin, result["endpoint_origin"]), (origin, origin))
+                self.assertNotIn(env["MODAL_API_KEY"], repr(config))
+
+    def test_direct_origin_requires_exact_pin_and_rejects_noncanonical_boundaries_before_send(self):
+        origin = "https://tenant.us-east.modal.direct"
+        invalid = ["http://tenant.us-east.modal.direct", "HTTPS://tenant.us-east.modal.direct",
+                   "https://Tenant.us-east.modal.direct", "https://tenant.US-east.modal.direct",
+                   "https://tenant.modal.direct", "https://modal.direct",
+                   "https://nested.tenant.us-east.modal.direct", "https://tenant.nested.us-east.modal.direct",
+                   origin + "/", origin + "/v1", origin + ":443", origin + ":8443",
+                   "https://user@tenant.us-east.modal.direct", "https://user:password@tenant.us-east.modal.direct",
+                   origin + "?token=x", origin + "#x", origin + ".", origin + ".attacker.test",
+                   "https://tenant.us-east.modal.direct.modal.direct", "https://tenant.us-east.modal-direct",
+                   "https://tenant.us-east.modal.directevil", "https://tenant%2eus-east.modal.direct",
+                   "https://ténant.us-east.modal.direct", "https://tenant.us_east.modal.direct",
+                   "https://-tenant.us-east.modal.direct", "https://tenant-.us-east.modal.direct",
+                   "https://tenant.-us-east.modal.direct", "https://tenant.us-east-.modal.direct",
+                   "https://" + "t" * 64 + ".us-east.modal.direct",
+                   "https://tenant." + "r" * 64 + ".modal.direct", origin + "\n"]
+        cases = [{**ENV, "MODAL_BASE_URL": value, "MODAL_ALLOWED_ORIGIN": value} for value in invalid]
+        cases.extend({**ENV, "MODAL_ALLOWED_ORIGIN": origin, "MODAL_BASE_URL": value} for value in
+                     ("https://another.us-east.modal.direct", "https://tenant.eu-west.modal.direct",
+                      ENV["MODAL_BASE_URL"]))
+        unpinned = {**ENV, "MODAL_BASE_URL": origin}; del unpinned["MODAL_ALLOWED_ORIGIN"]
+        cases.append(unpinned)
+        for env in cases:
+            with self.subTest(origin=env["MODAL_BASE_URL"], pin=env.get("MODAL_ALLOWED_ORIGIN")):
+                transport = Transport()
+                with self.assertRaises(wire.ModelTransportError):
+                    wire.complete(wire.configuration(env), system="JSON", context={}, schema=SCHEMA,
+                        schema_name="test", environ=env, timeout=5, transport=transport)
+                self.assertEqual(transport.requests, [])
+
     def test_malformed_or_unpinned_origin_never_dispatches_a_request(self):
         invalid = [wire.MODAL_ORIGIN, "https://modal.run", "http://owned.modal.run",
             "https://owned.modal.run/", "https://owned.modal.run/v1", "https://owned.modal.run:443",

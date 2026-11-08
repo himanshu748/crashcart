@@ -4,7 +4,12 @@ CrashCart uses AI to decide which evidence to inspect next. Deterministic code d
 
 This page describes an **actual historical model investigation performed on 26 October 2026**, using DeepSeek-V4.1-Flash served by Modal. It is a different case from the defective checkout shown in the public replay. The [public judge mode](https://himanshu748.github.io/crashcart/) makes no model calls and does not reproduce this AI execution.
 
-The current local/keyless source includes an **AI at work** section that presents these three recorded steps inside the product. It uses a pinned, whitelisted projection of the public summary below; selecting a step makes no model or provider request. The public hosted page may still be an older release while publication is blocked.
+A separate **8 November fresh checkout and real AI run** now verifies the same
+payment → ticket → finding sequence on a newly captured Sandbox order.
+[Actual local flow, screenshot and model receipts](LIVE_FLOW.md). The historical
+case below remains unchanged and is not relabelled as that new execution.
+
+The current local/keyless source and hosted walkthrough include an **AI at work** section that presents these three recorded steps inside the product. It uses a pinned, whitelisted projection of the public summary below; selecting a step makes no model or provider request.
 
 ## What actually ran
 

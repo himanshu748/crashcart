@@ -1,0 +1,65 @@
+{
+  "runtime_source_sha256": {
+    "crashcart/model_transport.py": "d2f51695bd6ad905f155be1754910cc4646daf1050d0c0304e2d044bf19e7191",
+    "crashcart/model_allowance.py": "cfeede66b4423263197d397f6ed314d41753a7734d5b7460a7c70dd67e03aacc",
+    "crashcart/investigator.py": "15753d31a91270b5a22328696f3572119051604812a1fbb8d9e20464aac0af87",
+    "crashcart/worker.py": "978d26fa1d848add7bb51eec14d072eead59017ac5bf12c18557d27295ab54d6",
+    "crashcart/service.py": "2a969ecb47e7aee5447fa666c2f43cf7e242f0f45be4ea3094cfd707a401beb9",
+    "crashcart/paypal.py": "a69534358625888c52aac555346f79129bf2261b18ed9d16471fa136824715ae",
+    "crashcart/server.py": "fcdd5761c829968776417067df9a2c461b61ec498d9782283d478e5207016736",
+    "crashcart/store.py": "86c2a1915e5b68ef9934db188bb6eae431732bb6c2e07b7e726b605da00b20c4",
+    "crashcart/invariant.py": "01c7007132e939716f5236322f40b175058981d21334c7add57dd4bb20007fea",
+    "crashcart/promise.py": "cd4e20e9a1c7b9a93e337edcc1ca35a01a22eebe98b8899527f18c8a7b3ca0e2",
+    "migrations/001_initial.sql": "776c928b0b07da50b3773a9c2feae8dbe20670d553ebbe643683802767f74714"
+  },
+  "test_source_sha256": {
+    "tests/test_model_allowance.py": "8ee6f60a0acb1f3906fecda059795342784d7384fec7e5665964e54f2c9e671a",
+    "tests/test_model_allowance_transport.py": "1fc3eb400eae5c6733be139fdc5c21d512557ed412a9cbccff021b4ae1e5940c",
+    "tests/test_model_transport.py": "6779b7ef84dd88170d3d727343a6ec47514b45cb62da9a252b978e4ab0fbdc65"
+  },
+  "tests": {
+    "full": {
+      "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -W error::ResourceWarning -m unittest discover -v",
+      "count": 523,
+      "seconds": 116.711,
+      "result": "OK",
+      "log": "full-suite-final.log"
+    },
+    "focused": {
+      "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -W error::ResourceWarning -m unittest tests.test_model_allowance tests.test_model_allowance_transport tests.test_model_transport -v",
+      "count": 57,
+      "seconds": 6.226,
+      "result": "OK",
+      "log": "transport-final.log"
+    },
+    "judge": {
+      "command": "PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 ./scripts/test-judge.sh",
+      "count": 15,
+      "seconds": 2.056,
+      "result": "OK",
+      "log": "judge-final.log"
+    }
+  },
+  "preserved_prior_attempts": {
+    "full-suite-first.log": "520pass beforefinalbookkeepingchanges; not finalsourceproof",
+    "judge.log": "older systemPython rejected; explicit supportedPython command passed",
+    "export-command-setup-failure.json": "wrongfilenames; actualincludedREADME modulecommands thenpassed",
+    "export-first-failure.json": "missingactualbrowserobservation; validatorunchanged thenrecordedactualpostresultpage"
+  },
+  "files": {
+    "judge.log": "d36ada9a296d9092804e832e5acc28cb2f18504dcdb57ce2a5707bdc154f1f20",
+    "live-result.jpg": "2cc5fbbbca4586749ad6da009fcf068f2ab08a10aa6383df8ccdb831276a6062",
+    "regression.zip": "a8e1a49334c765afd26650571a6553a738929d1d6ea09793e931ff3135751432",
+    "fresh-export-execution-corrected.json": "3c304b614b1a492b4b7a7b8e6aa6e3ca7e87e302f4d75a6e52f87e83fd7091d0",
+    "transport-final.log": "f457742cc6d500165eac217ab873acfe8e6593dff6fff1874c9db6cd6c08879a",
+    "http-preflight.json": "60a860f2b5afadb6392e0e9119696af99bed6101328fa6134a2f14e2a4d96970",
+    "full-suite-first.log": "d4e0d6af386588efbb0ba1ff1beb53247ce9c86131aea71dcb76894a691323ec",
+    "full-suite-final.log": "ba89dc0b2952c3446cdff68bf033b95e6be2ba029581b882224c7773c78ee25f",
+    "export-command-setup-failure.json": "7425086b4ad7bdb7a5c6cc94bdd3b8e5bdf15c9a0015faf24324d481774f4ffe",
+    "judge-final.log": "a9fd94b14011526cea14264aef1d345680f5824c5dc87aa843c12df816ec208e",
+    "review.json": "e0e95de09ea613043e9f5ed307c163c9e98fd484f333dfbbf998a7f1a1c6953f",
+    "publication-scan.json": "b6838b60df12104219b5bb184a6bb7987b4a5e4266950fcfb1b74ee03a4435fb",
+    "export-first-failure.json": "f067aa2bb2f9956d501707af242b4082efa82d9e16e961f425b50eb7df6ea0df",
+    "proof.json": "dbc1a950c360c3afbe58eebdb715b7c1bc46d39329202f06c68a93156d49747d"
+  }
+}

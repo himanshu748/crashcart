@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/healthz",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "GET",
+      "path": "/api/runs/run_fe3038da3c4a443189aad5c92f57d1ed",
+      "status": 401,
+      "expected": 401
+    },
+    {
+      "method": "GET",
+      "path": "/api/runs/run_fe3038da3c4a443189aad5c92f57d1ed",
+      "status": 200,
+      "expected": 200
+    },
+    {
+      "method": "POST",
+      "path": "/api/runs",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/webhooks/paypal",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/studio/query",
+      "status": 403,
+      "expected": 403
+    },
+    {
+      "method": "POST",
+      "path": "/api/runs/run_fe3038da3c4a443189aad5c92f57d1ed/investigate",
+      "status": 403,
+      "expected": 403
+    }
+  ],
+  "passed": 7,
+  "provider_calls": 0
+}
