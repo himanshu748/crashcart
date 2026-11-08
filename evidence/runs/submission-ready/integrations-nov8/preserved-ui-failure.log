@@ -1,0 +1,43 @@
+✔ queued and running never claim finished analysis or successful delivery (1.429417ms)
+✔ failed, cancelled and missing final results retain uncertainty (2.110292ms)
+✔ local simulated analysis stays labelled and never decides payment (0.407125ms)
+✖ background lifecycle never leaves a stale queue acknowledgement: false (2.221333ms)
+✖ background lifecycle never leaves a stale queue acknowledgement: true (0.896083ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 3
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 290.11925
+
+✖ failing tests:
+
+test at tests/test_background_ui.cjs:26:43
+✖ background lifecycle never leaves a stale queue acknowledgement: false (2.221333ms)
+  AssertionError [ERR_ASSERTION]: an older202 acknowledgement must not override the current persisted job state
+      at TestContext.<anonymous> (/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_background_ui.cjs:32:49)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'Assistant queued',
+    expected: 'Assistant queued',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/test_background_ui.cjs:26:43
+✖ background lifecycle never leaves a stale queue acknowledgement: true (0.896083ms)
+  AssertionError [ERR_ASSERTION]: an older202 acknowledgement must not override the current persisted job state
+      at TestContext.<anonymous> (/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_background_ui.cjs:32:49)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 'Assistant queued',
+    expected: 'Assistant queued',
+    operator: 'notStrictEqual',
+    diff: 'simple'
+  }

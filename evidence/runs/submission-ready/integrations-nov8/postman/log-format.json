@@ -1,0 +1,7 @@
+{
+  "display_log": "missing-proof-negative.log",
+  "normalization": "Trailing table-padding whitespace removed for readable Git diff only",
+  "raw_log": "missing-proof-negative.log.gz",
+  "raw_sha256": "ec6ada7a144e057c63397e2a4f9952bd9cbe12850de45ba9f9a2d168c4f8baab",
+  "assertions_and_errors": "Unchanged; original raw bytes retained in gzip and original Newman JSON"
+}

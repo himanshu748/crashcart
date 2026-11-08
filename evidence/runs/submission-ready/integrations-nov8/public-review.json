@@ -1,0 +1,12 @@
+{
+  "execution": "Both outcomes were recomputed during site build (5 Nov 2026, 09:34:24 UTC). The checkout observations were recorded in October 2026.",
+  "facts": "01 / PAYMENT\n$29.00 confirmed\n\nHistorical completion: 22 Oct 2026, 09:31:52 UTC.\n\n02 / DELIVERY\n1 ticket\n\nReplay creation: 22 Oct 2026, 09:32:24 UTC · 32.26s after payment.\n\n03 / DEADLINE\n60 seconds\n\nUnchanged deadline: 22 Oct 2026, 09:32:52 UTC. Outcome: promise kept.",
+  "headline": "Paid is only\nhalf the story.",
+  "local": "public hosted page, older design",
+  "scripts": [
+    "app.js"
+  ],
+  "selected": "Repaired replay · same saved payment response lost",
+  "timeline": "4 of 15 saved observations. Times are relative to confirmed payment; order alone does not establish cause.",
+  "title": "CrashCart — from payment to promise"
+}

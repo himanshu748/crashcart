@@ -1,0 +1,57 @@
+test_actual_worker_runs_adaptive_model_and_shared_records_then_never_requeues (tests.test_background_investigation.BackgroundInvestigationTests.test_actual_worker_runs_adaptive_model_and_shared_records_then_never_requeues) ... Worker ready: worker-1101b432fd83441398a1fcd89dc80e0f; durable database opened
+Job job_8095f09442664adb823b1ca0636ede91 completed
+Worker cycle finished
+Worker ready: worker-86c58a8dcd92417f87d176d036d3bbf7; durable database opened
+Worker cycle finished
+ok
+test_cancel_pending_job_never_runs_or_reports_success (tests.test_background_investigation.BackgroundInvestigationTests.test_cancel_pending_job_never_runs_or_reports_success) ... Worker ready: worker-d2ed644727d54ea98a3416d6f3d4d19e; durable database opened
+Worker cycle finished
+ok
+test_cancellation_during_model_preserves_cancelled_job_without_provider_work (tests.test_background_investigation.BackgroundInvestigationTests.test_cancellation_during_model_preserves_cancelled_job_without_provider_work) ... Worker ready: worker-b6d6450105674b1bb2cb243bb22e069a; durable database opened
+Job job_b8879af980404e58afac0d746bd0fb27 cancelled
+Worker cycle finished
+ok
+test_completed_analysis_keeps_its_inconclusive_customer_verdict (tests.test_background_investigation.BackgroundInvestigationTests.test_completed_analysis_keeps_its_inconclusive_customer_verdict) ... Worker ready: worker-5703433a39b844bcacddb56a50aead45; durable database opened
+Job job_d65b1a361bec4bf8baa6d7d4ceea1046 completed
+Worker cycle finished
+ok
+test_concurrent_http_requests_reserve_one_durable_job (tests.test_background_investigation.BackgroundInvestigationTests.test_concurrent_http_requests_reserve_one_durable_job) ... ok
+test_existing_execution_owner_wins_without_duplicate_model_work (tests.test_background_investigation.BackgroundInvestigationTests.test_existing_execution_owner_wins_without_duplicate_model_work) ... Worker ready: worker-42f342c673344b8d854d237691158878; durable database opened
+Job job_de26ba9f0067432ea24d311f51c08b44 failed
+Worker cycle finished
+ok
+test_http_acknowledges_queue_without_inference_and_deduplicates_across_restart (tests.test_background_investigation.BackgroundInvestigationTests.test_http_acknowledges_queue_without_inference_and_deduplicates_across_restart) ... ok
+test_http_rejects_unauthorized_payload_unknown_replay_and_cancelled_requests (tests.test_background_investigation.BackgroundInvestigationTests.test_http_rejects_unauthorized_payload_unknown_replay_and_cancelled_requests) ... ok
+test_job_lease_is_separate_from_unchanged_investigation_and_payment_deadlines (tests.test_background_investigation.BackgroundInvestigationTests.test_job_lease_is_separate_from_unchanged_investigation_and_payment_deadlines) ... ok
+test_lost_job_lease_cannot_commit_success_or_repeat_the_model (tests.test_background_investigation.BackgroundInvestigationTests.test_lost_job_lease_cannot_commit_success_or_repeat_the_model) ... Worker ready: worker-7bdcd108d7d6490eb48795fd8a80997e; durable database opened
+Job job_c2e35b0d9a704b9aa8739178430bf0df failed: ValueError
+Worker cycle finished
+Worker ready: worker-cd4292159b3a49149aa5354473fda2da; durable database opened
+Job job_c2e35b0d9a704b9aa8739178430bf0df failed
+Worker cycle finished
+ok
+test_missing_configuration_fails_worker_without_any_model_request (tests.test_background_investigation.BackgroundInvestigationTests.test_missing_configuration_fails_worker_without_any_model_request) ... Worker ready: worker-b2717e999c1f4eb0996e5f21a07962d6; durable database opened
+Job job_523f46a1c74744cabbb64d10af32b283 failed
+Worker cycle finished
+ok
+test_model_failure_is_terminal_failed_without_automatic_retry (tests.test_background_investigation.BackgroundInvestigationTests.test_model_failure_is_terminal_failed_without_automatic_retry) ... Worker ready: worker-c4efd1fa5aec4a3689ff0e912439dc32; durable database opened
+Job job_7a9d5c56efa24383bdb5cee57dec8f7d failed
+Worker cycle finished
+Worker ready: worker-e73fc1596e8946759b0ee7c79a183400; durable database opened
+Worker cycle finished
+ok
+test_reclaimed_job_is_interrupted_and_never_dispatches_unknown_inference (tests.test_background_investigation.BackgroundInvestigationTests.test_reclaimed_job_is_interrupted_and_never_dispatches_unknown_inference) ... Worker ready: worker-414dd8fb6db5400f88618c5f84a70dbf; durable database opened
+Job job_cd0d7bdce3e64d9db647646ea8861026 failed
+Worker cycle finished
+ok
+test_two_workers_do_not_dispatch_concurrent_models (tests.test_background_investigation.BackgroundInvestigationTests.test_two_workers_do_not_dispatch_concurrent_models) ... Worker ready: worker-42090c42942a4203a11eda0f427d50b7; durable database opened
+Worker ready: worker-ab5379cf3a9243aba7f9f63ff7990e7b; durable database opened
+Worker cycle finished
+Job job_2b403b5367334b01a6a91f92523c6099 completed
+Worker cycle finished
+ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 13.502s
+
+OK

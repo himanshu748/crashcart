@@ -1,0 +1,51 @@
+{
+  "queuedPhone": {
+    "disabled": true,
+    "mainMessage": "",
+    "note": "Assistant queued. You can leave this page and come back to its saved progress.",
+    "noteBox": {
+      "bottom": 755.984375,
+      "height": 80.796875,
+      "left": 39.5,
+      "right": 350.5,
+      "top": 675.1875,
+      "width": 311,
+      "x": 39.5,
+      "y": 675.1875
+    },
+    "scrollWidth": 390,
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "failedPhone": {
+    "disabled": true,
+    "mainMessage": "",
+    "note": "Example data · simulated assistant. The assistant could not finish. Saved records remain available. Check the assistant connection before starting a new investigation.",
+    "noteBox": {
+      "bottom": 826.1796875,
+      "height": 150.9921875,
+      "left": 39.5,
+      "right": 350.5,
+      "top": 675.1875,
+      "width": 311,
+      "x": 39.5,
+      "y": 675.1875
+    },
+    "scrollWidth": 390,
+    "viewport": [
+      390,
+      844
+    ]
+  },
+  "scope": "Actual local HTTP/UI with injected model and payment reads; no live provider execution",
+  "checks": [
+    "queue survives reload",
+    "cancelled queue stays stopped after reload",
+    "completed analysis survives reload",
+    "mode mismatch stops before further inference",
+    "phone messages fully within844px and no horizontal overflow",
+    "stale acknowledgement absent after fix"
+  ]
+}

@@ -1,0 +1,37 @@
+newman
+
+CrashCart observed sandbox API verification
+
+❏ Local smoke
+↳ API and database health
+  GET http://127.0.0.1:52221/healthz [200 OK, 497B, 75ms]
+  ✓  Health responds HTTP 200
+  ✓  Application identifies CrashCart
+  ✓  API and actual database are healthy
+
+↳ Owned workshop fixture
+  GET http://127.0.0.1:52221/api/fixture [200 OK, 613B, 6ms]
+  ✓  Registered fixture responds HTTP 200
+  ✓  Owned workshop fixture identity is fixed
+  ✓  Server owns exact 2900 USD price
+  ✓  Recovery deadline remains sixty seconds
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │                2 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │                2 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │                0 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │                7 │                0 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 172ms                                     │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 271B (approx)                            │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 40ms [min: 6ms, max: 75ms, s.d.: 34ms] │
+└───────────────────────────────────────────────────────────────┘

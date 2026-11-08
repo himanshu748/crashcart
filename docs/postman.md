@@ -25,7 +25,8 @@ Install the pinned runner into a new temporary directory, preserving the lockfil
 
 ```sh
 crashcart_runner_dir="$(mktemp -d)"
-crashcart_postman_evidence_dir="$(mktemp -d)"
+mkdir -p evidence/runs
+crashcart_postman_evidence_dir="$(mktemp -d "$PWD/evidence/runs/postman-XXXXXXXX")"
 npm install --prefix "$crashcart_runner_dir" --cache "$crashcart_runner_dir/npm-cache" --ignore-scripts --no-audit --no-fund --save-exact newman@6.2.1
 python3 scripts/verify_postman.py --newman "$crashcart_runner_dir/node_modules/.bin/newman" --evidence-dir "$crashcart_postman_evidence_dir"
 ```

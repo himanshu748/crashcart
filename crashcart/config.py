@@ -21,7 +21,7 @@ def prerequisites():
     groups = {
         "paypal": ["PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET"],
         "webhook": ["PAYPAL_WEBHOOK_ID", "CRASHCART_PUBLIC_URL"],
-        "model": (["MODAL_API_KEY", "MODAL_MODEL", "MODAL_BASE_URL"]
+        "model": (["MODAL_API_KEY", "MODAL_MODEL", "MODAL_BASE_URL", "MODAL_ALLOWED_ORIGIN"]
                   if os.environ.get("CRASHCART_MODEL_PROVIDER", "openai") == "modal"
                   else ["OPENAI_API_KEY", "OPENAI_MODEL"]),
         "kernel": ["KERNEL_API_KEY", "CRASHCART_PUBLIC_URL"],

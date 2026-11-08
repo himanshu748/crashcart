@@ -90,6 +90,8 @@ The account-free demo needs none of these service keys. The
 [integration ledger](docs/sponsor-ledger.md) records the scope and current status
 of each integration.
 
+Check the keyless example with `./scripts/test-judge.sh`. It tests recorded outcomes, HTTP boundaries and the runnable export without provider credentials. See [the connected integration workflow and current judge-access gaps](docs/JUDGE_REVIEW.md).
+
 ## Reproduce the comparison
 
 ```sh
@@ -118,6 +120,8 @@ No pip packages are needed. Build the frontend before starting Python: this
 source repository intentionally excludes compiled vendor bundles and private
 licence-bearing builds. The pinned lockfile supplies the real frontend packages.
 See [Studio setup and licensing](docs/studio.md).
+
+The workspace’s **Investigate** action queues durable work; run the background worker against the same database to process it. Reloading does not repeat inference, and interrupted calls require review. The [bounded KERNEL observer](docs/kernel-runner.md) can record an existing owned checkout under an explicit grant; reviewed browser evidence then joins the same case. It never starts or captures a payment.
 
 ```sh
 python3 --version  # must report 3.13.15

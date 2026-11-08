@@ -74,16 +74,23 @@ Actual model calls require an explicitly authorized `CRASHCART_ALLOW_MODEL=1`
 and the selected provider's private configuration. `CRASHCART_MODEL_PROVIDER`
 defaults to `openai`, which requires `OPENAI_API_KEY` and `OPENAI_MODEL` and uses
 the fixed OpenAI Responses endpoint. Selecting `modal` requires `MODAL_API_KEY`,
-`MODAL_MODEL=deepseek-ai/DeepSeek-V4.1-Flash` and a `MODAL_BASE_URL` that exactly
-matches `MODAL_ORIGIN` in `crashcart/model_transport.py`. The public source
-replaces the maintainer's private origin with the deliberately nonworking
-`https://your-owned-model.example.invalid` placeholder. Environment changes
-alone cannot redirect this transport. To use your own Modal deployment, review
-and change the `MODAL_ORIGIN` constant to your owned HTTPS origin, set matching
-`MODAL_BASE_URL` and the pinned `MODAL_MODEL`, and reverify the integration. This
-publication-only sanitization is not proof that the placeholder works or that a
-new endpoint passed acceptance. OpenAI remains the general supported own-key
-setup. No arbitrary-origin fallback is provided.
+`MODAL_MODEL=deepseek-ai/DeepSeek-V4.1-Flash`, `MODAL_ALLOWED_ORIGIN` and
+`MODAL_BASE_URL`. Set the two origin values privately to the identical owned
+Modal deployment origin, for example `https://your-deployment.modal.run`.
+Only canonical lowercase HTTPS origins with one DNS label before `.modal.run`
+are accepted. Paths, trailing slashes, ports, queries, fragments, user information
+and non-Modal hosts are rejected before a request is constructed. The operator's
+allowlist pin is server configuration; it cannot be changed by a model response
+or a browser request.
+
+No code edit or maintainer endpoint is needed to configure an owned Modal
+server. The non-routable `MODAL_ORIGIN` constant remains solely for explicitly
+injected local tests, which receive no credential and remain `LOCAL_TEST`.
+It is rejected for actual model calls. A configured origin establishes neither
+ownership, connectivity nor current usage authorization: the operator must own
+the deployment and separately authorize the bounded call allowance before
+setting `CRASHCART_ALLOW_MODEL=1`. Existing held-out policy, call, token and
+time budgets still apply; there is no arbitrary-origin fallback.
 
 The fixed `/v1/chat/completions` route uses the combined proxy credential as a
 server-only Bearer value. No CLI login, management token or unrelated provider

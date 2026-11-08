@@ -1,0 +1,118 @@
+newman
+
+CrashCart observed sandbox API verification
+
+❏ Observed sandbox evidence
+↳ Inspect independently observed paid run
+  1. Explicit observed run ID is required
+  2. Operator token must be configured privately
+  GET http://127.0.0.1:52221/api/runs/ [401 Unauthorized, 466B, 87ms]
+  3. Selected actual sandbox run responds HTTP 200
+  4. Stored run matches selection and actual sandbox mode
+  5. Payment was independently confirmed
+  6. Confirmed purchase is exactly 2900 USD
+  ✓  Run, logical purchase and merchant identities correlate
+  7. Independent provider retrieval event exists
+  8. Retrieved completed order contains one correlated purchase unit
+  9. Independent nested capture confirms exact amount and identity
+ 10. Logical capture journal matches the independently observed order
+  ✓  An explicit expected ticket count is supplied
+ 11. Actual merchant count matches the chosen experiment
+
+↳ Read actual merchant entitlement
+  GET http://127.0.0.1:52221/api/merchant/{{selected_purchase_id}} [401 Unauthorized, 466B, 6ms]
+ 12. Read-only merchant adapter responds HTTP 200
+ 13. Merchant adapter retains selected run and payment correlation
+ 14. Stored usable tickets match the explicit expected count
+
+┌─────────────────────────┬──────────────────┬──────────────────┐
+│                         │         executed │           failed │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              iterations │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│                requests │                2 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│            test-scripts │                2 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│      prerequest-scripts │                1 │                0 │
+├─────────────────────────┼──────────────────┼──────────────────┤
+│              assertions │               16 │               14 │
+├─────────────────────────┴──────────────────┴──────────────────┤
+│ total run duration: 271ms                                     │
+├───────────────────────────────────────────────────────────────┤
+│ total data received: 74B (approx)                             │
+├───────────────────────────────────────────────────────────────┤
+│ average response time: 46ms [min: 6ms, max: 87ms, s.d.: 40ms] │
+└───────────────────────────────────────────────────────────────┘
+
+[31m   # [39m[31m failure        [39m[31m detail                                                                                  [39m
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 01.  AssertionError  Explicit observed run ID is required
+                      Set run_id to an existing actual sandbox run: expected '' to match /^run_[a-zA-Z0-9]+$/
+                      at assertion:0 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 02.  AssertionError  Operator token must be configured privately
+                      Set operator_token in a private environment: expected '' to not deeply equal ''
+                      at assertion:1 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 03.  AssertionError  Selected actual sandbox run responds HTTP 200
+                      expected response to have status code 200 but got 401
+                      at assertion:0 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 04.  AssertionError  Stored run matches selection and actual sandbox mode
+                      expected undefined to deeply equal ''
+                      at assertion:1 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 05.  AssertionError  Payment was independently confirmed
+                      expected undefined to deeply equal 1
+                      at assertion:2 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 06.  AssertionError  Confirmed purchase is exactly 2900 USD
+                      expected undefined to deeply equal 2900
+                      at assertion:3 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 07.  AssertionError  Independent provider retrieval event exists
+                      A stored top-level success label is insufficient: expected +0 to be above +0
+                      at assertion:5 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 08.  AssertionError  Retrieved completed order contains one correlated purchase unit
+                      expected undefined to deeply equal 'COMPLETED'
+                      at assertion:6 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 09.  AssertionError  Independent nested capture confirms exact amount and identity
+                      expected [] to have a length of 1 but got +0
+                      at assertion:7 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 10.  AssertionError  Logical capture journal matches the independently observed order
+                      expected [] to have a length of 1 but got +0
+                      at assertion:8 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 11.  AssertionError  Actual merchant count matches the chosen experiment
+                      expected undefined to deeply equal true
+                      at assertion:10 in test-script
+                      inside "Observed sandbox evidence / Inspect independently observed paid run"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 12.  AssertionError  Read-only merchant adapter responds HTTP 200
+                      expected response to have status code 200 but got 401
+                      at assertion:0 in test-script
+                      inside "Observed sandbox evidence / Read actual merchant entitlement"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 13.  AssertionError  Merchant adapter retains selected run and payment correlation
+                      expected undefined to deeply equal true
+                      at assertion:1 in test-script
+                      inside "Observed sandbox evidence / Read actual merchant entitlement"
+[90m     [39m[90m                [39m[90m                                                                                         [39m
+ 14.  AssertionError  Stored usable tickets match the explicit expected count
+                      expected undefined to deeply equal 1
+                      at assertion:2 in test-script
+                      inside "Observed sandbox evidence / Read actual merchant entitlement"

@@ -74,6 +74,28 @@ function showError(error,target='message'){
   const raw=String(error?.message??error??'');text(target,errorMessage(raw));
   const login=target==='login-message';text(login?'login-error-code':'error-code',raw);$(login?'login-error-details':'error-details').hidden=false;
 }
+function investigationJobMessage(job){
+  if(!job)return '';
+  const prefix=job.result?.model_mode==='LOCAL_TEST'?'Example data · simulated assistant. ':'';
+  if(job.state==='PENDING')return 'Assistant queued. You can leave this page and come back to its saved progress.';
+  if(job.state==='RUNNING')return 'The assistant is checking this checkout in the background. You can leave this page.';
+  if(job.state==='CANCELLED')return 'Assistant stopped. Saved records remain available.';
+  if(job.state==='FAILED')return prefix+'The assistant could not finish. Saved records remain available. Check the assistant connection before starting a new investigation.';
+  if(job.state==='COMPLETED'&&job.result?.status==='COMPLETED')return prefix+'Assistant finished. Open Activity to follow what it checked. Payment and ticket records decide the delivery result.';
+  return 'Assistant status is unavailable. Saved payment and ticket records remain available.';
+}
+function investigationFinding(job,run,purchase){
+  const result=job?.result, finding=result?.final_verdict, ids=finding?.source_ids;
+  if(result?.status!=='COMPLETED'||!ids||ids.run_id!==run.id||ids.purchase_id!==purchase.id||ids.order_id!==purchase.order_id||!['PASS','FAIL','INCONCLUSIVE'].includes(finding.verdict))return '';
+  const description=verdictReasons.get(finding.signature);
+  return description?` Investigation finding: ${description}`:'';
+}
+function renderInvestigationJob(job,run,purchase){
+  if(!job)return;
+  text('investigator-note',investigationJobMessage(job)+investigationFinding(job,run,purchase));
+  $('investigator-note').dataset.mode=job.result?.model_mode||'UNKNOWN';
+  $('investigator-note').hidden=false;
+}
 let current = null;
 let recordingKey = null;
 let active = false;
@@ -129,7 +151,8 @@ function syncActionButtons(data=current){
   if(!matched){$('busy').hidden=!active;for(const id of ['checkout','capture','reconcile','investigate','cancel-run'])$(id).disabled=true;return;}
   const {run,purchase}=data;
   const cancelled=!!run.cancel_requested||run.state==='cancelled';
-  const running=run.execution?.active===true||(!run.execution&&String(run.state).toLowerCase()==='running');
+  const queued=data.investigation_job?.state==='PENDING'||data.investigation_job?.state==='RUNNING';
+  const running=queued||run.execution?.active===true||(!run.execution&&String(run.state).toLowerCase()==='running');
   const unavailable=active||running||cancelled;
   $('busy').hidden=!(active||running);
   $('cancel-run').disabled=cancelled||cancelPending===run.id;
@@ -137,7 +160,9 @@ function syncActionButtons(data=current){
   text('checkout',resumable?'Resume test checkout':'Start test checkout');
   $('checkout').disabled=unavailable||purchase.payment_confirmed===1||(!!purchase.order_id&&!resumable);
   $('reconcile').disabled=unavailable||!purchase.order_id;
-  $('investigate').disabled=unavailable;
+  $('investigate').disabled=unavailable||!!data.investigation_job;
+  text('investigate',data.investigation_job?'Assistant requested':'Investigate');
+  if(data.investigation_job?.state==='PENDING')text('run-state','Assistant queued');
   $('capture').disabled=unavailable||purchase.payment_confirmed===1;
 }
 async function action(fn){if(active)return;active=true;$('error-details').hidden=true;text('error-code','');text('message','');$('busy').hidden=false;syncActionButtons();try{await fn();}catch(e){showError(e);}finally{active=false;$('busy').hidden=true;syncRecoveryNotice();syncActionButtons();}}
@@ -161,7 +186,7 @@ async function refresh(){
   if(focusedRun){const restore=[...document.querySelectorAll('.run-row')].find(b=>b.dataset.runId===focusedRun);restore?.focus();}
   }
   filterRuns();
-  if(runId){const details=await api(`/api/runs/${runId}`);if(generation!==refreshGeneration||runId!==selected||details.run.id!==runId)return;current=details;const next=JSON.stringify([current.run.updated_at,current.run.id,current.purchase.updated_at,current.events.map(e=>e.id),current.merchant.tickets,current.recording]);if(next!==renderSignature){renderSignature=next;render(current);}}
+  if(runId){const details=await api(`/api/runs/${runId}`);if(generation!==refreshGeneration||runId!==selected||details.run.id!==runId)return;current=details;const next=JSON.stringify([current.run.updated_at,current.run.id,current.purchase.updated_at,current.events.map(e=>e.id),current.merchant.tickets,current.recording,current.investigation_job]);if(next!==renderSignature){renderSignature=next;render(current);}}
 }
 function closeRecording(restoreFocus=false){
   const video=$('customer-recording-video');video.pause();video.removeAttribute('src');video.load();
@@ -246,8 +271,9 @@ function render(data){
   $('verdict').dataset.verdict=result?result.payload.verdict:'INCONCLUSIVE';
   text('verdict',result?`${verdictLabels.get(result.payload.verdict)||'More evidence needed'}: ${verdictReasons.get(result.payload.signature)||errorMessage(result.payload.reason)}`:(purchase.order_id?'Check payment status to see the result.':'Start a test checkout to check ticket delivery.'));
   renderTimeline(run.id,events);
-  text('journal',JSON.stringify({run:{id:run.id,promise:run.promise,state:run.state,mode:run.mode,fault:run.fault,execution:run.execution||null},purchase_id:purchase.id,order_id:purchase.order_id,capture_id:purchase.capture_id,payment_state:purchase.payment_state,merchant_status:merchant.status,browser:customer||null,delivery_result:result?.payload||null,operations:data.operations},null,2));
+  text('journal',JSON.stringify({run:{id:run.id,promise:run.promise,state:run.state,mode:run.mode,fault:run.fault,execution:run.execution||null},assistant_job:data.investigation_job||null,purchase_id:purchase.id,order_id:purchase.order_id,capture_id:purchase.capture_id,payment_state:purchase.payment_state,merchant_status:merchant.status,browser:customer||null,delivery_result:result?.payload||null,operations:data.operations},null,2));
   if(run.execution?.state==='interrupted'){text('investigator-note','The assistant stopped before its response could be confirmed. Saved records remain available.');$('investigator-note').dataset.mode='UNKNOWN';$('investigator-note').hidden=false;}
+  renderInvestigationJob(data.investigation_job,run,purchase);
   if(focusSelectedRun){focusSelectedRun=false;$('run-title').focus();}
 }
 async function observe(actionName){if(!selected||!current||current.run.id!==selected||current.run.cancel_requested)return;await api(`/api/runs/${selected}/observation`,{browser_kind:'LOCAL_BROWSER',url_path:location.pathname,visible_text:[$('run-state').textContent,$('verdict').textContent,$('merchant-title').textContent,$('message').textContent].join(' | '),action:actionName});}
@@ -281,7 +307,7 @@ $('new-run').addEventListener('submit',(e)=>{e.preventDefault();action(async()=>
 $('checkout').addEventListener('click',()=>action(async()=>{try{const order=await api(`/api/runs/${selected}/order`,{});await refresh();await observe('leaving_for_buyer_approval');if(order.approval_url)location.href=order.approval_url;else text('message','The saved payment has been checked. No new approval was requested.');}catch(e){await refresh();showError(e);await observe('checkout_unavailable');throw e;}}));
 $('capture').addEventListener('click',()=>action(async()=>{let result;try{result=await api(`/api/runs/${selected}/capture`,{order_id:new URLSearchParams(location.search).get('token')});}catch(e){if(e instanceof TypeError)throw new Error('Connection interrupted while confirming payment. Reconnect to check the saved order.');throw e;}await refresh();if(result.message)text('message',readableText(result.message));syncRecoveryNotice();await observe('capture_result');await refresh();}));
 $('reconcile').addEventListener('click',()=>action(async()=>{await api(`/api/runs/${selected}/reconcile`,{});await refresh();await observe('reconciliation_result');await refresh();}));
-$('investigate').addEventListener('click',()=>action(async()=>{const runId=selected;text('investigator-note','');$('investigator-note').hidden=true;renderSignature=null;text('run-state','Starting investigation…');$('run-state').dataset.state='pending';let result;try{result=await api(`/api/runs/${runId}/investigate`,{});}catch(error){if(selected===runId){await refresh().catch(()=>{});if(current?.run.id===runId){text('run-state',statusLabel(current.run.state));$('run-state').dataset.state=current.run.state;}}throw error;}if(selected!==runId)return;await refresh();if(selected!==runId)return;if(['RUNNING','BUSY'].includes(result.status)){text('message','The assistant is already investigating this checkout. Its saved progress is shown below.');return;}if(result.status==='SUPERSEDED'){text('message','A newer investigation has already updated these records. Showing its saved result.');return;}const source=result.model_mode==='LOCAL_TEST'?'Test data · simulated response. ':result.model_mode==='LIVE_MODEL'?'':'Response source not recorded. ';$('investigator-note').dataset.mode=result.model_mode||'UNKNOWN';text('investigator-note',`${source}Assistant suggestion — the delivery result still comes from the recorded payment and ticket. ${statusLabel(result.status)}: ${errorMessage(result.reason)}`);$('investigator-note').hidden=false;const original=JSON.parse($('journal').textContent);original.assistant_response=result;text('journal',JSON.stringify(original,null,2));}));
+$('investigate').addEventListener('click',()=>action(async()=>{if(!selected)return;const runId=selected;await api(`/api/runs/${runId}/investigation-job`,{});if(selected!==runId)return;await refresh();if(selected!==runId)return;}));
 $('cancel-run').addEventListener('click',async()=>{if(!current||current.run.id!==selected||cancelPending)return;const runId=current.run.id;cancelPending=runId;syncActionButtons();try{await api(`/api/runs/${runId}/cancel`,{});await refresh();if(selected===runId)text('message','Investigation stopped. Saved evidence remains available.');}catch(e){if(selected===runId)showError(e);}finally{cancelPending=null;syncActionButtons();}});
 api('/healthz').then(d=>text('health',d.status==='ok'&&d.database==='ok'?'● Workspace connected':'Workspace connection needs attention')).catch(e=>text('health','Workspace unavailable. Check your connection and refresh.'));
 refresh().then(async()=>{if(selected&&location.pathname==='/cancel'){text('message','Buyer approval cancelled. This purchase is not completed.');await observe('buyer_cancelled');}else if(selected&&location.pathname==='/return'){if(current?.purchase.payment_confirmed!==1)text('message','Returned from PayPal. Check buyer approval before confirming this payment.');syncRecoveryNotice();await observe('buyer_returned');}}).catch(e=>{if($('workspace').hidden){$('login-panel').hidden=false;showError(e,'login-message');}else showError(e);});

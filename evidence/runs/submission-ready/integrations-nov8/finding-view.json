@@ -1,0 +1,7 @@
+{
+  "mainMessage": "",
+  "merchantStatus": "Check payment status to see the result.",
+  "mode": "LOCAL_TEST",
+  "note": "Example data · simulated assistant. Assistant finished. Open Activity to follow what it checked. Payment and ticket records decide the delivery result. Investigation finding: Payment confirmed, but no ticket arrived within 60 seconds.",
+  "technicalContainsJob": false
+}

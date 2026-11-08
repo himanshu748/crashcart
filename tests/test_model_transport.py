@@ -22,7 +22,8 @@ from crashcart.store import Store
 from tests.test_promise import requested_values
 
 ENV = {"CRASHCART_MODEL_PROVIDER":"modal", "MODAL_API_KEY":"test-only-modal-key",
-       "MODAL_MODEL":wire.MODAL_MODEL, "MODAL_BASE_URL":wire.MODAL_ORIGIN,
+       "MODAL_MODEL":wire.MODAL_MODEL, "MODAL_BASE_URL":"https://crashcart-model-test.modal.run",
+       "MODAL_ALLOWED_ORIGIN":"https://crashcart-model-test.modal.run",
        "CRASHCART_ALLOW_MODEL":"1", "CRASHCART_STUDIO_MODEL_MAX_CALLS":"16"}
 SCHEMA = {"type":"object", "properties":{"ok":{"type":"boolean"}}, "required":["ok"], "additionalProperties":False}
 
@@ -150,6 +151,63 @@ class WallClockTransportTests(unittest.TestCase):
         self.assertEqual(error.exception.metadata["response_id"],"chatcmpl_synthetic")
         self.assertEqual(error.exception.metadata["usage"]["total_tokens"],18)
 
+class ModalOriginConfigurationTests(unittest.TestCase):
+    def setUp(self):
+        blocker = patch("socket.create_connection", side_effect=AssertionError("Synthetic tests forbid network"))
+        blocker.start(); self.addCleanup(blocker.stop)
+
+    def test_owned_origin_pin_selects_exact_wire_endpoint_and_preserves_guards(self):
+        env = {**ENV, "MODAL_ALLOWED_ORIGIN": "https://other-owned-test.modal.run",
+               "MODAL_BASE_URL": "https://other-owned-test.modal.run"}
+        transport = Transport()
+        result = wire.complete(wire.configuration(env), system="JSON", context={}, schema=SCHEMA,
+            schema_name="test", environ=env, timeout=5, transport=transport)
+        self.assertEqual(len(transport.requests), 1)
+        request = transport.requests[0][0]
+        self.assertEqual(request.full_url, env["MODAL_ALLOWED_ORIGIN"] + "/v1/chat/completions")
+        self.assertEqual(request.get_header("Authorization"), "Bearer " + env["MODAL_API_KEY"])
+        self.assertEqual(result["endpoint_origin"], env["MODAL_ALLOWED_ORIGIN"])
+        self.assertEqual(result["model"], wire.MODAL_MODEL)
+        self.assertNotIn(env["MODAL_API_KEY"], repr(wire.configuration(env)))
+
+    def test_malformed_or_unpinned_origin_never_dispatches_a_request(self):
+        invalid = [wire.MODAL_ORIGIN, "https://modal.run", "http://owned.modal.run",
+            "https://owned.modal.run/", "https://owned.modal.run/v1", "https://owned.modal.run:443",
+            "https://owned.modal.run:8443", "https://user@owned.modal.run", "https://owned.modal.run?x=1",
+            "https://owned.modal.run#x", "https://owned.modal.run.", "https://owned.modal.run.attacker.test",
+            "https://owned.modal.run.modal.run", "https://ownéd.modal.run", "https://owned%2emodal.run",
+            "https://owned-modal.run", "https://owned.example", "https://127.0.0.1",
+            "https://Owned.modal.run", "https://-owned.modal.run", "https://owned-.modal.run",
+            "https://" + "x" * 64 + ".modal.run", "https://owned.modal.run\n", None, 1]
+        for origin in invalid:
+            with self.subTest(origin=origin):
+                transport = Transport()
+                env = {**ENV, "MODAL_BASE_URL": origin, "MODAL_ALLOWED_ORIGIN": origin}
+                with self.assertRaises(wire.ModelTransportError):
+                    wire.complete(wire.configuration(env), system="JSON", context={}, schema=SCHEMA,
+                        schema_name="test", environ=env, timeout=5, transport=transport)
+                self.assertEqual(transport.requests, [])
+        transport = Transport()
+        with self.assertRaisesRegex(wire.ModelTransportError, "INVALID_MODAL_ENDPOINT_OR_MODEL"):
+            wire.complete(wire.configuration({**ENV, "MODAL_BASE_URL":"https://different.modal.run"}),
+                system="JSON", context={}, schema=SCHEMA, schema_name="test", environ=ENV,
+                timeout=5, transport=transport)
+        self.assertEqual(transport.requests, [])
+        env = dict(ENV); del env["MODAL_ALLOWED_ORIGIN"]
+        with self.assertRaisesRegex(wire.ModelTransportError, "MISSING_CONFIGURATION:MODAL_ALLOWED_ORIGIN"):
+            wire.configuration(env)
+
+    def test_placeholder_is_only_available_to_credential_free_injected_transports(self):
+        config = wire.configuration({"CRASHCART_MODEL_PROVIDER":"modal"}, injected=True)
+        self.assertEqual(config.origin, wire.MODAL_ORIGIN)
+        self.assertEqual(config.key, "")
+        env = {**ENV, "MODAL_BASE_URL":wire.MODAL_ORIGIN, "MODAL_ALLOWED_ORIGIN":wire.MODAL_ORIGIN}
+        with self.assertRaisesRegex(wire.ModelTransportError, "INVALID_MODAL_ENDPOINT_OR_MODEL"):
+            wire.configuration(env)
+        injected = wire.configuration(ENV, injected=True)
+        self.assertEqual(injected.origin, ENV["MODAL_ALLOWED_ORIGIN"])
+        self.assertEqual(injected.key, "")
+
 class SharedTransportTests(unittest.TestCase):
     def setUp(self):
         blocker=patch('socket.create_connection',side_effect=AssertionError('No network in synthetic transport tests'))
@@ -160,7 +218,7 @@ class SharedTransportTests(unittest.TestCase):
     def test_modal_exact_chat_request_and_actual_metadata(self):
         t=Transport();r=self.complete(t);request,timeout=t.requests[0];body=json.loads(request.data)
         self.assertEqual(len(t.requests),1)
-        self.assertEqual(request.full_url,wire.MODAL_ORIGIN+'/v1/chat/completions')
+        self.assertEqual(request.full_url,ENV["MODAL_ALLOWED_ORIGIN"]+'/v1/chat/completions')
         self.assertEqual(request.get_header('Authorization'),'Bearer '+ENV['MODAL_API_KEY'])
         self.assertGreater(timeout,0);self.assertLessEqual(timeout,5);self.assertEqual(body['max_tokens'],1024)
         self.assertEqual((body['stream'],body['n'],body['reasoning_effort']),(False,1,'none'))
@@ -169,10 +227,10 @@ class SharedTransportTests(unittest.TestCase):
         self.assertFalse({'input','text','store','max_output_tokens','tools'}&body.keys())
         self.assertEqual(r['model'],wire.MODAL_MODEL);self.assertEqual(r['response_id'],'chatcmpl_synthetic')
         self.assertEqual(r['usage'],{'input_tokens':11,'output_tokens':7,'total_tokens':18})
-        self.assertEqual((r['provider'],r['protocol'],r['endpoint_origin']),('modal','chat_completions',wire.MODAL_ORIGIN))
+        self.assertEqual((r['provider'],r['protocol'],r['endpoint_origin']),('modal','chat_completions',ENV["MODAL_ALLOWED_ORIGIN"]))
         self.assertEqual(r['request_bytes'],len(request.data));self.assertNotIn(ENV['MODAL_API_KEY'],json.dumps(r))
     def test_configuration_never_accepts_other_destinations_models_or_credentials(self):
-        for origin in [wire.MODAL_ORIGIN+'/',wire.MODAL_ORIGIN+'?token=x',wire.MODAL_ORIGIN+'#x',wire.MODAL_ORIGIN.replace('https:','http:'),'https://foreign.invalid',wire.MODAL_ORIGIN.replace('https://','https://user@')]:
+        for origin in [ENV["MODAL_ALLOWED_ORIGIN"]+'/',ENV["MODAL_ALLOWED_ORIGIN"]+'?token=x',ENV["MODAL_ALLOWED_ORIGIN"]+'#x',ENV["MODAL_ALLOWED_ORIGIN"].replace('https:','http:'),'https://foreign.invalid',ENV["MODAL_ALLOWED_ORIGIN"].replace('https://','https://user@')]:
             with self.subTest(origin=origin),self.assertRaises(wire.ModelTransportError):wire.configuration({**ENV,'MODAL_BASE_URL':origin})
         for change in [{'CRASHCART_MODEL_PROVIDER':'unknown'},{'MODAL_MODEL':'another-model'},{'MODAL_API_KEY':''},{'MODAL_API_KEY':'x\r\nInjected: y'},{'CRASHCART_ALLOW_MODEL':'0'}]:
             with self.subTest(fields=list(change)),self.assertRaises(wire.ModelTransportError):wire.configuration({**ENV,**change})
@@ -218,7 +276,7 @@ class SharedTransportTests(unittest.TestCase):
             t=Transport(value)
             with self.subTest(value=value),self.assertRaises(wire.ModelTransportError) as e:self.complete(t)
             self.assertEqual(len(t.requests),1);self.assertEqual(e.exception.metadata['usage']['total_tokens'],18)
-            self.assertEqual(e.exception.metadata['provider'],'modal');self.assertEqual(e.exception.metadata['endpoint_origin'],wire.MODAL_ORIGIN)
+            self.assertEqual(e.exception.metadata['provider'],'modal');self.assertEqual(e.exception.metadata['endpoint_origin'],ENV["MODAL_ALLOWED_ORIGIN"])
     def test_no_json_repair_or_reasoning_extraction(self):
         for content in ['', '```json\n{"ok":true}\n```','<think>reason</think>{"ok":true}','{"ok":true,"ok":false}','{"value":NaN}','[]','{"ok":true} trailing','x'*16001]:
             t=Transport(chat(content))
@@ -303,10 +361,10 @@ class CallerChatTests(unittest.TestCase):
         model=OpenAIModel(environ=self.env,transport=Transport(bad));result=Investigation(self.store,None,model_factory=lambda:model).run(other['id'])
         attempts=[a for a in self.store.get_attempts(other['id']) if a['kind']=='investigator.model']
         self.assertEqual(len(attempts),1)
-        self.assertEqual(result['status'],'FAILED');saved=attempts[0]['result'];self.assertEqual(saved['response_id'],'chatcmpl_synthetic');self.assertEqual(saved['endpoint_origin'],wire.MODAL_ORIGIN);self.assertEqual(saved['usage']['total_tokens'],18)
+        self.assertEqual(result['status'],'FAILED');saved=attempts[0]['result'];self.assertEqual(saved['response_id'],'chatcmpl_synthetic');self.assertEqual(saved['endpoint_origin'],ENV["MODAL_ALLOWED_ORIGIN"]);self.assertEqual(saved['usage']['total_tokens'],18)
     def test_plain_injected_investigator_cannot_claim_live_mode_or_receive_credentials(self):
         # Same candidate-1 reproduction: plain OpenAIModel, synthetic finish,
-        # LIVE_SANDBOX run and configured placeholder credential.
+        # LIVE_SANDBOX run and configured synthetic credential.
         for mode in ("LIVE_SANDBOX", "FRESH_SANDBOX", "RECORDED_REPLAY"):
             with self.subTest(mode=mode):
                 run=self.store.create_run("Synthetic mode-boundary regression only",mode=mode)

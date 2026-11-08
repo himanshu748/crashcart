@@ -1,0 +1,44 @@
+test_cancellation_during_observation_closes_and_never_returns_success (tests.test_kernel_entrypoint.KernelEntrypointTests.test_cancellation_during_observation_closes_and_never_returns_success) ... ok
+test_cleanup_failure_is_incomplete_not_observed_success (tests.test_kernel_entrypoint.KernelEntrypointTests.test_cleanup_failure_is_incomplete_not_observed_success) ... ok
+test_cli_rejects_unsupported_checkout_action_before_adapter (tests.test_kernel_entrypoint.KernelEntrypointTests.test_cli_rejects_unsupported_checkout_action_before_adapter) ... ok
+test_interrupt_closes_without_creating_payment_or_importing (tests.test_kernel_entrypoint.KernelEntrypointTests.test_interrupt_closes_without_creating_payment_or_importing) ... ok
+test_local_replay_and_cancelled_runs_never_dispatch (tests.test_kernel_entrypoint.KernelEntrypointTests.test_local_replay_and_cancelled_runs_never_dispatch) ... ok
+test_main_outputs_only_fixed_error_on_unexpected_exception (tests.test_kernel_entrypoint.KernelEntrypointTests.test_main_outputs_only_fixed_error_on_unexpected_exception) ... ok
+test_missing_database_and_unknown_run_never_construct_adapter (tests.test_kernel_entrypoint.KernelEntrypointTests.test_missing_database_and_unknown_run_never_construct_adapter) ... ok
+test_missing_expired_wrong_scenario_or_disabled_grant_never_contacts_provider (tests.test_kernel_entrypoint.KernelEntrypointTests.test_missing_expired_wrong_scenario_or_disabled_grant_never_contacts_provider) ... ok
+test_observe_uses_existing_identity_retains_private_recording_and_closes (tests.test_kernel_entrypoint.KernelEntrypointTests.test_observe_uses_existing_identity_retains_private_recording_and_closes) ... ok
+test_registered_nonworkshop_fixture_is_rejected_before_adapter (tests.test_kernel_entrypoint.KernelEntrypointTests.test_registered_nonworkshop_fixture_is_rejected_before_adapter) ... ERROR
+test_remote_identity_mismatch_closes_and_retains_failed_receipt (tests.test_kernel_entrypoint.KernelEntrypointTests.test_remote_identity_mismatch_closes_and_retains_failed_receipt) ... ok
+test_actual_watchdog_invokes_cleanup_without_another_action (tests.test_kernel_browser.KernelTests.test_actual_watchdog_invokes_cleanup_without_another_action) ... ok
+test_allowance_missing_expired_mismatched_or_unbounded_rejected (tests.test_kernel_browser.KernelTests.test_allowance_missing_expired_mismatched_or_unbounded_rejected) ... ok
+test_ambiguous_create_is_not_retried_and_cleanup_uses_reserved_name (tests.test_kernel_browser.KernelTests.test_ambiguous_create_is_not_retried_and_cleanup_uses_reserved_name) ... ok
+test_cancel_and_deadline_close_then_refuse_actions_without_network (tests.test_kernel_browser.KernelTests.test_cancel_and_deadline_close_then_refuse_actions_without_network) ... ok
+test_checkout_binds_new_order_then_capture_requires_exact_return (tests.test_kernel_browser.KernelTests.test_checkout_binds_new_order_then_capture_requires_exact_return) ... ok
+test_cleanup_failure_is_not_success_and_does_not_prevent_session_delete (tests.test_kernel_browser.KernelTests.test_cleanup_failure_is_not_success_and_does_not_prevent_session_delete) ... ok
+test_download_rejects_html_and_oversize_body (tests.test_kernel_browser.KernelTests.test_download_rejects_html_and_oversize_body) ... ok
+test_localhost_credentials_paths_ip_and_private_dns_rejected (tests.test_kernel_browser.KernelTests.test_localhost_credentials_paths_ip_and_private_dns_rejected) ... ok
+test_missing_gates_make_no_network_call_or_reservation (tests.test_kernel_browser.KernelTests.test_missing_gates_make_no_network_call_or_reservation) ... ok
+test_one_use_allowance_survives_adapter_restart (tests.test_kernel_browser.KernelTests.test_one_use_allowance_survives_adapter_restart) ... ok
+test_redirect_handler_never_forwards_api_bearer (tests.test_kernel_browser.KernelTests.test_redirect_handler_never_forwards_api_bearer) ... ok
+test_remote_error_strings_and_malformed_diagnostics_never_enter_sidecar (tests.test_kernel_browser.KernelTests.test_remote_error_strings_and_malformed_diagnostics_never_enter_sidecar) ... ok
+test_remote_failure_timeout_and_interrupt_save_partial_and_delete (tests.test_kernel_browser.KernelTests.test_remote_failure_timeout_and_interrupt_save_partial_and_delete) ... ok
+test_sidecar_write_failure_cannot_hide_original_failure_or_skip_cleanup (tests.test_kernel_browser.KernelTests.test_sidecar_write_failure_cannot_hide_original_failure_or_skip_cleanup) ... ok
+test_success_has_no_failure_sidecar_and_preserves_receipt_shape (tests.test_kernel_browser.KernelTests.test_success_has_no_failure_sidecar_and_preserves_receipt_shape) ... ok
+test_typed_remote_timeout_is_private_diagnostic_not_observation (tests.test_kernel_browser.KernelTests.test_typed_remote_timeout_is_private_diagnostic_not_observation) ... ok
+test_unapproved_scenarios_and_arbitrary_code_rejected_before_execute (tests.test_kernel_browser.KernelTests.test_unapproved_scenarios_and_arbitrary_code_rejected_before_execute) ... ok
+test_valid_lifecycle_records_real_shapes_private_video_and_no_secret_urls (tests.test_kernel_browser.KernelTests.test_valid_lifecycle_records_real_shapes_private_video_and_no_secret_urls) ... ok
+test_wrong_identity_order_path_and_naive_time_are_not_browser_proof (tests.test_kernel_browser.KernelTests.test_wrong_identity_order_path_and_naive_time_are_not_browser_proof) ... ok
+
+======================================================================
+ERROR: test_registered_nonworkshop_fixture_is_rejected_before_adapter (tests.test_kernel_entrypoint.KernelEntrypointTests.test_registered_nonworkshop_fixture_is_rejected_before_adapter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_kernel_entrypoint.py", line 137, in test_registered_nonworkshop_fixture_is_rejected_before_adapter
+    db.execute("UPDATE runs SET fixture_id='another-store' WHERE id=?", (self.run["id"],))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: run contract is immutable
+
+----------------------------------------------------------------------
+Ran 30 tests in 1.278s
+
+FAILED (errors=1)

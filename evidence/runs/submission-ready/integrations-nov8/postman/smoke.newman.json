@@ -1,0 +1,967 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "9bcd3110-efac-4152-9dae-cfd461df3ebc",
+        "name": "Local smoke",
+        "description": {
+          "content": "No credentials or payment calls. A pass establishes only API/database health and the fixed merchant fixture.",
+          "type": "text/plain"
+        },
+        "item": [
+          {
+            "id": "219a03d5-4d80-4061-ac84-0edf1846dc9f",
+            "name": "API and database health",
+            "request": {
+              "url": {
+                "path": [
+                  "healthz"
+                ],
+                "host": [
+                  "{{base_url}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET",
+              "auth": {
+                "type": "noauth",
+                "noauth": []
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "9731d224-9004-4616-a82d-ae2e4868a7b1",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Health responds HTTP 200\", () => pm.response.to.have.status(200));",
+                    "const body = pm.response.json();",
+                    "pm.test(\"Application identifies CrashCart\", () => pm.expect(body.service).to.eql(\"crashcart\"));",
+                    "pm.test(\"API and actual database are healthy\", () => {pm.expect(body.status).to.eql(\"ok\"); pm.expect(body.database).to.eql(\"ok\");});"
+                  ],
+                  "_lastExecutionId": "627b0542-d15d-4501-8734-5a94ef7f6f66"
+                }
+              }
+            ]
+          },
+          {
+            "id": "a9199e4f-e34b-47e7-84b7-ccc53bb8fdfc",
+            "name": "Owned workshop fixture",
+            "request": {
+              "url": {
+                "path": [
+                  "api",
+                  "fixture"
+                ],
+                "host": [
+                  "{{base_url}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET",
+              "auth": {
+                "type": "noauth",
+                "noauth": []
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "37805d3e-de0e-4e8a-b6bb-4243ecd7ca7a",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Registered fixture responds HTTP 200\", () => pm.response.to.have.status(200));",
+                    "const body = pm.response.json();",
+                    "pm.test(\"Owned workshop fixture identity is fixed\", () => pm.expect(body.id).to.eql(\"workshop-v1\"));",
+                    "pm.test(\"Server owns exact 2900 USD price\", () => {pm.expect(body.amount_minor).to.eql(2900); pm.expect(body.currency).to.eql(\"USD\");});",
+                    "pm.test(\"Recovery deadline remains sixty seconds\", () => pm.expect(body.recovery_seconds).to.eql(60));"
+                  ],
+                  "_lastExecutionId": "a70fee5e-5d16-4d0b-a9f0-f4049068d62c"
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      },
+      {
+        "id": "6f5918d5-3723-445d-a054-39aba82e075a",
+        "name": "Observed sandbox evidence",
+        "description": {
+          "content": "Select an existing approved, captured and independently reconciled sandbox run. Missing token, run or proof makes this folder fail; no integration assertions are skipped. Requests are GET only.",
+          "type": "text/plain"
+        },
+        "item": [
+          {
+            "id": "d6e82878-6aee-4cf9-aea1-f313fda3fe3d",
+            "name": "Inspect independently observed paid run",
+            "request": {
+              "url": {
+                "path": [
+                  "api",
+                  "runs",
+                  "{{run_id}}"
+                ],
+                "host": [
+                  "{{base_url}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET",
+              "auth": {
+                "type": "bearer",
+                "bearer": [
+                  {
+                    "type": "string",
+                    "value": "{{operator_token}}",
+                    "key": "token"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "id": "1c8a0a81-8681-41ee-82be-bb6c4b8cfbad",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Explicit observed run ID is required\", () => pm.expect(pm.environment.get(\"run_id\"), \"Set run_id to an existing actual sandbox run\").to.match(/^run_[a-zA-Z0-9]+$/));",
+                    "pm.test(\"Operator token must be configured privately\", () => pm.expect(pm.environment.get(\"operator_token\"), \"Set operator_token in a private environment\").to.be.a(\"string\").and.not.eql(\"\"));",
+                    "pm.collectionVariables.unset(\"selected_purchase_id\");",
+                    "pm.collectionVariables.unset(\"selected_order_id\");",
+                    "pm.collectionVariables.unset(\"selected_capture_id\");"
+                  ]
+                }
+              },
+              {
+                "listen": "test",
+                "script": {
+                  "id": "3439a1fd-62df-482c-aa04-8f37d220cfd2",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Selected actual sandbox run responds HTTP 200\", () => pm.response.to.have.status(200));",
+                    "const body = pm.response.json();",
+                    "const run = body.run || {};",
+                    "const purchase = body.purchase || {};",
+                    "const merchant = body.merchant || {};",
+                    "pm.test(\"Stored run matches selection and actual sandbox mode\", () => {pm.expect(run.id).to.eql(pm.environment.get(\"run_id\")); pm.expect([\"LIVE_SANDBOX\", \"FRESH_SANDBOX\"]).to.include(run.mode);});",
+                    "pm.test(\"Payment was independently confirmed\", () => {pm.expect(purchase.payment_confirmed).to.eql(1); pm.expect(purchase.payment_state).to.eql(\"COMPLETED\"); pm.expect(purchase.order_id).to.be.a(\"string\").and.not.eql(\"\"); pm.expect(purchase.capture_id).to.be.a(\"string\").and.not.eql(\"\");});",
+                    "pm.test(\"Confirmed purchase is exactly 2900 USD\", () => {pm.expect(purchase.amount).to.eql(2900); pm.expect(purchase.currency).to.eql(\"USD\");});",
+                    "pm.test(\"Run, logical purchase and merchant identities correlate\", () => {pm.expect(purchase.run_id).to.eql(run.id); pm.expect(run.purchase_id).to.eql(purchase.id); pm.expect(merchant.purchase_id).to.eql(purchase.id); pm.expect(merchant.run_id).to.eql(run.id); pm.expect(merchant.order_id).to.eql(purchase.order_id);});",
+                    "const reads = (Array.isArray(body.events) ? body.events : []).filter(event => event.source === \"provider\" && event.event_type === \"independent_order_read\" && event.run_id === run.id && event.purchase_id === purchase.id && event.order_id === purchase.order_id && event.payload && event.payload.id === purchase.order_id);",
+                    "pm.test(\"Independent provider retrieval event exists\", () => pm.expect(reads.length, \"A stored top-level success label is insufficient\").to.be.above(0));",
+                    "const read = reads[reads.length - 1] || {};",
+                    "const order = read.payload || {};",
+                    "const units = order.purchase_units || [];",
+                    "const unit = units[0] || {};",
+                    "const captures = (unit.payments || {}).captures || [];",
+                    "const capture = captures[0] || {};",
+                    "pm.test(\"Retrieved completed order contains one correlated purchase unit\", () => {pm.expect(order.id).to.eql(purchase.order_id); pm.expect(order.status).to.eql(\"COMPLETED\"); pm.expect(order.intent).to.eql(\"CAPTURE\"); pm.expect(units).to.have.lengthOf(1); pm.expect(unit.reference_id).to.eql(purchase.id); pm.expect(unit.custom_id).to.eql(purchase.id); pm.expect(unit.amount).to.deep.eql({currency_code:\"USD\", value:\"29.00\"});});",
+                    "pm.test(\"Independent nested capture confirms exact amount and identity\", () => {pm.expect(captures).to.have.lengthOf(1); pm.expect(capture.id).to.eql(purchase.capture_id); pm.expect(capture.status).to.eql(\"COMPLETED\"); pm.expect(capture.amount).to.deep.eql({currency_code:\"USD\", value:\"29.00\"}); pm.expect(capture.update_time).to.eql(purchase.capture_completed_at); pm.expect(Number.isFinite(Date.parse(capture.update_time))).to.eql(true); pm.expect(Date.parse(read.observed_at)).to.be.at.least(Date.parse(capture.update_time));});",
+                    "pm.test(\"Logical capture journal matches the independently observed order\", () => {const operations = (body.operations || []).filter(operation => operation.semantic_key === \"order.capture\" && operation.purchase_id === purchase.id); pm.expect(operations).to.have.lengthOf(1); pm.expect(operations[0].request_id).to.be.a(\"string\").and.not.eql(\"\");});",
+                    "const expected = pm.environment.get(\"expected_ticket_count\");",
+                    "pm.test(\"An explicit expected ticket count is supplied\", () => pm.expect(expected).to.match(/^[0-9]+$/));",
+                    "pm.test(\"Actual merchant count matches the chosen experiment\", () => {pm.expect(merchant.known).to.eql(true); pm.expect(merchant.ticket_count).to.eql(Number(expected)); pm.expect(merchant.tickets).to.have.lengthOf(Number(expected)); for (const ticket of merchant.tickets) {pm.expect(ticket.purchase_id).to.eql(purchase.id); pm.expect(ticket.id).to.be.a(\"string\").and.not.eql(\"\");}});",
+                    "if (typeof purchase.id === \"string\" && typeof purchase.order_id === \"string\" && typeof purchase.capture_id === \"string\") {pm.collectionVariables.set(\"selected_purchase_id\", purchase.id); pm.collectionVariables.set(\"selected_order_id\", purchase.order_id); pm.collectionVariables.set(\"selected_capture_id\", purchase.capture_id);}"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "4af947b2-e950-46e4-affe-b5ffd7ca7ee9",
+            "name": "Read actual merchant entitlement",
+            "request": {
+              "url": {
+                "path": [
+                  "api",
+                  "merchant",
+                  "{{selected_purchase_id}}"
+                ],
+                "host": [
+                  "{{base_url}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "method": "GET",
+              "auth": {
+                "type": "bearer",
+                "bearer": [
+                  {
+                    "type": "string",
+                    "value": "{{operator_token}}",
+                    "key": "token"
+                  }
+                ]
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "dba9f2d6-b25d-4948-ad60-c18aea15ba65",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Read-only merchant adapter responds HTTP 200\", () => pm.response.to.have.status(200));",
+                    "const body = pm.response.json();",
+                    "pm.test(\"Merchant adapter retains selected run and payment correlation\", () => {pm.expect(body.known).to.eql(true); pm.expect(body.run_id).to.eql(pm.environment.get(\"run_id\")); pm.expect(body.purchase_id).to.eql(pm.collectionVariables.get(\"selected_purchase_id\")); pm.expect(body.order_id).to.eql(pm.collectionVariables.get(\"selected_order_id\"));});",
+                    "pm.test(\"Stored usable tickets match the explicit expected count\", () => {const expected = Number(pm.environment.get(\"expected_ticket_count\")); pm.expect(body.ticket_count).to.eql(expected); pm.expect(body.tickets).to.have.lengthOf(expected); for (const ticket of body.tickets) {pm.expect(ticket.purchase_id).to.eql(body.purchase_id); pm.expect(ticket.id).to.be.a(\"string\").and.not.eql(\"\");}});"
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      }
+    ],
+    "event": [],
+    "variable": [],
+    "info": {
+      "_postman_id": "c42c3675-44df-42dc-b2d8-7e40a2a99380",
+      "name": "CrashCart observed sandbox API verification",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": {
+        "content": "Read-only verification export. Local smoke proves health and fixture only. Observed sandbox evidence requires an explicitly selected real paid run and independent provider retrieval. It does not initiate a payment, replay a regression, or turn stored evidence into fresh sandbox execution. CC-050 remains unverified until this actual collection passes against approved real observations.",
+        "type": "text/plain"
+      }
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment",
+      "exporter": "CrashCart"
+    },
+    "id": "01185e8c-fd0f-48ef-af61-a0e8ae1dc92d",
+    "name": "CrashCart private runtime values (blank template)",
+    "values": [
+      {
+        "type": "any",
+        "value": "http://127.0.0.1:52221",
+        "key": "base_url"
+      },
+      {
+        "type": "any",
+        "value": "",
+        "key": "operator_token"
+      },
+      {
+        "type": "any",
+        "value": "",
+        "key": "run_id"
+      },
+      {
+        "type": "any",
+        "value": "1",
+        "key": "expected_ticket_count"
+      }
+    ]
+  },
+  "globals": {
+    "id": "ce841530-ed53-458f-b767-30f513fe6d4e",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 7,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 2,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 40.5,
+      "responseMin": 6,
+      "responseMax": 75,
+      "responseSd": 34.5,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1794118957302,
+      "completed": 1794118957474
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 2,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "7ed2eaf4-1860-4ddb-8ef2-9479ec1eb40c",
+          "httpRequestId": "c59d3545-d6d0-4cfd-866d-fbcdbbfe0bc5"
+        },
+        "item": {
+          "id": "219a03d5-4d80-4061-ac84-0edf1846dc9f",
+          "name": "API and database health",
+          "request": {
+            "url": {
+              "path": [
+                "healthz"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": {
+              "type": "noauth",
+              "noauth": []
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9731d224-9004-4616-a82d-ae2e4868a7b1",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Health responds HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Application identifies CrashCart\", () => pm.expect(body.service).to.eql(\"crashcart\"));",
+                  "pm.test(\"API and actual database are healthy\", () => {pm.expect(body.status).to.eql(\"ok\"); pm.expect(body.database).to.eql(\"ok\");});"
+                ],
+                "_lastExecutionId": "627b0542-d15d-4501-8734-5a94ef7f6f66"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "52221",
+            "path": [
+              "healthz"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "25e29461-3f9a-47ef-a5c5-bdce2f79523a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:52221",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET",
+          "auth": {
+            "type": "noauth",
+            "noauth": []
+          }
+        },
+        "response": {
+          "id": "89e05b2a-186c-4cf3-9fa4-031b620de765",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Server",
+              "value": "CrashCart/0.1 Python/3.13.15"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 08 Nov 2026 06:22:37 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "78"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              115,
+              116,
+              97,
+              116,
+              117,
+              115,
+              34,
+              58,
+              32,
+              34,
+              111,
+              107,
+              34,
+              44,
+              32,
+              34,
+              100,
+              97,
+              116,
+              97,
+              98,
+              97,
+              115,
+              101,
+              34,
+              58,
+              32,
+              34,
+              111,
+              107,
+              34,
+              44,
+              32,
+              34,
+              115,
+              101,
+              114,
+              118,
+              105,
+              99,
+              101,
+              34,
+              58,
+              32,
+              34,
+              99,
+              114,
+              97,
+              115,
+              104,
+              99,
+              97,
+              114,
+              116,
+              34,
+              44,
+              32,
+              34,
+              118,
+              101,
+              114,
+              115,
+              105,
+              111,
+              110,
+              34,
+              58,
+              32,
+              34,
+              48,
+              46,
+              49,
+              46,
+              48,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 75,
+          "responseSize": 78
+        },
+        "id": "219a03d5-4d80-4061-ac84-0edf1846dc9f",
+        "assertions": [
+          {
+            "assertion": "Health responds HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Application identifies CrashCart",
+            "skipped": false
+          },
+          {
+            "assertion": "API and actual database are healthy",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "0d59c653-1113-4863-9f12-642c98c729fb",
+          "length": 2,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "fd8d33b6-4e8b-47fd-a732-61f89442b063"
+        },
+        "item": {
+          "id": "a9199e4f-e34b-47e7-84b7-ccc53bb8fdfc",
+          "name": "Owned workshop fixture",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "fixture"
+              ],
+              "host": [
+                "{{base_url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": {
+              "type": "noauth",
+              "noauth": []
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "37805d3e-de0e-4e8a-b6bb-4243ecd7ca7a",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Registered fixture responds HTTP 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Owned workshop fixture identity is fixed\", () => pm.expect(body.id).to.eql(\"workshop-v1\"));",
+                  "pm.test(\"Server owns exact 2900 USD price\", () => {pm.expect(body.amount_minor).to.eql(2900); pm.expect(body.currency).to.eql(\"USD\");});",
+                  "pm.test(\"Recovery deadline remains sixty seconds\", () => pm.expect(body.recovery_seconds).to.eql(60));"
+                ],
+                "_lastExecutionId": "a70fee5e-5d16-4d0b-a9f0-f4049068d62c"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "52221",
+            "path": [
+              "api",
+              "fixture"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "e5d005d4-3c7b-41b5-9a00-1b02fb22677e",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:52221",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET",
+          "auth": {
+            "type": "noauth",
+            "noauth": []
+          }
+        },
+        "response": {
+          "id": "fe638923-73bf-4bdd-bf91-2f5f58c70c25",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Server",
+              "value": "CrashCart/0.1 Python/3.13.15"
+            },
+            {
+              "key": "Date",
+              "value": "Sun, 08 Nov 2026 06:22:37 GMT"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Content-Length",
+              "value": "193"
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-store"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "Referrer-Policy",
+              "value": "no-referrer"
+            },
+            {
+              "key": "Content-Security-Policy",
+              "value": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              32,
+              34,
+              119,
+              111,
+              114,
+              107,
+              115,
+              104,
+              111,
+              112,
+              45,
+              118,
+              49,
+              34,
+              44,
+              32,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              32,
+              34,
+              84,
+              104,
+              101,
+              32,
+              114,
+              101,
+              115,
+              105,
+              108,
+              105,
+              101,
+              110,
+              116,
+              32,
+              115,
+              121,
+              115,
+              116,
+              101,
+              109,
+              115,
+              32,
+              119,
+              111,
+              114,
+              107,
+              115,
+              104,
+              111,
+              112,
+              34,
+              44,
+              32,
+              34,
+              97,
+              109,
+              111,
+              117,
+              110,
+              116,
+              95,
+              109,
+              105,
+              110,
+              111,
+              114,
+              34,
+              58,
+              32,
+              50,
+              57,
+              48,
+              48,
+              44,
+              32,
+              34,
+              99,
+              117,
+              114,
+              114,
+              101,
+              110,
+              99,
+              121,
+              34,
+              58,
+              32,
+              34,
+              85,
+              83,
+              68,
+              34,
+              44,
+              32,
+              34,
+              114,
+              101,
+              99,
+              111,
+              118,
+              101,
+              114,
+              121,
+              95,
+              115,
+              101,
+              99,
+              111,
+              110,
+              100,
+              115,
+              34,
+              58,
+              32,
+              54,
+              48,
+              44,
+              32,
+              34,
+              112,
+              114,
+              111,
+              109,
+              105,
+              115,
+              101,
+              34,
+              58,
+              32,
+              34,
+              79,
+              110,
+              101,
+              32,
+              116,
+              105,
+              99,
+              107,
+              101,
+              116,
+              32,
+              119,
+              105,
+              116,
+              104,
+              105,
+              110,
+              32,
+              54,
+              48,
+              32,
+              115,
+              101,
+              99,
+              111,
+              110,
+              100,
+              115,
+              32,
+              111,
+              102,
+              32,
+              99,
+              111,
+              110,
+              102,
+              105,
+              114,
+              109,
+              101,
+              100,
+              32,
+              112,
+              97,
+              121,
+              109,
+              101,
+              110,
+              116,
+              46,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 6,
+          "responseSize": 193
+        },
+        "id": "a9199e4f-e34b-47e7-84b7-ccc53bb8fdfc",
+        "assertions": [
+          {
+            "assertion": "Registered fixture responds HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Owned workshop fixture identity is fixed",
+            "skipped": false
+          },
+          {
+            "assertion": "Server owns exact 2900 USD price",
+            "skipped": false
+          },
+          {
+            "assertion": "Recovery deadline remains sixty seconds",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 271
+    },
+    "failures": [],
+    "error": null
+  }
+}

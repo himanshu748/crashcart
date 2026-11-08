@@ -17,6 +17,8 @@ import time
 from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
+# Non-routable default for explicitly injected LOCAL_TEST transports only.
+# Real calls require an operator-pinned owned deployment in the environment.
 MODAL_ORIGIN = "https://your-owned-model.example.invalid"
 MODAL_MODEL = "deepseek-ai/DeepSeek-V4.1-Flash"
 MAX_REQUEST_BYTES, MAX_RESPONSE_BYTES, MAX_OUTPUT_TOKENS = 65536, 1048576, 1024
@@ -84,7 +86,7 @@ def configuration(environ, *, injected=False):
     provider = environ.get("CRASHCART_MODEL_PROVIDER", "openai")
     if provider not in {"openai", "modal"}:
         raise ModelTransportError("INVALID_MODEL_PROVIDER")
-    names = ("OPENAI_API_KEY", "OPENAI_MODEL") if provider == "openai" else ("MODAL_API_KEY", "MODAL_MODEL", "MODAL_BASE_URL")
+    names = ("OPENAI_API_KEY", "OPENAI_MODEL") if provider == "openai" else ("MODAL_API_KEY", "MODAL_MODEL", "MODAL_BASE_URL", "MODAL_ALLOWED_ORIGIN")
     missing = [name for name in names if not environ.get(name)]
     if missing and not injected:
         raise ModelTransportError("MISSING_CONFIGURATION:" + ",".join(missing))
@@ -97,10 +99,17 @@ def configuration(environ, *, injected=False):
     if not isinstance(key, str) or (not injected and (not 1 <= len(key) <= 8192 or any(not 33 <= ord(c) <= 126 for c in key))):
         raise ModelTransportError("INVALID_MODEL_CREDENTIAL")
     if provider == "modal":
-        # An exact owned origin prevents credentials being sent to arbitrary URLs.
-        if environ.get("MODAL_BASE_URL", MODAL_ORIGIN if injected else None) != MODAL_ORIGIN or model != MODAL_MODEL:
+        # The operator pins one owned Modal deployment, independently of the
+        # requested base URL. Neither value comes from model output or a web
+        # request. Require exact canonical equality before constructing a request.
+        origin = environ.get("MODAL_ALLOWED_ORIGIN", MODAL_ORIGIN if injected else None)
+        base = environ.get("MODAL_BASE_URL", MODAL_ORIGIN if injected else None)
+        local_placeholder = injected and origin == base == MODAL_ORIGIN
+        canonical_modal = (isinstance(origin, str) and re.fullmatch(
+            r"https://[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.modal\.run", origin))
+        if base != origin or model != MODAL_MODEL or not (local_placeholder or canonical_modal):
             raise ModelTransportError("INVALID_MODAL_ENDPOINT_OR_MODEL")
-        return ModelConfig(provider, "chat_completions", MODAL_ORIGIN, MODAL_ORIGIN + "/v1/chat/completions", model, key)
+        return ModelConfig(provider, "chat_completions", origin, origin + "/v1/chat/completions", model, key)
     return ModelConfig(provider, "responses", "https://api.openai.com", "https://api.openai.com/v1/responses", model, key)
 
 

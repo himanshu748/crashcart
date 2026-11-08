@@ -1,0 +1,9 @@
+{
+  "backend_unchanged_from_run_start": {
+    "crashcart/worker.py": "978d26fa1d848add7bb51eec14d072eead59017ac5bf12c18557d27295ab54d6",
+    "crashcart/server.py": "fcdd5761c829968776417067df9a2c461b61ec498d9782283d478e5207016736",
+    "web/index.html": "6eba231ba096cfdb06f984d1a595002e23a786fcd28a4dfbb101b01e10a2f8d7"
+  },
+  "web/app.js_after_reload": "c77274a819b346106a3edd5f2a81a0fd2bc0bb3504e025e0be2772345294b82f",
+  "scope": "Actual final renderer loaded after punctuation-only change; model/provider sequence ran via real local worker using injected replies. Lifecycle-only preceding UI archived as lifecycle-ui.js, not silently rebound."
+}

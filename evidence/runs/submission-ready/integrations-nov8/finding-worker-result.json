@@ -1,0 +1,46 @@
+{
+  "job": {
+    "id": "job_3b8b2d7efff54dfa9807e7baee461432",
+    "state": "COMPLETED",
+    "updated_at": "2026-11-08T06:40:45.555955Z",
+    "result": {
+      "status": "COMPLETED",
+      "reason": "Model investigation ended; deterministic verdict follows.",
+      "model_mode": "LOCAL_TEST",
+      "final_verdict": {
+        "deadline": "2026-11-08T06:40:05.874558Z",
+        "invariant_version": "ticket-v1",
+        "reason": "Confirmed payment has zero tickets beyond the fixed recovery deadline.",
+        "signature": "paid_without_ticket",
+        "source_ids": {
+          "capture_id": "LOCALCAPTURE",
+          "merchant_observation_id": "event_fff6722b98444fd3b684b1342bf0df42",
+          "order_id": "LOCALORDER",
+          "provider_observation_id": "event_834ce1caeb8d47c8996ad27abe49140b",
+          "purchase_id": "purchase_57fee091762f490e95bfba9906fe3895",
+          "run_id": "run_fe7f6cd8057d480f8f4a817f15ebaf00",
+          "ticket_ids": []
+        },
+        "verdict": "FAIL"
+      }
+    }
+  },
+  "model_calls": 3,
+  "provider_calls": 1,
+  "external_attempts": [],
+  "purchase": {
+    "id": "purchase_57fee091762f490e95bfba9906fe3895",
+    "run_id": "run_fe7f6cd8057d480f8f4a817f15ebaf00",
+    "order_id": "LOCALORDER",
+    "amount": 2900,
+    "currency": "USD",
+    "payment_state": "UNPAID",
+    "capture_id": null,
+    "capture_completed_at": null,
+    "payment_confirmed": 0,
+    "confirmation_json": null,
+    "created_at": "2026-11-08T06:40:35.869659Z",
+    "updated_at": "2026-11-08T06:40:35.872518Z",
+    "confirmation": null
+  }
+}

@@ -161,7 +161,8 @@ class Handler(BaseHTTPRequestHandler):
                     pass  # A browser seek/close must not trigger another response.
                 return
             purchase = self.store.purchase_for_run(run_id)
-            data = {"run": run, "purchase": purchase, "merchant": self.store.merchant_state(purchase["id"]), "events": self.store.get_events(run_id), "operations": self.store.get_operations(purchase["id"]),
+            from .worker import investigation_job
+            data = {"investigation_job": investigation_job(self.store, run_id), "run": run, "purchase": purchase, "merchant": self.store.merchant_state(purchase["id"]), "events": self.store.get_events(run_id), "operations": self.store.get_operations(purchase["id"]),
                     "recording": availability(self.store, run_id, ROOT / "var", allow=allow_recording)}
             if path.endswith("/regression.zip"):
                 from .replay import package_run, export_package
@@ -246,6 +247,19 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(200, service.reconcile(run_id))
             if action == "observation":
                 return self.send(201, service.observe_browser(run_id, body))
+            if action == "investigation-job":
+                if path != f"/api/runs/{run_id}/investigation-job" or body:
+                    raise ValueError("Background investigation accepts an empty request only")
+                run = self.store.get_run(run_id)
+                if run is None:
+                    return self.send(404, {"error": "Unknown run"})
+                if run["cancel_requested"]:
+                    return self.send(409, {"error": "Run is cancelled; evidence is read-only"})
+                if run["mode"] == "RECORDED_REPLAY":
+                    raise ValueError("Recorded replay cannot request a model investigation")
+                from .worker import INVESTIGATION_JOB_KEY, investigation_job
+                self.store.enqueue(run_id, "investigate", {}, semantic_key=INVESTIGATION_JOB_KEY)
+                return self.send(202, {"job": investigation_job(self.store, run_id)})
             if action == "investigate":
                 if body:
                     raise ValueError("Investigation accepts no supplied verdict or tool result")
@@ -256,6 +270,13 @@ class Handler(BaseHTTPRequestHandler):
             if not self.store.get_run(run_id):
                 return self.send(404, {"error": "Unknown run"})
             self.store.update_run(run_id, cancel_requested=1, state="cancelled")
+            # Stop only this new job kind. A late worker cannot publish over
+            # cancellation because complete_job still requires RUNNING + fence.
+            from .store import canonical, utcnow
+            with self.store.connect(write=True) as db:
+                db.execute("""UPDATE jobs SET state='CANCELLED',result_json=?,lease_until=NULL,updated_at=?
+                    WHERE run_id=? AND kind='investigate' AND state IN ('PENDING','RUNNING')""",
+                    (canonical({"status": "CANCELLED", "reason": "CANCELLED"}), utcnow(), run_id))
             self.store.record_event(run_id, "operator", "cancelled", {})
             return self.send(200, self.store.get_run(run_id))
         return self.send(404, {"error": "Not found"})

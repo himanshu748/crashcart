@@ -1,0 +1,167 @@
+{
+  "executed_at": "2026-11-08T06:22:40.422905+00:00",
+  "runner": "newman",
+  "runner_version": "6.2.1",
+  "mode": "LOCAL_TEST",
+  "source_hashes": {
+    "exports/crashcart.postman_collection.json": "e5552ed39c20df6330f8eb9719e9394efa1c157417868eece6e6b032f0cd213f",
+    "exports/crashcart.postman_environment.json": "3a64f78f8f2c8bbabd54d383524cebdaa0d5c653a8c526d4321d6642ab331282",
+    "scripts/verify_postman.py": "420268490b0c8f36814211dc1e38cff3e3a1d4a6f78eff1173ba55c773eb846b",
+    "crashcart/server.py": "fcdd5761c829968776417067df9a2c461b61ec498d9782283d478e5207016736",
+    "crashcart/store.py": "86c2a1915e5b68ef9934db188bb6eae431732bb6c2e07b7e726b605da00b20c4",
+    "migrations/001_initial.sql": "776c928b0b07da50b3773a9c2feae8dbe20670d553ebbe643683802767f74714"
+  },
+  "source_changed_during_run": [],
+  "smoke_pass": true,
+  "missing_proof_rejected": true,
+  "runs": [
+    {
+      "name": "smoke",
+      "folder": "Local smoke",
+      "command": [
+        "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/var/judge-review-nov8/newman/node_modules/.bin/newman",
+        "run",
+        "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/exports/crashcart.postman_collection.json",
+        "--environment",
+        "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/exports/crashcart.postman_environment.json",
+        "--env-var",
+        "base_url=http://127.0.0.1:52221",
+        "--folder",
+        "Local smoke",
+        "--timeout-request",
+        "5000",
+        "--reporters",
+        "cli,json",
+        "--reporter-json-export",
+        "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/evidence/runs/submission-ready/integrations-nov8/postman/smoke.newman.json",
+        "--color",
+        "off"
+      ],
+      "expected_exit": 0,
+      "observed_exit": 0,
+      "stats": {
+        "iterations": {
+          "total": 1,
+          "pending": 0,
+          "failed": 0
+        },
+        "items": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "scripts": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequests": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "requests": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "tests": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "assertions": {
+          "total": 7,
+          "pending": 0,
+          "failed": 0
+        },
+        "testScripts": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequestScripts": {
+          "total": 0,
+          "pending": 0,
+          "failed": 0
+        }
+      }
+    },
+    {
+      "name": "missing-proof-negative",
+      "folder": "Observed sandbox evidence",
+      "command": [
+        "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/var/judge-review-nov8/newman/node_modules/.bin/newman",
+        "run",
+        "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/exports/crashcart.postman_collection.json",
+        "--environment",
+        "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/exports/crashcart.postman_environment.json",
+        "--env-var",
+        "base_url=http://127.0.0.1:52221",
+        "--folder",
+        "Observed sandbox evidence",
+        "--timeout-request",
+        "5000",
+        "--reporters",
+        "cli,json",
+        "--reporter-json-export",
+        "/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/evidence/runs/submission-ready/integrations-nov8/postman/missing-proof-negative.newman.json",
+        "--color",
+        "off"
+      ],
+      "expected_exit": 1,
+      "observed_exit": 1,
+      "stats": {
+        "iterations": {
+          "total": 1,
+          "pending": 0,
+          "failed": 0
+        },
+        "items": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "scripts": {
+          "total": 3,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequests": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "requests": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "tests": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "assertions": {
+          "total": 16,
+          "pending": 0,
+          "failed": 14
+        },
+        "testScripts": {
+          "total": 2,
+          "pending": 0,
+          "failed": 0
+        },
+        "prerequestScripts": {
+          "total": 1,
+          "pending": 0,
+          "failed": 0
+        }
+      }
+    }
+  ],
+  "sandbox_execution": "NOT RUN",
+  "CC-050": "BLOCKED",
+  "blocker": "No approved actual paid sandbox run with independent provider evidence; CC-010 and executable regression export CC-035 remain prerequisites.",
+  "limitations": "Smoke establishes local API/database health and fixture only. Negative execution establishes missing live proof fails instead of being skipped."
+}

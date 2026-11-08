@@ -1,0 +1,31 @@
+✔ queued and running never claim finished analysis or successful delivery (3.30925ms)
+✔ failed, cancelled and missing final results retain uncertainty (0.432958ms)
+✔ local simulated analysis stays labelled and never decides payment (0.323167ms)
+✔ background lifecycle never leaves a stale queue acknowledgement: false (1.678708ms)
+✔ background lifecycle never leaves a stale queue acknowledgement: true (1.388916ms)
+✔ finding is presented only for the selected case: null (1.590167ms)
+✔ finding is presented only for the selected case: run_id (0.773833ms)
+✔ finding is presented only for the selected case: purchase_id (0.969416ms)
+✔ finding is presented only for the selected case: order_id (0.739667ms)
+✔ Unavailable response explains recovery without provider claims (49.910583ms)
+✔ Malformed JSON does not expose parser jargon (4.059459ms)
+✔ Disconnected network leaves an understandable safe state (1.58775ms)
+✔ Invalid comparison never displays a successful result (2.19375ms)
+✔ Partially parsed case is discarded before walkthrough reuse (2.541ms)
+✔ valid response retains identity and structured API rejection retains code (47.838542ms)
+✔ HTML failed POST is dispatched once with unchanged payload and a readable error (2.120208ms)
+✔ empty failed POST is dispatched once with unchanged payload and a readable error (1.493584ms)
+✔ malformed failed POST is dispatched once with unchanged payload and a readable error (1.035334ms)
+✔ null failed POST is dispatched once with unchanged payload and a readable error (1.823333ms)
+✔ array failed POST is dispatched once with unchanged payload and a readable error (0.924458ms)
+✔ string failed POST is dispatched once with unchanged payload and a readable error (1.27725ms)
+✔ connection rejection has one dispatch and no invented result (1.735833ms)
+✔ startup rejection reaches the visible login message and connection details (6.217667ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 356.459958
