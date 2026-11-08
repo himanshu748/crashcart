@@ -2,6 +2,10 @@
 
 Updated 6 November 2026. This translates the agreed design direction into observable checks. The [CC design amendment](DESIGN_CONTRACT_UPDATE.md) now updates the corresponding requirement descriptions and strengthens four open acceptance conditions; it adds no feature or new CC ID. **Original acceptance remains 47/60.** DV identifiers below organize UI verification only and are not additional CC requirements.
 
+## Recorded AI product story — 8 November 2026
+
+The keyless source now adds a separate, dated historical AI sequence. It does not run inference or reuse that sequence as the faulty-checkout case. A local real browser exercised all three stages, exact reasoning disclosure, Enter/Space and focus, in-page reduced motion, desktop/390/320 layouts and absent-history fallback while the checkout comparison remained usable. 26 sampled visible text elements exceeded 4.5:1 (minimum 5.165). [Current source-bound proof](../evidence/runs/submission-ready/ai-story-nov8.json). This rechecks the affected local landing/story scopes only; no hosted, real-provider, OS-motion, VoiceOver or original CC check is newly accepted. Earlier broader visual/copy records remain historical outside this scoped recheck.
+
 ## Background assistant — 8 November 2026
 
 The configured workspace now queues one durable investigation per case. Actual local browser checks exercised queued/reload/completed/cancelled/failed states with explicit simulated inputs; the final-source queue/worker/poll pass retained its case identity with no provider calls. Independent review caught a stale acknowledgement, preserved in failing regression output and fixed. Phone status text is visible below the case heading. [Bounded local proof](../evidence/runs/submission-ready/integrations-nov8.json). This does not reaccept the broader full operator/error matrix, sponsor runtime or original CC-048. DV-13’s previous synchronous-flow result remains historical; full acceptance is reopened for the changed asynchronous journey.

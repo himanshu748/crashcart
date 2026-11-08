@@ -4,6 +4,8 @@ CrashCart uses AI to decide which evidence to inspect next. Deterministic code d
 
 This page describes an **actual historical model investigation performed on 26 October 2026**, using DeepSeek-V4.1-Flash served by Modal. It is a different case from the defective checkout shown in the public replay. The [public judge mode](https://himanshu748.github.io/crashcart/) makes no model calls and does not reproduce this AI execution.
 
+The current local/keyless source includes an **AI at work** section that presents these three recorded steps inside the product. It uses a pinned, whitelisted projection of the public summary below; selecting a step makes no model or provider request. The public hosted page may still be an older release while publication is blocked.
+
 ## What actually ran
 
 The authenticated product investigation endpoint made three actual model calls. The model selected a provider read, then a merchant read, then finished. Its provider read made one real PayPal Sandbox order GET, with OAuth authentication, for an existing payment. Merchant observations came from a controlled copy of the historical store records. No new checkout or payment occurred during this investigation.

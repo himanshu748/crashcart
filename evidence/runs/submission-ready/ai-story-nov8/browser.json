@@ -1,0 +1,148 @@
+{
+  "stageOne": {
+    "known": "No payment or ticket observations had been collected yet.",
+    "next": "Read the payment record directly from PayPal.",
+    "question": "Was the payment completed?",
+    "reasoningClosed": true,
+    "recordedLabel": "Earlier recorded case · 26 October 2026 · a separate order from the comparison above"
+  },
+  "stageTwo": {
+    "focus": "1",
+    "known": "PayPal had confirmed the test payment.",
+    "next": "Look for the ticket linked to that payment.",
+    "outline": "solid",
+    "question": "Did the customer get their ticket?"
+  },
+  "stageThree": {
+    "conclusion": "One matching ticket, delivered 3.42 seconds after payment. The deterministic checker confirmed the promise was kept.",
+    "known": "PayPal had confirmed the test payment. The store had one ticket linked to that payment.",
+    "next": "Compare the ticket time with the delivery promise.",
+    "selected": [
+      "false",
+      "false",
+      "true"
+    ]
+  },
+  "quotedReasoning": "Provider capture is confirmed complete; merchant ticket delivery records have not yet been observed, so fulfillment timing cannot be evaluated.",
+  "aiMotion": {
+    "animation": "none",
+    "transition": "0s"
+  },
+  "phoneAi": {
+    "question": "Did delivery meet the promise?",
+    "result": "One matching ticket, delivered 3.42 seconds after payment. The deterministic checker confirmed the promise was kept.",
+    "scrollWidth": 390,
+    "width": 390
+  },
+  "narrowAi": {
+    "scrollWidth": 320,
+    "width": 320
+  },
+  "aiContrast": [
+    {
+      "contrast": 11.5567199122498,
+      "text": "Check the payment.\nThen check the promise."
+    },
+    {
+      "contrast": 8.619692382175511,
+      "text": "In an earlier investigation, DeepSeek used Pa"
+    },
+    {
+      "contrast": 8.549638543520688,
+      "text": "Earlier recorded case · 26 October 2026 · a s"
+    },
+    {
+      "contrast": 7.8896812843587645,
+      "text": "01"
+    },
+    {
+      "contrast": 11.104640900443991,
+      "text": "Confirm the payment\nPayPal record"
+    },
+    {
+      "contrast": 8.619692382175511,
+      "text": "PayPal record"
+    },
+    {
+      "contrast": 11.104640900443991,
+      "text": "↗"
+    },
+    {
+      "contrast": 7.8896812843587645,
+      "text": "02"
+    },
+    {
+      "contrast": 11.104640900443991,
+      "text": "Find the ticket\nStore record"
+    },
+    {
+      "contrast": 8.619692382175511,
+      "text": "Store record"
+    },
+    {
+      "contrast": 11.104640900443991,
+      "text": "↗"
+    },
+    {
+      "contrast": 5.165211258670912,
+      "text": "03"
+    },
+    {
+      "contrast": 11.5567199122498,
+      "text": "Check the promise\nPayment + fulfilment"
+    },
+    {
+      "contrast": 5.839976382591368,
+      "text": "Payment + fulfilment"
+    },
+    {
+      "contrast": 11.5567199122498,
+      "text": "↗"
+    },
+    {
+      "contrast": 5.34064722552078,
+      "text": "STEP 3 OF 3"
+    },
+    {
+      "contrast": 11.5567199122498,
+      "text": "Did delivery meet the promise?"
+    },
+    {
+      "contrast": 5.34064722552078,
+      "text": "WHAT WAS KNOWN"
+    },
+    {
+      "contrast": 6.245679013384037,
+      "text": "PayPal had confirmed the test payment. The st"
+    },
+    {
+      "contrast": 5.34064722552078,
+      "text": "NEXT STEP"
+    },
+    {
+      "contrast": 6.245679013384037,
+      "text": "Compare the ticket time with the delivery pro"
+    },
+    {
+      "contrast": 11.5567199122498,
+      "text": "Read the recorded reasoning"
+    },
+    {
+      "contrast": 5.34064722552078,
+      "text": "WHY THIS MATTERS"
+    },
+    {
+      "contrast": 11.5567199122498,
+      "text": "One matching ticket, delivered 3.42 seconds a"
+    },
+    {
+      "contrast": 8.619692382175511,
+      "text": "DeepSeek on Modal · existing PayPal Sandbox p"
+    },
+    {
+      "contrast": 8.619692382175511,
+      "text": "About this recorded case ↗"
+    }
+  ],
+  "scope": "Local recorded page; no new provider/model calls; in-product reduced motion only, not OS/VoiceOver certification"
+}

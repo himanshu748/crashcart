@@ -14,7 +14,8 @@ import unittest
 from unittest.mock import patch
 import zipfile
 
-from crashcart.judge import INPUT, INPUT_SHA256, export_site, make_server, prepare_review
+from crashcart.judge import (AI_HISTORY, AI_HISTORY_SHA256, INPUT, INPUT_SHA256,
+                            export_site, historical_ai, make_server, prepare_review)
 from crashcart.replay import ReplayError, verify_manifest
 
 
@@ -64,6 +65,81 @@ class JudgeReviewTests(unittest.TestCase):
             self.assertNotIn(b'DO_NOT_EXPOSE_',content)
         self.assertEqual(15,len(self.data['original_records']))
 
+    def test_historical_ai_is_an_explicit_separate_recorded_case(self):
+        summary = json.loads(AI_HISTORY.read_bytes())
+        ai = self.data['historical_ai']
+        self.assertEqual('RECORDED_AI_INVESTIGATION', ai['mode'])
+        self.assertFalse(ai['fresh_execution'])
+        self.assertFalse(ai['same_case_as_public_faulty_replay'])
+        self.assertEqual(AI_HISTORY_SHA256, hashlib.sha256(AI_HISTORY.read_bytes()).hexdigest())
+        self.assertEqual(AI_HISTORY_SHA256, ai['source_summary_sha256'])
+        for key in ('provider', 'model', 'investigation_started_at', 'investigation_finished_at',
+                    'historical_capture_date', 'actual_operations', 'deterministic_result'):
+            self.assertEqual(summary[key], ai[key], key)
+        self.assertEqual(['read_provider', 'read_merchant', 'finish'], [step['action'] for step in ai['trace']])
+        self.assertEqual([0, 1, 2], [len(step['evidence_categories_before_response']) for step in ai['trace']])
+        self.assertEqual(3, ai['actual_operations']['model_calls'])
+        self.assertEqual(1, ai['actual_operations']['paypal_existing_order_gets'])
+        self.assertEqual(0, ai['actual_operations']['new_payments'])
+        self.assertIn('different historical case', ai['limits'][0])
+        self.assertIn('private provider receipts', ai['limits'][-1])
+        for original, projected in zip(summary['trace'], ai['trace']):
+            expected = {key: value for key, value in original.items() if key != 'wire_response_sha256'}
+            self.assertEqual(expected, projected)
+
+    def test_historical_ai_projection_has_no_private_bindings_or_unknown_fields(self):
+        ai = self.data['historical_ai']
+        self.assertEqual({'mode', 'fresh_execution', 'same_case_as_public_faulty_replay', 'provider',
+                          'model', 'investigation_started_at', 'investigation_finished_at',
+                          'historical_capture_date', 'actual_operations', 'trace',
+                          'deterministic_result', 'source_summary_sha256', 'limits'}, set(ai))
+        encoded = json.dumps(ai)
+        for binding in json.loads(AI_HISTORY.read_bytes())['private_source_bindings']:
+            self.assertNotIn(binding['path'], encoded)
+            self.assertNotIn(binding['sha256'], encoded)
+        for forbidden in ('private_source_bindings', 'wire_response_sha256', 'endpoint',
+                          'capture_id', 'order_id', 'purchase_id', 'response_id', 'historical_verification'):
+            self.assertNotIn('"' + forbidden + '"', encoded)
+
+    def test_changed_historical_ai_source_prevents_publication(self):
+        with tempfile.TemporaryDirectory() as folder:
+            changed = Path(folder) / 'ai.json'
+            changed.write_bytes(AI_HISTORY.read_bytes() + b' ')
+            with self.assertRaisesRegex(ReplayError, 'historical AI summary changed'):
+                historical_ai(changed)
+            with patch('crashcart.judge.AI_HISTORY', changed), \
+                    patch.object(socket.socket, 'connect', side_effect=AssertionError('Network forbidden')):
+                with self.assertRaisesRegex(ReplayError, 'historical AI summary changed'):
+                    prepare_review()
+
+    def test_historical_ai_scope_and_sequence_are_validated_independently_of_hash(self):
+        original = json.loads(AI_HISTORY.read_bytes())
+        mutations = [
+            lambda value: value.update(new_verification_claim=True),
+            lambda value: value.update(public_judge_mode_calls_model=True),
+            lambda value: value.update(same_case_as_public_faulty_replay=True),
+            lambda value: value['actual_operations'].update(new_payments=1),
+            lambda value: value['actual_operations'].update(paypal_existing_order_gets=True),
+            lambda value: value['trace'].reverse(),
+            lambda value: value['trace'][0].update(step=True),
+            lambda value: value['trace'][0].update(evidence_categories_before_response=['future evidence']),
+            lambda value: value['trace'][1].pop('exact_model_excerpt'),
+            lambda value: value.update(investigation_started_at='2026-10-26T14:16:46'),
+            lambda value: value.update(investigation_finished_at='2026-10-25T14:17:01Z'),
+        ]
+        with tempfile.TemporaryDirectory() as folder:
+            source = Path(folder) / 'ai.json'
+            for mutate in mutations:
+                value = json.loads(json.dumps(original))
+                mutate(value)
+                raw = json.dumps(value).encode()
+                source.write_bytes(raw)
+                # Bind this synthetic byte sequence solely to exercise semantic
+                # validation; it is not relabelled as historical evidence.
+                with self.subTest(mutation=mutate), patch('crashcart.judge.AI_HISTORY_SHA256', hashlib.sha256(raw).hexdigest()):
+                    with self.assertRaisesRegex(ReplayError, 'unsupported scope or shape'):
+                        historical_ai(source)
+
     def test_downloaded_zip_is_executable_with_expected_pair(self):
         with tempfile.TemporaryDirectory() as folder:
             with zipfile.ZipFile(io.BytesIO(self.files['downloads/replay.zip'][1])) as archive:
@@ -103,6 +179,7 @@ class JudgeReviewTests(unittest.TestCase):
                 receipt=export_site(target)
             data=json.loads((target/'data.json').read_text())
             self.assertEqual('site build',data['computed_when'])
+            self.assertEqual(self.data['historical_ai'], data['historical_ai'])
             self.assertEqual('PASS',data['cases']['healthy']['receipt']['verdict'])
             self.assertEqual('FAIL',data['cases']['defective']['receipt']['verdict'])
             self.assertEqual(set(self.files),set(receipt['sha256']))

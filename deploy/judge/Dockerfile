@@ -4,6 +4,7 @@ COPY crashcart/ crashcart/
 COPY migrations/ migrations/
 COPY web/judge/ web/judge/
 COPY evidence/runs/paypal-live/early-response-loss-input.json evidence/runs/paypal-live/early-response-loss-input.json
+COPY evidence/runs/submission-ready/ai-historical-summary.json evidence/runs/submission-ready/ai-historical-summary.json
 COPY LICENSE LICENSE
 RUN python -m crashcart.judge --export-site /site
 

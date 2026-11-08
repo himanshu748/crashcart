@@ -50,6 +50,35 @@ function renderTimeline(){
   });
   byId("timeline").replaceChildren(...entries);
 }
+let aiHistory=null;
+function historicalAiStage(history,index){
+  const actions=['read_provider','read_merchant','finish'];
+  if(!history||history.mode!=='RECORDED_AI_INVESTIGATION'||history.fresh_execution!==false||history.same_case_as_public_faulty_replay!==false||history.provider!=='Modal'||history.model!=='deepseek-ai/DeepSeek-V4.1-Flash'||!Number.isInteger(index)||index<0||index>2)return null;
+  if(typeof history.investigation_started_at!=='string'||!history.investigation_started_at.startsWith('2026-10-26T')||history.historical_capture_date!=='2026-10-23')return null;
+  const counts=history.actual_operations,result=history.deterministic_result;
+  if(!counts||counts.model_calls!==3||counts.paypal_existing_order_gets!==1||counts.new_payments!==0||!result||result.verdict!=='PASS'||result.signature!=='ticket_delivered_once_on_time'||!Number.isFinite(result.delivery_latency_seconds)||result.delivery_latency_seconds<0||result.delivery_latency_seconds>60)return null;
+  if(!Array.isArray(history.trace)||history.trace.length!==3||!history.trace.every((step,i)=>step&&step.step===i+1&&step.action===actions[i]&&Array.isArray(step.evidence_categories_before_response)&&step.evidence_categories_before_response.every(value=>typeof value==='string'&&value.length<300)&&typeof(step.exact_model_excerpt||step.reasoning_summary)==='string'&&(step.exact_model_excerpt||step.reasoning_summary).length<=1000))return null;
+  const step=history.trace[index];
+  const known=step.evidence_categories_before_response;
+  const observations=new Map([['completed PayPal Sandbox capture','PayPal had confirmed the test payment.'],['matching single delivered ticket','The store had one ticket linked to that payment.']]);
+  if(known.some(value=>!observations.has(value)))return null;
+  return {count:`STEP ${index+1} OF 3`,question:['Was the payment completed?','Did the customer get their ticket?','Did delivery meet the promise?'][index],known:known.length?known.map(value=>observations.get(value)).join(' '):'No payment or ticket observations had been collected yet.',reasoning:step.exact_model_excerpt||step.reasoning_summary,next:['Read the payment record directly from PayPal.','Look for the ticket linked to that payment.','Compare the ticket time with the delivery promise.'][index],takeaway:index===0?'Check the payment provider before drawing a conclusion.':index===1?'A successful payment alone cannot tell you whether the order was fulfilled.':`One matching ticket, delivered ${result.delivery_latency_seconds.toFixed(2)} seconds after payment. The deterministic checker confirmed the promise was kept.`};
+}
+function showAiStep(index){
+  const stage=historicalAiStage(aiHistory,index);
+  if(!stage)return;
+  document.querySelectorAll('[data-ai-step]').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.aiStep)===index)));
+  ['count','question','known','reasoning','next','takeaway'].forEach(key=>byId(key==='count'?'ai-step-count':'ai-'+key).textContent=stage[key]);
+  const copy=byId('ai-answer-copy');copy.classList.remove('enter');void copy.offsetWidth;copy.classList.add('enter');
+}
+function initialiseAiHistory(history){
+  if(!historicalAiStage(history,0))return;
+  aiHistory=history;
+  byId('ai-unavailable').hidden=true;byId('ai-story-panel').hidden=false;
+  showAiStep(0);
+}
+byId('ai-answer-copy').addEventListener('animationend',()=>byId('ai-answer-copy').classList.remove('enter'));
+document.querySelectorAll('[data-ai-step]').forEach(button=>button.addEventListener('click',()=>showAiStep(Number(button.dataset.aiStep))));
 function showStory(stage){
   const descriptions={
     payment:["01 / 03","Payment confirmed","The payment went through.","PayPal’s saved record confirms the $29 payment. That tells us the money arrived—not whether the customer got their ticket."],
@@ -80,7 +109,7 @@ fetch("data.json",{cache:"no-store"}).then(response=>{if(!response.ok)throw new 
   const healthy=data.cases.healthy;
   byId("healthy-time").textContent=duration(seconds(healthy.merchant.tickets[0].created_at,healthy.purchase.capture_completed_at));
   byId("defective-finding").textContent="Confirmed payment, zero tickets beyond the deadline. CrashCart marks the customer promise as broken.";
-  renderCase();byId("load-state").hidden=true;byId("review").hidden=false;
+  renderCase();initialiseAiHistory(data.historical_ai);byId("load-state").hidden=true;byId("review").hidden=false;
   // The launch URL may target the finished case before its records arrive.
   const anchor=byId(window.location.hash.slice(1));
   if(anchor)anchor.scrollIntoView({block:"start",behavior:"auto"});

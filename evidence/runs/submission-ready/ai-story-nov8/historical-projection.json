@@ -1,0 +1,55 @@
+{
+  "mode": "RECORDED_AI_INVESTIGATION",
+  "fresh_execution": false,
+  "same_case_as_public_faulty_replay": false,
+  "provider": "Modal",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "investigation_started_at": "2026-10-26T14:16:46.363214Z",
+  "investigation_finished_at": "2026-10-26T14:17:01.972868Z",
+  "historical_capture_date": "2026-10-23",
+  "actual_operations": {
+    "model_calls": 3,
+    "paypal_oauth_requests": 1,
+    "paypal_existing_order_gets": 1,
+    "new_payments": 0,
+    "kernel_sessions": 0,
+    "studio_queries": 0
+  },
+  "trace": [
+    {
+      "step": 1,
+      "action": "read_provider",
+      "evidence_categories_before_response": [],
+      "reasoning_summary": "Payment confirmation and ticket timing remain unobserved."
+    },
+    {
+      "step": 2,
+      "action": "read_merchant",
+      "evidence_categories_before_response": [
+        "completed PayPal Sandbox capture"
+      ],
+      "exact_model_excerpt": "Provider capture is confirmed complete; merchant ticket delivery records have not yet been observed, so fulfillment timing cannot be evaluated."
+    },
+    {
+      "step": 3,
+      "action": "finish",
+      "evidence_categories_before_response": [
+        "completed PayPal Sandbox capture",
+        "matching single delivered ticket"
+      ],
+      "reasoning_summary": "Delivery latency is approximately 3.42 seconds and both observations support the promise."
+    }
+  ],
+  "deterministic_result": {
+    "verdict": "PASS",
+    "signature": "ticket_delivered_once_on_time",
+    "delivery_latency_seconds": 3.417739
+  },
+  "source_summary_sha256": "152c1c77dfcc219b32d7ae36c06ad7b39a35656e95f54f87a6691fe95010c8fb",
+  "limits": [
+    "An earlier recorded AI investigation of a different historical case, not the faulty checkout replay.",
+    "The historical model read one existing PayPal Sandbox order and copied merchant records; no new checkout occurred.",
+    "Viewing these saved steps makes no model or provider request and creates no payment.",
+    "The public summary and source hash do not independently authenticate the underlying private provider receipts."
+  ]
+}

@@ -22,6 +22,8 @@ from .store import Store
 ROOT = Path(__file__).resolve().parents[1]
 INPUT = ROOT / "evidence/runs/paypal-live/early-response-loss-input.json"
 INPUT_SHA256 = "07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288"
+AI_HISTORY = ROOT / "evidence/runs/submission-ready/ai-historical-summary.json"
+AI_HISTORY_SHA256 = "152c1c77dfcc219b32d7ae36c06ad7b39a35656e95f54f87a6691fe95010c8fb"
 ASSETS = ("index.html", "app.js", "style.css")
 
 
@@ -48,12 +50,90 @@ def licensed_replay(archive, licence):
     return output.getvalue()
 
 
+def historical_ai(source_path=None):
+    """Project the pinned public historical summary; never replay or infer AI.
+
+    The source retains private-artifact provenance paths. They are not needed by
+    the product view, so only its explicitly allowed presentation fields leave
+    this boundary. A hash is a source binding, not provider authentication.
+    """
+    raw = Path(AI_HISTORY if source_path is None else source_path).read_bytes()
+    if hashlib.sha256(raw).hexdigest() != AI_HISTORY_SHA256:
+        raise ReplayError("The reviewed historical AI summary changed; refusing to publish a different investigation")
+    try:
+        source = json.loads(raw)
+        operations = source["actual_operations"]
+        trace = source["trace"]
+        result = source["deterministic_result"]
+        expected_operations = {"model_calls": 3, "paypal_oauth_requests": 1,
+                               "paypal_existing_order_gets": 1, "new_payments": 0,
+                               "kernel_sessions": 0, "studio_queries": 0}
+        if (source["kind"] != "sanitized-historical-ai-evidence-summary-v1"
+                or source["new_verification_claim"] is not False
+                or source["public_judge_mode_calls_model"] is not False
+                or source["same_case_as_public_faulty_replay"] is not False
+                or source["provider"] != "Modal"
+                or source["model"] != "deepseek-ai/DeepSeek-V4.1-Flash"
+                or source["historical_capture_date"] != "2026-10-23"
+                or operations != expected_operations
+                or any(type(value) is not int for value in operations.values())
+                or not isinstance(trace, list) or len(trace) != 3
+                or result != {"verdict": "PASS", "signature": "ticket_delivered_once_on_time",
+                              "delivery_latency_seconds": 3.417739}):
+            raise ValueError("historical scope")
+        for key in ("investigation_started_at", "investigation_finished_at"):
+            value = source[key]
+            if not isinstance(value, str) or not value.startswith("2026-10-26T"):
+                raise ValueError("historical date")
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            if parsed.tzinfo is None or parsed.utcoffset() is None:
+                raise ValueError("historical timezone")
+        if (datetime.fromisoformat(source["investigation_finished_at"].replace("Z", "+00:00"))
+                < datetime.fromisoformat(source["investigation_started_at"].replace("Z", "+00:00"))):
+            raise ValueError("historical sequence")
+        projected_trace = []
+        for index, action in enumerate(("read_provider", "read_merchant", "finish"), 1):
+            step = trace[index - 1]
+            evidence = step["evidence_categories_before_response"]
+            if (type(step["step"]) is not int or step["step"] != index
+                    or step["action"] != action or not isinstance(evidence, list)
+                    or len(evidence) != index - 1
+                    or any(not isinstance(value, str) or not 1 <= len(value) <= 200 for value in evidence)):
+                raise ValueError("historical trace")
+            projected = {"step": index, "action": action,
+                         "evidence_categories_before_response": list(evidence)}
+            for key in ("reasoning_summary", "exact_model_excerpt"):
+                if key in step:
+                    value = step[key]
+                    if not isinstance(value, str) or not 1 <= len(value) <= 1000:
+                        raise ValueError("historical text")
+                    projected[key] = value
+            if not any(key in projected for key in ("reasoning_summary", "exact_model_excerpt")):
+                raise ValueError("missing historical explanation")
+            projected_trace.append(projected)
+    except (KeyError, TypeError, ValueError):
+        raise ReplayError("The historical AI summary has an unsupported scope or shape") from None
+    return {"mode": "RECORDED_AI_INVESTIGATION", "fresh_execution": False,
+            "same_case_as_public_faulty_replay": False,
+            "provider": source["provider"], "model": source["model"],
+            "investigation_started_at": source["investigation_started_at"],
+            "investigation_finished_at": source["investigation_finished_at"],
+            "historical_capture_date": source["historical_capture_date"],
+            "actual_operations": dict(operations), "trace": projected_trace,
+            "deterministic_result": dict(result), "source_summary_sha256": AI_HISTORY_SHA256,
+            "limits": ["An earlier recorded AI investigation of a different historical case, not the faulty checkout replay.",
+                       "The historical model read one existing PayPal Sandbox order and copied merchant records; no new checkout occurred.",
+                       "Viewing these saved steps makes no model or provider request and creates no payment.",
+                       "The public summary and source hash do not independently authenticate the underlying private provider receipts."]}
+
+
 def prepare_review(input_path=INPUT, *, exported=False):
     """Execute both variants and freeze a public, credential-free review bundle."""
     raw = Path(input_path).read_bytes()
     if hashlib.sha256(raw).hexdigest() != INPUT_SHA256:
         raise ReplayError("The reviewed historical input changed; refusing to publish a different example")
     tape = load_package(input_path)
+    ai_history = historical_ai()
     licence = (ROOT / "LICENSE").read_bytes()
     cases = {}
     downloads = {"downloads/input.json": ("application/json", raw)}
@@ -82,7 +162,7 @@ def prepare_review(input_path=INPUT, *, exported=False):
             "computed_when": "site build" if exported else "app launch",
             "input_file_sha256": INPUT_SHA256, "invariant": tape["invariant"],
             "recorded_source": tape["source"], "original_records": tape["records"],
-            "cases": cases, "network_calls": 0,
+            "cases": cases, "network_calls": 0, "historical_ai": ai_history,
             "limits": ["Historical PayPal Sandbox observations, replayed without new service calls.",
                        "The healthy merchant is re-executed on the same recorded input and clock.",
                        "This is not a fresh payment, a deployed repair or a new AI investigation.",

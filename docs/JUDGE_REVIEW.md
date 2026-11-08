@@ -2,7 +2,7 @@
 
 Reviewed 8 November 2026 against the [official rules](https://paypalaihackathon.devpost.com/rules), live Devpost judging criteria and sponsor pages. This is an engineering assessment, not an organizer ruling or prediction of scores.
 
-The problem is clear: a payment can complete while an order remains unfulfilled. PayPal is central to the implementation. The public walkthrough explains that problem and its failure/repair comparison. Its biggest weakness is that a visitor cannot experience the full PayPal-plus-AI workflow or sponsor workspace from that recorded page. Adding sponsor names would not fix that gap.
+The problem is clear: a payment can complete while an order remains unfulfilled. PayPal is central to the implementation. The public walkthrough explains that problem and its failure/repair comparison. The latest source now makes the earlier real AI sequence inspectable through three recorded steps in the page. Its biggest remaining weakness is that a visitor cannot execute the full live PayPal-plus-AI workflow or sponsor workspace from that recorded page. Adding sponsor names would not fix that gap.
 
 ## What each integration contributes
 
@@ -38,7 +38,7 @@ Enable only explicitly authorized provider usage. One background investigation i
 
 ## Assessment against the rubric
 
-- **Technological implementation:** substantive payment/recovery logic and historical real AI use. The recorded entry alone does not show the full integration operating now.
+- **Technological implementation:** substantive payment/recovery logic and historical real AI use. The new source walkthrough explains the historical AI/payment sequence; it does not show the full live integration operating now.
 - **Design:** current source has a product-first landing page and clearer workflow. Public hosting still serves an older build because GitHub is billing-locked.
 - **Potential impact:** a specific merchant pain and credible mechanism. No connected merchant store, adoption or measured business impact is established. Shopify matching, installation and accounts remain unfinished.
 - **Innovation:** correlation and reproducible failure recovery are the concrete mechanism. Market novelty is not established.
@@ -59,3 +59,7 @@ npm run test:deadlines --prefix studio
 Local tests use injected provider/model replies where specified. They do not establish fresh PayPal, model or KERNEL execution. [Historical webhook result](../evidence/runs/judge-ready/webhook-v55.json), [recovery](../evidence/runs/judge-ready/recovery-v56.json) and [AI](AI_EVIDENCE.md) keep their original dates and scope.
 
 Next: restore public publication, provide the configured sponsor workspace and end-to-end video, then verify owned test-store data with separately authorized provider use. Original acceptance remains **47/60**; no original requirement is closed by this review.
+
+## Hosting recovery boundary
+
+Read-only checks confirmed the site uses workflow publishing. Switching to a prebuilt branch would not avoid this account lock: GitHub says Pages deployments use Actions even for branch sources. No source setting, deployment or billing detail was changed. The owner can request a lock review if no active plan or balance explains it; a lock does not by itself prove a payment is necessary. [Publishing sources](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) · [Account lock help](https://docs.github.com/en/billing/how-tos/troubleshooting/locked-account).

@@ -1,0 +1,26 @@
+{
+  "scope": "Isolated clean COPY-input export stage, not Docker image execution",
+  "copies": [
+    "crashcart/",
+    "migrations/",
+    "web/judge/",
+    "evidence/runs/paypal-live/early-response-loss-input.json",
+    "evidence/runs/submission-ready/ai-historical-summary.json",
+    "LICENSE"
+  ],
+  "command": "python3 -m crashcart.judge --export-site SITE",
+  "exit": 0,
+  "stdout": "{\n  \"path\": \"/var/folders/d1/qf7w9g5d6n7cmd6xwd3479zc0000gn/T/crashcart-judge-context-f5g9f1ai/site\",\n  \"mode\": \"RECORDED_REPLAY\",\n  \"files\": 9,\n  \"sha256\": {\n    \"index.html\": \"313e7812e933f848ebaf843ab5300ea74039f667d4494a5d917106ee47701fef\",\n    \"app.js\": \"bba5675fb97175c28781c60092ec402cf8813aac1ffed9e80fdba49a3c645ce5\",\n    \"style.css\": \"7d9dff8336724caa7454685012c3db7657903cfadc80cfbb3be21a883644402b\",\n    \"data.json\": \"5362ebc1b7f3364efc989af73d75f3562efcc839ea8b83162907cfe4d869a44b\",\n    \"LICENSE\": \"96b3dda2b18f44646baeb204a4dd3a7ecf99d8234781979b731521234c43d9f7\",\n    \"downloads/input.json\": \"07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288\",\n    \"downloads/defective.json\": \"d8769dcab0e686ad0834add93bedda1155e00d92f5b3fbf12a2a2c67ae2f5dfa\",\n    \"downloads/healthy.json\": \"db4e38d766b010139e994899325896975a34cee186ce5922da1fabf5fe9dbd0f\",\n    \"downloads/replay.zip\": \"0d4013634e7f463a79a365a46c7b5290723415d089f7f8dff690f4772f01555d\"\n  }\n}\n",
+  "stderr": "",
+  "historical_ai_mode": "RECORDED_AI_INVESTIGATION",
+  "checkout_outcomes": [
+    "FAIL/paid_without_ticket",
+    "PASS/ticket_delivered_once_on_time"
+  ],
+  "docker_runtime": "BLOCKED: no default Docker daemon; no new VM started with only3.2GiB diskfree; otherproject context untouched",
+  "source_sha256": {
+    "deploy/judge/Dockerfile": "b5c0481c1fb33f67c2a098c079f31ad5880b8460729c2a67880534044cafdb14",
+    "deploy/judge/Dockerfile.dockerignore": "e23e1cacb6a41ece5aab7b13c32a64c2632f1538ecb5a9d5fb55d2d22df06f1d",
+    "crashcart/judge.py": "2245b5beae4996378fb76430712ab936a085a092ba8c612dacfa7f3209314ba7"
+  }
+}

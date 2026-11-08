@@ -10,7 +10,7 @@
   <a class="skip" href="#main">Skip to content</a>
   <header class="site-header">
     <a class="brand" href="#home" aria-label="CrashCart home"><span class="mark" aria-hidden="true">↳</span> CrashCart</a>
-    <nav aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#investigation">See it in action</a><a href="#questions">Questions</a></nav>
+    <nav aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#investigation">See it in action</a><a href="#ai-story">AI at work</a></nav>
     <span class="mode">Interactive recorded demo</span>
   </header>
   <main id="main">
@@ -61,12 +61,26 @@
         <details class="technical"><summary>Developer details</summary><p>Both variants use this identical recorded input. The saved source labels document provenance; they do not independently authenticate historical provider activity.</p><pre id="technical-result"></pre></details>
       </section>
     </div>
+    <section id="ai-story" class="ai-demo" aria-labelledby="ai-title">
+      <div class="ai-intro"><div><p class="eyebrow">THE NEXT USEFUL QUESTION</p><h2 id="ai-title">Check the payment.<br>Then check the promise.</h2></div><p>In an earlier investigation, DeepSeek used PayPal’s payment record to choose what to inspect next. Follow the three recorded steps.</p></div>
+      <p class="ai-context">Earlier recorded case · 26 October 2026 · a separate order from the comparison above</p>
+      <p id="ai-unavailable" class="ai-fallback">The recorded steps are unavailable here. <a href="https://github.com/himanshu748/crashcart/blob/main/docs/AI_EVIDENCE.md">Read the saved investigation ↗</a></p>
+      <div id="ai-story-panel" class="ai-layout" hidden>
+        <div class="ai-steps" role="group" aria-label="Explore the recorded AI investigation">
+          <button type="button" data-ai-step="0" aria-pressed="true"><span aria-hidden="true">01</span><span>Confirm the payment<small>PayPal record</small></span><span aria-hidden="true">↗</span></button>
+          <button type="button" data-ai-step="1" aria-pressed="false"><span aria-hidden="true">02</span><span>Find the ticket<small>Store record</small></span><span aria-hidden="true">↗</span></button>
+          <button type="button" data-ai-step="2" aria-pressed="false"><span aria-hidden="true">03</span><span>Check the promise<small>Payment + fulfilment</small></span><span aria-hidden="true">↗</span></button>
+        </div>
+        <article class="ai-answer" aria-live="polite" aria-atomic="true"><div class="ai-answer-top"><span class="small-label" id="ai-step-count"></span><span class="ai-recorded">Recorded investigation</span></div><div id="ai-answer-copy"><h3 id="ai-question"></h3><p class="ai-label">What was known</p><p id="ai-known"></p><p class="ai-label">Next step</p><p id="ai-next"></p><details class="ai-record"><summary>Read the recorded reasoning</summary><p id="ai-reasoning"></p></details><div class="ai-takeaway"><span class="small-label">WHY THIS MATTERS</span><p id="ai-takeaway"></p></div></div></article>
+      </div>
+      <div class="ai-caption"><p>DeepSeek on Modal · existing PayPal Sandbox payment · no new payment or AI request on this page</p><a href="https://github.com/himanshu748/crashcart/blob/main/docs/AI_EVIDENCE.md">About this recorded case ↗</a></div>
+    </section>
       <section class="next-chapter" aria-labelledby="next-title"><div><p class="eyebrow">BEYOND ONE CHECKOUT</p><h2 id="next-title">Fewer tabs.<br>Fewer unanswered orders.</h2></div><div><p>The next step is a store inbox: paid orders, fulfilment deadlines and the orders that need your attention, together.</p><p>Our local monitoring preview includes Shopify and WooCommerce webhook readers. Real-store connection and payment matching are still being completed.</p><a class="text-link" href="https://github.com/himanshu748/crashcart/blob/main/docs/MONITOR_SETUP.md">Explore the local monitoring preview ↗</a></div></section>
       <section id="questions" class="faq" aria-labelledby="faq-title"><div><p class="eyebrow">A FEW USEFUL ANSWERS</p><h2 id="faq-title">Before you dive in.</h2></div><div>
         <details><summary>Is this a live payment?</summary><p>No. You’re exploring a recorded PayPal Sandbox checkout. The failed and recovered outcomes use the same historical payment observations and the same 60-second promise. No money moves when you use this page.</p></details>
         <details><summary>What actually went wrong?</summary><p>Our test store lost the reply after payment capture. The payment succeeded, but the store never created the ticket. The recovery checks PayPal again before creating exactly one ticket. This is a merchant recovery problem, not a PayPal vulnerability.</p></details>
         <details><summary>Can I connect my shop today?</summary><p>You can run the monitoring preview locally and configure owned test stores. It is not a hosted merchant service yet. No real store has been connected; Shopify payment matching, customer accounts and installation are still in progress.</p></details>
-        <details><summary>Where does AI help?</summary><p>In the separately configured workspace, an AI investigator suggests what to check next. Payment and ticket rules decide the result. This recorded demo makes no AI calls. <a class="text-link" href="https://github.com/himanshu748/crashcart/blob/main/docs/AI_EVIDENCE.md">See the recorded AI investigation ↗</a></p></details>
+        <details><summary>Where does AI help?</summary><p>In the separately configured workspace, an AI investigator suggests what to check next. Payment and ticket rules decide the result. This recorded demo makes no AI calls. <a class="text-link" href="#ai-story">Explore the recorded investigation ↘</a></p></details>
         <details><summary>Can I run the example myself?</summary><div class="reproduce" id="reproduce"><p>Download the replay, unzip it and run these commands with Python 3.11 or newer. No keys or installation needed.</p><a class="text-link" href="downloads/replay.zip" download>Download the runnable example ↓</a><pre>python3 -m crashcart.replay run input.json --merchant defective
 # Expected: FAIL · paid_without_ticket · exit 1
 

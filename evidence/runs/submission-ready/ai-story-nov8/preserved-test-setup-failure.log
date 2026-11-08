@@ -1,0 +1,82 @@
+✔ queued and running never claim finished analysis or successful delivery (12.314125ms)
+✔ failed, cancelled and missing final results retain uncertainty (2.443458ms)
+✔ local simulated analysis stays labelled and never decides payment (10.505084ms)
+✔ background lifecycle never leaves a stale queue acknowledgement: false (3.167375ms)
+✔ background lifecycle never leaves a stale queue acknowledgement: true (1.3585ms)
+✔ finding is presented only for the selected case: null (3.409084ms)
+✔ finding is presented only for the selected case: run_id (1.170042ms)
+✔ finding is presented only for the selected case: purchase_id (1.535125ms)
+✔ finding is presented only for the selected case: order_id (1.092333ms)
+✔ Unavailable response explains recovery without provider claims (133.431792ms)
+✔ Malformed JSON does not expose parser jargon (17.142042ms)
+✔ Disconnected network leaves an understandable safe state (7.417208ms)
+✔ Invalid comparison never displays a successful result (21.848542ms)
+✔ Partially parsed case is discarded before walkthrough reuse (7.354166ms)
+✔ recorded AI stages expose the actual knowledge progression without mutating the case (276.652541ms)
+✖ unusable optional AI history leaves the recorded checkout working: missing (8.507958ms)
+✖ unusable optional AI history leaves the recorded checkout working: fresh (11.385042ms)
+✖ unusable optional AI history leaves the recorded checkout working: same-case (7.51575ms)
+✖ unusable optional AI history leaves the recorded checkout working: wrong-tools (13.651167ms)
+✖ unusable optional AI history leaves the recorded checkout working: missing-payment-read (7.15475ms)
+✖ unusable optional AI history leaves the recorded checkout working: invented-time (4.185292ms)
+✔ valid response retains identity and structured API rejection retains code (98.732375ms)
+✔ HTML failed POST is dispatched once with unchanged payload and a readable error (7.465458ms)
+✔ empty failed POST is dispatched once with unchanged payload and a readable error (4.775208ms)
+✔ malformed failed POST is dispatched once with unchanged payload and a readable error (10.8305ms)
+✔ null failed POST is dispatched once with unchanged payload and a readable error (7.367084ms)
+✔ array failed POST is dispatched once with unchanged payload and a readable error (5.342ms)
+✔ string failed POST is dispatched once with unchanged payload and a readable error (3.9775ms)
+✔ connection rejection has one dispatch and no invented result (2.728625ms)
+✔ startup rejection reaches the visible login message and connection details (82.170833ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 24
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1008.046584
+
+✖ failing tests:
+
+test at tests/test_judge_ui.cjs:58:106
+✖ unusable optional AI history leaves the recorded checkout working: missing (8.507958ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'hidden')
+      at TestContext.<anonymous> (/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_judge_ui.cjs:63:47)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/test_judge_ui.cjs:58:106
+✖ unusable optional AI history leaves the recorded checkout working: fresh (11.385042ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'hidden')
+      at TestContext.<anonymous> (/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_judge_ui.cjs:63:47)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/test_judge_ui.cjs:58:106
+✖ unusable optional AI history leaves the recorded checkout working: same-case (7.51575ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'hidden')
+      at TestContext.<anonymous> (/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_judge_ui.cjs:63:47)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/test_judge_ui.cjs:58:106
+✖ unusable optional AI history leaves the recorded checkout working: wrong-tools (13.651167ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'hidden')
+      at TestContext.<anonymous> (/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_judge_ui.cjs:63:47)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/test_judge_ui.cjs:58:106
+✖ unusable optional AI history leaves the recorded checkout working: missing-payment-read (7.15475ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'hidden')
+      at TestContext.<anonymous> (/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_judge_ui.cjs:63:47)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests/test_judge_ui.cjs:58:106
+✖ unusable optional AI history leaves the recorded checkout working: invented-time (4.185292ms)
+  TypeError [Error]: Cannot read properties of undefined (reading 'hidden')
+      at TestContext.<anonymous> (/Users/himanshujha/Documents/ChatGPT/paypal/var/github-publication-v1/repository/tests/test_judge_ui.cjs:63:47)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

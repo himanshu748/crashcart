@@ -10,6 +10,8 @@
 !evidence/runs/
 !evidence/runs/paypal-live/
 !evidence/runs/paypal-live/early-response-loss-input.json
+!evidence/runs/submission-ready/
+!evidence/runs/submission-ready/ai-historical-summary.json
 !LICENSE
 !deploy/
 !deploy/judge/

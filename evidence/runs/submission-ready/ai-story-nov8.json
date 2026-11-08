@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-08",
+  "base_revision": "f585cfcce297c8984a1a9c691816e3b3e8a159f1",
+  "scope": "Local keyless product presents a pinned public historical AI case; no new AI,PayPal,KERNEL call or new acceptance result",
+  "original_count": "47/60 frozen accepted private build; no new CC IDs",
+  "source_sha256": {
+    "crashcart/judge.py": "2245b5beae4996378fb76430712ab936a085a092ba8c612dacfa7f3209314ba7",
+    "web/judge/index.html": "313e7812e933f848ebaf843ab5300ea74039f667d4494a5d917106ee47701fef",
+    "web/judge/app.js": "bba5675fb97175c28781c60092ec402cf8813aac1ffed9e80fdba49a3c645ce5",
+    "web/judge/style.css": "7d9dff8336724caa7454685012c3db7657903cfadc80cfbb3be21a883644402b",
+    "tests/test_judge.py": "60366aee8a7597ce79af03e0a7e9bc8fccd14a9774c85c9a28011fad0c077f7a",
+    "tests/test_judge_ui.cjs": "6587c6d2c0913c03b6a34926f61b006864593f4f1f41421bf5becdaf8a894a88",
+    "evidence/runs/submission-ready/ai-historical-summary.json": "152c1c77dfcc219b32d7ae36c06ad7b39a35656e95f54f87a6691fe95010c8fb",
+    "deploy/judge/Dockerfile": "b5c0481c1fb33f67c2a098c079f31ad5880b8460729c2a67880534044cafdb14",
+    "deploy/judge/Dockerfile.dockerignore": "e23e1cacb6a41ece5aab7b13c32a64c2632f1538ecb5a9d5fb55d2d22df06f1d"
+  },
+  "checks": {
+    "full_python": "491 tests in131.721s,OK",
+    "node": "30 pass",
+    "judge_command": "15 pass",
+    "replay": "3 pass",
+    "browser": "Desktop1280,phone390,narrow320;all3steps,Enter/Spacefocus,reasoningdisclosure,reducedmotionnone/0s,actualhistorymissingfallback preservescomparison",
+    "contrast": "26 sampled visible text elements,min5.165:1;scopedmeasurement,notfullaccessibilitycertification",
+    "container_context": "Actual isolated export from Docker COPY inputs passes both outcomes and historical flags; Docker image/Caddy not exercised in this batch."
+  },
+  "modes": {
+    "checkout": "Recorded replay recomputed at launch/sitebuild",
+    "ai": "Earlier actual historical run26Oct,existingpayment23Oct,differentcase;not modelinference now",
+    "comparison_healthy_time": "32.261423s",
+    "historical_ai_ticket_time": "3.417739s"
+  },
+  "preserved_failure": "Initial DOM testdouble omitted an always-visible fallback element;6 negative cases erroredbefore assertions. Fixture now initializes the delivered markup state;assertionsunchanged. No production validator relaxed.",
+  "independent_review": {
+    "agent": "/root/judge_sponsor_review",
+    "result": "No blockers;sourcepin/whitelist/dates/recorded-onlylabels reviewed;parent browser evidence supplies rendered scope",
+    "attribution": "Parent summary of returned review,not a tool transcript"
+  },
+  "remaining": [
+    "HostedsiteolderbecauseActionsbillinglock;no newlydeployedclaim",
+    "Real-storeconnection,Shopifytransactionmatching,install/accounts/billingunfinished",
+    "Fullsponsoroperator/liveproviderworkflow/publicvideo unverified",
+    "OSmotion,VoiceOverandbroaderaccessibilitynotreverified"
+  ],
+  "artifact_sha256": {
+    "ai-phone-result.jpg": "df80b6473d6783c69e5d3392af5c8c93dca8b03df03474c8210cefa2eeb4f9bf",
+    "judge-command.log": "cca39273dd02f6041c4bc12777384664c501c039927d226c8cc1cf5e0e22fc61",
+    "python-suite.log": "83ab0774300415d344284b909744e86be42d6dfb9b41dc5142ceecd1692b1e19",
+    "fallback.json": "cb73b59dc4392705bf180980e697825041e40d3547a695b9fb51a354881376f4",
+    "historical-projection.json": "0cdb7e31c3071a64fdc0df62d9d7cde085ff93644a5b1700d48b0b19f648186c",
+    "ai-phone-overview.jpg": "bfd9138eecf8d508d9604f953960c7e716f157d64c2f566c868037bf6a471482",
+    "replay-tests.log": "1c73dfb767763998ed2b7b9d67faf4e19e46b1def96392636a14daddb8f2b315",
+    "backend-focused.log": "a8ea3fcb224a131b80cb79860bf52c9230e1d29c08eada998d6bb7e7249307d8",
+    "node-tests.log": "386bace7e889916c83057c20b82745687ed645609bbcfbeffaa5ab7c830f1c95",
+    "preserved-test-setup-failure.log": "a00a6387777d11080439d7f4d603ee766c67e9ca3f78c1089026f5d8681fa92c",
+    "fallback.jpg": "0848ddb7e9cfa6c101558402b9b040c736568e9e28f2f013f3771bfbf98c7d83",
+    "ai-desktop.jpg": "a44f986dc4ca2d9ee83a06ee9c50f66e8ed3ba08ddaa78fc54f545bf3592762a",
+    "browser.json": "f9d20283ec9fc8d5648e185a2880c03e0e05f0433f610cfafc14cf95e88fb2ea",
+    "container-context.json": "234d58803eb0692999bc7f0ad43ba83bd839879efcfb5cb24596d25b9a92bf85"
+  }
+}

@@ -8,7 +8,8 @@ CrashCart brings those pieces together so the missing step is easier to find.
 
 **[Explore the interactive demo →](https://himanshu748.github.io/crashcart/)**
 No account needed. Follow a recorded $29 ticket purchase from payment to the
-missing ticket, then compare the repaired checkout.
+missing ticket, then compare the repaired checkout. Run locally for the latest
+experience; the hosted demo is on an earlier release.
 
 ## See what happened
 
@@ -45,7 +46,7 @@ results computed at site-build time. Neither path makes new payments or model
 calls. The original faulty-checkout video is unavailable; the saved page and
 payment observations are included. See [replay details](#reproduce-the-comparison)
 for the commands and [the recorded AI investigation](docs/AI_EVIDENCE.md) for
-the separate historical DeepSeek workflow.
+the separate historical DeepSeek workflow. The current source build also presents that earlier case as an interactive payment → ticket → promise walkthrough. Its recorded order is separate from the faulty checkout; viewing it makes no new AI or payment call.
 
 ## A daily inbox for paid orders
 
