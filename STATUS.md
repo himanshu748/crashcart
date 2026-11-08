@@ -4,6 +4,16 @@
 
 ## Current delivery
 
+### 8 November — approved live access moved to Foley preparation
+
+The owner approved protected PayPal/AI hosting, a separate workspace-wide Modal proxy key, a supplemental 24-call/$1 allowance and up to eight Sandbox cases through 22 December UTC. The first host failed its unchanged 768 MiB launch guard; ten later read-only samples stayed below it. No service or route was installed. Approved credentials were briefly staged privately, then removed; SSH/firewall cleanup was verified. The original 23-call ledger and new zero-call ledger remain separate. [Failed gate and cleanup](evidence/runs/submission-ready/live-host-activation-nov8/proof.json).
+
+The owner then authorized another existing instance, including Foley. Its initial read-only preflight showed 869 MiB available and 48.8 GB free, with seven existing containers to preserve. The runtime and installer now pin only the new owned workspace hostname. Retarget verification: **549 tests in 103.822s OK; 15 judge/replay tests in 2.002s OK**. Independent source review passed. The live workspace is **not activated**; the public recorded demo is unchanged. [Source-bound evidence](evidence/runs/submission-ready/foley-retarget-nov8/proof.json).
+
+Foley setup stopped under the owner's two-failure rule: an AWS credential refresh timed out, then a local key-pair check rejected the fallback file before SSH. Offline inspection found the matching saved host-specific key and corrected the reference. No further connection has been made; resumption is requested. Neither preparation attempt uploaded provider credentials or changed Foley's apps/proxy. Fresh image, runtime, retention and HTTPS/provider proof remain unverified.
+
+**47/60 original verified; newly verified CC IDs: none.** The 13 open original checks and frozen private stale count are unchanged. Next: resume with the verified Foley key, verify the isolated image, activate with the existing guards, then exercise fresh healthy and defective Sandbox checkouts plus actual AI within the new grant. Project incomplete.
+
 ### 8 November — protected live-host candidate verified within scope
 
 The fresh local PayPal-plus-DeepSeek flow is pushed as `8f96ac4`. A separate protected hosting candidate now has **549 Python tests in 101.767s OK**, **26 focused tests in 11.923s OK**, and **15 judge/replay tests in 2.696s OK**. Independent review passed after fixing quarantined partial-case recovery and preserving the original inode during shared-proxy configuration writes. The runtime/test/configuration hashes match the tested snapshot; later edits are documentation only. [Source-bound proof, exact commands and logs](evidence/runs/submission-ready/live-host-candidate-nov8/proof.json) · [Independent review](evidence/runs/submission-ready/live-host-candidate-nov8/review.json).

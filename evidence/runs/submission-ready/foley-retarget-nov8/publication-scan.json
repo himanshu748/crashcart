@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "known_pattern_exit": 0,
+  "staged_files": 21,
+  "known_private_value_matches": 0,
+  "omitted": 0,
+  "scope": "Full staged blobs, nohistory; supplemental exact old/newcredentialandorigin checks.",
+  "raw_scan": "scope: full staged file contents\nfindings: 0; files omitted: 0\nlimits: known patterns only; no Git history; arbitrary untracked content excluded; staged scope excludes unstaged changes.\n"
+}

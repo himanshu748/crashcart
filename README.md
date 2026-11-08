@@ -37,8 +37,9 @@ execution is separate from the account-free hosted replay.
 A [protected hosting candidate](deploy/live/README.md) is prepared for that
 connected workflow on the existing host. Its local tests and secret-free
 container checks are recorded; it has **not been activated**, and no provider
-credentials have been uploaded. Activation requires approval to change the
-recorded-only hosting scope and extend the bounded model allowance.
+credentials have been uploaded. The owner approved that scope and allowance. The original host lacked the
+required memory margin; preparation now targets the existing Foley host while
+preserving its other apps.
 
 ## See what happened
 

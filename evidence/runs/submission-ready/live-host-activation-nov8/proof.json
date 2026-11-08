@@ -1,0 +1,52 @@
+{
+  "source_commit": "e48cf18f27aee961c16c103cddba55361eccdd5b",
+  "authorization": "Owner approved protected live hosting through22DecemberUTC with separate workspace-wide Modal proxy key, private Sandbox/Modal credentials, supplemental24calls/$1 from existing credits and8Sandboxcases. No newinstance/plan/topup/realpayment/KERNEL/webhook.",
+  "state": "BLOCKED_CAPACITY",
+  "first_activation": {
+    "source_commit": "e48cf18f27aee961c16c103cddba55361eccdd5b",
+    "phase": "preflight",
+    "result": "FAIL",
+    "provider_calls": 0,
+    "error": "AssertionError",
+    "message": "Less than 768MiB currently available",
+    "public_live_route_activated": false
+  },
+  "cleanup": {
+    "scope": "SSH lease and own temporary directory cleanup; deployed services untouched",
+    "own_staging_removed": true,
+    "master_closed": true,
+    "operator_cidr_removed": true,
+    "original_firewall_exactly_restored": true,
+    "temporary_key_files_removed": [
+      "key.pem",
+      "key.pem.pub",
+      "key-cert.pub"
+    ],
+    "finished_at": 1794142676.04989,
+    "approved_credentials_uploaded": true,
+    "activation_result": "FAIL"
+  },
+  "capacity_readback": {
+    "mem_total": "1951768 kB",
+    "available": "761216 kB",
+    "required_kib": 786432,
+    "existing_container_count": 8,
+    "crashcart_container_running": false,
+    "scope": "Separate later read-only sample; exact available RAM during the failed gate was not captured."
+  },
+  "source_or_proxy_modified": false,
+  "live_workspace_activated": false,
+  "new_modal_proxy_keys_created": 1,
+  "new_inference_calls": 0,
+  "sandbox_payments_created": 0,
+  "supplemental_ledger_calls": 0,
+  "original_ledger_calls": 23,
+  "original_ledger_hash_unchanged": true,
+  "frozen_private_acceptance": {
+    "verified": 47,
+    "total": 60,
+    "newly_verified_ids": []
+  },
+  "next_action": "Owner authorized checking anotherexistinghost. Foley initialpreflight has869MiBavailable; prepareandreverifyfixedhostname onFoley without changing its otherapps.",
+  "readiness_observation": "Ten read-only samples remained below768MiB; no second launch attempt on originalhost."
+}

@@ -60,4 +60,4 @@ services:
 networks:
   proxy:
     external: true
-    name: ${CRASHCART_PROXY_NETWORK:?Use the exact existing ew-proxy bridge network}
+    name: ${CRASHCART_PROXY_NETWORK:?Use the exact existing Foley proxy bridge network}

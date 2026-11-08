@@ -30,7 +30,7 @@ from .server import Handler
 from .service import MerchantService
 from .store import Store, utcnow
 
-PUBLIC_URL = "https://workspace-crashcart.52.202.25.181.sslip.io"
+PUBLIC_URL = "https://workspace-crashcart.13.204.212.172.sslip.io"
 MAX_WINDOW_END = datetime(2026, 12, 23, tzinfo=timezone.utc)
 CASE_LIMIT = 8
 ALLOWED_MODES = {"LIVE_SANDBOX", "FRESH_SANDBOX"}

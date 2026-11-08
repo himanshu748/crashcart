@@ -1,0 +1,47 @@
+{
+  "threshold_kib": 786432,
+  "samples": [
+    {
+      "unix_time": 1794142895.7065039,
+      "available_kib": 761904
+    },
+    {
+      "unix_time": 1794142905.7068472,
+      "available_kib": 775196
+    },
+    {
+      "unix_time": 1794142915.7071297,
+      "available_kib": 774028
+    },
+    {
+      "unix_time": 1794142925.707509,
+      "available_kib": 768356
+    },
+    {
+      "unix_time": 1794142935.7077746,
+      "available_kib": 766604
+    },
+    {
+      "unix_time": 1794142945.7081914,
+      "available_kib": 765692
+    },
+    {
+      "unix_time": 1794142955.7085655,
+      "available_kib": 759000
+    },
+    {
+      "unix_time": 1794142965.7088652,
+      "available_kib": 764864
+    },
+    {
+      "unix_time": 1794142975.7091687,
+      "available_kib": 760220
+    },
+    {
+      "unix_time": 1794142985.7095277,
+      "available_kib": 773912
+    }
+  ],
+  "ready_three_consecutive_samples": false,
+  "read_only": true
+}

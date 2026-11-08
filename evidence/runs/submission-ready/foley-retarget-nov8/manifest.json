@@ -1,0 +1,31 @@
+{
+  "base_revision": "e48cf18f27aee961c16c103cddba55361eccdd5b",
+  "scope": "Source-bound preparation and actual failed launch/read-only checks; no live deployment or provider result claimed.",
+  "files": [
+    {
+      "path": "full-suite.log",
+      "sha256": "2ade423949c9581fbb1ec632789ce0b0a0475cd1842bc0988d009885fea4e143",
+      "bytes": 98789
+    },
+    {
+      "path": "judge-replay.log",
+      "sha256": "f294a40d6fb74df1ef1fba90605baf10a632faf09ebcb5e1a9320883ab050ea3",
+      "bytes": 2585
+    },
+    {
+      "path": "proof.json",
+      "sha256": "dbc091989c072aa08924a6f198b03eff7baa3d22792a33c20342f08a9cccb6bd",
+      "bytes": 2369
+    },
+    {
+      "path": "publication-scan.json",
+      "sha256": "ebd8a96f58f0c21552c6da35db964da54f7ccab1bfd3e08550bcc4aa3545f191",
+      "bytes": 429
+    },
+    {
+      "path": "review.json",
+      "sha256": "20b4282b84e91c3fb3ccbd34d2c08a57eeb65b04e7f146bfbadde12a2b57ec2b",
+      "bytes": 4167
+    }
+  ]
+}

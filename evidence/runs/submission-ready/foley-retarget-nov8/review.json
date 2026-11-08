@@ -1,0 +1,63 @@
+{
+  "reviewed_at": "2026-11-08T13:33:17.029602+00:00",
+  "reviewer": "Independent source and hosting-boundary reviewer",
+  "decision": "PASS_SIX_FILE_FOLEY_RETARGET",
+  "blocking_source_findings": [],
+  "base_revision": "e48cf18f27aee961c16c103cddba55361eccdd5b",
+  "source_sha256": {
+    "crashcart/hosted_live.py": "64de66c4def65e05639797f5734b66b7e47faf020411f3f1053a569a03d30cea",
+    "deploy/live/install_caddy.py": "704c24e67e06a8d4fe3f24355ff52532b5a0247700385085036a4cf17f9438a4",
+    "deploy/live/Caddyfile.fragment": "1ef95c30cc99ab2422f8b7dad1db6bc76621012eb7b25b213fde8659c87ec442",
+    "deploy/live/runtime.env.example": "69529563bacaed6351cf80e2e279b6b1209b65288669597634217717cf4f69d1",
+    "deploy/live/README.md": "1c4750dacc111fed197352e3728386d71d674dd4b274a690ae69e4ea4d116838",
+    "deploy/live/compose.yaml": "ffe070188a6690c1554b3e8e46ae9cea2b6c0d898029130d02ab5317acf4dc17"
+  },
+  "scope": {
+    "hostname": "workspace-crashcart.13.204.212.172.sslip.io",
+    "instance": "foley-judging",
+    "region": "ap-south-1",
+    "proxy": "foley-caddy-1",
+    "existing_network": "foley_backend",
+    "host_config": "/opt/foley/deploy/Caddyfile",
+    "container_config": "/etc/caddy/Caddyfile",
+    "original_recorded_site": "Unchanged on the original instance; this retarget affects only the protected live candidate."
+  },
+  "findings": [
+    "Application public origin, installer hostname, Caddy fragment and environment example agree exactly.",
+    "Only hostname/proxy documentation and the existing-network description change; no deadline, validator, authentication, case quota, model allowance or container resource limit is relaxed.",
+    "The guide requires same-context current-file/ACTIVE equality, complete original route/settings preservation and inode/checksum guards before reload.",
+    "The guide preserves the Foley ReviewAfter marker while requiring CrashCart availability through 22 December UTC; future uptime is not established by this review."
+  ],
+  "required_next_proof": [
+    "Fresh Foley image and runtime checks; historical original-host probes do not transfer automatically.",
+    "Fresh 768 MiB capacity gate, fixed image digest, existing proxy/network identity, complete active configuration and route readbacks immediately before activation.",
+    "No automatic image pull during activation; separately authorized pinned-image preparation needs its own completion/readback.",
+    "Review the retargeted frozen activation scripts before launch.",
+    "Additive retention/access readback through 22 December UTC without deleting or overriding existing Foley ownership/maintenance metadata."
+  ],
+  "nonblocking_documentation_note": "Resolved: separately authorized preparation of the pinned official Python 3.13 base is distinct from activation, which remains offline/--pull never. Actual image identity/version must be recorded before activation; no automatic download or retry is allowed.",
+  "test_results_reported_by_parent": {
+    "full_suite": "549 tests in 103.822s, OK",
+    "judge_replay": "15 tests in 2.002s, OK",
+    "independently_repeated_in_this_review": false
+  },
+  "historical_failures_preserved": {
+    "original_activation": "FAIL at the unchanged 768 MiB capacity guard before source/service/config installation.",
+    "earlier_two_overall_full_probes": "Remain FAIL; the syntax-only Caddy pass does not replace them."
+  },
+  "review_actions": {
+    "provider_or_ssh_calls": 0,
+    "credentials_or_ledgers_read": false,
+    "deployment_performed": false,
+    "source_edits": false,
+    "committed": false
+  },
+  "completion_boundary": "Source retarget review only. No deployed service, trusted HTTPS, provider journey or future availability is claimed.",
+  "prose_only_refresh": {
+    "reviewed_at": "2026-11-08T13:38:57.780422+00:00",
+    "prior_document_reconstructed_exactly": true,
+    "other_five_source_hashes_unchanged": true,
+    "tests_rerun": false
+  },
+  "current_operational_gate": "Remote setup is paused after two reported setup failures. Owner resumption is required before further SSH; this source-review PASS does not resume deployment or establish corrected-key/provider success."
+}

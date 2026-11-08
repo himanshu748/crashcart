@@ -1,0 +1,48 @@
+{
+  "state": "PREPARED_NOT_ACTIVATED",
+  "base_commit": "e48cf18f27aee961c16c103cddba55361eccdd5b",
+  "design_decision": "Owner authorized anotherexistingLightsailhost. Retarget fixedapprovedhostname toFoley; preserveotherapps andoriginalrecordedsite. No generalURLoverride.",
+  "source_sha256": {
+    "crashcart/hosted_live.py": "64de66c4def65e05639797f5734b66b7e47faf020411f3f1053a569a03d30cea",
+    "deploy/live/install_caddy.py": "704c24e67e06a8d4fe3f24355ff52532b5a0247700385085036a4cf17f9438a4",
+    "deploy/live/Caddyfile.fragment": "1ef95c30cc99ab2422f8b7dad1db6bc76621012eb7b25b213fde8659c87ec442",
+    "deploy/live/compose.yaml": "ffe070188a6690c1554b3e8e46ae9cea2b6c0d898029130d02ab5317acf4dc17",
+    "deploy/live/runtime.env.example": "69529563bacaed6351cf80e2e279b6b1209b65288669597634217717cf4f69d1",
+    "deploy/live/README.md": "1c4750dacc111fed197352e3728386d71d674dd4b274a690ae69e4ea4d116838"
+  },
+  "full_suite": {
+    "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -W error::ResourceWarning -m unittest discover -v",
+    "output": "Ran 549 tests in 103.822s\n\nOK",
+    "log": "full-suite.log"
+  },
+  "judge_replay": {
+    "command": "PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 ./scripts/test-judge.sh",
+    "output": "Ran 15 tests in 2.002s\n\nOK",
+    "log": "judge-replay.log"
+  },
+  "foley_preflight": {
+    "region": "ap-south-1",
+    "name": "foley-judging",
+    "ip": "13.204.212.172",
+    "mem_available_kib": 889936,
+    "required_kib": 786432,
+    "free_disk_bytes": 48830058496,
+    "other_containers": 7,
+    "existing_proxy": "foley-caddy-1",
+    "existing_network": "foley_backend",
+    "host_config": "/opt/foley/deploy/Caddyfile",
+    "existing_monthly_base_usd": 12,
+    "additional_instance_base_usd": 0
+  },
+  "original_verified": 47,
+  "new_verified_ids": [],
+  "provider_calls": 0,
+  "live_workspace_activated": false,
+  "connection_setup": {
+    "first_failure": "AWS credential refresh timed out before SSH",
+    "second_failure": "Local companion-key check rejected the fallback file before SSH",
+    "remote_setup": "STOPPED under owner two-failure rule",
+    "offline_correction": "Verified the saved host-specific private key against its registered public companion; fixed reference. No new connection after stop.",
+    "owner_input": "Resume one Foley connection with the verified key"
+  }
+}

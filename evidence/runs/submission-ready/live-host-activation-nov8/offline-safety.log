@@ -1,0 +1,12 @@
+test_refuse_changed_bytes (__main__.SafetyTests.test_refuse_changed_bytes) ... ok
+test_refuse_other_active_config (__main__.SafetyTests.test_refuse_other_active_config) ... ok
+test_refuse_path_swap_during_validation (__main__.SafetyTests.test_refuse_path_swap_during_validation) ... ok
+test_reject_shared_host_match (__main__.SafetyTests.test_reject_shared_host_match) ... ok
+test_remove_only_exact_new_host (__main__.SafetyTests.test_remove_only_exact_new_host) ... ok
+test_restore_only_old_handle_after_write_swap (__main__.SafetyTests.test_restore_only_old_handle_after_write_swap) ... ok
+test_restore_same_inode (__main__.SafetyTests.test_restore_same_inode) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.004s
+
+OK

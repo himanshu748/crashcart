@@ -6,7 +6,7 @@ Deployment constraint: Render is excluded.
 
 ## Current execution scope — 6 November 2026
 
-Protected live-host preparation on 8 November has separate source-bound local/container proof; it does not change original CC acceptance. [Candidate proof](evidence/runs/submission-ready/live-host-candidate-nov8/proof.json). No connected public workspace or server credentials are active.
+Protected live-host preparation on 8 November has separate source-bound local/container proof; it does not change original CC acceptance. [Candidate proof](evidence/runs/submission-ready/live-host-candidate-nov8/proof.json). No connected public workspace or server credentials are active. The owner-approved Foley retarget has separate [source-bound verification](evidence/runs/submission-ready/foley-retarget-nov8/proof.json); original CC acceptance stays unchanged.
 
 **47/60 verified; 13 original requirements remain open.** Features are frozen. On 5 November the owner resumed verification of all 13 open checks. New provider/payment/recording experiments still require their applicable authorization; the feature freeze remains in force. Use [STATUS.md](STATUS.md) for current evidence, [MILESTONES.md](MILESTONES.md) for execution order, and [submission gates](docs/SUBMISSION_GATES.md) for the official-deliverable mapping.
 

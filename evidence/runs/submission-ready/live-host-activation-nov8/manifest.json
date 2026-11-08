@@ -1,0 +1,36 @@
+{
+  "base_revision": "e48cf18f27aee961c16c103cddba55361eccdd5b",
+  "scope": "Source-bound preparation and actual failed launch/read-only checks; no live deployment or provider result claimed.",
+  "files": [
+    {
+      "path": "memory-readiness.json",
+      "sha256": "c3525d329ac7e27086bc94ec2a602e0d0462e8261c23f11008f3d0a7e14494b0",
+      "bytes": 933
+    },
+    {
+      "path": "offline-safety.log",
+      "sha256": "57d8758122054c523ca74c84c43f9941490c32f962cb37fb11b23f8b3db1b49a",
+      "bytes": 768
+    },
+    {
+      "path": "proof.json",
+      "sha256": "866eb10351051d4da02c737d8c21c914698eb5023cf506369cde52c7775e96db",
+      "bytes": 2125
+    },
+    {
+      "path": "remote_activate.py",
+      "sha256": "7f41d3c412ba1dbafbb00324dd52467d6341988b7cfe8c50963ade90669b1789",
+      "bytes": 17329
+    },
+    {
+      "path": "review.json",
+      "sha256": "31649da784019e715b7ecc8d0b498114b5c9c830b0ebf75191e8f934dcb3829f",
+      "bytes": 3846
+    },
+    {
+      "path": "test_deployment_safety.py",
+      "sha256": "868f93cef16ba2b9874d86a65e683ad8fce0c1613234a1906a4f5e60d3e4365a",
+      "bytes": 3547
+    }
+  ]
+}

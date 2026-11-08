@@ -1,0 +1,59 @@
+{
+  "reviewed_at": "2026-11-08T12:56:50.997677+00:00",
+  "reviewer": "Independent read-only activation-plan reviewer",
+  "decision": "PASS_FROZEN_ACTIVATION_PLAN",
+  "blocking_findings": [],
+  "source_sha256": {
+    "session.py": "b0a522ce20222dd85eabd8495868e7b5b78d9d4f16b9fd442d55bf58e494a1cb",
+    "activate.py": "94f6018c1f4256c13a4853a78a72866f08b4308f55e5b35b76dfd4483cd02960",
+    "remote_activate.py": "7f41d3c412ba1dbafbb00324dd52467d6341988b7cfe8c50963ade90669b1789",
+    "test_deployment_safety.py": "868f93cef16ba2b9874d86a65e683ad8fce0c1613234a1906a4f5e60d3e4365a",
+    "authorization.json": "2d6723016b195cb1acee876eccae56b88c1a1a00c65d1de14d0c387aa417c898",
+    "image-files.json": "e96a78bb5b7c01b482928fe8fed37e21a3d105a10368a079771d0de7ece52f7e",
+    "source.tar.gz": "a3a271b3575303f27f139204b93e7049108512d896e42f565ecc32f670acfd35"
+  },
+  "authorization_reviewed": {
+    "question_item": "call_eaefd62313d04135beb2e31b35b867ae",
+    "scope": "Protected workspace on the existing Lightsail host through 22 December UTC; separate workspace-wide Modal proxy token and private server Sandbox/Modal credentials.",
+    "supplemental_model_calls": 24,
+    "supplemental_ceiling_micro_usd": 1000000,
+    "sandbox_cases": 8,
+    "sandbox_amount_usd": "29.00",
+    "exclusions": [
+      "New instance or plan",
+      "Top-up",
+      "Real-money payment",
+      "KERNEL",
+      "Webhook registration"
+    ]
+  },
+  "resolved_findings": [
+    "Rollback holds the original checked inode and lock, rechecks bytes/path identity and active configuration, preserves substituted paths, and verifies restoration before reload.",
+    "Non-PASS remote receipts cause local activation failure; unknown remote outcomes retain staging for recovery.",
+    "Old and candidate configurations are compared in equal adaptation contexts; actual mounted-path adaptations and full active JSON preserve every original route and setting.",
+    "Staging cleanup verifies absence; incomplete or uncertain activation retains its private diagnostic state.",
+    "An interrupted installer is treated as potentially mutating: exact old/candidate states are verified, while partial/unknown states require manual recovery and retain staging."
+  ],
+  "reviewed_safeguards": [
+    "Exact credential-name whitelist; private files are staged separately from image/source and no values are printed by the activation plan.",
+    "Fresh supplemental ledger has a distinct authorization; existing state/source and Compose-project collisions refuse overwrite.",
+    "Pinned image and all 34 runtime asset hashes are checked; archive metadata contains no unsafe paths or link members.",
+    "No new proxy interface, host application port, instance or plan; actual container resource/security settings are checked.",
+    "Activation creates no case, payment or model request; public TLS and the provider journey remain explicitly unverified until later checks."
+  ],
+  "independent_offline_validation": {
+    "command": "env -i PATH=/opt/homebrew/bin:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 python3.13 -W error::ResourceWarning test_deployment_safety.py",
+    "output": "Ran 7 tests in 0.003s\n\nOK",
+    "scope": "AST-extracted exact rollback and host-removal guards using temporary local files only."
+  },
+  "boundaries": {
+    "activation_scripts_executed_by_reviewer": false,
+    "ssh_cloud_or_provider_calls": 0,
+    "private_credential_values_read": false,
+    "actual_old_or_supplemental_ledger_contents_read": false,
+    "new_deployment_or_provider_success_claimed": false,
+    "earlier_two_overall_full_probe_failures_remain_recorded": true,
+    "scope_of_clearance": "Only the frozen owner-authorized activation plan; actual deployment, cleanup, shared-route preservation, trusted HTTPS and provider outcomes require their own receipts.",
+    "committed": false
+  }
+}
