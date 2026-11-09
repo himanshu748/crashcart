@@ -69,7 +69,7 @@ Open <http://127.0.0.1:8765>. Enter the generated workspace access key from `.en
 5. Choose **Ask the assistant**. Watch the background investigation and its cited payment/ticket observations. The assistant proposes where to look; the fixed payment/delivery check decides the outcome. You can stop the case.
 6. Compare the repair through the account-free recorded example. That comparison does not make a second payment.
 
-Webhook registration, KERNEL and commercial Studio access are optional setup paths, not requirements for this core sequence. The public video shows the existing 8 November execution and labels it recorded; producing that video makes no new payment or AI call.
+Webhook registration, KERNEL and commercial Studio access are optional setup paths, not requirements for this core sequence. The submission video uses the existing 8 November execution and labels it recorded; producing that video makes no new payment or AI call.
 
 ## If something is missing
 

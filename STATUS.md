@@ -2,6 +2,41 @@
 
 **Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 9 November 2026 (India).
 
+## 9 November — submission packaging on `ship/devpost`
+
+Features are frozen. The README now starts with the customer problem, keyless walkthrough, own-key Sandbox path and the separate jobs of PayPal and AI. GitHub’s repository metadata and visible About/Resources section both show **MIT**. Main stays at `900fa82`; only `ship/devpost` is being pushed. Devpost and YouTube remain owner actions.
+
+### Clean-clone quickstart
+
+Tested the pushed README commit `a6e971e` from a fresh network clone, without `.env`, provider keys, Node modules or installed Python packages. On this Mac, the prerequisite interpreter was selected with `export PATH=/opt/homebrew/opt/python@3.13/libexec/bin:$PATH`; `python3 --version` printed `Python 3.13.15`.
+
+```sh
+git clone --branch ship/devpost --single-branch https://github.com/himanshu748/crashcart.git
+cd crashcart
+python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant defective
+# exit 1; FAIL / paid_without_ticket; ticket_count 0; network_calls 0
+python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant healthy
+# exit 0; PASS / ticket_delivered_once_on_time; ticket_count 1; network_calls 0
+python3 -m unittest discover -s tests -p 'test_public_replay.py' -v
+# Ran 3 tests in 0.888s — OK. Includes rejection of the original late tape.
+./scripts/judge.sh --no-open --port 8767
+# CrashCart recorded review: http://127.0.0.1:8767/demo.html#investigation
+# Both outcomes recomputed at launch. No new payment or service call.
+```
+
+The clone branch flag is explained in the guide until this PR merges. The documented no-open/alternate-port option was used because this check runs separately from the user’s desktop. An actual Chromium browser opened that server and showed the healthy result at **32.26 seconds**. HTTP returned 200. The keyless path is exercised. The same clone also ran the full-workspace startup commands with credentials unset:
+
+```text
+python3 -m crashcart setup       → exit 0; private .env created; service credentials unset
+python3 -m crashcart migrate     → exit 0; workshop-v1 seeded (2900 USD, recovery 60s)
+python3 -m crashcart worker --once → exit 0; durable database opened; cycle finished
+python3 -m crashcart serve       → /healthz HTTP 200; status ok; database ok
+```
+
+Both temporary servers were stopped after inspection. This proves local startup, not a new provider transaction. The own-key guide is checked against the code and the existing 8 November run; no new payment/model experiment was authorized or executed.
+
+**Verified 47/60; newly verified CC IDs: none.** No acceptance conditions changed and no new verification receipts are being added. Next: finish the captioned video, final Devpost copy and draft PR. The owner must merge, upload the video as Public, paste the fields and submit by **13 November 2026, 01:30 IST**.
+
 ## 9 November — full local release checks pass on the multi-page source
 
 Continued the local release checks at the owner’s request. The three previously failing tests passed unchanged in isolation. A fresh frozen-source run then passed **560 Python tests in 107.997s**, **87 frontend tests**, and **16 judge/replay checks**. The earlier failures remain recorded; their root cause was not reproduced or proven. No model/transport/replay deadline, invariant, validator or acceptance condition changed. [Commands, full outputs and source hashes](evidence/runs/submission-ready/frontend-followthrough-nov9/result.json).

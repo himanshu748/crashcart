@@ -1,91 +1,53 @@
-# CrashCart — paste-ready Devpost copy
-
-Draft for the owner. **Do not submit automatically.** The required public YouTube video still awaits recording and upload. The recorded demo is hosted on an existing Lightsail server; no live merchant API or model service is hosted. The sections below distinguish the working recorded demonstration from separately exercised integrations.
-
-## Project name
-
-CrashCart
+# CrashCart
 
 ## Tagline
 
-Find where a successful payment becomes a broken promise.
+Find the missing step between a PayPal payment and delivery.
 
 ## Inspiration
 
-“I paid, but my ticket never arrived” is one incident with three perspectives: what the customer saw, what the payment provider confirmed, and what the store delivered. A successful charge answers only the second question.
-
-CrashCart starts with a concrete customer promise and brings those perspectives together. The aim is to give support and engineering the same inspectable evidence, then turn the failure into a test they can rerun against a repaired merchant.
+“Payment complete” should mean a customer is about to receive what they bought. Sometimes it means a merchant has a support problem they cannot yet explain. The payment record, checkout page and delivery system each tell only part of the story. CrashCart brings them together around the customer's promise.
 
 ## What it does
 
-CrashCart investigates an owned workshop checkout with a simple promise: one $29 ticket within 60 seconds of completed payment. It correlates checkout observations, PayPal payment state and ticket records, then uses deterministic rules to decide whether that promise was kept.
+CrashCart helps small merchants investigate “I paid, but nothing arrived.” The prototype follows a $29 workshop purchase with a clear promise: one ticket within 60 seconds of payment.
 
-The public walkthrough opens a finished investigation without accounts, keys or licences. Inspect the faulty checkout: payment completed, but the ticket is missing. Switch to the healthy merchant: the same historical input produces one ticket within the unchanged deadline. Filter the timeline by source, open individual records and download an executable replay.
+Open the account-free recorded walkthrough, inspect the missing ticket, filter the timeline by source and compare the recovered order. The healthy replay delivers one ticket in 32.26 seconds using the same saved input and deadline. Download the replay to run both outcomes locally.
 
-The hosted walkthrough displays replay results computed when the site was built. Running the keyless app locally recomputes both merchant outcomes. Neither path creates a new payment or calls an AI model.
-
-The separately configured workspace uses AI to choose what evidence to inspect next. On 8 November, we ran a new $29 Sandbox checkout and real DeepSeek investigation on the same case. The model requested PayPal's capture record, then the store's ticket records, and finished with citations. The unchanged delivery check identified the missing ticket. This actual local execution is separate from the recorded public walkthrough; live server access is not yet hosted. [Working flow and evidence](LIVE_FLOW.md).
+A separate completed run from 8 November shows a real PayPal Sandbox payment followed by a real AI investigation of that same order. DeepSeek checked PayPal, checked ticket records and cited the missing delivery. Showing that saved result starts no new payment or model call. The public walkthrough is recorded; it is not a live merchant connection.
 
 ## How we built it
 
-Python and SQLite hold purchases, payment-operation identities, observations, tickets and resumable jobs. A worker can recover interrupted fulfillment without treating a lost response as a failed payment. The PayPal Sandbox integration creates and captures orders, retrieves payment state independently and verifies payment notifications.
+Python, SQLite and a background worker keep payment requests, purchases, observations and tickets connected. PayPal's REST APIs provide Sandbox order creation, capture, independent payment retrieval and webhook signature verification. The server calls PayPal’s Sandbox REST APIs.
 
-The AI investigator uses structured, bounded tool calls. The fresh local flow and earlier investigations used DeepSeek-V4.1-Flash served through Modal. The model proposes hypotheses and selects observations; it cannot replace fixed payment and delivery rules with its own verdict. The latest run enforced the existing shared call allowance across worker and API processes.
+DeepSeek-V4.1-Flash, served through Modal, chooses evidence-reading tools and explains its findings. Fixed rules decide whether payment and delivery meet the promise.
 
-The replay engine runs the merchant's confirmation and fulfillment code against preserved input and a recorded clock. Faulty and healthy variants share the same promise. A separate late-delivery case remains a failure, protecting the 60-second deadline.
+The optional full workspace uses AG Grid's AG Studio for linked record widgets and saved-case questions, Bryntum Community Scheduler for delivery timing, KERNEL for remote checkout sessions and recordings, and Postman/Newman for executable API checks. These integrations have separate setup requirements and are not loaded by the keyless demo. Modal hosts the model; it is not an event tool sponsor.
 
-The full workspace also integrates AG Studio for linked evidence widgets and questions over saved cases, Bryntum Community Scheduler for delivery timing, KERNEL for remote checkout browser sessions and recordings, and Postman for executable API checks. These tools have separate configuration and verification boundaries; they are not loaded by the keyless walkthrough. Modal supplies model hosting and is not an event tool sponsor.
+## Challenges
 
-## Challenges we ran into
+A lost response can hide a completed payment. Retrying blindly risks another charge or ticket. Recovery must inspect the existing payment and preserve the original request identity. An earlier healthy replay also delivered too late; it still fails, while the timely comparison passes the unchanged deadline.
 
-The hardest boundary was between a payment completing and the merchant knowing it completed. A response can disappear while the payment remains valid. Recovery must check the existing operation and deliver exactly once, rather than create a second charge or ticket.
+## Accomplishments
 
-Timing exposed an important mistake: an earlier healthy replay delivered after the deadline. We preserved that failure and added a separately recorded earlier observation for the comparison. The same unchanged rule accepts timely delivery and rejects the original late case.
-
-AI needed an equally clear boundary. In a controlled historical experiment, removing the provider observation made payment and capture timing uncertain. The model preserved that uncertainty, and the deterministic result stayed inconclusive. Missing evidence was not permission to invent a successful payment.
-
-## Accomplishments that we're proud of
-
-The central failure is understandable without installing a payment SDK or sharing credentials: one recorded checkout, two merchant outcomes, and evidence the reader can inspect and rerun.
-
-Separate real Sandbox tests verified authentic payment notifications and exact-event resend, and rejected an invalid signature without changing state. Another test stopped checkout after capture, before ticket creation; a restarted worker checked the same payment and delivered exactly one ticket in 4.07 seconds. These are specific, retained test results—not a claim that every workflow or production failure is solved.
+One customer complaint becomes a readable payment-to-delivery story and a test anyone can rerun without credentials. A real Sandbox test also recovered after checkout stopped following capture, delivering exactly one ticket in about four seconds. The separate 8 November run connected real payment evidence with AI-selected investigation steps.
 
 ## What we learned
 
-A payment result, a page message and a delivered ticket are different facts. Keeping them separate makes recovery easier to reason about. We also learned to preserve a failed test when it exposes a timing problem: changing the deadline would hide the problem rather than fix the product.
-
-AI is useful here when it asks for the next relevant observation and explains what remains unknown. The final financial and entitlement decision belongs to deterministic code.
+A successful payment and a delivered order are different facts. AI helps decide where to look next; it should not invent the answer when records are missing.
 
 ## What's next
 
-Broaden the evidence model beyond workshop tickets, test the workflow with merchant support teams, and improve handoff into their existing incident tools. The next validation work is the complete fresh investigation and repair journey; held-out discovery and the full operator workflow remain open. Features are frozen for this submission. The prototype does not claim production readiness or measured customer impact.
+Validate Shopify and WooCommerce connections with owned stores, broaden delivery promises and test the workflow with merchant support teams. General merchant onboarding and production payments remain future work.
 
 ## Built with
 
-Python, SQLite, JavaScript, TypeScript, PayPal Sandbox, AG Studio, Bryntum Community Scheduler, KERNEL, Modal, DeepSeek, Postman, Newman, unittest.
+Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST APIs, AG Studio, Bryntum Community Scheduler, KERNEL, Modal, DeepSeek, Postman, Newman.
 
 ## Try-it links
 
-- Current interactive recorded demo: https://crashcart.52.202.25.181.sslip.io/
-
-- Current working build and complete setup: https://github.com/himanshu748/crashcart#run-it-locally
-- Older hosted recorded preview: https://himanshu748.github.io/crashcart/
-- Public source: https://github.com/himanshu748/crashcart
-- Historical AI evidence: https://github.com/himanshu748/crashcart/blob/main/docs/AI_EVIDENCE.md
-- Optional Sandbox instructions: https://github.com/himanshu748/crashcart#optional-sandbox-test-buyer-path
-
-## Video URL — owner action required
-
-**Awaiting the owner's actual public YouTube watch URL.** Record the [175-second script](VIDEO_SCRIPT.md), inspect the export and verify signed-out access. Do not paste this placeholder into the video field or submit without the required video.
-
-## Prize selection notes — not part of the project story
-
-- **Best Use of PayPal + AI:** target. The [fresh local payment-and-AI flow](LIVE_FLOW.md) joins a newly captured Sandbox order, three actual model requests, cited delivery observations and a deterministic missing-ticket finding. Hosted live access remains open; the keyless walkthrough makes no AI calls.
-- **Most Impactful:** target. The [public replay tests](../tests/test_public_replay.py) demonstrate a concrete paid-without-ticket problem and timely healthy comparison. No adoption, support-time saving or commercial impact has been measured.
-- **AG Grid / Bryntum lanes:** do not present the keyless demo as proof of these optional full-workspace experiences. Their complete operator journey remains unverified; this submission scope adds no sponsor features to claim those lanes.
-
-The organizers determine eligibility. Video, repository and final form must agree with these claims. Submission deadline: **13 November 2026, 01:30 IST**. Judging ends **15 December 2026, 21:30 IST**. Sources: [event](https://paypalaihackathon.devpost.com/) and [rules](https://paypalaihackathon.devpost.com/rules), checked 4 November 2026.
-
-## Access and freeze — reviewed 8 November
-
-Keep the demonstrated build and credentials/trials through the 21 December winner announcement, with a 22 December UTC buffer. Freeze submitted source, video and links after the deadline until then. Hosting is optional. The required public video and complete PayPal-plus-AI access remain open; the private AG trial ends 17 December. [Current readiness and source](RULES_READINESS.md).
+- Recorded walkthrough: https://crashcart.52.202.25.181.sslip.io/
+- GitHub Pages older recorded preview: https://himanshu748.github.io/crashcart/
+- Source and local setup: https://github.com/himanshu748/crashcart
+- Completed payment-and-AI run: https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md
+- Video: **[OWNER: insert the actual public YouTube watch URL before submitting.]**

@@ -36,7 +36,7 @@ python3 -m crashcart migrate
 python3 -m crashcart serve
 ```
 
-In a second terminal run `python3 -m crashcart worker`. Open <http://127.0.0.1:8765>, sign in with your local workspace key, create a faulty-store check, approve the test purchase, confirm it, then ask the assistant to investigate. [The five-minute guide](docs/JUDGE_GUIDE.md) covers the buyer, settings and exact clicks. Provider response times can add time.
+In a second terminal run `python3 -m crashcart worker`. Open <http://127.0.0.1:8765>, sign in with your local workspace key, create a faulty-store check, approve the test purchase, confirm it, wait more than 60 seconds, choose **Check payment and delivery**, then **Ask the assistant**. [The five-minute guide](docs/JUDGE_GUIDE.md) covers the buyer, settings and exact clicks. Provider response times can add time.
 
 **PayPal:** creates/captures test orders and independently reads payment status. **AI:** chooses read-only evidence tools and explains the gap. [MIT licence](LICENSE) · [Video walkthrough](docs/VIDEO_SCRIPT.md) · [Source and setup details](#full-workspace-and-optional-live-test-payments).
 
