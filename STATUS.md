@@ -16,6 +16,8 @@ Final checks: **87 frontend tests, 45 timing tests, 7 presentation regressions a
 
 The final [video export](docs/VIDEO_CHECK.md) is **2:45, 6.52 MB, 1080p/30fps**, with burned-in text narration and no music/audio. It was recorded with Playwright from the actual app, using the saved 8 November payment/AI case and a clearly separate healthy replay. Final frames were inspected and the full MP4 decoded without errors. No new payment/model call, upload, public deployment or Devpost submission occurred. [Paste-ready Devpost text](docs/DEVPOST.md) stays under 600 words. Next: owner review/merge, publish the site changes, upload the MP4 as Public, replace the video placeholder and submit before the deadline. Original acceptance remains **47/60**; no CC check was closed by this packaging work.
 
+The final packet was freshly cloned from `ship/devpost` at `b8e3485` using the same documented branch-clone command. `./scripts/judge.sh --no-open --port 8767` served HTTP 200 and the updated landing copy; the README’s two replay commands again returned **exit 1 / paid_without_ticket / 0 tickets** and **exit 0 / ticket_delivered_once_on_time / 1 ticket**, both with zero network calls. [Draft PR #2](https://github.com/himanshu748/crashcart/pull/2) is open against unchanged main `900fa82`. All submission commits are on `ship/devpost`; the final status-only update does not change tested runtime source.
+
 ### Clean-clone quickstart
 
 Tested the pushed README commit `a6e971e` from a fresh network clone, without `.env`, provider keys, Node modules or installed Python packages. On this Mac, the prerequisite interpreter was selected with `export PATH=/opt/homebrew/opt/python@3.13/libexec/bin:$PATH`; `python3 --version` printed `Python 3.13.15`.
