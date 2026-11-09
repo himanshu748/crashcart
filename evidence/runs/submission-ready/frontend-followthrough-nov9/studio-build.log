@@ -1,0 +1,9 @@
+
+> crashcart-studio@0.1.0 build
+> npm run typecheck && node build.mjs
+
+
+> crashcart-studio@0.1.0 typecheck
+> tsc --noEmit
+
+sh: tsc: command not found

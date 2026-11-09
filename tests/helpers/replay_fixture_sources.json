@@ -1,0 +1,15 @@
+[
+  "crashcart/__init__.py",
+  "crashcart/judge.py",
+  "crashcart/replay.py",
+  "crashcart/replay_workspace.py",
+  "crashcart/store.py",
+  "crashcart/invariant.py",
+  "migrations/001_initial.sql",
+  "evidence/runs/paypal-live/early-response-loss-input.json",
+  "evidence/runs/submission-ready/ai-historical-summary.json",
+  "LICENSE",
+  "tests/helpers/prepare_replay_fixture.py",
+  "tests/helpers/replay_fixture.cjs",
+  "tests/helpers/replay_fixture_sources.json"
+]

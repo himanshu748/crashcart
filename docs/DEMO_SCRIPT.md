@@ -6,9 +6,10 @@ Use your own narration; no generated voice or music is required.
 
 ## Before recording
 
-Run `./scripts/judge.sh` with Python 3.13.15. Use a clean browser window containing
-only the recorded review. Choose **Product** in the navigation to start at the
-landing page. Increase the browser's text size if needed. Keep the
+The redesigned local build passes its full suite and isolated Linux checks.
+The hosted frontend still serves the earlier build. To use the current local build, run `./scripts/judge.sh --no-open` with
+Python 3.13.15 and open `http://127.0.0.1:8766/`. Use a clean browser window
+containing only this recorded example, starting at its product landing page. Increase the browser's text size if needed. Keep the
 “Recorded example · no new payment” disclosure visible and show the real interactions below.
 Do not expose `.env`, developer dashboards, buyer credentials or private licences.
 
@@ -21,13 +22,13 @@ still needs the original and fresh journey described in [open checks](OPEN_CHECK
 
 | Time | Screen and action | Narration |
 | --- | --- | --- |
-| 0:00–0:15 | Landing: “Paid is only half the story.” Show the three-step checkout illustration. | “A customer paid for a workshop ticket. The payment succeeded, but the ticket never arrived. CrashCart helps a store team find where that promise broke.” |
-| 0:15–0:30 | Select **Payment**, **The gap**, then **The repair**. Keep the replay disclosure in frame. | “The promise is specific: one twenty-nine-dollar ticket within sixty seconds of confirmed payment. This demonstration replays historical PayPal test records. No new payment or AI call is happening.” |
-| 0:30–0:50 | Choose **Explore an investigation**. Frame both outcome cards. | “Here is one recorded checkout, run through two merchant versions. The faulty version loses the payment response and leaves the customer with no ticket. The healthy version checks the payment independently and delivers one.” |
-| 0:50–1:15 | **Inspect the failed checkout**. Show checkout, payment and ticket facts; expand one relevant event. | “A successful payment screen alone cannot prove delivery. CrashCart keeps the customer's page observation, PayPal's payment record and the store's ticket state together. Deterministic rules decide whether the promise was kept.” |
-| 1:15–1:35 | Filter to **PayPal**, then **Ticket store**; return to **All sources**. | “The timeline lets a support or engineering team trace the evidence by source. These are saved observations with their original timing, not invented live activity.” |
-| 1:35–1:55 | Select **Repaired replay**. Show the one-ticket result and delivery time. Expand **Input identity and technical result**. | “The repaired comparison uses the same input and the same sixty-second deadline. We change the merchant behavior, not the expected answer. A separate late-read example still fails, so a late ticket cannot be disguised as a recovery.” |
-| 1:55–2:15 | **Download executable replay**. In a terminal run the archive's defective and healthy commands; frame their verdict/signature output. | “The finding travels with an executable replay. The defective merchant fails with a paid-without-ticket result. The healthy merchant passes. Anyone can rerun both locally without an account, key or licence.” |
+| 0:00–0:15 | Landing: “The customer paid. So where’s their ticket?” Show the record-connection illustration. | “A customer paid for a workshop ticket. The payment succeeded, but the ticket never arrived. CrashCart helps a store team find where that promise broke.” |
+| 0:15–0:30 | Select **1. The payment**, **2. The delivery**, then **3. The repair**. Keep the replay disclosure in frame. | “The promise is specific: one twenty-nine-dollar ticket within sixty seconds of confirmed payment. This demonstration replays historical PayPal test records. No new payment or AI call is happening.” |
+| 0:30–0:50 | Choose **Follow a recorded case**, then **Walk through the recorded case**, and frame the comparison just above it. Frame both outcome cards. | “Here is one recorded checkout, run through two merchant versions. The faulty version loses the payment response and leaves the customer with no ticket. The healthy version checks the payment independently and delivers one.” |
+| 0:50–1:15 | Select **Missed order**. Show checkout, payment and ticket facts; expand one relevant event. | “A successful payment screen alone cannot prove delivery. CrashCart keeps the customer's page observation, PayPal's payment record and the store's ticket state together. Deterministic rules decide whether the promise was kept.” |
+| 1:15–1:35 | Filter to **PayPal**, then **Ticket store**; return to **Everything**. | “The timeline lets a support or engineering team trace the evidence by source. These are saved observations with their original timing, not invented live activity.” |
+| 1:35–1:55 | Select **Recovered order (replay)**. Show the one-ticket result and delivery time. Expand **Result details**. | “The repaired comparison uses the same input and the same sixty-second deadline. We change the merchant behavior, not the expected answer. A separate late-read example still fails, so a late ticket cannot be disguised as a recovery.” |
+| 1:55–2:15 | **Replay test you can run on your computer, with no payment**. In a terminal run the archive's defective and healthy commands; frame their verdict/signature output. | “The finding travels with an executable replay. The defective merchant fails with a paid-without-ticket result. The healthy merchant passes. Anyone can rerun both locally without an account, key or licence.” |
 | 2:15–2:30 | Return to the page and show its limitations; briefly show README's integration table. | “The full workspace adds AG Studio records, Bryntum timing, KERNEL browser evidence and bounded model investigations through Modal. Those integrations have separate access and verification boundaries; this keyless review claims only recorded replay.” |
 | 2:30–2:40 | End on both outcome cards and repository URL. | “CrashCart turns a vague ‘I paid, but got nothing’ complaint into inspectable evidence and a repeatable test. Follow the payment. Check the promise.” |
 

@@ -6,12 +6,15 @@ import json
 import mimetypes
 import os
 import secrets
+import threading
+from types import MappingProxyType
 from http.cookies import SimpleCookie
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
 from .config import prerequisites
+from .faults import KINDS
 from .store import Store
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -19,8 +22,90 @@ ROOT = Path(__file__).resolve().parent.parent
 STUDIO_COLOR_SENSOR_STYLE_HASH = "'sha256-ydedGqCb79ipYJuuWRyOTMrKbkjYWv8WIjG7SRdnEPU='"
 
 
+# A single canonical public replay bundle per server. Request paths never select
+# an input fixture, private database or arbitrary file on disk.
+RECORDED_FILES = frozenset({"index.html", "product.html", "integrations.html", "demo.html", "app.js", "style.css",
+    "site.js", "data.json", "LICENSE", "downloads/input.json", "downloads/defective.json", "downloads/healthy.json", "downloads/replay.zip"})
+RECORDED_MAX_FILE = 8 * 1024 * 1024
+RECORDED_MAX_BUNDLE = 16 * 1024 * 1024
+_RECORDED_CACHE_INIT = threading.Lock()
+
+
+class _RecordedUnavailable(Exception):
+    pass
+
+
+class _RecordedBundle:
+    def __init__(self, builder):
+        self.builder = builder
+        self.lock = threading.Lock()
+        self.files = None
+        self.attempted = False
+
+    def get(self):
+        # No queue of waiting build threads and no per-path/per-user cache.
+        if not self.lock.acquire(blocking=False):
+            raise _RecordedUnavailable()
+        try:
+            if self.files is not None:
+                return self.files
+            if self.attempted:
+                raise _RecordedUnavailable()
+            self.attempted = True
+            try:
+                files = self.builder()
+                if not isinstance(files, dict) or set(files) != RECORDED_FILES:
+                    raise ValueError('Unexpected recorded bundle members')
+                total = 0
+                for name, item in files.items():
+                    if not isinstance(name, str) or not isinstance(item, tuple) or len(item) != 2:
+                        raise ValueError('Invalid recorded member')
+                    kind, body = item
+                    if (not isinstance(kind, str) or '\r' in kind or '\n' in kind
+                            or kind.split(';')[0] not in {'text/html', 'text/javascript', 'text/css', 'application/json', 'application/zip', 'text/plain'}
+                            or not isinstance(body, bytes) or len(body) > RECORDED_MAX_FILE):
+                        raise ValueError('Recorded member exceeds its boundary')
+                    total += len(body)
+                    if total > RECORDED_MAX_BUNDLE:
+                        raise ValueError('Recorded bundle exceeds its boundary')
+                self.files = MappingProxyType(dict(files))
+            except Exception:
+                # Remember failure: public refreshes cannot repeatedly launch a
+                # failing replay. A new reviewed server instance retries setup.
+                raise _RecordedUnavailable() from None
+            return self.files
+        finally:
+            self.lock.release()
+
+
+def _canonical_recorded_bundle():
+    from .judge import prepare_review
+    return prepare_review()
+
+
+def _server_recorded_bundle(server):
+    with _RECORDED_CACHE_INIT:
+        cache = getattr(server, '_recorded_public_bundle', None)
+        if cache is None:
+            # Injection is only available to a server constructor/test owner;
+            # no HTTP field can select this callable or fixture.
+            builder = getattr(server, '_recorded_bundle_builder', _canonical_recorded_bundle)
+            cache = _RecordedBundle(builder)
+            server._recorded_public_bundle = cache
+    return cache.get()
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "CrashCart/0.1"
+
+    def ui_capabilities(self):
+        """Describe the existing workspace's UI choices, never provider health.
+
+        The description limit is a presentation bound; action validation and
+        payment/fault authorization remain enforced by the existing API.
+        """
+        faults = KINDS if os.environ.get("CRASHCART_ALLOW_PROCESS_INTERRUPT") == "1" else KINDS - {"process_interrupt"}
+        return {"faults": sorted(faults), "max_promise_chars": 4000}
 
     def log_message(self, fmt, *args):
         # Avoid logging URLs that might carry provider return parameters.
@@ -84,13 +169,48 @@ class Handler(BaseHTTPRequestHandler):
     def store(self):
         return self.server.store
 
+    def reject_recorded_post(self, path):
+        if path == "/recorded" or path.startswith("/recorded/"):
+            self.send(405, {"error": "The recorded example is read-only. No payment or AI request was made."}, headers={"Allow": "GET"})
+            return True
+        return False
+
+    def recorded_get(self, path):
+        if path != "/recorded" and not path.startswith("/recorded/"):
+            return False
+        if path == "/recorded":
+            self.send(308, b"", "text/plain", {"Location": "/recorded/"})
+            return True
+        name = path[len("/recorded/"):] or "index.html"
+        if name not in RECORDED_FILES:
+            self.send(404, {"error": "Recorded page not found"})
+            return True
+        try:
+            files = _server_recorded_bundle(self.server)
+        except _RecordedUnavailable:
+            self.send(503, {"error": "The recorded example is unavailable or still preparing. Reload shortly. No payment or AI request was made."}, headers={"Retry-After": "1"})
+            return True
+        if name not in files:
+            self.send(404, {"error": "Recorded page not found"})
+            return True
+        kind, body = files[name]
+        # The canonical bundle already contains encoded JSON bytes. Preserve
+        # them instead of Handler.send serializing a Python object again.
+        if kind == "application/json":
+            kind = "application/json; charset=utf-8"
+        self.send(200, body, kind)
+        return True
+
     def do_GET(self):
         path = urlparse(self.path).path
         try:
+            if self.recorded_get(path):
+                return
             if path == "/healthz":
                 with self.store.connect() as db:
                     db.execute("SELECT 1").fetchone()
-                return self.send(200, {"status": "ok", "database": "ok", "service": "crashcart", "version": "0.1.0"})
+                return self.send(200, {"status": "ok", "database": "ok", "service": "crashcart", "version": "0.1.0",
+                                       "capabilities": self.ui_capabilities()})
             if path == "/api/fixture":
                 return self.send(200, {"id": "workshop-v1", "name": "The resilient systems workshop", "amount_minor": 2900, "currency": "USD", "recovery_seconds": 60, "promise": "One ticket within 60 seconds of confirmed payment."})
             if path.startswith("/api/"):
@@ -182,6 +302,8 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         path = urlparse(self.path).path
+        if self.reject_recorded_post(path):
+            return
         try:
             if not self.origin_allowed():
                 return self.send(403, {"error": "Cross-origin writes are rejected"})

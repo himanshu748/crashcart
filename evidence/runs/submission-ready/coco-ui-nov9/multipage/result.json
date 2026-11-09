@@ -1,0 +1,116 @@
+{
+  "status": "MULTIPAGE_SCOPED_PASS_RELEASE_BLOCKED",
+  "original_verified": 47,
+  "newly_verified_cc_ids": [],
+  "single_page_required_by_agents": false,
+  "checked_agents": [
+    "global",
+    "private repository",
+    "public worktree"
+  ],
+  "prior_candidate": {
+    "frontend_tests": {
+      "passed": 73,
+      "failed": 0,
+      "skipped": 0,
+      "duration_ms": 1601.014542
+    },
+    "judge_tests": {
+      "tests": 15,
+      "result": "OK",
+      "seconds": 30.712
+    },
+    "full_attempt_1": {
+      "tests": 551,
+      "errors": 1,
+      "seconds": 445.434,
+      "cause": "delayed-capture fixture setup failed before the target fault; scope fixed, unchanged .2-second target, both targeted tests passed"
+    },
+    "full_attempt_2": {
+      "tests": 551,
+      "failures": 1,
+      "errors": 2,
+      "seconds": 539.959,
+      "source_unchanged": true,
+      "failed_checks": [
+        "local model success MODEL_TIMEOUT at2seconds",
+        "network-denied replay subprocess timeout15seconds",
+        "slow-header server.accepted false"
+      ],
+      "root_cause": "unproven; no deadline relaxed",
+      "state": "STOPPED after two failed full runs"
+    },
+    "review": "source/visual clear; release blocked",
+    "downloaded_replay": "manifest PASS; defective FAIL paid_without_ticket exit1; healthy PASS ticket_delivered_once_on_time exit0; zero network attempts",
+    "browser": "prior local checks retained; last screenshot/control inventory timed out twice, paused"
+  },
+  "new_scope": {
+    "model": "Auto Intelligent",
+    "actual_model": "claude-opus-5-5",
+    "session_id": "9e189918-40b4-40e0-aded-9d0f54aab8a0",
+    "pages": [
+      "Home",
+      "Product",
+      "Integrations",
+      "Recorded Example"
+    ],
+    "dashboard": "existing separate authenticated workspace",
+    "state": "implemented; scoped local tests and browser checks passed; release blocked"
+  },
+  "new_paypal_payments": 0,
+  "new_product_model_calls": 0,
+  "design_inference_used": true,
+  "pushed": false,
+  "deployed": false,
+  "next": "Diagnose the three retained full-suite failures without changing deadlines; finish current workspace/image/release proof before push or deployment.",
+  "current_checks": {
+    "frontend": {
+      "passed": 87,
+      "failed": 0,
+      "skipped": 0,
+      "duration_ms": 296.568167,
+      "log": "multipage/frontend-final.log"
+    },
+    "judge_replay": {
+      "tests": 16,
+      "seconds": 1.205,
+      "result": "OK",
+      "log": "multipage/judge-final.log"
+    },
+    "actual_http": {
+      "tests": 1,
+      "seconds": 0.616,
+      "result": "OK",
+      "proof": "multipage/recorded-namespace-final-rebind-v4-proof.json"
+    },
+    "browser": {
+      "proof": "multipage/browser/interaction-observations.json",
+      "scope": [
+        "four real public pages",
+        "Product keyboard slider; missing at60 waiting,61 broken; immediate timely ticket pass; late and duplicate fail",
+        "integration filters1/6/7cards",
+        "saved repair1ticket32.26s; USD29; PayPal4of15steps",
+        "page navigation by Enter",
+        "390/320 widths, no document overflow",
+        "motion stopped at4s and preference shared between pages"
+      ],
+      "limitations": [
+        "new full-workspace navigation not browser-rechecked",
+        "no OS-level motion/VoiceOver/zoom proof",
+        "not current hosted source or new Docker image"
+      ]
+    }
+  },
+  "secret_scan": {
+    "exit_code": 1,
+    "findings": 16,
+    "omitted": 65,
+    "scope": "tracked working-tree blobs only; excludes new untracked files",
+    "state": "not a clean release scan; flagged test credential assignments need classification, binaries omitted"
+  },
+  "independent_review": {
+    "result": "SCOPED_MULTIPAGE_PASS_RELEASE_BLOCKED",
+    "path": "multipage/independent-review.json",
+    "scope": "28sources,9screenshots, actual interactions, exact v4 HTTP proof; no new blocker; no full-suite/image/host clearance"
+  }
+}

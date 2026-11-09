@@ -1,0 +1,44 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            BuildKit is currently disabled; enable it by removing the DOCKER_BUILDKIT=0
+            environment-variable.
+
+Sending build context to Docker daemon  236.9MB
+Step 1/14 : ARG PYTHON_IMAGE
+Step 2/14 : FROM ${PYTHON_IMAGE}
+ ---> e48f59cdba69
+Step 3/14 : ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
+ ---> Running in 3c1aa9dedcc3
+ ---> Removed intermediate container 3c1aa9dedcc3
+ ---> 738e706083a7
+Step 4/14 : WORKDIR /app
+ ---> Running in 6617f5d00c23
+ ---> Removed intermediate container 6617f5d00c23
+ ---> fc87ad5db317
+Step 5/14 : COPY crashcart/ /app/crashcart/
+ ---> b0b8a1197dd2
+Step 6/14 : COPY migrations/ /app/migrations/
+ ---> 533dc3607c9b
+Step 7/14 : COPY web/index.html web/app.js web/style.css web/marketing.js /app/web/
+ ---> 1ff5af863fb8
+Step 8/14 : COPY web/judge/index.html web/judge/product.html web/judge/integrations.html web/judge/demo.html web/judge/app.js web/judge/style.css web/judge/site.js /app/web/judge/
+ ---> 9fdd008683a4
+Step 9/14 : COPY evidence/runs/paypal-live/early-response-loss-input.json /app/evidence/runs/paypal-live/early-response-loss-input.json
+ ---> e7e3b13ed790
+Step 10/14 : COPY evidence/runs/submission-ready/ai-historical-summary.json /app/evidence/runs/submission-ready/ai-historical-summary.json
+ ---> 4ab02cd6c5dc
+Step 11/14 : COPY LICENSE /app/LICENSE
+ ---> 15ae3dc539f8
+Step 12/14 : USER 10001:10001
+ ---> Running in 3ef991c28f7f
+ ---> Removed intermediate container 3ef991c28f7f
+ ---> 8b22af3cf736
+Step 13/14 : ENTRYPOINT ["python", "-m", "crashcart.hosted_live"]
+ ---> Running in 27105bd5c97b
+ ---> Removed intermediate container 27105bd5c97b
+ ---> 0214d3fec93d
+Step 14/14 : CMD ["api"]
+ ---> Running in 9b407bc2c362
+ ---> Removed intermediate container 9b407bc2c362
+ ---> 2bb66bf1e83e
+Successfully built 2bb66bf1e83e
+Successfully tagged crashcart-live:frontend-nov9

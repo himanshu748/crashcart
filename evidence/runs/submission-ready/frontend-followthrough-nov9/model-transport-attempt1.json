@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/opt/homebrew/bin/python3.13",
+    "-W",
+    "error::ResourceWarning",
+    "-m",
+    "unittest",
+    "tests.test_model_transport.WallClockTransportTests.test_active_dripping_headers_and_body_are_disconnected_at_total_deadline",
+    "tests.test_model_transport.WallClockTransportTests.test_worker_success_private_stdin_and_no_redirect",
+    "-v"
+  ],
+  "cwd": "/Users/himanshujha/Documents/ChatGPT/paypal/var/coco-ui-redesign-nov9/auto-intelligent/worktree",
+  "environment_keys": [
+    "PATH",
+    "PYTHONDONTWRITEBYTECODE"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 4.35889566699916,
+  "source_before": {
+    "tests/test_model_transport.py": "6779b7ef84dd88170d3d727343a6ec47514b45cb62da9a252b978e4ab0fbdc65",
+    "crashcart/model_transport.py": "d2f51695bd6ad905f155be1754910cc4646daf1050d0c0304e2d044bf19e7191",
+    "crashcart/held_out.py": "23b0e99179d0061c58c8aa8dc5c8b98a132d0ba769c94838c41d594845a88e44"
+  },
+  "source_after": {
+    "tests/test_model_transport.py": "6779b7ef84dd88170d3d727343a6ec47514b45cb62da9a252b978e4ab0fbdc65",
+    "crashcart/model_transport.py": "d2f51695bd6ad905f155be1754910cc4646daf1050d0c0304e2d044bf19e7191",
+    "crashcart/held_out.py": "23b0e99179d0061c58c8aa8dc5c8b98a132d0ba769c94838c41d594845a88e44"
+  },
+  "source_unchanged": true,
+  "full_output_log": "/Users/himanshujha/Documents/ChatGPT/paypal/var/coco-ui-redesign-nov9/release-diagnosis/model-transport-attempt1.log",
+  "full_output_sha256": "2a08f49b6d5bd66fec88002b188823335c131fd799f1897450206b183b6c3591",
+  "scope": "Exact two selected loopback/synthetic tests; no full suite, provider call or source edit"
+}

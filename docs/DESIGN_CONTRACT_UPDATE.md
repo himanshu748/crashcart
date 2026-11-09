@@ -2,6 +2,14 @@
 
 The owner requested CC IDs and descriptions aligned with the new design decisions, then requested a stale-item audit. Existing **CC-001–CC-060 IDs remain stable** so historical artifacts and dependencies do not point at different requirements. No requirement is removed, renumbered or marked done by this edit.
 
+## 9 November — owner chooses a multi-page site
+
+The owner explicitly replaced the earlier rich single-page brief with a multi-page product site. Neither the global nor repository AGENTS.md mandates a single page; those files were checked and left unchanged.
+
+The public site has four distinct destinations: Home (`index.html`), Product (`product.html`), Integrations (`integrations.html`) and the working recorded example (`demo.html`). The authenticated dashboard stays separate. Navigation uses real page URLs and must work under a project subpath. The local connected app provides the same public example under a read-only `/recorded/` namespace, with existing private API authentication unchanged.
+
+This direction authorizes frontend layout, page navigation, export and the routing needed to make those pages work. It does not authorize a new provider, account, payment, paid plan or deployment. It does not change the USD29/one-ticket/60-second rule or turn the recorded example into a live store. The new page/route proof must be exercised afresh. The earlier candidate and both failed full-suite runs remain preserved; the earlier two full-suite failures remain preserved. A later fresh frozen-source run passed560 Python tests, with separate current browser and image proof. Original private acceptance stays 47/60, with no new CC checkmarks.
+
 ## Current product surfaces
 
 - **Public entry:** a warm, user-facing landing page with an interactive keyless recorded investigation, case comparison, inspectable records and executable download. It makes no new payment or model call.

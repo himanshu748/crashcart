@@ -68,6 +68,17 @@ class BackgroundInvestigationTests(unittest.TestCase):
         with self.store.connect() as db:
             return dict(db.execute("SELECT * FROM jobs WHERE run_id=?", (self.run["id"],)).fetchone())
 
+    def test_local_health_describes_available_fault_choices_without_execution(self):
+        normal = {"none", "response_loss", "event_delay", "event_duplicate"}
+        for allowed in ("0", "1", "", "true"):
+            with self.subTest(allow_process_interrupt=allowed), patch.dict(os.environ, {"CRASHCART_ALLOW_PROCESS_INTERRUPT": allowed}):
+                status, health = self.request("GET", "/healthz", auth=False)
+                self.assertEqual(status, 200)
+                self.assertEqual(set(health["capabilities"]["faults"]),
+                                 normal | ({"process_interrupt"} if allowed == "1" else set()))
+                self.assertEqual(health["capabilities"]["max_promise_chars"], 4000)
+        self.assertEqual((self.model.calls, self.provider.calls), (0, 0))
+
     def test_http_acknowledges_queue_without_inference_and_deduplicates_across_restart(self):
         with patch("crashcart.investigator.Investigation", side_effect=AssertionError("Enqueue must not start analysis")):
             first_status, first = self.request("POST")

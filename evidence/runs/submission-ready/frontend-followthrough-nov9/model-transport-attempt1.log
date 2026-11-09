@@ -1,0 +1,7 @@
+test_active_dripping_headers_and_body_are_disconnected_at_total_deadline (tests.test_model_transport.WallClockTransportTests.test_active_dripping_headers_and_body_are_disconnected_at_total_deadline) ... ok
+test_worker_success_private_stdin_and_no_redirect (tests.test_model_transport.WallClockTransportTests.test_worker_success_private_stdin_and_no_redirect) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.198s
+
+OK

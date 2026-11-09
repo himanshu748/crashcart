@@ -1,0 +1,20 @@
+✔ illustration agrees with checker: missing at59 (5.874416ms)
+✔ illustration agrees with checker: missing at60 (0.228291ms)
+✔ illustration agrees with checker: missing at61 (0.099917ms)
+✔ illustration agrees with checker: delivered at8 observed at8 (0.111333ms)
+✔ illustration agrees with checker: delivered at8 observed at20 (0.10875ms)
+✔ illustration agrees with checker: delivered at60 (0.096375ms)
+✔ illustration agrees with checker: late ticket still pending at60 (0.086167ms)
+✔ illustration agrees with checker: late ticket at61 (0.083375ms)
+✔ illustration agrees with checker: late at75 (0.135917ms)
+✔ illustration agrees with checker: duplicate not issued yet (0.203583ms)
+✔ illustration agrees with checker: duplicate at11 (0.201625ms)
+✔ illustration agrees with checker: duplicate at90 (0.150833ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 618.941208

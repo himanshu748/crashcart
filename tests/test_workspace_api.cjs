@@ -1,39 +1,13 @@
-const {test}=require('node:test');
-const assert=require('node:assert/strict');
-const fs=require('node:fs');
-const vm=require('node:vm');
-const source=fs.readFileSync(require('node:path').join(__dirname,'../web/app.js'),'utf8');
-const api=source.slice(source.indexOf('async function api('),source.indexOf('\nfunction text(',source.indexOf('async function api(')));
-const messages=source.slice(source.indexOf('function errorMessage('),source.indexOf('\nfunction showError('));
-function request(body,status=200,payload){
- const calls=[];const context=vm.createContext({readableText:x=>x,fetch:async(path,options)=>{calls.push({path,options});return new Response(body,{status});}});
- vm.runInContext(api+'\n'+messages,context);
- return {result:context.api('/api/runs/local-only/order',payload),calls,context};
-}
-test('valid response retains identity and structured API rejection retains code',async()=>{
- assert.equal((await request('{"id":"local-case"}').result).id,'local-case');
- await assert.rejects(request('{"error":"SCOPED_ACCESS_REQUIRED"}',401).result,{message:'SCOPED_ACCESS_REQUIRED'});
-});
-for(const [name,body,status] of [['HTML','<html>unavailable</html>',502],['empty','',503],['malformed','{',503],['null','null',200],['array','[]',200],['string','"ok"',200]]){
- test(name+' failed POST is dispatched once with unchanged payload and a readable error',async()=>{
-  const payload={purchase:'LOCAL_TEST',request_id:'do-not-repeat'};
-  const {result,calls,context}=request(body,status,payload);
-  await assert.rejects(result,{message:'HTTP_RESPONSE_UNAVAILABLE'});
-  assert.equal(calls.length,1);assert.equal(calls[0].options.method,'POST');
-  assert.equal(calls[0].options.body,JSON.stringify(payload));
-  assert.match(context.errorMessage('HTTP_RESPONSE_UNAVAILABLE'),/^Couldn’t load this update\./);
-  assert.doesNotMatch(context.errorMessage('HTTP_RESPONSE_UNAVAILABLE'),/payment failed|SyntaxError|Unexpected token/i);
- });
-}
-test('connection rejection has one dispatch and no invented result',async()=>{
- let calls=0;const context=vm.createContext({fetch:async()=>{calls++;throw new TypeError('Failed to fetch');}});
- vm.runInContext(api,context);await assert.rejects(context.api('/local-only',{}),{message:'Failed to fetch'});assert.equal(calls,1);
-});
-test('startup rejection reaches the visible login message and connection details',async()=>{
- const nodes=new Map();const $=id=>{if(!nodes.has(id))nodes.set(id,{hidden:id==='workspace',textContent:''});return nodes.get(id);};
- const show=source.slice(source.indexOf('function showError('),source.indexOf('\nlet current'));
- const boot=source.slice(source.lastIndexOf("refresh().then(async"),source.lastIndexOf('\nsetInterval('));
- const context=vm.createContext({$,text:(id,value)=>$(id).textContent=value,readableText:x=>x,refresh:()=>Promise.reject(new Error('HTTP_RESPONSE_UNAVAILABLE'))});
- $('login-panel').hidden=true;vm.runInContext(messages+'\n'+show+'\n'+boot,context);await new Promise(resolve=>setImmediate(resolve));
- assert.equal($('login-panel').hidden,false);assert.match($('login-message').textContent,/Couldn’t load this update/);assert.equal($('login-error-details').hidden,false);assert.equal($('login-error-code').textContent,'HTTP_RESPONSE_UNAVAILABLE');
-});
+const {test}=require('node:test');const assert=require('node:assert/strict');
+const {loadMain,details,response,backend}=require('./helpers/ui_vm.cjs');
+test('valid API identity and structured rejection remain available',async()=>{const p=loadMain({fetch:async()=>response({id:'local-case'})});assert.equal((await p.ui.api('/local')).id,'local-case');const q=loadMain({fetch:async()=>response({error:'SCOPED_ACCESS_REQUIRED',code:'SCOPED_ACCESS_REQUIRED'},401)});await assert.rejects(q.ui.api('/local'),e=>e.status===401&&e.code==='SCOPED_ACCESS_REQUIRED');});
+for(const [name,body,status] of [['HTML','<html>unavailable</html>',502],['empty','',503],['malformed','{',503],['null','null',200],['array','[]',200],['string','"ok"',200]])test(name+' failed POST dispatches once with unchanged payload and usable uncertainty',async()=>{const p=loadMain({fetch:async()=>new Response(body,{status})});const payload={purchase:'LOCAL_TEST',request_id:'do-not-repeat'};await assert.rejects(p.ui.api('/local/order',payload),e=>e.message==='HTTP_RESPONSE_UNAVAILABLE'&&e.uncertain===true);assert.equal(p.calls.length,1);assert.equal(p.calls[0][1].body,JSON.stringify(payload));assert.match(p.ui.errorMessage('HTTP_RESPONSE_UNAVAILABLE'),/couldn’t read.*reply/i);assert.doesNotMatch(p.ui.errorMessage('HTTP_RESPONSE_UNAVAILABLE'),/payment failed|SyntaxError|Unexpected token/i);});
+test('disconnected POST has one dispatch and no invented payment result',async()=>{const p=loadMain({fetch:async()=>{throw TypeError('Failed to fetch');}});await assert.rejects(p.ui.api('/local',{}),e=>e.message==='NETWORK_UNAVAILABLE'&&e.uncertain);assert.equal(p.calls.length,1);});
+test('startup rejection reaches a visible recovery view and technical details',async()=>{const p=loadMain({fetch:async()=>new Response('<html>unavailable</html>',{status:502})});await p.ui.openWorkspace();assert.equal(p.nodes.get('offline-panel').hidden,false);assert.match(p.nodes.get('offline-message').textContent,/couldn’t read.*reply/i);assert.equal(p.nodes.get('offline-code').textContent,'HTTP_RESPONSE_UNAVAILABLE');assert.equal(p.nodes.get('offline-details').hidden,false);});
+test('minor-unit payment and store displays represent 2900 as 29, never 2900 dollars',async()=>{const d=details('run-money',{paid:true,ticket:true});d.events.push({id:'event-provider-read',run_id:d.run.id,purchase_id:d.purchase.id,order_id:d.purchase.order_id,source:'provider',event_type:'independent_order_read',observed_at:'2026-11-09T00:00:20Z',payload:{}});const p=loadMain({url:'http://localhost/shop?run=run-money',fetch:backend(new Map([[d.run.id,d]]))});await p.ui.refresh();assert.match(p.ui.money(2900,'USD'),/29[.,]00/);assert.doesNotMatch(p.nodes.get('store-price').textContent,/2[,.]?900/);assert.match(p.nodes.get('provider-detail').textContent||p.ui.money(2900,'USD'),/29[.,]00/);});
+for(const variant of ['paid','unpaid','uncertain'])test('cancel URL preserves '+variant+' payment uncertainty and never waives delivery',()=>{const d=details('run-cancel',{paid:variant==='paid'});if(variant==='uncertain'){d.purchase.order_id='ORDER-UNCERTAIN';d.purchase.payment_state='UNRESOLVED';}const p=loadMain({url:'http://localhost/cancel?run=run-cancel'});p.ui.renderFlow(d);const text=p.nodes.get('flow-banner').textContent;assert.match(text,/cancellation link/i);assert.doesNotMatch(text,/no ticket is due|isn.t complete|before approving|payment failed/i);if(variant==='paid')assert.match(text,/records confirm this payment/);else assert.match(text,/does not establish whether payment completed/);});
+for(const change of ['run-purchase','purchase-run','merchant-run','merchant-purchase','merchant-order','ticket-purchase','verdict-run','verdict-purchase','verdict-order'])test('detail identity rejects '+change,()=>{const p=loadMain();const d=details('run-owned',{paid:true,ticket:true});const ids={run_id:d.run.id,purchase_id:d.purchase.id,order_id:d.purchase.order_id};d.events=[{id:'event-result',run_id:d.run.id,purchase_id:d.purchase.id,order_id:d.purchase.order_id,event_type:'invariant_result',source:'checker',payload:{verdict:'PASS',source_ids:ids}}];assert.equal(p.ui.validDetails(d,d.run.id),true);if(change==='run-purchase')d.run.purchase_id='foreign';if(change==='purchase-run')d.purchase.run_id='foreign';if(change==='merchant-run')d.merchant.run_id='foreign';if(change==='merchant-purchase')d.merchant.purchase_id='foreign';if(change==='merchant-order')d.merchant.order_id='foreign';if(change==='ticket-purchase')delete d.merchant.tickets[0].purchase_id;if(change.startsWith('verdict-'))ids[change.split('-')[1]+'_id']='foreign';assert.equal(p.ui.validDetails(d,d.run.id),false);});
+test('ticket without purchase identity is never copyable; unrelated verdict is never selected',()=>{const p=loadMain(),d=details('run-owned',{paid:true,ticket:true});delete d.merchant.tickets[0].purchase_id;assert.equal(p.ui.oneTicket(d.merchant,d.purchase),null);assert.equal(p.ui.latestVerdict([{event_type:'invariant_result',run_id:'foreign',payload:{verdict:'PASS'}}],d.run,d.purchase),null);});
+test('server capability required for process interruption and checked again before submit',async()=>{const p=loadMain();const process=p.nodes.get('fault').options.find(o=>o.value==='process_interrupt');assert.equal(process.disabled,true);assert.equal(process.hidden,true);p.nodes.get('promise').value='My customer issue';p.nodes.get('fault').value='process_interrupt';await p.nodes.get('new-run').trigger('submit');assert.equal(p.calls.length,0);p.ui.applyCapabilities({faults:['none','process_interrupt'],max_promise_chars:4000});assert.equal(process.disabled,false);assert.equal(p.nodes.get('promise').maxLength,4000);p.ui.applyCapabilities({faults:['none','response_loss'],max_promise_chars:1000});assert.equal(process.disabled,true);assert.equal(p.nodes.get('promise').maxLength,1000);});
+
+test('a saved cancellation-page observation is a return link, never proof that approval was cancelled',async()=>{const d=details('run-cancel-observation',{paid:true});d.events.push({id:'event-cancel-page',run_id:d.run.id,purchase_id:d.purchase.id,order_id:d.purchase.order_id,source:'browser',event_type:'customer_observation',observed_at:'2026-11-09T00:00:20Z',payload:{browser_kind:'LOCAL_BROWSER',url_path:'/cancel',visible_text:'The saved records confirm this payment.'}});const p=loadMain({url:'http://localhost/?run=run-cancel-observation',fetch:backend(new Map([[d.run.id,d]]))});await p.ui.refresh();assert.equal(p.nodes.get('customer-title').textContent,'Returned through cancellation link');assert.doesNotMatch(p.nodes.get('customer-title').textContent,/approval cancelled|payment cancelled/i);assert.match(p.nodes.get('customer-detail').textContent,/records confirm this payment/);});

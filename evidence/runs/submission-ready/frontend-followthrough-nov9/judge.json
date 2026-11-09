@@ -1,0 +1,8 @@
+{
+  "command": [
+    "./scripts/test-judge.sh"
+  ],
+  "exit_code": 0,
+  "seconds": 2.206,
+  "scope": "offline/local tests; no fresh provider proof"
+}

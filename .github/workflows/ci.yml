@@ -19,8 +19,9 @@ jobs:
       - run: python -m compileall -q crashcart scripts tests
       - run: node --check web/app.js
       - run: node --check web/marketing.js
-      - run: node --test tests/test_judge_ui.cjs
+      - run: node --test tests/test_workspace_api.cjs tests/test_background_ui.cjs tests/test_judge_ui.cjs tests/test_site_illustration.cjs
       - run: python -m unittest discover -v
+      - run: ./scripts/test-judge.sh
       - run: python scripts/verify_foundation.py
       - run: python -m crashcart prerequisites
       # No provider credentials or external transactions. These local checks do

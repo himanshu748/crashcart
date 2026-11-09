@@ -1,0 +1,23 @@
+[
+  {
+    "page": "Home",
+    "h1": "The customer paid.So where’s their ticket?",
+    "scroll": 390,
+    "title": "CrashCart · Find out why a paid order wasn’t delivered",
+    "width": 390
+  },
+  {
+    "page": "Integrations",
+    "h1": "Follow the order across your tools.",
+    "scroll": 390,
+    "title": "Integrations · What CrashCart connects to",
+    "width": 390
+  },
+  {
+    "page": "Recorded example",
+    "h1": "One paid order.Follow it to the missing ticket.",
+    "scroll": 390,
+    "title": "CrashCart · Find out why a paid order wasn’t delivered · Recorded example",
+    "width": 390
+  }
+]

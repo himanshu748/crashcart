@@ -1,0 +1,39 @@
+{
+  "commands": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 108.311,
+      "scope": "offline/local tests; no fresh provider proof"
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "tests/test_workspace_api.cjs",
+        "tests/test_background_ui.cjs",
+        "tests/test_judge_ui.cjs",
+        "tests/test_site_illustration.cjs"
+      ],
+      "exit_code": 0,
+      "seconds": 2.285,
+      "scope": "offline/local tests; no fresh provider proof"
+    },
+    {
+      "command": [
+        "./scripts/test-judge.sh"
+      ],
+      "exit_code": 0,
+      "seconds": 2.206,
+      "scope": "offline/local tests; no fresh provider proof"
+    }
+  ],
+  "unchanged": true,
+  "changed": []
+}

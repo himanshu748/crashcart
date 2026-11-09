@@ -1,0 +1,76 @@
+{
+  "commands": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.13/libexec/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 108.311,
+      "scope": "offline/local tests; no fresh provider proof"
+    },
+    {
+      "command": [
+        "node",
+        "--test",
+        "tests/test_workspace_api.cjs",
+        "tests/test_background_ui.cjs",
+        "tests/test_judge_ui.cjs",
+        "tests/test_site_illustration.cjs"
+      ],
+      "exit_code": 0,
+      "seconds": 2.285,
+      "scope": "offline/local tests; no fresh provider proof"
+    },
+    {
+      "command": [
+        "./scripts/test-judge.sh"
+      ],
+      "exit_code": 0,
+      "seconds": 2.206,
+      "scope": "offline/local tests; no fresh provider proof"
+    }
+  ],
+  "unchanged": true,
+  "changed": [],
+  "original_verified": 47,
+  "newly_verified_cc_ids": [],
+  "new_provider_calls": 0,
+  "new_payments": 0,
+  "pushed": false,
+  "deployed": false,
+  "full_python": {
+    "tests": 560,
+    "seconds": 107.997,
+    "result": "OK"
+  },
+  "frontend": {
+    "tests": 87,
+    "seconds_ms": 876.49,
+    "result": "PASS"
+  },
+  "judge": {
+    "tests": 16,
+    "result": "OK"
+  },
+  "historical_failures": "Retained unchanged; exact three focused tests now pass, prior root cause remains unproven; no deadline/validator changes",
+  "workspace": {
+    "navigation": "actual Handler Product/Integrations/Example routes and return; browser login/session retained",
+    "phone": "390px no document overflow, case visible",
+    "data": "synthetic disposable records, outbound denied",
+    "fixture_failure": "initial checker event lacked purchase/order IDs and was rejected; fixed only fixture identities"
+  },
+  "packaging": {
+    "result": "PASS_LOCAL",
+    "image": "image-proof.json",
+    "runtime_files": 43,
+    "linux_tests": 35,
+    "studio_build": "PASS after pinned dependencies installed; initial missing-dependency failures retained",
+    "studio_deadline_tests": 45,
+    "scope": "no secrets, public ports, external provider calls or host activation"
+  },
+  "next": "Independent review, secret review and authorized source commit/push; hosted update and original release gate remain separate"
+}

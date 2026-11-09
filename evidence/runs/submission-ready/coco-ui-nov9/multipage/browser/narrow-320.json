@@ -1,0 +1,17 @@
+[
+  {
+    "page": "Product",
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "page": "Integrations",
+    "scroll": 320,
+    "width": 320
+  },
+  {
+    "page": "Home",
+    "scroll": 320,
+    "width": 320
+  }
+]

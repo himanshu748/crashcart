@@ -1,0 +1,6 @@
+test_actual_public_pages_data_downloads_and_read_only_auth_boundaries (tests.test_recorded_namespace.RecordedNamespaceActualReplayTests.test_actual_public_pages_data_downloads_and_read_only_auth_boundaries) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.616s
+
+OK

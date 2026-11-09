@@ -1,96 +1,146 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Catch the gap between a successful payment and a fulfilled order. Explore a real recorded checkout with CrashCart.">
-  <title>CrashCart — from payment to promise</title>
-  <link rel="stylesheet" href="style.css"><script src="app.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CrashCart · Find out why a paid order wasn’t delivered</title>
+  <meta name="description" content="CrashCart lines up the PayPal payment, your store’s delivery record and the promise you made, so you can see whether a paid order was delivered and where it broke if it wasn’t.">
+  <meta name="color-scheme" content="light">
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
 </head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="CrashCart home"><span class="mark" aria-hidden="true">↳</span> CrashCart</a>
-    <nav aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#investigation">See it in action</a><a href="#ai-story">AI at work</a></nav>
-    <span class="mode">Interactive recorded demo</span>
-  </header>
-  <main id="main">
-    <section class="intro" id="home" aria-labelledby="page-title">
-      <div class="intro-copy"><p class="eyebrow"><span aria-hidden="true"></span> FOR THE ORDERS THAT FALL THROUGH</p>
-        <h1 id="page-title">They paid.<br><em>Now keep the promise.</em></h1>
-        <p class="lead">A payment can succeed while an order goes nowhere. CrashCart brings the payment and fulfilment story together, so you can see the gap before answering “Where’s my order?”</p>
-        <a class="primary" href="#investigation">See a missing order <span aria-hidden="true">↘</span></a>
-        <p class="micro-note">Try the recorded example. No sign-up. No new payment.</p>
-      </div>
-      <aside class="promise" aria-label="Interactive checkout walkthrough" data-story="payment">
-        <div class="story-header"><span class="small-label">A CUSTOMER’S $29 TICKET</span><span class="story-counter" id="story-counter">01 / 03</span></div>
-        <svg class="flow-art" viewBox="0 0 400 125" role="img" aria-label="A confirmed payment flows through the store to a ticket. The walkthrough highlights the missing delivery and the repaired replay.">
-          <path class="flow-line" d="M80 60 H320"/><path class="flow-path" d="M80 60 H320"/>
-          <g class="flow-payment"><rect x="16" y="26" width="80" height="66" rx="10"/><path d="M36 48 H76 M36 60 H51 M36 70 H64"/><circle cx="85" cy="30" r="13"/><path d="m79 30 4 4 8-9"/></g>
-          <g class="flow-store"><rect x="162" y="28" width="76" height="64" rx="10"/><path d="M177 51 H223 M180 60 V78 H220 V60 M190 78 V62 H207 V78"/><path d="M175 51 181 40 H219 L225 51"/></g>
-          <g class="flow-ticket"><path d="M309 28 H384 V48 Q372 60 384 72 V92 H309 V72 Q321 60 309 48 Z"/><path d="M347 40 V80 M324 45 H335 M324 74 H335"/></g>
-        </svg>
-        <div class="story-copy" id="story-copy" aria-live="polite"><span class="story-status" id="story-status">Payment confirmed</span><h2 id="story-title">The payment went through.</h2><p id="story-description">PayPal’s saved record confirms the $29 payment. That tells us the money arrived—not whether the customer got their ticket.</p></div>
-        <div class="story-controls" aria-label="Walk through the checkout"><button data-story="payment" aria-pressed="true">1. Payment</button><button data-story="delivery" aria-pressed="false">2. The gap</button><button data-story="repair" aria-pressed="false">3. The repair</button></div>
-        <p class="promise-note">One ticket. $29. Within 60 seconds.<br>Follow the payment → spot the gap → compare the repair.</p>
-      </aside>
-    </section>
-    <section class="value-strip" id="how-it-works" aria-label="How CrashCart helps"><div><span>01</span><h2>Start with the payment.</h2><p>See a confirmed PayPal payment alongside the order it was meant to fulfil.</p></div><div><span>02</span><h2>Find what’s missing.</h2><p>Did the customer get what they paid for, within the time you promised?</p></div><div><span>03</span><h2>Understand the next step.</h2><p>Follow the failed order, then see how a payment recheck recovers the ticket.</p></div></section>
-    <div id="load-state" class="notice" role="status">Loading the recorded investigation…</div>
-    <div id="review" hidden>
-      <section id="investigation" aria-labelledby="comparison-title">
-        <div class="section-heading"><div><p class="eyebrow">THE MOMENT THAT MATTERS</p><h2 id="comparison-title">Payment received. Customer still waiting.</h2></div><span class="quiet">Same $29 · same 60-second promise</span></div>
-        <div class="comparison-grid">
-          <article class="outcome broken"><div class="card-top"><span class="small-label">THE MISSED ORDER</span><span class="result-tag">Promise broken</span></div>
-            <h3>Payment arrived.<br>The ticket didn’t.</h3><p>The payment reply was lost. The store failed to recover and deliver the ticket.</p>
-            <dl><div><dt>Confirmed payment</dt><dd>$29.00</dd></div><div><dt>Tickets delivered</dt><dd id="defective-count">—</dd></div><div><dt>Delivery deadline</dt><dd>60s</dd></div></dl>
-            <p class="finding" id="defective-finding"></p><button class="select-case" data-case="defective" aria-pressed="true">Follow the missed order <span aria-hidden="true">↗</span></button>
-          </article>
-          <article class="outcome repaired"><div class="card-top"><span class="small-label">THE RECOVERED ORDER · REPLAY</span><span class="result-tag">Promise kept</span></div>
-            <h3>A second check.<br>One delivered ticket.</h3><p>The repaired store checks PayPal again. The payment is confirmed, and one ticket is created.</p>
-            <dl><div><dt>Confirmed payment</dt><dd>$29.00</dd></div><div><dt>Tickets delivered</dt><dd id="healthy-count">—</dd></div><div><dt>Ticket after payment</dt><dd id="healthy-time">—</dd></div></dl>
-            <p class="finding">The same recorded checkout, with the recovery applied. No duplicate ticket.</p><button class="select-case" data-case="healthy" aria-pressed="false">See how it was recovered <span aria-hidden="true">↗</span></button>
-          </article>
-        </div>
-      </section>
-      <section id="evidence" aria-labelledby="evidence-title">
-        <div class="section-heading"><div><p class="eyebrow">THE ORDER STORY</p><h2 id="evidence-title" tabindex="-1">Every step in one place.</h2></div><a id="download-case" class="text-link" href="downloads/defective.json" download>Save this order’s records ↓</a></div>
-        <div class="evidence-toolbar"><div><span class="small-label">VIEWING</span><p id="selected-name" aria-live="polite">Failed checkout</p></div><div class="segmented" aria-label="Choose checkout"><button data-case="defective" aria-pressed="true">Failed checkout</button><button data-case="healthy" aria-pressed="false">Repaired replay</button></div></div>
-        <div class="facts" id="facts"></div>
-        <details class="order-records"><summary>Open the payment and order timeline</summary><div class="timeline-heading"><h3>What happened, and when</h3><label>Show records from <select id="source-filter"><option value="all">All sources</option><option value="provider">PayPal</option><option value="browser">Checkout page</option><option value="merchant">Ticket store</option><option value="harness">Connection interruption</option></select></label></div>
-        <p class="quiet" id="timeline-count" role="status"></p><ol class="timeline" id="timeline"></ol></details>
-        <details class="technical"><summary>Developer details</summary><p>Both variants use this identical recorded input. The saved source labels document provenance; they do not independently authenticate historical provider activity.</p><pre id="technical-result"></pre></details>
-      </section>
-    </div>
-    <section id="ai-story" class="ai-demo" aria-labelledby="ai-title">
-      <div class="ai-intro"><div><p class="eyebrow">THE NEXT USEFUL QUESTION</p><h2 id="ai-title">Check the payment.<br>Then check the promise.</h2></div><p>In an earlier investigation, DeepSeek used PayPal’s payment record to choose what to inspect next. Follow the three recorded steps.</p></div>
-      <p class="ai-context">Earlier recorded case · 26 October 2026 · a separate order from the comparison above</p>
-      <p id="ai-unavailable" class="ai-fallback">The recorded steps are unavailable here. <a href="https://github.com/himanshu748/crashcart/blob/main/docs/AI_EVIDENCE.md">Read the saved investigation ↗</a></p>
-      <div id="ai-story-panel" class="ai-layout" hidden>
-        <div class="ai-steps" role="group" aria-label="Explore the recorded AI investigation">
-          <button type="button" data-ai-step="0" aria-pressed="true"><span aria-hidden="true">01</span><span>Confirm the payment<small>PayPal record</small></span><span aria-hidden="true">↗</span></button>
-          <button type="button" data-ai-step="1" aria-pressed="false"><span aria-hidden="true">02</span><span>Find the ticket<small>Store record</small></span><span aria-hidden="true">↗</span></button>
-          <button type="button" data-ai-step="2" aria-pressed="false"><span aria-hidden="true">03</span><span>Check the promise<small>Payment + fulfilment</small></span><span aria-hidden="true">↗</span></button>
-        </div>
-        <article class="ai-answer" aria-live="polite" aria-atomic="true"><div class="ai-answer-top"><span class="small-label" id="ai-step-count"></span><span class="ai-recorded">Recorded investigation</span></div><div id="ai-answer-copy"><h3 id="ai-question"></h3><p class="ai-label">What was known</p><p id="ai-known"></p><p class="ai-label">Next step</p><p id="ai-next"></p><details class="ai-record"><summary>Read the recorded reasoning</summary><p id="ai-reasoning"></p></details><div class="ai-takeaway"><span class="small-label">WHY THIS MATTERS</span><p id="ai-takeaway"></p></div></div></article>
-      </div>
-      <div class="ai-caption"><p>DeepSeek on Modal · existing PayPal Sandbox payment · no new payment or AI request on this page</p><a href="https://github.com/himanshu748/crashcart/blob/main/docs/AI_EVIDENCE.md">About this recorded case ↗</a></div>
-    </section>
-      <section class="next-chapter" aria-labelledby="next-title"><div><p class="eyebrow">BEYOND ONE CHECKOUT</p><h2 id="next-title">Fewer tabs.<br>Fewer unanswered orders.</h2></div><div><p>The next step is a store inbox: paid orders, fulfilment deadlines and the orders that need your attention, together.</p><p>Our local monitoring preview includes Shopify and WooCommerce webhook readers. Real-store connection and payment matching are still being completed.</p><a class="text-link" href="https://github.com/himanshu748/crashcart/blob/main/docs/MONITOR_SETUP.md">Explore the local monitoring preview ↗</a></div></section>
-      <section id="questions" class="faq" aria-labelledby="faq-title"><div><p class="eyebrow">A FEW USEFUL ANSWERS</p><h2 id="faq-title">Before you dive in.</h2></div><div>
-        <details><summary>Is this a live payment?</summary><p>No. You’re exploring a recorded PayPal Sandbox checkout. The failed and recovered outcomes use the same historical payment observations and the same 60-second promise. No money moves when you use this page.</p></details>
-        <details><summary>What actually went wrong?</summary><p>Our test store lost the reply after payment capture. The payment succeeded, but the store never created the ticket. The recovery checks PayPal again before creating exactly one ticket. This is a merchant recovery problem, not a PayPal vulnerability.</p></details>
-        <details><summary>Can I connect my shop today?</summary><p>You can run the monitoring preview locally and configure owned test stores. It is not a hosted merchant service yet. No real store has been connected; Shopify payment matching, customer accounts and installation are still in progress.</p></details>
-        <details><summary>Where does AI help?</summary><p>In the separately configured workspace, an AI investigator suggests what to check next. Payment and ticket rules decide the result. This recorded demo makes no AI calls. <a class="text-link" href="#ai-story">Explore the recorded investigation ↘</a></p></details>
-        <details><summary>Can I run the example myself?</summary><div class="reproduce" id="reproduce"><p>Download the replay, unzip it and run these commands with Python 3.11 or newer. No keys or installation needed.</p><a class="text-link" href="downloads/replay.zip" download>Download the runnable example ↓</a><pre>python3 -m crashcart.replay run input.json --merchant defective
-# Expected: FAIL · paid_without_ticket · exit 1
+<body class="page-home">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-python3 -m crashcart.replay run input.json --merchant healthy
-# Expected: PASS · ticket_delivered_once_on_time · exit 0</pre><a class="text-link" href="downloads/input.json" download>Original input ↓</a></div></details>
-        <details><summary>How are these results produced?</summary><p id="execution-note"></p><p>The local app runs the actual ticket rules at startup. The hosted page shows results computed when the site was built. The repaired outcome is a replay, not a fresh payment or a deployed fix. Original checkout video is unavailable; saved page observations are included.</p></details>
-      </div></section>
-      <section class="closing"><p class="eyebrow">FROM PAYMENT TO PROMISE</p><h2>“Paid” shouldn’t be<br>where the story ends.</h2><a class="primary" href="#investigation">Explore the order <span aria-hidden="true">↗</span></a></section>
-    <noscript><p class="notice">Enable JavaScript to explore the recorded example, or <a href="downloads/replay.zip">download the executable replay</a> and follow its README.</p></noscript>
+  <header class="bar">
+    <a class="brand" href="index.html" aria-label="CrashCart home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <rect class="mark-bg" x="1" y="1" width="30" height="30" rx="9"/>
+        <path class="mark-line" d="M7.5 10h2.6l2.4 10.2h9.4l2-7.4H11.4"/>
+        <circle class="mark-dot" cx="13.6" cy="24" r="1.6"/>
+        <circle class="mark-dot" cx="20.6" cy="24" r="1.6"/>
+        <path class="mark-crack" d="M17.6 6.5l-1.8 3.4 2.4.9-1.6 3.2"/>
+      </svg>
+      CrashCart
+    </a>
+    <nav class="bar-nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="product.html">Product</a>
+      <a href="integrations.html">Integrations</a>
+      <a href="demo.html">Recorded example</a>
+    </nav>
+    <label class="motion-toggle">
+      <input type="checkbox" id="reduce-motion">
+      <span>Reduce motion</span>
+    </label>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="product" aria-labelledby="home-title">
+      <div class="product-copy">
+        <p class="eyebrow">For merchants who sell instant deliveries</p>
+        <h1 id="home-title">The customer paid.<br><em>So where’s their ticket?</em></h1>
+        <p class="lead">CrashCart lines up the PayPal payment, your store’s delivery record and the promise you made. It tells you plainly whether a paid order was delivered, and where it broke if it wasn’t.</p>
+        <div class="product-actions">
+          <a class="btn btn-signal" href="demo.html">Follow a recorded case</a>
+          <a class="btn btn-outline-light" href="product.html">See how it works</a>
+        </div>
+        <p class="product-fine">Built around one owned workshop test store: a $29 ticket, promised within 60 seconds of payment, paid with PayPal Sandbox test money. Nothing on this page takes a payment or contacts PayPal.</p>
+      </div>
+      <figure class="glance">
+        <ol class="glance-list" aria-label="What CrashCart compares">
+          <li><span class="glance-who">PayPal</span><span class="glance-says">Payment completed</span></li>
+          <li class="is-alert"><span class="glance-who">Your store</span><span class="glance-says">No ticket issued</span></li>
+          <li class="is-verdict"><span class="glance-who">Your promise</span><span class="glance-says">No ticket after 60s</span></li>
+          <li class="is-kept"><span class="glance-who">Next step</span><span class="glance-says">Find where it stopped</span></li>
+        </ol>
+        <figcaption><span class="tag">Illustration</span> One payment, one delivery record, one promise to check them against.</figcaption>
+      </figure>
+    </section>
+
+    <section class="band" aria-labelledby="gap-title">
+      <p class="eyebrow">The gap</p>
+      <h2 class="section-title" id="gap-title">“Paid” and “delivered” are two different records</h2>
+      <p class="band-lead">A completed payment tells you the money arrived. It doesn’t tell you the customer got what they paid for. When the two disagree, someone has to read both systems side by side. CrashCart does that reading for you.</p>
+      <div class="facts">
+        <div class="fact">
+          <span class="small-label">1 · Payment</span>
+          <h3 class="fact-main">Did the money arrive?</h3>
+          <p>CrashCart reads the payment straight from PayPal, not from the page the customer saw.</p>
+        </div>
+        <div class="fact fact-bad">
+          <span class="small-label">2 · Delivery</span>
+          <h3 class="fact-main">Did the store deliver?</h3>
+          <p>It checks your store for the ticket linked to that exact payment.</p>
+        </div>
+        <div class="fact fact-good">
+          <span class="small-label">3 · Promise</span>
+          <h3 class="fact-main">Was the promise kept?</h3>
+          <p>The same fixed rule every time: one ticket, within 60 seconds of payment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band-alt" aria-labelledby="decides-title">
+      <p class="eyebrow">Who decides</p>
+      <h2 class="section-title" id="decides-title">The records decide. The assistant helps you look.</h2>
+      <div class="split">
+        <article class="split-card split-rule">
+          <p class="small-label">Fixed code</p>
+          <h3>Says whether the promise held</h3>
+          <ul>
+            <li>Reads the payment and the delivery records</li>
+            <li>Applies one written rule</li>
+            <li>Gives the same answer for the same records</li>
+          </ul>
+        </article>
+        <article class="split-card split-ai">
+          <p class="small-label">AI assistant, in the background</p>
+          <h3>Suggests where to look next</h3>
+          <ul>
+            <li>Works through the records one question at a time</li>
+            <li>Runs within set limits, and you can stop it</li>
+            <li>Never decides the payment or delivery result</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="band" aria-labelledby="next-title">
+      <p class="eyebrow">Where to next</p>
+      <h2 class="section-title" id="next-title">Pick your next step</h2>
+      <div class="next-cards">
+        <a class="next-card is-primary" href="demo.html">
+          <span class="compare-kicker">Recorded example</span>
+          <h3>A customer paid $29. The ticket never came.</h3>
+          <p>Step through saved records from a real PayPal test checkout, then the repaired store replayed against the same payment.</p>
+          <span class="next-go">Open the recorded case →</span>
+        </a>
+        <a class="next-card" href="product.html">
+          <span class="compare-kicker">Product</span>
+          <h3>How a check works</h3>
+          <p>Move a payment through the 60-second promise yourself and see how the answer changes.</p>
+          <span class="next-go">See the product →</span>
+        </a>
+        <a class="next-card" href="integrations.html">
+          <span class="compare-kicker">Integrations</span>
+          <h3>What it connects to</h3>
+          <p>PayPal Sandbox, the background assistant and the tools around them, with clear notes on where each one stops.</p>
+          <span class="next-go">See integrations →</span>
+        </a>
+      </div>
+    </section>
   </main>
-  <footer><a class="brand" href="#home"><span class="mark" aria-hidden="true">↳</span> CrashCart</a><p>From a successful payment to a delivered promise.</p><label class="motion-control"><input type="checkbox" id="reduce-motion"> Reduce motion</label><a class="text-link" href="LICENSE">MIT licence</a><a class="text-link" href="https://github.com/himanshu748/crashcart">Source & setup ↗</a></footer>
+
+  <footer class="foot">
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="product.html">Product</a>
+      <a href="integrations.html">Integrations</a>
+      <a href="demo.html">Recorded example</a>
+    </nav>
+    <p class="fine"><a href="LICENSE">MIT licence</a></p>
+    <p class="fine">Checking your own orders happens in a separate, private CrashCart workspace. This public site doesn’t sign you in or connect a store.</p>
+  </footer>
 </body>
 </html>

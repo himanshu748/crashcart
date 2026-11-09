@@ -24,7 +24,7 @@ INPUT = ROOT / "evidence/runs/paypal-live/early-response-loss-input.json"
 INPUT_SHA256 = "07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288"
 AI_HISTORY = ROOT / "evidence/runs/submission-ready/ai-historical-summary.json"
 AI_HISTORY_SHA256 = "152c1c77dfcc219b32d7ae36c06ad7b39a35656e95f54f87a6691fe95010c8fb"
-ASSETS = ("index.html", "app.js", "style.css")
+ASSETS = ("index.html", "product.html", "integrations.html", "demo.html", "app.js", "style.css", "site.js")
 
 
 def json_bytes(value):
@@ -247,7 +247,7 @@ def main(argv=None):
     server = make_server(prepare_review(), args.host, args.port)
     port = server.server_address[1]
     display_host = "127.0.0.1" if args.host in {"0.0.0.0", "::"} else args.host
-    url = f"http://{display_host}:{port}/#investigation"
+    url = f"http://{display_host}:{port}/demo.html#investigation"
     print(f"CrashCart recorded review: {url}\nBoth outcomes recomputed at launch. No new payment or service call.\nPress Ctrl+C to stop.", flush=True)
     if not args.no_open:
         webbrowser.open(url)

@@ -1,0 +1,6 @@
+test_export_runs_in_clean_directory_without_network_and_detects_tampering (tests.test_replay.ReplayTests.test_export_runs_in_clean_directory_without_network_and_detects_tampering) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.145s
+
+OK

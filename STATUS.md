@@ -2,6 +2,28 @@
 
 **Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 9 November 2026 (India).
 
+## 9 November — full local release checks pass on the multi-page source
+
+Continued the local release checks at the owner’s request. The three previously failing tests passed unchanged in isolation. A fresh frozen-source run then passed **560 Python tests in 107.997s**, **87 frontend tests**, and **16 judge/replay checks**. The earlier failures remain recorded; their root cause was not reproduced or proven. No model/transport/replay deadline, invariant, validator or acceptance condition changed. [Commands, full outputs and source hashes](evidence/runs/submission-ready/frontend-followthrough-nov9/result.json).
+
+Actual browser checks also opened the workspace through the production Handler using disposable synthetic records, followed Product/Integrations/Example through `/recorded/` and returned to the same authenticated case. At 390px the case remained visible with no page overflow. The first test record lacked matching purchase/order IDs on its checker event and was correctly rejected; only that fixture was corrected. This is not a fresh PayPal or AI run.
+
+**Verified 47/60; newly verified CC IDs: none.** All 13 original open checks retain their states. The actual deployment image built with its pinned base; all43 runtime hashes match and35 isolated Linux checks pass without networking, credentials or public ports. The optional Studio tools typecheck/build and45 deadline checks pass after installing the pinned dependencies; initial missing-dependency failures remain recorded. A first image-test launch failed before execution because the existing VM does not share this host path. A test-only child image added just tests and two public deployment files, preserving all runtime hashes; no host sharing was expanded. The clean-directory foundation check also passes. Nothing has been pushed or deployed in this continuation. Independent publication review passed with source hashes matched. The full staged-text scan found one unchanged synthetic test-token assignment and omitted no files; manual review classified it as a fixture, with no real credentials found. Next: commit and push the verified source within existing authority. The protected-host activation, real-provider proof and public video remain separate open gates.
+
+## 9 November — four-page frontend checked locally; release blocked
+
+Global, private repository and public worktree AGENTS.md contain no single-page mandate and were left unchanged. The owner replaced the earlier rich one-page brief with separate **Home, Product, Integrations and Recorded Example** pages, plus the existing authenticated workspace. CoCo completed that version using Auto Intelligent. Real page URLs, project-subpath links, exports and the read-only public example route are implemented in the isolated candidate.
+
+**87 focused frontend tests passed**, including 12 comparisons of the illustration against the unchanged backend rule. **16 judge/replay tests passed in 1.205s**; actual canonical replay HTTP passed in 0.616s with all 20 source/input hashes unchanged. Actual browser checks covered page navigation, the inclusive deadline (60s waiting; 61s failed), late/duplicate delivery, the repaired recorded order (one ticket at 32.26s), PayPal filtering, integration filters, keyboard navigation, 390/320-pixel layouts and the shared motion switch. The illustration is labelled synthetic; the separate recorded example makes no new payment or AI call. [Source-bound result and evidence](evidence/runs/submission-ready/coco-ui-nov9/result.json).
+
+Independent review found no new blocker in the four-page source, actual browser evidence or exact HTTP asset proof. Its scoped pass does not clear the release gate. [Review receipt](evidence/runs/submission-ready/coco-ui-nov9/multipage/independent-review.json).
+
+The earlier candidate, screenshot/control timeouts and both failed full-suite runs remain recorded. The first 551-test run had one setup error; fault scoping was repaired without extending the 0.2-second target, and both affected tests passed. The second unchanged-source 551-test run had two errors and one failure: model worker 2-second timeout, offline replay subprocess 15-second timeout, and slow-header acceptance check. Their cause remains unproven. No third full-suite run was attempted. The full release step stays paused under the two-failure rule. New workspace-navigation browser proof, current Docker image and hosted update remain unverified; the secret scan flagged fixture assignments and omitted binaries, so no clean release scan is claimed. No push or deployment occurred.
+
+**Verified 47/60; newly verified CC IDs: none.** CC-035 failed; CC-036/038/041/056/060 blocked; CC-046/048/050/057 implemented-unverified; CC-040/042 in progress; CC-059 pending. The original private accepted build stays frozen. Affected public UI/export/access proof is reopened; these narrower candidate passes do not transfer original acceptance. No new PayPal payment, product-model call, service, billing change, hosting activation or Devpost submission occurred.
+
+Next: diagnose the retained full-suite failures with unchanged deadlines, complete the current workspace/image/release checks, and resolve the paused release gate before publication. Foley live activation remains separately paused. Project incomplete.
+
 ## Current delivery
 
 ### 9 November — exact-preservation hostname fix

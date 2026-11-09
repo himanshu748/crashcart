@@ -1,6 +1,6 @@
 # CrashCart
 
-**A successful payment should lead to a fulfilled order.**
+**Find out why a paid order wasn’t delivered.**
 
 “I paid, but nothing arrived.” For a small shop, that message means searching
 payment records, order history and fulfilment updates while a customer waits.
@@ -65,7 +65,7 @@ cd crashcart
 ./scripts/judge.sh
 ```
 
-It opens the comparison at <http://127.0.0.1:8766/#investigation>. No API keys,
+It opens the comparison at <http://127.0.0.1:8766/demo.html#investigation>. No API keys,
 PayPal login, vendor licence, Node installation or package download is needed.
 Tested with Python **3.13.15**. Stop with **Ctrl+C**; use `--no-open` on a machine
 without a desktop or `--port 8767` if the default port is busy.
@@ -77,6 +77,22 @@ calls. The original faulty-checkout video is unavailable; the saved page and
 payment observations are included. See [replay details](#reproduce-the-comparison)
 for the commands and [the recorded AI investigation](docs/AI_EVIDENCE.md) for
 the separate historical DeepSeek workflow. The current source build also presents that earlier case as an interactive payment → ticket → promise walkthrough. Its recorded order is separate from the faulty checkout; viewing it makes no new AI or payment call.
+
+## The current frontend
+
+The local candidate has separate Home, Product, Integrations and Recorded Example
+pages. Home explains the merchant’s problem; Product lets you try the deadline
+rule; Integrations explains each tool; the example follows the payment and repair.
+The private workspace brings the delivery answer and next action forward; case history and setup tuck away on a phone. PayPal
+confirmation and background investigation use the existing workspace APIs.
+
+![CrashCart’s redesigned recorded landing page, explaining the gap between payment and delivery](evidence/runs/submission-ready/coco-ui-nov9/multipage/browser/home-final-desktop.jpg)
+
+*Shown locally with saved checkout records. This frontend has not been deployed;
+the hosted link above serves the earlier version. The full local run passes 560 Python tests, 87 frontend checks and 16 replay checks.
+The deployment image also passes 35 isolated Linux checks. These results establish
+local behavior, not a new hosted or provider run. See the
+[current result](evidence/runs/submission-ready/frontend-followthrough-nov9/result.json).*
 
 ## A daily inbox for paid orders
 

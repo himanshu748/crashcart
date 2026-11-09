@@ -1,0 +1,95 @@
+{
+  "boundary60": {
+    "answer": "Waiting for delivery",
+    "state": "waiting",
+    "time": "60"
+  },
+  "boundary61": {
+    "answer": "Paid, but the promise broke",
+    "state": "broken",
+    "time": "61"
+  },
+  "lateResult": {
+    "answer": "Delivered late",
+    "delivery": "1 ticket at 75s",
+    "time": "90"
+  },
+  "twiceResult": {
+    "answer": "Paid, but the promise broke",
+    "delivery": "2 tickets",
+    "time": "90"
+  },
+  "motionStop": {
+    "play": "Play from payment",
+    "pressed": "false",
+    "time": "4"
+  },
+  "mobileChecks": [
+    {
+      "page": "Home",
+      "h1": "The customer paid.So where\u2019s their ticket?",
+      "scroll": 390,
+      "title": "CrashCart \u00b7 Find out why a paid order wasn\u2019t delivered",
+      "width": 390
+    },
+    {
+      "page": "Product",
+      "width": 390,
+      "scroll": 390
+    },
+    {
+      "page": "Integrations",
+      "h1": "Follow the order across your tools.",
+      "scroll": 390,
+      "title": "Integrations \u00b7 What CrashCart connects to",
+      "width": 390
+    },
+    {
+      "page": "Recorded example",
+      "h1": "One paid order.Follow it to the missing ticket.",
+      "scroll": 390,
+      "title": "CrashCart \u00b7 Find out why a paid order wasn\u2019t delivered \u00b7 Recorded example",
+      "width": 390
+    }
+  ],
+  "narrowChecks": [
+    {
+      "page": "Product",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "page": "Integrations",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "page": "Home",
+      "scroll": 320,
+      "width": 320
+    },
+    {
+      "page": "Recorded example",
+      "width": 320,
+      "scroll": 320
+    }
+  ],
+  "restoredPreferenceOff": true,
+  "integrationFilters": {
+    "storePreview": "1 of7; Shopify/WooCommerce preview only",
+    "workspace": "6 of7",
+    "all": "7 of7"
+  },
+  "navigation": "actual page URLs, Home to Product by Enter",
+  "recordedResult": "Missed0; recovered1 in32.26s; USD29.00; PayPal filter4of15",
+  "limitations": [
+    "Main workspace new nav not browser-rechecked in this pass",
+    "OS reduced-motion setting not changed; in-page preference tested",
+    "Full Python suite remains failed; no release claim"
+  ],
+  "harness_errors_retained": [
+    "Old frozen preview showed previous filter labels; restarted owned preview before using changed labels.",
+    "Recorded example label capitalization and Play from payment accessible name corrected after no-match; no repeated blind clicks.",
+    "Initial timeline attempt remained at0/1, excluded from deadline proof; corrected Home/End/arrows verified60/61."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "decision": "No AGENTS.md inspected requires a single-page site; previous rich one-page brief replaced by owner-requested four-page site.",
+  "files": [
+    {
+      "scope": "global",
+      "sha256": "89695770431f932ca3fe1ffb3febe094a3f7ba0bf37c0f8e9d559a9153e94283",
+      "single_page_phrase_lines": [],
+      "modified": false
+    },
+    {
+      "scope": "private repository",
+      "sha256": "922b84a0771bc4520ffb887ef1366d0f95c2606a223ede64e334ae516654d881",
+      "single_page_phrase_lines": [],
+      "modified": false
+    },
+    {
+      "scope": "public worktree",
+      "sha256": "bdcd1a3f2cb5f84fc66c523eb130d4e1afdc7f5031dddab41d658d6da1a53ef3",
+      "single_page_phrase_lines": [],
+      "modified": false
+    }
+  ]
+}

@@ -1,0 +1,445 @@
+TAP version 13
+# Subtest: queued/running never claim finished analysis or successful delivery
+ok 1 - queued/running never claim finished analysis or successful delivery
+  ---
+  duration_ms: 244.879125
+  ...
+# Subtest: failed/cancelled/missing final results retain uncertainty
+ok 2 - failed/cancelled/missing final results retain uncertainty
+  ---
+  duration_ms: 0.926625
+  ...
+# Subtest: simulated analysis stays labelled; records decide delivery
+ok 3 - simulated analysis stays labelled; records decide delivery
+  ---
+  duration_ms: 0.911458
+  ...
+# Subtest: background lifecycle does not leave stale queue acknowledgement false
+ok 4 - background lifecycle does not leave stale queue acknowledgement false
+  ---
+  duration_ms: 350.019125
+  ...
+# Subtest: background lifecycle does not leave stale queue acknowledgement true
+ok 5 - background lifecycle does not leave stale queue acknowledgement true
+  ---
+  duration_ms: 5.225208
+  ...
+# Subtest: assistant finding belongs only to selected case null
+ok 6 - assistant finding belongs only to selected case null
+  ---
+  duration_ms: 1.241208
+  ...
+# Subtest: assistant finding belongs only to selected case run_id
+ok 7 - assistant finding belongs only to selected case run_id
+  ---
+  duration_ms: 1.599041
+  ...
+# Subtest: assistant finding belongs only to selected case purchase_id
+ok 8 - assistant finding belongs only to selected case purchase_id
+  ---
+  duration_ms: 0.972958
+  ...
+# Subtest: assistant finding belongs only to selected case order_id
+ok 9 - assistant finding belongs only to selected case order_id
+  ---
+  duration_ms: 1.029958
+  ...
+# Subtest: pending Stop A does not prevent stopping selected case B
+ok 10 - pending Stop A does not prevent stopping selected case B
+  ---
+  duration_ms: 10.499875
+  ...
+# Subtest: late ambiguous capture cannot overwrite completed Stop
+ok 11 - late ambiguous capture cannot overwrite completed Stop
+  ---
+  duration_ms: 3.866334
+  ...
+# Subtest: order readback loss retains uncertainty/ack and blocks payment retry
+ok 12 - order readback loss retains uncertainty/ack and blocks payment retry
+  ---
+  duration_ms: 1.347375
+  ...
+# Subtest: capture readback loss retains uncertainty/ack and blocks payment retry
+ok 13 - capture readback loss retains uncertainty/ack and blocks payment retry
+  ---
+  duration_ms: 0.965959
+  ...
+# Subtest: reconcile readback loss retains uncertainty/ack and blocks payment retry
+ok 14 - reconcile readback loss retains uncertainty/ack and blocks payment retry
+  ---
+  duration_ms: 1.283625
+  ...
+# Subtest: investigation-job readback loss retains uncertainty/ack and blocks payment retry
+ok 15 - investigation-job readback loss retains uncertainty/ack and blocks payment retry
+  ---
+  duration_ms: 2.524458
+  ...
+# Subtest: lost order reply and failed GET cannot be repeated; authoritative identity resolves it
+ok 16 - lost order reply and failed GET cannot be repeated; authoritative identity resolves it
+  ---
+  duration_ms: 1.738042
+  ...
+# Subtest: late Create retains newer selection and refreshes the new case into history
+ok 17 - late Create retains newer selection and refreshes the new case into history
+  ---
+  duration_ms: 2.951458
+  ...
+# Subtest: order INTENDED journal remains uncertain after reload
+ok 18 - order INTENDED journal remains uncertain after reload
+  ---
+  duration_ms: 2.4435
+  ...
+# Subtest: capture INTENDED journal remains uncertain after reload
+ok 19 - capture INTENDED journal remains uncertain after reload
+  ---
+  duration_ms: 1.106375
+  ...
+# Subtest: Unavailable response explains recovery without provider claims
+ok 20 - Unavailable response explains recovery without provider claims
+  ---
+  duration_ms: 99.280125
+  ...
+# Subtest: Malformed JSON does not expose parser jargon
+ok 21 - Malformed JSON does not expose parser jargon
+  ---
+  duration_ms: 2.098083
+  ...
+# Subtest: Disconnected network leaves a safe usable state
+ok 22 - Disconnected network leaves a safe usable state
+  ---
+  duration_ms: 0.768083
+  ...
+# Subtest: Invalid comparison never displays successful results
+ok 23 - Invalid comparison never displays successful results
+  ---
+  duration_ms: 1.158583
+  ...
+# Subtest: Partially parsed case is discarded before walkthrough reuse
+ok 24 - Partially parsed case is discarded before walkthrough reuse
+  ---
+  duration_ms: 1.640208
+  ...
+# Subtest: actual canonical replay accepts both genuine outcomes despite generated identity differences
+ok 25 - actual canonical replay accepts both genuine outcomes despite generated identity differences
+  ---
+  duration_ms: 316.708
+  ...
+# Subtest: reject changed/uncorrelated replay: canonical-input
+ok 26 - reject changed/uncorrelated replay: canonical-input
+  ---
+  duration_ms: 3.566708
+  ...
+# Subtest: reject changed/uncorrelated replay: promise
+ok 27 - reject changed/uncorrelated replay: promise
+  ---
+  duration_ms: 1.958125
+  ...
+# Subtest: reject changed/uncorrelated replay: missing-network
+ok 28 - reject changed/uncorrelated replay: missing-network
+  ---
+  duration_ms: 2.364667
+  ...
+# Subtest: reject changed/uncorrelated replay: receipt-network
+ok 29 - reject changed/uncorrelated replay: receipt-network
+  ---
+  duration_ms: 2.272375
+  ...
+# Subtest: reject changed/uncorrelated replay: receipt-fresh
+ok 30 - reject changed/uncorrelated replay: receipt-fresh
+  ---
+  duration_ms: 2.206084
+  ...
+# Subtest: reject changed/uncorrelated replay: receipt-mode
+ok 31 - reject changed/uncorrelated replay: receipt-mode
+  ---
+  duration_ms: 2.301
+  ...
+# Subtest: reject changed/uncorrelated replay: execution-network
+ok 32 - reject changed/uncorrelated replay: execution-network
+  ---
+  duration_ms: 1.558834
+  ...
+# Subtest: reject changed/uncorrelated replay: deadline
+ok 33 - reject changed/uncorrelated replay: deadline
+  ---
+  duration_ms: 9.174958
+  ...
+# Subtest: reject changed/uncorrelated replay: ticket-purchase
+ok 34 - reject changed/uncorrelated replay: ticket-purchase
+  ---
+  duration_ms: 11.080166
+  ...
+# Subtest: reject changed/uncorrelated replay: merchant-run
+ok 35 - reject changed/uncorrelated replay: merchant-run
+  ---
+  duration_ms: 1.909792
+  ...
+# Subtest: reject changed/uncorrelated replay: merchant-order
+ok 36 - reject changed/uncorrelated replay: merchant-order
+  ---
+  duration_ms: 2.608875
+  ...
+# Subtest: reject changed/uncorrelated replay: receipt-purchase
+ok 37 - reject changed/uncorrelated replay: receipt-purchase
+  ---
+  duration_ms: 3.072084
+  ...
+# Subtest: reject changed/uncorrelated replay: source-map
+ok 38 - reject changed/uncorrelated replay: source-map
+  ---
+  duration_ms: 2.902333
+  ...
+# Subtest: reject changed/uncorrelated replay: verdict-source
+ok 39 - reject changed/uncorrelated replay: verdict-source
+  ---
+  duration_ms: 2.243584
+  ...
+# Subtest: reject changed/uncorrelated replay: event-run
+ok 40 - reject changed/uncorrelated replay: event-run
+  ---
+  duration_ms: 2.342375
+  ...
+# Subtest: reject changed/uncorrelated replay: missing-timezone
+ok 41 - reject changed/uncorrelated replay: missing-timezone
+  ---
+  duration_ms: 3.967792
+  ...
+# Subtest: recorded AI knowledge progression preserves original data and never calls providers
+ok 42 - recorded AI knowledge progression preserves original data and never calls providers
+  ---
+  duration_ms: 3.353292
+  ...
+# Subtest: invalid optional AI history leaves checkout working: missing
+ok 43 - invalid optional AI history leaves checkout working: missing
+  ---
+  duration_ms: 3.563209
+  ...
+# Subtest: invalid optional AI history leaves checkout working: fresh
+ok 44 - invalid optional AI history leaves checkout working: fresh
+  ---
+  duration_ms: 4.028417
+  ...
+# Subtest: invalid optional AI history leaves checkout working: same-case
+ok 45 - invalid optional AI history leaves checkout working: same-case
+  ---
+  duration_ms: 2.424125
+  ...
+# Subtest: invalid optional AI history leaves checkout working: wrong-tools
+ok 46 - invalid optional AI history leaves checkout working: wrong-tools
+  ---
+  duration_ms: 2.650166
+  ...
+# Subtest: invalid optional AI history leaves checkout working: missing-payment-read
+ok 47 - invalid optional AI history leaves checkout working: missing-payment-read
+  ---
+  duration_ms: 2.4955
+  ...
+# Subtest: invalid optional AI history leaves checkout working: invented-time
+ok 48 - invalid optional AI history leaves checkout working: invented-time
+  ---
+  duration_ms: 4.181208
+  ...
+# Subtest: recorded page shares the public site motion preference across page loads
+ok 49 - recorded page shares the public site motion preference across page loads
+  ---
+  duration_ms: 4.398209
+  ...
+# Subtest: blocked preference storage leaves the recorded page and its motion control usable
+ok 50 - blocked preference storage leaves the recorded page and its motion control usable
+  ---
+  duration_ms: 2.229459
+  ...
+# Subtest: illustration agrees with checker: missing at59
+ok 51 - illustration agrees with checker: missing at59
+  ---
+  duration_ms: 0.507125
+  ...
+# Subtest: illustration agrees with checker: missing at60
+ok 52 - illustration agrees with checker: missing at60
+  ---
+  duration_ms: 0.044292
+  ...
+# Subtest: illustration agrees with checker: missing at61
+ok 53 - illustration agrees with checker: missing at61
+  ---
+  duration_ms: 0.032667
+  ...
+# Subtest: illustration agrees with checker: delivered at8 observed at8
+ok 54 - illustration agrees with checker: delivered at8 observed at8
+  ---
+  duration_ms: 0.076042
+  ...
+# Subtest: illustration agrees with checker: delivered at8 observed at20
+ok 55 - illustration agrees with checker: delivered at8 observed at20
+  ---
+  duration_ms: 0.037292
+  ...
+# Subtest: illustration agrees with checker: delivered at60
+ok 56 - illustration agrees with checker: delivered at60
+  ---
+  duration_ms: 0.331084
+  ...
+# Subtest: illustration agrees with checker: late ticket still pending at60
+ok 57 - illustration agrees with checker: late ticket still pending at60
+  ---
+  duration_ms: 0.073958
+  ...
+# Subtest: illustration agrees with checker: late ticket at61
+ok 58 - illustration agrees with checker: late ticket at61
+  ---
+  duration_ms: 0.026625
+  ...
+# Subtest: illustration agrees with checker: late at75
+ok 59 - illustration agrees with checker: late at75
+  ---
+  duration_ms: 0.197834
+  ...
+# Subtest: illustration agrees with checker: duplicate not issued yet
+ok 60 - illustration agrees with checker: duplicate not issued yet
+  ---
+  duration_ms: 0.244708
+  ...
+# Subtest: illustration agrees with checker: duplicate at11
+ok 61 - illustration agrees with checker: duplicate at11
+  ---
+  duration_ms: 0.066625
+  ...
+# Subtest: illustration agrees with checker: duplicate at90
+ok 62 - illustration agrees with checker: duplicate at90
+  ---
+  duration_ms: 0.023834
+  ...
+# Subtest: valid API identity and structured rejection remain available
+ok 63 - valid API identity and structured rejection remain available
+  ---
+  duration_ms: 57.70275
+  ...
+# Subtest: HTML failed POST dispatches once with unchanged payload and usable uncertainty
+ok 64 - HTML failed POST dispatches once with unchanged payload and usable uncertainty
+  ---
+  duration_ms: 2.894875
+  ...
+# Subtest: empty failed POST dispatches once with unchanged payload and usable uncertainty
+ok 65 - empty failed POST dispatches once with unchanged payload and usable uncertainty
+  ---
+  duration_ms: 1.041
+  ...
+# Subtest: malformed failed POST dispatches once with unchanged payload and usable uncertainty
+ok 66 - malformed failed POST dispatches once with unchanged payload and usable uncertainty
+  ---
+  duration_ms: 1.451708
+  ...
+# Subtest: null failed POST dispatches once with unchanged payload and usable uncertainty
+ok 67 - null failed POST dispatches once with unchanged payload and usable uncertainty
+  ---
+  duration_ms: 1.254292
+  ...
+# Subtest: array failed POST dispatches once with unchanged payload and usable uncertainty
+ok 68 - array failed POST dispatches once with unchanged payload and usable uncertainty
+  ---
+  duration_ms: 0.855417
+  ...
+# Subtest: string failed POST dispatches once with unchanged payload and usable uncertainty
+ok 69 - string failed POST dispatches once with unchanged payload and usable uncertainty
+  ---
+  duration_ms: 1.162042
+  ...
+# Subtest: disconnected POST has one dispatch and no invented payment result
+ok 70 - disconnected POST has one dispatch and no invented payment result
+  ---
+  duration_ms: 1.248166
+  ...
+# Subtest: startup rejection reaches a visible recovery view and technical details
+ok 71 - startup rejection reaches a visible recovery view and technical details
+  ---
+  duration_ms: 2.523792
+  ...
+# Subtest: minor-unit payment and store displays represent 2900 as 29, never 2900 dollars
+ok 72 - minor-unit payment and store displays represent 2900 as 29, never 2900 dollars
+  ---
+  duration_ms: 342.645125
+  ...
+# Subtest: cancel URL preserves paid payment uncertainty and never waives delivery
+ok 73 - cancel URL preserves paid payment uncertainty and never waives delivery
+  ---
+  duration_ms: 1.076125
+  ...
+# Subtest: cancel URL preserves unpaid payment uncertainty and never waives delivery
+ok 74 - cancel URL preserves unpaid payment uncertainty and never waives delivery
+  ---
+  duration_ms: 1.029084
+  ...
+# Subtest: cancel URL preserves uncertain payment uncertainty and never waives delivery
+ok 75 - cancel URL preserves uncertain payment uncertainty and never waives delivery
+  ---
+  duration_ms: 1.218834
+  ...
+# Subtest: detail identity rejects run-purchase
+ok 76 - detail identity rejects run-purchase
+  ---
+  duration_ms: 3.107583
+  ...
+# Subtest: detail identity rejects purchase-run
+ok 77 - detail identity rejects purchase-run
+  ---
+  duration_ms: 1.05875
+  ...
+# Subtest: detail identity rejects merchant-run
+ok 78 - detail identity rejects merchant-run
+  ---
+  duration_ms: 0.682666
+  ...
+# Subtest: detail identity rejects merchant-purchase
+ok 79 - detail identity rejects merchant-purchase
+  ---
+  duration_ms: 0.888667
+  ...
+# Subtest: detail identity rejects merchant-order
+ok 80 - detail identity rejects merchant-order
+  ---
+  duration_ms: 0.643666
+  ...
+# Subtest: detail identity rejects ticket-purchase
+ok 81 - detail identity rejects ticket-purchase
+  ---
+  duration_ms: 0.552292
+  ...
+# Subtest: detail identity rejects verdict-run
+ok 82 - detail identity rejects verdict-run
+  ---
+  duration_ms: 1.688041
+  ...
+# Subtest: detail identity rejects verdict-purchase
+ok 83 - detail identity rejects verdict-purchase
+  ---
+  duration_ms: 0.690875
+  ...
+# Subtest: detail identity rejects verdict-order
+ok 84 - detail identity rejects verdict-order
+  ---
+  duration_ms: 0.774458
+  ...
+# Subtest: ticket without purchase identity is never copyable; unrelated verdict is never selected
+ok 85 - ticket without purchase identity is never copyable; unrelated verdict is never selected
+  ---
+  duration_ms: 0.980792
+  ...
+# Subtest: server capability required for process interruption and checked again before submit
+ok 86 - server capability required for process interruption and checked again before submit
+  ---
+  duration_ms: 0.816625
+  ...
+# Subtest: a saved cancellation-page observation is a return link, never proof that approval was cancelled
+ok 87 - a saved cancellation-page observation is a return link, never proof that approval was cancelled
+  ---
+  duration_ms: 1.429583
+  ...
+1..87
+# tests 87
+# suites 0
+# pass 87
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 876.49

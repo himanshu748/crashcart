@@ -1,5 +1,6 @@
 """Read-only judge entry: actual offline replay, exports and HTTP restrictions."""
 import hashlib
+from html.parser import HTMLParser
 import http.client
 import io
 import json
@@ -12,11 +13,46 @@ import tempfile
 import threading
 import unittest
 from unittest.mock import patch
+from urllib.parse import urljoin, urlsplit
 import zipfile
 
 from crashcart.judge import (AI_HISTORY, AI_HISTORY_SHA256, INPUT, INPUT_SHA256,
                             export_site, historical_ai, make_server, prepare_review)
 from crashcart.replay import ReplayError, verify_manifest
+
+
+class _PublicPage(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.ids, self.duplicates, self.links, self.current = set(), [], [], set()
+        self.h1_count, self.in_title, self.title = 0, False, ''
+        self.inline = []
+
+    def handle_starttag(self, tag, attributes):
+        attrs = dict(attributes)
+        if attrs.get('id'):
+            if attrs['id'] in self.ids:
+                self.duplicates.append(attrs['id'])
+            self.ids.add(attrs['id'])
+        self.h1_count += tag == 'h1'
+        if tag == 'title':
+            self.in_title = True
+        if tag == 'a' and attrs.get('aria-current') == 'page':
+            self.current.add(attrs.get('href'))
+        for attribute in ('href', 'src'):
+            if attribute in attrs:
+                self.links.append((tag, attrs[attribute]))
+        if tag == 'style' or tag == 'script' and not attrs.get('src'):
+            self.inline.append(tag)
+        self.inline.extend(name for name in attrs if name == 'style' or name.startswith('on'))
+
+    def handle_endtag(self, tag):
+        if tag == 'title':
+            self.in_title = False
+
+    def handle_data(self, data):
+        if self.in_title:
+            self.title += data
 
 
 class JudgeReviewTests(unittest.TestCase):
@@ -164,6 +200,39 @@ class JudgeReviewTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(readme).hexdigest(),manifest['files']['README.md'])
             for name in ('crashcart/replay.py','crashcart/store.py','crashcart/invariant.py','migrations/001_initial.sql'):
                 self.assertEqual((root/name).read_bytes(),archive.read(name))
+
+    def test_separate_pages_have_real_subpath_safe_navigation_and_resources(self):
+        pages = ('index.html', 'product.html', 'integrations.html', 'demo.html')
+        parsed = {}
+        for name in pages:
+            page = _PublicPage()
+            page.feed(self.files[name][1].decode('utf-8'))
+            parsed[name] = page
+            self.assertEqual(page.h1_count, 1, name)
+            self.assertEqual(page.duplicates, [], name)
+            self.assertEqual(page.inline, [], name)
+            self.assertEqual(page.current, {name}, name)
+        self.assertEqual(len({page.title.strip() for page in parsed.values()}), len(pages))
+        prefix = '/crashcart/'
+        for name, page in parsed.items():
+            linked_pages = set()
+            for tag, target in page.links:
+                self.assertTrue(target, (name, tag))
+                url = urlsplit(urljoin('https://example.test' + prefix + name, target))
+                if url.netloc != 'example.test':
+                    self.assertEqual(tag, 'a', (name, target))
+                    self.assertIn(url.scheme, ('http', 'https'), (name, target))
+                    continue
+                self.assertTrue(url.path.startswith(prefix), (name, target))
+                member = url.path.removeprefix(prefix) or 'index.html'
+                self.assertIn(member, self.files, (name, target))
+                if member in pages:
+                    linked_pages.add(member)
+                    if url.fragment:
+                        self.assertIn(url.fragment, parsed[member].ids, (name, target))
+            self.assertEqual(linked_pages, set(pages), name)
+            scripts = [target for tag, target in page.links if tag == 'script']
+            self.assertEqual(scripts, ['app.js'] if name == 'demo.html' else ['site.js'], name)
 
     def test_changed_example_is_rejected_before_publication(self):
         with tempfile.TemporaryDirectory() as folder:

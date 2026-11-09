@@ -1,0 +1,21 @@
+{
+  "stage": "read-only before exact focused execution",
+  "retained_full_log": "/Users/himanshujha/Documents/ChatGPT/paypal/var/coco-ui-redesign-nov9/auto-intelligent/checks-final/python-suite.log",
+  "retained_log_sha256": "7ffd005dd769b624519923bbbe68c5da7e795781b9bdd83720eff29a3e01bc7b",
+  "retained_source_stability": {
+    "unchanged": true,
+    "changed": []
+  },
+  "observations": [
+    "The success test timed out in the parent-enforced subprocess communicate deadline at unchanged 2 seconds. Its retained trace does not record whether the peer accepted.",
+    "The active headers subtest failed its mandatory accepted-peer precondition after the same unchanged 2-second transport deadline. This does not establish an actively streaming-peer deadline failure.",
+    "Interpreter startup and all worker import/connect/read/IPC time share the total deadline. The retained log has no phase timings or host-resource measurements establishing the underlying latency cause."
+  ],
+  "hypothesis_not_proven": "Startup/scheduling or I/O pressure may have consumed the deadline; no production fault established.",
+  "source_before": {
+    "tests/test_model_transport.py": "6779b7ef84dd88170d3d727343a6ec47514b45cb62da9a252b978e4ab0fbdc65",
+    "crashcart/model_transport.py": "d2f51695bd6ad905f155be1754910cc4646daf1050d0c0304e2d044bf19e7191",
+    "crashcart/held_out.py": "23b0e99179d0061c58c8aa8dc5c8b98a132d0ba769c94838c41d594845a88e44"
+  },
+  "source_edits": false
+}

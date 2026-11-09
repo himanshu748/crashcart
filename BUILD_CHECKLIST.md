@@ -64,6 +64,16 @@ A checklist alone cannot guarantee correctness. The combination of explicit outc
 
 Only VERIFIED becomes [x]. Everything else remains [ ].
 
+### 9 November multi-page direction
+
+The owner now requires distinct Home, Product, Integrations and Recorded Example pages plus the separate existing workspace. AGENTS.md has no single-page mandate. Real page navigation, project-subpath export and read-only example routing require new scoped evidence. This changes the frontend brief, not any business invariant or original provider-proof condition. See [the site structure](docs/SITE_ARCHITECTURE.md).
+
+### 9 November frontend freshness notice
+
+The owner-authorized CoCo remake now has four real public pages and a separate existing workspace in an isolated public candidate. Earlier UI/image/hosted proof is historical for its changed source. DV-01–14 are reopened in [the design verification checklist](docs/DESIGN_VERIFICATION.md); current scoped test results do not reaccept the original configured journey. The 47 checked CC entries below continue to identify the frozen private accepted build, not acceptance of this modified public frontend. No original condition, deadline, dependency or provider-proof requirement is removed or relaxed.
+
+
+
 | State | Meaning |
 | --- | --- |
 | PENDING | Work has not started. |

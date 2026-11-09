@@ -1,66 +1,24 @@
-// LOCAL_TEST: run the delivered page script with injected responses and a small
-// DOM test double. Real browser/layout verification is recorded separately.
-const {test}=require('node:test');
-const assert=require('node:assert/strict');
-const fs=require('node:fs');
-const path=require('node:path');
-const vm=require('node:vm');
-const source=fs.readFileSync(path.join(__dirname,'../web/judge/app.js'),'utf8');
-const message='The saved investigation could not be opened. Reload this page to try again. No new payment or AI request was made.';
-function element(){return {textContent:'',hidden:false,checked:false,dataset:{},handlers:{},children:[],append(...items){this.children.push(...items);},replaceChildren(...items){this.children=items;},classList:{add(){},remove(){},toggle(){},contains(){return false;}},addEventListener(type,fn){this.handlers[type]=fn;},setAttribute(name,value){this[name]=value;},focus(){},scrollIntoView(){}};}
-async function load(fetchResult){
- const nodes=new Map();const byId=id=>{if(!nodes.has(id))nodes.set(id,element());return nodes.get(id);};byId('review').hidden=true;byId('ai-story-panel').hidden=true;byId('ai-unavailable').hidden=false;
- const stories=['payment','delivery','repair'].map(stage=>({...element(),dataset:{story:stage}}));
- const cases=['defective','healthy'].map(variant=>({...element(),dataset:{case:variant}}));
- const aiSteps=[0,1,2].map(i=>({...element(),dataset:{aiStep:String(i)}}));
- const links=[element(),element()];
- const calls=[];const document={getElementById:byId,documentElement:element(),querySelector:()=>element(),querySelectorAll:selector=>selector==='button[data-story]'?stories:selector==='[data-case]'?cases:selector==='a[href="#investigation"]'?links:selector==='[data-ai-step]'?aiSteps:[],createElement:()=>element()};
- const context=vm.createContext({document,window:{location:{hash:''},matchMedia:()=>({matches:false,addEventListener(){}})},fetch:async(...args)=>{calls.push(args);return fetchResult();}});
- vm.runInContext(source,context,{filename:'web/judge/app.js'});
- await new Promise(setImmediate);
- return {nodes,stories,cases,aiSteps,calls,links};
-}
-async function expectRecoverableFailure(response){
- const page=await load(response);
- assert.equal(page.nodes.get('load-state').textContent,message);
- assert.ok(page.links.every(link=>link.href==='#load-state'),'demo links must lead to visible recovery instead of a hidden result');
- assert.equal(page.nodes.get('load-state').hidden,false);
- assert.equal(page.nodes.get('review').hidden,true,'incomplete results remain hidden');
- for(const button of page.stories)assert.doesNotThrow(()=>button.handlers.click(),'walkthrough remains usable after failed data');
- for(const button of page.cases)assert.doesNotThrow(()=>button.handlers.click(),'case controls cannot render incomplete data');
- assert.equal(page.calls.length,1,'failure does not automatically retry or request a live action');
- assert.equal(page.calls[0][0],'data.json');
-}
+/* Delivered recorded-page behavior; local replay fixtures, never providers. */
+const {test,before}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs'),path=require('node:path');
+const {ROOT,loadJudge,response}=require('./helpers/ui_vm.cjs');
+// Exercise the validator against actual canonical replay output. Generated IDs
+// intentionally differ between the two imports. No live adapters or env loader.
+const {loadFixture}=require('./helpers/replay_fixture.cjs');
+let genuine;
+before(async()=>{genuine=await loadFixture();});
+const historySource=JSON.parse(fs.readFileSync(path.join(ROOT,'evidence/runs/submission-ready/ai-historical-summary.json'),'utf8'));
+const history=()=>({...structuredClone(historySource),mode:'RECORDED_AI_INVESTIGATION',fresh_execution:false});
+const reviewData=(h=undefined)=>{const d=structuredClone(genuine);if(h!==undefined)d.historical_ai=h;return d;};
+async function expectRecoverableFailure(fetcher){const p=await loadJudge(fetcher);assert.match(p.nodes.get('load-state').textContent,/couldn’t open.*saved records/i);assert.match(p.nodes.get('load-state').textContent,/No payment or AI request was made/);assert.equal(p.nodes.get('load-state').hidden,false);assert.equal(p.nodes.get('review').hidden,true);assert.ok(p.links.every(link=>link.href==='#load-state'));for(const button of [...p.stories,...p.cases])await assert.doesNotReject(button.trigger('click'));assert.equal(p.calls.length,1);assert.equal(p.calls[0][0],'data.json');}
 test('Unavailable response explains recovery without provider claims',()=>expectRecoverableFailure(()=>new Response('<html>unavailable</html>',{status:503})));
 test('Malformed JSON does not expose parser jargon',()=>expectRecoverableFailure(()=>new Response('{',{status:200})));
-test('Disconnected network leaves an understandable safe state',()=>expectRecoverableFailure(()=>{throw new TypeError('Failed to fetch');}));
-test('Invalid comparison never displays a successful result',()=>expectRecoverableFailure(()=>new Response(JSON.stringify({mode:'LOCAL_TEST',fresh_execution:true}),{status:200})));
-test('Partially parsed case is discarded before walkthrough reuse',()=>expectRecoverableFailure(()=>new Response(JSON.stringify({mode:'RECORDED_REPLAY',fresh_execution:false,cases:{defective:{receipt:{signature:'paid_without_ticket'}},healthy:{receipt:{signature:'ticket_delivered_once_on_time'}}}}),{status:200})));
+test('Disconnected network leaves a safe usable state',()=>expectRecoverableFailure(()=>{throw TypeError('Failed to fetch');}));
+test('Invalid comparison never displays successful results',()=>expectRecoverableFailure(()=>response({mode:'LOCAL_TEST',fresh_execution:true})));
+test('Partially parsed case is discarded before walkthrough reuse',()=>expectRecoverableFailure(()=>response({mode:'RECORDED_REPLAY',fresh_execution:false,cases:{defective:{receipt:{signature:'paid_without_ticket'}},healthy:{receipt:{signature:'ticket_delivered_once_on_time'}}}})));
+test('actual canonical replay accepts both genuine outcomes despite generated identity differences',async()=>{const p=await loadJudge(()=>response(genuine));assert.equal(p.ui.validReview(genuine),true);assert.notEqual(genuine.cases.defective.purchase.run_id,genuine.cases.healthy.purchase.run_id);assert.notEqual(genuine.cases.defective.purchase.order_id,genuine.cases.healthy.purchase.order_id);assert.equal(p.nodes.get('review').hidden,false);assert.equal(p.nodes.get('defective-count').textContent,'0');assert.equal(p.nodes.get('healthy-count').textContent,'1');assert.match(p.nodes.get('facts').textContent,/USD 29\.00 confirmed/);assert.doesNotMatch(p.nodes.get('facts').textContent,/2900\.00/);await p.cases[1].trigger('click');assert.match(p.nodes.get('download-case').href,/healthy\.json$/);assert.equal(p.calls.length,1);});
+for(const change of ['canonical-input','promise','missing-network','receipt-network','receipt-fresh','receipt-mode','execution-network','deadline','ticket-purchase','merchant-run','merchant-order','receipt-purchase','source-map','verdict-source','event-run','missing-timezone'])test('reject changed/uncorrelated replay: '+change,async()=>{const d=reviewData(),h=d.cases.healthy;if(change==='canonical-input')h.receipt.input_sha256='f'.repeat(64);if(change==='promise')d.invariant.recovery_seconds=900;if(change==='missing-network')delete d.network_calls;if(change==='receipt-network')h.receipt.network_calls=1;if(change==='receipt-fresh')h.receipt.fresh_execution=true;if(change==='receipt-mode')h.receipt.mode='LOCAL_TEST';if(change==='execution-network')h.execution.network_calls=1;if(change==='deadline')h.execution.deadline=new Date(Date.parse(h.purchase.capture_completed_at)+900000).toISOString();if(change==='ticket-purchase')delete h.merchant.tickets[0].purchase_id;if(change==='merchant-run')h.merchant.run_id='foreign';if(change==='merchant-order')h.merchant.order_id='foreign';if(change==='receipt-purchase')h.receipt.purchase_id='foreign';if(change==='source-map')h.receipt.identity_mapping[d.recorded_source.order_id]='foreign';if(change==='verdict-source')h.events.find(e=>e.event_type==='invariant_result').payload.source_ids.order_id='foreign';if(change==='event-run')h.events[0].run_id='foreign';if(change==='missing-timezone')h.purchase.capture_completed_at=h.purchase.capture_completed_at.replace(/Z$/,'');await expectRecoverableFailure(()=>response(d));});
+test('recorded AI knowledge progression preserves original data and never calls providers',async()=>{const h=history(),before=JSON.stringify(h),p=await loadJudge(()=>response(reviewData(h)));assert.equal(p.nodes.get('review').hidden,false);assert.equal(p.nodes.get('ai-story-panel').hidden,false);assert.equal(p.nodes.get('ai-unavailable').hidden,true);assert.match(p.nodes.get('ai-known').textContent,/No payment or ticket records/);await p.aiSteps[1].trigger('click');assert.match(p.nodes.get('ai-known').textContent,/PayPal had confirmed/);assert.equal(p.nodes.get('ai-reasoning').textContent,h.trace[1].exact_model_excerpt);await p.aiSteps[2].trigger('click');assert.match(p.nodes.get('ai-takeaway').textContent,/3\.42 seconds/);assert.equal(JSON.stringify(h),before);assert.equal(p.calls.length,1);});
+for(const change of ['missing','fresh','same-case','wrong-tools','missing-payment-read','invented-time'])test('invalid optional AI history leaves checkout working: '+change,async()=>{let h=history();if(change==='missing')h=null;if(change==='fresh')h.fresh_execution=true;if(change==='same-case')h.same_case_as_public_faulty_replay=true;if(change==='wrong-tools')h.trace[1].action='capture_payment';if(change==='missing-payment-read')h.actual_operations.paypal_existing_order_gets=0;if(change==='invented-time')h.deterministic_result.delivery_latency_seconds=null;const p=await loadJudge(()=>response(reviewData(h)));assert.equal(p.nodes.get('review').hidden,false);assert.equal(p.nodes.get('ai-story-panel').hidden,true);assert.equal(p.nodes.get('ai-unavailable').hidden,false);for(const button of p.aiSteps)await assert.doesNotReject(button.trigger('click'));assert.equal(p.calls.length,1);});
 
-const historySource=JSON.parse(fs.readFileSync(path.join(__dirname,'../evidence/runs/submission-ready/ai-historical-summary.json'),'utf8'));
-function history(){return {...structuredClone(historySource),mode:'RECORDED_AI_INVESTIGATION',fresh_execution:false};}
-function reviewData(recordedHistory){
- const payment='2026-10-22T09:31:52Z';
- const variant=healthy=>({receipt:{signature:healthy?'ticket_delivered_once_on_time':'paid_without_ticket',ticket_count:healthy?1:0},purchase:{capture_completed_at:payment},merchant:{tickets:healthy?[{created_at:'2026-10-22T09:32:24.261423Z'}]:[]},execution:{deadline:'2026-10-22T09:32:52Z'},events:[]});
- return {mode:'RECORDED_REPLAY',fresh_execution:false,computed_when:'app launch',computed_at:payment,cases:{healthy:variant(true),defective:variant(false)},historical_ai:recordedHistory};
-}
-test('recorded AI stages expose the actual knowledge progression without mutating the case',async()=>{
- const h=history(),before=JSON.stringify(h);
- const page=await load(()=>new Response(JSON.stringify(reviewData(h)),{status:200}));
- assert.equal(page.nodes.get('review').hidden,false);assert.equal(page.nodes.get('ai-story-panel').hidden,false);
- assert.equal(page.nodes.get('ai-unavailable').hidden,true);
- assert.match(page.nodes.get('ai-known').textContent,/No payment or ticket observations/);
- page.aiSteps[1].handlers.click();assert.match(page.nodes.get('ai-known').textContent,/PayPal had confirmed/);
- assert.equal(page.nodes.get('ai-reasoning').textContent,h.trace[1].exact_model_excerpt);
- page.aiSteps[2].handlers.click();assert.match(page.nodes.get('ai-takeaway').textContent,/3.42 seconds/);
- assert.equal(JSON.stringify(h),before);assert.equal(page.calls.length,1,'story selections must not call a model or provider');
-});
-for(const change of ['missing','fresh','same-case','wrong-tools','missing-payment-read','invented-time'])test('unusable optional AI history leaves the recorded checkout working: '+change,async()=>{
- let h=history();if(change==='missing')h=null;if(change==='fresh')h.fresh_execution=true;if(change==='same-case')h.same_case_as_public_faulty_replay=true;if(change==='wrong-tools')h.trace[1].action='capture_payment';if(change==='missing-payment-read')h.actual_operations.paypal_existing_order_gets=0;if(change==='invented-time')h.deterministic_result.delivery_latency_seconds=null;
- const page=await load(()=>new Response(JSON.stringify(reviewData(h)),{status:200}));
- assert.equal(page.nodes.get('review').hidden,false,'the checkout comparison remains usable');
- assert.equal(page.nodes.get('ai-story-panel').hidden,true,'no unsupported AI story appears');
- assert.equal(page.nodes.get('ai-unavailable').hidden,false);
- for(const button of page.aiSteps)assert.doesNotThrow(()=>button.handlers.click());
- assert.equal(page.calls.length,1);
-});
+test('recorded page shares the public site motion preference across page loads',async()=>{const saved=new Map([['crashcart-reduce-motion','1']]);const storage={getItem:key=>saved.get(key),setItem:(key,value)=>saved.set(key,value)};const first=await loadJudge(()=>response(genuine),{storage});assert.equal(first.nodes.get('reduce-motion').checked,true);assert.equal(first.document.documentElement.classList.contains('reduce-motion'),true);first.nodes.get('reduce-motion').checked=false;await first.nodes.get('reduce-motion').trigger('change');assert.equal(saved.get('crashcart-reduce-motion'),'0');assert.equal(first.document.documentElement.classList.contains('reduce-motion'),false);const second=await loadJudge(()=>response(genuine),{storage});assert.equal(second.nodes.get('reduce-motion').checked,false);assert.equal(first.calls.length,1);assert.equal(second.calls.length,1);});
+test('blocked preference storage leaves the recorded page and its motion control usable',async()=>{const storage={getItem(){throw Error('storage blocked');},setItem(){throw Error('storage blocked');}};const p=await loadJudge(()=>response(genuine),{storage});assert.equal(p.nodes.get('review').hidden,false);p.nodes.get('reduce-motion').checked=true;await assert.doesNotReject(p.nodes.get('reduce-motion').trigger('change'));assert.equal(p.document.documentElement.classList.contains('reduce-motion'),true);assert.equal(p.calls.length,1);});

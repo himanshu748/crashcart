@@ -1,0 +1,20 @@
+[
+  {
+    "from": "authenticated workspace",
+    "link": "Product",
+    "url": "http://127.0.0.1:8921/recorded/product.html",
+    "title": "Product · How CrashCart checks a paid order"
+  },
+  {
+    "from": "authenticated workspace",
+    "link": "Integrations",
+    "url": "http://127.0.0.1:8921/recorded/integrations.html",
+    "title": "Integrations · What CrashCart connects to"
+  },
+  {
+    "from": "authenticated workspace",
+    "link": "Example",
+    "url": "http://127.0.0.1:8921/recorded/demo.html",
+    "title": "CrashCart · Find out why a paid order wasn’t delivered · Recorded example"
+  }
+]

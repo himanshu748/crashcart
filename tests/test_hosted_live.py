@@ -60,6 +60,19 @@ class HostedLiveTests(unittest.TestCase):
     def create(self):
         status,raw,_=self.request('POST','/api/runs',{'promise':'USD 29 buys one ticket within 60 seconds','mode':'LIVE_SANDBOX','fault':{'kind':'none','merchant':'healthy'}},auth=True)
         self.assertEqual(status,201);return json.loads(raw)
+
+    def test_health_excludes_unsupported_fault_before_submit_without_relaxing_guard(self):
+        self.start()
+        status, raw, _ = self.request(path='/healthz')
+        self.assertEqual(status, 200)
+        capabilities = json.loads(raw)['capabilities']
+        self.assertEqual(set(capabilities['faults']), {'none', 'response_loss', 'event_delay', 'event_duplicate'})
+        self.assertEqual(capabilities['max_promise_chars'], 1000)
+        status, _, _ = self.request('POST', '/api/runs', {'promise': 'One workshop ticket',
+            'fault': {'kind': 'process_interrupt', 'merchant': 'healthy'}}, auth=True)
+        self.assertEqual(status, 403)
+        self.assertEqual(self.server.store.list_runs(), [])
+        self.assertEqual(json.loads(self.ledger.read_text())['calls'], [])
     def test_auth_login_cookie_and_cross_origin(self):
         self.start();self.assertEqual(self.request(path='/')[0],200);self.assertEqual(self.request(path='/api/runs')[0],401)
         for method in ('POST','PUT','PATCH','DELETE'):
@@ -220,7 +233,9 @@ class HostedLiveTests(unittest.TestCase):
             self.assertEqual(db.execute('SELECT COUNT(*) FROM hosted_live_case_grants WHERE run_id IS NULL').fetchone()[0],1)
         self.assertIsNotNone(store.get_run(orphan['id']))
     def test_delayed_order_survives_ingress_disconnect_with_one_journal(self):
-        self.start(limits=IngressLimits(request_timeout=.2));run=self.create();store=self.server.store
+        # Keep ordinary case setup/readback on the real ingress default;
+        # shorten only the deliberately delayed order request.
+        self.start();run=self.create();store=self.server.store
         entered=threading.Event();release=threading.Event()
         self.addCleanup(release.set)
         response={'id':'ORDER-DELAYED','status':'CREATED','links':[{'rel':'approve','href':'https://www.sandbox.paypal.com/checkoutnow?token=ORDER-DELAYED'}]}
@@ -229,11 +244,14 @@ class HostedLiveTests(unittest.TestCase):
             if not release.wait(3):raise AssertionError('Test failed to release synthetic response')
             return response
         with patch('crashcart.paypal.PayPalSandbox.create_order',side_effect=delayed) as creates,patch('crashcart.paypal.PayPalSandbox.get_order',return_value=response):
-            with ThreadPoolExecutor(max_workers=1) as pool:
-                future=pool.submit(self.request,'POST',f'/api/runs/{run["id"]}/order',auth=True)
-                self.assertTrue(entered.wait(1))
-                with self.assertRaises((http.client.RemoteDisconnected,ConnectionResetError)):future.result(timeout=2)
-                release.set()
+            self.assertEqual(self.server.ingress_limits.request_timeout,10)
+            with patch.object(self.server,'ingress_limits',IngressLimits(request_timeout=.2)):
+                with ThreadPoolExecutor(max_workers=1) as pool:
+                    future=pool.submit(self.request,'POST',f'/api/runs/{run["id"]}/order',auth=True)
+                    self.assertTrue(entered.wait(1))
+                    with self.assertRaises((http.client.RemoteDisconnected,ConnectionResetError)):future.result(timeout=2)
+                    release.set()
+            self.assertEqual(self.server.ingress_limits.request_timeout,10)
             until=time.monotonic()+2
             while self.server.active_handlers and time.monotonic()<until:time.sleep(.01)
             self.assertEqual(self.server.active_handlers,0)
@@ -248,7 +266,9 @@ class HostedLiveTests(unittest.TestCase):
             self.assertEqual(sum(event['event_type']=='order_created' for event in events),1)
     def test_delayed_capture_survives_disconnect_without_second_payment(self):
         from tests.test_service import FakePayPal
-        self.start(limits=IngressLimits(request_timeout=.2));run=self.create();store=self.server.store
+        # Ordinary case/order setup uses the real 10-second ingress limit.
+        # Only the deliberately delayed capture receives the shortened fault.
+        self.start();run=self.create();store=self.server.store
         fake=FakePayPal();entered=threading.Event();release=threading.Event();self.addCleanup(release.set)
         def delayed(*args):
             entered.set()
@@ -257,11 +277,14 @@ class HostedLiveTests(unittest.TestCase):
         with patch('crashcart.paypal.PayPalSandbox.create_order',side_effect=fake.create_order),patch('crashcart.paypal.PayPalSandbox.get_order',side_effect=fake.get_order),patch('crashcart.paypal.PayPalSandbox.capture_order',side_effect=delayed):
             self.assertEqual(self.request('POST',f'/api/runs/{run["id"]}/order',auth=True)[0],200)
             fake.order['status']='APPROVED'
-            with ThreadPoolExecutor(max_workers=1) as pool:
-                future=pool.submit(self.request,'POST',f'/api/runs/{run["id"]}/capture',{'order_id':'ORDER_TEST'},auth=True)
-                self.assertTrue(entered.wait(1))
-                with self.assertRaises((http.client.RemoteDisconnected,ConnectionResetError)):future.result(timeout=2)
-                release.set()
+            self.assertEqual(self.server.ingress_limits.request_timeout,10)
+            with patch.object(self.server,'ingress_limits',IngressLimits(request_timeout=.2)):
+                with ThreadPoolExecutor(max_workers=1) as pool:
+                    future=pool.submit(self.request,'POST',f'/api/runs/{run["id"]}/capture',{'order_id':'ORDER_TEST'},auth=True)
+                    self.assertTrue(entered.wait(1))
+                    with self.assertRaises((http.client.RemoteDisconnected,ConnectionResetError)):future.result(timeout=2)
+                    release.set()
+            self.assertEqual(self.server.ingress_limits.request_timeout,10)
             until=time.monotonic()+2
             while self.server.active_handlers and time.monotonic()<until:time.sleep(.01)
             self.assertEqual(self.server.active_handlers,0)

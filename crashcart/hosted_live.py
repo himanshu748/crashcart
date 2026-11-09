@@ -199,6 +199,10 @@ def granted_runs(store):
 
 
 class HostedHandler(Handler):
+    def ui_capabilities(self):
+        return {"faults": [kind for kind in super().ui_capabilities()["faults"] if kind != "process_interrupt"],
+                "max_promise_chars": 1000}
+
     def send(self, *args, **kwargs):
         try:
             return super().send(*args, **kwargs)
@@ -246,6 +250,8 @@ class HostedHandler(Handler):
 
     def do_POST(self):
         path = urlsplit(self.path).path
+        if self.reject_recorded_post(path):
+            return
         try:
             if path != "/api/login" and not self.authenticated():
                 return self.send(401, {"error": "Workspace access required"})

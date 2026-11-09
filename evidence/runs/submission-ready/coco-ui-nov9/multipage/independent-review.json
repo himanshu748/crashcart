@@ -1,0 +1,203 @@
+{
+  "kind": "crashcart-multipage-independent-review-v1",
+  "reviewed_at": "2026-11-09T12:20:36.406895+00:00",
+  "reviewer": "aws_demo_preflight independent reviewer",
+  "decision": "SCOPED_MULTIPAGE_PASS_RELEASE_BLOCKED",
+  "blocking_findings_in_scope": [],
+  "scope": "Source and existing saved browser/test artifacts only. No product edits, test reruns, browser sessions, provider calls, network, SSH or cloud actions by reviewer.",
+  "worktree": "/Users/himanshujha/Documents/ChatGPT/paypal/var/coco-ui-redesign-nov9/auto-intelligent/worktree",
+  "source_sha256": {
+    "LICENSE": "96b3dda2b18f44646baeb204a4dd3a7ecf99d8234781979b731521234c43d9f7",
+    "crashcart/__init__.py": "fb29cf6e467a7feab03803e60d3181794f2a28b1aa3beed5d16146f0fa777e0a",
+    "crashcart/hosted_live.py": "3544db94a29aab35133537c3ea4155560538952ec7f531e2afa037a8d15fb47c",
+    "crashcart/invariant.py": "01c7007132e939716f5236322f40b175058981d21334c7add57dd4bb20007fea",
+    "crashcart/judge.py": "c2bdf01bffadef53568794bbcf57f36787b1455a3c849fefcb09a278d10ee3ba",
+    "crashcart/replay.py": "ae419d09dc203f3a8c93ba7edd60bf5d4d5894968044812403e7ed438481f47d",
+    "crashcart/replay_workspace.py": "d2957acf1d893ee808996382975904a24452de8ffd5cb56df002cbea7b5061be",
+    "crashcart/server.py": "74b450330e61726ba0615712b26ef8340ea140a7071d158b6affadbaa7c9a726",
+    "crashcart/store.py": "86c2a1915e5b68ef9934db188bb6eae431732bb6c2e07b7e726b605da00b20c4",
+    "evidence/runs/paypal-live/early-response-loss-input.json": "07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288",
+    "evidence/runs/submission-ready/ai-historical-summary.json": "152c1c77dfcc219b32d7ae36c06ad7b39a35656e95f54f87a6691fe95010c8fb",
+    "migrations/001_initial.sql": "776c928b0b07da50b3773a9c2feae8dbe20670d553ebbe643683802767f74714",
+    "tests/test_recorded_namespace.py": "2e221377e849a57206363ab93c1955b43545de40b995a71cfeee3be0ec826fd2",
+    "web/judge/app.js": "c21de16067b56de3f8ddb08dd5899bd5285948997bb4a93598779a9887d97964",
+    "web/judge/demo.html": "f6af28cd331749480c1ae23b44e5cc757df93fdd9b0944bdd5ccad52eb6e1693",
+    "web/judge/index.html": "15b49293abb743006f611f713030535be47d40f278f28d10d709e28ba789285a",
+    "web/judge/integrations.html": "f76d20b235a2a7ceef2014682a18c94a14d48b8a507da3b9c9be9f6ed01282e6",
+    "web/judge/product.html": "ddbdb01173dc5e83e6e5bb1b6a7a9b9d94149ce3f8383583c90487f175cb3f88",
+    "web/judge/site.js": "9bc80239330a10bab52632c317365dfd6929f774450c1a024a678860c0e8d7cd",
+    "web/judge/style.css": "805594d40393f41bbb877b5a2d0cfc7d5d0671466351fcb4551fae0d1830e85b",
+    "web/index.html": "35a295fd5eff36c7e5865a410dc88cf8eed474cb64932cbb10b927c008852ac9",
+    "web/app.js": "58ea36d9f31dc9e6ea25b2a1854f2db7c1349151c15cd68743841b2629126868",
+    "web/style.css": "074f251b240dcfa699a16df2bce6f73b7934f74aad406859347b120dd5c47950",
+    "web/marketing.js": "c5f9b20e6e47caa5a49d496d06513444f21d864d38d51d22525cc972de9476c7",
+    "deploy/live/Dockerfile": "c2e966e090b85916d822cf6904d7a59d9687d0f4f5a35f15c7f700d625dc0c1e",
+    "deploy/live/Dockerfile.dockerignore": "aae816cf652e24f9d3a1ba1df4975d6a0461fe7e961d13973b47aaa7266fcc97",
+    "tests/test_site_illustration.cjs": "3bd832ede1dce2f0e124c0dd59123e0081e206c9d712561fd8e26d5e9e734fa1",
+    "tests/test_judge.py": "6e84e9574ac6ec1526dea6e27dfe09438114e34bce006a8017d944ed222877cd"
+  },
+  "observations": [
+    "Home, Product, Integrations and Recorded example are four real pages with active navigation and relative links. Static inspection found no duplicate IDs, missing demo-controller IDs, invalid local links/anchors, inline handlers/styles or remote assets. The workspace remains separate.",
+    "The illustrative timeline is local only, handles slider/play/scenarios and preserves the inclusive deadline: missing at60 remains waiting; missing at61 fails; ticket at60 passes. Home wording is now No ticket after60s. No UI simulation initiates capture or AI.",
+    "The strict recorded controller preserves fixed invariant, common input, mapped identities, genuine0/1 outcomes and separate historical AI. Main financial controller hash remains the previously reviewed58ea36d9 version.",
+    "Motion preference stores only a boolean and respects OS reduced motion. Integration copy distinguishes saved public records, configured/licensed tools, authorized remote sessions and unverified store previews; no production installs, billing or active hosted workspace is invented.",
+    "The public namespace serves only13 canonical public bundle members, never the private Store. Cache/output types and size are bounded; concurrent cold requests fail503 rather than start more builders. POST is rejected before body/API dispatch in both handlers. Existing auth and CSP remain.",
+    "Judge export and Docker source include named public pages and pinned already-public replay inputs. A new image/runtime proof is still needed before hosting activation."
+  ],
+  "visual_review": {
+    "screenshots_inspected": [
+      "home-final-desktop.jpg",
+      "product-desktop.jpg",
+      "integrations-desktop.jpg",
+      "demo-desktop.jpg",
+      "home-mobile.jpg",
+      "home-320.jpg",
+      "product-320.jpg",
+      "integrations-320.jpg",
+      "recorded-example-mobile.jpg"
+    ],
+    "result": "Clear merchant problem and solution, distinct warm paper/ink design, primary actions, recorded/illustration labels and readable390/320layouts. Stable final Home capture shows all4illustration rows and corrected deadline wording.",
+    "browser_observations": {
+      "boundary60": {
+        "answer": "Waiting for delivery",
+        "state": "waiting",
+        "time": "60"
+      },
+      "boundary61": {
+        "answer": "Paid, but the promise broke",
+        "state": "broken",
+        "time": "61"
+      },
+      "lateResult": {
+        "answer": "Delivered late",
+        "delivery": "1 ticket at 75s",
+        "time": "90"
+      },
+      "twiceResult": {
+        "answer": "Paid, but the promise broke",
+        "delivery": "2 tickets",
+        "time": "90"
+      },
+      "motionStop": {
+        "play": "Play from payment",
+        "pressed": "false",
+        "time": "4"
+      },
+      "mobileChecks": [
+        {
+          "page": "Home",
+          "h1": "The customer paid.So where\u2019s their ticket?",
+          "scroll": 390,
+          "title": "CrashCart \u00b7 Find out why a paid order wasn\u2019t delivered",
+          "width": 390
+        },
+        {
+          "page": "Product",
+          "width": 390,
+          "scroll": 390
+        },
+        {
+          "page": "Integrations",
+          "h1": "Follow the order across your tools.",
+          "scroll": 390,
+          "title": "Integrations \u00b7 What CrashCart connects to",
+          "width": 390
+        },
+        {
+          "page": "Recorded example",
+          "h1": "One paid order.Follow it to the missing ticket.",
+          "scroll": 390,
+          "title": "CrashCart \u00b7 Find out why a paid order wasn\u2019t delivered \u00b7 Recorded example",
+          "width": 390
+        }
+      ],
+      "narrowChecks": [
+        {
+          "page": "Product",
+          "scroll": 320,
+          "width": 320
+        },
+        {
+          "page": "Integrations",
+          "scroll": 320,
+          "width": 320
+        },
+        {
+          "page": "Home",
+          "scroll": 320,
+          "width": 320
+        },
+        {
+          "page": "Recorded example",
+          "width": 320,
+          "scroll": 320
+        }
+      ],
+      "restoredPreferenceOff": true,
+      "integrationFilters": {
+        "storePreview": "1 of7; Shopify/WooCommerce preview only",
+        "workspace": "6 of7",
+        "all": "7 of7"
+      },
+      "navigation": "actual page URLs, Home to Product by Enter",
+      "recordedResult": "Missed0; recovered1 in32.26s; USD29.00; PayPal filter4of15",
+      "limitations": [
+        "Main workspace new nav not browser-rechecked in this pass",
+        "OS reduced-motion setting not changed; in-page preference tested",
+        "Full Python suite remains failed; no release claim"
+      ],
+      "harness_errors_retained": [
+        "Old frozen preview showed previous filter labels; restarted owned preview before using changed labels.",
+        "Recorded example label capitalization and Play from payment accessible name corrected after no-match; no repeated blind clicks.",
+        "Initial timeline attempt remained at0/1, excluded from deadline proof; corrected Home/End/arrows verified60/61."
+      ]
+    },
+    "measurement_scope": "Numeric overflow and interaction results were executed by parent and saved; reviewer inspected artifacts without browser reexecution. Narrow navigation scrolls inside its bar.",
+    "limits": [
+      "Main workspace new nav not browser-rechecked in this pass.",
+      "OS motion/VoiceOver not changed; in-page motion tested.",
+      "No all-colors contrast or hosted/provider verification."
+    ]
+  },
+  "evidence": {
+    "frontend": "frontend-final.log:87tests,87pass,0fail.",
+    "judge": "judge-final.log:16tests,1.205seconds,OK.",
+    "illustration": "illustration-after.log:12vectors pass against actual Python invariant; earlier failure log retained.",
+    "namespace_v4": {
+      "exit_code": 0,
+      "source_unchanged": true,
+      "all20hashes_match_current_source": true,
+      "result": "One actual loopback HTTP/canonical offline replay test,0.616seconds,OK; pages/data/downloads/license and actual defective/healthy results; private401, recorded POST405, traversal404. No external provider execution."
+    },
+    "prior_v3": "Earlier Home wording asset differed; v4 provides exact final rebind."
+  },
+  "artifact_sha256": {
+    "frontend-final.log": "1aaa9187e22a7bae9d6634ca3074c9681c1b8a63e4d36840bef2f313bbb4f361",
+    "judge-final.log": "49fcc718fad152cd3a95693e7e9bd371bfaf66071ea472ceef3680e80d47ca70",
+    "illustration-before.log": "68127c610123b3a76e904760ce6391388e3def2ddbe16a57dff3dafefc478a14",
+    "illustration-after.log": "b60121e8173907bc5f56b0c4f05102729b503cad61914f28cb82b592d0720ee3",
+    "recorded-namespace-final-rebind-v4-proof.json": "50ffa5d52149e0a2409f7ec545c50eff4c6f6f2ac1df75921328f2ab365a32d8",
+    "recorded-namespace-final-rebind-v4.log": "7ebda6d32e0e0e5ab3867808035e83f17290aae26fda3e5e6b2e7216f5682415",
+    "browser/interaction-observations.json": "817606e37ef22c14c7fc6b0637ac73153b0c1de9dfe393d6e0eb6595f5b82ba0",
+    "browser/mobile-390.json": "78bca3cc29db82e49addfbb873efd0ed18ba82a3446262b8cb7f938be4c57e23",
+    "browser/narrow-320.json": "647548e0e417f4971f05f85ec7c709d480d24d3631a31c890ca0edb26fc35b60",
+    "browser/motion-stop.json": "d6dd4309c658cf4d4821c74538a34cb84d5df061520b9ca23affc01eb44997be",
+    "browser/home-final-desktop.jpg": "14e33ac3f53f98f5b78ad390789cc7ea912b32e960eeb240d8441b4d287f8074",
+    "browser/product-desktop.jpg": "79c574a220881338291ccbbfe6cc59e3c78bdfc34d3c5330219861c57e157ffc",
+    "browser/integrations-desktop.jpg": "d09f489163ae7cb2805c46c67918afade851bc1a12a12f334fee137e098e2358",
+    "browser/demo-desktop.jpg": "e1303880b9043262a1698e032e36c75eaab72e079c4f200727ae0bbc3172b950",
+    "browser/home-mobile.jpg": "3b494065553fc90ae2fadf415959dffa93f0635b009df30cc490e53d31de37ed",
+    "browser/home-320.jpg": "ac40f043584e13dac7ebbac8bb3cd30975be1b5d91571ca7009e944d25c490b1",
+    "browser/product-320.jpg": "36b1620e1ce79851aec8a0aa6434226a972439d443cc8ca70324cc21d660776d",
+    "browser/integrations-320.jpg": "55a6a556db75d914836ad25be6b1193544fd8dbb315f208e58b6e08b817cee0a",
+    "browser/recorded-example-mobile.jpg": "e52bf5309ec67c8e3f61f914da6d23b9da9587b1bd2da5b390bf35aa2f34fe4c"
+  },
+  "verified_count": "47/60 unchanged",
+  "new_CC_verifications": [],
+  "release": {
+    "status": "BLOCKED",
+    "reason": "Prior551-test full suite failed twice and remains unresolved. No new full suite run here; focused passes do not replace it.",
+    "hosting": "Paused; no deployment/image/runtime clearance."
+  },
+  "next_action": "Record scoped pass and evidence; keep full-suite blocker explicit. Finish small workspace-nav browser check when available. Diagnose full-suite only within owner retry boundary; preserve failures and unchanged acceptance rules. Renew image proof before separately authorized activation."
+}
