@@ -81,19 +81,19 @@ export type QueryState = {
 };
 export const INITIAL_QUERY: QueryState = {
   status: "idle",
-  message: "Ask the assistant about your saved investigations.",
+  message: "Ask about payments and tickets in your saved cases.",
   receipt: null,
 };
 
 export const queryLabel = (query: string) =>
   ({
-    all: "All saved investigations",
+    all: "All saved cases",
     completed: "Completed payments",
     completed_missing_tickets: "Completed payments without tickets",
     unresolved: "Payments still being checked",
     delivered: "Delivered tickets",
-    unsupported: "Unsupported question",
-  })[query] || "Unsupported question";
+    unsupported: "Question not available",
+  })[query] || "Question not available";
 
 /** Accept a correlated terminal receipt, never model-authored counts or a payment verdict. */
 export function validateReceipt(
@@ -205,7 +205,7 @@ export function validateReceipt(
 
 const errorMessage = (code: string) => {
   if (code === "MISSING_OR_INVALID_STUDIO_CALL_ALLOWANCE")
-    return "The assistant is unavailable because no usage allowance has been set.";
+    return "The assistant is not ready yet. Ask the workspace owner to set a usage limit.";
   if (code.startsWith("MISSING_CONFIGURATION:"))
     return "The assistant is not connected yet. Ask the workspace owner to finish setup.";
   if (code === "MODEL_USAGE_NOT_AUTHORIZED")
@@ -217,14 +217,14 @@ const errorMessage = (code: string) => {
   if (code === "QUESTION_TOO_LONG")
     return "Use a question of 1–2,000 characters.";
   if (code === "NO_READY_INVESTIGATION")
-    return "Choose an investigation and wait for its records to load.";
+    return "Choose a case and wait for its records to load.";
   if (code === "INVALID_QUERY_RECEIPT")
     return "The answer could not be checked, so no results were shown. Try again.";
   return "The assistant could not answer. No results were shown. Try again.";
 };
 const modeDescription = (mode: string) => ({
-  ANY: "all saved test types", LIVE_SANDBOX: "initial test checkouts",
-  FRESH_SANDBOX: "new test checkouts after a repair", RECORDED_REPLAY: "saved replays",
+  ANY: "all saved test types", LIVE_SANDBOX: "test checkouts",
+  FRESH_SANDBOX: "new test checkouts after a repair", RECORDED_REPLAY: "replayed checkouts",
   LOCAL_TEST: "simulated test data",
 })[mode] || "an unknown test type";
 
@@ -315,8 +315,8 @@ export class QueryController {
           status: "complete",
           message:
             receipt.status === "UNSUPPORTED"
-              ? "This question is outside the questions these saved records can answer."
-              : `${receipt.count} matching investigation${receipt.count === 1 ? "" : "s"}.`,
+              ? "Try asking about payments, missing tickets or delivered tickets."
+              : `${receipt.count} matching case${receipt.count === 1 ? "" : "s"}.`,
           receipt,
         });
         const messageId = crypto.randomUUID();
@@ -325,7 +325,9 @@ export class QueryController {
         yield {
           type: "TEXT_MESSAGE_CONTENT",
           messageId,
-          delta: `${receipt.model_mode === "LOCAL_TEST" ? "Test data · simulated response.\n\n" : ""}${queryLabel(receipt.plan.query)}: ${receipt.count} matching investigation${receipt.count === 1 ? "" : "s"} from ${modeDescription(receipt.plan.mode)}.\n\nThese results describe saved records. A missing ticket alone does not show that its delivery deadline was missed.\n\nResults are ready in the Answers panel. ${receipt.model_mode === "LOCAL_TEST" ? "This is a simulated answer." : "The assistant used the saved records."} Open Technical details there to inspect the original answer and record references.`,
+          delta: receipt.status === "UNSUPPORTED"
+            ? `${receipt.model_mode === "LOCAL_TEST" ? "Test data · simulated response.\n\n" : ""}This question cannot be answered from these saved records. Try asking about paid orders, missing tickets or delivered tickets.`
+            : `${receipt.model_mode === "LOCAL_TEST" ? "Test data · simulated response.\n\n" : ""}${queryLabel(receipt.plan.query)}: ${receipt.count} matching case${receipt.count === 1 ? "" : "s"} from ${modeDescription(receipt.plan.mode)}.\n\nThese answers use saved records. Check a case’s delivery time before treating a missing ticket as late.\n\nSee the matching cases in Answers. ${receipt.model_mode === "LOCAL_TEST" ? "This is a simulated answer." : "The assistant used the saved records."} Open Technical details there for the full records.`,
         };
         if (!current()) return;
         yield { type: "TEXT_MESSAGE_END", messageId };

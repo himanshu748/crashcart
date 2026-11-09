@@ -4,7 +4,7 @@ The public demo needs no keys. A new checkout and investigation uses your own ac
 
 ## No-account path
 
-Open [CrashCart](https://crashcart.52.202.25.181.sslip.io/), choose **Follow a recorded case**, and switch between **Missed order** and **Recovered order (replay)**. These are saved PayPal Sandbox records. The repair uses the same payment and the same 60-second rule. No payment or model request happens on this public page.
+Open [CrashCart](https://crashcart.52.202.25.181.sslip.io/), open the recorded example, and switch between **Missed order** and **Recovered order (replay)**. These are saved PayPal Sandbox records. The repair uses the same payment and the same 60-second rule. No payment or model request happens on this public page.
 
 For an executable local comparison, follow the README's clone and `./scripts/judge.sh` commands. Before this draft PR is merged, select its branch when cloning:
 
@@ -58,7 +58,7 @@ In a second terminal, from the same directory:
 python3 -m crashcart worker
 ```
 
-Open <http://127.0.0.1:8765>. Enter the generated workspace access key from `.env` into **Access key**, then choose **Sign in**. Both processes must use the same database; the default is `var/crashcart.sqlite3`.
+Open <http://127.0.0.1:8765>. Enter the generated workspace access key from `.env` into **Workspace access key**, then choose **Sign in**. Both processes must use the same database; the default is `var/crashcart.sqlite3`.
 
 ### 4. Follow the order
 

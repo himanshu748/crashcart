@@ -51,8 +51,8 @@
   </div>
 
   <p class="replay-note" id="replay-note">
-    <strong>These are saved records from an earlier PayPal test checkout.</strong>
-    Nothing on this page takes a payment, contacts PayPal or asks the AI anything.
+    <strong>You’re exploring a recorded PayPal test order.</strong>
+    No new payment, store connection or AI request happens here.
   </p>
 
   <noscript>
@@ -65,12 +65,12 @@
       <div class="product-copy">
         <p class="eyebrow">Recorded example · one PayPal test checkout</p>
         <h1 id="product-title">One paid order.<br><em>Follow it to the missing ticket.</em></h1>
-        <p class="lead">CrashCart lines up the PayPal payment, your store’s delivery record and the promise you made. Here it does that with saved records from one test checkout, so you can see exactly where a paid order broke.</p>
+        <p class="lead">The payment went through, but the customer received no ticket. Follow the order to see where delivery stopped, then compare the recovered checkout.</p>
         <div class="product-actions">
-          <a class="btn btn-signal" href="#investigation">Walk through the recorded case</a>
+          <a class="btn btn-signal" href="#investigation">Follow this order</a>
           <a class="btn btn-outline-light" href="product.html">How CrashCart works</a>
         </div>
-        <p class="product-fine">This page replays saved records from one PayPal test checkout. It doesn’t take a payment, connect to a store or ask the AI anything.</p>
+        <p class="product-fine">Recorded test checkout. Explore it without signing in, making a payment or connecting a store.</p>
       </div>
       <figure class="glance">
         <ol class="glance-list" aria-label="How CrashCart connects the records">
@@ -88,9 +88,9 @@
     <div id="review" hidden>
       <section class="intro" aria-labelledby="intro-title">
         <p class="tag tag-recorded">Recorded · saved PayPal test checkout · no live store</p>
-        <p class="eyebrow">One order, two stores, one promise</p>
+        <p class="eyebrow">Before and after, with the same delivery promise</p>
         <h2 class="intro-title" id="intro-title">A customer paid $29.<br><em>The ticket never came.</em></h2>
-        <p class="lead">These records come from an actual PayPal test checkout. First, the store as it was, with its delivery problem. Then the repaired store, replayed against the same saved payment and the same 60-second promise.</p>
+        <p class="lead">First, see the order that went missing after a real test payment. Then compare the repaired checkout using that same recorded payment. The customer’s promise stays at 60 seconds.</p>
 
         <div class="compare">
           <article class="compare-card compare-bad" aria-labelledby="cmp-bad-title">
@@ -98,14 +98,14 @@
             <h3 id="cmp-bad-title">Missed order</h3>
             <p class="compare-figure"><span id="defective-count">0</span> <span class="unit">tickets</span></p>
             <p id="defective-finding"></p>
-            <button class="btn select-case" type="button" data-case="defective" aria-controls="evidence">See the records</button>
+            <button class="btn select-case" type="button" data-case="defective" aria-controls="evidence">See what happened</button>
           </article>
           <article class="compare-card compare-good" aria-labelledby="cmp-good-title">
             <p class="compare-kicker">Repaired store · replay</p>
             <h3 id="cmp-good-title">Recovered order</h3>
             <p class="compare-figure"><span id="healthy-count">1</span> <span class="unit">ticket, after <span id="healthy-time"></span></span></p>
-            <p>The same saved payment, replayed through the repaired store. This isn’t a new payment, and it isn’t a live store.</p>
-            <button class="btn select-case" type="button" data-case="healthy" aria-controls="evidence">See the records</button>
+            <p>The repaired checkout delivers the ticket from the same recorded payment. This is a replay, not a new purchase.</p>
+            <button class="btn select-case" type="button" data-case="healthy" aria-controls="evidence">See what happened</button>
           </article>
         </div>
         <p class="fine" id="execution-note"></p>
@@ -149,15 +149,15 @@
         <div class="facts" id="facts"></div>
 
         <details class="order-records" open>
-          <summary>Step-by-step records</summary>
+          <summary>Order activity</summary>
           <div class="records-tools">
             <label for="source-filter">Show</label>
             <select id="source-filter">
               <option value="all">Everything</option>
               <option value="provider">PayPal</option>
               <option value="browser">Checkout page</option>
-              <option value="merchant">Ticket store</option>
-              <option value="harness">Connection interruption</option>
+              <option value="merchant">Ticket delivery</option>
+              <option value="harness">Checkout interruption</option>
             </select>
             <p class="fine" id="timeline-count" role="status"></p>
           </div>
@@ -165,19 +165,19 @@
         </details>
 
         <div class="case-actions">
-          <a class="btn" id="download-case" href="downloads/defective.json" download>Download these records (JSON)</a>
+          <a class="btn" id="download-case" href="downloads/defective.json" download>Download order details (JSON)</a>
         </div>
 
         <details class="tech">
-          <summary>Result details</summary>
+          <summary>How this answer was checked</summary>
           <pre id="technical-result" tabindex="0"></pre>
         </details>
       </section>
 
       <section class="ai" aria-labelledby="ai-title">
-        <p class="eyebrow">How the assistant reasons</p>
-        <h2 class="section-title" id="ai-title">A saved AI investigation</h2>
-        <p class="ai-unavailable" id="ai-unavailable">The saved AI investigation isn’t included in this copy, or it didn’t pass its checks, so it’s hidden. The rest of this page is unaffected.</p>
+        <p class="eyebrow">Help finding the next step</p>
+        <h2 class="section-title" id="ai-title">An earlier AI-assisted investigation</h2>
+        <p class="ai-unavailable" id="ai-unavailable">This earlier investigation isn’t available. You can still explore the order and its delivery records.</p>
         <div class="ai-panel" id="ai-story-panel" hidden>
           <p class="ai-scope" id="ai-scope"></p>
           <div class="ai-steps" role="group" aria-label="Investigation step">
@@ -189,8 +189,8 @@
             <p class="story-meta" id="ai-step-count"></p>
             <h3 id="ai-question"></h3>
             <dl class="ai-dl">
-              <dt>Known so far</dt><dd id="ai-known"></dd>
-              <dt id="ai-reasoning-label">Its reasoning</dt><dd><blockquote id="ai-reasoning"></blockquote></dd>
+              <dt>What it found</dt><dd id="ai-known"></dd>
+              <dt id="ai-reasoning-label">Why it looked next</dt><dd><blockquote id="ai-reasoning"></blockquote></dd>
               <dt>Next</dt><dd id="ai-next"></dd>
             </dl>
             <p class="ai-takeaway" id="ai-takeaway"></p>
@@ -202,28 +202,28 @@
 
     <section class="how" id="how" aria-labelledby="how-title">
       <p class="eyebrow">How it works</p>
-      <h2 class="section-title" id="how-title">From “they paid” to “here’s why” in four steps</h2>
-      <p class="how-lead"><span class="tag">About the private workspace</span> This is how a check runs in a configured CrashCart workspace. None of it runs on this page. The <a href="product.html">Product page</a> lets you try the 60-second rule yourself.</p>
+      <h2 class="section-title" id="how-title">Follow the payment. Find the missing delivery.</h2>
+      <p class="how-lead"><span class="tag">Private test workspace</span> These steps describe the private test workspace. This recorded example doesn’t start a checkout or run the assistant. The <a href="product.html">Product page</a> lets you try the delivery timeline yourself.</p>
       <ol class="how-steps">
         <li>
           <span class="how-num" aria-hidden="true">01</span>
-          <h3>Make a test purchase</h3>
+          <h3>Start a test checkout</h3>
           <p>Start a checkout in PayPal’s test environment and approve it yourself. No real card is charged.</p>
         </li>
         <li>
           <span class="how-num" aria-hidden="true">02</span>
-          <h3>Confirm the payment yourself</h3>
-          <p>After you approve it on PayPal, you confirm the payment with a click. CrashCart never completes a charge on its own.</p>
+          <h3>Confirm the approved payment</h3>
+          <p>Approve the checkout on PayPal, then choose to confirm it in CrashCart. CrashCart checks PayPal before completing the test payment.</p>
         </li>
         <li>
           <span class="how-num" aria-hidden="true">03</span>
-          <h3>Check the delivery promise</h3>
-          <p>CrashCart asks PayPal and your store directly, then applies the same rule every time: one ticket, within 60 seconds.</p>
+          <h3>See whether delivery was on time</h3>
+          <p>Compare the confirmed payment with the store’s ticket record. The promise stays the same: one ticket, within 60 seconds.</p>
         </li>
         <li>
           <span class="how-num" aria-hidden="true">04</span>
-          <h3>Let the assistant dig in</h3>
-          <p>If something’s off, an AI assistant works through the records in the background. It suggests where to look, but the payment and ticket records decide the result. You can stop it at any time.</p>
+          <h3>Find the missing step</h3>
+          <p>Ask the assistant to follow the payment and delivery records. It points to what happened and what to check next. You can stop it from taking further steps.</p>
         </li>
       </ol>
     </section>
@@ -234,27 +234,27 @@
       <div class="faq-list">
         <details class="faq-item" id="faq-payment">
           <summary>Does this page take a payment or contact PayPal?</summary>
-          <p>No. It only reads saved records that ship with the page. It doesn’t start a checkout, contact PayPal, connect to a store or ask the AI anything.</p>
+          <p>No. You’re exploring a recorded test order. Nothing here charges money, contacts PayPal, connects a store or starts an AI investigation.</p>
         </details>
         <details class="faq-item" id="faq-recorded">
           <summary>What exactly was recorded?</summary>
-          <p>One earlier PayPal Sandbox test checkout against the owned workshop test store, which sells a $29 ticket promised within 60 seconds of payment. The original store lost the delivery. The “recovered order” runs the same saved payment through the repaired store. It’s a replay, not a new payment or a live store.</p>
+          <p>A PayPal Sandbox test order for a $29 workshop ticket, due within 60 seconds of payment. The store lost the payment reply and never issued the ticket. The recovered order shows the repaired checkout using that same recorded payment, without making a new purchase.</p>
         </details>
         <details class="faq-item" id="faq-assistant">
           <summary>Is the AI assistant running here?</summary>
-          <p>No. When this copy includes a saved investigation that passes its checks, you can read it as saved text. Otherwise that section stays hidden. Either way the result comes from the payment and ticket records, not from the assistant.</p>
+          <p>No. The assistant section shows an earlier saved investigation of a different order. Reading it makes no AI request. Payment and delivery records, rather than the assistant’s opinion, determine the answer.</p>
         </details>
         <details class="faq-item" id="faq-stores">
           <summary>Which stores does CrashCart work with today?</summary>
-          <p>One owned workshop test store. Shopify and WooCommerce readers exist as a separate preview, but they haven’t been connected to a real store yet, so there’s no install or connect flow today.</p>
+          <p>The current example uses a workshop test store. Shopify and WooCommerce connections are still in preview and haven’t been tested with a real store. There’s no store installation or connection available here yet.</p>
         </details>
         <details class="faq-item" id="faq-own">
           <summary>How would I check my own orders?</summary>
-          <p>CrashCart runs in a private workspace. You sign in with an access key from your workspace owner, and test checkouts need PayPal Sandbox details. This recorded page doesn’t sign you in or create anything.</p>
+          <p>The private workspace can run test checkouts after its owner sets up PayPal Sandbox access. It isn’t a self-service connection for your shop yet. This recorded example needs no sign-in.</p>
         </details>
         <details class="faq-item" id="faq-downloads">
           <summary>What can I download?</summary>
-          <p>The records for both orders and the saved checkout input, as JSON you can read but which don’t run anything. There’s also a replay test (ZIP) that reruns the failure on your computer with no payment.</p>
+          <p>Take the order details for both outcomes and the saved checkout data. The ZIP also lets you run the same comparison on your computer without making a payment. Downloading a file doesn’t run it.</p>
         </details>
       </div>
     </section>
@@ -265,8 +265,8 @@
       <ul class="download-list">
         <li><a href="downloads/defective.json" download>Missed order records</a><span>JSON</span></li>
         <li><a href="downloads/healthy.json" download>Recovered order records (replay)</a><span>JSON</span></li>
-        <li><a href="downloads/input.json" download>Saved checkout input</a><span>JSON</span></li>
-        <li><a href="downloads/replay.zip" download>Replay test you can run on your computer, with no payment</a><span>ZIP</span></li>
+        <li><a href="downloads/input.json" download>Saved checkout details</a><span>JSON</span></li>
+        <li><a href="downloads/replay.zip" download>Replay this comparison on your computer, without a payment</a><span>ZIP</span></li>
         <li><a href="LICENSE">Licence</a><span>Text</span></li>
       </ul>
     </section>

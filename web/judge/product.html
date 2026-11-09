@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Product · How CrashCart checks a paid order</title>
-  <meta name="description" content="How CrashCart checks a paid order: read the payment from PayPal, find the delivery in your store, and apply one fixed rule. Try the 60-second promise yourself.">
+  <meta name="description" content="Follow a paid order from PayPal to delivery. Try an interactive timeline and see whether a ticket arrives within the promised 60 seconds.">
   <meta name="color-scheme" content="light">
   <link rel="stylesheet" href="style.css">
   <script src="site.js" defer></script>
@@ -43,7 +43,7 @@
     </nav>
     <nav class="trail-page" aria-label="On this page">
       <span class="trail-label">On this page</span>
-      <a href="#rule">The 60-second rule</a>
+      <a href="#rule">The delivery promise</a>
       <a href="#steps">Four steps</a>
     </nav>
   </div>
@@ -51,18 +51,18 @@
   <main id="main" tabindex="-1">
     <section class="page-hero" aria-labelledby="product-page-title">
       <p class="eyebrow">Product</p>
-      <h1 id="product-page-title">One rule, checked <em>the same way every time.</em></h1>
-      <p class="lead">CrashCart reads the payment from PayPal and the delivery from your store, then holds both up against the promise you made. You get a plain answer, the records behind it, and a suggestion for where to look when it went wrong.</p>
+      <h1 id="product-page-title">Check the payment.<em> Find the missing delivery.</em></h1>
+      <p class="lead">When a customer asks where their order is, you need more than “payment complete”. Follow the payment, find the delivery, and see whether it arrived when promised.</p>
       <div class="product-actions">
-        <a class="btn btn-signal" href="demo.html">See it on saved records</a>
-        <a class="btn btn-outline-light" href="#rule">Try the 60-second rule</a>
+        <a class="btn btn-signal" href="demo.html">Explore a recorded order</a>
+        <a class="btn btn-outline-light" href="#rule">Try the delivery timeline</a>
       </div>
     </section>
 
     <section class="band" id="rule" aria-labelledby="rule-title">
       <p class="eyebrow">Try it</p>
-      <h2 class="section-title" id="rule-title">Move a payment through the promise</h2>
-      <p class="band-lead">Choose what the store does after the payment, then drag the timeline or press play. The rule doesn’t change: exactly one ticket, within 60 seconds of a completed payment.</p>
+      <h2 class="section-title" id="rule-title">What happens after a customer pays?</h2>
+      <p class="band-lead">Choose what happens after payment, then drag the timeline or press play. See whether the customer gets exactly one ticket within the promised 60 seconds.</p>
 
       <div class="sim" id="sim" data-state="broken">
         <div class="sim-head">
@@ -72,9 +72,9 @@
 
         <div class="sim-controls" id="sim-controls" hidden>
           <div class="sim-group" role="group" aria-labelledby="sim-scenario-label">
-            <span class="sim-group-label" id="sim-scenario-label">What the store does</span>
-            <button type="button" class="pill" data-scenario="lost" aria-pressed="true">Misses the reply</button>
-            <button type="button" class="pill" data-scenario="lookup" aria-pressed="false">Checks PayPal itself</button>
+            <span class="sim-group-label" id="sim-scenario-label">What happens after payment</span>
+            <button type="button" class="pill" data-scenario="lost" aria-pressed="true">Payment reply is lost</button>
+            <button type="button" class="pill" data-scenario="lookup" aria-pressed="false">Store rechecks the payment</button>
             <button type="button" class="pill" data-scenario="late" aria-pressed="false">Delivers late</button>
             <button type="button" class="pill" data-scenario="twice" aria-pressed="false">Delivers twice</button>
           </div>
@@ -104,61 +104,61 @@
           <div class="sim-record">
             <span class="small-label">Your store</span>
             <strong id="sim-store">No ticket</strong>
-            <span class="fine" id="sim-store-note">Never heard back from PayPal</span>
+            <span class="fine" id="sim-store-note">The store didn’t receive the payment reply</span>
           </div>
           <div class="sim-record sim-promise-box">
             <span class="small-label">Your promise</span>
             <strong id="sim-promise">Broken</strong>
-            <span class="fine" id="sim-promise-note">No ticket inside 60 seconds.</span>
+            <span class="fine" id="sim-promise-note">No ticket arrived within 60 seconds.</span>
           </div>
         </div>
 
         <div class="sim-verdict" aria-live="polite">
           <span class="small-label">CrashCart’s answer</span>
-          <p class="sim-verdict-title" id="sim-verdict-title">Paid, but the promise broke</p>
-          <p id="sim-verdict-body">The customer paid and is still waiting. This is the case CrashCart exists to catch.</p>
+          <p class="sim-verdict-title" id="sim-verdict-title">Paid, but the ticket never arrived</p>
+          <p id="sim-verdict-body">The payment is complete, but the customer is still waiting for their ticket.</p>
           <div class="sim-hint" id="sim-hint">
             <span class="small-label">Suggested next step · illustration</span>
-            <p id="sim-hint-text">PayPal says the money arrived, but the store never acted on it. Look the payment up directly with PayPal, then find the step where the store stopped waiting for a reply.</p>
+            <p id="sim-hint-text">Check the completed payment with PayPal, then follow the store’s delivery steps to see why no ticket was issued.</p>
           </div>
         </div>
       </div>
       <noscript><p class="fine">Turn on JavaScript to switch scenarios and move the timeline. The end state of the first scenario is shown above.</p></noscript>
-      <p class="fine sim-foot">The times here are made up to show the rule. The <a href="demo.html">recorded example</a> shows real saved records from one PayPal test checkout.</p>
+      <p class="fine sim-foot">This timeline is an illustration, not a real order. The <a href="demo.html">recorded example</a> shows real saved records from one PayPal test checkout.</p>
     </section>
 
     <section class="how band-alt" id="steps" aria-labelledby="steps-title">
-      <p class="eyebrow">In a configured workspace</p>
-      <h2 class="section-title" id="steps-title">From “they paid” to “here’s why” in four steps</h2>
-      <p class="how-lead"><span class="tag">About the private workspace</span> This is how a check runs in a configured CrashCart workspace. None of it runs on this public site.</p>
+      <p class="eyebrow">In the private test workspace</p>
+      <h2 class="section-title" id="steps-title">Follow the payment. Find the missing delivery.</h2>
+      <p class="how-lead"><span class="tag">Private test workspace</span> These steps describe CrashCart’s private test workspace. This public example doesn’t start a checkout or run the assistant.</p>
       <ol class="how-steps">
         <li>
           <span class="how-num" aria-hidden="true">01</span>
-          <h3>Make a test purchase</h3>
+          <h3>Start a test checkout</h3>
           <p>Start a checkout in PayPal’s test environment and approve it yourself. No real card is charged.</p>
         </li>
         <li>
           <span class="how-num" aria-hidden="true">02</span>
-          <h3>Confirm the payment yourself</h3>
-          <p>After you approve it on PayPal, you confirm the payment with a click. CrashCart never completes a charge on its own.</p>
+          <h3>Confirm the approved payment</h3>
+          <p>Approve the checkout on PayPal, then choose to confirm it in CrashCart. CrashCart checks PayPal before completing the test payment.</p>
         </li>
         <li>
           <span class="how-num" aria-hidden="true">03</span>
-          <h3>Check the delivery promise</h3>
-          <p>CrashCart asks PayPal and your store directly, then applies the same rule every time: one ticket, within 60 seconds.</p>
+          <h3>See whether delivery was on time</h3>
+          <p>Compare the confirmed payment with the store’s ticket record. The promise stays the same: one ticket, within 60 seconds.</p>
         </li>
         <li>
           <span class="how-num" aria-hidden="true">04</span>
-          <h3>Let the assistant dig in</h3>
-          <p>If something’s off, an AI assistant works through the records in the background. It suggests where to look, but the payment and ticket records decide the result. You can stop it at any time.</p>
+          <h3>Find the missing step</h3>
+          <p>Ask the assistant to follow the payment and delivery records. It points to what happened and what to check next. You can stop it from taking further steps.</p>
         </li>
       </ol>
     </section>
 
     <section class="band band-dark" aria-labelledby="product-next-title">
-      <p class="eyebrow">See it on real records</p>
-      <h2 class="section-title" id="product-next-title">One order that went wrong, and the repair</h2>
-      <p class="band-lead">The recorded example replays saved records from one PayPal test checkout: the store that lost the ticket, then the repaired store against the same payment and the same 60-second promise.</p>
+      <p class="eyebrow">Follow a recorded order</p>
+      <h2 class="section-title" id="product-next-title">See the missing ticket, then the recovery</h2>
+      <p class="band-lead">A test payment succeeded, but no ticket was issued. Follow the recorded order, then see the repaired checkout deliver within the same 60-second promise.</p>
       <div class="band-actions">
         <a class="btn btn-signal" href="demo.html">Open the recorded example</a>
         <a class="btn btn-outline-light" href="integrations.html">What it connects to</a>
@@ -179,7 +179,7 @@
       <a href="demo.html">Recorded example</a>
     </nav>
     <p class="fine"><a href="LICENSE">MIT licence</a></p>
-    <p class="fine">Checking your own orders happens in a separate, private CrashCart workspace. This public site doesn’t sign you in or connect a store.</p>
+    <p class="fine">Explore this recorded example without signing in. Connecting your own store isn’t available here yet.</p>
   </footer>
 </body>
 </html>

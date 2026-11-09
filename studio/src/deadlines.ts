@@ -58,7 +58,7 @@ async function savedJson(url: string, signal: AbortSignal): Promise<unknown> {
 function unavailable(run: RunSummary): TimingRow {
   return { ...run, verdict: null, verdictLabel: 'Result unavailable', verdictReason: 'This saved record could not be loaded.',
     paymentAt: null, paymentEpochMs: null, ticketOffsetsMs: [], ticketTimes: [], ticketCount: null,
-    timingStatus: 'Timing unavailable. Open the investigation or refresh to try again.', timingAvailable: false };
+    timingStatus: 'Timing is unavailable. Open the case or refresh to try again.', timingAvailable: false };
 }
 function showDetail(row: TimingRow, focus = false) {
   selected = row.id;
@@ -75,9 +75,15 @@ function showDetail(row: TimingRow, focus = false) {
   };
   addFact('Saved result', row.verdictLabel);
   addFact('Payment confirmed', moment(row.paymentAt));
-  addFact('Recorded tickets', row.ticketCount === null ? 'Not available' : String(row.ticketCount));
-  addFact('Ticket timing', row.ticketOffsetsMs.length ? row.ticketOffsetsMs.map(ms => seconds(ms) + ' seconds after payment').join('; ') : row.timingStatus);
-  addFact('Recorded check', row.verdictReason || 'No delivery check is saved.');
+  addFact('Tickets', row.ticketCount === null ? 'Not available' : String(row.ticketCount));
+  addFact('Delivery time', row.ticketOffsetsMs.length ? row.ticketOffsetsMs.map(ms => seconds(ms) + ' seconds after payment').join('; ') : row.timingStatus);
+  const check = document.createElement('div');
+  const explanation = document.createElement('dd');
+  const technical = document.createElement('details');
+  technical.append(text('summary', 'Technical details'), text('p', row.verdictReason || 'No delivery check is saved.'));
+  explanation.append(technical);
+  check.append(text('dt', 'Delivery check'), explanation);
+  facts.append(check);
   element<HTMLAnchorElement>('timing-open-case').href = path(row.id);
   element<HTMLAnchorElement>('timing-open-records').href = path(row.id, true);
   detail.hidden = false;
@@ -102,7 +108,7 @@ function createChart(visible: TimingRow[]) {
     rowHeight: 80,
     barMargin: 6,
     eventLayout: 'pack',
-    columns: [{ text: 'Saved investigation', field: 'name', width: 260, sortable: false,
+    columns: [{ text: 'Case', field: 'name', width: 260, sortable: false,
       renderer: ({ value }: { value: unknown }) => StringHelper.encodeHtml(String(value)) }],
     resources: visible.map(row => ({ id: row.id, name: 'Case ' + row.reference + ' / ' + row.verdictLabel })),
     events,
@@ -146,7 +152,7 @@ function render() {
     tr.append(identity, result, ticket);
     tableBody.append(tr);
   }
-  status.textContent = visible.length + ' of ' + rows.length + ' saved investigations. ' + latestScope;
+  status.textContent = visible.length + ' of ' + rows.length + ' saved cases. ' + latestScope;
   const chosen = visible.find(row => row.id === selected);
   if (chosen) showDetail(chosen); else detail.hidden = true;
 }
@@ -162,7 +168,7 @@ async function load() {
   outcome.disabled = true;
   range.disabled = true;
   errorPanel.hidden = true;
-  status.textContent = 'Loading saved investigations…';
+  status.textContent = 'Loading saved cases…';
   resultPanel.setAttribute('aria-busy', 'true');
   try {
     const listed = parseRunList(await savedJson('/api/runs', controller.signal));
@@ -189,7 +195,7 @@ async function load() {
     controller.abort();
     scheduler?.destroy(); scheduler = null;
     rows = []; tableBody.replaceChildren(); detail.hidden = true; resultPanel.hidden = true;
-    element('timing-error-copy').textContent = error instanceof AccessRequired ? 'Open your workspace with its private access key, then return to delivery timing.' : timedOut ? 'The records took too long to load. Try again or open the workspace.' : 'The saved records could not be read. Try again or inspect the original investigation.';
+    element('timing-error-copy').textContent = error instanceof AccessRequired ? 'Enter your workspace access code, then return to delivery timing.' : timedOut ? 'The records took too long to load. Try again or open the workspace.' : 'The saved records could not be loaded. Try again or open the case.';
     errorPanel.hidden = false;
     status.textContent = error instanceof AccessRequired ? 'Workspace access required.' : 'Delivery timing is unavailable.';
   } finally {

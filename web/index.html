@@ -125,7 +125,7 @@
           <p class="eyebrow eyebrow-ink">Walkthrough</p>
           <h2 id="walkthrough-title">Walk through a check</h2>
           <p>Pick what happened to the order, then look at it from each side: the checkout page, PayPal and your store.</p>
-          <p class="tag tag-ink">Illustration · runs in your browser · no case, payment or AI request</p>
+          <p class="tag tag-ink">Interactive example · no payment or AI call</p>
         </div>
 
         <div class="demo">
@@ -227,8 +227,8 @@ No ticket in sight.</p>
             </div>
           </div>
           <figcaption>
-            <span class="tag tag-ink">Illustration · sample case</span>
-            A sample test case, not customer data. PayPal confirmed a $29 test payment, the store has no ticket, so the promise is marked broken and the suggested next step is to ask the assistant. Your workspace shows only the cases you create and the records saved for each one.
+            <span class="tag tag-ink">Example workspace</span>
+            A sample test case, not customer data. A missing-ticket case opens with the answer, the payment and the store’s delivery record. The assistant helps you find the missing step.
           </figcaption>
         </figure>
       </section>
@@ -326,7 +326,7 @@ No ticket in sight.</p>
         <h1 id="login-title">Sign in to your workspace</h1>
         <p>Enter the access key from your workspace owner. You’ll stay signed in on this browser until the session ends.</p>
         <form id="login" class="login-form" novalidate>
-          <label for="token">Access key</label>
+          <label for="token">Workspace access key</label>
           <input id="token" name="token" type="password" autocomplete="off" spellcheck="false" required>
           <button class="btn btn-primary" type="submit" id="login-submit">Sign in</button>
         </form>
@@ -491,7 +491,7 @@ No ticket in sight.</p>
           </section>
 
           <section class="witnesses" aria-labelledby="witness-title">
-            <h3 class="section-title" id="witness-title">What each record says</h3>
+            <h3 class="section-title" id="witness-title">Payment and delivery, side by side</h3>
             <div class="witness-grid">
               <article class="witness" data-source="browser" aria-labelledby="customer-title">
                 <p class="witness-source">Checkout page</p>
@@ -536,12 +536,12 @@ No ticket in sight.</p>
             <h3 class="section-title" id="assistant-title">Assistant</h3>
             <p id="investigator-note" data-mode="UNKNOWN"></p>
             <p class="finding" id="investigator-finding" hidden></p>
-            <p class="fine" id="case-budget"></p>
+            <details class="usage-limits"><summary>Assistant usage limits</summary><p class="fine" id="case-budget"></p></details>
           </section>
 
           <section class="activity" aria-labelledby="activity-title">
             <div class="section-head">
-              <h3 class="section-title" id="activity-title">Activity</h3>
+              <h3 class="section-title" id="activity-title">Order activity</h3>
               <span class="fine" id="trace-count"></span>
             </div>
             <div class="trace-filters" role="group" aria-labelledby="trace-filter-label">
@@ -558,7 +558,7 @@ No ticket in sight.</p>
           </section>
 
           <section class="records" aria-labelledby="records-title">
-            <h3 class="section-title" id="records-title">Records and downloads</h3>
+            <h3 class="section-title" id="records-title">Share this case</h3>
             <div class="download-grid">
               <a class="download" id="export" href="#" download>
                 <span class="download-name">Case records</span>
@@ -576,13 +576,13 @@ No ticket in sight.</p>
             <h4 class="sub-title">Other views</h4>
             <ul class="views">
               <li><a id="merchant-link" href="/shop">Store page</a><span>See this case the way the buyer does. Opening it doesn’t start a payment.</span></li>
-              <li><a id="delivery-timing-link" href="/deadlines/index.html">Delivery timing</a><span>Optional. Shows this case’s delivery timing where it’s been set up; otherwise it explains what’s missing.</span></li>
-              <li><a id="studio-link" href="/studio/index.html">Records explorer</a><span id="studio-note">Optional. A table of this case’s records where it’s been set up; otherwise it explains what’s missing.</span></li>
-              <li><a href="/monitor/">Store connectors</a><span>Preview. Shopify and WooCommerce readers run separately and aren’t connected to a real store yet.</span></li>
+              <li><a id="delivery-timing-link" href="/deadlines/index.html">Delivery timing</a><span>See when the ticket arrived compared with the promised minute. Requires the delivery-timing view.</span></li>
+              <li><a id="studio-link" href="/studio/index.html">Explore case records</a><span id="studio-note">Explore this case’s payment, checkout and ticket records. Requires a connected records workspace.</span></li>
+              <li><a href="/monitor/">Store connectors</a><span>Preview for Shopify and WooCommerce. No real store is connected yet.</span></li>
             </ul>
 
             <details class="journal">
-              <summary>Original records</summary>
+              <summary>Technical details</summary>
               <pre id="journal" tabindex="0"></pre>
             </details>
             <p class="fine">Full case reference: <code id="run-id"></code></p>
@@ -622,7 +622,7 @@ No ticket in sight.</p>
       <p class="dialog-lead">Set up what to test. Creating a check doesn’t take a payment. You’ll start the test checkout as a separate step.</p>
 
       <label for="promise">What should happen, or what went wrong?</label>
-      <textarea id="promise" name="promise" rows="3" maxlength="1000" required aria-describedby="promise-help">A completed USD 29 payment must produce exactly one workshop ticket within 60 seconds.</textarea>
+      <textarea id="promise" name="promise" rows="3" maxlength="1000" required aria-describedby="promise-help">One $29 workshop ticket, delivered within 60 seconds of payment.</textarea>
       <p class="help" id="promise-help">Describe the customer issue in your own words. The delivery rule stays fixed: one ticket within 60 seconds of a confirmed payment.</p>
 
       <label for="fixture">Store</label>
@@ -632,14 +632,14 @@ No ticket in sight.</p>
 
       <fieldset class="choice">
         <legend>Type of check</legend>
-        <label class="choice-item"><input type="radio" name="mode" value="LIVE_SANDBOX" checked><span><strong>Reproduce the problem</strong><small>Run a new test checkout against your store as it is today.</small></span></label>
-        <label class="choice-item"><input type="radio" name="mode" value="FRESH_SANDBOX"><span><strong>Check a repair</strong><small>Run a new test checkout to confirm a fix keeps the promise.</small></span></label>
+        <label class="choice-item"><input type="radio" name="mode" value="LIVE_SANDBOX" checked><span><strong>Reproduce the problem</strong><small>Try a checkout in the workshop test store.</small></span></label>
+        <label class="choice-item"><input type="radio" name="mode" value="FRESH_SANDBOX"><span><strong>Check a repair</strong><small>Try the workshop checkout with recovery enabled.</small></span></label>
       </fieldset>
 
       <label for="merchant">Store version</label>
       <select id="merchant" name="merchant">
-        <option value="defective">Current store, with the delivery issue</option>
-        <option value="healthy">Repaired store</option>
+        <option value="defective">Workshop store · ticket delivery issue</option>
+        <option value="healthy">Workshop store · recovery enabled</option>
       </select>
 
       <label for="fault">What should go wrong during the test?</label>

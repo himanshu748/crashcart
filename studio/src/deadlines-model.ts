@@ -30,16 +30,24 @@ export type TimingRow = RunSummary & {
 type RecordValue = Record<string, unknown>;
 type Instant = { text: string; micros: bigint; epochMs: number };
 const modes: Record<RunMode, string> = {
-  LOCAL_TEST: "Local test",
-  LIVE_SANDBOX: "Initial test checkout",
-  RECORDED_REPLAY: "Recorded replay",
-  FRESH_SANDBOX: "New checkout after a repair",
+  LOCAL_TEST: "Example data · no payment",
+  LIVE_SANDBOX: "Test checkout",
+  RECORDED_REPLAY: "Replayed checkout",
+  FRESH_SANDBOX: "New test checkout after a repair",
 };
+// Display aliases only for known generated case titles; custom seller text stays exact.
+const generatedTitles = new Map([
+  ["Fresh repair verification: recover a lost capture response and issue exactly one ticket.", "Check the repair: recover a lost payment response and issue exactly one ticket."],
+  ["Lost capture response: payment completed but the workshop ticket is missing.", "Lost payment response: payment completed but the workshop ticket is missing."],
+  ["Recover a real sandbox payment after the merchant process exits before ticket delivery, preserving exactly one ticket within 60 seconds.", "Recover a test payment after the store stops before delivery, with exactly one ticket within 60 seconds."],
+  ["A completed USD 29 payment must produce exactly one workshop ticket within 60 seconds. Early independent read, then deadline verification.", "A completed USD 29 payment must produce exactly one workshop ticket within 60 seconds. Check payment status, then check delivery at the deadline."],
+  ["LOCAL_TEST UI interaction: one workshop ticket within 60 seconds; unpaid fixture, no provider call.", "Example case: one workshop ticket within 60 seconds; no payment made."],
+]);
 const states: Record<string, string> = {
   CREATED: "Ready to start", created: "Ready to start", queued: "Queued",
-  running: "Running", awaiting_approval: "Awaiting buyer approval",
+  running: "Checking", awaiting_approval: "Awaiting buyer approval",
   completed: "Completed", failed: "Failed", cancelled: "Stopped",
-  inconclusive: "More evidence needed",
+  inconclusive: "More information needed",
 };
 const isRecord = (v: unknown): v is RecordValue => v !== null && typeof v === "object" && !Array.isArray(v);
 const identity = (v: unknown): v is string => typeof v === "string" && v.length > 0 && v.length <= 256 && v === v.trim();
@@ -67,10 +75,10 @@ function summary(value: unknown): RunSummary {
       typeof value.state !== "string" || !value.state || value.state.length > 80) throw error();
   const mode = value.mode as RunMode;
   return {
-    id: value.id, purchaseId: value.purchase_id, title: value.promise,
+    id: value.id, purchaseId: value.purchase_id, title: generatedTitles.get(value.promise) ?? value.promise,
     reference: value.id.slice(-8), mode, modeLabel: modes[mode], state: value.state,
-    stateLabel: Object.hasOwn(states, value.state) ? states[value.state] : "Saved state unavailable",
-    sourceLabel: mode === "RECORDED_REPLAY" ? "Saved replay records" : mode === "LOCAL_TEST" ? "Saved local test records" : "Saved test-payment records",
+    stateLabel: Object.hasOwn(states, value.state) ? states[value.state] : "Status unavailable",
+    sourceLabel: mode === "RECORDED_REPLAY" ? "Replayed checkout records" : mode === "LOCAL_TEST" ? "Simulated checkout records" : "Saved test-payment records",
   };
 }
 
@@ -93,7 +101,7 @@ function savedResult(events: unknown[], run: RunSummary, purchase: RecordValue):
     if (!isRecord(candidate)) continue;
     const observed = instant(candidate.observed_at);
     if (!identity(candidate.id) || seen.has(candidate.id) || !observed)
-      return { ...none, issue: "The saved result's identity or time is unavailable." };
+      return { ...none, issue: "The saved delivery check is missing its reference or time." };
     seen.add(candidate.id);
     if (latestTime === null || observed.micros > latestTime ||
         (observed.micros === latestTime && candidate.id > String(latest?.id))) {
@@ -103,7 +111,7 @@ function savedResult(events: unknown[], run: RunSummary, purchase: RecordValue):
   }
   if (!latest || latest.source !== "checker" || latest.run_id !== run.id ||
       latest.purchase_id !== run.purchaseId || latest.order_id !== purchase.order_id ||
-      !isRecord(latest.payload)) return { ...none, issue: "The saved result does not match this investigation's records." };
+      !isRecord(latest.payload)) return { ...none, issue: "The delivery check does not match this case." };
   const payload = latest.payload;
   if (payload.invariant_version !== "ticket-v1" || !isRecord(payload.source_ids) ||
       typeof payload.verdict !== "string" || !["PASS", "FAIL", "INCONCLUSIVE"].includes(payload.verdict))
@@ -137,21 +145,21 @@ export function projectDetail(value: unknown, expectedRunId: string): TimingRow 
     { verdict: null, reason: "No result for the supported delivery promise.", deadline: undefined, issue: null };
   const row: TimingRow = {
     ...run, verdict: result.verdict,
-    verdictLabel: result.verdict === "PASS" ? "Promise kept" : result.verdict === "FAIL" ? "Promise broken" : result.verdict === "INCONCLUSIVE" ? "More evidence needed" : "Not checked",
+    verdictLabel: result.verdict === "PASS" ? "Promise kept" : result.verdict === "FAIL" ? "Promise broken" : result.verdict === "INCONCLUSIVE" ? "More information needed" : "Not checked",
     verdictReason: result.reason, paymentAt: null, paymentEpochMs: null,
     ticketOffsetsMs: [], ticketTimes: [], ticketCount: null,
-    timingStatus: "Payment is not independently confirmed.", timingAvailable: false,
+    timingStatus: "Payment has not been confirmed with PayPal.", timingAvailable: false,
   };
   const unavailable = (reason: string): TimingRow => ({ ...row, timingStatus: reason });
   if (!supported)
-    return unavailable("This investigation does not use the supported delivery promise.");
+    return unavailable("This case uses a different delivery promise.");
   if (purchase.payment_confirmed !== 1 && purchase.payment_confirmed !== true) return row;
   if (purchase.payment_state !== "COMPLETED" || !identity(purchase.order_id) || !identity(purchase.capture_id))
-    return unavailable("A completed payment and its references are unavailable.");
+    return unavailable("The completed payment details are missing.");
   if (purchase.amount !== 2900 || purchase.currency !== "USD")
     return unavailable("This payment does not match the one-ticket USD 29 promise.");
   const payment = instant(purchase.capture_completed_at);
-  if (!payment) return unavailable("Confirmed payment time is unavailable or has no timezone.");
+  if (!payment) return unavailable("The payment time is missing or incomplete.");
   const merchant = value.merchant;
   if (!isRecord(merchant) || merchant.known !== true)
     return unavailable("The store's delivery records are unavailable.");
@@ -159,7 +167,7 @@ export function projectDetail(value: unknown, expectedRunId: string): TimingRow 
     return unavailable("The payment and store records do not belong to the same purchase.");
   const observed = instant(merchant.observed_at);
   if (!observed || observed.micros < payment.micros)
-    return unavailable("The store observation time is unavailable or precedes payment.");
+    return unavailable("The delivery check is missing a valid time after payment.");
   if (typeof merchant.ticket_count !== "number" || !Number.isInteger(merchant.ticket_count) || merchant.ticket_count < 0 ||
       !Array.isArray(merchant.tickets) || merchant.tickets.length !== merchant.ticket_count)
     return unavailable("The ticket count and delivery records disagree.");
@@ -167,10 +175,10 @@ export function projectDetail(value: unknown, expectedRunId: string): TimingRow 
   const identities = new Set<string>();
   for (const ticket of merchant.tickets) {
     if (!isRecord(ticket) || !identity(ticket.id) || ticket.purchase_id !== run.purchaseId || identities.has(ticket.id))
-      return unavailable("A ticket identity is repeated, unavailable or belongs to another purchase.");
+      return unavailable("A ticket is missing its reference, appears more than once or belongs to another purchase.");
     const time = instant(ticket.created_at);
     if (!time || time.micros < payment.micros || time.micros > observed.micros)
-      return unavailable("A ticket time is unavailable or outside the recorded payment and store observation.");
+      return unavailable("A ticket’s delivery time is missing or does not match the payment and delivery checks.");
     identities.add(ticket.id);
     tickets.push(time);
   }
@@ -187,6 +195,6 @@ export function projectDetail(value: unknown, expectedRunId: string): TimingRow 
     ticketCount: merchant.ticket_count, ticketTimes: tickets.map(t => t.text),
     ticketOffsetsMs: tickets.map(t => Number(t.micros - payment.micros) / 1000),
     timingAvailable: true,
-    timingStatus: result.verdict === null ? "Recorded timings shown. No delivery result has been saved." : "Recorded timings shown. The saved result is unchanged.",
+    timingStatus: result.verdict === null ? "No delivery result has been saved. Showing saved payment and ticket times." : "Showing saved payment and delivery times.",
   };
 }

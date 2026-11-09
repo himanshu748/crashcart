@@ -120,7 +120,7 @@
     document.querySelectorAll('.case-switch [data-case]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.case === selected)));
     document.querySelectorAll('.compare-card').forEach((card) => card.classList.toggle('is-selected', card.querySelector('[data-case]')?.dataset.case === selected));
     byId('download-case').href = `downloads/${selected}.json`;
-    byId('download-case').textContent = selected === 'defective' ? 'Download the missed order records (JSON)' : 'Download the recovered order records (JSON)';
+    byId('download-case').textContent = selected === 'defective' ? 'Download missed-order summary (JSON)' : 'Download recovered-order summary (JSON)';
     const kept = receipt.verdict === 'PASS';
     const amount = Number(item.purchase.amount), currency = item.purchase.currency;
     const paidLabel = Number.isFinite(amount) && typeof currency === 'string' && /^[A-Z]{3}$/.test(currency) ? `${currency} ${(amount / 100).toFixed(2)} confirmed` : 'Payment confirmed';
@@ -155,13 +155,15 @@
         el('span', Number.isFinite(rel) ? `${rel >= 0 ? '+' : '−'}${shortDuration(Math.abs(rel))}` : 'time n/a', 'event-time'));
       const body = el('div', null, 'record-body');
       body.append(el('p', `${instant(e.event_time)} · ${e.source === 'merchant'
-        ? 'Store result produced by this replay. The original store observation is kept inside recorded_payload.'
+        ? 'Store response from this recorded comparison. The original observation is available in technical details.'
         : 'Recorded during the original checkout. No new request was made.'}`));
       const payload = {...(e.payload || {})}; delete payload.replay_provenance;
       const pre = el('pre', JSON.stringify(payload, null, 2));
       pre.tabIndex = 0;
       pre.setAttribute('aria-label', `Original details: ${eventNames[e.event_type] || 'saved observation'}`);
-      body.append(pre);
+      const original = el('details', null, 'original-details');
+      original.append(el('summary', 'Technical details'), pre);
+      body.append(original);
       details.append(summary, body); li.append(details);
       return li;
     });
@@ -174,7 +176,7 @@
     const descriptions = {
       payment: ['1 of 3', 'Payment confirmed', 'The payment went through.', 'PayPal’s saved record confirms the $29 payment. That tells us the money arrived. It doesn’t tell us whether the customer got their ticket.'],
       delivery: ['2 of 3', 'Promise broken', 'But the ticket never arrived.', 'PayPal’s reply to the store was lost on the way. The original store never issued a ticket, even after its 60-second promise ran out.'],
-      repair: ['3 of 3', 'Repaired store · replay', 'The repaired store closes the gap.', `Instead of waiting for a reply that never comes, the repaired store looks the payment up directly. Replayed against the same saved payment, it issues exactly one ticket after ${duration(latency)}. Same input, same deadline.`],
+      repair: ['3 of 3', 'Repaired store · replay', 'The repaired store closes the gap.', `The recovered store checks PayPal directly instead of waiting for a lost reply. Replayed against the same saved payment, it issues exactly one ticket after ${duration(latency)}. The customer’s one-minute promise stays the same.`],
     };
     const values = descriptions[stage];
     if (!values) return;
@@ -211,12 +213,12 @@
       count: `Step ${index + 1} of 3`,
       question: ['Did the payment go through?', 'Did the customer get their ticket?', 'Was the promise kept?'][index],
       known: known.length ? known.map((v) => observations.get(v)).join(' ') : 'Nothing yet. No payment or ticket records had been read.',
-      reasoningLabel: step.exact_model_excerpt ? 'In the model’s words' : 'Summary of its reasoning',
+      reasoningLabel: step.exact_model_excerpt ? 'What the assistant considered' : 'Why it checked this',
       reasoning: step.exact_model_excerpt || step.reasoning_summary,
       next: ['Look the payment up directly with PayPal.', 'Find the ticket linked to that payment.', 'Compare the ticket’s time with the 60-second promise.'][index],
       takeaway: index === 0 ? 'Start with the payment service, not the page the customer saw.'
         : index === 1 ? 'A completed payment alone can’t tell you whether the order was fulfilled.'
-        : `One matching ticket, ${result.delivery_latency_seconds.toFixed(2)} seconds after payment. The fixed delivery rule, not the model, confirmed the promise was kept.`,
+        : `One matching ticket, ${result.delivery_latency_seconds.toFixed(2)} seconds after payment. The payment and ticket timings confirm the promise was kept.`,
     };
   }
 
@@ -239,7 +241,7 @@
     aiHistory = history;
     const c = history.actual_operations;
     byId('ai-scope').textContent = `This is a different, earlier test checkout, captured on ${day(history.historical_capture_date + 'T00:00:00Z')}, where the ticket did arrive. It isn’t the missed order above. It shows how the assistant works through a case, one question at a time.`;
-    byId('ai-identity').textContent = `Recorded investigation · started ${instant(history.investigation_started_at)} · ${history.provider}, ${history.model} · ${c.model_calls} model calls, ${c.paypal_existing_order_gets} lookup of an existing PayPal order, ${c.new_payments} new payments.`;
+    byId('ai-identity').textContent = `Recorded investigation · started ${instant(history.investigation_started_at)} · DeepSeek on ${history.provider} · ${c.model_calls} saved assistant steps · no new payment or AI call on this page.`;
     byId('ai-unavailable').hidden = true;
     byId('ai-story-panel').hidden = false;
     showAiStep(0);

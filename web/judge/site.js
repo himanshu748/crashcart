@@ -38,7 +38,7 @@
     },
     late: {
       tickets: [75],
-      store: 'Queue backed up',
+      store: 'Delivery was held up',
       hint: 'The ticket exists, so the store did hear about the payment. Look at what held it up between payment and issue.',
     },
     twice: {
@@ -69,9 +69,9 @@
       late: ['Broken', 'A ticket came, but after the deadline.'],
     }[state];
     const verdict = {
-      waiting: ['Waiting for delivery', 'No ticket is recorded yet. Read the store again before deciding the result.'],
+      waiting: ['Waiting for delivery', 'No ticket is recorded yet. Check the store again before deciding whether delivery is late.'],
       kept: ['Promise kept', 'Payment complete, one ticket, on time. No delivery issue in these records.'],
-      broken: ['Paid, but the promise broke', issued > 1 ? 'The customer was sent more than one ticket for a single payment.' : 'The customer paid and is still waiting. This is the case CrashCart exists to catch.'],
+      broken: ['Paid, but not delivered as promised', issued > 1 ? 'The customer was sent more than one ticket for a single payment.' : 'The customer paid and is still waiting. This is the case CrashCart exists to catch.'],
       late: ['Delivered late', 'The customer did get a ticket, but after the 60 seconds you promised. That still counts as broken.'],
     }[state];
     return {store, promise, verdict};

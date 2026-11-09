@@ -6,6 +6,12 @@
 
 Features are frozen. The README now starts with the customer problem, keyless walkthrough, own-key Sandbox path and the separate jobs of PayPal and AI. GitHub’s repository metadata and visible About/Resources section both show **MIT**. Main stays at `900fa82`; only `ship/devpost` is being pushed. Devpost and YouTube remain owner actions.
 
+### Customer-facing site and components
+
+The owner clarified that the whole interface needed this treatment. Refined all four public pages, the workspace, order activity, monitoring preview, records explorer and delivery-timing view. Activities explain the actual saved step before offering unchanged technical records; unsupported questions no longer look like zero matches. Store setup names the workshop test store and monitoring stays explicitly a test-payment preview. The timing page’s missing layout styles were found in visual review and fixed.
+
+Final checks: **87 frontend tests, 45 timing tests, 7 presentation regressions and 16 judge/replay checks passed**; optional views typecheck/build with the pinned cached dependencies. Actual Chromium inspection covered the four public pages, workspace, records explorer and delivery timing at desktop and 390/320px, plus keyboard disclosures, reduced motion and the unchanged 60/61-second boundary. Monitoring sign-in was checked at all three widths, with its empty workspace and keyboard form checked at 320px; no store was connected. One wording regression and one new test-runner dependency-path error were fixed before the passing runs. No backend payment rule, validator, deadline or provider configuration changed. These are submission presentation fixes, not new product features or acceptance claims.
+
 ### Clean-clone quickstart
 
 Tested the pushed README commit `a6e971e` from a fresh network clone, without `.env`, provider keys, Node modules or installed Python packages. On this Mac, the prerequisite interpreter was selected with `export PATH=/opt/homebrew/opt/python@3.13/libexec/bin:$PATH`; `python3 --version` printed `Python 3.13.15`.

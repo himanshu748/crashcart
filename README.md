@@ -6,7 +6,7 @@ PayPal creates and captures the test order, then supplies its payment record. Th
 
 ## Try it in 60 seconds — no keys
 
-[**Open the recorded demo →**](https://crashcart.52.202.25.181.sslip.io/) Choose **Follow a recorded case**, then compare **Missed order** with **Recovered order (replay)**.
+[**Open the recorded demo →**](https://crashcart.52.202.25.181.sslip.io/) Open the recorded example, then compare **Missed order** with **Recovered order (replay)**.
 
 Or run it locally with Python 3.11 or newer (tested on 3.13.15):
 
@@ -42,7 +42,7 @@ In a second terminal run `python3 -m crashcart worker`. Open <http://127.0.0.1:8
 
 ## See the product
 
-![CrashCart’s published landing page](docs/images/crashcart-home.jpg)
+![CrashCart’s landing page](docs/images/crashcart-home.jpg)
 
 The public site has separate Home, Product, Integrations and Recorded Example pages. The recorded example is open without an account. A new payment and AI investigation runs in your privately configured workspace, not on the public site.
 
