@@ -12,6 +12,10 @@ The owner clarified that the whole interface needed this treatment. Refined all 
 
 Final checks: **87 frontend tests, 45 timing tests, 7 presentation regressions and 16 judge/replay checks passed**; optional views typecheck/build with the pinned cached dependencies. Actual Chromium inspection covered the four public pages, workspace, records explorer and delivery timing at desktop and 390/320px, plus keyboard disclosures, reduced motion and the unchanged 60/61-second boundary. Monitoring sign-in was checked at all three widths, with its empty workspace and keyboard form checked at 320px; no store was connected. One wording regression and one new test-runner dependency-path error were fixed before the passing runs. No backend payment rule, validator, deadline or provider configuration changed. These are submission presentation fixes, not new product features or acceptance claims.
 
+### Submission video prepared
+
+The final [video export](docs/VIDEO_CHECK.md) is **2:45, 6.52 MB, 1080p/30fps**, with burned-in text narration and no music/audio. It was recorded with Playwright from the actual app, using the saved 8 November payment/AI case and a clearly separate healthy replay. Final frames were inspected and the full MP4 decoded without errors. No new payment/model call, upload, public deployment or Devpost submission occurred. [Paste-ready Devpost text](docs/DEVPOST.md) stays under 600 words. Next: owner review/merge, publish the site changes, upload the MP4 as Public, replace the video placeholder and submit before the deadline. Original acceptance remains **47/60**; no CC check was closed by this packaging work.
+
 ### Clean-clone quickstart
 
 Tested the pushed README commit `a6e971e` from a fresh network clone, without `.env`, provider keys, Node modules or installed Python packages. On this Mac, the prerequisite interpreter was selected with `export PATH=/opt/homebrew/opt/python@3.13/libexec/bin:$PATH`; `python3 --version` printed `Python 3.13.15`.

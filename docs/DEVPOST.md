@@ -14,19 +14,19 @@ CrashCart helps small merchants investigate “I paid, but nothing arrived.” T
 
 Open the account-free recorded walkthrough, inspect the missing ticket, filter the timeline by source and compare the recovered order. The healthy replay delivers one ticket in 32.26 seconds using the same saved input and deadline. Download the replay to run both outcomes locally.
 
-A separate completed run from 8 November shows a real PayPal Sandbox payment followed by a real AI investigation of that same order. DeepSeek checked PayPal, checked ticket records and cited the missing delivery. Showing that saved result starts no new payment or model call. The public walkthrough is recorded; it is not a live merchant connection.
+A separate completed run from 8 November shows an actual PayPal test payment followed by a real AI investigation of that same order. DeepSeek checked PayPal, checked ticket records and cited the missing delivery. Showing that saved result starts no new payment or model call. The public walkthrough is recorded; it is not a live merchant connection.
 
 ## How we built it
 
-Python, SQLite and a background worker keep payment requests, purchases, observations and tickets connected. PayPal's REST APIs provide Sandbox order creation, capture, independent payment retrieval and webhook signature verification. The server calls PayPal’s Sandbox REST APIs.
+Python, SQLite and a background worker keep payment requests, purchases, observations and tickets connected. Through PayPal’s Sandbox APIs, the server creates and captures orders, checks payments independently and verifies payment notifications.
 
-DeepSeek-V4.1-Flash, served through Modal, chooses evidence-reading tools and explains its findings. Fixed rules decide whether payment and delivery meet the promise.
+DeepSeek-V4.1-Flash, served through Modal, chooses which payment and ticket records to read and explains its findings. Fixed rules decide whether payment and delivery meet the promise.
 
-The optional full workspace uses AG Grid's AG Studio for linked record widgets and saved-case questions, Bryntum Community Scheduler for delivery timing, KERNEL for remote checkout sessions and recordings, and Postman/Newman for executable API checks. These integrations have separate setup requirements and are not loaded by the keyless demo. Modal hosts the model; it is not an event tool sponsor.
+The optional full workspace uses AG Grid's AG Studio to explore linked payment, ticket and checkout records, Bryntum Community Scheduler for delivery timing, KERNEL for remote checkout sessions and recordings, and Postman/Newman for executable API checks. These extra views need their own setup. The public walkthrough needs no keys.
 
 ## Challenges
 
-A lost response can hide a completed payment. Retrying blindly risks another charge or ticket. Recovery must inspect the existing payment and preserve the original request identity. An earlier healthy replay also delivered too late; it still fails, while the timely comparison passes the unchanged deadline.
+A lost reply made a successful purchase look unfinished. We had to connect the payment and store records without trusting a checkout-page message or issuing duplicates. The repair still had to keep the customer’s original one-minute promise.
 
 ## Accomplishments
 

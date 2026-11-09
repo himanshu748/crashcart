@@ -1,41 +1,27 @@
-# CrashCart video — 2 minutes 55 seconds
+# CrashCart — 2:45 product walkthrough
 
-**Owner recording plan, not a completed video.** Target 175 seconds: problem 15s, product demonstration 120s, PayPal implementation 30s, close 10s. Export below three minutes, watch the whole export and check its actual duration before uploading publicly to YouTube. The owner submits the final link.
+This is the edit used for the submission video. It shows the current app displaying the completed **8 November PayPal Sandbox + AI investigation**, followed by a **separate healthy recorded replay**. It does not show a new payment, a new AI call or original buyer-approval footage. The existing case has no original checkout recording; do not describe this screen capture as one.
 
-## Prepare the real screens
+The video uses burned-in text narration, with no music or spoken audio. Each caption stays long enough to read. Keep the saved-run date visible during the investigation and the separate-replay label visible during the repair.
 
-- This script uses the redesigned local controls. Its560-test local suite and35 isolated Linux checks pass; the hosted URL still needs its update. To use the tested local build, start `./scripts/judge.sh --no-open` and open `http://127.0.0.1:8766/` for the landing. The [hosted demo](https://crashcart.52.202.25.181.sslip.io/) still serves an earlier build; use these shot labels there only after the update is deployed and checked.
-- Open the completed 8 November local case at `http://127.0.0.1:8910/?run=run_fe3038da3c4a443189aad5c92f57d1ed#case` while its results reader is running. Keep [the fresh flow and receipts](LIVE_FLOW.md) ready. If the reader is unavailable, show that document and explicitly call its image a saved screenshot. This is a different case from the public replay. The hosted **A saved AI investigation** section remains an earlier, historical case.
-- Have the [Sandbox recovery evidence](https://github.com/himanshu748/crashcart/blob/main/evidence/runs/judge-ready/recovery-v56.json) and [README integration table](https://github.com/himanshu748/crashcart#what-powers-crashcart) ready.
-- Make the recorded-example labels and text legible. Hide notifications and unrelated tabs. Do not show credentials, account dashboards, private licences or `.env`. Use your own narration; no music or generated voice is required.
-
-The hosted page is interactive, but its replay results were computed **during site build**. Clicking controls does not start a payment, AI call or Python replay. Local `sh scripts/judge.sh` recomputes both variants at startup. Describe these modes accurately.
-
-## Shot list and narration
-
-| Time | Shot and real action | Narration |
+| Time | Screen and action | Burned-in narration |
 | --- | --- | --- |
-| 0:00–0:15 · Problem | Landing headline and checkout illustration. | “A customer paid for a workshop ticket. The payment succeeded, but the ticket never arrived. Support sees a complaint; engineering sees a successful charge. CrashCart brings them to the same evidence.” |
-| 0:15–0:33 · Product | Choose **Follow a recorded case**, then click **1. The payment**, **2. The delivery** and **3. The repair**. Keep the recorded-example disclosure visible. | “The promise is one twenty-nine-dollar ticket within sixty seconds of payment. This walkthrough uses saved Sandbox records. The local app recomputes both outcomes when it starts; a static hosted export computes them when it is built. I am interacting with the product; no new payment or AI call is happening.” |
-| 0:33–0:53 | Choose **Missed order** under the recorded case. Show payment and missing-ticket facts. | “The faulty merchant loses the payment response. PayPal's record says payment completed, but the store has no ticket. CrashCart checks payment and delivery separately, so a successful charge cannot stand in for a fulfilled order.” |
-| 0:53–1:13 | Filter to **PayPal**, then **Ticket store**. Expand an event and return to **Everything**. | “I can follow the evidence by source, open a record and compare its timing. The customer's page, the payment provider and the merchant can disagree. Keeping those observations separate makes the gap visible.” |
-| 1:13–1:34 | Select **Recovered order (replay)**. Show one ticket and delivery time; expand **Result details**. | “The healthy merchant checks the payment independently and creates exactly one ticket. It passes in about thirty-two seconds, with the same recorded input and sixty-second deadline. An older late-delivery example still fails; the rule has not been loosened.” |
-| 1:34–1:48 | Open **What can I download?**, then click **Replay test you can run on your computer, with no payment** and show the completed download. Return to both outcome cards. | “The evidence can leave the dashboard as an executable replay. Run both merchants locally without an account or key. This is a repeatable comparison, not proof of a newly deployed repair.” |
-| 1:48–2:10 · Completed live AI case | Open the authenticated local result. Show **Assistant finished**, the missing-ticket finding and Activity. Keep the separate-case date clear. This displays a completed execution; start no new requests. | “On November eighth, a new Sandbox checkout completed, but our test store delivered no ticket. In that same case, DeepSeek checked PayPal, then ticket records, and cited both. This is the completed live test, shown without starting another payment or model call.” |
-| 2:10–2:15 | Return to the hosted comparison. | “The public walkthrough still uses recorded data.” |
-| 2:15–2:45 · PayPal | Show README's PayPal role, then sanitized recovery evidence. Emphasize capture, independent read, one ticket and 4.067743s. | “PayPal is the payment source of truth. The full workspace creates and captures Sandbox orders, reads their state independently, and verifies payment notifications. In a separate real test, we stopped checkout after capture, before ticket creation. A restarted worker checked the same payment and delivered one ticket in about four seconds. That test validates recovery in our owned store, using Sandbox funds only.” |
-| 2:45–2:55 · Close | End on the hosted app, with its URL and repository visible. | “CrashCart turns ‘I paid, but got nothing’ into evidence a team can inspect and a test it can rerun. Follow the payment. Check the promise.” |
+| 0:00–0:10 | Actual landing page, headline and checkout illustration. | “I paid, but my ticket never arrived.” |
+| 0:10–0:20 | Landing product story. | A successful payment can still become a broken promise. CrashCart helps support and engineering find the missing step. |
+| 0:20–0:35 | Open the saved 8 November case. Show its $29/one-ticket/60-second promise and result. | This real Sandbox checkout ran on 8 November. We are opening its saved results; no new payment or AI call is happening. |
+| 0:35–0:50 | Show payment and ticket witnesses. Filter Activity to PayPal. | The test store lost the payment reply. PayPal confirms the charge. The store still has no ticket. |
+| 0:50–1:05 | Show the Assistant section and its actual finding. Filter Activity to Assistant. | DeepSeek investigated this same order. It chose to read PayPal, then the ticket records. |
+| 1:05–1:25 | Open the actual saved assistant steps. Each explains which record it asked to check. Keep technical details closed. | First, check PayPal: did the payment complete? Then check the store: did this customer get a ticket? The assistant connects those facts; a fixed check decides whether the promise was kept. |
+| 1:25–1:40 | Return to the fixed-rule verdict and payment/ticket summary. | The customer paid, but the ticket missed its one-minute promise. This order needs attention. |
+| 1:40–1:55 | Open the account-free recorded example. Select Recovered order (replay). | For the repair, we switch to a different recorded checkout. Its faulty and healthy versions use the same payment and one-minute promise. |
+| 1:55–2:10 | Show one ticket at 32.26 seconds. Open the delivery records. | The recovered order creates one ticket in 32.26 seconds. One payment. One ticket. Delivered before the promised minute. |
+| 2:10–2:20 | Switch to Missed order and back to Recovered order. | The missing-ticket case needs attention. The recovered order keeps the same one-minute promise. |
+| 2:20–2:35 | Show the replay download and return to the landing page. | Small sellers need an answer they can share, not another successful-payment screen. Take the case and its runnable comparison with you. |
+| 2:35–2:45 | End on the product with repository address and invitation to open the recorded walkthrough. | Try the recorded walkthrough with no account. For a new test purchase, connect your own PayPal Sandbox and AI account. Follow the payment. Check the promise. |
 
-## Before upload
+## Recording boundaries
 
-1. Perform the actions in the actual running build. Fix or rerecord a failed control or download; do not splice in a fabricated success.
-2. Keep the fresh local payment-plus-AI case, public recorded replay, earlier historical AI and separate Sandbox recovery distinct. Do not narrate held-out discovery, a fresh repaired purchase, hosted live access or complete sponsor acceptance; those checks remain open.
-3. Rehearse and shorten pauses rather than exceeding 175 seconds. Measure the exported file: script timings do not establish its actual duration.
-4. Watch the complete export for legibility, truthful labels, audio and privacy. Add no unlicensed music or third-party material.
-5. Upload to **YouTube, Public**, and test the watch link while signed out. Paste the real URL into Devpost. No video URL exists yet; this script does not satisfy that requirement.
-
-Sources: [requirements](https://paypalaihackathon.devpost.com/) and [rules](https://paypalaihackathon.devpost.com/rules), reviewed 4 November 2026. The organizer's 2 November guidance asks entrants to show PayPal and AI working. This script labels historical evidence; it does not promise an eligibility determination.
-
-## Access and freeze — reviewed 8 November
-
-Keep the demonstrated build and credentials/trials through the 21 December winner announcement, with a 22 December UTC buffer. Freeze submitted source, video and links after the deadline until then. Hosting is optional. The required public video and complete PayPal-plus-AI access remain open; the private AG trial ends 17 December. [Current readiness and source](RULES_READINESS.md).
+- Playwright captures the running app. The completed case is read from a private SQLite backup; all new payment/model actions are disabled. Sign-in happens before recording and no key appears in the video.
+- The 8 November case, its saved AI investigation and the separate healthy public replay retain their real outcomes. Captions explain the investigation in customer language; raw record IDs and tool names stay in the repository. No progress animation is staged and no failed outcome is changed into a pass.
+- Public demo: <https://crashcart.52.202.25.181.sslip.io/>. Source: <https://github.com/himanshu748/crashcart>. The local capture uses the same app source, not a live provider connection.
+- Runtime, file size and actual frame inspection are in [VIDEO_CHECK.md](VIDEO_CHECK.md). The owner uploads the final MP4 to YouTube as Public and adds that real watch URL to Devpost. Nothing is uploaded or submitted by this task.
