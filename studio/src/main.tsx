@@ -157,51 +157,52 @@ const generatedTitles = new Map([
   ['Lost capture response: payment completed but the workshop ticket is missing.','Lost payment response: payment completed but the workshop ticket is missing.'],
   ['Recover a real sandbox payment after the merchant process exits before ticket delivery, preserving exactly one ticket within 60 seconds.','Recover a test payment after the store stops before delivery, with exactly one ticket within 60 seconds.'],
   ['A completed USD 29 payment must produce exactly one workshop ticket within 60 seconds. Early independent read, then deadline verification.','A completed USD 29 payment must produce exactly one workshop ticket within 60 seconds. Check payment status, then check delivery at the deadline.'],
-  ['LOCAL_TEST UI interaction: one workshop ticket within 60 seconds; unpaid fixture, no provider call.','Interface check · test data: one workshop ticket within 60 seconds; no payment made.'],
+  ['LOCAL_TEST UI interaction: one workshop ticket within 60 seconds; unpaid fixture, no provider call.','Example case: one workshop ticket within 60 seconds; no payment made.'],
 ]);
 const displayPromise = (value: string) => generatedTitles.get(value) ?? String(value ?? '');
 const caseLabel = (run: Run) => `${testTypeLabel(run.mode)} · Case ${run.id.slice(-8)} — ${displayPromise(run.promise)}`;
 const timeLabel = (value: unknown) => typeof value === "string" && Number.isFinite(Date.parse(value)) ? new Date(value).toLocaleString(undefined,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",second:"2-digit",timeZoneName:"short"}) : "Time not recorded";
-const outcomeLabel = (value: unknown) => value === "PASS" ? "Promise kept" : value === "FAIL" ? "Promise broken" : "More evidence needed";
-const eventLabel = (value: string) => ({customer_observation:"Page recorded",order_created:"Checkout started",pre_capture_read:"Payment checked before confirmation",fault_activated:"Test condition started",capture_transport_response:"Payment reply received",customer_message:"Store message saved",independent_order_read:"Payment checked with PayPal",ticket_fulfilled:"Ticket issued",entitlement_read:"Ticket checked with the store",invariant_result:"Delivery promise checked",fault_deactivated:"Test condition ended",attempt_started:"Investigation step started",attempt_completed:"Investigation step finished",run_cancelled:"Investigation stopped",webhook_received:"PayPal update received"})[value] || "Saved event";
+const outcomeLabel = (value: unknown) => value === "PASS" ? "Promise kept" : value === "FAIL" ? "Promise broken" : "More information needed";
+const eventLabel = (value: string) => ({customer_observation:"Page recorded",order_created:"Checkout started",pre_capture_read:"Payment checked before confirmation",fault_activated:"Test condition started",capture_transport_response:"Payment reply received",customer_message:"Store message saved",independent_order_read:"Payment checked with PayPal",ticket_fulfilled:"Ticket issued",entitlement_read:"Ticket checked with the store",invariant_result:"Delivery promise checked",fault_deactivated:"Test condition ended",attempt_started:"Case check started",attempt_completed:"Case check finished",run_cancelled:"Case stopped",webhook_received:"PayPal update received"})[value] || "Saved event";
 const readableError = (value: string) => value === "Operator access required" ? "Enter your access code to open this workspace." : value === "Invalid operator token" || value.startsWith("Invalid") ? "That access code was not accepted. Try again." : "The records could not be loaded. Refresh and try again.";
-function OriginalRecords({value,label="Original records"}:{value:unknown;label?:string}) {return <details className="original-records"><summary>{label}</summary><pre>{JSON.stringify(value,null,2)}</pre></details>;}
+function OriginalRecords({value,label="Technical details"}:{value:unknown;label?:string}) {return <details className="original-records"><summary>{label}</summary><pre>{JSON.stringify(value,null,2)}</pre></details>;}
 function Identity({ data }: { data: Detail }) {
   return <p className="identity"><span>{testTypeLabel(data.run.mode)}</span><span className="case-reference">Case {data.run.id.slice(-8)}</span></p>;
 }
 function Result({ data }: { data: Detail }) {
   const v=verdict(data);
-  return <div className={"result "+words(v?.verdict).toLowerCase()}><b>{outcomeLabel(v?.verdict)}</b><p>{v?.verdict === "PASS" ? "One ticket arrived within the promised time after payment." : v?.verdict === "FAIL" ? "The saved payment and delivery records do not meet the promise." : "More payment or delivery information is needed to check the promise."}</p><OriginalRecords value={v||null} label="Original result" /></div>;
+  return <div className={"result "+words(v?.verdict).toLowerCase()}><b>{outcomeLabel(v?.verdict)}</b><p>{v?.verdict === "PASS" ? "One ticket arrived within the promised time after payment." : v?.verdict === "FAIL" ? "The saved payment and delivery records do not meet the promise." : "More payment or delivery information is needed to check the promise."}</p><OriginalRecords value={v||null} label="Technical details" /></div>;
 }
 function EvidenceWidget({ widgetId }: AgWidgetParams) {
   const { primary:d,comparison,source,setSource }=useContext(Context);
-  if(!d)return <section className="widget empty">Choose an investigation to see its saved records.</section>;
+  if(!d)return <section className="widget empty">Choose a case to see its payment and delivery records.</section>;
   if(widgetId === "customer") {
     const e=[...d.events].reverse().find(e=>e.source === "browser");
     const path=typeof e?.payload.url_path === "string" ? e.payload.url_path : "";
-    const view=path === "/" ? "Investigation dashboard" : path === "/shop" ? "Store page" : path === "/return" ? "Payment return page" : "Recorded page";
+    const view=path === "/" ? "Case page" : path === "/shop" ? "Store page" : path === "/return" ? "Payment return page" : "Recorded page";
     return <section className="widget" aria-label="Browser record"><p className="kicker"><span className="source-index">01</span> BROWSER</p><h2>{e ? "What the page showed" : "No page saved yet"}</h2>
       {e&&<p className="browser-origin"><strong>{view}</strong><span>{browserLabel(e.payload.browser_kind)}</span></p>}
-      <p>{e ? "Open the original page text to read exactly what was recorded." : "No page has been recorded for this investigation."}</p>
+      <p>{e ? "See the page text saved with this case." : "No page has been saved for this case."}</p>
       <p className="meta">{e ? `Recorded ${timeLabel(e.observed_at)}` : "A payment record does not show what appeared in the browser."}</p>
+      {e&&typeof e.payload.visible_text === "string"&&e.payload.visible_text.length>0&&<blockquote>{e.payload.visible_text.slice(0,180)}</blockquote>}
       {e&&<><details className="original-browser"><summary>Original page text</summary><blockquote>{words(e.payload.visible_text)}</blockquote></details><OriginalRecords value={e} /></>}
     </section>;
   }
   if(widgetId === "payment") {
     const e=last(d,"independent_order_read");
     return <section className="widget" aria-label="Payment record"><p className="kicker"><span className="source-index">02</span> PAYPAL</p><h2>{d.purchase.payment_confirmed===1 ? "Payment confirmed" : e ? "Payment still being checked" : "Payment not checked yet"}</h2>
-      <div className="number">{d.purchase.payment_confirmed===1 ? "$29.00" : "—"}<span>USD · test workshop price</span></div>
+      <div className="number">{d.purchase.payment_confirmed===1 ? "$29.00" : "—"}<span>USD · test ticket price</span></div>
       <p className="meta">{e ? `Checked ${timeLabel(e.observed_at)}` : "No payment check has been saved."}</p><p>Refreshing this page reads saved records. It does not contact PayPal.</p>
       <OriginalRecords value={{purchase:d.purchase,check:e||null}} />
     </section>;
   }
-  if(widgetId === "merchant")return <section className="widget" aria-label="Ticket record"><p className="kicker"><span className="source-index">03</span> STORE</p><h2>{d.merchant.known ? "Was the ticket delivered?" : "Purchase not found"}</h2><div className="number">{d.merchant.ticket_count??"—"}<span>{d.merchant.ticket_count===1 ? "workshop ticket" : "workshop tickets"}</span></div>
-    {d.merchant.tickets.map(t=><div className="ticket" key={t.id}><strong><span aria-hidden="true">↳</span> You're on the list.</strong><code>{t.id}</code><small>Issued {timeLabel(t.created_at)}</small></div>)}
+  if(widgetId === "merchant")return <section className="widget" aria-label="Ticket record"><p className="kicker"><span className="source-index">03</span> STORE</p><h2>{d.merchant.known ? "Ticket delivery" : "Purchase not found"}</h2><div className="number">{d.merchant.ticket_count??"—"}<span>{d.merchant.ticket_count===1 ? "workshop ticket" : "workshop tickets"}</span></div>
+    {d.merchant.tickets.map(t=><div className="ticket" key={t.id}><strong><span aria-hidden="true">↳</span> Ticket issued</strong><details><summary>Ticket reference</summary><code>{t.id}</code></details><small>Issued {timeLabel(t.created_at)}</small></div>)}
     {d.merchant.ticket_count===0&&<p>No ticket is saved for this purchase.</p>}<p className="meta">Store checked {timeLabel(d.merchant.observed_at)}</p><OriginalRecords value={{purchase_id:d.purchase.id,...d.merchant}} />
   </section>;
-  if(widgetId === "comparison")return <section className="widget" aria-label="Checkout comparison"><p className="kicker"><span className="source-index">04</span> COMPARE CHECKOUTS</p><h2>Compare checkout outcomes</h2><div className="compare"><div><h3>Selected investigation</h3><Identity data={d}/><Result data={d}/><p>{faultLabel(d.run.fault.kind)} · {versionLabel(d.run.fault.merchant)}</p></div><div><h3>Comparison investigation</h3>{comparison ? <><Identity data={comparison}/><Result data={comparison}/><p>{faultLabel(comparison.run.fault.kind)} · {versionLabel(comparison.run.fault.merchant)}</p></> : <p>Choose another investigation above to compare its records.</p>}</div></div><p className="meta">The promise is one $29 ticket within 60 seconds of confirmed payment. Two selected checkouts may have different test conditions.</p></section>;
+  if(widgetId === "comparison")return <section className="widget" aria-label="Checkout comparison"><p className="kicker"><span className="source-index">04</span> COMPARE CHECKOUTS</p><h2>Compare checkout outcomes</h2><div className="compare"><div><h3>Selected case</h3><Identity data={d}/><Result data={d}/><p>{faultLabel(d.run.fault.kind)} · {versionLabel(d.run.fault.merchant)}</p></div><div><h3>Comparison case</h3>{comparison ? <><Identity data={comparison}/><Result data={comparison}/><p>{faultLabel(comparison.run.fault.kind)} · {versionLabel(comparison.run.fault.merchant)}</p></> : <p>Choose another case above to compare payment and delivery.</p>}</div></div><p className="meta">The promise is one $29 ticket within 60 seconds of confirmed payment. Two selected checkouts may have different test conditions.</p></section>;
   const visible=d.events.filter(e=>source === "all" || e.source === source);
-  return <section className="widget trace" aria-label="Investigation timeline"><div className="trace-head"><div><p className="kicker"><span className="source-index">05</span> TIMELINE</p><h2>What happened, and when.</h2></div><label>Show records from<select aria-label="Show records from" value={source} onChange={e=>setSource(e.target.value)}><option value="all">All sources</option>{[...new Set(d.events.map(e=>e.source))].map(value=><option key={value} value={value}>{sourceLabel(value)}</option>)}</select></label></div><p className="meta">{visible.length} of {d.events.length} saved events. Their order alone does not explain why something happened.</p><ol>{visible.map(e=><li key={e.id}><span className={"event-source "+e.source}>{sourceLabel(e.source)}</span><details><summary>{eventLabel(e.event_type)}<time>{timeLabel(e.observed_at)}</time></summary><p>Recorded {timeLabel(e.observed_at)}. {e.caused_by ? "An earlier event is linked in the original record." : "No earlier event is linked."}</p><OriginalRecords value={e}/></details></li>)}</ol></section>;
+  return <section className="widget trace" aria-label="Case timeline"><div className="trace-head"><div><p className="kicker"><span className="source-index">05</span> TIMELINE</p><h2>What happened, and when</h2></div><label>Show records from<select aria-label="Show records from" value={source} onChange={e=>setSource(e.target.value)}><option value="all">All sources</option>{[...new Set(d.events.map(e=>e.source))].map(value=><option key={value} value={value}>{sourceLabel(value)}</option>)}</select></label></div><p className="meta">{visible.length} of {d.events.length} saved activities. Open an activity for its details.</p><ol>{visible.map(e=><li key={e.id}><span className={"event-source "+e.source}>{sourceLabel(e.source)}</span><details><summary>{eventLabel(e.event_type)}<time>{timeLabel(e.observed_at)}</time></summary><p>Recorded {timeLabel(e.observed_at)}. {e.caused_by ? "An earlier event is linked in the original record." : "No earlier event is linked."}</p><OriginalRecords value={e}/></details></li>)}</ol></section>;
 }
 
 type Def = AgWidgetDefinition<
@@ -222,7 +223,7 @@ const widgets = createWidgets<Registry>({
   additionalTypes: [
     {
       id: "case-evidence",
-      label: "CrashCart evidence",
+      label: "Payment and delivery records",
       form: (p) => p.createDefaults({}),
       comp: EvidenceWidget,
       defaultSize: { width: 400, height: 300 },
@@ -364,7 +365,7 @@ function App() {
           primary: controller.runner.id,
           promptStarters: [
             {
-              label: "Completed, no ticket",
+              label: "Paid, ticket missing",
               prompt: "Show completed payments with no stored tickets.",
             },
             {
@@ -535,7 +536,7 @@ function App() {
   return (
     <>
       <a className="skip" href="#main">
-        Skip to evidence
+        Skip to checkout records
       </a>
       <header>
         <a className="brand" href={selected ? `/?view=home&run=${encodeURIComponent(selected)}` : "/?view=home"}>
@@ -549,10 +550,10 @@ function App() {
       <main id="main">
         <div className="heading">
           <div>
-            <p className="kicker">WORKSPACE / SAVED RECORDS</p>
-            <h1>Checkout records.</h1>
+            <p className="kicker">PAYMENTS & DELIVERY</p>
+            <h1>Follow the payment. Find the ticket.</h1>
             <p>
-              Compare saved browser, PayPal and store records.
+              See what happened at checkout, confirm the saved payment details and check ticket delivery.
             </p>
           </div>
           <div className="contract">
@@ -582,7 +583,7 @@ function App() {
             }}
           >
             <label>
-              Workspace access code
+              Workspace access key
               <input
                 type="password"
                 value={token}
@@ -597,9 +598,9 @@ function App() {
           <>
             <div className="toolbar" aria-label="Choose records">
               <label>
-                Investigation
+                Case
                 <select
-                  aria-label="Investigation"
+                  aria-label="Case"
                   value={selected}
                   onChange={(e) => {
                     invalidateQuery();
@@ -609,7 +610,7 @@ function App() {
                   }}
                 >
                   <option value="" disabled>
-                    Choose an investigation
+                    Choose a case
                   </option>
                   {runs.map((r) => (
                     <option value={r.id} key={r.id}>
@@ -651,18 +652,18 @@ function App() {
             <div className="status" role="status">
               {loading
                 ? "Loading saved records…"
-                : `${runs.length} saved investigations · refreshed ${updated || "just now"} · ${ready ? "Ready" : "Loading workspace"}`}
+                : `${runs.length} saved cases · refreshed ${updated || "just now"} · ${ready ? "Ready" : "Loading workspace"}`}
             </div>
             {primary && (
               <div className="case-strip">
-                <div className="selected-identity"><p className="selection-label">SELECTED INVESTIGATION</p><Identity data={primary} /><OriginalRecords value={primary.run} /></div>
+                <div className="selected-identity"><p className="selection-label">SELECTED CASE</p><Identity data={primary} /><OriginalRecords value={primary.run} /></div>
                 <div>
                   <a download href={`/api/runs/${selected}/export`}>
                     Download records ↓
                   </a>
                   {canReplay && (
                     <a download href={`/api/runs/${selected}/regression.zip`}>
-                      Download saved replay ↓
+                      Download checkout replay ↓
                     </a>
                   )}
                 </div>
@@ -734,8 +735,8 @@ function App() {
         )}
       </main>
       <footer>
-        <span>Your test store · test payments only</span>
-        <span>Saved records do not replace a new payment check</span>
+        <span>Test payments only · no real charges</span>
+        <span>Showing saved payment and delivery records</span>
       </footer>
     </>
   );

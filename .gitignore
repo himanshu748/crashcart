@@ -29,3 +29,6 @@ web/studio/*
 !web/studio/index.html
 web/deadlines/*
 !web/deadlines/index.html
+
+# Local submission video exports.
+dist/

@@ -1,63 +1,14 @@
 # CrashCart
 
-**Find out why a paid order wasn’t delivered.**
+**“I paid, but my ticket never arrived.”** CrashCart helps support and engineering at small online sellers find the missing step between a PayPal payment and delivery.
 
-“I paid, but nothing arrived.” For a small shop, that message means searching
-payment records, order history and fulfilment updates while a customer waits.
-CrashCart brings those pieces together so the missing step is easier to find.
+PayPal creates and captures the test order, then supplies its payment record. The AI chooses which payment and ticket records to inspect and cites what it finds. **The AI proposes; fixed rules decide whether the delivery promise was kept.**
 
-**[Open CrashCart →](https://crashcart.52.202.25.181.sslip.io/)** · [Run it locally](#run-it-locally)
-No account needed. Follow a recorded $29 ticket purchase from payment to the
-missing ticket, then compare the repaired checkout. The hosted demo shows results
-computed during export; the local command recomputes them at startup.
+## Try it in 60 seconds — no keys
 
-## Judge access
+[**Open the recorded demo →**](https://crashcart.52.202.25.181.sslip.io/) Open the recorded example, then compare **Missed order** with **Recovered order (replay)**.
 
-The [current HTTPS demo](https://crashcart.52.202.25.181.sslip.io/) runs without an account.
-Hosting is optional under the event rules; `./scripts/judge.sh` below is the local
-alternative. The [older Pages preview](https://himanshu748.github.io/crashcart/)
-remains a fallback. The local command
-recomputes the two merchant outcomes from saved Sandbox input, without new
-payment or AI calls. The full configured PayPal-plus-AI workspace has separate
-access requirements.
-
-Submissions close **13 November 2026, 01:30 IST**. Keep the demonstrated build and
-required credentials/trials through the **21 December winner announcement**; plan
-retention through **22 December UTC**. Freeze submitted source, video and linked
-materials after the deadline until the announcement. The private AG Studio trial
-ends 17 December and does not cover that window; the keyless path needs no licence.
-[Current readiness and remaining gaps](docs/RULES_READINESS.md).
-
-The configured workspace also completed a **new Sandbox checkout and real AI
-investigation on 8 November**: PayPal confirmed the $29 capture, DeepSeek checked
-payment and ticket records in three calls, and CrashCart identified the missing
-ticket. [See the actual local flow and its limits](docs/LIVE_FLOW.md). This
-execution is separate from the account-free hosted replay.
-
-A [protected hosting candidate](deploy/live/README.md) is prepared for that
-connected workflow on the existing host. Its local tests and secret-free
-container checks are recorded; it has **not been activated**, and no provider
-credentials have been uploaded. The owner approved that scope and allowance. The original host lacked the
-required memory margin; preparation now targets the existing Foley host while
-preserving its other apps.
-
-## See what happened
-
-The example starts with a simple promise: **one workshop ticket within 60
-seconds of payment**. PayPal confirms the payment, but the store loses its reply
-and never delivers the ticket. CrashCart puts the payment and ticket records
-side by side. The repaired checkout checks again and delivers one ticket within
-the same deadline.
-
-Explore the failed checkout, switch to its repair and follow the timeline.
-The records and an executable replay are available if you want to look closer.
-This is a recorded example, not a new payment or a live merchant connection.
-
-<a id="try-the-product-in-60-seconds"></a>
-
-## Run it locally
-
-With Python 3.11 or newer:
+Or run it locally with Python 3.11 or newer (tested on 3.13.15):
 
 ```sh
 git clone https://github.com/himanshu748/crashcart.git
@@ -65,34 +16,35 @@ cd crashcart
 ./scripts/judge.sh
 ```
 
-It opens the comparison at <http://127.0.0.1:8766/demo.html#investigation>. No API keys,
-PayPal login, vendor licence, Node installation or package download is needed.
-Tested with Python **3.13.15**. Stop with **Ctrl+C**; use `--no-open` on a machine
-without a desktop or `--port 8767` if the default port is busy.
+Both paths use saved Sandbox records, with no new payment or AI call. To run the comparison directly:
 
-The local command runs both checkout variants against the same saved inputs and
-clock using CrashCart's payment and ticket rules. The hosted demo displays those
-results computed at site-build time. Neither path makes new payments or model
-calls. The original faulty-checkout video is unavailable; the saved page and
-payment observations are included. See [replay details](#reproduce-the-comparison)
-for the commands and [the recorded AI investigation](docs/AI_EVIDENCE.md) for
-the separate historical DeepSeek workflow. The current source build also presents that earlier case as an interactive payment → ticket → promise walkthrough. Its recorded order is separate from the faulty checkout; viewing it makes no new AI or payment call.
+```sh
+python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant defective
+python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant healthy
+```
 
-## The current frontend
+The first command intentionally exits **1**: paid, no ticket. The second exits **0**: one ticket within 60 seconds. The hosted page computes results during site build; the local app recomputes them at startup.
 
-The local candidate has separate Home, Product, Integrations and Recorded Example
-pages. Home explains the merchant’s problem; Product lets you try the deadline
-rule; Integrations explains each tool; the example follows the payment and repair.
-The private workspace brings the delivery answer and next action forward; case history and setup tuck away on a phone. PayPal
-confirmation and background investigation use the existing workspace APIs.
+## Full run in about 5 minutes — your Sandbox and AI keys
 
-![CrashCart’s redesigned recorded landing page, explaining the gap between payment and delivery](evidence/runs/submission-ready/coco-ui-nov9/multipage/browser/home-final-desktop.jpg)
+Have a PayPal Sandbox business app, a separate Sandbox buyer and an AI API key ready. Python 3.13.15 is recommended; the core workspace needs no package installation.
 
-*Shown locally with saved checkout records. This frontend has not been deployed;
-the hosted link above serves the earlier version. The full local run passes 560 Python tests, 87 frontend checks and 16 replay checks.
-The deployment image also passes 35 isolated Linux checks. These results establish
-local behavior, not a new hosted or provider run. See the
-[current result](evidence/runs/submission-ready/frontend-followthrough-nov9/result.json).*
+Run `python3 -m crashcart setup`, then privately fill `.env`: `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `OPENAI_API_KEY` and `OPENAI_MODEL`. Set `CRASHCART_ALLOW_SANDBOX=1` and `CRASHCART_ALLOW_MODEL=1` only when you intend to use your test account and AI allowance.
+
+```sh
+python3 -m crashcart migrate
+python3 -m crashcart serve
+```
+
+In a second terminal run `python3 -m crashcart worker`. Open <http://127.0.0.1:8765>, sign in with your local workspace key, create a faulty-store check, approve the test purchase, confirm it, wait more than 60 seconds, choose **Check payment and delivery**, then **Ask the assistant**. [The five-minute guide](docs/JUDGE_GUIDE.md) covers the buyer, settings and exact clicks. Provider response times can add time.
+
+**PayPal:** creates/captures test orders and independently reads payment status. **AI:** chooses read-only evidence tools and explains the gap. [MIT licence](LICENSE) · [Video walkthrough](docs/VIDEO_SCRIPT.md) · [Source and setup details](#full-workspace-and-optional-live-test-payments).
+
+## See the product
+
+![CrashCart’s landing page](docs/images/crashcart-home.jpg)
+
+The public site has separate Home, Product, Integrations and Recorded Example pages. The recorded example is open without an account. A new payment and AI investigation runs in your privately configured workspace, not on the public site.
 
 ## A daily inbox for paid orders
 
@@ -162,19 +114,12 @@ covers CrashCart's source; vendor packages retain their own licences.
 
 ## Full workspace and optional live test payments
 
-Prerequisites: Python **3.13.15** with SQLite, Node.js **22.14.0** and npm.
-No pip packages are needed. Build the frontend before starting Python: this
-source repository intentionally excludes compiled vendor bundles and private
-licence-bearing builds. The pinned lockfile supplies the real frontend packages.
-See [Studio setup and licensing](docs/studio.md).
+The core payment-and-AI workspace uses Python **3.13.15** with SQLite and needs no pip or Node packages. Start with [the five-minute guide](docs/JUDGE_GUIDE.md). Optional Studio and delivery-timing views additionally use Node.js **22.14.0** and npm; build those only when you need them. Compiled vendor bundles and private licence-bearing builds stay out of Git. See [Studio setup and licensing](docs/studio.md).
 
 The workspace’s **Investigate** action queues durable work; run the background worker against the same database to process it. Reloading does not repeat inference, and interrupted calls require review. The [bounded KERNEL observer](docs/kernel-runner.md) can record an existing owned checkout under an explicit grant; reviewed browser evidence then joins the same case. It never starts or captures a payment.
 
 ```sh
 python3 --version  # must report 3.13.15
-node --version     # must report v22.14.0
-npm ci --ignore-scripts --prefix studio
-npm run build --prefix studio
 python3 -m crashcart setup
 python3 -m crashcart migrate
 python3 -m crashcart serve

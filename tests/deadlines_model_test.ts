@@ -192,7 +192,7 @@ test("top-level run and purchase identity errors throw a fixed user-safe error",
 });
 
 test("run list rejects duplicate identities and maps modes without internal enum labels", () => {
-  for (const [mode, label] of [["LOCAL_TEST", "Local test"], ["LIVE_SANDBOX", "Initial test checkout"], ["RECORDED_REPLAY", "Recorded replay"], ["FRESH_SANDBOX", "New checkout after a repair"]]) {
+  for (const [mode, label] of [["LOCAL_TEST", "Example data · no payment"], ["LIVE_SANDBOX", "Test checkout"], ["RECORDED_REPLAY", "Replayed checkout"], ["FRESH_SANDBOX", "New test checkout after a repair"]]) {
     const run = { ...fixed().run, mode }; const row = parseRunList({ runs: [run] })[0]; assert.equal(row.modeLabel, label);
     assert.ok(!row.sourceLabel.includes("LIVE_SANDBOX"));
   }
@@ -203,5 +203,5 @@ test("run list rejects duplicate identities and maps modes without internal enum
 
 test("unknown state names cannot select prototype properties or become executable content", () => {
   const data = fixed(); data.run.state = "constructor"; data.run.promise = "<script>synthetic text only</script>";
-  const row = project(data); assert.equal(row.stateLabel, "Saved state unavailable"); assert.equal(row.title, data.run.promise);
+  const row = project(data); assert.equal(row.stateLabel, "Status unavailable"); assert.equal(row.title, data.run.promise);
 });

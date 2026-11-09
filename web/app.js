@@ -38,7 +38,7 @@
   const statusLabel = (value) => new Map([
     ['created', 'Ready to start'], ['running', 'In progress'], ['awaiting_approval', 'Waiting for buyer approval'],
     ['approved', 'Approved by the buyer'], ['completed', 'Completed'], ['failed', 'Needs attention'],
-    ['cancelled', 'Stopped'], ['inconclusive', 'More evidence needed'], ['blocked', 'Needs setup'],
+    ['cancelled', 'Stopped'], ['inconclusive', 'More information needed'], ['blocked', 'Needs setup'],
     ['pending', 'Waiting'], ['unresolved', 'Not confirmed yet'], ['delivered', 'Ticket delivered'],
     ['not_delivered', 'No ticket delivered'], ['missing_purchase', 'Purchase not found'], ['not_started', 'Not started'],
     ['needs_input', 'More information needed'], ['budget_exhausted', 'Assistant limit reached'],
@@ -82,7 +82,7 @@
       [/Fresh repair verification/gi, 'Check the repair'], [/capture response/gi, 'PayPal reply'],
       [/confirmed capture/gi, 'confirmed payment'], [/capture completion/gi, 'payment confirmation'], [/\bcaptured?\b/gi, 'payment'],
       [/persisted/gi, 'saved'], [/correlated/gi, 'linked'], [/\bsandbox\b/gi, 'test'], [/merchant process/gi, 'store process'],
-      [/\bmerchant\b/gi, 'store'], [/\bprovider\b/gi, 'PayPal'], [/entitlements?/gi, 'ticket'],
+      [/\bmerchant\b/gi, 'store'], [/entitlements?/gi, 'ticket'],
       [/independent read/gi, 'payment check'], [/independent retrieval/gi, 'a separate payment check'],
       [/fixed recovery (window|deadline)/gi, '60-second delivery deadline'], [/deterministic verdict/gi, 'delivery result'],
       [/invariant/gi, 'delivery promise'], [/fixture/gi, 'test store'], [/reconcil(e|ed|iation)/gi, 'payment check'],
@@ -98,7 +98,7 @@
     ['capture_transport_response', 'PayPal reply recorded'], ['capture_unresolved', 'Payment confirmation interrupted'],
     ['capture_confirmed', 'Payment confirmed'], ['capture_completed', 'Payment completed'], ['ticket_created', 'Ticket issued'],
     ['ticket_issued', 'Ticket issued'], ['ticket_fulfilled', 'Ticket delivered'], ['merchant_observation', 'Store tickets checked'],
-    ['entitlement_read', 'Store tickets checked'], ['invariant_result', 'Delivery promise checked'], ['inconclusive', 'More evidence needed'],
+    ['entitlement_read', 'Store tickets checked'], ['invariant_result', 'Delivery promise checked'], ['inconclusive', 'More information needed'],
     ['fault_applied', 'Test problem applied'], ['fault_activated', 'Test problem started'], ['fault_deactivated', 'Test problem ended'],
     ['response_loss', 'PayPal reply lost'], ['process_exit_boundary', 'Store stopped mid-delivery'], ['pre_capture_read', 'Buyer approval checked'],
     ['model_request', 'Assistant asked a question'], ['model_response', 'Assistant replied'], ['model_plan', 'Assistant proposed a next step'],
@@ -108,7 +108,7 @@
   ]);
   const eventLabel = (type) => eventLabels.get(type) || 'Other activity recorded';
 
-  const verdictTitles = new Map([['PASS', 'Promise kept'], ['FAIL', 'Promise broken'], ['INCONCLUSIVE', 'More evidence needed']]);
+  const verdictTitles = new Map([['PASS', 'Promise kept'], ['FAIL', 'Promise broken'], ['INCONCLUSIVE', 'More information needed']]);
   const verdictReasons = new Map([
     ['ticket_delivered_once_on_time', 'PayPal confirmed the payment, and exactly one ticket arrived within 60 seconds.'],
     ['paid_without_ticket', 'PayPal confirmed the payment, but no ticket arrived within 60 seconds.'],
@@ -178,7 +178,7 @@
     if (/Invalid operator token/i.test(raw)) return 'That access key wasn’t accepted. Check it and try again.';
     if (/Operator access required/i.test(raw)) return 'Sign in to your workspace to continue.';
     if (/Unknown run/i.test(raw) || error?.status === 404) return 'We couldn’t find that case. Choose another one from the list.';
-    if (error?.status === 403) return 'You don’t have access to that case. Choose another one from the list.';
+    if (error?.status === 403) return 'That action isn’t allowed in this workspace. Check its setup or ask your workspace owner.';
     if (error?.status === 429) return 'Too many requests in a short time. Wait a moment, then try again.';
     if (/HTTP_|TRANSPORT_|INVALID_|MALFORMED_|MISSING_|NOT_AUTHORIZED|_ERROR|Internal error|\b[A-Z]+(?:_[A-Z0-9]+)+\b/.test(raw)) return 'That didn’t work. Try again, or send the details below to your workspace owner.';
     return readableText(raw || 'That didn’t work. Please try again.');
@@ -637,7 +637,7 @@
     const result = latestVerdict(events, run, purchase);
     let copy;
     if (isStopped(run)) copy = 'This case is stopped. Its records stay available to read and download. To test again, start a new check.';
-    else if (jobActive(job)) copy = 'The assistant is working through this case in the background. You can leave this page; its progress is saved.';
+    else if (jobActive(job)) copy = 'The assistant is checking the payment and delivery. You can leave this page and return to its answer.';
     else if (returnMatches(purchase) && purchase.payment_confirmed !== 1) copy = 'If you approved the payment on PayPal, confirm it here. CrashCart never confirms a payment for you, and it checks with PayPal first.';
     else if (!purchase.order_id) copy = 'Start the test checkout. You’ll approve the payment yourself on PayPal’s test site, then come back here to confirm it.';
     else if (isResumable(purchase)) copy = 'This checkout is waiting for approval on PayPal. Resume it to finish approving, or check its status first.';
@@ -645,7 +645,7 @@
     else if (!result) copy = 'The payment is confirmed. Check delivery to see whether the ticket arrived on time.';
     else if (result.payload.verdict === 'FAIL') copy = job ? 'The promise was broken. The assistant’s notes are below, and the records are ready to download.' : 'The promise was broken. Ask the assistant to trace where the delivery went wrong, or download the records.';
     else if (result.payload.verdict === 'PASS') copy = 'The promise was kept. The records are ready to download if you need them.';
-    else copy = 'There isn’t enough evidence yet. Check payment and delivery again, ideally once the 60-second window has closed.';
+    else copy = 'We need more information. Check payment and delivery again after the promised minute has passed.';
     text('next-copy', copy);
     const returnedElsewhere = pageMode === 'return' && !returnMatches(purchase);
     $('capture-help').hidden = !returnedElsewhere;
@@ -787,7 +787,7 @@
     if (job.state === 'FAILED') return prefix + 'The assistant couldn’t finish. Saved records are still available. Ask your workspace owner to check its connection before you start a new check.';
     if (job.state === 'COMPLETED') {
       const status = job.result?.status;
-      if (status === 'COMPLETED') return prefix + 'The assistant finished. Its steps are in Activity. The payment and ticket records decide the result, not the assistant.';
+      if (status === 'COMPLETED') return prefix + 'The assistant finished checking this order. Its steps are below. The payment and ticket records decide the result.';
       if (status === 'BUDGET_EXHAUSTED') return prefix + 'The assistant reached its limit before finishing. Everything it found so far is saved.';
       if (status === 'INTERRUPTED') return prefix + 'The assistant was interrupted before it finished. It won’t retry on its own. Saved records are still available.';
       return prefix + 'The assistant stopped without a full answer. Saved records are still available.';
@@ -819,6 +819,29 @@
     text('investigator-finding', finding);
   }
 
+  /* Explain the actual saved event before offering its unchanged raw record. */
+  function eventExplanation(event) {
+    const payload = event.payload || {};
+    if (event.event_type === 'model_plan') {
+      return new Map([
+        ['read_provider', 'The assistant asked to check whether PayPal completed this payment.'],
+        ['read_merchant', 'The assistant asked to look for a ticket linked to this purchase.'],
+        ['finish', 'The assistant proposed finishing its review of the payment and ticket records.'],
+      ]).get(payload.plan?.tool) || 'The assistant saved its next step for this case.';
+    }
+    if (event.event_type === 'tool_observation') {
+      if (payload.tool === 'read_provider' && payload.result?.known === true)
+        return payload.result.confirmed === true ? 'PayPal confirmed the payment.' : 'PayPal has not confirmed a completed payment.';
+      if (payload.tool === 'read_merchant' && payload.result?.known === true && Number.isInteger(payload.result.ticket_count))
+        return payload.result.ticket_count === 0 ? 'The store has no ticket linked to this purchase.' : `The store has ${payload.result.ticket_count} ticket${payload.result.ticket_count === 1 ? '' : 's'} linked to this purchase.`;
+      return 'The assistant saved the reply to its question. Open the details to inspect that reply.';
+    }
+    if (event.event_type === 'invariant_result') return verdictReasons.get(payload.signature) || 'The payment and delivery were compared with the customer’s promise.';
+    if (event.event_type === 'independent_order_read') return 'CrashCart checked this payment directly with PayPal.';
+    if (event.event_type === 'entitlement_read') return 'CrashCart checked the store for the ticket linked to this purchase.';
+    return eventLabel(event.event_type) + '. Open technical details for the original saved record.';
+  }
+
   /* ---------- Activity ---------- */
   function renderTimeline(runId, allEvents) {
     const total = allEvents.length;
@@ -848,7 +871,10 @@
         const pre = node('pre', JSON.stringify({id: e.id, run_id: e.run_id, purchase_id: e.purchase_id, order_id: e.order_id, operation_id: e.operation_id, event_time: e.event_time, observed_at: e.observed_at, caused_by: e.caused_by, payload: e.payload}, null, 2));
         pre.tabIndex = 0;
         pre.setAttribute('aria-label', `Original record: ${eventLabel(e.event_type)}`);
-        row.append(summary, pre);
+        const explanation = node('p', eventExplanation(e), 'event-explanation');
+        const original = node('details', null, 'record-details');
+        original.append(node('summary', 'Technical details'), pre);
+        row.append(summary, explanation, original);
       }
       if (timeline.children[index] !== row) timeline.insertBefore(row, timeline.children[index] || null);
       existing.delete(id);
@@ -1017,7 +1043,7 @@
     if (!stillMine(runId)) return;
     const fresh = await safeRefresh();
     if (!stillMine(runId)) return;
-    if (!fresh) setMessage('The assistant request was saved. Its last acknowledged status is shown; progress could not be refreshed. No second request will be sent automatically.', 'warn', 'queued');
+    if (!fresh) setMessage('Your request was saved, but the page couldn’t update. Refresh to see progress. We won’t send a second request automatically.', 'warn', 'queued');
     else clearMessage(); // Persisted assistant status is rendered in its own panel.
   }));
 

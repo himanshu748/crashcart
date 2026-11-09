@@ -843,3 +843,9 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   .spinner { animation: none; border-right-color: currentColor; opacity: .5; }
 }
+
+/* Case activity explains the saved action before offering the original record. */
+.event-explanation { margin: 10px 12px; color: var(--ink-2); line-height: 1.6; }
+.record-details { margin: 0 12px 14px; }
+.record-details > summary, .usage-limits > summary { cursor: pointer; color: var(--ink-2); font-size: .86rem; padding: 8px 0; }
+.record-details > summary:focus-visible, .usage-limits > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }

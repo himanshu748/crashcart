@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Integrations · What CrashCart connects to</title>
-  <meta name="description" content="The services behind CrashCart: PayPal Sandbox for test payments, a bounded background AI investigation, and the tools around them. What each one does, where it runs, and where it stops.">
+  <meta name="description" content="See how PayPal, the assistant and optional workspace tools help you follow a paid order. Explore recorded examples and learn which store connections are still in preview.">
   <meta name="color-scheme" content="light">
   <link rel="stylesheet" href="style.css">
   <script src="site.js" defer></script>
@@ -62,13 +62,13 @@
     <section class="band" id="stack" aria-labelledby="stack-title">
       <p class="eyebrow">How it connects</p>
       <h2 class="section-title" id="stack-title">How each integration helps</h2>
-      <p class="band-lead">CrashCart’s code checks payment and delivery against the promise. The AI helps with investigation; the records decide the result.</p>
+      <p class="band-lead">Each tool helps answer a practical question: did the customer pay, did the store deliver, and what should you check next?</p>
 
       <div class="int-tools" id="int-tools" role="group" aria-label="Show integrations" hidden>
         <button type="button" class="pill" data-int-filter="all" aria-pressed="true">All</button>
         <button type="button" class="pill" data-int-filter="public" aria-pressed="false">Recorded example</button>
-        <button type="button" class="pill" data-int-filter="workspace" aria-pressed="false">Workspace tools</button>
-        <button type="button" class="pill" data-int-filter="preview" aria-pressed="false">Store preview</button>
+        <button type="button" class="pill" data-int-filter="workspace" aria-pressed="false">Private workspace</button>
+        <button type="button" class="pill" data-int-filter="preview" aria-pressed="false">Store connections</button>
         <p class="fine" id="int-count" role="status"></p>
       </div>
 
@@ -76,84 +76,84 @@
         <article class="int-card" data-where="workspace public" aria-labelledby="int-paypal">
           <div class="int-card-head">
             <h3 id="int-paypal">PayPal Sandbox</h3>
-            <span class="int-status int-status-public">Saved records in public example</span>
+            <span class="int-status int-status-public">Explore a recorded payment</span>
           </div>
           <dl class="int-dl">
-            <dt>What it does</dt><dd>Creates and captures CrashCart’s own test orders, then reads the payment back independently. Payment notifications are verified in separately configured runs.</dd>
-            <dt>Where to use it</dt><dd>A configured workspace with PayPal Sandbox details. The public example shows saved records from one earlier test checkout.</dd>
+            <dt>How it helps</dt><dd>Checks the PayPal payment behind a test order, so a checkout message alone can’t be mistaken for money received. The test workspace also confirms payments and checks payment notifications before trusting them.</dd>
+            <dt>Where it’s available</dt><dd>The private test workspace needs PayPal Sandbox access. Here, you can explore the saved payment from an earlier test checkout.</dd>
             <dt>Good to know</dt><dd>Test money only. The public site never starts a checkout or contacts PayPal.</dd>
           </dl>
         </article>
 
         <article class="int-card" data-where="workspace public" aria-labelledby="int-ai">
           <div class="int-card-head">
-            <h3 id="int-ai">Background investigation · DeepSeek on Modal</h3>
-            <span class="int-status int-status-public">Saved text in public example</span>
+            <h3 id="int-ai">Investigation assistant · DeepSeek on Modal</h3>
+            <span class="int-status int-status-public">Read an earlier investigation</span>
           </div>
           <dl class="int-dl">
-            <dt>What it does</dt><dd>A DeepSeek model, hosted on Modal, works through a case in the background within fixed limits: it reads the records and suggests next steps.</dd>
-            <dt>Where to use it</dt><dd>A configured workspace. The public example can show one saved investigation from a separate, earlier, dated case.</dd>
-            <dt>Good to know</dt><dd>It never decides the payment or delivery result, and the public site never calls it.</dd>
+            <dt>How it helps</dt><dd>Helps trace a missed delivery by checking payment and ticket records, explaining what it found and suggesting where to look next.</dd>
+            <dt>Where it’s available</dt><dd>The assistant runs in the private workspace. Here, you can read a saved investigation from a separate earlier order.</dd>
+            <dt>Good to know</dt><dd>The answer stays tied to payment and delivery records. Reading the saved investigation makes no new AI request.</dd>
           </dl>
         </article>
 
         <article class="int-card" data-where="workspace" aria-labelledby="int-ag">
           <div class="int-card-head">
             <h3 id="int-ag">AG Studio</h3>
-            <span class="int-status">Configured workspace</span>
+            <span class="int-status">Optional workspace tool</span>
           </div>
           <dl class="int-dl">
-            <dt>What it does</dt><dd>Shows the payment, delivery and investigation records linked to each other, so you can follow one order across systems.</dd>
-            <dt>Where to use it</dt><dd>A licensed, configured workspace.</dd>
-            <dt>Good to know</dt><dd>Not part of the public example.</dd>
+            <dt>How it helps</dt><dd>Follow an order through linked payment and ticket records, and ask questions about saved cases.</dd>
+            <dt>Where it’s available</dt><dd>A private workspace with the required AG Studio licence.</dd>
+            <dt>Good to know</dt><dd>Available separately from this recorded example.</dd>
           </dl>
         </article>
 
         <article class="int-card" data-where="workspace" aria-labelledby="int-bryntum">
           <div class="int-card-head">
             <h3 id="int-bryntum">Bryntum Scheduler (Community)</h3>
-            <span class="int-status">Configured workspace</span>
+            <span class="int-status">Optional workspace tool</span>
           </div>
           <dl class="int-dl">
-            <dt>What it does</dt><dd>Lays out delivery timing on a timeline, so the gap between payment, ticket and deadline is visible at a glance.</dd>
-            <dt>Where to use it</dt><dd>A configured workspace.</dd>
-            <dt>Good to know</dt><dd>Not part of the public example, which uses its own simple timeline.</dd>
+            <dt>How it helps</dt><dd>Compare when orders were paid and delivered, and spot tickets that missed their promised time.</dd>
+            <dt>Where it’s available</dt><dd>The private workspace, after this optional view is set up.</dd>
+            <dt>Good to know</dt><dd>This optional delivery view is separate from the timeline in the recorded example.</dd>
           </dl>
         </article>
 
         <article class="int-card" data-where="workspace" aria-labelledby="int-kernel">
           <div class="int-card-head">
             <h3 id="int-kernel">KERNEL</h3>
-            <span class="int-status">Separately authorised</span>
+            <span class="int-status">Optional checkout recording</span>
           </div>
           <dl class="int-dl">
-            <dt>What it does</dt><dd>Runs a remote test checkout and records it, so the customer’s side of the order is captured too.</dd>
-            <dt>Where to use it</dt><dd>Only in runs that have been separately authorised.</dd>
-            <dt>Good to know</dt><dd>Not part of the public example. The public site starts no remote session.</dd>
+            <dt>How it helps</dt><dd>Records an approved test checkout in a remote browser, so you can review what the customer experienced alongside payment and delivery.</dd>
+            <dt>Where it’s available</dt><dd>The private workspace, when its owner enables a test session.</dd>
+            <dt>Good to know</dt><dd>Available separately from this recorded example. The public site starts no remote session.</dd>
           </dl>
         </article>
 
         <article class="int-card" data-where="workspace" aria-labelledby="int-postman">
           <div class="int-card-head">
             <h3 id="int-postman">Postman</h3>
-            <span class="int-status">Configured workspace</span>
+            <span class="int-status">Optional workspace tool</span>
           </div>
           <dl class="int-dl">
-            <dt>What it does</dt><dd>Checks CrashCart’s API responses and the records it exports.</dd>
-            <dt>Where to use it</dt><dd>Against a configured workspace.</dd>
-            <dt>Good to know</dt><dd>Not part of the public example. The downloads there are saved files, and downloading them doesn’t call any service.</dd>
+            <dt>How it helps</dt><dd>Runs repeatable checks on CrashCart’s payment and delivery records and the files it downloads.</dd>
+            <dt>Where it’s available</dt><dd>A separately set up private workspace.</dd>
+            <dt>Good to know</dt><dd>These checks are separate from the recorded example. Downloading its files makes no payment or AI request.</dd>
           </dl>
         </article>
 
         <article class="int-card" data-where="preview" aria-labelledby="int-stores">
           <div class="int-card-head">
-            <h3 id="int-stores">Shopify and WooCommerce readers</h3>
+            <h3 id="int-stores">Shopify and WooCommerce</h3>
             <span class="int-status int-status-preview">Preview</span>
           </div>
           <dl class="int-dl">
-            <dt>What it does</dt><dd>Would read orders and fulfilment from a real store, in place of the owned workshop test store.</dd>
-            <dt>Where to use it</dt><dd>A separate preview. It has never been connected to a real store.</dd>
-            <dt>Good to know</dt><dd>There’s no install, app listing or connect flow today.</dd>
+            <dt>How it helps</dt><dd>Store order and delivery connections are in preview. They haven’t been tested with a real store yet.</dd>
+            <dt>Where it’s available</dt><dd>Not available to connect your store yet.</dd>
+            <dt>Good to know</dt><dd>This example uses a workshop test store. Store installation and connection are not available yet.</dd>
           </dl>
         </article>
       </div>
@@ -163,17 +163,17 @@
       <p class="eyebrow">Before you start</p>
       <h2 class="section-title" id="limits-title">What you can use today</h2>
       <ul class="limits">
-        <li><strong>Test payments only</strong><span>Every payment is PayPal Sandbox test money. The one owned test case is a USD 29 workshop ticket, promised within 60 seconds.</span></li>
-        <li><strong>Store setup</strong><span>Store connectors are a preview. App installation, customer accounts and store billing aren’t available yet.</span></li>
-        <li><strong>Private workspace access</strong><span>The connected workspace uses an access key from its owner. This public example opens without one.</span></li>
-        <li><strong>A recorded example</strong><span>Explore saved records here. A new payment or AI investigation runs only in a configured workspace.</span></li>
+        <li><strong>Test payments only</strong><span>The example follows a $29 workshop ticket due within 60 seconds. Test payments use PayPal Sandbox funds.</span></li>
+        <li><strong>Connect your store</strong><span>Shopify and WooCommerce connections are still a preview. Store installation, customer accounts and store billing aren’t available yet.</span></li>
+        <li><strong>Private workspace access</strong><span>The private workspace needs setup and access from its owner. No sign-in is needed for this recorded example.</span></li>
+        <li><strong>A recorded example</strong><span>Explore saved records here. A new payment or AI investigation needs the private test workspace.</span></li>
       </ul>
     </section>
 
     <section class="band band-dark" aria-labelledby="int-next-title">
       <p class="eyebrow">Next</p>
-      <h2 class="section-title" id="int-next-title">See the saved records for yourself</h2>
-      <p class="band-lead">The recorded example shows the PayPal and store records side by side, the repaired store replayed against the same payment, and the files to download.</p>
+      <h2 class="section-title" id="int-next-title">Follow an order from payment to delivery</h2>
+      <p class="band-lead">See the missing ticket, compare how the repaired checkout handles the same recorded payment, and take the order details with you.</p>
       <div class="band-actions">
         <a class="btn btn-signal" href="demo.html">Open the recorded example</a>
         <a class="btn btn-outline-light" href="demo.html#downloads">Go to the downloads</a>
@@ -194,7 +194,7 @@
       <a href="demo.html">Recorded example</a>
     </nav>
     <p class="fine"><a href="LICENSE">MIT licence</a></p>
-    <p class="fine">Checking your own orders happens in a separate, private CrashCart workspace. This public site doesn’t sign you in or connect a store.</p>
+    <p class="fine">Explore this recorded example without signing in. Connecting your own store isn’t available here yet.</p>
   </footer>
 </body>
 </html>
