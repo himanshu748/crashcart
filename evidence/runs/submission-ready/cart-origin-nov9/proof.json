@@ -1,0 +1,60 @@
+{
+  "state": "PREPARED_NOT_DEPLOYED",
+  "base_commit": "a3d4d77f29f4f825de9c290f88aa50cc8a65f1f4",
+  "hostname": "cart.13.204.212.172.sslip.io",
+  "cause": "The longer unactivated hostname made Caddy renumber three existing Ripple route-group identifiers. Selecting a shorter new site name preserves the original generated groups.",
+  "strict_comparison_unchanged": true,
+  "group_fields_normalized": false,
+  "old_source_config_sha256": "ee20557e34ed18b37e21b8ef421c46a2066c9eb96ecc8b0166201520d7674072",
+  "old_failure_differences": [
+    {
+      "path": "/apps/http/servers/srv0/routes/4/handle/0/routes/1/group",
+      "kind": "value",
+      "old_sha256": "83099f097d46f47c09263025784dece3b7d7dbd2cb75283b7eeadbb90cedd6c6",
+      "new_sha256": "fba0a98d6705fd408dc22cf92351c67e1836a9a062af1b0ee1a61d6854d2cd64",
+      "old": "group7",
+      "new": "group8"
+    },
+    {
+      "path": "/apps/http/servers/srv0/routes/4/handle/0/routes/2/group",
+      "kind": "value",
+      "old_sha256": "83099f097d46f47c09263025784dece3b7d7dbd2cb75283b7eeadbb90cedd6c6",
+      "new_sha256": "fba0a98d6705fd408dc22cf92351c67e1836a9a062af1b0ee1a61d6854d2cd64",
+      "old": "group7",
+      "new": "group8"
+    },
+    {
+      "path": "/apps/http/servers/srv0/routes/4/handle/0/routes/3/group",
+      "kind": "value",
+      "old_sha256": "83099f097d46f47c09263025784dece3b7d7dbd2cb75283b7eeadbb90cedd6c6",
+      "new_sha256": "fba0a98d6705fd408dc22cf92351c67e1836a9a062af1b0ee1a61d6854d2cd64",
+      "old": "group7",
+      "new": "group8"
+    }
+  ],
+  "cart_readonly_differences": [],
+  "original_complete_json_equal_after_removing_only_new_route": true,
+  "no_config_writes_or_reload_in_proof": true,
+  "source_sha256": {
+    "crashcart/hosted_live.py": "e1f683c91f51e1861de158e1eb2b04f1108ad9b20a4876d29e7e8beb38433a75",
+    "deploy/live/install_caddy.py": "be67c354cbf5e38848dcbf2a119396770d9ce064f6d6b2a755a700e493411342",
+    "deploy/live/Caddyfile.fragment": "bb4de4ad9564c610f889e4f595c1055b849c21be6c50efd1b5107170c16e6596",
+    "deploy/live/runtime.env.example": "6c1dd508344a3755209f1a72c8e10b589eba0bc882c559705b27f993904ab9c7",
+    "deploy/live/README.md": "6c7698db888f8ad99343e92c5a6ffcd634416744d19c84cf4fc467cc110006b5"
+  },
+  "full_suite": {
+    "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -W error::ResourceWarning -m unittest discover -v",
+    "output": "Ran 549 tests in 124.453s\n\nOK"
+  },
+  "judge_replay": {
+    "command": "PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 ./scripts/test-judge.sh",
+    "output": "Ran 15 tests in 2.812s\n\nOK"
+  },
+  "new_image": "NOT_YET_BUILT",
+  "activation": "PAUSED_OWNER_TWO_FAILURE_RULE",
+  "payment_calls": 0,
+  "model_calls": 0,
+  "original_verified": 47,
+  "total": 60,
+  "new_verified_ids": []
+}

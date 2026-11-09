@@ -11,7 +11,7 @@ from pathlib import Path
 import re
 import stat
 
-HOSTNAME = b'workspace-crashcart.13.204.212.172.sslip.io'
+HOSTNAME = b'cart.13.204.212.172.sslip.io'
 
 
 def digest(body):

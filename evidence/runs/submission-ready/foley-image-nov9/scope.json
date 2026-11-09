@@ -1,0 +1,7 @@
+{
+  "scope": "Actual prepared A3 image and isolated synthetic Linux checks; never activated. Does not establish Cart-origin image, public TLS or provider behavior.",
+  "source_commit": "a3d4d77f29f4f825de9c290f88aa50cc8a65f1f4",
+  "provider_calls": 0,
+  "provider_credentials_mounted": false,
+  "image_ports_published": 0
+}

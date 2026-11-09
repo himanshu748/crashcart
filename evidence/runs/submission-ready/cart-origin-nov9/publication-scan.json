@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "full_staged_files": 19,
+  "known_private_value_matches": 0,
+  "omitted": 0,
+  "raw_known_pattern_scan": "scope: full staged file contents\nfindings: 0; files omitted: 0\nlimits: known patterns only; no Git history; arbitrary untracked content excluded; staged scope excludes unstaged changes.\n",
+  "scope": "Current staged blobs; no Git history scan."
+}

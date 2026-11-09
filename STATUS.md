@@ -1,8 +1,24 @@
 # CrashCart development status
 
-**Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 8 November 2026 (India).
+**Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 9 November 2026 (India).
 
 ## Current delivery
+
+### 9 November — exact-preservation hostname fix
+
+The rejected candidate differed only in three Caddy-generated Ripple route-group identifiers. A read-only test with the short owned hostname `cart.13.204.212.172.sslip.io` leaves the **entire original JSON exactly unchanged** after removing only CrashCart's new route. No group fields or other settings are ignored or normalized. The old configuration hash is unchanged and both failed activations remain recorded. Independent review confirmed the cause and zero-diff proof.
+
+The runtime origin, installer guard, proxy fragment and environment example now pin that address. Fresh source verification passed **549 tests in 124.453s** and **15 judge/replay checks in 2.812s**. This is preparation, not a deployed service: the new source still needs its own image/Linux checks, final review and owner resumption of the paused activation. [Source, commands and read-only evidence](evidence/runs/submission-ready/cart-origin-nov9/proof.json).
+
+**Verified 47/60; newly verified CC IDs: none.** Original open checks and frozen-private stale count are unchanged. No new payment/model call or Devpost submission. Next: finish the image proof and request the activation retry required by the owner's two-failure rule, then verify HTTPS and fresh PayPal/AI behavior. Project incomplete.
+
+### 9 November — Foley image verified; activation paused
+
+The pinned source `a3d4d77` built successfully on Foley using its installed Docker builder, without an automatic pull or networked build. The actual image is `sha256:ce0eb439db748b0442100bbdbd525247bd41216af02bc348a985edf5f0f4fed1`. All 34 runtime-file hashes match; **26 isolated Linux tests passed in 11.732s** with no network, provider credentials or public ports. That earlier image has its own source-bound proof; it is not the new Cart-origin candidate.
+
+Two activation attempts remain failed and recorded. The first rejected an incorrect seven-host assumption; a read-only inventory established all six exact public hostnames, and the guard was corrected to exact set equality after review. The second rejected a difference between the original and candidate Caddy configurations before installing any app, state or route. Activation is stopped under the owner's two-failure rule while that difference is inspected read-only. All six existing sites returned HTTP 200; private staged credentials and temporary SSH/firewall access were removed. No new Sandbox payment or model request occurred. The new protected workspace is **not deployed**; the public recorded demo remains independent.
+
+**47/60 original verified; newly verified CC IDs: none.** The original failed, blocked and unverified items remain open; no newly stale checks on the frozen private build. Next: identify and correct the configuration difference without dropping preservation checks, obtain the required retry resumption, then verify actual HTTPS and fresh PayPal/AI behavior. Project incomplete.
 
 ### 8 November — approved live access moved to Foley preparation
 

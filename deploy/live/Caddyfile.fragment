@@ -1,6 +1,6 @@
 # Append only after candidate approval and a backup/validation of the existing
 # foley-caddy-1 configuration. Do not replace globals or any existing host block.
-workspace-crashcart.13.204.212.172.sslip.io {
+cart.13.204.212.172.sslip.io {
 	encode zstd gzip
 	header {
 		X-Content-Type-Options nosniff

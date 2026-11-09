@@ -1,0 +1,13 @@
+{
+  "scope": "SSH lease and own temporary directory cleanup; deployed services untouched",
+  "own_staging_removed": true,
+  "master_closed": true,
+  "operator_cidr_removed": true,
+  "original_firewall_exactly_restored": true,
+  "temporary_key_files_removed": [
+    "key.pem",
+    "key.pem.pub",
+    "key-cert.pub"
+  ],
+  "finished_at": 1794206270.319746
+}

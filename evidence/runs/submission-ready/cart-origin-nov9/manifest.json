@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "cause-review.json",
+      "sha256": "ff38aafa141778efcf698c73c4c1b7ac6079e0c99eb332de96ff9a849a2bc0a1",
+      "bytes": 2896
+    },
+    {
+      "path": "full-suite.log",
+      "sha256": "08d54f357d2231fe058ddfdfe649ed7357ff694d17daa6f8a72709d393031139",
+      "bytes": 96667
+    },
+    {
+      "path": "judge-replay.log",
+      "sha256": "6c66b4f4ecfeb40df2217565bf528c6af0feea5b4377402c22ba1930f0160fb8",
+      "bytes": 2585
+    },
+    {
+      "path": "proof.json",
+      "sha256": "3984673145b9877f674736f1ce9dec6c1ba5f3d8e97cb1d93781aa3227d20f4f",
+      "bytes": 2775
+    },
+    {
+      "path": "publication-scan.json",
+      "sha256": "1843846801b50c3cec998c9151f5b3f4f8280bdc04a18f1cab832dfe8edebf75",
+      "bytes": 380
+    },
+    {
+      "path": "source-review.json",
+      "sha256": "804dfac87041644a9f9fc83cd48ea10bb210d1594a0e012d6ddf215e4c894241",
+      "bytes": 3755
+    }
+  ]
+}

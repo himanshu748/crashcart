@@ -1,0 +1,66 @@
+{
+  "reviewed_at": "2026-11-09T07:20:53.897022+00:00",
+  "reviewer": "Independent source and saved-test-evidence reviewer",
+  "decision": "PASS_FIXED_CART_ORIGIN_SOURCE",
+  "blocking_findings": [],
+  "source_sha256": {
+    "crashcart/hosted_live.py": "e1f683c91f51e1861de158e1eb2b04f1108ad9b20a4876d29e7e8beb38433a75",
+    "deploy/live/install_caddy.py": "be67c354cbf5e38848dcbf2a119396770d9ce064f6d6b2a755a700e493411342",
+    "deploy/live/Caddyfile.fragment": "bb4de4ad9564c610f889e4f595c1055b849c21be6c50efd1b5107170c16e6596",
+    "deploy/live/runtime.env.example": "6c1dd508344a3755209f1a72c8e10b589eba0bc882c559705b27f993904ab9c7",
+    "deploy/live/README.md": "6c7698db888f8ad99343e92c5a6ffcd634416744d19c84cf4fc467cc110006b5"
+  },
+  "artifact_sha256": {
+    "proof.json": "3984673145b9877f674736f1ce9dec6c1ba5f3d8e97cb1d93781aa3227d20f4f",
+    "full-suite.log": "08d54f357d2231fe058ddfdfe649ed7357ff694d17daa6f8a72709d393031139",
+    "judge-replay.log": "6c66b4f4ecfeb40df2217565bf528c6af0feea5b4377402c22ba1930f0160fb8",
+    "cause-review.json": "ff38aafa141778efcf698c73c4c1b7ac6079e0c99eb332de96ff9a849a2bc0a1"
+  },
+  "base_commit": "a3d4d77f29f4f825de9c290f88aa50cc8a65f1f4",
+  "reviewed_changes": [
+    "Application PUBLIC_URL, installer HOSTNAME, fragment hostname and environment example change only the fixed origin from the unactivated workspace name to cart on the same owned Foley instance.",
+    "The four executable/configuration files exactly match the base revision after that single literal-hostname substitution; no other code or guard changes are present.",
+    "The guide explains the observed group-renumbering cause, preserves exact-object comparisons and labels the origin as prepared rather than activated."
+  ],
+  "unchanged_boundaries": [
+    "Exact fixed-origin/authentication checks",
+    "Eight permanent Sandbox-case grants",
+    "Existing model grant and reservation accounting",
+    "Fixed 60-second delivery rule and validators",
+    "Maximum expiry of 2026-12-23T00:00:00Z",
+    "Container/resource/network restrictions",
+    "Same-inode/CAS/complete ACTIVE route/settings preservation"
+  ],
+  "saved_verification": {
+    "full_suite": {
+      "command": "/opt/homebrew/opt/python@3.13/libexec/bin/python3 -W error::ResourceWarning -m unittest discover -v",
+      "output": "Ran 549 tests in 124.453s\n\nOK"
+    },
+    "judge_replay": {
+      "command": "PYTHON=/opt/homebrew/opt/python@3.13/libexec/bin/python3 ./scripts/test-judge.sh",
+      "output": "Ran 15 tests in 2.812s\n\nOK"
+    },
+    "actual_log_content_verified": true,
+    "new_tests_run_by_reviewer": false,
+    "readonly_cause_proof": "Previously independently verified complete JSON equality after removing only the cart route; no group-field normalization.",
+    "old_source_config_sha256": "ee20557e34ed18b37e21b8ef421c46a2066c9eb96ecc8b0166201520d7674072"
+  },
+  "status": {
+    "source_prepared": true,
+    "new_image_verified": false,
+    "activation_cleared": false,
+    "activation": "Paused under the owner two-failure rule; owner resumption remains required after final source/image preparation.",
+    "prior_two_activation_failures_preserved": true,
+    "original_verified": 47,
+    "total": 60,
+    "new_verified_ids": [],
+    "next": "Commit the frozen source, build and verify the new immutable image with 26 Linux checks, review final activation inputs, then obtain owner resumption before another activation."
+  },
+  "review_actions": {
+    "host_or_model_provider_calls": 0,
+    "private_credential_or_ledger_values_read": false,
+    "source_edits": false,
+    "committed": false
+  },
+  "completion_boundary": "Source-review PASS only. No deployment, new payment/model execution, hosted journey or future availability is claimed."
+}

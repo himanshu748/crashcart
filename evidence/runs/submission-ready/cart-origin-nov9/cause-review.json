@@ -1,0 +1,49 @@
+{
+  "reviewed_at": "2026-11-09T07:12:36.097861+00:00",
+  "reviewer": "Independent saved-evidence reviewer",
+  "decision": "PASS_CART_HOSTNAME_CAUSE_FIX_READ_ONLY_ONLY",
+  "activation_cleared": false,
+  "blocking_findings_for_this_cause_fix": [],
+  "evidence": {
+    "path": "../foley-config-diff-cart/proof.private.json",
+    "sha256": "f8de27af45e89da2d1f769b6363a5be5a48e028307c8906e60830c4cd228382b",
+    "recorded_read_only": true,
+    "saved_source_config_sha256": "ee20557e34ed18b37e21b8ef421c46a2066c9eb96ecc8b0166201520d7674072",
+    "original_full_json_sha256": "922f0e2cdd061800ffc0dcd0162cf14068ebf3bb86b88cf9667742b633c5a061",
+    "candidate_full_json_sha256": "d92e3b346c3420f7567a091bf9e474a3cb5510fac4ae8767017ca6cbe973b115",
+    "independently_pruned_candidate_sha256": "922f0e2cdd061800ffc0dcd0162cf14068ebf3bb86b88cf9667742b633c5a061",
+    "differences_after_only_exact_new_route_removal": 0,
+    "old_matches_prior_failed_candidate_baseline": true
+  },
+  "verified_comparison": [
+    "Independently removed exactly the single cart hostname route from the saved complete candidate; no other fields, groups or ordering were normalized.",
+    "The remaining complete JSON equals both the saved pruned candidate and the complete original JSON exactly.",
+    "All six existing routes remain in their original order; cart is appended last.",
+    "The saved original configuration hash and complete original JSON match the earlier workspace-hostname diagnostic."
+  ],
+  "scope": {
+    "same_owned_instance": "foley-judging, ap-south-1, 13.204.212.172",
+    "candidate_hostname": "cart.13.204.212.172.sslip.io",
+    "permission_expansion": false,
+    "new_instance_plan_or_service": false,
+    "config_write_reload_or_listener_proven_by_this_receipt": false,
+    "explanation": "Changing an unactivated candidate hostname avoids the observed adapter-generated group renumbering while retaining strict preservation checks."
+  },
+  "failed_attempts_retained": [
+    "First Foley activation FAIL: incorrect hostname-count assumption; retained as a failed preflight.",
+    "Second Foley activation FAIL: original generated group7 values became group8 with the workspace hostname; retained as a failed preflight."
+  ],
+  "activation_gates": [
+    "Retarget and freeze the fixed-origin application/configuration/docs",
+    "Fresh source-suite, judge/replay and immutable-image/26-Linux-test proof",
+    "Review the final retargeted activation inputs",
+    "Owner resumption after the two failed activation attempts"
+  ],
+  "review_actions": {
+    "host_or_provider_calls": 0,
+    "credential_or_actual_ledger_values_read": false,
+    "source_edits": false,
+    "committed": false
+  },
+  "completion_boundary": "This approves only the saved read-only cause-fix proof. It does not resume or approve another activation, establish provider behavior, close CC checks or promise future uptime."
+}

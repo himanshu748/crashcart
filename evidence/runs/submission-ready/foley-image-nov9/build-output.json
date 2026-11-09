@@ -1,0 +1,5 @@
+{
+  "stderr_utf8": "DEPRECATED: The legacy builder is deprecated and will be removed in a future release.\n            BuildKit is currently disabled; enable it by removing the DOCKER_BUILDKIT=0\n            environment-variable.\n\n",
+  "raw_sha256": "ec34a09e033b515c85951f12dbaa17dc3090601dd78ed912c6b4548ce882034a",
+  "scope": "Verbatim successful build stderr encoded as JSON; original trailing newline bytes preserved in the string."
+}

@@ -1,0 +1,29 @@
+{
+  "files": [
+    {
+      "path": "build-output.json",
+      "sha256": "05178ea87af2f8ebe3fbe522e41a3db348825add34f00121aafdfd64637dbc2b",
+      "bytes": 442
+    },
+    {
+      "path": "cleanup.json",
+      "sha256": "c61ed125e93c56ac7b0217cd9f2ea2456caf789f4da68dcac5b452e58fdb8ea2",
+      "bytes": 356
+    },
+    {
+      "path": "focused-linux.log",
+      "sha256": "0f2dc059a4932e77dcb544bd741246a3abdf8ddba55c74346ac307263d2b89d4",
+      "bytes": 4240
+    },
+    {
+      "path": "proof.json",
+      "sha256": "b14453949183b1fd35772b1bfc3cec7ec47c71e822e594e6402a884a663d4223",
+      "bytes": 1508
+    },
+    {
+      "path": "scope.json",
+      "sha256": "690eaa31d4c072d10ccc3fdbd80616dc5bbbf157f91ba6cad37031cf9b624507",
+      "bytes": 324
+    }
+  ]
+}
