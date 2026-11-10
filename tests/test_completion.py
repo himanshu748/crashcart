@@ -20,7 +20,7 @@ class CompletionCheckerTests(unittest.TestCase):
         (self.root / "scripts").mkdir()
         shutil.copy(REPO / "scripts/requirements.json", self.root / "scripts/requirements.json")
         self.rules = checker.read_rules(self.root)
-        text = (REPO / "BUILD_CHECKLIST.md").read_text().replace("- [x] **CC-", "- [ ] **CC-")
+        text = (REPO / "docs/archive/BUILD_CHECKLIST.md").read_text().replace("- [x] **CC-", "- [ ] **CC-")
         (self.root / "BUILD_CHECKLIST.md").write_text(text)
         (self.root / "sample.py").write_text("# synthetic checker test source\n")
         self.snapshot = self.root / "evidence/snapshots/test"
@@ -179,7 +179,7 @@ class CompletionCheckerTests(unittest.TestCase):
         self.verify("CC-001")
         path = self.root / "evidence/CC-001/result.json"
         path.unlink()
-        path.symlink_to(REPO / "BUILD_CHECKLIST.md")
+        path.symlink_to(REPO / "docs/archive/BUILD_CHECKLIST.md")
         self.reject("escapes repository")
 
     def test_missing_snapshot_rejected(self):

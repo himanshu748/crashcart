@@ -2,7 +2,7 @@
 
 ## Merchant monitoring — 6 November
 
-The exact overload-notice follow-up now passes locally as [OV-001](docs/OVERLOAD_VISIBILITY.md), with fresh desktop/phone captures and unchanged production guard limits. Historical fixture failures are preserved.
+The exact overload-notice follow-up now passes locally as [OV-001](../OVERLOAD_VISIBILITY.md), with fresh desktop/phone captures and unchanged production guard limits. Historical fixture failures are preserved.
 
 Newly authorized scope, separate from the frozen investigation contract:
 
@@ -11,31 +11,31 @@ Newly authorized scope, separate from the frozen investigation contract:
 3. Customer accounts, supported installation and hosted operation: pending. PM-008/009.
 4. Per-store subscription/cancellation: pending a separate billing decision and Sandbox implementation. PM-010. No live charges authorized.
 
-[Product acceptance](docs/MONITOR_PRODUCT.md). Local webhook limits, receipt retention and recovery WH-001–006 now pass with [source-bound proof](evidence/runs/submission-ready/monitor-v2.json). Authentic platform data, installation and hosted/customer SaaS remain open. Original private acceptance stays 47/60; monitoring does not inherit it.
+[Product acceptance](../MONITOR_PRODUCT.md). Local webhook limits, receipt retention and recovery WH-001–006 now pass with [source-bound proof](../../evidence/runs/submission-ready/monitor-v2.json). Authentic platform data, installation and hosted/customer SaaS remain open. Original private acceptance stays 47/60; monitoring does not inherit it.
 
 
 Updated **6 November 2026**. **47/60 verified; 13 original checks open; zero stale accepted checks.** Original investigation features are frozen; the merchant-monitoring scope above is separately authorized. These milestones order work; they neither grant acceptance nor authorize new spending, provider calls or submission.
 
 ## Verification resumed — 5 November
 
-The owner has now requested verification of all 13 open CC checks. [Current results](docs/REMAINING_VERIFICATION.md) supersede the deferral and next-action language below. Features remain frozen; no new service allowance or payment/recording window is created by this request. The recorded submission path remains available while original acceptance gaps are resolved.
+The owner has now requested verification of all 13 open CC checks. [Current results](../REMAINING_VERIFICATION.md) supersede the deferral and next-action language below. Features remain frozen; no new service allowance or payment/recording window is created by this request. The recorded submission path remains available while original acceptance gaps are resolved.
 
 
-**Design amendment:** [updated CC descriptions](docs/DESIGN_CONTRACT_UPDATE.md) keep IDs stable and strengthen four open conditions. Current original count is 47/60. The 3 November plan inside the collapsed historical section retains its then-current counts and failures; it is not the active queue. The loading repair is pushed but not hosted because GitHub CI is blocked by the account billing lock.
+**Design amendment:** [updated CC descriptions](../DESIGN_CONTRACT_UPDATE.md) keep IDs stable and strengthen four open conditions. Current original count is 47/60. The 3 November plan inside the collapsed historical section retains its then-current counts and failures; it is not the active queue. The loading repair is pushed but not hosted because GitHub CI is blocked by the account billing lock.
 
 ## Current submission path
 
 | Milestone | State and evidence | Next action / owner |
 | --- | --- | --- |
-| Runnable, keyless product | Verified clean-clone execution, healthy/faulty replay pair, downloadable regression and hosted access. See [verification](docs/SUBMISSION_VERIFICATION.md). | Preserve the working [HTTPS demo](https://himanshu748.github.io/crashcart/); fix a demonstrated regression if one appears. |
-| Honest integration story | Historical actual PayPal recovery and model investigation documented; keyless mode makes no new provider/model calls. See [AI evidence](docs/AI_EVIDENCE.md) and [submission copy](docs/DEVPOST.md). | Keep replay, historical service calls and fresh verification distinct in the recording. |
-| Public video | **Pending — required submission deliverable.** The [175-second script](docs/VIDEO_SCRIPT.md) is prepared; no video or public watch URL is verified. | Owner records, inspects actual duration/privacy, uploads Public to YouTube and verifies signed-out playback. |
+| Runnable, keyless product | Verified clean-clone execution, healthy/faulty replay pair, downloadable regression and hosted access. See [verification](../SUBMISSION_VERIFICATION.md). | Preserve the working [HTTPS demo](https://himanshu748.github.io/crashcart/); fix a demonstrated regression if one appears. |
+| Honest integration story | Historical actual PayPal recovery and model investigation documented; keyless mode makes no new provider/model calls. See [AI evidence](../AI_EVIDENCE.md) and [submission copy](../DEVPOST.md). | Keep replay, historical service calls and fresh verification distinct in the recording. |
+| Public video | **Pending — required submission deliverable.** The [175-second script](../VIDEO_SCRIPT.md) is prepared; no video or public watch URL is verified. | Owner records, inspects actual duration/privacy, uploads Public to YouTube and verifies signed-out playback. |
 | Final Devpost entry | **Pending — owner action.** Paste-ready fields exist; a draft is not submitted. | Owner reviews links and video, then submits before 13 November 2026, 01:30 IST. Agent must not submit. |
 | Access during judging | Current GitHub Pages access is verified; future uptime is **ongoing/unverified**. | Keep source/demo available through 15 December. Recheck access before submission and during judging. |
 
 ## Optional AWS host
 
-Local Docker/Caddy and AWS Budget configuration are verified; an AWS compute instance and public TLS endpoint are **not deployed**. No existing hostname was supplied. This does not block runnable access because the current HTTPS demo and clean-clone path work. Budget emails are configured, but delivery is not verified and alerts are not spending caps. See [AWS plan and current results](docs/AWS_JUDGE_DEPLOY.md). Do not buy a domain or provision infrastructure merely to close this optional milestone.
+Local Docker/Caddy and AWS Budget configuration are verified; an AWS compute instance and public TLS endpoint are **not deployed**. No existing hostname was supplied. This does not block runnable access because the current HTTPS demo and clean-clone path work. Budget emails are configured, but delivery is not verified and alerts are not spending caps. See [AWS plan and current results](../AWS_JUDGE_DEPLOY.md). Do not buy a domain or provision infrastructure merely to close this optional milestone.
 
 ## Original release backlog — verification resumed, not passed
 
@@ -47,7 +47,7 @@ Local Docker/Caddy and AWS Budget configuration are verified; an AWS compute ins
 | In progress | CC-040, CC-042 | Fresh reduced-witness and repaired-payment experiments remain incomplete. |
 | Pending | CC-059 | Public video is active submission work; full original acceptance also requires the broader journey and dependencies. |
 
-The exact causes and original evidence requirements remain in [open checks](docs/OPEN_CHECKS.md). Verification is resumed; execute experiments only when their necessary access, technical bounds and specific authorization exist. CC-060 remains the sole project-completion gate.
+The exact causes and original evidence requirements remain in [open checks](../OPEN_CHECKS.md). Verification is resumed; execute experiments only when their necessary access, technical bounds and specific authorization exist. CC-060 remains the sole project-completion gate.
 
 ## Preserved earlier planning
 
@@ -133,7 +133,7 @@ The public late-read tape still correctly fails the healthy variant with `ticket
 | Requirement and current state | Direct dependencies · allowed proof | Blocker / budget | Observable exit | Next concrete action |
 | --- | --- | --- | --- | --- |
 | **CC-050 — Implemented, proof incomplete** | CC-010, CC-035 · `LOCAL_TEST`, `LIVE_SANDBOX` or `FRESH_SANDBOX` | **L for local saved-record reads.** Existing 48-assertion Newman execution is real but CC-035 remains open. No new PayPal read is implied. | The actual collection/template executes its meaningful status, amount and correlation assertions with explicit observed IDs and no exported secrets. | After CC-035, inspect the existing actual collection run and source bindings; reuse valid dated proof. Repeat only an affected collection/data path, using selected owned records and keeping authorization headers/private environments out of public artifacts. |
-| **CC-056 — Blocked** | CC-036, CC-042, CC-048, CC-054 · `FRESH_SANDBOX` | **L preparation; U + R/A for missing authorized execution.** Export, repaired comparison and complete operator prerequisites are open. | A clean checkout or exact delivered build supports documented configuration, real investigation, finding, reproduction export and repaired comparison without the author's hidden setup notes. | Follow the public [quickstart](README.md), including npm build before Python startup. Use the delivered access/licence route, account for the public model placeholder and empty database, and record each actual step and missing dependency. |
+| **CC-056 — Blocked** | CC-036, CC-042, CC-048, CC-054 · `FRESH_SANDBOX` | **L preparation; U + R/A for missing authorized execution.** Export, repaired comparison and complete operator prerequisites are open. | A clean checkout or exact delivered build supports documented configuration, real investigation, finding, reproduction export and repaired comparison without the author's hidden setup notes. | Follow the public [quickstart](../../README.md), including npm build before Python startup. Use the delivered access/licence route, account for the public model placeholder and empty database, and record each actual step and missing dependency. |
 | **CC-057 — Implemented, proof incomplete** | CC-050, CC-055, CC-056 · `DOCUMENT_REVIEW` | **L for independent review; valid U/R/A scope for any agreed rerun.** Focused reviews exist, but CC-050/056 and the full acceptance review remain open. | A separate reviewer inspects frozen source, reruns the core regression/export, challenges fresh/Sandbox/sponsor claims and leaves no blocking finding hidden behind a summary. | Freeze the delivered revision and evidence, give the reviewer exact artifacts and acceptance conditions, resolve findings, then re-review any affected proof before accepting the requirement. |
 
 ## M7 — Record the real demonstration and finish the handoff

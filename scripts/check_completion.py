@@ -268,7 +268,8 @@ def validate(root: Path, mode="progress", phase=None) -> dict:
     root = root.resolve()
     errors = []
     try:
-        items, errors = checklist_items(contained(root, "BUILD_CHECKLIST.md").read_text())
+        checklist = "BUILD_CHECKLIST.md" if (root / "BUILD_CHECKLIST.md").exists() else "docs/archive/BUILD_CHECKLIST.md"
+        items, errors = checklist_items(contained(root, checklist).read_text())
         rules = read_rules(root)
     except (OSError, ValueError, TypeError) as exc:
         return {"ok": False, "mode": mode, "verified_count": 0, "errors": [str(exc)]}

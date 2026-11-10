@@ -81,5 +81,5 @@ Real remote execution needs the operator's own access and an explicitly scoped
 usage allowance. A source clone supplies neither. Historical session outcomes,
 recordings and current account usage belong to the private operational archive;
 they must not be inferred from passing injected-transport tests. See
-[development status](../STATUS.md) for current release limits. Local scenario
+[development status](archive/STATUS.md) for current release limits. Local scenario
 repairs cannot retroactively establish the cause of an earlier remote failure.

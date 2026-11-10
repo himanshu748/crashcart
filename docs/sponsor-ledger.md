@@ -7,7 +7,7 @@ repeatable check. Each integration has a specific job in that workflow.
 
 This build serves one registered workshop store and uses test payments.
 Multi-tenant SaaS, production payments and general merchant onboarding are not
-implemented. [Development status and release limits](../STATUS.md).
+implemented. [Development status and release limits](archive/STATUS.md).
 
 ## What powers the product
 

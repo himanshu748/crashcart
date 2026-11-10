@@ -79,4 +79,4 @@ applicable licences and an explicit bounded allowance. No account, credential,
 remote session, paid usage or public endpoint is included in a source checkout.
 Historical saved observations and recorded replay do not establish fresh repair
 verification, held-out discovery, authentic webhook delivery or a complete
-operator journey. [Development status](../STATUS.md) lists current release limits.
+operator journey. [Development status](archive/STATUS.md) lists current release limits.

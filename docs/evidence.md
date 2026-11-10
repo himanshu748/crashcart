@@ -6,7 +6,7 @@ operational artifacts, apart from the single curated historical replay input.
 Paths and JSON below describe records to create during an actual verification;
 they are examples, not claims that those files are delivered or passed. Public CI
 runs source tests and frontend checks; it does not run the private artifact gate.
-See [development status](../STATUS.md) and the [public evidence boundary](../evidence/README.md).
+See [development status](archive/STATUS.md) and the [public evidence boundary](../evidence/README.md).
 
 The checklist owns the acceptance conditions; the coordinator owns checkmarks.
 Implementation, successful builds, synthetic unit-test fixtures and screenshots

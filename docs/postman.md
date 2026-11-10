@@ -87,6 +87,6 @@ fabricated database contents.
 **CC-050 remains open through its prerequisite chain.** The local smoke,
 missing-proof rejection and observed paid-order collection have run. CC-010 has
 historical independently confirmed payment proof; current-source status follows
-[development status](../STATUS.md) during revalidation. CC-035's full accepted replay/export chain remains
+[development status](archive/STATUS.md) during revalidation. CC-035's full accepted replay/export chain remains
 open. This collection reads observed records; it does not replace an executable
 regression or fresh provider verification.

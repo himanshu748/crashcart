@@ -95,7 +95,7 @@ Injected local test responses remain `LOCAL_TEST`. Historical maintainer tests
 also exercised four actual model-backed native queries over changing copied
 saved records. Those private traces are not included in this checkout, and
 neither selecting a record nor running a local test establishes a new provider
-call. See [development status](../STATUS.md) for remaining verification limits.
+call. See [development status](archive/STATUS.md) for remaining verification limits.
 
 ## Content Security Policy
 
