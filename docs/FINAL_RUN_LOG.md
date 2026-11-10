@@ -8,3 +8,42 @@ Target: 12 November 2026, 22:00 IST. Final submission requires the owner's new *
 | 2026-11-10 13:50 IST | Phase 1 initial link check. | Exit 1: `/product` and `/example` returned404. Other19/21public URLs returned200;27local files,4local anchors and11hosted anchors passed. Four localhost setup URLs are explicitly untested. |
 | 2026-11-10 13:50 IST | Fixed public aliases and added asset health; rewrote judge quickstart and live-vs-recorded explanation. | Canonical bundle now has17exact members: healthz and three directory aliases added. CSP remains unchanged; no payment rule, deadline or validator changed. Native/static HTTP tests cover root and GitHub Pages subpath. |
 | 2026-11-10 13:50 IST | Scanned all fetched public Git history and checked licence/language. | 1,085reachable blobs/19,111,309bytes scanned with known credential patterns, including binary ASCII content. No high-confidence token/key matches;16generic assignments were reviewed as synthetic/local test fixtures. Unknown credential formats remain outside this scan. GitHub detects MIT; project Markdown contains no non-Latin prose. |
+| 2026-11-10 13:58 IST | Fresh-cloned main at `375a118`; ran the documented keyless path and both replay commands. | Startup succeeded; HTTP200 health reports recorded-demo. Defective exits1 with `FAIL / paid_without_ticket / 0 tickets`; healthy exits0 with `PASS / ticket_delivered_once_on_time / 1 ticket`. Both report zero network calls. Exact commands/output below. |
+| 2026-11-10 13:58 IST | Ran affected Python and frontend tests; checked hosted Pages workflow. | Python26tests passed; Node87passed/0failed. Both Source behavior and Recorded walkthrough workflows succeeded for375a118. Pages serves the new homepage, working product route and health endpoint. |
+| 2026-11-10 13:58 IST | Attempted read-only main-host deployment preflight. | Stopped before SSH: this Mac's current IP is absent from the host's SSH rules. Owner approved a temporary current-IP-only rule and removal of that new rule after deployment. Existing site is still serving; no files changed remotely yet. |
+
+## Fresh-clone commands and output — 10 November
+
+```sh
+git clone --branch main --single-branch https://github.com/himanshu748/crashcart.git /tmp/crashcart-final-JHXdgI/repo
+cd /tmp/crashcart-final-JHXdgI/repo
+PYTHON=/opt/homebrew/opt/python@3.13/bin/python3.13 ./scripts/judge.sh --no-open --port 8767
+```
+
+```text
+CrashCart recorded review: http://127.0.0.1:8767/demo.html#investigation
+Both outcomes recomputed at launch. No new payment or service call.
+Press Ctrl+C to stop.
+```
+
+In a second terminal (the explicit interpreter selects this Mac's installed Python3.13; ordinary `python3` works when it is3.11+):
+
+```sh
+/opt/homebrew/opt/python@3.13/bin/python3.13 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant defective
+# JSON verdict=FAIL signature=paid_without_ticket ticket_count=0 network_calls=0; exit1
+/opt/homebrew/opt/python@3.13/bin/python3.13 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant healthy
+# JSON verdict=PASS signature=ticket_delivered_once_on_time ticket_count=1 network_calls=0; exit0
+```
+
+Affected tests:
+
+```text
+python3 -m unittest tests.test_judge tests.test_public_replay tests.test_recorded_namespace -v
+Ran 26 tests in 7.959s
+OK
+
+node --test tests/test_*cjs
+# tests 87
+# pass 87
+# fail 0
+```
