@@ -119,8 +119,8 @@ def _sanitize(value):
     return value
 
 
-class OpenAIModel:
-    """Configured shared transport; name retained for existing callers/imports."""
+class StructuredModel:
+    """Structured plans through the configured OpenAI or Modal transport."""
 
     def __init__(self, *, environ=None, transport=None):
         self.environ = os.environ if environ is None else environ
@@ -149,6 +149,9 @@ class OpenAIModel:
         except ModelTransportError as exc:
             raise InvestigationError(exc.code, metadata=exc.metadata) from None
 
+
+# Preserve existing imports and exact-class checks while naming the shared adapter.
+OpenAIModel = StructuredModel
 
 def validate_plan(plan, run, evidence_ids):
     if not isinstance(plan, dict) or set(plan) != set(PLAN_SCHEMA["properties"]):
@@ -238,7 +241,7 @@ def browser_observation(event):
 
 
 class Investigation:
-    def __init__(self, store, service, model_factory=OpenAIModel, *, clock=time.monotonic):
+    def __init__(self, store, service, model_factory=StructuredModel, *, clock=time.monotonic):
         self.store, self.service, self.model_factory, self.clock = store, service, model_factory, clock
 
     def _reserve(self, run, context, maximum, execution_id, model_provenance=None):
@@ -330,7 +333,7 @@ class Investigation:
                 raise InvestigationError("REPLAY_MODEL_NETWORK_FORBIDDEN")
             held_out = HeldOutGate.for_run(self.store, run_id)
             model = self.model_factory()
-            if held_out and type(model) is not OpenAIModel:
+            if held_out and type(model) is not StructuredModel:
                 raise HeldOutError("HELD_OUT_GUARDED_MODEL_REQUIRED")
             mode = getattr(model, "evidence_mode", None)
             if mode not in {"LOCAL_TEST", "LIVE_MODEL"} or (mode == "LOCAL_TEST") != (run["mode"] == "LOCAL_TEST"):

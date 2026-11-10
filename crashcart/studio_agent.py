@@ -1,7 +1,7 @@
 """One-call Studio query planner; SQLite owns every row/count, never the model.
 
-Responses structured-output contract:
-https://developers.openai.com/api/docs/guides/structured-outputs
+Provider-neutral structured plans use the shared model_transport adapter.
+The provider is explicitly configured; the default remains OpenAI.
 No payment/provider tool, SQL, code execution, or verdict is exposed.
 """
 import hashlib
