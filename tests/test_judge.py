@@ -236,7 +236,10 @@ class JudgeReviewTests(unittest.TestCase):
                         self.assertIn(url.fragment, parsed[member].ids, (name, target))
             self.assertEqual(linked_pages, set(pages), name)
             scripts = [target for tag, target in page.links if tag == 'script']
-            self.assertEqual(scripts, ['app.js'] if name == 'demo.html' else ['site.js'], name)
+            self.assertEqual(scripts, [
+                'app.js' if name == 'demo.html' else 'site.js',
+                'assets/vendor/gsap.min.js', 'assets/vendor/ScrollTrigger.min.js', 'motion.js',
+            ], name)
 
     def test_changed_example_is_rejected_before_publication(self):
         with tempfile.TemporaryDirectory() as folder:

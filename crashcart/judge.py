@@ -26,7 +26,20 @@ INPUT = ROOT / "evidence/runs/paypal-live/early-response-loss-input.json"
 INPUT_SHA256 = "07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288"
 AI_HISTORY = ROOT / "evidence/runs/submission-ready/ai-historical-summary.json"
 AI_HISTORY_SHA256 = "152c1c77dfcc219b32d7ae36c06ad7b39a35656e95f54f87a6691fe95010c8fb"
-ASSETS = ("index.html", "product.html", "integrations.html", "demo.html", "app.js", "style.css", "site.js")
+# Explicit public allowlist: no runtime packages, remote fonts or private files.
+ASSETS = (
+    "index.html", "product.html", "integrations.html", "demo.html", "app.js", "style.css", "site.js",
+    "landing.css", "motion.css", "motion.js", "assets/fonts.css", "assets/favicon.svg", "assets/PROVENANCE.json",
+    "assets/vendor/gsap.min.js", "assets/vendor/ScrollTrigger.min.js", "assets/vendor/GSAP-LICENSE.txt",
+    "assets/fonts/instrument-serif-latin.woff2", "assets/fonts/manrope-latin.woff2",
+    "assets/fonts/INSTRUMENT-SERIF-OFL.txt", "assets/fonts/MANROPE-OFL.txt",
+    "assets/media/delivery-timing.webp", "assets/media/payment-evidence.webp",
+)
+ASSET_TYPES = {
+    ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8",
+    ".css": "text/css; charset=utf-8", ".json": "application/json", ".txt": "text/plain; charset=utf-8",
+    ".woff2": "font/woff2", ".webp": "image/webp", ".svg": "image/svg+xml",
+}
 PAGE_ALIASES = {"product": "product.html", "example": "demo.html", "integrations": "integrations.html"}
 
 
@@ -170,9 +183,7 @@ def prepare_review(input_path=INPUT, *, exported=False):
                        "The healthy merchant is re-executed on the same recorded input and clock.",
                        "This is not a fresh payment, a deployed repair or a new AI investigation.",
                        "The original fault video is unavailable; saved page observations remain inspectable."]}
-    files = {name: ("text/html; charset=utf-8" if name.endswith("html") else
-                    "text/javascript; charset=utf-8" if name.endswith("js") else "text/css; charset=utf-8",
-                    (ROOT / "web/judge" / name).read_bytes()) for name in ASSETS}
+    files = {name: (ASSET_TYPES[Path(name).suffix], (ROOT / "web/judge" / name).read_bytes()) for name in ASSETS}
     # Fixed directory-index redirects work on static hosts and project Pages.
     # Land on the unchanged canonical document before it loads scripts/data;
     # no base element, inline script or weaker CSP is needed.
@@ -220,7 +231,7 @@ def make_server(files, host="127.0.0.1", port=8766):
             self.send_header("Cache-Control", "no-store")
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("Referrer-Policy", "no-referrer")
-            self.send_header("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
+            self.send_header("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
             if location is not None:
                 self.send_header("Location", location)
             if download:

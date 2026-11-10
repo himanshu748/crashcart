@@ -85,8 +85,8 @@
     const state = stateAt(s, t);
     const copy = copyFor(s, state, t);
     sim.dataset.state = state;
-    byId('sim-fill').style.width = pct(t);
-    byId('sim-now').style.left = pct(t);
+    byId('sim-fill').style.transform = `scaleX(${Math.min(Math.max(t, 0), END) / END})`;
+    byId('sim-now').style.transform = `translateX(${pct(t)})`;
     const mark = byId('sim-ticket');
     mark.style.left = s.tickets.length ? pct(s.tickets[0]) : '100%';
     mark.textContent = s.tickets.length > 1 ? `Ticket ×${s.tickets.length}` : s.tickets.length ? 'Ticket' : 'No ticket';
