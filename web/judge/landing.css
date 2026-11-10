@@ -72,3 +72,17 @@
 .hero-flow[data-motion-state="playing"] .ticket-card:not(.is-missing){background:#fffef8;border-color:#d9dece}
 .hero-flow[data-motion-state="playing"] .ticket-card:not(.is-missing) :is(.missing-ticket,.missing-status,.flow-icon){color:#4d5845;border-color:#d9dece}
 @media(min-width:768px){.clock-label,.record-label,.promise-receipt>span,.visual-note,.story-panel figcaption,.repair-ruler,.stack-tag,.repair-kicker,.flow-reference,.hero-flow figcaption{font-size:11px!important}}
+
+/* Match the mobile layout immediately, while GSAP releases its desktop pin.
+   Keep the content in flow rather than clipping an oversized spacer. */
+@media(max-width:999px){
+ .landing-story>.pin-spacer{display:contents!important}
+ .landing-story .story-visual{max-width:100%;min-width:0!important;width:100%!important;position:relative!important;inset:auto!important;transform:none!important}
+ .story-enhanced .story-stage{height:auto;display:grid}
+ .story-enhanced .story-panel{position:relative;inset:auto;opacity:1!important;transform:none!important}
+ .story-enhanced .story-step,.story-enhanced .story-step:last-child{min-height:0}
+}
+
+/* Preserve the footer note's scale against the mobile page-heading rule. */
+.page-home .footer-disclosure h2{font:600 12px/1.5 var(--sans);letter-spacing:0}
+@media(max-width:767px){.page-home .hero-flow{margin:32px auto 0}}
