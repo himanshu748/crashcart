@@ -54,3 +54,22 @@ test('See what happened focuses without an instant jump and scrolls to the resul
   assert.equal(p.nodes.get('evidence').scrollOptions.behavior,'auto');
   assert.equal(p.calls.length,1);
 });
+
+test('8 November failure investigation is shown first with cited evidence and no fresh call', async()=>{
+  const p=await loadJudge(()=>response(genuine));
+  assert.equal(p.nodes.get('failure-ai-panel').hidden,false);
+  assert.equal(p.nodes.get('failure-ai-unavailable').hidden,true);
+  await p.failureSteps[1].trigger('click');
+  assert.match(p.nodes.get('failure-answer').textContent,/PayPal confirmed/);
+  await p.failureSteps[2].trigger('click');
+  assert.match(p.nodes.get('failure-verdict').textContent,/FAIL \/ paid_without_ticket/);
+  for(const id of genuine.failure_ai.trace[2].findings.flatMap(f=>f.evidence_ids)) assert.match(p.nodes.get('failure-citations').textContent,new RegExp(id));
+  assert.equal(p.calls.length,1);
+});
+test('invalid failure trace leaves the recorded comparison usable and hides its panel',async()=>{
+  const data=structuredClone(genuine); data.failure_ai.trace[1].action='capture_payment';
+  const p=await loadJudge(()=>response(data));
+  assert.equal(p.nodes.get('failure-ai-panel').hidden,true);
+  assert.equal(p.nodes.get('review').hidden,false);
+  assert.equal(p.calls.length,1);
+});

@@ -177,6 +177,26 @@
         </details>
       </section>
 
+      <section class="ai" aria-labelledby="failure-ai-title">
+        <p class="eyebrow">AI on a missed delivery</p>
+        <h2 class="section-title" id="failure-ai-title">The payment was real. The ticket was missing.</h2>
+        <p>Recorded 8 Nov 2026 DeepSeek (Modal) investigation, no live call. This is a separate order from the 22 October repair comparison above.</p>
+        <div class="ai-panel" id="failure-ai-panel" hidden>
+          <div class="ai-steps" role="group" aria-label="8 November investigation step">
+            <button type="button" class="pill" data-failure-step="0" aria-pressed="true">1. Check payment</button>
+            <button type="button" class="pill" data-failure-step="1" aria-pressed="false">2. Find the ticket</button>
+            <button type="button" class="pill" data-failure-step="2" aria-pressed="false">3. Explain the gap</button>
+          </div>
+          <div class="ai-answer" aria-live="polite">
+            <h3 id="failure-question"></h3><p id="failure-answer"></p>
+            <details class="tech"><summary>Saved model note and supporting records</summary><p id="failure-reasoning"></p><pre id="failure-citations" tabindex="0"></pre></details>
+            <p class="ai-takeaway" id="failure-verdict"></p>
+          </div>
+          <p class="fine">AI selected the evidence. Deterministic code retained FAIL / paid_without_ticket. Viewing this saved trace makes no payment or model request.</p>
+        </div>
+        <p id="failure-ai-unavailable">The recorded failure investigation is unavailable. The payment and repair comparison still works.</p>
+      </section>
+      <details class="earlier-ai"><summary>Earlier delivered checkout · captured 23 October, investigated 26 October</summary>
       <section class="ai" aria-labelledby="ai-title">
         <p class="eyebrow">Help finding the next step</p>
         <h2 class="section-title" id="ai-title">An earlier AI-assisted investigation</h2>
@@ -201,6 +221,7 @@
           <p class="fine" id="ai-identity"></p>
         </div>
       </section>
+      </details>
     </div>
 
     <section class="how" id="how" aria-labelledby="how-title">
