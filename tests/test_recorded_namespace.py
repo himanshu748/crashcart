@@ -49,10 +49,10 @@ class HTTPFixture(unittest.TestCase):
 
 class RecordedNamespaceUnitTests(HTTPFixture):
     """Injected, labelled bundle only; no claim of actual replay execution."""
-    def test_lazy_single_cache_seventeen_exact_members_and_private_auth(self):
+    def test_lazy_single_cache_exact_public_members_and_private_auth(self):
         calls=[];files=synthetic_bundle()
         self.start(lambda:calls.append(True) or files)
-        self.assertEqual(len(RECORDED_FILES),17);self.assertEqual(self.request('/api/runs')[0],401);self.assertEqual(calls,[])
+        self.assertEqual(len(RECORDED_FILES),32);self.assertEqual(self.request('/api/runs')[0],401);self.assertEqual(calls,[])
         for name in sorted(RECORDED_FILES):
             status,body,headers=self.request('/recorded/'+name)
             self.assertEqual(status,200);self.assertEqual(body,files[name][1]);self.assertIn("script-src 'self'",headers['Content-Security-Policy']);self.assertNotIn('Set-Cookie',headers)
@@ -135,8 +135,13 @@ class RecordedNamespaceActualReplayTests(HTTPFixture):
         from crashcart import judge
         self.assertTrue({'index.html','product.html','integrations.html','demo.html','site.js'}<=set(judge.ASSETS),'New canonical public assets must land before this check')
         self.start()
-        for name in ('','product.html','integrations.html','demo.html','product/','example/','integrations/','app.js','site.js','style.css','LICENSE'):
+        for name in ('', 'product/', 'example/', 'integrations/', 'LICENSE', *judge.ASSETS):
             status,body,_=self.request('/recorded/'+name);self.assertEqual(status,200);self.assertTrue(body)
+        status, font, headers = self.request('/recorded/assets/fonts/manrope-latin.woff2')
+        self.assertEqual(status, 200)
+        self.assertEqual(headers['Content-Type'], 'font/woff2')
+        self.assertEqual(font[:4], b'wOF2')
+        self.assertEqual(self.request('/recorded/assets/../../.env')[0], 404)
         status,raw,headers=self.request('/recorded/healthz');self.assertEqual(status,200)
         self.assertEqual(json.loads(raw)['status'],'recorded-demo');self.assertFalse(json.loads(raw)['live_services_checked'])
         self.assertEqual(headers['Content-Type'],'application/json; charset=utf-8')

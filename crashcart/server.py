@@ -16,6 +16,7 @@ from urllib.parse import urlparse
 from . import __version__
 from .config import prerequisites
 from .faults import KINDS
+from .public_assets import ASSETS
 from .store import Store
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -25,9 +26,11 @@ STUDIO_COLOR_SENSOR_STYLE_HASH = "'sha256-ydedGqCb79ipYJuuWRyOTMrKbkjYWv8WIjG7SR
 
 # A single canonical public replay bundle per server. Request paths never select
 # an input fixture, private database or arbitrary file on disk.
-RECORDED_FILES = frozenset({"index.html", "product.html", "integrations.html", "demo.html", "app.js", "style.css",
-    "site.js", "data.json", "LICENSE", "downloads/input.json", "downloads/defective.json", "downloads/healthy.json", "downloads/replay.zip",
-    "healthz", "product/index.html", "example/index.html", "integrations/index.html"})
+RECORDED_FILES = frozenset({
+    *ASSETS, "data.json", "LICENSE", "downloads/input.json", "downloads/defective.json",
+    "downloads/healthy.json", "downloads/replay.zip", "healthz",
+    "product/index.html", "example/index.html", "integrations/index.html",
+})
 RECORDED_ALIASES = frozenset({"product", "example", "integrations"})
 RECORDED_MAX_FILE = 8 * 1024 * 1024
 RECORDED_MAX_BUNDLE = 16 * 1024 * 1024
@@ -65,7 +68,10 @@ class _RecordedBundle:
                         raise ValueError('Invalid recorded member')
                     kind, body = item
                     if (not isinstance(kind, str) or '\r' in kind or '\n' in kind
-                            or kind.split(';')[0] not in {'text/html', 'text/javascript', 'text/css', 'application/json', 'application/zip', 'text/plain'}
+                            or kind.split(';')[0] not in {
+                                'text/html', 'text/javascript', 'text/css', 'application/json', 'application/zip',
+                                'text/plain', 'font/woff2', 'image/webp', 'image/svg+xml',
+                            }
                             or not isinstance(body, bytes) or len(body) > RECORDED_MAX_FILE):
                         raise ValueError('Recorded member exceeds its boundary')
                     total += len(body)

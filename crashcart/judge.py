@@ -16,6 +16,7 @@ import webbrowser
 import zipfile
 
 from .model_ids import DEEPSEEK_MODEL_ID
+from .public_assets import ASSETS, ASSET_TYPES
 from .replay import ReplayError, export_package, load_package
 from .replay_workspace import import_replay
 from .store import Store
@@ -26,20 +27,6 @@ INPUT = ROOT / "evidence/runs/paypal-live/early-response-loss-input.json"
 INPUT_SHA256 = "07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288"
 AI_HISTORY = ROOT / "evidence/runs/submission-ready/ai-historical-summary.json"
 AI_HISTORY_SHA256 = "152c1c77dfcc219b32d7ae36c06ad7b39a35656e95f54f87a6691fe95010c8fb"
-# Explicit public allowlist: no runtime packages, remote fonts or private files.
-ASSETS = (
-    "index.html", "product.html", "integrations.html", "demo.html", "app.js", "style.css", "site.js",
-    "landing.css", "motion.css", "motion.js", "assets/fonts.css", "assets/favicon.svg", "assets/PROVENANCE.json",
-    "assets/vendor/gsap.min.js", "assets/vendor/ScrollTrigger.min.js", "assets/vendor/GSAP-LICENSE.txt",
-    "assets/fonts/instrument-serif-latin.woff2", "assets/fonts/manrope-latin.woff2",
-    "assets/fonts/INSTRUMENT-SERIF-OFL.txt", "assets/fonts/MANROPE-OFL.txt",
-    "assets/media/delivery-timing.webp", "assets/media/payment-evidence.webp",
-)
-ASSET_TYPES = {
-    ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8",
-    ".css": "text/css; charset=utf-8", ".json": "application/json", ".txt": "text/plain; charset=utf-8",
-    ".woff2": "font/woff2", ".webp": "image/webp", ".svg": "image/svg+xml",
-}
 PAGE_ALIASES = {"product": "product.html", "example": "demo.html", "integrations": "integrations.html"}
 
 
