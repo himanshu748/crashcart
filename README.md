@@ -101,3 +101,5 @@ This prototype uses the PayPal **Sandbox** base URL and a fixed **2,900-cent USD
 [Devpost entry](https://devpost.com/software/crashcart-87asqz), submitted 10 November 2026 · [Submission text](docs/DEVPOST.md) · [Video script](docs/VIDEO_SCRIPT.md).
 
 Historical development checklists are in [docs/archive](docs/archive/STATUS.md). They describe internal work and do not change the recorded demo’s scope. [Sponsor preparation log](docs/SPONSOR_PRIZE_RUN_LOG.md).
+
+[Repository guidance](docs/AGENTS.md) lives under `docs/`; load it explicitly when working on this repository.
