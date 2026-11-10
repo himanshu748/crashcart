@@ -7,7 +7,9 @@
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && node build.mjs",
     "test:deadlines": "node test-deadlines.mjs",
-    "test:presentation": "node test-presentation.mjs"
+    "test:presentation": "node test-presentation.mjs",
+    "build:recorded": "npm run typecheck && node build-recorded.mjs",
+    "test:recorded": "node test-recorded.mjs"
   },
   "dependencies": {
     "@bryntum/core-community": "8.0.0-beta.1",

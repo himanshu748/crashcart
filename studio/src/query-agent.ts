@@ -51,7 +51,7 @@ export type QueryReceipt = {
   run_id: string;
   attempt_id: string;
   status: "COMPLETED" | "UNSUPPORTED";
-  model_mode: "LOCAL_TEST" | "LIVE_MODEL";
+  model_mode: "LOCAL_TEST" | "LIVE_MODEL" | "RECORDED_FILTER";
   model: {
     configured: string;
     actual: string;
@@ -112,8 +112,9 @@ export function validateReceipt(
     r.request_id !== requestId ||
     r.attempt_id !== "attempt_studio_" + requestId.replaceAll("-", "") ||
     !["COMPLETED", "UNSUPPORTED"].includes(r.status) ||
-    !["LOCAL_TEST", "LIVE_MODEL"].includes(r.model_mode) ||
+    !["LOCAL_TEST", "LIVE_MODEL", "RECORDED_FILTER"].includes(r.model_mode) ||
     !record(r.model) ||
+    (r.model_mode === "RECORDED_FILTER" && (r.model.configured !== "none" || r.model.usage !== null || r.plan?.mode !== "RECORDED_REPLAY")) ||
     ![r.model.configured, r.model.actual, r.model.response_id].every(text) ||
     !(
       r.model.usage === null ||
@@ -150,6 +151,7 @@ export function validateReceipt(
       !MODES.includes(row.mode) ||
       (r.plan.mode !== "ANY" && row.mode !== r.plan.mode) ||
       (r.model_mode === "LOCAL_TEST" && row.mode !== "LOCAL_TEST") ||
+      (r.model_mode === "RECORDED_FILTER" && (row.mode !== "RECORDED_REPLAY" || r.plan.mode !== "RECORDED_REPLAY")) ||
       !text(row.purchase_id) ||
       !count(row.amount) ||
       !text(row.currency) ||
@@ -235,6 +237,7 @@ export class QueryController {
   constructor(
     private scope: () => { runId: string; ready: boolean },
     private update: (state: QueryState) => void,
+    private recordedRequest?: (runId: string, requestId: string, question: string, signal: AbortSignal) => Promise<unknown>,
   ) {}
   invalidate() {
     ++this.epoch;
@@ -290,6 +293,10 @@ export class QueryController {
           message: "Checking saved records…",
           receipt: null,
         });
+        let value: unknown;
+        if (this.recordedRequest) {
+          value = await this.recordedRequest(runId, requestId, question, controller.signal);
+        } else {
         const response = await fetch("/api/studio/query", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -300,7 +307,7 @@ export class QueryController {
             question,
           }),
         });
-        const value: unknown = await response.json();
+        value = await response.json();
         if (!current()) return;
         if (!response.ok)
           throw Error(
@@ -310,7 +317,10 @@ export class QueryController {
               ? value.code
               : "QUERY_REQUEST_FAILED",
           );
+        }
+        if (!current()) return;
         const receipt = validateReceipt(value, runId, requestId);
+        if (!!this.recordedRequest !== (receipt.model_mode === "RECORDED_FILTER")) throw Error("INVALID_QUERY_RECEIPT");
         this.update({
           status: "complete",
           message:
@@ -326,8 +336,8 @@ export class QueryController {
           type: "TEXT_MESSAGE_CONTENT",
           messageId,
           delta: receipt.status === "UNSUPPORTED"
-            ? `${receipt.model_mode === "LOCAL_TEST" ? "Test data · simulated response.\n\n" : ""}This question cannot be answered from these saved records. Try asking about paid orders, missing tickets or delivered tickets.`
-            : `${receipt.model_mode === "LOCAL_TEST" ? "Test data · simulated response.\n\n" : ""}${queryLabel(receipt.plan.query)}: ${receipt.count} matching case${receipt.count === 1 ? "" : "s"} from ${modeDescription(receipt.plan.mode)}.\n\nThese answers use saved records. Check a case’s delivery time before treating a missing ticket as late.\n\nSee the matching cases in Answers. ${receipt.model_mode === "LOCAL_TEST" ? "This is a simulated answer." : "The assistant used the saved records."} Open Technical details there for the full records.`,
+            ? `${receipt.model_mode === "LOCAL_TEST" ? "Test data · simulated response.\n\n" : receipt.model_mode === "RECORDED_FILTER" ? "Recorded example · browser filter, no AI call.\n\n" : ""}This question cannot be answered from these saved records. Try asking about paid orders, missing tickets or delivered tickets.`
+            : `${receipt.model_mode === "LOCAL_TEST" ? "Test data · simulated response.\n\n" : receipt.model_mode === "RECORDED_FILTER" ? "Recorded example · browser filter, no AI call.\n\n" : ""}${queryLabel(receipt.plan.query)}: ${receipt.count} matching case${receipt.count === 1 ? "" : "s"} from ${modeDescription(receipt.plan.mode)}.\n\nThese answers use saved records. Check a case’s delivery time before treating a missing ticket as late.\n\nSee the matching cases in Answers. ${receipt.model_mode === "LOCAL_TEST" ? "This is a simulated answer." : receipt.model_mode === "RECORDED_FILTER" ? "A browser filter selected these recorded cases; no model was called." : "The assistant used the saved records."} Open Technical details there for the full records.`,
         };
         if (!current()) return;
         yield { type: "TEXT_MESSAGE_END", messageId };
@@ -364,6 +374,7 @@ export class QueryController {
             this.update({
               status: "cancelled",
               message:
+                this.recordedRequest ? "Local record filter stopped. No service call was made." :
                 "Answer stopped. A request already sent to the assistant may still use part of your allowance.",
               receipt: null,
             });

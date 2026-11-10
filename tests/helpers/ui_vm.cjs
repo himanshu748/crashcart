@@ -19,7 +19,7 @@ function environment(file,{fetch:fetcher,url='http://localhost/',mobile=false,st
   toggleAttribute(name,on){if(on)this.setAttribute(name,'');else this.removeAttribute(name);}
   addEventListener(type,fn){(this.handlers[type]??=[]).push(fn);}
   async trigger(type,extra={}){for(const fn of this.handlers[type]||[])await fn({preventDefault(){},currentTarget:this,target:this,...extra});}
-  focus(){document.activeElement=this;}scrollIntoView(){}pause(){}load(){}
+  focus(options){this.focusOptions=options;document.activeElement=this;}scrollIntoView(options){this.scrollOptions=options;}pause(){}load(){}
   showModal(){this.open=true;}close(){this.open=false;for(const fn of this.handlers.close||[])fn({target:this});}
   matches(selector){return selector.startsWith('.')&&this.classList.contains(selector.slice(1));}
   walk(){return this.children.flatMap(x=>[x,...x.walk()]);}

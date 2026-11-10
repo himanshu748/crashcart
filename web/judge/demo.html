@@ -30,10 +30,7 @@
       <a href="integrations.html">Integrations</a>
       <a href="demo.html" aria-current="page">Recorded example</a>
     </nav>
-    <label class="motion-toggle">
-      <input type="checkbox" id="reduce-motion">
-      <span>Reduce motion</span>
-    </label>
+
   </header>
 
   <div class="trail">
@@ -91,6 +88,12 @@
         <p class="eyebrow">Before and after, with the same delivery promise</p>
         <h2 class="intro-title" id="intro-title">A customer paid $29.<br><em>The ticket never came.</em></h2>
         <p class="lead">First, see the order that went missing after a real test payment. Then compare the repaired checkout using that same recorded payment. The customer’s promise stays at 60 seconds.</p>
+
+        <aside class="case-dates" aria-label="Three separate recorded cases">
+          <p><strong>22 October · the missed order</strong><span>The payment below completed, but the original store issued no ticket. The recovered version replays that same saved input.</span></p>
+          <p><strong>23 October · an earlier AI-assisted case</strong><span>A separate checkout delivered its ticket. The saved AI investigation ran on 26 October; you can read its steps below.</span></p>
+          <p><strong>8 November · the live payment + AI run</strong><span>A different Sandbox order was created, captured and investigated with DeepSeek. <a href="https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md">Read that completed flow.</a></span></p>
+        </aside>
 
         <div class="compare">
           <article class="compare-card compare-bad" aria-labelledby="cmp-bad-title">
@@ -278,6 +281,10 @@
   </nav>
 
   <footer class="foot">
+    <label class="motion-toggle">
+      <input type="checkbox" id="reduce-motion">
+      <span>Reduce motion</span>
+    </label>
     <nav class="foot-nav" aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="product.html">Product</a>

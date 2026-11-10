@@ -333,14 +333,16 @@ class JudgeReviewTests(unittest.TestCase):
                 if name.startswith('downloads/'):
                     self.assertIn('attachment',headers['Content-Disposition'])
             self.assertEqual(self.files['index.html'][1],request('GET','/')[2])
-            for alias in PAGE_ALIASES:
-                status, headers, _ = request('GET', '/' + alias)
-                self.assertEqual(status, 308)
-                self.assertEqual(headers['Location'], '/' + alias + '/')
-                status, headers, body = request('GET', '/' + alias + '/')
+            for alias, canonical in PAGE_ALIASES.items():
+                status, headers, body = request('GET', '/' + alias)
                 self.assertEqual(status, 200)
-                self.assertEqual(body, self.files[alias + '/index.html'][1])
+                self.assertNotIn('Location', headers)
+                self.assertEqual(body, self.files[canonical][1])
+                self.assertNotIn(b'http-equiv="refresh"', body)
                 self.assertIn("base-uri 'none'", headers['Content-Security-Policy'])
+                status, headers, _ = request('GET', '/' + alias + '/')
+                self.assertEqual(status, 308)
+                self.assertEqual(headers['Location'], '/' + alias)
             self.assertIn("base-uri 'none'", request('GET', '/product.html')[1]['Content-Security-Policy'])
             status, headers, body = request('GET', '/healthz')
             self.assertEqual(status, 200)

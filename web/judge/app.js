@@ -180,6 +180,8 @@
     };
     const values = descriptions[stage];
     if (!values) return;
+    selected = stage === 'repair' ? 'healthy' : 'defective';
+    renderCase();
     document.querySelector('.promise').dataset.story = stage;
     document.querySelectorAll('button[data-story]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.story === stage)));
     ['story-counter', 'story-status', 'story-title', 'story-description'].forEach((id, i) => { byId(id).textContent = values[i]; });
@@ -256,8 +258,9 @@
     renderCase();
     if (button.classList.contains('select-case')) {
       document.querySelector('.order-records').open = true;
-      byId('evidence').scrollIntoView({block: 'start', behavior: reduced() ? 'auto' : 'smooth'});
+      // Move focus without scrolling first, then make one deliberate scroll.
       byId('evidence-title').focus({preventScroll: true});
+      byId('evidence').scrollIntoView({block: 'start', behavior: reduced() ? 'auto' : 'smooth'});
     }
   }));
   byId('source-filter').addEventListener('change', () => { if (review) renderTimeline(); });

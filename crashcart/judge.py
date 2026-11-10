@@ -231,7 +231,9 @@ def make_server(files, host="127.0.0.1", port=8766):
             path = urlsplit(self.path).path
             key = "index.html" if path == "/" else path.removeprefix("/")
             if key in PAGE_ALIASES:
-                self.reply(308, "text/plain", b"", location=f"/{key}/")
+                key = PAGE_ALIASES[key]
+            elif key.endswith("/") and key[:-1] in PAGE_ALIASES:
+                self.reply(308, "text/plain", b"", location=f"/{key[:-1]}")
                 return
             if key.endswith("/") and key[:-1] in PAGE_ALIASES:
                 key += "index.html"

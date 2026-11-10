@@ -1,0 +1,29 @@
+# Prepared only. Replace REPLACE_FROM_EXPORT with the final export's style nonce.
+# Validate the complete shared config; preserve all other host blocks.
+crashcart.52.202.25.181.sslip.io {
+	root * /data/crashcart/site-b0e304a
+	encode zstd gzip
+	@writes not method GET HEAD
+	respond @writes "Recorded example is read-only" 405
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		Cache-Control no-store
+	}
+	@product path /product
+	rewrite @product /product.html
+	@example path /example
+	rewrite @example /demo.html
+	@integrations path /integrations
+	rewrite @integrations /integrations.html
+	header /downloads/* Content-Disposition "attachment"
+	@explorer_document path /explorer/ /explorer/index.html
+	handle @explorer_document {
+		header Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self' 'nonce-REPLACE_FROM_EXPORT' 'sha256-ydedGqCb79ipYJuuWRyOTMrKbkjYWv8WIjG7SRdnEPU='; connect-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+		file_server
+	}
+	handle {
+		header Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+		file_server
+	}
+}

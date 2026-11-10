@@ -22,3 +22,35 @@ for(const change of ['missing','fresh','same-case','wrong-tools','missing-paymen
 
 test('recorded page shares the public site motion preference across page loads',async()=>{const saved=new Map([['crashcart-reduce-motion','1']]);const storage={getItem:key=>saved.get(key),setItem:(key,value)=>saved.set(key,value)};const first=await loadJudge(()=>response(genuine),{storage});assert.equal(first.nodes.get('reduce-motion').checked,true);assert.equal(first.document.documentElement.classList.contains('reduce-motion'),true);first.nodes.get('reduce-motion').checked=false;await first.nodes.get('reduce-motion').trigger('change');assert.equal(saved.get('crashcart-reduce-motion'),'0');assert.equal(first.document.documentElement.classList.contains('reduce-motion'),false);const second=await loadJudge(()=>response(genuine),{storage});assert.equal(second.nodes.get('reduce-motion').checked,false);assert.equal(first.calls.length,1);assert.equal(second.calls.length,1);});
 test('blocked preference storage leaves the recorded page and its motion control usable',async()=>{const storage={getItem(){throw Error('storage blocked');},setItem(){throw Error('storage blocked');}};const p=await loadJudge(()=>response(genuine),{storage});assert.equal(p.nodes.get('review').hidden,false);p.nodes.get('reduce-motion').checked=true;await assert.doesNotReject(p.nodes.get('reduce-motion').trigger('change'));assert.equal(p.document.documentElement.classList.contains('reduce-motion'),true);assert.equal(p.calls.length,1);});
+
+
+test('repair story selects the repaired result on the first activation and remains repeatable', async()=>{
+  const p=await loadJudge(()=>response(genuine));
+  await p.stories[2].trigger('click');
+  assert.equal(p.stories[2].getAttribute('aria-pressed'),'true');
+  assert.match(p.nodes.get('selected-name').textContent,/Recovered order/);
+  assert.match(p.nodes.get('facts').textContent,/1 ticket/);
+  assert.match(p.nodes.get('facts').textContent,/Kept/);
+  assert.match(p.nodes.get('story-description').textContent,/32\.26 seconds/);
+  await p.stories[2].trigger('click');
+  assert.match(p.nodes.get('facts').textContent,/1 ticket/);
+  await p.stories[1].trigger('click');
+  assert.match(p.nodes.get('selected-name').textContent,/Missed order/);
+  assert.match(p.nodes.get('facts').textContent,/0 tickets/);
+  assert.equal(p.calls.length,1);
+});
+
+test('See what happened focuses without an instant jump and scrolls to the result, respecting motion preference',async()=>{
+  const p=await loadJudge(()=>response(genuine));
+  const button=p.cases[1]; button.classList.add('select-case');
+  await button.trigger('click');
+  assert.equal(p.document.activeElement,p.nodes.get('evidence-title'));
+  assert.equal(p.nodes.get('evidence-title').focusOptions.preventScroll,true);
+  assert.equal(p.nodes.get('evidence').scrollOptions.block,'start');
+  assert.equal(p.nodes.get('evidence').scrollOptions.behavior,'smooth');
+  p.nodes.get('reduce-motion').checked=true;
+  await p.nodes.get('reduce-motion').trigger('change');
+  await button.trigger('click');
+  assert.equal(p.nodes.get('evidence').scrollOptions.behavior,'auto');
+  assert.equal(p.calls.length,1);
+});

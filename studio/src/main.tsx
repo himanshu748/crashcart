@@ -23,10 +23,14 @@ import type {
 import { INITIAL_QUERY, QueryController, queryDataSource } from "./query-agent";
 import type { QueryState } from "./query-agent";
 import { QueryContext, QueryWidget, testTypeLabel } from "./query-widget";
+import { recordedApi, recordedQuery, recordedRecords } from "./recorded";
+import type { RecordedRecords } from "./recorded";
 import "./style.css";
 
-// Replaced by the explicit build-time value; absence preserves vendor warnings.
+// Explicit build values only; no server configuration is exported.
 declare const __CRASHCART_AG_STUDIO_LICENSE_KEY__: string | undefined;
+declare const __CRASHCART_RECORDED_STUDIO__: boolean;
+const recorded = __CRASHCART_RECORDED_STUDIO__;
 
 type Run = {
   id: string;
@@ -125,6 +129,7 @@ function validateDetail(v: unknown, id: string): Detail {
   return d;
 }
 async function api(path: string, body?: object) {
+  if (recorded) return recordedApi(path, body);
   const r = await fetch(
     path,
     body
@@ -160,7 +165,7 @@ const generatedTitles = new Map([
   ['LOCAL_TEST UI interaction: one workshop ticket within 60 seconds; unpaid fixture, no provider call.','Example case: one workshop ticket within 60 seconds; no payment made.'],
 ]);
 const displayPromise = (value: string) => generatedTitles.get(value) ?? String(value ?? '');
-const caseLabel = (run: Run) => `${testTypeLabel(run.mode)} · Case ${run.id.slice(-8)} — ${displayPromise(run.promise)}`;
+const caseLabel = (run: Run) => recorded ? (run.fault.merchant === "defective" ? "Missed delivery — payment confirmed, no ticket" : "Repair replay — one ticket in 32.26 seconds") : `${testTypeLabel(run.mode)} · Case ${run.id.slice(-8)} — ${displayPromise(run.promise)}`;
 const timeLabel = (value: unknown) => typeof value === "string" && Number.isFinite(Date.parse(value)) ? new Date(value).toLocaleString(undefined,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit",second:"2-digit",timeZoneName:"short"}) : "Time not recorded";
 const outcomeLabel = (value: unknown) => value === "PASS" ? "Promise kept" : value === "FAIL" ? "Promise broken" : "More information needed";
 const eventLabel = (value: string) => ({customer_observation:"Page recorded",order_created:"Checkout started",pre_capture_read:"Payment checked before confirmation",fault_activated:"Test condition started",capture_transport_response:"Payment reply received",customer_message:"Store message saved",independent_order_read:"Payment checked with PayPal",ticket_fulfilled:"Ticket issued",entitlement_read:"Ticket checked with the store",invariant_result:"Delivery promise checked",fault_deactivated:"Test condition ended",attempt_started:"Case check started",attempt_completed:"Case check finished",run_cancelled:"Case stopped",webhook_received:"PayPal update received"})[value] || "Saved event";
@@ -198,7 +203,7 @@ function EvidenceWidget({ widgetId }: AgWidgetParams) {
   }
   if(widgetId === "merchant")return <section className="widget" aria-label="Ticket record"><p className="kicker"><span className="source-index">03</span> STORE</p><h2>{d.merchant.known ? "Ticket delivery" : "Purchase not found"}</h2><div className="number">{d.merchant.ticket_count??"—"}<span>{d.merchant.ticket_count===1 ? "workshop ticket" : "workshop tickets"}</span></div>
     {d.merchant.tickets.map(t=><div className="ticket" key={t.id}><strong><span aria-hidden="true">↳</span> Ticket issued</strong><details><summary>Ticket reference</summary><code>{t.id}</code></details><small>Issued {timeLabel(t.created_at)}</small></div>)}
-    {d.merchant.ticket_count===0&&<p>No ticket is saved for this purchase.</p>}<p className="meta">Store checked {timeLabel(d.merchant.observed_at)}</p><OriginalRecords value={{purchase_id:d.purchase.id,...d.merchant}} />
+    {d.merchant.ticket_count===0&&<p>No ticket is saved for this purchase.</p>}<p className="meta">{recorded ? "Replay loaded " : "Store checked "}{timeLabel(d.merchant.observed_at)}</p><OriginalRecords value={{purchase_id:d.purchase.id,...d.merchant}} />
   </section>;
   if(widgetId === "comparison")return <section className="widget" aria-label="Checkout comparison"><p className="kicker"><span className="source-index">04</span> COMPARE CHECKOUTS</p><h2>Compare checkout outcomes</h2><div className="compare"><div><h3>Selected case</h3><Identity data={d}/><Result data={d}/><p>{faultLabel(d.run.fault.kind)} · {versionLabel(d.run.fault.merchant)}</p></div><div><h3>Comparison case</h3>{comparison ? <><Identity data={comparison}/><Result data={comparison}/><p>{faultLabel(comparison.run.fault.kind)} · {versionLabel(comparison.run.fault.merchant)}</p></> : <p>Choose another case above to compare payment and delivery.</p>}</div></div><p className="meta">The promise is one $29 ticket within 60 seconds of confirmed payment. Two selected checkouts may have different test conditions.</p></section>;
   const visible=d.events.filter(e=>source === "all" || e.source === source);
@@ -344,8 +349,10 @@ function App() {
     runId: selected,
     ready: !!primary && !loading && primary.run.id === selected,
   };
+  const [recording, setRecording] = useState<RecordedRecords | null>(null);
+  useEffect(() => { if (recorded) recordedRecords().then(setRecording).catch(() => {}); }, []);
   const controller = useMemo(
-    () => new QueryController(() => scope.current, setQuery),
+    () => new QueryController(() => scope.current, setQuery, recorded ? recordedQuery : undefined),
     [],
   );
   const invalidateQuery = () => {
@@ -429,7 +436,7 @@ function App() {
         if (!disposed) {
           setRuns(r);
           setLogin(false);
-          if (!selected && r[0]) setSelected(r[0].id);
+          if (!selected && r[0]) { setSelected(r[0].id); if (recorded && r[1]) setCompare(r[1].id); }
           setLoading(false);
         }
       })
@@ -539,12 +546,12 @@ function App() {
         Skip to checkout records
       </a>
       <header>
-        <a className="brand" href={selected ? `/?view=home&run=${encodeURIComponent(selected)}` : "/?view=home"}>
+        <a className="brand" href={recorded ? "/" : selected ? `/?view=home&run=${encodeURIComponent(selected)}` : "/?view=home"}>
           <span className="brand-mark" aria-hidden="true">↳</span> CrashCart <span className="brand-label">RECORDS</span>
         </a>
         <span className="header-scope"><span aria-hidden="true" />Test payments only · saved records</span>
-        <a className="back" href={selected ? `/?run=${selected}` : "/"}>
-          Workspace
+        <a className="back" href={recorded ? "/example" : selected ? `/?run=${selected}` : "/"}>
+          {recorded ? "Recorded example" : "Workspace"}
         </a>
       </header>
       <main id="main">
@@ -562,6 +569,16 @@ function App() {
             <p>From confirmed payment</p>
           </div>
         </div>
+        {recorded && <aside className="recorded-notice" aria-label="About these records">
+          <div><strong>Recorded checkout explorer</strong><p>Two versions of the same saved input. No new payment, AI call or store connection. AG Studio powers this workspace.</p></div>
+          <a href="/demo.html#investigation">See the guided walkthrough ↗</a>
+        </aside>}
+        {recorded && recording && <details className="recorded-history"><summary>Where AI helped — a separate saved investigation</summary>
+          <p>This earlier checkout was captured on 23 October; AI investigated it on 26 October. It is a different case from the missed order on 22 October and the live test on 8 November.</p>
+          <p>{recording.historical_ai.provider} · {recording.historical_ai.model}. These are saved steps, not a conversation with a model now.</p>
+          <ol>{recording.historical_ai.trace.map(step => <li key={step.step}><strong>{({read_provider:"Check the PayPal payment",read_merchant:"Check the ticket",finish:"Return to the promise check"})[step.action] || "Saved step"}</strong><p>{step.reasoning_summary || step.exact_model_excerpt}</p></li>)}</ol>
+          <p>The model proposed what to inspect. Deterministic code checked payment and delivery. <a href="https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md">Read about the separate 8 November live test.</a></p>
+        </details>}
         {error && (
           <p role="alert" className="error">
             {readableError(error)}
@@ -605,7 +622,8 @@ function App() {
                   onChange={(e) => {
                     invalidateQuery();
                     const next = e.target.value;
-                    if (next === compare) setCompare("");
+                    if (recorded) setCompare(runs.find(run => run.id !== next)?.id || "");
+                    else if (next === compare) setCompare("");
                     setSelected(next);
                   }}
                 >
@@ -658,11 +676,11 @@ function App() {
               <div className="case-strip">
                 <div className="selected-identity"><p className="selection-label">SELECTED CASE</p><Identity data={primary} /><OriginalRecords value={primary.run} /></div>
                 <div>
-                  <a download href={`/api/runs/${selected}/export`}>
+                  <a download href={recorded ? `/downloads/${primary.run.fault.merchant}.json` : `/api/runs/${selected}/export`}>
                     Download records ↓
                   </a>
                   {canReplay && (
-                    <a download href={`/api/runs/${selected}/regression.zip`}>
+                    <a download href={recorded ? "/downloads/replay.zip" : `/api/runs/${selected}/regression.zip`}>
                       Download checkout replay ↓
                     </a>
                   )}
@@ -680,7 +698,7 @@ function App() {
                 aria-pressed={queryOpen}
                 onClick={() => showWorkspace(true)}
               >
-                Ask a question
+                {recorded ? "Explore saved cases" : "Ask a question"}
               </button>
               {queryOpen && chatOpen && (
                 <button onClick={() => showWorkspace(true, false)}>
@@ -693,6 +711,7 @@ function App() {
                 </span>
               )}
             </div>
+            {recorded && queryOpen && <div className="recorded-query-note"><strong>Local record filters, not live AI</strong><p>Use the suggested questions in the panel. The native Studio Agent Framework runs a browser filter over these two cases. Other questions are unavailable; no model or private API is called.</p></div>}
             <QueryContext.Provider value={query}>
               <Context.Provider
                 value={{ primary, comparison, source, setSource }}
@@ -741,4 +760,7 @@ function App() {
     </>
   );
 }
-createRoot(document.getElementById("root")!).render(<App />);
+function LicenseGate() {
+  return <main className="license-gate"><a className="brand" href="/">↳ CrashCart</a><p className="kicker">RECORDED CHECKOUT EXPLORER</p><h1>Studio access is not configured.</h1><p>This optional workspace needs an AG Studio licence configured by its owner. The recorded walkthrough works without one.</p><a className="back" href="/example">Open the recorded example</a></main>;
+}
+createRoot(document.getElementById("root")!).render(recorded && !__CRASHCART_AG_STUDIO_LICENSE_KEY__ ? <LicenseGate /> : <App />);

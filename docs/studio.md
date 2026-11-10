@@ -4,7 +4,28 @@ CrashCart embeds the actual `ag-studio` and `ag-studio-react` 3.0.0 packages. Th
 React workspace reads authenticated saved investigations from the same local
 server. It does not make a payment or refresh PayPal when a run is selected.
 
-## Build and open
+## Recorded explorer (feature branch, not deployed)
+
+The optional `/explorer/` page uses the **actual pinned AG Studio SDK** and the same five evidence panels as the private workspace. It reads only exported replay rows. The two case variants share the saved input; the repair is not a new purchase. The native Agent Framework runs three explicit browser filters. Its panel says **no AI call**; arbitrary questions are unsupported. A separate disclosure shows the genuine earlier saved AI investigation, clearly identified as another case.
+
+```sh
+npm ci --ignore-scripts --prefix studio
+# Configure AG_STUDIO_LICENSE_KEY privately in this process, never in Git.
+npm run build:recorded --prefix studio
+python3 -m crashcart.recorded_studio --serve --port 8769
+```
+
+Open <http://127.0.0.1:8769/explorer/>. No operator key, PayPal key or model key is read by this server. Without a licensed build, the route shows an explicit access message and serves no SDK or record data. The ordinary recorded example remains usable. A build marker records configuration presence, not vendor validation or public redistribution permission.
+
+To prepare a **private, local** static release (never commit it):
+
+```sh
+python3 -m crashcart.recorded_studio --output var/studio-release
+```
+
+The default `judge.sh` and its exported replay ZIP remain package-free and do not include Studio. A public deployment is gated on owner approval and an applicable vendor entitlement. See [release preparation](STUDIO_RELEASE.md).
+
+## Private workspace: build and open
 
 Python 3.13.15 runs the application. Building Studio additionally requires
 Node.js 22.14.0 and npm. The lockfile pins the frontend toolchain and packages.
@@ -26,7 +47,7 @@ compatibility, not widget behavior; actual browser checks are recorded separatel
 
 ## Evidence views
 
-Actual registered custom widgets display the selected recorded browser view,
+Five instances of the registered custom evidence widget display the selected recorded browser view,
 independently saved provider record, current stored ticket, comparison run, and
 event trace. Browser kind and recorded path distinguish operator, merchant and
 return pages; an unknown source stays unknown. Source IDs and observation times
@@ -48,8 +69,7 @@ limitations remain described in [replay documentation](replay.md).
 
 AG Studio is commercial software. Follow the vendor's
 [licensing and local-evaluation instructions](https://www.ag-grid.com/studio/react/licence-install/)
-and obtain your own entitlement where required. Local evaluation does not grant
-production or judging-period rights. The maintainer's private trial key and
+and obtain your own entitlement where required. The vendor's [6 November hackathon announcement](https://www.ag-grid.com/blog/build-a-payments-dashboard-without-building-a-dashboard/) says entries do not require a licence during judging and AG Grid will provide the key. That announcement is not a key already delivered/configured for this deployment. The existing private trial ends 17 December; public access through 22 December still needs the promised key or explicit coverage. Local evaluation alone does not establish that coverage. The maintainer's private trial key and
 licensed compilation overlay are not included in this repository. Do not remove
 vendor watermarks or warnings.
 

@@ -29,10 +29,7 @@
       <a href="integrations.html">Integrations</a>
       <a href="demo.html">Recorded example</a>
     </nav>
-    <label class="motion-toggle">
-      <input type="checkbox" id="reduce-motion">
-      <span>Reduce motion</span>
-    </label>
+
   </header>
 
   <div class="trail">
@@ -50,6 +47,7 @@
 
   <main id="main" tabindex="-1">
     <section class="page-hero" aria-labelledby="product-page-title">
+      <div class="hero-copy">
       <p class="eyebrow">Product</p>
       <h1 id="product-page-title">Check the payment.<em> Find the missing delivery.</em></h1>
       <p class="lead">When a customer asks where their order is, you need more than “payment complete”. Follow the payment, find the delivery, and see whether it arrived when promised.</p>
@@ -57,6 +55,16 @@
         <a class="btn btn-signal" href="demo.html">Explore a recorded order</a>
         <a class="btn btn-outline-light" href="#rule">Try the delivery timeline</a>
       </div>
+      </div>
+      <figure class="glance hero-aside">
+        <ol class="glance-list" aria-label="The delivery promise">
+          <li><span class="glance-who">Customer pays</span><span class="glance-says">$29.00</span></li>
+          <li><span class="glance-who">Your promise</span><span class="glance-says">One ticket · 60 seconds</span></li>
+          <li class="is-alert"><span class="glance-who">The question</span><span class="glance-says">Did it arrive?</span></li>
+          <li class="is-kept"><span class="glance-who">CrashCart</span><span class="glance-says">Follow the records</span></li>
+        </ol>
+        <figcaption>Illustration · try the delivery timeline below. No payment or AI request.</figcaption>
+      </figure>
     </section>
 
     <section class="band" id="rule" aria-labelledby="rule-title">
@@ -172,6 +180,10 @@
   </nav>
 
   <footer class="foot">
+    <label class="motion-toggle">
+      <input type="checkbox" id="reduce-motion">
+      <span>Reduce motion</span>
+    </label>
     <nav class="foot-nav" aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="product.html" aria-current="page">Product</a>
