@@ -1,6 +1,7 @@
 # CrashCart: the judge-facing architecture
 
-The public example recomputes recorded input without accounts or provider calls.
+The local judge recomputes recorded input at launch; the hosted pages show
+results computed at site build. Neither needs accounts or provider calls.
 A separately configured private workspace can run Sandbox checkout and AI.
 AI proposes which evidence to inspect; deterministic code decides the verdict.
 
