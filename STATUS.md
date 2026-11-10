@@ -1,6 +1,18 @@
 # CrashCart development status
 
-**Verified: 47/60. Zero stale requirements on the frozen accepted build. Project incomplete.** Updated 9 November 2026 (India).
+**Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost is not submitted.** Updated 10 November 2026 (India).
+
+## 10 November — final submission review
+
+PR #2 was squash-merged as `fe60ae4`. Both public recorded sites are deployed, including the repaired product/example routes and static health endpoint. Fresh-clone judge mode reproduces the missing-ticket failure and healthy pass without keys or network calls. The public host remains tagged to retain through 22 December; restart instructions are in [OPERATIONS.md](docs/OPERATIONS.md).
+
+The [public 2:45 video](https://www.youtube.com/watch?v=gFWje84_wEA) was checked in signed-out Safari. It opens the saved 8 November Sandbox/DeepSeek investigation and a separate healthy replay, with the actual Bryntum timing view at 2:10–2:20. No new payment or model call occurred.
+
+The [Devpost entry](https://devpost.com/software/crashcart-87asqz) is **DRAFT, 4/5 steps done**. Story, links, media, technical answers and confirmed personal answers are saved. The final rules box and Submit button remain untouched. The filled-form screenshots are local under `evidence/submission/`. Next: owner reviews the form and replies **submit**, then perform final submission/readback, recheck links and a fresh clone, and tag the submitted commit. No submission tag has been created.
+
+[Commands, outcomes, decisions and commit progression](docs/FINAL_RUN_LOG.md). The original failed/blocked/unverified CC items remain outside this frozen submission scope; no acceptance score or invariant was changed.
+
+The dated sections below are development history, not the current publication state.
 
 ## 9 November — submission packaging on `ship/devpost`
 

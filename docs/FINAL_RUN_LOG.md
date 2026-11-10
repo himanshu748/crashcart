@@ -21,6 +21,13 @@ Target: 12 November 2026, 22:00 IST. Final submission requires the owner's new *
 | 2026-11-10 14:15 IST | Opened the watch URL in Safari Private Browsing. | Signed-out “Sign in” control visible; actual playback advanced to0:27 of2:45. The public watch page is playable without an account and under3minutes. Screenshots saved locally under `evidence/submission/`; no screenshot or MP4 added to Git. |
 | 2026-11-10 14:15 IST | Replaced video placeholders and updated video/edit documentation. | README and Devpost copy now link the actual public watch URL. Bryntum's existing timing view is visible in that uploaded edit at2:10–2:20. Phase3 complete; Devpost final submission is still prohibited until the owner's new “submit” reply. |
 
+| 2026-11-10 14:26 IST | Phase 4: synchronized the final story, ten factual technology tags, three try-it links and public video to Devpost. Saved the video separately in the hackathon entry. | Project readback confirms the new watch URL; entry remains unsubmitted. The native form shows DRAFT, 4/5 steps done. |
+| 2026-11-10 14:26 IST | Updated the judge-only technical answers and sponsor selection; reloaded saved fields. | Bryntum, KERNEL and Postman selected for their actual uses. AG Grid, APIMatic, Channel3 and Render unselected; optional AG/APIMatic feedback cleared. Hosted URL and keyless instructions replace the stale setup. Owner confirmed Significant learning, Yes career value and No follow-up contact. Prior Individual/India/New and eligibility answers retained. |
+| 2026-11-10 14:26 IST | Uploaded the home, saved investigation and Bryntum timing screenshots from docs/images; updated the project thumbnail. | Three new gallery images appended; existing gallery preserved. The new home image represents the project listing. Saved investigation and timing captions explicitly identify recorded data. |
+| 2026-11-10 14:26 IST | Captured the filled additional-info form and final review screen locally under evidence/submission. | Rules/terms remains unchecked; Submit project has not been clicked. No submission timestamp, submission tag or freeze is claimed. Next: owner reviews the screenshots and replies submit, including agreement to the official rules and Devpost terms, before Phase 5. |
+
+| 2026-11-10 14:27 IST | Re-ran the advertised-link check after adding the YouTube URL. | Exit 0: `SUMMARY public=24 HTTP200=24 local_files=30 local_anchors=3 public_anchors=11 local_only_untested=5 failures=0`. Five localhost setup links remain explicitly outside this public HTTP check. |
+
 ## Fresh-clone commands and output — 10 November
 
 ```sh
