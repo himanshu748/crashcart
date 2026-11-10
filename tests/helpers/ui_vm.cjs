@@ -2,9 +2,10 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const ROOT=path.resolve(__dirname,'../..');
 function environment(file,{fetch:fetcher,url='http://localhost/',mobile=false,storage}={}){
- const nodes=new Map(),all=[],queries=new Map(),calls=[],assigned=[];let document;
+ const isJudge=file==='web/judge/app.js';
+ const nodes=new Map(),all=[],queries=new Map(),calls=[],assigned=[],windowEvents=new Map();let document;
  class Element{
-  constructor(tag='div'){this.tagName=tag;this.children=[];this.parentElement=null;this.dataset={};this.attributes={};this.handlers={};this.hidden=false;this.disabled=false;this.checked=false;this.open=false;this.value='';this._text='';const set=new Set();this.classList={add:(...x)=>x.forEach(v=>set.add(v)),remove:(...x)=>x.forEach(v=>set.delete(v)),contains:x=>set.has(x),toggle:(x,on)=>{on=on===undefined?!set.has(x):on;if(on)set.add(x);else set.delete(x);return on;}};all.push(this);}
+  constructor(tag='div'){this.tagName=isJudge?tag.toUpperCase():tag;this.children=[];this.parentElement=null;this.dataset={};this.attributes={};this.handlers={};this.hidden=false;this.disabled=false;this.checked=false;this.open=false;this.value='';this._text='';const set=new Set();this.classList={add:(...x)=>x.forEach(v=>set.add(v)),remove:(...x)=>x.forEach(v=>set.delete(v)),contains:x=>set.has(x),toggle:(x,on)=>{on=on===undefined?!set.has(x):on;if(on)set.add(x);else set.delete(x);return on;}};all.push(this);}
   set id(value){this._id=value;nodes.set(value,this);}get id(){return this._id;}
   set className(value){this._className=value;for(const x of value.split(/\s+/))if(x)this.classList.add(x);}get className(){return this._className||'';}
   set textContent(value){this._text=String(value??'');this.children=[];}get textContent(){return this._text+this.children.map(x=>x.textContent).join('');}
@@ -13,37 +14,76 @@ function environment(file,{fetch:fetcher,url='http://localhost/',mobile=false,st
   insertBefore(item,before){if(item.parentElement)item.remove();let i=this.children.indexOf(before);if(i<0)i=this.children.length;this.children.splice(i,0,item);item.parentElement=this;}
   before(item){if(this.parentElement)this.parentElement.insertBefore(item,this);}
   remove(){if(this.parentElement){const a=this.parentElement.children;a.splice(a.indexOf(this),1);this.parentElement=null;}}
-  setAttribute(name,value){this.attributes[name]=String(value);if(name==='class')this.className=String(value);if(name==='href')this.href=String(value);if(name==='open')this.open=true;}
+  setAttribute(name,value){this.attributes[name]=String(value);if(name==='id')this.id=String(value);if(name==='class')this.className=String(value);if(name==='href')this.href=String(value);if(name==='open')this.open=true;if(name==='hidden')this.hidden=true;if(name==='disabled')this.disabled=true;if(name==='value')this.value=String(value);if(name.startsWith('data-'))this.dataset[name.slice(5).replace(/-([a-z])/g,(_m,c)=>c.toUpperCase())]=String(value);}
   getAttribute(name){return this.attributes[name]??null;}
-  removeAttribute(name){delete this.attributes[name];if(name==='open')this.open=false;}
+  removeAttribute(name){delete this.attributes[name];if(name==='open')this.open=false;if(name==='hidden')this.hidden=false;if(name==='disabled')this.disabled=false;}
   toggleAttribute(name,on){if(on)this.setAttribute(name,'');else this.removeAttribute(name);}
   addEventListener(type,fn){(this.handlers[type]??=[]).push(fn);}
   async trigger(type,extra={}){for(const fn of this.handlers[type]||[])await fn({preventDefault(){},currentTarget:this,target:this,...extra});}
-  focus(options){this.focusOptions=options;document.activeElement=this;}scrollIntoView(options){this.scrollOptions=options;}pause(){}load(){}
+  focus(options){this.focusOptions=options;document.activeElement=this;}scrollIntoView(options){this.scrollOptions=options;this.scrollCount=(this.scrollCount||0)+1;}pause(){}load(){}
   showModal(){this.open=true;}close(){this.open=false;for(const fn of this.handlers.close||[])fn({target:this});}
-  matches(selector){return selector.startsWith('.')&&this.classList.contains(selector.slice(1));}
+  matches(selector){if(!isJudge)return selector.startsWith('.')&&this.classList.contains(selector.slice(1));return matchesSelector(this,selector);}
+  closest(selector){for(let e=this;e;e=e.parentElement)if(e.matches(selector))return e;return null;}
   walk(){return this.children.flatMap(x=>[x,...x.walk()]);}
-  querySelector(selector){if(selector==='time')return this.walk().find(x=>x.tagName==='time')||null;if(selector==='[data-case]')return this.caseButton||null;const key='local:'+this.id+':'+selector;if(!queries.has(key))queries.set(key,new Element());return queries.get(key);}
-  querySelectorAll(selector){if(selector===':scope > .event')return this.children.filter(x=>x.classList.contains('event'));return [];}
+  querySelector(selector){if(isJudge)return this.walk().find(e=>e.matches(selector))||null;if(selector==='time')return this.walk().find(x=>x.tagName==='time')||null;if(selector==='[data-case]')return this.caseButton||null;const key='local:'+this.id+':'+selector;if(!queries.has(key))queries.set(key,new Element());return queries.get(key);}
+  querySelectorAll(selector){if(isJudge){if(selector.startsWith(':scope > '))return this.children.filter(e=>e.matches(selector.slice(9)));return this.walk().filter(e=>e.matches(selector));}if(selector===':scope > .event')return this.children.filter(x=>x.classList.contains('event'));return [];}
  }
  const html=fs.readFileSync(path.join(ROOT,(file==='web/judge/app.js'?'web/judge/demo.html':file.replace(/app\.js$/,'index.html'))),'utf8');
- for(const match of html.matchAll(/<([\w-]+)\b([^>]*\bid="([^"]+)"[^>]*)>/g)){
+ // Judge pages use actual source controls and ancestry. The other workspace
+ // harness deliberately retains its established transport-focused synthetic DOM.
+ // This only models selectors/markup used by the delivered page; native events,
+ // layout, focusability and HTML parsing edge cases need the real browser checks.
+ function matchesSimple(node,selector){
+  const attributes=[...selector.matchAll(/\[([\w-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\]\s]+)))?\]/g)];
+  const shape=selector.replace(/\[[^\]]*\]/g,'');
+  const tag=/^[\w-]+/.exec(shape)?.[0];
+  if(tag&&node.tagName.toLowerCase()!==tag.toLowerCase())return false;
+  const id=/#([\w-]+)/.exec(shape)?.[1];if(id&&node.id!==id)return false;
+  if([...shape.matchAll(/\.([\w-]+)/g)].some(m=>!node.classList.contains(m[1])))return false;
+  for(const [,name,a,b,c] of attributes){const expected=a??b??c,value=node.getAttribute(name);if(value===null||(expected!==undefined&&value!==expected))return false;}
+  return !!(tag||id||attributes.length||shape.includes('.'));
+ }
+ function matchesSelector(node,selector){
+  return selector.split(',').some(part=>{
+   const chain=part.trim().split(/\s+/);let current=node;
+   if(!matchesSimple(current,chain.pop()))return false;
+   while(chain.length){const ancestor=chain.pop();current=current.parentElement;while(current&&!matchesSimple(current,ancestor))current=current.parentElement;if(!current)return false;}
+   return true;
+  });
+ }
+ let parsedRoot=null,parsedBody=null;
+ if(isJudge){
+  const stack=[],voids=new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
+  for(const token of html.matchAll(/<!--[\s\S]*?-->|<![^>]*>|<\/([\w:-]+)\s*>|<([\w:-]+)\b([^>]*)>|([^<]+)/g)){
+   if(token[0].startsWith('<!'))continue;
+   if(token[1]){const tag=token[1].toUpperCase();while(stack.length){if(stack.pop().tagName===tag)break;}continue;}
+   if(token[2]){
+    const e=new Element(token[2]);
+    for(const attr of token[3].matchAll(/([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g))e.setAttribute(attr[1],attr[2]??attr[3]??attr[4]??'');
+    if(stack.length)stack.at(-1).append(e);
+    if(e.tagName==='HTML')parsedRoot=e;if(e.tagName==='BODY')parsedBody=e;
+    if(!voids.has(token[2].toLowerCase())&&!/\/\s*$/.test(token[3]))stack.push(e);
+   }else if(token[4]&&stack.length){const e=new Element('#text');e.textContent=token[4].replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");stack.at(-1).append(e);}
+  }
+ }else for(const match of html.matchAll(/<([\w-]+)\b([^>]*\bid="([^"]+)"[^>]*)>/g)){
   const e=new Element(match[1]);e.id=match[3];e.hidden=/\bhidden(?:\s|$|=)/.test(match[2]);e.disabled=/\bdisabled(?:\s|$|=)/.test(match[2]);e.value=/\bvalue="([^"]*)"/.exec(match[2])?.[1]||'';e.className=/\bclass="([^"]*)"/.exec(match[2])?.[1]||'';
  }
- const sources=['all','browser','provider','merchant'].map(source=>{const e=new Element('button');e.dataset.source=source;return e;});
- const stories=['payment','delivery','repair'].map(story=>{const e=new Element('button');e.dataset.story=story;return e;});
- const cases=['defective','healthy'].map(which=>{const e=new Element('button');e.dataset.case=which;return e;});
- const failureAi=[0,1,2].map(i=>{const e=new Element();e.dataset.failureStep=String(i);return e;});
- const ai=[0,1,2].map(i=>{const e=new Element('button');e.dataset.aiStep=String(i);return e;});const links=[new Element('a'),new Element('a')];links.forEach(x=>x.href='#investigation');
+ const actual=selector=>parsedRoot?.walk().filter(e=>e.matches(selector))||[];
+ const sources=isJudge?actual('.trace-filters button'):['all','browser','provider','merchant'].map(source=>{const e=new Element('button');e.dataset.source=source;return e;});
+ const stories=isJudge?actual('button[data-story]'):['payment','delivery','repair'].map(story=>{const e=new Element('button');e.dataset.story=story;return e;});
+ const cases=isJudge?actual('[data-case]'):['defective','healthy'].map(which=>{const e=new Element('button');e.dataset.case=which;return e;});
+ const failureAi=isJudge?actual('[data-failure-step]'):[0,1,2].map(i=>{const e=new Element();e.dataset.failureStep=String(i);return e;});
+ const ai=isJudge?actual('[data-ai-step]'):[0,1,2].map(i=>{const e=new Element('button');e.dataset.aiStep=String(i);return e;});
+ const links=isJudge?actual('a[href="#investigation"]'):[new Element('a'),new Element('a')];if(!isJudge)links.forEach(x=>x.href='#investigation');
  const location=new URL(url);location.assign=value=>assigned.push(value);
- document={hidden:false,activeElement:null,body:new Element('body'),documentElement:new Element('html'),getElementById:id=>nodes.get(id)||null,
+ document={hidden:false,activeElement:null,body:parsedBody||new Element('body'),documentElement:parsedRoot||new Element('html'),getElementById:id=>nodes.get(id)||null,
   createElement:tag=>new Element(tag),createTextNode:value=>{const e=new Element('#text');e.textContent=value;return e;},contains:el=>all.includes(el),addEventListener(){},
-  querySelector(selector){if(selector==='input[name="mode"]:checked')return {value:'LIVE_SANDBOX'};if(selector.startsWith('#progress ')){if(!queries.has(selector))queries.set(selector,new Element());return queries.get(selector);}if(selector.startsWith('.')){const existing=all.find(e=>e.matches(selector));if(existing)return existing;}if(!queries.has(selector))queries.set(selector,new Element());return queries.get(selector);},
-  querySelectorAll(selector){if(selector==='.run-row')return nodes.get('runs')?.walk().filter(e=>e.classList.contains('run-row'))||[];if(selector==='.trace-filters button')return sources;if(selector==='button[data-story]')return stories;if(selector==='[data-case]'||selector==='.case-switch [data-case]')return cases;if(selector==='[data-failure-step]')return failureAi;if(selector==='[data-ai-step]')return ai;if(selector==='a[href="#investigation"]')return links;if(selector==='.compare-card')return [];if(selector.includes('.brand'))return [document.querySelector('.brand'),document.querySelector('.nav-home')];return [];}};
+  querySelector(selector){if(isJudge)return actual(selector)[0]||null;if(selector==='input[name="mode"]:checked')return {value:'LIVE_SANDBOX'};if(selector.startsWith('#progress ')){if(!queries.has(selector))queries.set(selector,new Element());return queries.get(selector);}if(selector.startsWith('.')){const existing=all.find(e=>e.matches(selector));if(existing)return existing;}if(!queries.has(selector))queries.set(selector,new Element());return queries.get(selector);},
+  querySelectorAll(selector){if(isJudge)return actual(selector);if(selector==='.run-row')return nodes.get('runs')?.walk().filter(e=>e.classList.contains('run-row'))||[];if(selector==='.trace-filters button')return sources;if(selector==='button[data-story]')return stories;if(selector==='[data-case]'||selector==='.case-switch [data-case]')return cases;if(selector==='[data-failure-step]')return failureAi;if(selector==='[data-ai-step]')return ai;if(selector==='a[href="#investigation"]')return links;if(selector==='.compare-card')return [];if(selector.includes('.brand'))return [document.querySelector('.brand'),document.querySelector('.nav-home')];return [];}};
  if(nodes.has('fault')){nodes.get('fault').options=['none','response_loss','event_delay','event_duplicate','process_interrupt'].map(value=>({value,hidden:false,disabled:false}));nodes.get('fault').value='none';}
  if(nodes.has('merchant'))nodes.get('merchant').value='healthy';if(nodes.has('fixture'))nodes.get('fixture').value='workshop-v1';if(nodes.has('source-filter'))nodes.get('source-filter').value='all';
- const context=vm.createContext({document,location,history:{replaceState:(_a,_b,next)=>{const x=new URL(next,location.href);location.href=x.href;}},window:{location,localStorage:storage,matchMedia:query=>({matches:query.includes('max-width')?mobile:false,addEventListener(){}}),addEventListener(){}},navigator:{clipboard:{writeText:async value=>{context.copied=value;}}},URL,URLSearchParams,Response,setInterval(){},clearInterval(){},fetch:async(...args)=>{calls.push(args);return fetcher?fetcher(...args):new Response('{}',{status:503});}});
- return {nodes,document,context,calls,assigned,sources,stories,cases,aiSteps:ai,failureSteps:failureAi,links,element:()=>new Element()};
+ const context=vm.createContext({document,location,history:{replaceState:(_a,_b,next)=>{const x=new URL(next,location.href);location.href=x.href;}},window:{location,localStorage:storage,matchMedia:query=>({matches:query.includes('max-width')?mobile:false,addEventListener(){}}),addEventListener:(type,fn)=>{const callbacks=windowEvents.get(type)||[];callbacks.push(fn);windowEvents.set(type,callbacks);}},navigator:{clipboard:{writeText:async value=>{context.copied=value;}}},URL,URLSearchParams,Response,setInterval(){},clearInterval(){},fetch:async(...args)=>{calls.push(args);return fetcher?fetcher(...args):new Response('{}',{status:503});}});
+ return {nodes,document,context,calls,assigned,sources,stories,cases,aiSteps:ai,failureSteps:failureAi,links,dispatchWindow:async(type,extra={})=>{for(const callback of windowEvents.get(type)||[])await callback(extra);},element:()=>new Element()};
 }
 function loadMain(options){const page=environment('web/app.js',options);const source=fs.readFileSync(path.join(ROOT,'web/app.js'),'utf8');const end=source.lastIndexOf('\n  updateLinks();');if(end<0)throw Error('Missing explicit startup boundary');const expose=`\n globalThis.ui={api,ApiError,errorMessage,showError,openWorkspace,refresh,safeRefresh,money,validDetails,latestVerdict,oneTicket,jobMessage,jobFinding,renderFlow,syncActionButtons,selectRun,startCheckout,openNewCase,closeNewCase,applyCapabilities,allowedFault,mutate,stillMine,poll, renderAssistant, state:()=>({selected,current,active,creating,cancelPending,unresolved,acknowledgedJobs,createUnresolved}), setState:value=>{if('selected'in value)selected=value.selected;if('current'in value)current=value.current;if('active'in value)active=value.active;if('pageMode'in value)pageMode=value.pageMode;}};\n})();`;
  vm.runInContext(source.slice(0,end)+expose,page.context,{filename:'web/app.js'});page.ui=page.context.ui;return page;}

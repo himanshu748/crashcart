@@ -73,3 +73,144 @@ test('invalid failure trace leaves the recorded comparison usable and hides its 
   assert.equal(p.nodes.get('review').hidden,false);
   assert.equal(p.calls.length,1);
 });
+
+/* Workspace routing is exercised against the actual delivered HTML controls and
+   their ancestry. This remains a synthetic DOM test, not keyboard/browser proof. */
+function assertView(page,view){
+  assert.equal(page.nodes.get('failure-case').hidden,view!=='failure');
+  assert.equal(page.nodes.get('comparison-case').hidden,view!=='comparison');
+  assert.equal(page.nodes.get('workspace-failure-button').getAttribute('aria-pressed'),String(view==='failure'));
+  assert.equal(page.nodes.get('workspace-comparison-button').getAttribute('aria-pressed'),String(view==='comparison'));
+}
+
+test('workspace opens on the actual November investigation without borrowing October purchase facts',async()=>{
+  const data=reviewData(),before=JSON.stringify(data),p=await loadJudge(()=>response(data));
+  assertView(p,'failure');
+  assert.equal(p.nodes.get('workspace-failure-button').disabled,false);
+  assert.equal(p.nodes.get('workspace-comparison-button').disabled,false);
+  assert.match(p.nodes.get('workspace-case-date').textContent,/8 November 2026/);
+  assert.equal(p.nodes.get('workspace-payment-state').textContent,'Confirmed');
+  assert.doesNotMatch(p.nodes.get('workspace-payment-state').textContent,/USD|29\.00/);
+  const format=timestamp=>new Date(timestamp).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'medium',timeZone:'UTC'})+' UTC';
+  assert.equal(p.nodes.get('workspace-payment-time').textContent,format(data.failure_ai.payment_completed_at));
+  assert.notEqual(p.nodes.get('workspace-payment-time').textContent,format(data.cases.defective.purchase.capture_completed_at));
+  assert.equal(p.nodes.get('workspace-ticket-count').textContent,'0 tickets');
+  assert.equal(p.nodes.get('workspace-promise').textContent,'60-second promise');
+  assert.equal(p.nodes.get('workspace-deadline').textContent,'Missed · due '+format(data.failure_ai.deterministic_result.deadline));
+  assert.equal(JSON.stringify(data),before,'Presentation must not mutate recorded input');
+  assert.equal(p.calls.length,1);assert.equal(p.calls[0][0],'data.json');
+});
+
+test('workspace case controls are actual semantic buttons linked to distinct delivered panes',async()=>{
+  const p=await loadJudge(()=>response(genuine));
+  const controls=p.document.querySelectorAll('[data-workspace-view]');
+  assert.equal(controls.length,2);
+  for(const control of controls){
+    assert.equal(control.tagName,'BUTTON');assert.equal(control.getAttribute('type'),'button');
+    const pane=p.nodes.get(control.getAttribute('aria-controls'));
+    assert.ok(pane);assert.equal(pane.dataset.workspacePane,control.dataset.workspaceView);
+    control.focus();assert.equal(p.document.activeElement,control);
+  }
+  assert.equal(p.nodes.get('failure-question').closest('[data-workspace-pane]'),p.nodes.get('failure-case'));
+  assert.equal(p.nodes.get('facts').closest('[data-workspace-pane]'),p.nodes.get('comparison-case'));
+});
+
+test('saved next-step journey leads to a separately labelled October repair, then preserves November state',async()=>{
+  const p=await loadJudge(()=>response(genuine)),next=p.nodes.get('workspace-next-step');
+  assert.equal(p.nodes.get('workspace-step-label').textContent,'Recorded step 1 of 3');
+  assert.equal(p.nodes.get('workspace-evidence-count').textContent,'No records read yet');
+  await next.trigger('click');
+  assert.equal(p.nodes.get('workspace-step-label').textContent,'Recorded step 2 of 3');
+  assert.equal(p.nodes.get('workspace-evidence-count').textContent,'1 supporting record');
+  await next.trigger('click');
+  assert.equal(p.nodes.get('workspace-step-label').textContent,'Recorded step 3 of 3');
+  assert.equal(p.nodes.get('workspace-evidence-count').textContent,'2 supporting records');
+  assert.match(p.nodes.get('workspace-next-note').textContent,/different recorded order.*22 October/);
+  await next.trigger('click');
+  assertView(p,'comparison');assert.match(p.nodes.get('workspace-case-date').textContent,/22 October 2026/);
+  assert.equal(p.document.activeElement,p.nodes.get('evidence-title'));
+  assert.equal(p.nodes.get('evidence-title').focusOptions.preventScroll,true);
+  assert.equal(p.nodes.get('comparison-case').scrollOptions.block,'start');
+  assert.equal(p.nodes.get('comparison-case').scrollOptions.behavior,'smooth');
+  assert.match(p.nodes.get('selected-name').textContent,/Recovered order/);
+  assert.match(p.nodes.get('facts').textContent,/1 ticket/);
+  assert.match(p.nodes.get('story-description').textContent,/32\.26 seconds/);
+  assert.match(p.nodes.get('comparison-case').textContent,/Different order/);
+  await p.nodes.get('workspace-failure-button').trigger('click');
+  assertView(p,'failure');assert.equal(p.nodes.get('workspace-ticket-count').textContent,'0 tickets');
+  assert.match(p.nodes.get('failure-verdict').textContent,/FAIL \/ paid_without_ticket/);
+  await p.failureSteps[0].trigger('click');
+  assert.equal(p.nodes.get('workspace-step-label').textContent,'Recorded step 1 of 3');
+  assert.equal(p.calls.length,1,'Navigation and replay selection must not fetch or call providers');
+});
+
+for(const change of ['missing','missing-payment','payment-no-timezone','missing-deadline','deadline-no-timezone','non-60s-interval','invariant-version','invalid-trace'])test('workspace falls back safely when optional November projection is unavailable: '+change,async()=>{
+  const data=reviewData();
+  if(change==='missing')delete data.failure_ai;
+  if(change==='missing-payment')delete data.failure_ai.payment_completed_at;
+  if(change==='payment-no-timezone')data.failure_ai.payment_completed_at=data.failure_ai.payment_completed_at.replace(/Z$/,'');
+  if(change==='missing-deadline')delete data.failure_ai.deterministic_result.deadline;
+  if(change==='deadline-no-timezone')data.failure_ai.deterministic_result.deadline=data.failure_ai.deterministic_result.deadline.replace(/Z$/,'');
+  if(change==='non-60s-interval')data.failure_ai.deterministic_result.deadline=new Date(Date.parse(data.failure_ai.payment_completed_at)+61000).toISOString();
+  if(change==='invariant-version')data.failure_ai.deterministic_result.invariant_version='ticket-v2';
+  if(change==='invalid-trace')data.failure_ai.trace[1].action='capture_payment';
+  const p=await loadJudge(()=>response(data));
+  assert.equal(p.nodes.get('review').hidden,false);assertView(p,'comparison');
+  assert.equal(p.nodes.get('workspace-failure-button').disabled,true);
+  assert.equal(p.nodes.get('workspace-comparison-button').disabled,false);
+  assert.equal(p.nodes.get('workspace-notice').hidden,false);
+  assert.match(p.nodes.get('workspace-notice').textContent,/saved AI case is unavailable.*recorded repair/);
+  await p.nodes.get('workspace-failure-button').trigger('click');assertView(p,'comparison');
+  await p.cases[1].trigger('click');assert.match(p.nodes.get('facts').textContent,/1 ticket/);
+  assert.equal(p.calls.length,1);
+});
+
+for(const anchor of ['investigation','evidence','timeline','technical-result'])test('legacy comparison deep link reveals its pane before scrolling: #'+anchor,async()=>{
+  const p=await loadJudge(()=>response(genuine),{url:'https://example.test/project/demo.html#'+anchor});
+  assertView(p,'comparison');
+  const target=p.nodes.get(anchor);
+  assert.equal(target.scrollOptions.block,'start');assert.equal(target.scrollOptions.behavior,'auto');
+  for(let parent=target.parentElement;parent;parent=parent.parentElement){if(parent.tagName==='DETAILS')assert.equal(parent.open,true);}
+  assert.equal(p.calls.length,1);
+});
+
+test('November deep link selects the saved investigation and later hash changes reveal comparison details',async()=>{
+  const p=await loadJudge(()=>response(genuine),{url:'https://example.test/project/demo.html#failure-ai-title'});
+  assertView(p,'failure');assert.equal(p.nodes.get('failure-ai-title').scrollOptions.block,'start');
+  p.context.window.location.hash='#timeline';await p.dispatchWindow('hashchange');
+  assertView(p,'comparison');
+  assert.equal(p.document.querySelector('.order-records').open,true);
+  assert.equal(p.nodes.get('timeline').scrollOptions.block,'start');
+  p.context.window.location.hash='#failure-citations';await p.dispatchWindow('hashchange');
+  assertView(p,'failure');
+  assert.equal(p.nodes.get('failure-citations').closest('details').open,true);
+  assert.equal(p.nodes.get('failure-citations').scrollOptions.block,'start');
+  assert.equal(p.calls.length,1);
+});
+
+for(const anchor of ['faq','downloads','ai-title'])test('secondary deep link opens enclosing disclosures: #'+anchor,async()=>{
+  const p=await loadJudge(()=>response(genuine),{url:'https://example.test/project/demo.html#'+anchor});
+  const target=p.nodes.get(anchor);
+  assert.equal(target.scrollOptions.block,'start');
+  let disclosures=0;for(let parent=target.parentElement;parent;parent=parent.parentElement){if(parent.tagName==='DETAILS'){disclosures++;assert.equal(parent.open,true);}}
+  assert.ok(disclosures>0,'The target must really be inside a delivered disclosure');
+  assert.equal(p.calls.length,1);
+});
+
+test('unavailable November deep link leaves the valid comparison visible instead of scrolling into a hidden case',async()=>{
+  const data=reviewData();delete data.failure_ai;
+  const p=await loadJudge(()=>response(data),{url:'https://example.test/project/demo.html#failure-ai-title'});
+  assertView(p,'comparison');assert.equal(p.nodes.get('workspace-notice').hidden,false);
+  assert.equal(p.nodes.get('failure-ai-title').scrollOptions,undefined);
+  assert.equal(p.calls.length,1);
+});
+
+test('failed records do not enable workspace controls or allow a saved next step',async()=>{
+  const p=await loadJudge(()=>response({mode:'LOCAL_TEST',fresh_execution:true}));
+  assert.equal(p.nodes.get('review').hidden,true);
+  assert.equal(p.nodes.get('workspace-failure-button').disabled,true);
+  assert.equal(p.nodes.get('workspace-comparison-button').disabled,true);
+  await p.nodes.get('workspace-next-step').trigger('click');
+  for(const control of p.document.querySelectorAll('[data-workspace-view]'))await control.trigger('click');
+  assert.equal(p.nodes.get('review').hidden,true);assert.equal(p.calls.length,1);
+});
