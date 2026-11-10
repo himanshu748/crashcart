@@ -5,6 +5,7 @@ and opts in on a loopback server. Only an imported kernel-video-v1 reference
 confined to the owned var directory can be opened. Verified immutable bytes are
 served, so a subsequent filesystem write cannot swap the streamed content.
 """
+
 from dataclasses import dataclass
 import hashlib
 import ipaddress
@@ -38,7 +39,10 @@ class Recording:
 
 def enabled(server, environ):
     try:
-        return environ.get("CRASHCART_ALLOW_PRIVATE_RECORDINGS") == "1" and ipaddress.ip_address(server.server_address[0]).is_loopback
+        return (
+            environ.get("CRASHCART_ALLOW_PRIVATE_RECORDINGS") == "1"
+            and ipaddress.ip_address(server.server_address[0]).is_loopback
+        )
     except (ValueError, AttributeError, IndexError):
         return False
 
@@ -54,11 +58,15 @@ def load_recording(store, run_id, private_root):
     run = store.get_run(run_id)
     if not run or reference.get("mode") != run["mode"]:
         raise RecordingUnavailable("Saved checkout unavailable")
-    recorded = [e["payload"]["recording"] for e in store.get_events(run_id)
-                if e["event_type"] == "kernel_recorded_observation" and e["source"] == "browser"
-                and e["payload"].get("browser_kind") == "KERNEL"
-                and e["payload"].get("source_mode") == run["mode"]
-                and e["payload"].get("recording", {}).get("sha256") == reference["sha256"]]
+    recorded = [
+        e["payload"]["recording"]
+        for e in store.get_events(run_id)
+        if e["event_type"] == "kernel_recorded_observation"
+        and e["source"] == "browser"
+        and e["payload"].get("browser_kind") == "KERNEL"
+        and e["payload"].get("source_mode") == run["mode"]
+        and e["payload"].get("recording", {}).get("sha256") == reference["sha256"]
+    ]
     if not recorded:
         raise RecordingUnavailable("Saved checkout unavailable")
     root = Path(private_root).absolute()
@@ -74,7 +82,8 @@ def load_recording(store, run_id, private_root):
         try:
             for part in parts[:-1]:
                 next_directory = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory)
-                os.close(directory); directory = next_directory
+                os.close(directory)
+                directory = next_directory
             fd = os.open(parts[-1], os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
         finally:
             os.close(directory)
@@ -84,10 +93,20 @@ def load_recording(store, run_id, private_root):
                 raise ValueError()
             body = file.read(MAX_VIDEO_BYTES + 1)
             after = os.fstat(file.fileno())
-            if (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns, before.st_ctime_ns) != (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns):
+            if (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns, before.st_ctime_ns) != (
+                after.st_dev,
+                after.st_ino,
+                after.st_size,
+                after.st_mtime_ns,
+                after.st_ctime_ns,
+            ):
                 raise ValueError()
-        if (len(body) != before.st_size or body[4:8] != b"ftyp" or hashlib.sha256(body).hexdigest() != reference["sha256"]
-                or not all(r.get("bytes") == len(body) and r.get("access") == "PRIVATE_OPERATOR_ARTIFACT" for r in recorded)):
+        if (
+            len(body) != before.st_size
+            or body[4:8] != b"ftyp"
+            or hashlib.sha256(body).hexdigest() != reference["sha256"]
+            or not all(r.get("bytes") == len(body) and r.get("access") == "PRIVATE_OPERATOR_ARTIFACT" for r in recorded)
+        ):
             raise ValueError()
         return Recording(body, reference["sha256"])
     except (OSError, ValueError, TypeError):
@@ -102,8 +121,14 @@ def availability(store, run_id, private_root, *, allow):
         recording = load_recording(store, run_id, private_root)
     except RecordingUnavailable:
         return {"availability": "unavailable", "access": "operator_only", "fresh_verification": False}
-    return {"availability": "available", "url": f"/api/runs/{run_id}/recording", "access": "operator_only",
-            "bytes": recording.size, "sha256": recording.sha256, "fresh_verification": False}
+    return {
+        "availability": "available",
+        "url": f"/api/runs/{run_id}/recording",
+        "access": "operator_only",
+        "bytes": recording.size,
+        "sha256": recording.sha256,
+        "fresh_verification": False,
+    }
 
 
 def byte_range(value, size):
@@ -120,7 +145,8 @@ def byte_range(value, size):
         if suffix <= 0:
             raise InvalidRange()
         return max(0, size - suffix), size - 1, True
-    start = int(first); end = min(int(last), size - 1) if last else size - 1
+    start = int(first)
+    end = min(int(last), size - 1) if last else size - 1
     if start >= size or start > end:
         raise InvalidRange()
     return start, end, True

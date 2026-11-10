@@ -1,6 +1,6 @@
 # Remaining 13 checks — verification results
 
-**6 November design amendment:** current CC wording is in [BUILD_CHECKLIST](../BUILD_CHECKLIST.md) and the [decision map](DESIGN_CONTRACT_UPDATE.md). CC-046/048/056/059 have additive design acceptance; all 13 open states remain open. Dated attempts and next actions below are historical, superseded by the top of STATUS.md. No prior capture grant is renewed.
+**6 November design amendment:** current CC wording is in [BUILD_CHECKLIST](archive/BUILD_CHECKLIST.md) and the [decision map](DESIGN_CONTRACT_UPDATE.md). CC-046/048/056/059 have additive design acceptance; all 13 open states remain open. Dated attempts and next actions below are historical, superseded by the top of STATUS.md. No prior capture grant is renewed.
 
 5 November 2026. **47/60 verified; no new CC checkmarks.** The owner resumed verification of all open checks. Features remain frozen. The v65 pass executed available offline checks, inspected original evidence and dependencies, and repaired inactive recording preparation. No payment, public test window, recording, model call or remote browser session occurred.
 

@@ -1,4 +1,5 @@
 """Local monitoring console. Authenticating webhooks never creates a payment."""
+
 from __future__ import annotations
 import argparse
 import base64
@@ -6,7 +7,7 @@ import binascii
 from dataclasses import asdict
 from datetime import datetime, timezone
 from http.cookies import CookieError, SimpleCookie
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler
 import hashlib
 import hmac
 import json
@@ -37,16 +38,23 @@ def _json(raw):
                 raise ValueError('Duplicate JSON field')
             result[key] = value
         return result
-    data = json.loads(raw.decode('utf-8'), object_pairs_hook=pairs,
-                      parse_constant=lambda _: (_ for _ in ()).throw(ValueError('Invalid JSON number')))
+
+    data = json.loads(
+        raw.decode('utf-8'),
+        object_pairs_hook=pairs,
+        parse_constant=lambda _: (_ for _ in ()).throw(ValueError('Invalid JSON number')),
+    )
     if not isinstance(data, dict):
         raise ValueError('JSON object required')
-    pending=[(data,0)]
+    pending = [(data, 0)]
     while pending:
-        value,depth=pending.pop()
-        if depth>32:raise ValueError('JSON nesting limit reached')
-        if isinstance(value,dict):pending.extend((child,depth+1) for child in value.values())
-        elif isinstance(value,list):pending.extend((child,depth+1) for child in value)
+        value, depth = pending.pop()
+        if depth > 32:
+            raise ValueError('JSON nesting limit reached')
+        if isinstance(value, dict):
+            pending.extend((child, depth + 1) for child in value.values())
+        elif isinstance(value, list):
+            pending.extend((child, depth + 1) for child in value)
     return data
 
 
@@ -66,7 +74,11 @@ def _commerce_secret(env, item, stores):
             continue
         other_key = 'SHOPIFY_SECRET' if other['platform'] == 'shopify' else 'WOOCOMMERCE_SECRET'
         other_secret = env.get(_prefix(other['id']) + other_key)
-        if isinstance(other_secret, str) and other_secret and hmac.compare_digest(secret.encode(), other_secret.encode()):
+        if (
+            isinstance(other_secret, str)
+            and other_secret
+            and hmac.compare_digest(secret.encode(), other_secret.encode())
+        ):
             return None, 'Each store needs a separate signing secret'
     return secret, None
 
@@ -75,13 +87,26 @@ def _configuration(env, item, stores):
     prefix = _prefix(item['id'])
     secret, setup_error = _commerce_secret(env, item, stores)
     keys = ['PAYPAL_CLIENT_ID', 'PAYPAL_CLIENT_SECRET', 'PAYPAL_WEBHOOK_ID', 'PAYPAL_MERCHANT_ID']
-    return {'commerce_configured': bool(secret), 'commerce_setup_error': setup_error,
-            'paypal_configured': env.get(prefix + 'ALLOW_SANDBOX') == '1' and all(env.get(prefix + k) for k in keys),
-            'environment': 'sandbox', 'connection_verified': False}
+    return {
+        'commerce_configured': bool(secret),
+        'commerce_setup_error': setup_error,
+        'paypal_configured': env.get(prefix + 'ALLOW_SANDBOX') == '1' and all(env.get(prefix + k) for k in keys),
+        'environment': 'sandbox',
+        'connection_verified': False,
+    }
 
 
-def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
-                paypal_factory=None, start_scanner=True, ingress_limits=None, ingress_clock=time.monotonic):
+def make_server(
+    db_path,
+    *,
+    host='127.0.0.1',
+    port=8790,
+    environ=None,
+    paypal_factory=None,
+    start_scanner=True,
+    ingress_limits=None,
+    ingress_clock=time.monotonic,
+):
     if host not in {'127.0.0.1', 'localhost'}:
         raise ValueError('Monitoring server must bind to loopback')
     limits = ingress_limits or IngressLimits()
@@ -93,7 +118,15 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
     public_origin = env.get('CRASHCART_MONITOR_PUBLIC_ORIGIN', '')
     if public_origin:
         origin = urlsplit(public_origin)
-        if origin.scheme != 'https' or not origin.hostname or origin.username or origin.password or origin.path not in {'', '/'} or origin.query or origin.fragment:
+        if (
+            origin.scheme != 'https'
+            or not origin.hostname
+            or origin.username
+            or origin.password
+            or origin.path not in {'', '/'}
+            or origin.query
+            or origin.fragment
+        ):
             raise ValueError('Public origin must be an exact HTTPS origin')
         public_origin = 'https://' + origin.netloc
     secure_cookie = bool(public_origin) or env.get('CRASHCART_MONITOR_SECURE_COOKIE') == '1'
@@ -105,6 +138,7 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
 
     class Handler(BaseHTTPRequestHandler):
         protocol_version = 'HTTP/1.1'
+
         def setup(self):
             super().setup()
             self.connection.settimeout(limits.request_timeout)
@@ -114,18 +148,22 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
 
         def send(self, status, data, kind='application/json', cookie=None, retry_after=None):
             try:
-                return self._send(status,data,kind,cookie,retry_after)
+                return self._send(status, data, kind, cookie, retry_after)
             except OSError:
-                self.close_connection=True
+                self.close_connection = True
 
         def _send(self, status, data, kind='application/json', cookie=None, retry_after=None):
             raw = data if isinstance(data, bytes) else json.dumps(data, allow_nan=False).encode()
             self.close_connection = True
             self.send_response(status)
             self.send_header('Connection', 'close')
-            for key, value in {'Content-Type': kind, 'Content-Length': str(len(raw)),
-                'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff',
-                'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"}.items():
+            for key, value in {
+                'Content-Type': kind,
+                'Content-Length': str(len(raw)),
+                'Cache-Control': 'no-store',
+                'X-Content-Type-Options': 'nosniff',
+                'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
+            }.items():
                 self.send_header(key, value)
             if retry_after is not None:
                 self.send_header('Retry-After', str(retry_after))
@@ -149,47 +187,97 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
             return raw
 
         def unique_headers(self):
-            names = ['Host','Origin','Cookie','X-CrashCart-Request','Content-Length','Transfer-Encoding',
-                'X-Shopify-Hmac-Sha256','X-Shopify-Shop-Domain','X-Shopify-Topic','X-Shopify-Webhook-Id',
-                'X-WC-Webhook-Signature','X-WC-Webhook-Source','X-WC-Webhook-Topic','X-WC-Webhook-Delivery-ID',
-                'Paypal-Auth-Algo','Paypal-Cert-Url','Paypal-Transmission-Id','Paypal-Transmission-Sig','Paypal-Transmission-Time']
+            names = [
+                'Host',
+                'Origin',
+                'Cookie',
+                'X-CrashCart-Request',
+                'Content-Length',
+                'Transfer-Encoding',
+                'X-Shopify-Hmac-Sha256',
+                'X-Shopify-Shop-Domain',
+                'X-Shopify-Topic',
+                'X-Shopify-Webhook-Id',
+                'X-WC-Webhook-Signature',
+                'X-WC-Webhook-Source',
+                'X-WC-Webhook-Topic',
+                'X-WC-Webhook-Delivery-ID',
+                'Paypal-Auth-Algo',
+                'Paypal-Cert-Url',
+                'Paypal-Transmission-Id',
+                'Paypal-Transmission-Sig',
+                'Paypal-Transmission-Time',
+            ]
             return all(len(self.headers.get_all(name, [])) <= 1 for name in names)
 
         def paypal_headers_valid(self):
-            required = ['Paypal-Auth-Algo','Paypal-Cert-Url','Paypal-Transmission-Id','Paypal-Transmission-Sig','Paypal-Transmission-Time']
-            if any(len(self.headers.get_all(name, [])) != 1 or not 0 < len(self.headers[name]) <= 8192 or any(ord(char)<33 or ord(char)>126 for char in self.headers[name]) for name in required):return False
+            required = [
+                'Paypal-Auth-Algo',
+                'Paypal-Cert-Url',
+                'Paypal-Transmission-Id',
+                'Paypal-Transmission-Sig',
+                'Paypal-Transmission-Time',
+            ]
+            if any(
+                len(self.headers.get_all(name, [])) != 1
+                or not 0 < len(self.headers[name]) <= 8192
+                or any(ord(char) < 33 or ord(char) > 126 for char in self.headers[name])
+                for name in required
+            ):
+                return False
             try:
-                cert=urlsplit(self.headers['Paypal-Cert-Url'])
-                stamp=datetime.fromisoformat(self.headers['Paypal-Transmission-Time'].replace('Z','+00:00'))
-                signature=base64.b64decode(self.headers['Paypal-Transmission-Sig'],validate=True)
-                return bool(signature) and stamp.tzinfo is not None and self.headers['Paypal-Auth-Algo']=='SHA256withRSA' and cert.scheme=='https' and cert.hostname in {'api.paypal.com','api.sandbox.paypal.com','api-m.sandbox.paypal.com'} and not cert.username and not cert.password and cert.port in (None,443) and cert.path.startswith('/v1/notifications/certs/') and not cert.query and not cert.fragment
-            except (ValueError,TypeError,binascii.Error):return False
+                cert = urlsplit(self.headers['Paypal-Cert-Url'])
+                stamp = datetime.fromisoformat(self.headers['Paypal-Transmission-Time'].replace('Z', '+00:00'))
+                signature = base64.b64decode(self.headers['Paypal-Transmission-Sig'], validate=True)
+                return (
+                    bool(signature)
+                    and stamp.tzinfo is not None
+                    and self.headers['Paypal-Auth-Algo'] == 'SHA256withRSA'
+                    and cert.scheme == 'https'
+                    and cert.hostname in {'api.paypal.com', 'api.sandbox.paypal.com', 'api-m.sandbox.paypal.com'}
+                    and not cert.username
+                    and not cert.password
+                    and cert.port in (None, 443)
+                    and cert.path.startswith('/v1/notifications/certs/')
+                    and not cert.query
+                    and not cert.fragment
+                )
+            except (ValueError, TypeError, binascii.Error):
+                return False
 
-        def admit_webhook(self,path):
-            retry=limiter.global_admit()
+        def admit_webhook(self, path):
+            retry = limiter.global_admit()
             if retry:
-                self.send(503,{'error':'Too many deliveries. Try again shortly.'},retry_after=retry);return None
+                self.send(503, {'error': 'Too many deliveries. Try again shortly.'}, retry_after=retry)
+                return None
             if not self.unique_headers():
-                self.send(400,{'error':'Duplicate request headers are not accepted'});return None
-            bits=path.strip('/').split('/')
-            if len(bits)!=3 or not ID.fullmatch(bits[1]):
-                self.send(404,{'error':'Webhook not found'});return None
-            item=store.get_store(bits[1])
-            retry=limiter.store_admit(item['id'])
+                self.send(400, {'error': 'Duplicate request headers are not accepted'})
+                return None
+            bits = path.strip('/').split('/')
+            if len(bits) != 3 or not ID.fullmatch(bits[1]):
+                self.send(404, {'error': 'Webhook not found'})
+                return None
+            item = store.get_store(bits[1])
+            retry = limiter.store_admit(item['id'])
             if retry:
-                self.send(503,{'error':'Store delivery limit reached. Try again shortly.'},retry_after=retry);return None
+                self.send(503, {'error': 'Store delivery limit reached. Try again shortly.'}, retry_after=retry)
+                return None
             return item
 
         def reject_method(self):
             try:
-                path=urlsplit(self.path).path
-                if path.startswith('/webhooks/') and self.admit_webhook(path) is None:return
-                self.send(405,{'error':'This method is not supported'})
-            except ValueError:self.send(400,{'error':'Invalid request target'})
-            except KeyError:self.send(404,{'error':'Store not found'})
-            except sqlite3.Error:self.send(503,{'error':'Monitoring is busy. Try again shortly.'},retry_after=1)
+                path = urlsplit(self.path).path
+                if path.startswith('/webhooks/') and self.admit_webhook(path) is None:
+                    return
+                self.send(405, {'error': 'This method is not supported'})
+            except ValueError:
+                self.send(400, {'error': 'Invalid request target'})
+            except KeyError:
+                self.send(404, {'error': 'Store not found'})
+            except sqlite3.Error:
+                self.send(503, {'error': 'Monitoring is busy. Try again shortly.'}, retry_after=1)
 
-        do_PUT=do_PATCH=do_DELETE=do_OPTIONS=do_HEAD=reject_method
+        do_PUT = do_PATCH = do_DELETE = do_OPTIONS = do_HEAD = reject_method
 
         def authenticated(self):
             try:
@@ -220,8 +308,10 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
             return {**item, 'connections': _configuration(env, item, store.list_stores())}
 
         def do_GET(self):
-            try:path = urlsplit(self.path).path
-            except ValueError:return self.send(400, {'error': 'Invalid request target'})
+            try:
+                path = urlsplit(self.path).path
+            except ValueError:
+                return self.send(400, {'error': 'Invalid request target'})
             if path.startswith('/webhooks/'):
                 return self.reject_method()
             if not self.unique_headers():
@@ -230,10 +320,22 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
                 name = {'/': 'index.html', '/app.js': 'app.js', '/style.css': 'style.css'}[path]
                 if not (WEB / name).is_file():
                     return self.send(503, {'error': 'Monitoring interface is being prepared'})
-                kind = {'index.html': 'text/html; charset=utf-8', 'app.js': 'application/javascript', 'style.css': 'text/css'}[name]
+                kind = {
+                    'index.html': 'text/html; charset=utf-8',
+                    'app.js': 'application/javascript',
+                    'style.css': 'text/css',
+                }[name]
                 return self.send(200, (WEB / name).read_bytes(), kind)
             if path == '/healthz':
-                return self.send(200, {'status': 'degraded' if scan_state['status'] == 'error' else 'ok', 'mode': 'monitor', 'payment_environment': 'sandbox', 'scanner': dict(scan_state)})
+                return self.send(
+                    200,
+                    {
+                        'status': 'degraded' if scan_state['status'] == 'error' else 'ok',
+                        'mode': 'monitor',
+                        'payment_environment': 'sandbox',
+                        'scanner': dict(scan_state),
+                    },
+                )
             if not self.authenticated():
                 return self.send(401, {'error': 'Sign in to continue'})
             try:
@@ -260,9 +362,10 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
             try:
                 path = urlsplit(self.path).path
                 if path.startswith('/webhooks/'):
-                    item=self.admit_webhook(path)
-                    if item is None:return
-                    return self.webhook(path,self.body(),item)
+                    item = self.admit_webhook(path)
+                    if item is None:
+                        return
+                    return self.webhook(path, self.body(), item)
                 if not self.unique_headers():
                     return self.send(400, {'error': 'Duplicate request headers are not accepted'})
                 raw = self.body()
@@ -293,16 +396,24 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
                             return self.send(429, {'error': 'Too many active sessions'})
                         sessions[hashlib.sha256(value.encode()).hexdigest()] = now + 28800
                     secure = '; Secure' if secure_cookie else ''
-                    return self.send(200, {'authenticated': True}, cookie=f'{COOKIE}={value}; Path=/; HttpOnly; SameSite=Strict; Max-Age=28800{secure}')
+                    return self.send(
+                        200,
+                        {'authenticated': True},
+                        cookie=f'{COOKIE}={value}; Path=/; HttpOnly; SameSite=Strict; Max-Age=28800{secure}',
+                    )
                 if not self.authenticated():
                     return self.send(401, {'error': 'Sign in to continue'})
                 if path == '/api/logout':
                     cookie = SimpleCookie(self.headers.get('Cookie', ''))
                     with lock:
                         sessions.pop(hashlib.sha256(cookie[COOKIE].value.encode()).hexdigest(), None)
-                    return self.send(200, {'authenticated': False}, cookie=f'{COOKIE}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0')
+                    return self.send(
+                        200, {'authenticated': False}, cookie=f'{COOKIE}=; Path=/; HttpOnly; SameSite=Strict; Max-Age=0'
+                    )
                 if path == '/api/stores':
-                    item = store.create_store(data.get('name'), data.get('platform'), data.get('domain'), data.get('promise_seconds'))
+                    item = store.create_store(
+                        data.get('name'), data.get('platform'), data.get('domain'), data.get('promise_seconds')
+                    )
                     return self.send(201, {'store': self.public_store(item)})
                 bits = path.strip('/').split('/')
                 if len(bits) == 6 and bits[:2] == ['api', 'stores'] and bits[3] == 'alerts' and bits[5] == 'ack':
@@ -315,7 +426,11 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
             except sqlite3.Error:
                 return self.send(503, {'error': 'Monitoring is busy. Try again shortly.'}, retry_after=1)
             except ReceiptCapacityError:
-                return self.send(503, {'error': 'This workspace cannot receive more store updates right now. Try again later.'}, retry_after=60)
+                return self.send(
+                    503,
+                    {'error': 'This workspace cannot receive more store updates right now. Try again later.'},
+                    retry_after=60,
+                )
             except PaymentValidationError:
                 return self.send(400, {'error': 'Payment data was not accepted'})
             except PayPalError:
@@ -323,7 +438,9 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
             except KeyError:
                 return self.send(404, {'error': 'Reference not found'})
             except (ValueError, TypeError, UnicodeError, TimeoutError, RecursionError) as exc:
-                error = SHOPIFY_ADDRESS_HINT if str(exc) == SHOPIFY_ADDRESS_HINT else 'The request could not be accepted'
+                error = (
+                    SHOPIFY_ADDRESS_HINT if str(exc) == SHOPIFY_ADDRESS_HINT else 'The request could not be accepted'
+                )
                 return self.send(400, {'error': error})
 
         def webhook(self, path, raw, item):
@@ -342,12 +459,32 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
                 if not secret:
                     return self.send(503, {'error': setup_error})
                 try:
-                    update = parse_shopify(raw, headers, secret, item['domain']) if provider == 'shopify' else parse_woocommerce(raw, headers, secret, 'https://' + item['domain'])
+                    update = (
+                        parse_shopify(raw, headers, secret, item['domain'])
+                        if provider == 'shopify'
+                        else parse_woocommerce(raw, headers, secret, 'https://' + item['domain'])
+                    )
                 except ValueError:
                     return self.send(401, {'error': 'Store delivery was not accepted'})
                 values = asdict(update)
                 values['payment_references'] = list(values['payment_references'])
-                store.upsert_order(item['id'], values['platform_order_id'], **{key: values[key] for key in ['display_number', 'currency', 'total_minor', 'payment_references', 'fulfillment_status', 'fulfilled_at', 'updated_at', 'event_id']})
+                store.upsert_order(
+                    item['id'],
+                    values['platform_order_id'],
+                    **{
+                        key: values[key]
+                        for key in [
+                            'display_number',
+                            'currency',
+                            'total_minor',
+                            'payment_references',
+                            'fulfillment_status',
+                            'fulfilled_at',
+                            'updated_at',
+                            'event_id',
+                        ]
+                    },
+                )
                 store.scan(datetime.now(timezone.utc).isoformat())
                 return self.send(200, {'received': True})
             if provider != 'paypal':
@@ -357,7 +494,10 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
             if not self.paypal_headers_valid():
                 return self.send(401, {'error': 'Signature headers were not accepted'})
             event = parse_webhook_event(raw)
-            values = {'CRASHCART_ALLOW_SANDBOX': env[prefix + 'ALLOW_SANDBOX'], **{key: env[prefix + key] for key in ['PAYPAL_CLIENT_ID', 'PAYPAL_CLIENT_SECRET', 'PAYPAL_WEBHOOK_ID']}}
+            values = {
+                'CRASHCART_ALLOW_SANDBOX': env[prefix + 'ALLOW_SANDBOX'],
+                **{key: env[prefix + key] for key in ['PAYPAL_CLIENT_ID', 'PAYPAL_CLIENT_SECRET', 'PAYPAL_WEBHOOK_ID']},
+            }
             if not paypal_factory(values).verify_webhook(headers, event, raw_body=raw):
                 return self.send(401, {'error': 'Signature was not accepted'})
             if event.get('event_type') != 'PAYMENT.CAPTURE.COMPLETED':
@@ -365,10 +505,21 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
             resource = event.get('resource', {})
             if not isinstance(resource, dict) or not isinstance(resource.get('payee'), dict):
                 return self.send(400, {'error': 'Payment data was not accepted'})
-            if resource.get('status') != 'COMPLETED' or resource.get('payee', {}).get('merchant_id') != env[prefix + 'PAYPAL_MERCHANT_ID']:
+            if (
+                resource.get('status') != 'COMPLETED'
+                or resource.get('payee', {}).get('merchant_id') != env[prefix + 'PAYPAL_MERCHANT_ID']
+            ):
                 return self.send(400, {'error': 'Payment does not belong to this store'})
             amount, currency = _observed_money(resource.get('amount'))
-            store.record_payment(item['id'], capture_id=resource['id'], reference=resource['id'], currency=currency, amount_minor=amount, completed_at=resource['create_time'], event_id=event['id'])
+            store.record_payment(
+                item['id'],
+                capture_id=resource['id'],
+                reference=resource['id'],
+                currency=currency,
+                amount_minor=amount,
+                completed_at=resource['create_time'],
+                event_id=event['id'],
+            )
             store.scan(datetime.now(timezone.utc).isoformat())
             return self.send(200, {'received': True})
 
@@ -376,13 +527,16 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
     server.monitor_limiter = limiter
     server.monitor_store, server.monitor_stop = store, stop
     original_close = server.server_close
+
     def close():
         stop.set()
         if getattr(server, 'monitor_scanner', None):
             server.monitor_scanner.join(timeout=6)
         original_close()
+
     server.server_close = close
     if start_scanner:
+
         def scan():
             while not stop.is_set():
                 try:
@@ -392,6 +546,7 @@ def make_server(db_path, *, host='127.0.0.1', port=8790, environ=None,
                 except (ValueError, OSError, sqlite3.Error):
                     scan_state['status'] = 'error'
                 stop.wait(5)
+
         server.monitor_scanner = threading.Thread(target=scan, daemon=True)
         server.monitor_scanner.start()
     return server
@@ -410,6 +565,7 @@ def main():
         pass
     finally:
         server.server_close()
+
 
 if __name__ == '__main__':
     main()

@@ -7,6 +7,7 @@ A replacement may already be visible if the following directory fsync fails.
 That failure still raises; either recoverable state remains charged: the prior
 RESERVED entry or the installed completion metadata. No failed write refunds it.
 """
+
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -23,10 +24,11 @@ import tempfile
 import time
 import uuid
 
+from .model_ids import DEEPSEEK_MODEL_ID as MODEL
+
 CALL_LIMIT = 24
 CEILING_MICRO_USD = 1_000_000
 RESERVATION_MICRO_USD = 40_000
-MODEL = "deepseek-ai/DeepSeek-V4.1-Flash"
 MAX_REQUEST_BYTES = 65_536
 MAX_LEDGER_BYTES = 4 * 1024 * 1024
 LOCK_TIMEOUT_SECONDS = 2.0
@@ -60,8 +62,10 @@ def _json(raw):
                 raise ValueError("duplicate field")
             result[key] = value
         return result
+
     def invalid(_):
         raise ValueError("nonfinite JSON")
+
     return json.loads(raw, object_pairs_hook=unique, parse_constant=invalid)
 
 
@@ -96,22 +100,37 @@ def _usage(value):
 
 def _validate(state):
     try:
-        if (type(state) is not dict or type(state.get("version")) is not int or state["version"] != 1
-                or type(state.get("call_limit")) is not int or state["call_limit"] != CALL_LIMIT
-                or type(state.get("ceiling_micro_usd")) is not int or state["ceiling_micro_usd"] != CEILING_MICRO_USD
-                or type(state.get("calls")) is not list or len(state["calls"]) > CALL_LIMIT):
+        if (
+            type(state) is not dict
+            or type(state.get("version")) is not int
+            or state["version"] != 1
+            or type(state.get("call_limit")) is not int
+            or state["call_limit"] != CALL_LIMIT
+            or type(state.get("ceiling_micro_usd")) is not int
+            or state["ceiling_micro_usd"] != CEILING_MICRO_USD
+            or type(state.get("calls")) is not list
+            or len(state["calls"]) > CALL_LIMIT
+        ):
             raise ValueError("ledger")
         for index, call in enumerate(state["calls"], 1):
-            if (type(call) is not dict or type(call.get("call")) is not int or call["call"] != index
-                    or call.get("state") not in {"RESERVED", "RESPONDED", "ERROR"}
-                    or type(call.get("reserved_micro_usd")) is not int or call["reserved_micro_usd"] != RESERVATION_MICRO_USD
-                    or not isinstance(call.get("request_sha256"), str) or not re.fullmatch(r"[a-f0-9]{64}", call["request_sha256"])
-                    or type(call.get("request_bytes")) is not int or not 0 < call["request_bytes"] <= MAX_REQUEST_BYTES):
+            if (
+                type(call) is not dict
+                or type(call.get("call")) is not int
+                or call["call"] != index
+                or call.get("state") not in {"RESERVED", "RESPONDED", "ERROR"}
+                or type(call.get("reserved_micro_usd")) is not int
+                or call["reserved_micro_usd"] != RESERVATION_MICRO_USD
+                or not isinstance(call.get("request_sha256"), str)
+                or not re.fullmatch(r"[a-f0-9]{64}", call["request_sha256"])
+                or type(call.get("request_bytes")) is not int
+                or not 0 < call["request_bytes"] <= MAX_REQUEST_BYTES
+            ):
                 raise ValueError("entry")
             _timestamp(call.get("started_at"))
             _cost(call.get("observed_rate_cost_micro_usd", 0))
-            if "reservation_id" in call and (not isinstance(call["reservation_id"], str)
-                    or not re.fullmatch(r"[a-f0-9]{32}", call["reservation_id"])):
+            if "reservation_id" in call and (
+                not isinstance(call["reservation_id"], str) or not re.fullmatch(r"[a-f0-9]{32}", call["reservation_id"])
+            ):
                 raise ValueError("reservation")
             if call["state"] != "RESERVED" or "finished_at" in call:
                 _timestamp(call.get("finished_at"))
@@ -122,8 +141,15 @@ def _validate(state):
             if "usage" in call:
                 _usage(call["usage"])
             for key in ("response_id", "model", "error"):
-                if key in call and call[key] is not None and (not isinstance(call[key], str)
-                        or len(call[key]) > 200 or any(ord(char) < 32 for char in call[key])):
+                if (
+                    key in call
+                    and call[key] is not None
+                    and (
+                        not isinstance(call[key], str)
+                        or len(call[key]) > 200
+                        or any(ord(char) < 32 for char in call[key])
+                    )
+                ):
                     raise ValueError("metadata")
     except (KeyError, TypeError, ValueError, OverflowError):
         raise ModelAllowanceError("MODEL_ALLOWANCE_CORRUPT") from None
@@ -140,8 +166,12 @@ def _path(value):
 
 
 def _private_file(info):
-    return (stat.S_ISREG(info.st_mode) and stat.S_IMODE(info.st_mode) == 0o600
-            and info.st_uid == os.getuid() and info.st_nlink == 1)
+    return (
+        stat.S_ISREG(info.st_mode)
+        and stat.S_IMODE(info.st_mode) == 0o600
+        and info.st_uid == os.getuid()
+        and info.st_nlink == 1
+    )
 
 
 def _sync_directory(path):
@@ -164,8 +194,12 @@ def _locked(path, lock_timeout=None):
     fd = None
     try:
         parent = path.parent.stat()
-        if (not stat.S_ISDIR(parent.st_mode) or parent.st_uid != os.getuid()
-                or stat.S_IMODE(parent.st_mode) & 0o022 or path.parent.is_symlink()):
+        if (
+            not stat.S_ISDIR(parent.st_mode)
+            or parent.st_uid != os.getuid()
+            or stat.S_IMODE(parent.st_mode) & 0o022
+            or path.parent.is_symlink()
+        ):
             raise ModelAllowanceError("MODEL_ALLOWANCE_PERMISSIONS")
         fd = os.open(lock, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
         if not _private_file(os.fstat(fd)):
@@ -212,7 +246,9 @@ def _write(path, state):
         fd, temporary = tempfile.mkstemp(prefix=".allowance-", dir=path.parent)
         with os.fdopen(fd, "wb") as handle:
             os.fchmod(handle.fileno(), 0o600)
-            handle.write(raw); handle.flush(); os.fsync(handle.fileno())
+            handle.write(raw)
+            handle.flush()
+            os.fsync(handle.fileno())
         os.replace(temporary, path)
         _sync_directory(path.parent)
     except (ValueError, TypeError, OverflowError):
@@ -227,25 +263,39 @@ def _write(path, state):
 
 def _request(request, expected_origin, expected_model):
     label = r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?"
-    if (not isinstance(expected_origin, str) or not re.fullmatch(
-            rf"https://(?:{label}\.modal\.run|{label}\.{label}\.modal\.direct)", expected_origin)
-            or expected_model != MODEL or request.get_method() != "POST"
-            or request.full_url != expected_origin + "/v1/chat/completions"):
+    if (
+        not isinstance(expected_origin, str)
+        or not re.fullmatch(rf"https://(?:{label}\.modal\.run|{label}\.{label}\.modal\.direct)", expected_origin)
+        or expected_model != MODEL
+        or request.get_method() != "POST"
+        or request.full_url != expected_origin + "/v1/chat/completions"
+    ):
         raise ModelAllowanceError("MODEL_ALLOWANCE_DESTINATION_REJECTED")
     raw = request.data
     if not isinstance(raw, bytes) or not 0 < len(raw) <= MAX_REQUEST_BYTES:
         raise ModelAllowanceError("MODEL_ALLOWANCE_REQUEST_REJECTED")
     try:
         body = _json(raw)
-        if (type(body) is not dict or set(body) - {"model", "messages", "n", "max_tokens", "stream", "reasoning_effort", "response_format"}
-                or body.get("model") != expected_model
-                or type(body.get("messages")) is not list or len(body["messages"]) != 2
-                or any(type(message) is not dict or set(message) != {"role", "content"}
-                       or message["role"] != role or not isinstance(message["content"], str)
-                       for message, role in zip(body["messages"], ("system", "user")))
-                or type(body.get("n")) is not int or body["n"] != 1
-                or type(body.get("max_tokens")) is not int or not 1 <= body["max_tokens"] <= 1024
-                or body.get("stream") is not False or body.get("reasoning_effort") != "none"):
+        if (
+            type(body) is not dict
+            or set(body) - {"model", "messages", "n", "max_tokens", "stream", "reasoning_effort", "response_format"}
+            or body.get("model") != expected_model
+            or type(body.get("messages")) is not list
+            or len(body["messages"]) != 2
+            or any(
+                type(message) is not dict
+                or set(message) != {"role", "content"}
+                or message["role"] != role
+                or not isinstance(message["content"], str)
+                for message, role in zip(body["messages"], ("system", "user"))
+            )
+            or type(body.get("n")) is not int
+            or body["n"] != 1
+            or type(body.get("max_tokens")) is not int
+            or not 1 <= body["max_tokens"] <= 1024
+            or body.get("stream") is not False
+            or body.get("reasoning_effort") != "none"
+        ):
             raise ValueError("wire limits")
     except (ValueError, TypeError, RecursionError):
         raise ModelAllowanceError("MODEL_ALLOWANCE_REQUEST_REJECTED") from None
@@ -271,21 +321,34 @@ def reserve(path, request, *, expected_origin, expected_model, lock_timeout=None
             usage = _usage(call.get("usage")) or {}
             # Preserve historical entries, but never undercount known usage if
             # a legacy cost field is absent or lower than its reported tokens.
-            derived = Decimal(usage.get("prompt_tokens", 0)) * Decimal(".30") + Decimal(usage.get("completion_tokens", 0)) * Decimal("1.20")
+            derived = Decimal(usage.get("prompt_tokens", 0)) * Decimal(".30") + Decimal(
+                usage.get("completion_tokens", 0)
+            ) * Decimal("1.20")
             spent += max(Decimal(RESERVATION_MICRO_USD), _cost(call.get("observed_rate_cost_micro_usd", 0)), derived)
         if len(state["calls"]) >= CALL_LIMIT or spent + RESERVATION_MICRO_USD > CEILING_MICRO_USD:
             raise ModelAllowanceError("MODEL_ALLOWANCE_EXHAUSTED")
         index = len(state["calls"]) + 1
-        state["calls"].append({"call": index, "state": "RESERVED", "started_at": _now(),
-            "request_sha256": digest, "request_bytes": len(raw),
-            "reserved_micro_usd": RESERVATION_MICRO_USD, "reservation_id": identity})
+        state["calls"].append(
+            {
+                "call": index,
+                "state": "RESERVED",
+                "started_at": _now(),
+                "request_sha256": digest,
+                "request_bytes": len(raw),
+                "reserved_micro_usd": RESERVATION_MICRO_USD,
+                "reservation_id": identity,
+            }
+        )
         _write(path, state)
     return Reservation(index, digest, identity, str(path), time.monotonic(), credential)
 
 
 def _identifier(value, credential):
-    if (isinstance(value, str) and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:/-]{0,199}", value)
-            and not (credential and credential in value)):
+    if (
+        isinstance(value, str)
+        and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:/-]{0,199}", value)
+        and not (credential and credential in value)
+    ):
         return value
     return None
 
@@ -301,28 +364,43 @@ def finish(path, reservation, *, response=None, error=None, lock_timeout=None):
     the object returned by this invocation.
     """
     path = _path(path)
-    if (not isinstance(reservation, Reservation) or str(path) != reservation._path
-            or type(reservation.call) is not int or not 1 <= reservation.call <= CALL_LIMIT):
+    if (
+        not isinstance(reservation, Reservation)
+        or str(path) != reservation._path
+        or type(reservation.call) is not int
+        or not 1 <= reservation.call <= CALL_LIMIT
+    ):
         raise ModelAllowanceError("MODEL_ALLOWANCE_RESERVATION_MISMATCH")
     if response is None and error is not None:
         response = getattr(error, "response", None)
     duration = time.monotonic() - reservation._started
     if not math.isfinite(duration) or duration < 0:
         raise ModelAllowanceError("MODEL_ALLOWANCE_RESERVATION_MISMATCH")
-    summary = {"state": "ERROR" if error is not None else "RESPONDED", "finished_at": _now(),
-               "duration_seconds": duration}
+    summary = {
+        "state": "ERROR" if error is not None else "RESPONDED",
+        "finished_at": _now(),
+        "duration_seconds": duration,
+    }
     if error is not None:
         code = getattr(error, "code", "")
-        summary["error"] = code if isinstance(code, str) and re.fullmatch(
-            r"MODEL_(?:HTTP_[0-9]{3}|TIMEOUT|TRANSPORT_ERROR|RESPONSE_TOO_LARGE)", code) else "CALL_ERROR"
+        summary["error"] = (
+            code
+            if isinstance(code, str)
+            and re.fullmatch(r"MODEL_(?:HTTP_[0-9]{3}|TIMEOUT|TRANSPORT_ERROR|RESPONSE_TOO_LARGE)", code)
+            else "CALL_ERROR"
+        )
     if isinstance(response, dict):
-        summary.update(response_id=_identifier(response.get("id"), reservation._credential),
-                       model=_identifier(response.get("model"), reservation._credential))
+        summary.update(
+            response_id=_identifier(response.get("id"), reservation._credential),
+            model=_identifier(response.get("model"), reservation._credential),
+        )
         try:
             usage = _usage(response.get("usage"))
             summary["usage"] = usage
             if usage and "prompt_tokens" in usage and "completion_tokens" in usage:
-                cost = Decimal(usage["prompt_tokens"]) * Decimal(".30") + Decimal(usage["completion_tokens"]) * Decimal("1.20")
+                cost = Decimal(usage["prompt_tokens"]) * Decimal(".30") + Decimal(usage["completion_tokens"]) * Decimal(
+                    "1.20"
+                )
                 summary["observed_rate_cost_micro_usd"] = int(cost) if cost == cost.to_integral_value() else float(cost)
                 _cost(summary["observed_rate_cost_micro_usd"])
         except (ValueError, OverflowError):
@@ -332,8 +410,11 @@ def finish(path, reservation, *, response=None, error=None, lock_timeout=None):
             entry = state["calls"][reservation.call - 1]
         except (IndexError, TypeError):
             raise ModelAllowanceError("MODEL_ALLOWANCE_RESERVATION_MISMATCH") from None
-        if (entry["call"] != reservation.call or entry["request_sha256"] != reservation.request_sha256
-                or entry.get("reservation_id") != reservation.reservation_id):
+        if (
+            entry["call"] != reservation.call
+            or entry["request_sha256"] != reservation.request_sha256
+            or entry.get("reservation_id") != reservation.reservation_id
+        ):
             raise ModelAllowanceError("MODEL_ALLOWANCE_RESERVATION_MISMATCH")
         if entry["state"] != "RESERVED":
             raise ModelAllowanceError("MODEL_ALLOWANCE_ALREADY_FINISHED")

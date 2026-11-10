@@ -7,9 +7,7 @@ from contextlib import nullcontext
 from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
-import json
 import os
-import re
 import time
 import uuid
 
@@ -21,7 +19,7 @@ from .promise import (PROPOSED_INVARIANT_SCHEMA, MISSING_FIELDS_SCHEMA, PROMISE_
                       REQUESTED_VALUES_SCHEMA, PROJECTION_VERSION, PromiseMappingError,
                       validate_promise_mapping, project_requested_values)
 from .model_transport import (ModelTransportError, configuration, complete as complete_model,
-                              http as _http, json_object, SECRET_KEYS, redact)
+                              http as _http, json_object, redact)
 from .store import canonical, utcnow
 
 
@@ -106,21 +104,11 @@ class InvestigationError(Exception):
 
 
 def _sanitize(value):
-    if isinstance(value, dict):
-        return {k: _sanitize(v) for k, v in value.items() if isinstance(k, str) and not re.search(r"secret|authorization|api.?key|password|payer|shipping", k, re.I)}
-    if isinstance(value, list):
-        return [_sanitize(v) for v in value[:50]]
-    if isinstance(value, str):
-        for name in SECRET_KEYS:
-            secret = os.environ.get(name)
-            if secret:
-                value = value.replace(secret, "[REDACTED]")
-        return re.sub(r"(?<![\w.+-])[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", "[REDACTED_EMAIL]", value[:4000]) if "@" in value else value[:4000]
-    return value
+    return redact(value, os.environ, max_list_items=50, max_characters=4000)
 
 
-class OpenAIModel:
-    """Configured shared transport; name retained for existing callers/imports."""
+class StructuredModel:
+    """Structured plans through the configured OpenAI or Modal transport."""
 
     def __init__(self, *, environ=None, transport=None):
         self.environ = os.environ if environ is None else environ
@@ -149,6 +137,9 @@ class OpenAIModel:
         except ModelTransportError as exc:
             raise InvestigationError(exc.code, metadata=exc.metadata) from None
 
+
+# Preserve existing imports and exact-class checks while naming the shared adapter.
+OpenAIModel = StructuredModel
 
 def validate_plan(plan, run, evidence_ids):
     if not isinstance(plan, dict) or set(plan) != set(PLAN_SCHEMA["properties"]):
@@ -238,7 +229,7 @@ def browser_observation(event):
 
 
 class Investigation:
-    def __init__(self, store, service, model_factory=OpenAIModel, *, clock=time.monotonic):
+    def __init__(self, store, service, model_factory=StructuredModel, *, clock=time.monotonic):
         self.store, self.service, self.model_factory, self.clock = store, service, model_factory, clock
 
     def _reserve(self, run, context, maximum, execution_id, model_provenance=None):
@@ -330,7 +321,7 @@ class Investigation:
                 raise InvestigationError("REPLAY_MODEL_NETWORK_FORBIDDEN")
             held_out = HeldOutGate.for_run(self.store, run_id)
             model = self.model_factory()
-            if held_out and type(model) is not OpenAIModel:
+            if held_out and type(model) is not StructuredModel:
                 raise HeldOutError("HELD_OUT_GUARDED_MODEL_REQUIRED")
             mode = getattr(model, "evidence_mode", None)
             if mode not in {"LOCAL_TEST", "LIVE_MODEL"} or (mode == "LOCAL_TEST") != (run["mode"] == "LOCAL_TEST"):

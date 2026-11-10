@@ -103,6 +103,18 @@ class PromiseMappingError(ValueError):
         self.code = code
 
 
+def _expected_values():
+    """A fresh descriptive projection of the unchanged execution contract."""
+    return {
+        "amount_minor": DEFAULT_INVARIANT["amount"],
+        "currency": DEFAULT_INVARIANT["currency"],
+        "ticket_count": DEFAULT_INVARIANT["ticket_count"],
+        "deadline_seconds": DEFAULT_INVARIANT["recovery_seconds"],
+        "timing_trigger": "capture_completed",
+        "delivery_kind": "ticket",
+    }
+
+
 def validate_promise_mapping(proposal, status, missing_fields):
     """Validate an untrusted proposal and its declared classification.
 
@@ -135,9 +147,7 @@ def validate_promise_mapping(proposal, status, missing_fields):
     expected_start = CAPTURE_TIME_FIELD if proposal["timing_trigger"] == "capture_completed" else None
     if adapters["timing_start"] != expected_start or type(adapters["timing_start"]) is not type(expected_start):
         raise PromiseMappingError("INVALID_PROMISE_TIMING_SEMANTICS")
-    expected_values = {"amount_minor": DEFAULT_INVARIANT["amount"], "currency": DEFAULT_INVARIANT["currency"],
-                       "ticket_count": DEFAULT_INVARIANT["ticket_count"], "deadline_seconds": DEFAULT_INVARIANT["recovery_seconds"],
-                       "timing_trigger": "capture_completed", "delivery_kind": "ticket"}
+    expected_values = _expected_values()
     absent = [field for field in VALUE_FIELDS if proposal[field] is None]
     unsupported = [field for field in VALUE_FIELDS if proposal[field] is not None and proposal[field] != expected_values[field]]
     expected_status = "unsupported" if unsupported else "ambiguous" if absent else "compatible"
@@ -163,9 +173,7 @@ def project_requested_values(values):
     proposal = {**requested, "version": PROPOSAL_VERSION,
                 "adapter_fields": {**ADAPTER_FIELDS, "timing_start": CAPTURE_TIME_FIELD
                     if requested["timing_trigger"] == "capture_completed" else None}}
-    expected = {"amount_minor": DEFAULT_INVARIANT["amount"], "currency": DEFAULT_INVARIANT["currency"],
-                "ticket_count": DEFAULT_INVARIANT["ticket_count"], "deadline_seconds": DEFAULT_INVARIANT["recovery_seconds"],
-                "timing_trigger": "capture_completed", "delivery_kind": "ticket"}
+    expected = _expected_values()
     absent = [field for field in VALUE_FIELDS if requested[field] is None]
     conflicts = [field for field in VALUE_FIELDS if requested[field] is not None and requested[field] != expected[field]]
     status = "unsupported" if conflicts else "ambiguous" if absent else "compatible"

@@ -180,6 +180,8 @@
     };
     const values = descriptions[stage];
     if (!values) return;
+    selected = stage === 'repair' ? 'healthy' : 'defective';
+    renderCase();
     document.querySelector('.promise').dataset.story = stage;
     document.querySelectorAll('button[data-story]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.story === stage)));
     ['story-counter', 'story-status', 'story-title', 'story-description'].forEach((id, i) => { byId(id).textContent = values[i]; });
@@ -195,6 +197,32 @@
   }
   byId('story-copy').addEventListener('animationend', () => byId('story-copy').classList.remove('enter'));
   document.querySelectorAll('button[data-story]').forEach((b) => b.addEventListener('click', () => { if (review) showStory(b.dataset.story); }));
+
+  /* The actual 8 November missed-delivery investigation, separately recorded. */
+  let failureHistory = null;
+  function validFailureAi(history) {
+    const actions = ['read_provider', 'read_merchant', 'finish'];
+    const result = history?.deterministic_result;
+    return !!history && history.kind === 'recorded-failure-investigation-v1' && history.fresh_execution === false && history.same_case_as_public_faulty_replay === false && history.recorded_date === '2026-11-08' && history.provider === 'Modal' && history.model === 'deepseek-ai/DeepSeek-V4.1-Flash' && result?.verdict === 'FAIL' && result.signature === 'paid_without_ticket' && Array.isArray(result.source_ids?.ticket_ids) && result.source_ids.ticket_ids.length === 0 && Array.isArray(history.trace) && history.trace.length === 3 && history.trace.every((step, i) => step?.step === i + 1 && step.action === actions[i] && typeof step.hypothesis === 'string' && Array.isArray(step.findings) && step.findings.length === i && step.findings.every(f => f.kind === 'observed' && typeof f.claim === 'string' && Array.isArray(f.evidence_ids) && f.evidence_ids.length > 0 && f.evidence_ids.every(id => [result.source_ids.provider_observation_id,result.source_ids.merchant_observation_id].includes(id))));
+  }
+  function showFailureStep(index) {
+    if (!failureHistory || !Number.isInteger(index) || index < 0 || index > 2) return;
+    const step = failureHistory.trace[index];
+    document.querySelectorAll('[data-failure-step]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.failureStep) === index)));
+    byId('failure-question').textContent = ['Did the payment complete?', 'Was a ticket delivered?', 'What does the evidence support?'][index];
+    byId('failure-answer').textContent = ['The assistant started without payment or delivery observations and requested the PayPal record.', 'PayPal confirmed the $29 capture. The assistant then requested the matching ticket records.', 'The store had no ticket after the one-minute deadline. The assistant finished with citations to both records.'][index];
+    byId('failure-reasoning').textContent = step.hypothesis;
+    byId('failure-citations').textContent = step.findings.length ? JSON.stringify(step.findings, null, 2) : 'No observations had been collected at this step.';
+    byId('failure-verdict').textContent = index === 2 ? 'Paid, but no ticket. Fixed code checked the unchanged promise: FAIL / paid_without_ticket.' : 'The assistant chooses where to look; it does not decide the payment outcome.';
+  }
+  document.querySelectorAll('[data-failure-step]').forEach(b => b.addEventListener('click', () => showFailureStep(Number(b.dataset.failureStep))));
+  function initialiseFailureAi(history) {
+    if (!validFailureAi(history)) return;
+    failureHistory = history;
+    byId('failure-ai-panel').hidden = false;
+    byId('failure-ai-unavailable').hidden = true;
+    showFailureStep(0);
+  }
 
   /* ---------- Saved AI investigation (separate, earlier case) ---------- */
   let aiHistory = null;
@@ -256,8 +284,9 @@
     renderCase();
     if (button.classList.contains('select-case')) {
       document.querySelector('.order-records').open = true;
-      byId('evidence').scrollIntoView({block: 'start', behavior: reduced() ? 'auto' : 'smooth'});
+      // Move focus without scrolling first, then make one deliberate scroll.
       byId('evidence-title').focus({preventScroll: true});
+      byId('evidence').scrollIntoView({block: 'start', behavior: reduced() ? 'auto' : 'smooth'});
     }
   }));
   byId('source-filter').addEventListener('change', () => { if (review) renderTimeline(); });
@@ -294,6 +323,7 @@
       renderCase();
       showStory('payment');
       byId('story-copy').classList.remove('enter');
+      if (data.failure_ai !== undefined) initialiseFailureAi(data.failure_ai);
       if (data.historical_ai !== undefined) initialiseAiHistory(data.historical_ai);
       byId('load-state').hidden = true;
       byId('review').hidden = false;

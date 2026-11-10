@@ -36,5 +36,5 @@ The strict `scripts/check_completion.py` gate needs the full private canonical
 records and their bound artifacts. A public clone cannot reproduce that private
 44/60 audit. The public source tests and keyless replay checks are separately
 reproducible; they do not close the missing original/fresh-payment evidence.
-[STATUS.md](../STATUS.md) and [open checks](../docs/OPEN_CHECKS.md) preserve that
+[STATUS.md](../docs/archive/STATUS.md) and [open checks](../docs/OPEN_CHECKS.md) preserve that
 boundary and the remaining work. CC-060 remains the completion gate.

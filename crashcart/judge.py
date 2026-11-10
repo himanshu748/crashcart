@@ -15,9 +15,11 @@ from urllib.parse import urlsplit
 import webbrowser
 import zipfile
 
+from .model_ids import DEEPSEEK_MODEL_ID
 from .replay import ReplayError, export_package, load_package
 from .replay_workspace import import_replay
 from .store import Store
+from .recorded_ai import failure_ai
 
 ROOT = Path(__file__).resolve().parents[1]
 INPUT = ROOT / "evidence/runs/paypal-live/early-response-loss-input.json"
@@ -74,7 +76,7 @@ def historical_ai(source_path=None):
                 or source["public_judge_mode_calls_model"] is not False
                 or source["same_case_as_public_faulty_replay"] is not False
                 or source["provider"] != "Modal"
-                or source["model"] != "deepseek-ai/DeepSeek-V4.1-Flash"
+                or source["model"] != DEEPSEEK_MODEL_ID
                 or source["historical_capture_date"] != "2026-10-23"
                 or operations != expected_operations
                 or any(type(value) is not int for value in operations.values())
@@ -163,7 +165,7 @@ def prepare_review(input_path=INPUT, *, exported=False):
             "computed_when": "site build" if exported else "app launch",
             "input_file_sha256": INPUT_SHA256, "invariant": tape["invariant"],
             "recorded_source": tape["source"], "original_records": tape["records"],
-            "cases": cases, "network_calls": 0, "historical_ai": ai_history,
+            "cases": cases, "network_calls": 0, "historical_ai": ai_history, "failure_ai": failure_ai(),
             "limits": ["Historical PayPal Sandbox observations, replayed without new service calls.",
                        "The healthy merchant is re-executed on the same recorded input and clock.",
                        "This is not a fresh payment, a deployed repair or a new AI investigation.",
@@ -231,7 +233,9 @@ def make_server(files, host="127.0.0.1", port=8766):
             path = urlsplit(self.path).path
             key = "index.html" if path == "/" else path.removeprefix("/")
             if key in PAGE_ALIASES:
-                self.reply(308, "text/plain", b"", location=f"/{key}/")
+                key = PAGE_ALIASES[key]
+            elif key.endswith("/") and key[:-1] in PAGE_ALIASES:
+                self.reply(308, "text/plain", b"", location=f"/{key[:-1]}")
                 return
             if key.endswith("/") and key[:-1] in PAGE_ALIASES:
                 key += "index.html"

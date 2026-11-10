@@ -1,4 +1,4 @@
-# Submission readiness — official rules rechecked 8 November
+# Submission readiness — updated 10 November
 
 This is a project readiness assessment, not an organizer eligibility ruling.
 Sources: [official rules](https://paypalaihackathon.devpost.com/rules),
@@ -25,19 +25,19 @@ announcement, so their exact times conflict. Retain access through the actual
 announcement and 22 December UTC; do not infer that 15 December teardown is safe.
 These are operating instructions, not evidence of future uptime.
 
-## Current gates
+## Current gates — 10 November readback
 
 | Gate | Actual state and next action |
 | --- | --- |
 | Public source and OSI licence | GitHub API readback: public repository, default branch main, detected MIT. LICENSE present. This does not license private vendor bundles. |
 | Working local build | Fresh public clone and actual script/HTTP verification recorded in the linked evidence. Saved input is executed; no provider or model call occurs. This establishes replay functionality, not the complete configured AI workflow. |
 | PayPal-plus-AI capability | Actual historical Sandbox webhook/recovery and separate real DeepSeek evidence exist. The current keyless path is recorded. Complete judge-accessible configured PayPal-plus-AI execution remains unverified; do not claim a recorded model trace is an executable AI service. |
-| Public video | **OPEN.** Live Devpost readback has an empty video URL. Record, inspect duration and truthful labels, upload publicly to YouTube, and check signed-out playback. A script is insufficient. |
+| Public video | **Published.** The submitted entry links the [2:45 public video](https://www.youtube.com/watch?v=gFWje84_wEA). Its saved Sandbox flow and separate healthy replay are labelled; this feature branch does not replace it. |
 | Access through winner announcement | **OPEN operational obligation.** Keyless source has no credential expiry. Any claimed live workspace/model access needs usable, free judge access and permitted allowance throughout the longer window. No new provider execution or paid extension is authorized by this document. |
-| AG Studio optional workflow | Private trial ends 17 December; it does not cover the extended window. Obtain an authorized vendor grant or leave this optional workflow/prize claim out of the submitted experience. The keyless build does not load AG Studio. |
+| AG Studio optional workflow | Private trial ends 17 December. The [6 November vendor announcement](https://www.ag-grid.com/blog/build-a-payments-dashboard-without-building-a-dashboard/) promises judging-period keys. Confirm delivery and coverage through 22 December before publishing the new recorded explorer or selecting the prize. The keyless build does not load AG Studio. |
 | Other sponsors | Describe actual roles only. Postman performs API checks; KERNEL supplies separately bounded browser observation; Bryntum supplies a configured timing view. Optional prize use requires accessible working evidence, not a logo or installed package. Render remains excluded; Modal hosts the model and is not an event tool sponsor. |
 | Entry submitted | **NO.** The project page is published, but this hackathon's submitted_at is null. The owner retains final submission. No registration, form edit, submission or rules-acknowledgement write occurred. |
-| Final form | Check all current required fields, public video, public repo and working-build/setup URL. Do not publish usable API keys or buyer secrets in the repo. Provide any special access privately through the allowed judging instructions. Personal declarations remain the owner's statements. |
+| Final form | Submitted 10 November, 14:31:32 IST; readback confirmed Submitted, 5/5. Current optional sponsor selections are Bryntum, KERNEL and Postman. AG Grid and APIMatic are off. No entry edits are authorized before the owner replies exactly `submit`. |
 
 ## Judging priorities
 
@@ -52,6 +52,6 @@ The original private acceptance remains **47/60**, with no new CC IDs or weakene
 conditions. Submission rules and the 60-item full-release contract are different
 boundaries. This review neither closes CC-059/060 nor declares the entry compliant.
 
-## Current hosted access — 8 November
+## Current hosted access — 10 November
 
-The [current recorded demo](https://crashcart.52.202.25.181.sslip.io/) is verified on an existing Lightsail host, without a new instance or plan upgrade. The Pages link remains an older fallback. The hosted example includes historical AI, not a current model endpoint; complete configured PayPal-plus-AI access remains open. The public video and owner submission are still missing. A retention tag and a valid certificate support the plan through the winner announcement; future uptime is not a verified result. [Hosting evidence and limits](LIGHTSAIL_SHARED_HOST.md).
+The [current recorded demo](https://crashcart.52.202.25.181.sslip.io/) is verified on an existing Lightsail host, without a new instance or plan upgrade. The Pages mirror is also available. The hosted example includes historical AI, not a current model endpoint; complete configured PayPal-plus-AI access remains open. The public video and owner submission were verified on 10 November. A retention tag and a valid certificate support the plan through the winner announcement; future uptime is not a verified result. [Hosting evidence and limits](LIGHTSAIL_SHARED_HOST.md).

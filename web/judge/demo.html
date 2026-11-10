@@ -30,10 +30,7 @@
       <a href="integrations.html">Integrations</a>
       <a href="demo.html" aria-current="page">Recorded example</a>
     </nav>
-    <label class="motion-toggle">
-      <input type="checkbox" id="reduce-motion">
-      <span>Reduce motion</span>
-    </label>
+
   </header>
 
   <div class="trail">
@@ -92,6 +89,12 @@
         <h2 class="intro-title" id="intro-title">A customer paid $29.<br><em>The ticket never came.</em></h2>
         <p class="lead">First, see the order that went missing after a real test payment. Then compare the repaired checkout using that same recorded payment. The customer’s promise stays at 60 seconds.</p>
 
+        <aside class="case-dates" aria-label="Three separate recorded cases">
+          <p><strong>22 October · the missed order</strong><span>The payment below completed, but the original store issued no ticket. The recovered version replays that same saved input.</span></p>
+          <p><strong>23 October · an earlier AI-assisted case</strong><span>A separate checkout delivered its ticket. The saved AI investigation ran on 26 October; you can read its steps below.</span></p>
+          <p><strong>8 November · the live payment + AI run</strong><span>A different Sandbox order was created, captured and investigated with DeepSeek. <a href="https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md">Read that completed flow.</a></span></p>
+        </aside>
+
         <div class="compare">
           <article class="compare-card compare-bad" aria-labelledby="cmp-bad-title">
             <p class="compare-kicker">Original store</p>
@@ -104,7 +107,7 @@
             <p class="compare-kicker">Repaired store · replay</p>
             <h3 id="cmp-good-title">Recovered order</h3>
             <p class="compare-figure"><span id="healthy-count">1</span> <span class="unit">ticket, after <span id="healthy-time"></span></span></p>
-            <p>The repaired checkout delivers the ticket from the same recorded payment. This is a replay, not a new purchase.</p>
+            <p>The replay applies the repaired rule: issue a ticket after the saved payment read confirms capture. It uses the same input, not a new purchase or a live merchant run.</p>
             <button class="btn select-case" type="button" data-case="healthy" aria-controls="evidence">See what happened</button>
           </article>
         </div>
@@ -174,6 +177,26 @@
         </details>
       </section>
 
+      <section class="ai" aria-labelledby="failure-ai-title">
+        <p class="eyebrow">AI on a missed delivery</p>
+        <h2 class="section-title" id="failure-ai-title">The payment was real. The ticket was missing.</h2>
+        <p>Recorded 8 Nov 2026 DeepSeek (Modal) investigation, no live call. This is a separate order from the 22 October repair comparison above.</p>
+        <div class="ai-panel" id="failure-ai-panel" hidden>
+          <div class="ai-steps" role="group" aria-label="8 November investigation step">
+            <button type="button" class="pill" data-failure-step="0" aria-pressed="true">1. Check payment</button>
+            <button type="button" class="pill" data-failure-step="1" aria-pressed="false">2. Find the ticket</button>
+            <button type="button" class="pill" data-failure-step="2" aria-pressed="false">3. Explain the gap</button>
+          </div>
+          <div class="ai-answer" aria-live="polite">
+            <h3 id="failure-question"></h3><p id="failure-answer"></p>
+            <details class="tech"><summary>Saved model note and supporting records</summary><p id="failure-reasoning"></p><pre id="failure-citations" tabindex="0"></pre></details>
+            <p class="ai-takeaway" id="failure-verdict"></p>
+          </div>
+          <p class="fine">AI selected the evidence. Deterministic code retained FAIL / paid_without_ticket. Viewing this saved trace makes no payment or model request.</p>
+        </div>
+        <p id="failure-ai-unavailable">The recorded failure investigation is unavailable. The payment and repair comparison still works.</p>
+      </section>
+      <details class="earlier-ai"><summary>Earlier delivered checkout · captured 23 October, investigated 26 October</summary>
       <section class="ai" aria-labelledby="ai-title">
         <p class="eyebrow">Help finding the next step</p>
         <h2 class="section-title" id="ai-title">An earlier AI-assisted investigation</h2>
@@ -198,6 +221,7 @@
           <p class="fine" id="ai-identity"></p>
         </div>
       </section>
+      </details>
     </div>
 
     <section class="how" id="how" aria-labelledby="how-title">
@@ -242,7 +266,7 @@
         </details>
         <details class="faq-item" id="faq-assistant">
           <summary>Is the AI assistant running here?</summary>
-          <p>No. The assistant section shows an earlier saved investigation of a different order. Reading it makes no AI request. Payment and delivery records, rather than the assistant’s opinion, determine the answer.</p>
+          <p>No. The first panel shows the saved 8 November missing-ticket investigation; the earlier delivered checkout is available separately. Both concern different orders from the 22 October repair comparison. Reading them makes no AI request. Payment and delivery records, rather than the assistant’s opinion, determine the answer.</p>
         </details>
         <details class="faq-item" id="faq-stores">
           <summary>Which stores does CrashCart work with today?</summary>
@@ -278,6 +302,10 @@
   </nav>
 
   <footer class="foot">
+    <label class="motion-toggle">
+      <input type="checkbox" id="reduce-motion">
+      <span>Reduce motion</span>
+    </label>
     <nav class="foot-nav" aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="product.html">Product</a>

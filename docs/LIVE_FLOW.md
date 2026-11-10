@@ -26,7 +26,7 @@ download were exercised. The downloaded archive's members match the API export.
 
 ## Reproduce with your own accounts
 
-Follow the [full workspace and test-buyer setup](../README.md#full-workspace-and-optional-live-test-payments).
+Follow the [full workspace and test-buyer setup](WORKSPACE.md#full-workspace-and-optional-live-test-payments).
 Run both API and worker against the same database. Configure your own PayPal
 Sandbox app, separate test buyer, and explicitly authorized model access.
 

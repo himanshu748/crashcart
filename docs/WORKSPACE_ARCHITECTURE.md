@@ -1,4 +1,11 @@
-# Runtime and evidence architecture
+# Historical workspace architecture
+
+Archived 10 November 2026 from source `31860a7`. This preserves the earlier
+workspace description; its deployment and verification statements are dated
+history, not current readiness claims. Start with the [judge-facing map](ARCHITECTURE.md)
+for the current module boundaries.
+
+## Runtime and evidence architecture
 
 CrashCart is a Python 3.13.15 standard-library application with an HTTP API,
 same-origin browser UI, a SQLite WAL database and a separate worker process.
@@ -79,4 +86,4 @@ applicable licences and an explicit bounded allowance. No account, credential,
 remote session, paid usage or public endpoint is included in a source checkout.
 Historical saved observations and recorded replay do not establish fresh repair
 verification, held-out discovery, authentic webhook delivery or a complete
-operator journey. [Development status](../STATUS.md) lists current release limits.
+operator journey. [Development status](archive/STATUS.md) lists current release limits.

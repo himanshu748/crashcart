@@ -12,9 +12,9 @@ Find the missing step between a PayPal payment and delivery.
 
 CrashCart helps small merchants investigate “I paid, but nothing arrived.” The prototype follows a $29 workshop purchase with a clear promise: one ticket within 60 seconds of payment.
 
-Open the account-free recorded walkthrough, inspect the missing ticket, filter the timeline by source and compare the recovered order. The healthy 32.26-second repair uses a separate saved checkout input, not a new purchase. Its faulty and healthy variants use the same payment input and deadline. Download the replay to run both outcomes locally.
+Open the account-free recorded walkthrough, inspect the missing ticket, filter the timeline by source and compare the recovered order. The healthy 32.26-second repair uses a separate saved checkout input, not a new purchase. Its faulty and healthy variants use the same payment input and deadline. The healthy variant applies a repaired fulfil-on-confirmed-reconciliation rule to saved input; it does not re-run the merchant service. Download the replay to run both outcomes locally.
 
-The completed 8 November 2026 run used real PayPal Sandbox Orders v2 create, capture and get, followed by real DeepSeek calls through Modal on that same order. DeepSeek checked PayPal, checked ticket records and cited the missing delivery. Showing that saved result starts no new payment or model call. The public walkthrough is recorded; it is not a live merchant connection.
+The completed 8 November 2026 run used real PayPal Sandbox Orders v2 create, capture and get, followed by real DeepSeek calls through Modal on that same order. DeepSeek checked PayPal, checked ticket records and cited the missing delivery. The recorded failure investigation shows its three saved steps and citations before the earlier successful case. Showing that saved result starts no new payment or model call. The public walkthrough is recorded; it is not a live merchant connection.
 
 ## How we built it
 

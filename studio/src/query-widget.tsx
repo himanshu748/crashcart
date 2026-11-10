@@ -18,20 +18,22 @@ export const QueryContext = createContext<QueryState>(INITIAL_QUERY);
 export function QueryWidget() {
   const { status, message, receipt, errorCode }=useContext(QueryContext);
   const testData=receipt?.model_mode === "LOCAL_TEST";
+  const recorded=receipt?.model_mode === "RECORDED_FILTER";
   return <section className="widget query-results" aria-label="Answers">
+    {recorded&&<p className="query-source">Recorded example · browser filter, no AI call</p>}
     {testData&&<p className="query-source test-data">Test data · simulated response</p>}
     <p className="kicker"><span className="source-index" aria-hidden="true">↗</span> ASK ABOUT PAYMENTS & TICKETS</p>
     <h2>Answers</h2>
     <p role="status" className={`query-status ${status}${testData ? " test-data" : ""}`}>{testData ? "Test data · " : ""}{message}</p>
     <p className="meta">Find cases to follow up on. These answers use saved records; check each case’s delivery time before treating a missing ticket as late.</p>
-    {!receipt&&<p className="query-empty">Open “Ask a question” to find completed payments, missing tickets, payments still being checked, or delivered tickets.</p>}
+    {!receipt&&<p className="query-empty">Use a suggested question in the panel to find payments and tickets in saved cases.</p>}
     {errorCode&&<details className="query-error-details"><summary>Technical details</summary><code>{errorCode}</code></details>}
     {receipt&&<>
-      {receipt.status!=="UNSUPPORTED"&&<div className="query-totals"><strong>{receipt.count}<small>matching {receipt.count===1 ? "case" : "cases"}</small></strong><strong>{receipt.summary.completed_payments}<small>confirmed payments</small></strong><strong>{receipt.summary.ticket_count}<small>saved tickets</small></strong></div>}
-      {receipt.rows.length===0 ? <p>{receipt.status === "UNSUPPORTED" ? "This question cannot be answered from these records. Try asking about paid orders, missing tickets or delivered tickets." : "No saved cases match this question."}</p> : <div className="query-table" tabIndex={0} role="region" aria-label="Matching cases"><table><thead><tr><th>Case</th><th>Payment</th><th>Tickets</th><th>Supporting records</th></tr></thead><tbody>{receipt.rows.map(row=><tr key={row.run_id}><td><strong>Case {row.run_id.slice(-8)}</strong><br/><small>{testTypeLabel(row.mode)}</small></td><td>{paymentLabel(row.payment_state)}<br/>{(row.amount/100).toFixed(2)} {row.currency}</td><td>{row.ticket_count}<small>{row.ticket_count===1 ? "ticket" : "tickets"}</small>{row.ticket_id&&<details><summary>Ticket reference</summary><code>{row.ticket_id}</code></details>}</td><td><details className="row-records"><summary>Technical details</summary><pre>{JSON.stringify(row,null,2)}</pre></details></td></tr>)}</tbody></table></div>}
+      {receipt.status!=="UNSUPPORTED"&&<div className="query-totals"><strong>{receipt.count}<small>matching {receipt.count===1 ? "case" : "cases"}</small></strong><strong>{receipt.summary.completed_payments}<small>confirmed payment{receipt.summary.completed_payments === 1 ? "" : "s"}</small></strong><strong>{receipt.summary.ticket_count}<small>saved ticket{receipt.summary.ticket_count === 1 ? "" : "s"}</small></strong></div>}
+      {receipt.rows.length===0 ? <p>{receipt.status === "UNSUPPORTED" ? "This question cannot be answered from these records. Try asking about paid orders, missing tickets or delivered tickets." : "No saved cases match this question."}</p> : <div className="query-table" tabIndex={0} role="region" aria-label="Matching cases"><table><thead><tr><th>Case</th><th>Payment</th><th>Tickets</th><th>Supporting records</th></tr></thead><tbody>{receipt.rows.map(row=><tr key={row.run_id}><td><strong>Case {row.run_id.slice(-8)}</strong><br/><small>{testTypeLabel(row.mode)}</small></td><td>{paymentLabel(row.payment_state)}<br/>{(row.amount/100).toFixed(2)} {row.currency}</td><td>{row.ticket_count}{" "}<small>{row.ticket_count===1 ? "ticket" : "tickets"}</small>{row.ticket_id&&<details><summary>Ticket reference</summary><code>{row.ticket_id}</code></details>}</td><td><details className="row-records"><summary>Technical details</summary><pre>{JSON.stringify(row,null,2)}</pre></details></td></tr>)}</tbody></table></div>}
       <details className="query-provenance"><summary>Technical details</summary><dl>
         <dt>Question filter</dt><dd>{queryLabel(receipt.plan.query)}</dd>
-        <dt>Answer source</dt><dd>{testData ? "Test data · simulated response" : "Connected assistant"}</dd>
+        <dt>Answer source</dt><dd>{testData ? "Test data · simulated response" : recorded ? "Recorded cases · browser filter, no AI call" : "Connected assistant"}</dd>
         <dt>Assistant</dt><dd>{receipt.model.actual}</dd>
         <dt>Records saved</dt><dd>{receipt.snapshot_at}</dd>
         <dt>Record fingerprint</dt><dd>{receipt.dataset_sha256}</dd>

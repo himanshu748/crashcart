@@ -333,3 +333,14 @@ details[open] > summary::before { transform: rotate(45deg); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none!important; transition: none!important; scroll-behavior: auto!important; }
 }
+
+.recorded-notice { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:20px 24px; margin-bottom:18px; border:1px solid #bccb91; border-radius:12px; background:#f2f8df; }
+.recorded-notice p, .recorded-query-note p { margin:6px 0 0; max-width:900px; }
+.recorded-history { margin:16px 0 24px; padding:16px 22px; background:var(--paper); border:1px solid var(--line); border-radius:12px; }
+.recorded-history summary { cursor:pointer; font-weight:650; min-height:28px; }
+.recorded-history ol { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; padding:0 0 0 22px; }
+.recorded-history li p { margin:8px 0; }
+.recorded-query-note { padding:16px 22px; background:#f2f8df; border-radius:12px; margin:12px 0; }
+.license-gate { max-width:720px; padding:64px 24px; }
+.license-gate .kicker { margin-top:48px; }
+@media(max-width:849px) { .recorded-notice { align-items:flex-start; flex-direction:column; gap:12px; padding:16px; } .recorded-history ol { grid-template-columns:1fr; gap:12px; } }

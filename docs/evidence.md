@@ -6,7 +6,7 @@ operational artifacts, apart from the single curated historical replay input.
 Paths and JSON below describe records to create during an actual verification;
 they are examples, not claims that those files are delivered or passed. Public CI
 runs source tests and frontend checks; it does not run the private artifact gate.
-See [development status](../STATUS.md) and the [public evidence boundary](../evidence/README.md).
+See [development status](archive/STATUS.md) and the [public evidence boundary](../evidence/README.md).
 
 The checklist owns the acceptance conditions; the coordinator owns checkmarks.
 Implementation, successful builds, synthetic unit-test fixtures and screenshots
@@ -115,7 +115,7 @@ from pathlib import Path
 from scripts.check_completion import checklist_items, digest
 
 root = Path.cwd()
-items, errors = checklist_items((root / "BUILD_CHECKLIST.md").read_text())
+items, errors = checklist_items((root / "docs/archive/BUILD_CHECKLIST.md").read_text())
 assert not errors
 acceptance_sha256 = items["CC-006"]["acceptance_sha256"]
 rules_sha256 = digest(root / "scripts/requirements.json")

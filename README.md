@@ -1,16 +1,16 @@
 # CrashCart
 
-## For judges
-
 **“I paid, but my ticket never arrived.”** CrashCart helps support and engineering at small online sellers find the missing step between payment and delivery.
 
-[Open the recorded demo](https://crashcart.52.202.25.181.sslip.io/) · [GitHub Pages mirror](https://himanshu748.github.io/crashcart/) · [Video walkthrough](https://www.youtube.com/watch?v=gFWje84_wEA)
+## For judges
 
-The public walkthrough is a **recorded replay: no new PayPal or AI calls**. The real **8 November 2026** test used PayPal Sandbox **Orders v2 create, capture and get**, followed by real DeepSeek calls through Modal. [Read that completed flow](docs/LIVE_FLOW.md). The healthy **32.26-second** repair uses a **separate saved checkout input**, not a new purchase; its faulty and healthy variants use the same payment input and 60-second promise.
+[Open the recorded demo](https://crashcart.52.202.25.181.sslip.io/) · [Watch the 2:45 video](https://www.youtube.com/watch?v=gFWje84_wEA) · [Pages mirror](https://himanshu748.github.io/crashcart/)
 
-### Keyless path — about one minute
+The public walkthrough replays saved records. **It makes no new PayPal or AI calls.** Compare a confirmed payment with a missing ticket, then see a repair deliver exactly one ticket inside the same 60-second promise.
 
-Python 3.11+ is required; Python 3.13.15 is tested. No packages, licence or account keys are needed.
+### Try it in 60 seconds
+
+Python 3.11+ is required; Python 3.13.15 is tested. No packages, account keys or licence are needed.
 
 ```sh
 git clone https://github.com/himanshu748/crashcart.git
@@ -18,7 +18,7 @@ cd crashcart
 ./scripts/judge.sh
 ```
 
-Expected startup output:
+Expected output:
 
 ```text
 CrashCart recorded review: http://127.0.0.1:8766/demo.html#investigation
@@ -26,315 +26,78 @@ Both outcomes recomputed at launch. No new payment or service call.
 Press Ctrl+C to stop.
 ```
 
-The command keeps the local site running. Open the printed URL, compare **Missed order** and **Recovered order (replay)**, then press Ctrl+C to stop. Without a desktop browser, use `./scripts/judge.sh --no-open --port 8767`.
+Open the printed URL. Compare **Missed order** and **Recovered order (replay)**. Stop with Ctrl+C. For a terminal without a browser, add `--no-open`.
 
-To check the two outcomes directly:
+![CrashCart’s landing page with the payment-to-delivery investigation](docs/images/crashcart-home.jpg)
 
-```sh
-python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant defective
-# exit 1: FAIL / paid_without_ticket / 0 tickets
-python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant healthy
-# exit 0: PASS / ticket_delivered_once_on_time / 1 ticket
-```
+## What actually happened
 
-### Live path — your test accounts and model key
+Three separate cases explain the product:
 
-The public site does not run this flow. Use your own PayPal Sandbox business app, separate Sandbox Personal buyer and authorized AI account. Start with `python3 -m crashcart setup`, which creates a private `.env` from [the secret-free example](.env.example).
+- **22 October:** a saved Sandbox payment completed, but its ticket was missing. The public repair comparison reuses this input; the healthy variant delivers at **32.26 seconds**, without a new purchase.
+- **23 October:** an earlier checkout, investigated by AI on 26 October. Its saved AI steps concern a different case from the missed order.
+- **8 November:** a real PayPal Sandbox **Orders v2 create/capture/get** flow and real DeepSeek calls through Modal. [Completed live flow](docs/LIVE_FLOW.md).
 
-Required settings: `CRASHCART_OPERATOR_TOKEN`, `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `CRASHCART_PUBLIC_URL`, `CRASHCART_ALLOW_SANDBOX=1` and `CRASHCART_ALLOW_MODEL=1`. Choose one model connection:
+The AI proposes which payment and ticket records to inspect. **Deterministic code decides whether the delivery promise was kept.** It cannot infer delivery from a checkout success message.
 
-- **Modal / DeepSeek**, used in the 8 November run: `CRASHCART_MODEL_PROVIDER=modal`, `MODAL_API_KEY`, `MODAL_MODEL`, `MODAL_BASE_URL` and the identical `MODAL_ALLOWED_ORIGIN`.
-- **OpenAI adapter**, an optional configuration: `CRASHCART_MODEL_PROVIDER=openai`, `OPENAI_API_KEY` and `OPENAI_MODEL`.
-
-```sh
-python3 -m crashcart migrate
-python3 -m crashcart serve
-```
-
-In a second terminal run `python3 -m crashcart worker`. Open the workspace, enter its private access key and create a workshop test-store check. Approve with the Sandbox buyer, confirm payment, wait more than 60 seconds, choose **Check payment and delivery**, then **Ask the assistant**. [Complete setup and buyer instructions](docs/JUDGE_GUIDE.md).
-
-**The AI proposes which records to read; fixed code decides whether the delivery promise was kept.** Never use a real-money buyer account or commit keys.
-
-[MIT licence](LICENSE) · [Video walkthrough](https://www.youtube.com/watch?v=gFWje84_wEA) · [Health and restart instructions](docs/OPERATIONS.md) · [Final run log](docs/FINAL_RUN_LOG.md)
-
-## See the product
-
-![CrashCart’s landing page](docs/images/crashcart-home.jpg)
-
-The public site has separate Home, Product, Integrations and Recorded Example pages. The recorded example is open without an account. A new payment and AI investigation runs in your privately configured workspace, not on the public site.
-
-## A daily inbox for paid orders
-
-The merchant monitoring preview extends that same idea across a store's orders:
-bring payment, order and fulfilment facts together, flag a missed promise, and
-keep the history when someone acknowledges or fulfils the order. Each store has
-its own inbox and fulfilment deadline.
-
-![CrashCart's monitoring inbox showing an overdue example order and its history](evidence/runs/submission-ready/monitor-v2/browser-visible/recovered-desktop.png)
-
-*Local example data; no real merchant store is connected yet.*
-
-The preview has Shopify and WooCommerce webhook readers and store-scoped PayPal
-Sandbox matching. So far it has been exercised with signed example events and
-stubbed PayPal replies. Shopify still needs transaction data to match a payment;
-its order webhook alone stays unmatched. “Fulfilled” means the merchant has
-marked the order complete, not that a physical parcel has arrived.
-
-With Python **3.13.15**, configure a private `CRASHCART_MONITOR_TOKEN` and run:
-
-```sh
-python3 -m crashcart.monitor_server --db var/monitor.sqlite3 --port 8790
-```
-
-Open <http://127.0.0.1:8790/>. [Connection setup](docs/MONITOR_SETUP.md) explains
-the access key and per-store settings. This is a local preview for one operator
-managing owned stores. Customer accounts, app installation and per-store billing
-are still pending.
-
-## What powers CrashCart
-
-| Technology | Role in CrashCart |
-| --- | --- |
-| PayPal Sandbox | Test checkout and independent payment reads. The public demo uses saved observations. |
-| Optional local records explorer | AG Studio experiment requiring a separate applicable licence; not part of the public walkthrough or sponsor-prize claim. |
-| Bryntum Community Scheduler | Compares saved ticket timings with the delivery window in the full workspace. |
-| KERNEL | Remote test-checkout browser sessions and recordings; separately configured and authorized. |
-| Modal + DeepSeek | Selects payment and ticket observations in bounded investigations; the fresh local 8 November flow used three real requests. Modal is the model host, not a listed event sponsor. |
-| Postman | Runnable API checks and linked-record checks; the local runner needs no Postman account. |
-
-The account-free demo needs none of these service keys. The
-[integration ledger](docs/sponsor-ledger.md) records the scope and current status
-of each integration.
-
-Check the keyless example with `./scripts/test-judge.sh`. It tests recorded outcomes, HTTP boundaries and the runnable export without provider credentials. See [the connected integration workflow and current judge-access gaps](docs/JUDGE_REVIEW.md).
-
-## Reproduce the comparison
+## Reproduce both outcomes
 
 ```sh
 python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant defective
-# Expected: FAIL, paid_without_ticket, 0 tickets, exit 1
+# exit 1: FAIL / paid_without_ticket / 0 tickets / network_calls=0
 python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant healthy
-# Expected: PASS, ticket_delivered_once_on_time, 1 ticket, exit 0
-python3 -m unittest discover -s tests -p 'test_public_replay.py' -v
+# exit 0: PASS / ticket_delivered_once_on_time / 1 ticket / network_calls=0
+./scripts/test-judge.sh
 ```
 
-An exit of 1 in the first command is the meaningful reproduced failure. Both
-variants use the unchanged input, capture time, observation horizon and
-60-second rule. The original `response-loss-input.json` remains a separate
-late-read example: its healthy variant correctly fails `ticket_delivered_late`.
-We preserve it rather than move a historical timestamp to manufacture a pass.
+The healthy replay applies the repaired fulfil-on-confirmed-reconciliation rule to the same recorded input; it does not re-run `MerchantService`.
 
-[STATUS.md](STATUS.md) separates the frozen private acceptance count from these
-public checks. [Open checks](docs/OPEN_CHECKS.md) names the missing evidence.
-The project is not complete until CC-060 passes. The [MIT licence](LICENSE)
-covers CrashCart's source; vendor packages retain their own licences.
+The defective command intentionally exits 1. Both variants use the unchanged payment input and 60-second rule. The separate original late-read tape still fails correctly; it has not been rewritten to manufacture a pass.
 
-## Full workspace and optional live test payments
+## Run your own Sandbox checkout
 
-The core payment-and-AI workspace uses Python **3.13.15** with SQLite and needs no pip or Node packages. Start with [the five-minute guide](docs/JUDGE_GUIDE.md). Optional Studio and delivery-timing views additionally use Node.js **22.14.0** and npm; build those only when you need them. Compiled vendor bundles and private licence-bearing builds stay out of Git. See [Studio setup and licensing](docs/studio.md).
-
-The workspace’s **Investigate** action queues durable work; run the background worker against the same database to process it. Reloading does not repeat inference, and interrupted calls require review. The [bounded KERNEL observer](docs/kernel-runner.md) can record an existing owned checkout under an explicit grant; reviewed browser evidence then joins the same case. It never starts or captures a payment.
+This is a separate, private workspace, using your own test accounts and authorized model access. Never use a real-money buyer or publish keys. [Full setup and test-buyer instructions](docs/JUDGE_GUIDE.md) · [Secret-free environment example](.env.example).
 
 ```sh
-python3 --version  # must report 3.13.15
 python3 -m crashcart setup
+# Privately configure .env before continuing.
 python3 -m crashcart migrate
 python3 -m crashcart serve
-```
-
-In another terminal in the same directory:
-
-```sh
+# In another terminal:
 python3 -m crashcart worker
 ```
 
-Open <http://127.0.0.1:8765>. For operator access, copy your locally generated
-`CRASHCART_OPERATOR_TOKEN` from `.env` into the password field. It is sent only to
-this local server and stored in an HttpOnly session cookie. Never publish `.env`.
-The merchant fixture and health endpoint are public; investigation records require
-operator access. The default binding is loopback. This development server is not
-a production deployment.
+Required: `CRASHCART_OPERATOR_TOKEN`, `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `CRASHCART_PUBLIC_URL`, `CRASHCART_ALLOW_SANDBOX=1`, `CRASHCART_ALLOW_MODEL=1`. For Modal/DeepSeek, set `CRASHCART_MODEL_PROVIDER=modal`, `MODAL_API_KEY`, `MODAL_MODEL`, `MODAL_BASE_URL`, and the identical `MODAL_ALLOWED_ORIGIN`. The optional OpenAI adapter instead uses `OPENAI_API_KEY` and `OPENAI_MODEL`.
 
-```sh
-curl --fail http://127.0.0.1:8765/healthz
-python3 -m crashcart prerequisites
-python3 -m unittest discover -v
-```
+Open the workspace, approve a test checkout with your Sandbox Personal buyer, confirm payment, wait past the promise, and choose **Check payment and delivery**, then **Ask the assistant**. New calls need your provider allowance; they do not occur on the public demo.
 
-`.env.example` documents configuration. A database is created under `var/`, with
-idempotent migrations from `migrations/`. A different isolated database can be
-selected with `--db /path/to/file.sqlite3`. All processes for one experiment must
-use the same database. Avoid copying a live SQLite file without its WAL; use
-SQLite's backup API.
+## What powers it
 
-## External prerequisites
-
-Real sandbox checkout needs PayPal sandbox app credentials and an actual sandbox
-buyer approval. KERNEL requires a reachable owned HTTPS application, browser
-access and a recording. Webhooks require a registered ID and reachable HTTPS
-ingress. Model and remote browser usage require configured access and explicit
-usage authorization. AG Studio needs its actual package, license and supported
-agent integration for the full acceptance contract. AG Studio is commercial:
-obtain your own applicable licence or follow the vendor's local-evaluation terms.
-The maintainer's private trial key and licensed build are not included. A licence
-value supplied as `AG_STUDIO_LICENSE_KEY` during compilation becomes part of that
-browser bundle; keep private licence-bearing output out of public source and
-follow the vendor's redistribution terms. See
-[Studio licensing](docs/studio.md#licensing-and-agent-boundary). Render is excluded.
-
-For AI, configure your own OpenAI key and model, or follow the
-[explicit Modal setup](docs/investigator.md#authorization-and-configuration).
-Configure the identical owned origin in `MODAL_BASE_URL` and
-`MODAL_ALLOWED_ORIGIN`; canonical `modal.run` and tenant/region `modal.direct`
-origins are supported. The `.invalid` default is for injected local tests only.
-For a bounded owner test, both API and worker can share the existing private
-`CRASHCART_MODEL_ALLOWANCE_PATH` ledger. No inference credentials or provider
-allowance are included.
-
-The local application fails explicitly when service configuration is missing.
-Do not interpret `configured` as a successful connectivity check. The [sponsor ledger](docs/sponsor-ledger.md) distinguishes implemented
-capabilities from historical observations and pending verification.
-
-## Optional sandbox test-buyer path
-
-The keyless path above is the complete recorded demonstration. To attempt a new
-checkout, use the full workspace with **your own PayPal Sandbox app and accounts**:
-
-1. In [PayPal Developer](https://developer.paypal.com/), use a Sandbox **Business**
-   account for the merchant, a Sandbox app for its client ID/secret, and a separate
-   Sandbox **Personal** account for buyer approval. Use test funds only.
-2. Run the full-workspace setup above. Put the app's values in the local `.env`
-   fields `PAYPAL_CLIENT_ID` and `PAYPAL_CLIENT_SECRET`. Keep the generated
-   `CRASHCART_OPERATOR_TOKEN` private. The application uses the Sandbox API.
-3. After the account owner authorizes the test, set `CRASHCART_ALLOW_SANDBOX=1`
-   locally, start both server and worker, and create an investigation. Leave
-   model and KERNEL enable flags at zero unless separately configured and
-   authorized. Their keys are not needed to sign in as the test buyer.
-4. Choose **Start test checkout** and approve with the Sandbox Personal buyer.
-   Return to CrashCart and confirm the approved payment. Inspect the independent
-   payment read and the ticket record; do not infer success from the return URL.
-5. A complete remote-browser, notification or AI verification also needs its
-   [external prerequisites](#external-prerequisites). These remaining proofs
-   cannot be completed by this recorded judge mode.
-
-Use the following as a **private handoff template**, not values to commit here:
-
-| Item | Placeholder for the owner to fill privately |
+| Technology | Actual job |
 | --- | --- |
-| Sandbox merchant/app owner | `<YOUR_SANDBOX_BUSINESS_ACCOUNT>` |
-| Sandbox client ID | `<SET_PAYPAL_CLIENT_ID_IN_LOCAL_ENV>` |
-| Sandbox client secret | `<SET_PAYPAL_CLIENT_SECRET_IN_LOCAL_ENV>` |
-| Sandbox buyer email | `<YOUR_SANDBOX_PERSONAL_EMAIL>` |
-| Sandbox buyer password | `<SHARE_PRIVATELY_NOT_IN_GIT>` |
-| Owned test-store URL | `<AUTHORIZED_LOCAL_OR_HTTPS_STORE_URL>` |
+| PayPal Sandbox REST | Creates and captures test orders, independently reads payment status, verifies webhook signatures. Public pages show saved observations. |
+| Modal + DeepSeek | Selects the next evidence to inspect in bounded investigations. The 8 November run used three real model requests. |
+| AG Studio 3.0.0 | Optional records workspace: five evidence panels and native Agent Framework. The recorded explorer is verified locally and **not deployed**; permitted public licence coverage is pending. [Access and licensing](docs/studio.md). |
+| Bryntum Community Scheduler | Actual MIT-licensed delivery-timing view in the full workspace and video at 2:10–2:20. |
+| KERNEL | Remote test-checkout browser sessions and recordings in earlier authorized experiments. |
+| Postman / Newman | Executable API and linked-record checks. |
 
-Never put a real PayPal password, usable test-buyer login, API key or licence in
-this README, Git, screenshots or public video. Judge access to the recorded
-review needs none of those values. If private live access is offered, communicate
-its test-only credentials through the submission's private testing instructions.
+The keyless path needs none of these service keys. Sponsor eligibility is separate from an installed package. [Integration scope](docs/sponsor-ledger.md).
 
-## Evidence
+## Optional workspace
 
-`BUILD_CHECKLIST.md` defines the acceptance contract; [STATUS.md](STATUS.md)
-records the public development status. The maintainer's private evidence archive
-binds runtime observations to source hashes. It is intentionally excluded from
-source publication, along with `.env`, databases, payment/account receipts,
-licence values and checkout recordings. The normal workspace starts with its own empty database; it does not include the
-maintainer's saved database. Judge mode instead creates two isolated cases from
-the curated earlier recording. Two historical input tapes are included: the
-earlier repair comparison and the original late-read negative example. Neither
-is a fresh payment or a complete acceptance archive.
+[Full workspace and delivery timing](docs/WORKSPACE.md) · [Records explorer](docs/studio.md) · [Merchant monitoring preview](docs/MONITOR_SETUP.md)
 
-The tests exercise local synthetic scenarios unless explicitly identified
-otherwise. Passing them or publishing source does not establish a successful
-sandbox payment, fresh repair verification, hosted deployment or release.
-The completion validator in `scripts/check_completion.py` operates on the full
-private acceptance archive; it cannot reproduce that evidence from a public
-source checkout. Relevant source changes require affected proof to be renewed.
-Read [the product contract](docs/product-contract.md) for scope and immutable
-timing semantics.
+Shopify and WooCommerce connectors have local signed-event tests, but **no real merchant store is connected yet**. Merchant onboarding and production payments remain future work.
 
-## Local workbench journey
+## Path to production
 
-The dashboard presents payment and delivery in plain language: **Promise kept**, **Promise broken** or **More evidence needed**. **Check payment status** reads the saved checkout through the existing payment service; **Start test checkout** still requires buyer approval. **Original records & technical details** retains unchanged investigation titles, proof modes, payment references and browser sources. **Recorded page text** preserves the original captured text verbatim. These disclosures do not create new evidence, and readable labels do not change payment decisions.
+This prototype uses the PayPal **Sandbox** base URL and a fixed **2,900-cent USD ticket fixture**. Production needs a separately reviewed PayPal live app/base URL, merchant-owned catalog and fulfilment contracts, verified store onboarding, and per-user/store access with expiry and revocation. The current cookie has no server expiry; webhook timestamps are parsed without an age window, and duplicates are keyed by event ID. [Existing boundaries and required changes](docs/SECURITY_BOUNDARIES.md). No production payment or real merchant connection is claimed.
 
-Open `/?view=home` for the landing page even while signed in. Both CrashCart home links retain the selected investigation; **Open your workspace** returns to it. The UI calls `LIVE_SANDBOX` an **Initial test checkout**, `FRESH_SANDBOX` **Repair verification · new test checkout**, and `RECORDED_REPLAY` a **Replay of a saved checkout**. API/export proof modes retain their exact technical values. Replay does not make a new payment; repair verification requires a separate test payment.
+## Project and submission
 
-1. Create an investigation with the fixed workshop fixture and a controlled fault.
-2. Start sandbox checkout. If access is disabled or missing, the UI shows the
-   limitation and the run remains inconclusive. No example payment is substituted.
-3. With authorized sandbox access configured, follow the provider's actual buyer
-   approval URL, return, and choose Confirm approved payment. The server reads
-   approval independently; callback parameters do not establish it.
-4. Reconcile payment and inspect recorded browser views, provider records and the
-   stored ticket. For healthy recovery, keep the worker running. Inspect raw
-   operation IDs and the timeline under their recorded provenance.
-5. Ask investigator only after model access/allowance is authorized. Missing access
-   is recorded. Cancel preserves collected evidence. Refresh restores run state.
-6. Download inspection JSON for any run. Recorded defective response-loss or
-   interruption failures also offer an offline regression ZIP. Healthy runs retain
-   inspection export. A replay uses recorded inputs; it creates no new payment.
+[MIT licence](LICENSE) covers CrashCart’s source; vendor packages retain their own terms. [Health and restart](docs/OPERATIONS.md) · [Architecture](docs/ARCHITECTURE.md) · [Replay details](docs/replay.md).
 
-## Delivery timing
+[Devpost entry](https://devpost.com/software/crashcart-87asqz), submitted 10 November 2026 · [Submission text](docs/DEVPOST.md) · [Video script](docs/VIDEO_SCRIPT.md).
 
-Open **Delivery timing** from the workspace, or visit
-<http://127.0.0.1:8765/deadlines/index.html> after signing in to the workspace.
-Add `?run=run_…` to retain a selected investigation. The view compares each saved
-checkout relative to its own confirmed payment: the fixed 60-second ticket
-window, recorded ticket times and the saved server result. Case details link
-back to the investigation and AG Studio records.
-
-The real `@bryntum/scheduler-community` **8.0.0-beta.1** component powers this
-read-only chart. Its separate page keeps the beta dependency out of the core
-workspace. It loads up to 60 returned investigations, including the selected case
-when available, with search and saved-result filters and a 120-second or
-five-minute chart range. Ticket times outside that range remain in case details.
-A table also exposes case selection and timings. Unconfirmed payments or
-inconsistent identities, dates or records receive an explanation and no chart
-anchor; the browser never calculates a replacement payment verdict.
-
-The page uses authenticated, same-origin `GET /api/runs` and
-`GET /api/runs/:id` reads. Refreshing reads saved records; it does not contact
-PayPal, start a checkout, run a model or change delivery. Viewing a saved test
-payment is distinct from a fresh sandbox verification. Historical local browser checks cover saved-record selection, filters and
-keyboard interactions. These do not establish a complete fresh checkout and
-repair comparison; [STATUS.md](STATUS.md) records the current boundaries.
-
-Build both frontend entries with the existing Node.js **22.14.0** toolchain:
-
-```sh
-npm ci --ignore-scripts --prefix studio
-npm run build --prefix studio
-npm run test:deadlines --prefix studio
-```
-
-The build emits the local SDK, CSS and fonts under `web/deadlines/`; it does not
-require a Bryntum account or a commercial trial key. The pinned Community
-packages are MIT-licensed. The [build script](studio/build.mjs) copies the installed
-Bryntum licence, third-party notices and the
-[Font Awesome licence](studio/vendor/FONT-AWESOME-LICENSE.txt) into the generated
-`web/deadlines/` assets, alongside linked bundle legal notices. Preserve those
-notices when distributing a build. The model test command exercises local
-projection logic; a build or passing model tests alone does not verify browser
-behavior. See the [sponsor ledger](docs/sponsor-ledger.md) for integration scope.
-
-Historical sandbox and replay observations are summarized in the
-[sponsor ledger](docs/sponsor-ledger.md); their private receipts and recordings
-are not part of this repository. You can create your own inspection exports and
-eligible regression archives through the application. A reduced replay can remove
-a timely read that the repaired comparison needs, so a reduced failure alone
-must not be presented as proof of recovery.
-
-See [architecture](docs/architecture.md), [invariant and scope](docs/product-contract.md),
-[investigator](docs/investigator.md), [offline replay](docs/replay.md),
-[Postman](docs/postman.md), and [sponsor ledger](docs/sponsor-ledger.md).
-
-The CI workflow is configured. A source commit or push does not establish that
-CI passed; inspect the repository's actual Actions results. Offline unit tests
-use synthetic `LOCAL_TEST` transports where needed. Live acceptance checks and
-release limitations remain separate in [STATUS.md](STATUS.md). The hosted recorded review serves build-time results; the live checkout backend is separate.
-The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted on 10 November 2026. Submission does not close the remaining internal acceptance checks.
-
-## Submission materials
-
-[Verified clean-clone path](docs/SUBMISSION_VERIFICATION.md) · [Submission scope](docs/SUBMISSION_GATES.md) · [Shared Lightsail hosting](docs/LIGHTSAIL_SHARED_HOST.md) · [Video script](docs/VIDEO_SCRIPT.md) · [Devpost draft](docs/DEVPOST.md). The current recorded demo is verified on the existing Lightsail host. The [public video](https://www.youtube.com/watch?v=gFWje84_wEA) is available. The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted on 10 November 2026.
+Historical development checklists are in [docs/archive](docs/archive/STATUS.md). They describe internal work and do not change the recorded demo’s scope. [Sponsor preparation log](docs/SPONSOR_PRIZE_RUN_LOG.md).

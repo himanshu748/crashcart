@@ -1,0 +1,71 @@
+{
+  "kind": "recorded-failure-investigation-v1",
+  "fresh_execution": false,
+  "same_case_as_public_faulty_replay": false,
+  "provider": "Modal",
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "recorded_date": "2026-11-08",
+  "investigation_started_at": "2026-11-08T09:36:33.402881+00:00",
+  "investigation_finished_at": "2026-11-08T09:36:43.142708+00:00",
+  "payment_completed_at": "2026-11-08T09:23:15Z",
+  "proof_sha256": "dbc1a950c360c3afbe58eebdb715b7c1bc46d39329202f06c68a93156d49747d",
+  "trace": [
+    {
+      "step": 1,
+      "action": "read_provider",
+      "hypothesis": "The promise requests one USD 29 workshop ticket delivered within 60 seconds of confirmed payment. The timing phrase 'confirmed payment' most naturally maps to confirmed provider capture completion (capture_completed), but no payment, merchant, or browser evidence has been collected yet, so the timing evidence gap remains open.",
+      "findings": []
+    },
+    {
+      "step": 2,
+      "action": "read_merchant",
+      "hypothesis": "Hypothesis: capture completion is confirmed, so the timing_start anchor exists; delivery evidence (merchant ticket records) is still missing and must be read to evaluate the 60-second window.",
+      "findings": [
+        {
+          "claim": "Provider capture completed for USD 29.00 (amount 2900) at 2026-11-08T09:23:15Z, capture_id 9U732141TN8280908, status COMPLETED.",
+          "evidence_ids": [
+            "event_8c499bbe6d6443eaaebcf2f73daa6e0d"
+          ],
+          "kind": "observed"
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "action": "finish",
+      "hypothesis": "Hypothesis: the promise requests one workshop ticket delivered within 60 seconds of confirmed provider capture completion; the amount, currency, ticket count, deadline, timing trigger and delivery kind are all specified, and the payment and merchant evidence are sufficient to evaluate the timing. No further read is needed.",
+      "findings": [
+        {
+          "claim": "Provider capture completed for USD 29.00 (amount 2900) at 2026-11-08T09:23:15Z, capture_id 9U732141TN8280908, status COMPLETED.",
+          "evidence_ids": [
+            "event_8c499bbe6d6443eaaebcf2f73daa6e0d"
+          ],
+          "kind": "observed"
+        },
+        {
+          "claim": "Merchant order 4HJ31244AH4428038 shows status NOT_DELIVERED, ticket_count 0, and no ticket records as of 2026-11-08T09:36:40Z, well past the 60-second window from capture completion.",
+          "evidence_ids": [
+            "event_41669261106d47a69a88b619c9228e1d"
+          ],
+          "kind": "observed"
+        }
+      ]
+    }
+  ],
+  "deterministic_result": {
+    "deadline": "2026-11-08T09:24:15Z",
+    "invariant_version": "ticket-v1",
+    "reason": "Confirmed payment has zero tickets beyond the fixed recovery deadline.",
+    "signature": "paid_without_ticket",
+    "source_ids": {
+      "capture_id": "9U732141TN8280908",
+      "merchant_observation_id": "event_41669261106d47a69a88b619c9228e1d",
+      "order_id": "4HJ31244AH4428038",
+      "provider_observation_id": "event_8c499bbe6d6443eaaebcf2f73daa6e0d",
+      "purchase_id": "purchase_afc9c55700de40a090ea1a69c96187be",
+      "run_id": "run_fe3038da3c4a443189aad5c92f57d1ed",
+      "ticket_ids": []
+    },
+    "verdict": "FAIL"
+  }
+}

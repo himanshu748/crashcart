@@ -17,13 +17,17 @@ import time
 from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
+# The private -I -S HTTP subprocess executes this file directly. Keep that
+# stdlib-only worker independent of package imports and configuration helpers.
+if __package__:
+    from .model_ids import DEEPSEEK_MODEL_ID as MODAL_MODEL
+    from .redaction import SECRET_KEYS as SECRET_KEYS, redact as redact
+
 # Non-routable default for explicitly injected LOCAL_TEST transports only.
 # Real calls require an operator-pinned owned deployment in the environment.
 MODAL_ORIGIN = "https://your-owned-model.example.invalid"
-MODAL_MODEL = "deepseek-ai/DeepSeek-V4.1-Flash"
 MAX_REQUEST_BYTES, MAX_RESPONSE_BYTES, MAX_OUTPUT_TOKENS = 65536, 1048576, 1024
-SECRET_KEYS = ("OPENAI_API_KEY", "MODAL_API_KEY", "MODAL_TOKEN_ID", "MODAL_TOKEN_SECRET",
-               "PAYPAL_CLIENT_SECRET", "KERNEL_API_KEY", "AG_STUDIO_LICENSE_KEY", "CRASHCART_OPERATOR_TOKEN")
+
 
 
 class ModelTransportError(Exception):
@@ -51,21 +55,6 @@ def json_object(text):
     value = strict_json(text)
     if not isinstance(value, dict):
         raise ValueError("expected JSON object")
-    return value
-
-
-def redact(value, environ):
-    if isinstance(value, dict):
-        return {k: redact(v, environ) for k, v in value.items() if isinstance(k, str) and
-                not re.search(r"secret|authorization|api.?key|password|payer|shipping", k, re.I)}
-    if isinstance(value, list):
-        return [redact(v, environ) for v in value]
-    if isinstance(value, str):
-        for name in SECRET_KEYS:
-            secret = environ.get(name)
-            if isinstance(secret, str) and secret:
-                value = value.replace(secret, "[REDACTED]")
-        return re.sub(r"(?<![\w.+-])[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", "[REDACTED_EMAIL]", value) if "@" in value else value
     return value
 
 

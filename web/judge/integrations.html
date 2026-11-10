@@ -29,10 +29,7 @@
       <a href="integrations.html" aria-current="page">Integrations</a>
       <a href="demo.html">Recorded example</a>
     </nav>
-    <label class="motion-toggle">
-      <input type="checkbox" id="reduce-motion">
-      <span>Reduce motion</span>
-    </label>
+
   </header>
 
   <div class="trail">
@@ -50,6 +47,7 @@
 
   <main id="main" tabindex="-1">
     <section class="page-hero" aria-labelledby="int-title">
+      <div class="hero-copy">
       <p class="eyebrow">Integrations</p>
       <h1 id="int-title">Follow the order <em>across your tools.</em></h1>
       <p class="lead">PayPal confirms the payment. Your store records delivery. CrashCart brings those records together and uses AI to help investigate a missed promise. Explore each tool’s role and what you’ll need to use it.</p>
@@ -57,6 +55,16 @@
         <a class="btn btn-signal" href="demo.html">See it in a recorded case</a>
         <a class="btn btn-outline-light" href="#stack">Browse integrations</a>
       </div>
+      </div>
+      <figure class="glance hero-aside">
+        <ol class="glance-list" aria-label="How the records connect">
+          <li><span class="glance-who">PayPal</span><span class="glance-says">Confirms the payment</span></li>
+          <li><span class="glance-who">Store</span><span class="glance-says">Records the delivery</span></li>
+          <li class="is-verdict"><span class="glance-who">CrashCart</span><span class="glance-says">Checks the promise</span></li>
+          <li class="is-kept"><span class="glance-who">AI assistant</span><span class="glance-says">Suggests what to check</span></li>
+        </ol>
+        <figcaption>How the private workspace works. The public example reads saved records only.</figcaption>
+      </figure>
     </section>
 
     <section class="band" id="stack" aria-labelledby="stack-title">
@@ -187,6 +195,10 @@
   </nav>
 
   <footer class="foot">
+    <label class="motion-toggle">
+      <input type="checkbox" id="reduce-motion">
+      <span>Reduce motion</span>
+    </label>
     <nav class="foot-nav" aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="product.html">Product</a>

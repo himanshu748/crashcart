@@ -4,7 +4,7 @@ import {mkdir,copyFile} from 'node:fs/promises';
 // the rest of process.env must never become client-side build definitions.
 const studioLicenseKey=process.env.AG_STUDIO_LICENSE_KEY;
 await mkdir('../web/studio',{recursive:true});
-await build({entryPoints:['src/main.tsx'],bundle:true,format:'esm',target:'es2022',outdir:'../web/studio',minify:true,legalComments:'linked',define:{'process.env.NODE_ENV':'"production"','__CRASHCART_AG_STUDIO_LICENSE_KEY__':studioLicenseKey?JSON.stringify(studioLicenseKey):'undefined'},loader:{'.woff2':'file','.woff':'file','.svg':'file'}});
+await build({entryPoints:['src/main.tsx'],bundle:true,format:'esm',target:'es2022',outdir:'../web/studio',minify:true,legalComments:'linked',define:{'process.env.NODE_ENV':'"production"','__CRASHCART_RECORDED_STUDIO__':'false','__CRASHCART_AG_STUDIO_LICENSE_KEY__':studioLicenseKey?JSON.stringify(studioLicenseKey):'undefined'},loader:{'.woff2':'file','.woff':'file','.svg':'file'}});
 await copyFile('index.html','../web/studio/index.html');
 // A separate, read-only Bryntum Community entry keeps the beta SDK out of the core workspace.
 await mkdir('../web/deadlines',{recursive:true});

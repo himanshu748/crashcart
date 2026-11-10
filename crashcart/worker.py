@@ -1,5 +1,4 @@
 import json
-import os
 import time
 import uuid
 
@@ -65,9 +64,15 @@ def work(db_path, once=False):
                 if job["kind"] == "health":
                     result = {"status": "ok", "owner": owner}
                 elif job["kind"] == "reconcile":
+                    from .paypal import PayPalError
                     from .service import MerchantService
-                    result = MerchantService(store).reconcile(job["run_id"])
                     attempt = job["payload"].get("attempt", 0)
+                    try:
+                        result = MerchantService(store).reconcile(job["run_id"])
+                    except PayPalError as exc:
+                        if exc.code in {"TIMEOUT", "TRANSPORT_ERROR"} and attempt < 29:
+                            store.enqueue(job["run_id"], "reconcile", {"attempt": attempt+1}, semantic_key=f"recovery-{attempt+1}", available_at=time.time()+2)
+                        raise
                     if result.get("verdict") == "INCONCLUSIVE" and attempt < 29:
                         store.enqueue(job["run_id"], "reconcile", {"attempt": attempt+1}, semantic_key=f"recovery-{attempt+1}", available_at=time.time()+2)
                 elif job["kind"] == "investigate":

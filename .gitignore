@@ -32,3 +32,9 @@ web/deadlines/*
 
 # Local submission video exports.
 dist/
+
+# Optional recorded explorer may contain a private trial/judging licence.
+web/studio-recorded/
+
+# Cached dependency symlink used only for local builds.
+studio/node_modules
