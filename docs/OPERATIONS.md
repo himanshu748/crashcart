@@ -1,38 +1,71 @@
 # Keep the recorded demo online
 
-Keep the existing host, address, certificate storage and site files available through **22 December 2026**. There is no scheduled teardown. This is a shared host; CrashCart adds no instance or paid service.
+Primary demo: <https://crashcart.32.193.44.79.sslip.io/>. Keep this instance,
+its attached static IP and certificate storage running through **22 December 2026**.
+There is no scheduled teardown. The owner approved this independent **$12/month
+base Lightsail plan** on 10 November; taxes and transfer overages are separate.
 
 ## Health
 
 ```sh
-curl --fail --silent --show-error https://crashcart.52.202.25.181.sslip.io/healthz
+curl --fail --silent --show-error https://crashcart.32.193.44.79.sslip.io/healthz
 ```
 
-Expected: HTTP 200 with JSON containing `"status":"recorded-demo"`, `"scope":"static-asset-serving"` and `"live_services_checked":false`. This checks that the public static release is being served. It does not check PayPal or an AI provider and makes no provider call.
+Expected: HTTP 200, `"status": "recorded-demo"`, `"scope": "static-asset-serving"`
+and `"live_services_checked": false`. This checks static serving, not PayPal or AI.
+`/product`, `/example` and `/integrations` serve directly, without HTML redirects.
 
-Also check the [recorded example](https://crashcart.52.202.25.181.sslip.io/demo.html). It must show a missing ticket and a separate recovered-order replay. The keyless local command remains available if the host or its DNS is unavailable.
+## Dedicated host
 
-## What serves the site
+- Lightsail instance: `crashcart-demo-nov10`, `us-east-1a`, Ubuntu 24.04,
+  `small_3_0` (2GB RAM, 2vCPU, 60GB disk).
+- Attached static IP: `crashcart-demo-nov10-ip`, `32.193.44.79`.
+- Container: `crashcart-demo`, Docker restart policy `unless-stopped`.
+- Initial deployed source: `fc3e2432699e4ecd5ac62019883769aca00ce5ec`.
+- Exactly 17 public files at `/opt/crashcart/site`, mounted read-only at `/srv`.
+- [Applied Caddy configuration](../deploy/judge/Caddyfile.dedicated-static):
+  `/opt/crashcart/Caddyfile`; TLS state at `/opt/crashcart/caddy-data` and
+  `/opt/crashcart/caddy-config`. Only HTTP/HTTPS is public; SSH is operator-IP-only.
+- Caddy image: `caddy:2.11.9-alpine@sha256:0bbb055bda6793c999bde78b1b5ce3e89f829fb031af2cf50056ea1246559fee`.
 
-The existing `embodiweave-demo` Lightsail instance in `us-east-1` serves CrashCart through its shared Caddy container, `ew-proxy`. The static site is mounted at `/data/crashcart/site-b0e304a` inside that container. No CrashCart worker, payment credentials or model keys run on this public host.
+No CrashCart worker, provider keys, AG Studio licence or model service runs here.
+The site replays saved records. The optional licensed explorer is **not deployed**.
+The hostname uses public `sslip.io` DNS; local replay is the fallback if DNS fails.
 
-## Restart and recovery
+## Inspect and restart
 
-Use the existing verified SSH access; do not disable host-key checks. Inspect before taking action:
+Use your private SSH identity and saved host fingerprint; never disable host-key
+checking. First connection used explicit first-use trust against the AWS-assigned
+IP; it was not an independently authenticated fingerprint. Subsequent connections
+remain strictly pinned. Refresh an expired temporary SSH certificate through AWS;
+do not reset a changed host key automatically.
+
+On this dedicated host:
 
 ```sh
-sudo docker inspect ew-proxy --format '{{.State.Status}}'
-sudo docker logs --tail 50 ew-proxy
+sudo docker inspect crashcart-demo --format '{{.State.Status}} {{.HostConfig.RestartPolicy.Name}}'
+sudo docker logs --tail 50 crashcart-demo
+sudo docker start crashcart-demo     # only if stopped
+# If it is running but unresponsive, restart this dedicated container:
+sudo docker restart crashcart-demo
 ```
 
-If the existing proxy container is **stopped**, start it:
+Rerun the public health check after any restart. Preserve certificate directories
+and the existing site. A future release needs a separate reviewed update and
+post-deploy link/replay checks; the private initial installer deliberately refuses
+an existing deployment. Do not prune/delete resources or replace the site with a
+live worker.
 
-```sh
-sudo docker start ew-proxy
-```
+The initial Lightsail user-data wrapper ran the Bash script under `sh` and failed.
+Setup succeeded through an explicit `sudo bash -s` SSH invocation after the owner
+approved resuming. This does not require rebuilding the instance.
 
-Then rerun the public health and link checks. There is no separate CrashCart process to restart. If the shared proxy is running but unresponsive, coordinate with the host owner before `sudo docker restart ew-proxy`: that action briefly affects the other applications on the same proxy. A static release update normally needs **no restart, reload or Caddy configuration change**.
+## Other public copies
 
-Publish updates with a validated same-volume directory exchange and retain the previous release. Do not run global Compose shutdown/prune, delete the host or volume, or replace the shared proxy configuration to repair one page. [Existing-host details](LIGHTSAIL_SHARED_HOST.md).
+The [previous shared host](LIGHTSAIL_SHARED_HOST.md) remains intact; its firewall,
+applications and proxy were not changed for this release. Do not restart its
+shared proxy to repair the new dedicated demo.
 
-GitHub Pages is published by the repository’s **Recorded walkthrough** workflow after the **Source behavior** workflow succeeds on main. Inspect the workflow’s result before claiming that mirror has updated.
+The [Pages mirror](https://himanshu748.github.io/crashcart/) publishes through the
+**Recorded walkthrough** workflow after successful **Source behavior** CI on main.
+Inspect the deployment result before claiming that mirror has updated.

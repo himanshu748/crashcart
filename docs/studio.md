@@ -4,7 +4,7 @@ CrashCart embeds the actual `ag-studio` and `ag-studio-react` 3.0.0 packages. Th
 React workspace reads authenticated saved investigations from the same local
 server. It does not make a payment or refresh PayPal when a run is selected.
 
-## Recorded explorer (feature branch, not deployed)
+## Recorded explorer (local access, not deployed)
 
 The optional `/explorer/` page uses the **actual pinned AG Studio SDK** and the same five evidence panels as the private workspace. It reads only exported replay rows. The two case variants share the saved input; the repair is not a new purchase. The native Agent Framework runs three explicit browser filters. Its panel says **no AI call**; arbitrary questions are unsupported. A separate disclosure shows the genuine earlier saved AI investigation, clearly identified as another case.
 

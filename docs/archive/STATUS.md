@@ -2,9 +2,11 @@
 
 **Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 10 November 2026 (India).
 
-## 10 November — owner-authorized local sponsor branch
+## 10 November — sponsor core published; separate demo host
 
-Sponsor and backend preparation continues only on `sponsor-prizes-nov10`. Public main and the submitted entry remain unchanged pending the owner's exact `submit` instruction. The historical 47/60 baseline is not a certification of the changed tree; no new CC ID is closed. Current tests, remaining licence coverage and proposed publishing actions are in [the sponsor run log](../SPONSOR_PRIZE_RUN_LOG.md) and [STOP report](../SPONSOR_PRIZE_STOP.md).
+The owner replied exactly `submit`. PR#3 merged to main at `fc3e243`; main CI and Pages passed. The recorded core is live on the [dedicated demo](https://crashcart.32.193.44.79.sslip.io/), on a separately approved $12/month Lightsail plan. The previous shared host is untouched. The existing Devpost entry remains Submitted with updated story, screenshots and demo access. No new CC requirement is closed; 47/60 remains historical, not certification of this tree.
+
+AG Studio is implemented/tested locally, **not publicly deployed**. A licence question was sent in the official AG Grid Discord; public coverage through 22 December is pending and AG Grid remains unselected. Bryntum/KERNEL/Postman remain selected; APIMatic/Channel3/Render remain unselected. The video is unchanged. Current commands, failures retained, deployment and licence limits are in the [sponsor run log](../SPONSOR_PRIZE_RUN_LOG.md). The earlier [STOP report](../SPONSOR_PRIZE_STOP.md) records the approved action scope, not current publication state. Freeze remains 12 November, 21:00 IST.
 
 ## 10 November — submitted and frozen
 

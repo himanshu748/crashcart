@@ -1,6 +1,6 @@
 # Sponsor submission changes — not applied
 
-The current submitted entry remains unchanged. This file is a preparation note,
+The core story, screenshots and demo link have been updated on the submitted entry. This file records the conditional AG Studio addition,
 not a claim that the feature branch is deployed or eligible for a prize.
 
 ## AG Studio paragraph — use only after public access is verified
@@ -12,7 +12,7 @@ not a claim that the feature branch is deployed or eligible for a prize.
 > paid order had no ticket. Payment and delivery decisions remain deterministic.
 
 Proposed try-it link, **currently unpublished**:
-`https://crashcart.52.202.25.181.sslip.io/explorer/`
+`https://crashcart.32.193.44.79.sslip.io/explorer/`
 
 Add `AG Studio` to Built With only with that actual, permitted, public SDK view.
 Do not rename it a generated AG Grid dashboard or imply its local filters are
