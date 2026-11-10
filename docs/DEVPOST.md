@@ -22,7 +22,7 @@ Python, SQLite and a background worker keep payment requests, purchases, observa
 
 DeepSeek-V4.1-Flash, served through Modal, chooses which payment and ticket records to read and explains its findings. Fixed rules decide whether payment and delivery meet the promise.
 
-The local workspace also contains optional record-exploration tools. Bryntum Community Scheduler compares saved ticket times with the delivery window. KERNEL supported remote checkout experiments; Postman/Newman provide executable API checks. These tools are separate from the keyless walkthrough.
+Bryntum Community Scheduler compares saved ticket times with the delivery window; the video shows this actual view at 2:10–2:20. It is separate from the public website's simpler timeline. KERNEL supported remote checkout experiments; Postman/Newman provide executable API checks.
 
 ## Challenges
 
@@ -42,7 +42,7 @@ Validate Shopify and WooCommerce connections with owned stores, broaden delivery
 
 ## Built with
 
-Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST (Orders v2, webhook verification), Modal, DeepSeek, Postman, Newman.
+Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST (Orders v2, webhook verification), Modal, DeepSeek, Postman, Newman, Bryntum Community Scheduler.
 
 ## Try-it links
 
