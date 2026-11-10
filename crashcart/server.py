@@ -13,6 +13,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlparse
 
+from . import __version__
 from .config import prerequisites
 from .faults import KINDS
 from .store import Store
@@ -98,7 +99,7 @@ def _server_recorded_bundle(server):
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "CrashCart/0.1"
+    server_version = "CrashCart/" + __version__
 
     def ui_capabilities(self):
         """Describe the existing workspace's UI choices, never provider health.
@@ -216,7 +217,7 @@ class Handler(BaseHTTPRequestHandler):
             if path == "/healthz":
                 with self.store.connect() as db:
                     db.execute("SELECT 1").fetchone()
-                return self.send(200, {"status": "ok", "database": "ok", "service": "crashcart", "version": "0.1.0",
+                return self.send(200, {"status": "ok", "database": "ok", "service": "crashcart", "version": __version__,
                                        "capabilities": self.ui_capabilities()})
             if path == "/api/fixture":
                 return self.send(200, {"id": "workshop-v1", "name": "The resilient systems workshop", "amount_minor": 2900, "currency": "USD", "recovery_seconds": 60, "promise": "One ticket within 60 seconds of confirmed payment."})
@@ -244,7 +245,9 @@ class Handler(BaseHTTPRequestHandler):
             return self.send(200, data, kind)
         except (ValueError, KeyError) as exc:
             return self.send(400, {"error": str(exc)})
-        except Exception:
+        except Exception as exc:
+            # Match POST diagnostics without logging URLs, responses or exception messages.
+            print(f"request error: {type(exc).__name__}", flush=True)
             return self.send(500, {"error": "Internal error; inspect local service logs"})
 
     def api_get(self, path):

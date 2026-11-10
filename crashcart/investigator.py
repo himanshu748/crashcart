@@ -8,7 +8,6 @@ from copy import deepcopy
 from datetime import datetime, timezone
 import hashlib
 import os
-import re
 import time
 import uuid
 
@@ -20,7 +19,7 @@ from .promise import (PROPOSED_INVARIANT_SCHEMA, MISSING_FIELDS_SCHEMA, PROMISE_
                       REQUESTED_VALUES_SCHEMA, PROJECTION_VERSION, PromiseMappingError,
                       validate_promise_mapping, project_requested_values)
 from .model_transport import (ModelTransportError, configuration, complete as complete_model,
-                              http as _http, json_object, SECRET_KEYS, redact)
+                              http as _http, json_object, redact)
 from .store import canonical, utcnow
 
 
@@ -105,17 +104,7 @@ class InvestigationError(Exception):
 
 
 def _sanitize(value):
-    if isinstance(value, dict):
-        return {k: _sanitize(v) for k, v in value.items() if isinstance(k, str) and not re.search(r"secret|authorization|api.?key|password|payer|shipping", k, re.I)}
-    if isinstance(value, list):
-        return [_sanitize(v) for v in value[:50]]
-    if isinstance(value, str):
-        for name in SECRET_KEYS:
-            secret = os.environ.get(name)
-            if secret:
-                value = value.replace(secret, "[REDACTED]")
-        return re.sub(r"(?<![\w.+-])[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}", "[REDACTED_EMAIL]", value[:4000]) if "@" in value else value[:4000]
-    return value
+    return redact(value, os.environ, max_list_items=50, max_characters=4000)
 
 
 class StructuredModel:

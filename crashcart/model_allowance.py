@@ -24,10 +24,11 @@ import tempfile
 import time
 import uuid
 
+from .model_ids import DEEPSEEK_MODEL_ID as MODEL
+
 CALL_LIMIT = 24
 CEILING_MICRO_USD = 1_000_000
 RESERVATION_MICRO_USD = 40_000
-MODEL = "deepseek-ai/DeepSeek-V4.1-Flash"
 MAX_REQUEST_BYTES = 65_536
 MAX_LEDGER_BYTES = 4 * 1024 * 1024
 LOCK_TIMEOUT_SECONDS = 2.0

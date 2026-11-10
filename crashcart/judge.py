@@ -15,6 +15,7 @@ from urllib.parse import urlsplit
 import webbrowser
 import zipfile
 
+from .model_ids import DEEPSEEK_MODEL_ID
 from .replay import ReplayError, export_package, load_package
 from .replay_workspace import import_replay
 from .store import Store
@@ -75,7 +76,7 @@ def historical_ai(source_path=None):
                 or source["public_judge_mode_calls_model"] is not False
                 or source["same_case_as_public_faulty_replay"] is not False
                 or source["provider"] != "Modal"
-                or source["model"] != "deepseek-ai/DeepSeek-V4.1-Flash"
+                or source["model"] != DEEPSEEK_MODEL_ID
                 or source["historical_capture_date"] != "2026-10-23"
                 or operations != expected_operations
                 or any(type(value) is not int for value in operations.values())

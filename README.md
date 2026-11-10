@@ -77,7 +77,7 @@ Open the workspace, approve a test checkout with your Sandbox Personal buyer, co
 | --- | --- |
 | PayPal Sandbox REST | Creates and captures test orders, independently reads payment status, verifies webhook signatures. Public pages show saved observations. |
 | Modal + DeepSeek | Selects the next evidence to inspect in bounded investigations. The 8 November run used three real model requests. |
-| AG Studio 3.0.0 | Optional records workspace: five evidence panels and native Agent Framework. A recorded explorer is being prepared on this feature branch; it is **not deployed**. [Access and licensing](docs/studio.md). |
+| AG Studio 3.0.0 | Optional records workspace: five evidence panels and native Agent Framework. The recorded explorer is verified locally and **not deployed**; permitted public licence coverage is pending. [Access and licensing](docs/studio.md). |
 | Bryntum Community Scheduler | Actual MIT-licensed delivery-timing view in the full workspace and video at 2:10–2:20. |
 | KERNEL | Remote test-checkout browser sessions and recordings in earlier authorized experiments. |
 | Postman / Newman | Executable API and linked-record checks. |
@@ -89,6 +89,10 @@ The keyless path needs none of these service keys. Sponsor eligibility is separa
 [Full workspace and delivery timing](docs/WORKSPACE.md) · [Records explorer](docs/studio.md) · [Merchant monitoring preview](docs/MONITOR_SETUP.md)
 
 Shopify and WooCommerce connectors have local signed-event tests, but **no real merchant store is connected yet**. Merchant onboarding and production payments remain future work.
+
+## Path to production
+
+This prototype uses the PayPal **Sandbox** base URL and a fixed **2,900-cent USD ticket fixture**. Production needs a separately reviewed PayPal live app/base URL, merchant-owned catalog and fulfilment contracts, verified store onboarding, and per-user/store access with expiry and revocation. The current cookie has no server expiry; webhook timestamps are parsed without an age window, and duplicates are keyed by event ID. [Existing boundaries and required changes](docs/SECURITY_BOUNDARIES.md). No production payment or real merchant connection is claimed.
 
 ## Project and submission
 

@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from .replay import ReplayError
+from .model_ids import DEEPSEEK_MODEL_ID
 
 SUMMARY = Path(__file__).resolve().parents[1] / "evidence/runs/submission-ready/ai-failure-nov8-summary.json"
 SUMMARY_SHA256 = "5e30391a8673228eaae6e0ec16b13f1db86686e5f608a69b865babad5fbc569a"
@@ -23,7 +24,7 @@ def failure_ai(source_path=None):
                 or source["fresh_execution"] is not False
                 or source["same_case_as_public_faulty_replay"] is not False
                 or source["provider"] != "Modal"
-                or source["model"] != "deepseek-ai/DeepSeek-V4.1-Flash"
+                or source["model"] != DEEPSEEK_MODEL_ID
                 or source["recorded_date"] != "2026-11-08"
                 or result["verdict"] != "FAIL" or result["signature"] != "paid_without_ticket"
                 or result["source_ids"]["ticket_ids"] != []
