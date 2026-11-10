@@ -62,7 +62,8 @@ test('8 November failure investigation is shown first with cited evidence and no
   await p.failureSteps[1].trigger('click');
   assert.match(p.nodes.get('failure-answer').textContent,/PayPal confirmed/);
   await p.failureSteps[2].trigger('click');
-  assert.match(p.nodes.get('failure-verdict').textContent,/FAIL \/ paid_without_ticket/);
+  assert.match(p.nodes.get('failure-verdict').textContent,/one-minute promise was missed/);
+  assert.match(p.nodes.get('failure-deterministic').textContent,/FAIL \/ paid_without_ticket/);
   for(const id of genuine.failure_ai.trace[2].findings.flatMap(f=>f.evidence_ids)) assert.match(p.nodes.get('failure-citations').textContent,new RegExp(id));
   assert.equal(p.calls.length,1);
 });
@@ -138,7 +139,8 @@ test('saved next-step journey leads to a separately labelled October repair, the
   assert.match(p.nodes.get('comparison-case').textContent,/Different order/);
   await p.nodes.get('workspace-failure-button').trigger('click');
   assertView(p,'failure');assert.equal(p.nodes.get('workspace-ticket-count').textContent,'0 tickets');
-  assert.match(p.nodes.get('failure-verdict').textContent,/FAIL \/ paid_without_ticket/);
+  assert.match(p.nodes.get('failure-verdict').textContent,/one-minute promise was missed/);
+  assert.match(p.nodes.get('failure-deterministic').textContent,/FAIL \/ paid_without_ticket/);
   await p.failureSteps[0].trigger('click');
   assert.equal(p.nodes.get('workspace-step-label').textContent,'Recorded step 1 of 3');
   assert.equal(p.calls.length,1,'Navigation and replay selection must not fetch or call providers');

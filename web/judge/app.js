@@ -314,10 +314,12 @@
     const step = failureHistory.trace[index];
     document.querySelectorAll('[data-failure-step]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.failureStep) === index)));
     byId('failure-question').textContent = ['Did the payment complete?', 'Was a ticket delivered?', 'What does the evidence support?'][index];
-    byId('failure-answer').textContent = ['The assistant started without payment or delivery observations and requested the PayPal record.', 'PayPal confirmed the $29 capture. The assistant then requested the matching ticket records.', 'The store had no ticket after the one-minute deadline. The assistant finished with citations to both records.'][index];
+    byId('failure-answer').textContent = ['The assistant started without payment or delivery observations and requested the PayPal record.', 'PayPal confirmed capture. The assistant then requested the matching ticket records.', 'The store had no ticket after the one-minute deadline. The assistant finished with citations to both records.'][index];
     byId('failure-reasoning').textContent = step.hypothesis;
+    const result = failureHistory.deterministic_result;
+    byId('failure-deterministic').textContent = `Recorded code result: ${result.verdict} / ${result.signature}. The 60-second promise is unchanged.`;
     byId('failure-citations').textContent = step.findings.length ? JSON.stringify(step.findings, null, 2) : 'No observations had been collected at this step.';
-    byId('failure-verdict').textContent = index === 2 ? 'Paid, but no ticket. Fixed code checked the unchanged promise: FAIL / paid_without_ticket.' : 'The assistant chooses where to look; it does not decide the payment outcome.';
+    byId('failure-verdict').textContent = index === 2 ? 'Paid, but no ticket. The payment and delivery records confirm the one-minute promise was missed.' : 'The assistant chooses where to look; it does not decide the payment outcome.';
     updateWorkspaceStep(index);
   }
   document.querySelectorAll('[data-failure-step]').forEach(b => b.addEventListener('click', () => showFailureStep(Number(b.dataset.failureStep))));
