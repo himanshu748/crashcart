@@ -2,6 +2,12 @@
 
 **Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 10 November 2026 (India).
 
+## 10 November — landing and motion candidate (local)
+
+The `ui-motion-nov10` branch redesigns the public landing and adds presentation-only motion to the recorded demo/product. Fresh-clone checks pass: 598 Python, 97 JavaScript, 17 judge and 58 Studio/timing/presentation tests; Ruff/mypy and build pass. Mobile and desktop Lighthouse are100/100/100/100. The first full run exposed a public-asset allowlist mismatch causing `/recorded/`503; the cause is fixed and the same integration test now passes. Payment rules, replay fixtures and the invariant are unchanged.
+
+The requested20-second scroll clip is now recorded in the actual browser and frame-reviewed after the owner redirected recording away from computer use. It is1920×1080,25fps,5.75MB, no audio; animation timing measured16.7ms median/p95. Native capture/control failures remain recorded. Real browser reduced-motion emulation passes. Remote CI is pending a separately authorized push. Pages publication is prepared as a manual action, preserving separate merge/deploy approvals. Nothing is pushed, merged, deployed or edited on Devpost. [Motion run log](../UI_MOTION_RUN_LOG.md) · [STOP report](../UI_MOTION_STOP.md). Historical47/60 unchanged; no CC IDs newly verified. Next: owner review, then exact submit for the branch push only.
+
 ## 10 November — sponsor core published; separate demo host
 
 The owner replied exactly `submit`. PR#3 merged to main at `fc3e243`; main CI and Pages passed. The recorded core is live on the [dedicated demo](https://crashcart.32.193.44.79.sslip.io/), on a separately approved $12/month Lightsail plan. The previous shared host is untouched. The existing Devpost entry remains Submitted with updated story, screenshots and demo access. No new CC requirement is closed; 47/60 remains historical, not certification of this tree.
