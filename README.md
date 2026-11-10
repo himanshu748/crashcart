@@ -1,14 +1,16 @@
 # CrashCart
 
-**“I paid, but my ticket never arrived.”** CrashCart helps support and engineering at small online sellers find the missing step between a PayPal payment and delivery.
+## For judges
 
-PayPal creates and captures the test order, then supplies its payment record. The AI chooses which payment and ticket records to inspect and cites what it finds. **The AI proposes; fixed rules decide whether the delivery promise was kept.**
+**“I paid, but my ticket never arrived.”** CrashCart helps support and engineering at small online sellers find the missing step between payment and delivery.
 
-## Try it in 60 seconds — no keys
+[Open the recorded demo](https://crashcart.52.202.25.181.sslip.io/) · [GitHub Pages mirror](https://himanshu748.github.io/crashcart/) · Video: `<YOUTUBE_URL>`
 
-[**Open the recorded demo →**](https://crashcart.52.202.25.181.sslip.io/) Open the recorded example, then compare **Missed order** with **Recovered order (replay)**.
+The public walkthrough is a **recorded replay: no new PayPal or AI calls**. The real **8 November 2026** test used PayPal Sandbox **Orders v2 create, capture and get**, followed by real DeepSeek calls through Modal. [Read that completed flow](docs/LIVE_FLOW.md). The healthy **32.26-second** repair uses a **separate saved checkout input**, not a new purchase; its faulty and healthy variants use the same payment input and 60-second promise.
 
-Or run it locally with Python 3.11 or newer (tested on 3.13.15):
+### Keyless path — about one minute
+
+Python 3.11+ is required; Python 3.13.15 is tested. No packages, licence or account keys are needed.
 
 ```sh
 git clone https://github.com/himanshu748/crashcart.git
@@ -16,29 +18,44 @@ cd crashcart
 ./scripts/judge.sh
 ```
 
-Both paths use saved Sandbox records, with no new payment or AI call. To run the comparison directly:
+Expected startup output:
+
+```text
+CrashCart recorded review: http://127.0.0.1:8766/demo.html#investigation
+Both outcomes recomputed at launch. No new payment or service call.
+Press Ctrl+C to stop.
+```
+
+The command keeps the local site running. Open the printed URL, compare **Missed order** and **Recovered order (replay)**, then press Ctrl+C to stop. Without a desktop browser, use `./scripts/judge.sh --no-open --port 8767`.
+
+To check the two outcomes directly:
 
 ```sh
 python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant defective
+# exit 1: FAIL / paid_without_ticket / 0 tickets
 python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-input.json --merchant healthy
+# exit 0: PASS / ticket_delivered_once_on_time / 1 ticket
 ```
 
-The first command intentionally exits **1**: paid, no ticket. The second exits **0**: one ticket within 60 seconds. The hosted page computes results during site build; the local app recomputes them at startup.
+### Live path — your test accounts and model key
 
-## Full run in about 5 minutes — your Sandbox and AI keys
+The public site does not run this flow. Use your own PayPal Sandbox business app, separate Sandbox Personal buyer and authorized AI account. Start with `python3 -m crashcart setup`, which creates a private `.env` from [the secret-free example](.env.example).
 
-Have a PayPal Sandbox business app, a separate Sandbox buyer and an AI API key ready. Python 3.13.15 is recommended; the core workspace needs no package installation.
+Required settings: `CRASHCART_OPERATOR_TOKEN`, `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `CRASHCART_PUBLIC_URL`, `CRASHCART_ALLOW_SANDBOX=1` and `CRASHCART_ALLOW_MODEL=1`. Choose one model connection:
 
-Run `python3 -m crashcart setup`, then privately fill `.env`: `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `OPENAI_API_KEY` and `OPENAI_MODEL`. Set `CRASHCART_ALLOW_SANDBOX=1` and `CRASHCART_ALLOW_MODEL=1` only when you intend to use your test account and AI allowance.
+- **Modal / DeepSeek**, used in the 8 November run: `CRASHCART_MODEL_PROVIDER=modal`, `MODAL_API_KEY`, `MODAL_MODEL`, `MODAL_BASE_URL` and the identical `MODAL_ALLOWED_ORIGIN`.
+- **OpenAI adapter**, an optional configuration: `CRASHCART_MODEL_PROVIDER=openai`, `OPENAI_API_KEY` and `OPENAI_MODEL`.
 
 ```sh
 python3 -m crashcart migrate
 python3 -m crashcart serve
 ```
 
-In a second terminal run `python3 -m crashcart worker`. Open <http://127.0.0.1:8765>, sign in with your local workspace key, create a faulty-store check, approve the test purchase, confirm it, wait more than 60 seconds, choose **Check payment and delivery**, then **Ask the assistant**. [The five-minute guide](docs/JUDGE_GUIDE.md) covers the buyer, settings and exact clicks. Provider response times can add time.
+In a second terminal run `python3 -m crashcart worker`. Open the workspace, enter its private access key and create a workshop test-store check. Approve with the Sandbox buyer, confirm payment, wait more than 60 seconds, choose **Check payment and delivery**, then **Ask the assistant**. [Complete setup and buyer instructions](docs/JUDGE_GUIDE.md).
 
-**PayPal:** creates/captures test orders and independently reads payment status. **AI:** chooses read-only evidence tools and explains the gap. [MIT licence](LICENSE) · [Video walkthrough](docs/VIDEO_SCRIPT.md) · [Source and setup details](#full-workspace-and-optional-live-test-payments).
+**The AI proposes which records to read; fixed code decides whether the delivery promise was kept.** Never use a real-money buyer account or commit keys.
+
+[MIT licence](LICENSE) · [Video walkthrough](docs/VIDEO_SCRIPT.md) · [Health and restart instructions](docs/OPERATIONS.md) · [Final run log](docs/FINAL_RUN_LOG.md)
 
 ## See the product
 
@@ -79,7 +96,7 @@ are still pending.
 | Technology | Role in CrashCart |
 | --- | --- |
 | PayPal Sandbox | Test checkout and independent payment reads. The public demo uses saved observations. |
-| AG Grid's AG Studio | Linked payment, ticket and browser views in the configured full workspace. Requires an applicable licence. |
+| Optional local records explorer | AG Studio experiment requiring a separate applicable licence; not part of the public walkthrough or sponsor-prize claim. |
 | Bryntum Community Scheduler | Compares saved ticket timings with the delivery window in the full workspace. |
 | KERNEL | Remote test-checkout browser sessions and recordings; separately configured and authorized. |
 | Modal + DeepSeek | Selects payment and ticket observations in bounded investigations; the fresh local 8 November flow used three real requests. Modal is the model host, not a listed event sponsor. |

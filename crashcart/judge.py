@@ -25,6 +25,7 @@ INPUT_SHA256 = "07609306e1310420c49e9908ee26b2da361e42028ea6f40b5d19005d47498288
 AI_HISTORY = ROOT / "evidence/runs/submission-ready/ai-historical-summary.json"
 AI_HISTORY_SHA256 = "152c1c77dfcc219b32d7ae36c06ad7b39a35656e95f54f87a6691fe95010c8fb"
 ASSETS = ("index.html", "product.html", "integrations.html", "demo.html", "app.js", "style.css", "site.js")
+PAGE_ALIASES = {"product": "product.html", "example": "demo.html", "integrations": "integrations.html"}
 
 
 def json_bytes(value):
@@ -170,6 +171,22 @@ def prepare_review(input_path=INPUT, *, exported=False):
     files = {name: ("text/html; charset=utf-8" if name.endswith("html") else
                     "text/javascript; charset=utf-8" if name.endswith("js") else "text/css; charset=utf-8",
                     (ROOT / "web/judge" / name).read_bytes()) for name in ASSETS}
+    # Fixed directory-index redirects work on static hosts and project Pages.
+    # Land on the unchanged canonical document before it loads scripts/data;
+    # no base element, inline script or weaker CSP is needed.
+    for alias, canonical in PAGE_ALIASES.items():
+        body = (f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
+                f'<meta name="viewport" content="width=device-width,initial-scale=1">'
+                f'<meta http-equiv="refresh" content="0; url=../{canonical}">'
+                f'<link rel="canonical" href="../{canonical}">'
+                f'<title>CrashCart - {alias.capitalize()}</title></head><body>'
+                f'<p>Opening CrashCart. <a href="../{canonical}">Continue to {alias}.</a></p>'
+                f'</body></html>')
+        files[f"{alias}/index.html"] = ("text/html; charset=utf-8", body.encode())
+    files["healthz"] = ("application/json", json_bytes({
+        "status": "recorded-demo", "service": "crashcart",
+        "scope": "static-asset-serving", "live_services_checked": False,
+    }))
     files["data.json"] = ("application/json", json_bytes(data))
     files["LICENSE"] = ("text/plain; charset=utf-8", licence)
     files.update(downloads)
@@ -194,7 +211,7 @@ def export_site(destination):
 
 def make_server(files, host="127.0.0.1", port=8766):
     class ReviewHandler(BaseHTTPRequestHandler):
-        def reply(self, status, content_type, body, *, download=False):
+        def reply(self, status, content_type, body, *, download=False, location=None):
             self.send_response(status)
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(body)))
@@ -202,6 +219,8 @@ def make_server(files, host="127.0.0.1", port=8766):
             self.send_header("X-Content-Type-Options", "nosniff")
             self.send_header("Referrer-Policy", "no-referrer")
             self.send_header("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
+            if location is not None:
+                self.send_header("Location", location)
             if download:
                 self.send_header("Content-Disposition", 'attachment; filename="' + urlsplit(self.path).path.rsplit("/", 1)[-1] + '"')
             self.end_headers()
@@ -211,6 +230,11 @@ def make_server(files, host="127.0.0.1", port=8766):
         def do_GET(self):
             path = urlsplit(self.path).path
             key = "index.html" if path == "/" else path.removeprefix("/")
+            if key in PAGE_ALIASES:
+                self.reply(308, "text/plain", b"", location=f"/{key}/")
+                return
+            if key.endswith("/") and key[:-1] in PAGE_ALIASES:
+                key += "index.html"
             if key not in files:
                 self.reply(404, "application/json", b'{"error":"This review only serves recorded examples"}\n')
                 return

@@ -6,15 +6,9 @@ The public demo needs no keys. A new checkout and investigation uses your own ac
 
 Open [CrashCart](https://crashcart.52.202.25.181.sslip.io/), open the recorded example, and switch between **Missed order** and **Recovered order (replay)**. These are saved PayPal Sandbox records. The repair uses the same payment and the same 60-second rule. No payment or model request happens on this public page.
 
-For an executable local comparison, follow the README's clone and `./scripts/judge.sh` commands. Before this draft PR is merged, select its branch when cloning:
+For an executable local comparison, follow the README's main-branch clone and `./scripts/judge.sh` commands. No checkout of a submission branch is needed.
 
-```sh
-git clone --branch ship/devpost --single-branch https://github.com/himanshu748/crashcart.git
-cd crashcart
-./scripts/judge.sh
-```
-
-The normal README clone command targets the default branch after merge. It opens `http://127.0.0.1:8766/demo.html#investigation`. Press Ctrl+C to stop. Use `./scripts/judge.sh --no-open --port 8767` if that port is busy or there is no desktop browser. Python 3.11+ is required; Python 3.13.15 is tested.
+The judge command opens `http://127.0.0.1:8766/demo.html#investigation`. Press Ctrl+C to stop. Use `./scripts/judge.sh --no-open --port 8767` if that port is busy or there is no desktop browser. Python 3.11+ is required; Python 3.13.15 is tested.
 
 ## New Sandbox checkout and AI investigation
 

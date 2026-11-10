@@ -25,7 +25,9 @@ STUDIO_COLOR_SENSOR_STYLE_HASH = "'sha256-ydedGqCb79ipYJuuWRyOTMrKbkjYWv8WIjG7SR
 # A single canonical public replay bundle per server. Request paths never select
 # an input fixture, private database or arbitrary file on disk.
 RECORDED_FILES = frozenset({"index.html", "product.html", "integrations.html", "demo.html", "app.js", "style.css",
-    "site.js", "data.json", "LICENSE", "downloads/input.json", "downloads/defective.json", "downloads/healthy.json", "downloads/replay.zip"})
+    "site.js", "data.json", "LICENSE", "downloads/input.json", "downloads/defective.json", "downloads/healthy.json", "downloads/replay.zip",
+    "healthz", "product/index.html", "example/index.html", "integrations/index.html"})
+RECORDED_ALIASES = frozenset({"product", "example", "integrations"})
 RECORDED_MAX_FILE = 8 * 1024 * 1024
 RECORDED_MAX_BUNDLE = 16 * 1024 * 1024
 _RECORDED_CACHE_INIT = threading.Lock()
@@ -182,6 +184,11 @@ class Handler(BaseHTTPRequestHandler):
             self.send(308, b"", "text/plain", {"Location": "/recorded/"})
             return True
         name = path[len("/recorded/"):] or "index.html"
+        if name in RECORDED_ALIASES:
+            self.send(308, b"", "text/plain", {"Location": f"/recorded/{name}/"})
+            return True
+        if name.endswith("/") and name[:-1] in RECORDED_ALIASES:
+            name += "index.html"
         if name not in RECORDED_FILES:
             self.send(404, {"error": "Recorded page not found"})
             return True

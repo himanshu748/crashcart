@@ -49,16 +49,34 @@ class HTTPFixture(unittest.TestCase):
 
 class RecordedNamespaceUnitTests(HTTPFixture):
     """Injected, labelled bundle only; no claim of actual replay execution."""
-    def test_lazy_single_cache_thirteen_exact_members_and_private_auth(self):
+    def test_lazy_single_cache_seventeen_exact_members_and_private_auth(self):
         calls=[];files=synthetic_bundle()
         self.start(lambda:calls.append(True) or files)
-        self.assertEqual(len(RECORDED_FILES),13);self.assertEqual(self.request('/api/runs')[0],401);self.assertEqual(calls,[])
+        self.assertEqual(len(RECORDED_FILES),17);self.assertEqual(self.request('/api/runs')[0],401);self.assertEqual(calls,[])
         for name in sorted(RECORDED_FILES):
             status,body,headers=self.request('/recorded/'+name)
             self.assertEqual(status,200);self.assertEqual(body,files[name][1]);self.assertIn("script-src 'self'",headers['Content-Security-Policy']);self.assertNotIn('Set-Cookie',headers)
         self.assertEqual(len(calls),1);original=self.request('/recorded/')[1]
         files['index.html']=('text/html',b'changed builder dictionary')
         self.assertEqual(self.request('/recorded/')[1],original);self.assertEqual(self.request('/api/runs')[0],401);self.assertEqual(len(calls),1)
+    def test_fixed_aliases_redirect_without_changing_csp_or_private_access(self):
+        files = synthetic_bundle(); calls = []
+        self.start(lambda: calls.append(True) or files)
+        for alias in ('product', 'example', 'integrations'):
+            status, _, headers = self.request('/recorded/' + alias)
+            self.assertEqual(status, 308)
+            self.assertEqual(headers['Location'], '/recorded/' + alias + '/')
+            status, body, headers = self.request('/recorded/' + alias + '/')
+            self.assertEqual(status, 200)
+            self.assertEqual(body, files[alias + '/index.html'][1])
+            self.assertIn("base-uri 'none'", headers['Content-Security-Policy'])
+            self.assertEqual(self.request('/recorded/' + alias + '/data.json')[0], 404)
+            self.assertEqual(self.request('/recorded/' + alias + '/../../.env')[0], 404)
+            self.assertEqual(self.request('/recorded/' + alias + '/', 'POST', b'{}')[0], 405)
+        self.assertEqual(len(calls), 1)
+        for path in ('/recorded/product.html', '/recorded/healthz', '/api/runs'):
+            _, _, headers = self.request(path)
+            self.assertIn("base-uri 'none'", headers['Content-Security-Policy'])
     def test_concurrent_build_is_once_and_contenders_do_not_queue(self):
         calls=[];entered=threading.Event();release=threading.Event();self.addCleanup(release.set)
         def build():
@@ -117,8 +135,11 @@ class RecordedNamespaceActualReplayTests(HTTPFixture):
         from crashcart import judge
         self.assertTrue({'index.html','product.html','integrations.html','demo.html','site.js'}<=set(judge.ASSETS),'New canonical public assets must land before this check')
         self.start()
-        for name in ('','product.html','integrations.html','demo.html','app.js','site.js','style.css','LICENSE'):
+        for name in ('','product.html','integrations.html','demo.html','product/','example/','integrations/','app.js','site.js','style.css','LICENSE'):
             status,body,_=self.request('/recorded/'+name);self.assertEqual(status,200);self.assertTrue(body)
+        status,raw,headers=self.request('/recorded/healthz');self.assertEqual(status,200)
+        self.assertEqual(json.loads(raw)['status'],'recorded-demo');self.assertFalse(json.loads(raw)['live_services_checked'])
+        self.assertEqual(headers['Content-Type'],'application/json; charset=utf-8')
         status,raw,_=self.request('/recorded/data.json');self.assertEqual(status,200);data=json.loads(raw)
         self.assertEqual(data['mode'],'RECORDED_REPLAY');self.assertFalse(data['fresh_execution']);self.assertEqual(data['network_calls'],0)
         self.assertEqual(data['cases']['defective']['receipt']['signature'],'paid_without_ticket')

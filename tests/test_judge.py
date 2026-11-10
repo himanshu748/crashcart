@@ -2,6 +2,7 @@
 import hashlib
 from html.parser import HTMLParser
 import http.client
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import io
 import json
 import os
@@ -17,7 +18,7 @@ from urllib.parse import urljoin, urlsplit
 import zipfile
 
 from crashcart.judge import (AI_HISTORY, AI_HISTORY_SHA256, INPUT, INPUT_SHA256,
-                            export_site, historical_ai, make_server, prepare_review)
+                            PAGE_ALIASES, export_site, historical_ai, make_server, prepare_review)
 from crashcart.replay import ReplayError, verify_manifest
 
 
@@ -27,9 +28,12 @@ class _PublicPage(HTMLParser):
         self.ids, self.duplicates, self.links, self.current = set(), [], [], set()
         self.h1_count, self.in_title, self.title = 0, False, ''
         self.inline = []
+        self.refresh = []
 
     def handle_starttag(self, tag, attributes):
         attrs = dict(attributes)
+        if tag == 'meta' and attrs.get('http-equiv', '').lower() == 'refresh':
+            self.refresh.append(attrs.get('content'))
         if attrs.get('id'):
             if attrs['id'] in self.ids:
                 self.duplicates.append(attrs['id'])
@@ -257,6 +261,61 @@ class JudgeReviewTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'already exists'):
                 export_site(target)
 
+    def test_static_health_and_alias_targets_work_at_root_and_project_subpath(self):
+        class StaticHandler(SimpleHTTPRequestHandler):
+            def log_message(self, *_):
+                pass
+
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder) / 'crashcart'
+            with patch.object(socket.socket, 'connect', side_effect=AssertionError('Export must stay offline')):
+                export_site(target)
+            for prefix, directory in (('/', target), ('/crashcart/', target.parent)):
+                with self.subTest(prefix=prefix):
+                    def handler(*args, **kwargs):
+                        return StaticHandler(*args, directory=str(directory), **kwargs)
+                    server = ThreadingHTTPServer(('127.0.0.1', 0), handler)
+                    thread = threading.Thread(target=server.serve_forever, daemon=True)
+                    thread.start()
+                    try:
+                        def request(path):
+                            client = http.client.HTTPConnection('127.0.0.1', server.server_port, timeout=5)
+                            try:
+                                client.request('GET', path)
+                                response = client.getresponse()
+                                return response.status, dict(response.getheaders()), response.read()
+                            finally:
+                                client.close()
+                        status, _, raw = request(prefix + 'healthz')
+                        self.assertEqual(status, 200)
+                        self.assertEqual(json.loads(raw), {
+                            'status': 'recorded-demo', 'service': 'crashcart',
+                            'scope': 'static-asset-serving', 'live_services_checked': False,
+                        })
+                        for alias, canonical in PAGE_ALIASES.items():
+                            status, headers, _ = request(prefix + alias)
+                            self.assertEqual(status, 301)
+                            self.assertEqual(headers['Location'], prefix + alias + '/')
+                            status, _, body = request(prefix + alias + '/')
+                            self.assertEqual(status, 200)
+                            self.assertEqual(body, self.files[alias + '/index.html'][1])
+                            page = _PublicPage()
+                            page.feed(body.decode())
+                            self.assertEqual(page.inline, [])
+                            self.assertEqual(page.refresh, ['0; url=../' + canonical])
+                            self.assertEqual(page.links, [('link', '../' + canonical), ('a', '../' + canonical)])
+                            resolved = urlsplit(urljoin('http://127.0.0.1' + prefix + alias + '/', '../' + canonical))
+                            self.assertEqual(resolved.path, prefix + canonical)
+                            status, _, document = request(resolved.path)
+                            self.assertEqual(status, 200)
+                            self.assertEqual(document, self.files[canonical][1])
+                            # The canonical example loads its original relative data URL.
+                            status, _, data = request(urlsplit(urljoin(resolved.geturl(), 'data.json')).path)
+                            self.assertEqual(status, 200)
+                            self.assertEqual(json.loads(data)['mode'], 'RECORDED_REPLAY')
+                    finally:
+                        server.shutdown(); server.server_close(); thread.join(timeout=5)
+
     def test_http_only_serves_frozen_allowlist_and_rejects_live_actions(self):
         server=make_server(self.files,port=0)
         thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
@@ -274,6 +333,19 @@ class JudgeReviewTests(unittest.TestCase):
                 if name.startswith('downloads/'):
                     self.assertIn('attachment',headers['Content-Disposition'])
             self.assertEqual(self.files['index.html'][1],request('GET','/')[2])
+            for alias in PAGE_ALIASES:
+                status, headers, _ = request('GET', '/' + alias)
+                self.assertEqual(status, 308)
+                self.assertEqual(headers['Location'], '/' + alias + '/')
+                status, headers, body = request('GET', '/' + alias + '/')
+                self.assertEqual(status, 200)
+                self.assertEqual(body, self.files[alias + '/index.html'][1])
+                self.assertIn("base-uri 'none'", headers['Content-Security-Policy'])
+            self.assertIn("base-uri 'none'", request('GET', '/product.html')[1]['Content-Security-Policy'])
+            status, headers, body = request('GET', '/healthz')
+            self.assertEqual(status, 200)
+            self.assertEqual(headers['Content-Type'], 'application/json')
+            self.assertEqual(json.loads(body)['status'], 'recorded-demo')
             for path in ('/.env','/../.env','/%2e%2e/.env','/api/runs','/shop','/api/health','/downloads/unknown.json'):
                 self.assertEqual(404,request('GET',path)[0],path)
             for method in ('POST','PUT','PATCH','DELETE'):

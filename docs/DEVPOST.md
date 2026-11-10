@@ -12,9 +12,9 @@ Find the missing step between a PayPal payment and delivery.
 
 CrashCart helps small merchants investigate “I paid, but nothing arrived.” The prototype follows a $29 workshop purchase with a clear promise: one ticket within 60 seconds of payment.
 
-Open the account-free recorded walkthrough, inspect the missing ticket, filter the timeline by source and compare the recovered order. The healthy replay delivers one ticket in 32.26 seconds using the same saved input and deadline. Download the replay to run both outcomes locally.
+Open the account-free recorded walkthrough, inspect the missing ticket, filter the timeline by source and compare the recovered order. The healthy 32.26-second repair uses a separate saved checkout input, not a new purchase. Its faulty and healthy variants use the same payment input and deadline. Download the replay to run both outcomes locally.
 
-A separate completed run from 8 November shows an actual PayPal test payment followed by a real AI investigation of that same order. DeepSeek checked PayPal, checked ticket records and cited the missing delivery. Showing that saved result starts no new payment or model call. The public walkthrough is recorded; it is not a live merchant connection.
+The completed 8 November 2026 run used real PayPal Sandbox Orders v2 create, capture and get, followed by real DeepSeek calls through Modal on that same order. DeepSeek checked PayPal, checked ticket records and cited the missing delivery. Showing that saved result starts no new payment or model call. The public walkthrough is recorded; it is not a live merchant connection.
 
 ## How we built it
 
@@ -22,7 +22,7 @@ Python, SQLite and a background worker keep payment requests, purchases, observa
 
 DeepSeek-V4.1-Flash, served through Modal, chooses which payment and ticket records to read and explains its findings. Fixed rules decide whether payment and delivery meet the promise.
 
-The optional full workspace uses AG Grid's AG Studio to explore linked payment, ticket and checkout records, Bryntum Community Scheduler for delivery timing, KERNEL for remote checkout sessions and recordings, and Postman/Newman for executable API checks. These extra views need their own setup. The public walkthrough needs no keys.
+The local workspace also contains optional record-exploration tools. Bryntum Community Scheduler compares saved ticket times with the delivery window. KERNEL supported remote checkout experiments; Postman/Newman provide executable API checks. These tools are separate from the keyless walkthrough.
 
 ## Challenges
 
@@ -42,7 +42,7 @@ Validate Shopify and WooCommerce connections with owned stores, broaden delivery
 
 ## Built with
 
-Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST APIs, AG Studio, Bryntum Community Scheduler, KERNEL, Modal, DeepSeek, Postman, Newman.
+Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST (Orders v2, webhook verification), Modal, DeepSeek, Postman, Newman.
 
 ## Try-it links
 
@@ -50,4 +50,4 @@ Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST APIs, AG Studio, Bry
 - GitHub Pages older recorded preview: https://himanshu748.github.io/crashcart/
 - Source and local setup: https://github.com/himanshu748/crashcart
 - Completed payment-and-AI run: https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md
-- Video: **[OWNER: insert the actual public YouTube watch URL before submitting.]**
+- Video: `<YOUTUBE_URL>`
