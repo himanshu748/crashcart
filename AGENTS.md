@@ -73,7 +73,7 @@ Use the optional engineering playbook (not included in this source snapshot) whe
 
 ## CrashCart completion contract
 
-BUILD_CHECKLIST.md defines the agreed scope and acceptance criteria. STATUS.md records current unfinished work and blockers. Start a build session by reading the current status and relevant phase. Read other documents when that work requires them.
+docs/archive/BUILD_CHECKLIST.md defines the agreed scope and acceptance criteria. docs/archive/STATUS.md records current unfinished work and blockers. Start a build session by reading the current status and relevant phase. Read other documents when that work requires them.
 
 Only verified requirements may receive [x]. Code written, a passing build, or a screenshot is insufficient when the requirement calls for runtime or integration behavior. Save the actual verification result and supporting artifacts under evidence/CC-NNN/ and identify the tested source revision.
 
@@ -91,4 +91,4 @@ Use only owned registered merchant fixtures and sandbox payments for this build.
 
 If blocked, record the exact missing dependency and continue independent authorized work. Ask only for the smallest necessary input once useful unblocked work is exhausted or that input is needed to proceed.
 
-Before ending, update STATUS.md with verified IDs, evidence, failed or blocked IDs, and the next action. Report the verified count accurately. Say "project complete" only after the final release gate passes.
+Before ending, update docs/archive/STATUS.md with verified IDs, evidence, failed or blocked IDs, and the next action. Report the verified count accurately. Say "project complete" only after the final release gate passes.

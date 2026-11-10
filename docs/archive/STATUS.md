@@ -2,6 +2,10 @@
 
 **Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 10 November 2026 (India).
 
+## 10 November — owner-authorized local sponsor branch
+
+Sponsor and backend preparation continues only on `sponsor-prizes-nov10`. Public main and the submitted entry remain unchanged pending the owner's exact `submit` instruction. The historical 47/60 baseline is not a certification of the changed tree; no new CC ID is closed. Current tests, remaining licence coverage and proposed publishing actions are in [the sponsor run log](../SPONSOR_PRIZE_RUN_LOG.md) and [STOP report](../SPONSOR_PRIZE_STOP.md).
+
 ## 10 November — submitted and frozen
 
 **Submitted 10 November 2026, 14:31:32 IST.** [Devpost entry](https://devpost.com/software/crashcart-87asqz) · [Public video](https://www.youtube.com/watch?v=gFWje84_wEA). The official submission response and fresh project readback both report submission 1268551; the browser shows **SUBMITTED, 5/5 steps done**. Screenshot saved locally at `evidence/submission/devpost-submitted.jpg`.
