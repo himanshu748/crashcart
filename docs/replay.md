@@ -12,8 +12,10 @@ are preserved. Neither recording was edited to produce a pass.
 
 Executing either now is **recorded replay**, not a new transaction or fresh
 repair verification. The early case's first usable payment read is about 32.26
-seconds after capture, so the real fulfillment code can deliver before the
-unchanged 60-second deadline. Its defective variant still delivers zero tickets.
+seconds after capture. The healthy variant applies the repaired merchant rule
+(fulfil on confirmed reconciliation) using the real `Store.fulfill` operation at
+that recorded time, before the unchanged 60-second deadline. It does **not**
+re-run `MerchantService` or make a new provider request. Its defective variant still delivers zero tickets.
 Raw provider receipts and original recordings are not included. The schema and
 hashes alone cannot authenticate historical origin. Synthetic unit fixtures
 remain `LOCAL_TEST`.
@@ -59,13 +61,26 @@ The package schema uses only allowlisted data fields and step types. Unknown int
 
 `replay(package, merchant="defective", steps=None)` executes the ordered steps in a fresh temporary database. A private instance of the Store module receives the recorded clock, without changing the application's shared clock. All confirmation constraints, ticket uniqueness and fulfillment guards execute against the real SQLite implementation. Original source identities remain in the tape; the output identifies their mapping into the isolated replay namespace.
 
-At capture, the response-loss branch preserves unresolved merchant state. The interruption branch additionally reopens the durable Store at the recorded after-capture boundary. This is an offline simulation of process interruption, not proof that an operating-system process was killed. Independent recorded retrieval confirms payment. The defective merchant leaves delivery absent; the healthy merchant invokes `Store.fulfill` at that **same recorded retrieval time**. Repeated reconciliation still produces one ticket.
+At capture, the response-loss branch preserves unresolved merchant state. The interruption branch additionally reopens the durable Store at the recorded after-capture boundary. This is an offline simulation of process interruption, not proof that an operating-system process was killed. Independent recorded retrieval confirms payment. Replay applies the repaired merchant rule directly; it does not re-run `MerchantService`. The defective merchant leaves delivery absent; the healthy merchant invokes `Store.fulfill` at that **same recorded retrieval time**. Repeated reconciliation still produces one ticket.
 
 The fixed evaluation time must equal the latest captured merchant payload's `observed_at`. The output names that observation. A journal envelope appended later cannot extend the state-observation horizon, and later executable provider interactions require a subsequent merchant observation. A later browser observation is preserved as source evidence only and is excluded from executable steps beyond that horizon. A pre-order browser observation may have no order ID only before the first recorded order creation, with run and purchase identities still matched. Advancing only `evaluate_at` is rejected, so a three-second observation cannot become evidence of missing delivery beyond 60 seconds. The final merchant state is queried from the replay database at that bound time, including after reduction removes display steps.
 
 Source records must retain chronological order. Exactly one fault activation must occur after observed approval and before the capture response in both source order and time. A process interruption additionally requires exactly one boundary after that response and before recovery/entitlement observations; response loss cannot claim this process boundary.
 
 Healthy delivery cannot be backdated: if the first usable recorded reconciliation occurs after the 60-second deadline, healthy replay fails with `ticket_delivered_late`. A package without a timely read needs a new actual observation/run to establish timely recovery; changing timestamps would invalidate evidence.
+
+## Connection guard and measured count
+
+Every `replay()` call installs a context-local audit guard for Python's
+`socket.connect` event, which also covers `socket.connect_ex`. Connection
+attempts are counted and blocked before a socket connects. The returned
+`network_calls` is this measured attempt count, not a fixed success claim.
+An uncaught attempt fails replay with `ReplayError`; even if unexpected replay
+code catches that error, the returned count remains nonzero. Normal recorded
+executions measure zero. Calls outside replay and other threads are unaffected;
+the current scope is restored on return or exception. This is an in-process
+Python socket boundary, not a network sandbox for arbitrary native code or
+child processes. Replay imports no live adapter and starts no child process.
 
 ## Reduction and command line
 

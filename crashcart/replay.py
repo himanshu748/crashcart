@@ -6,12 +6,14 @@ Synthetic inputs remain LOCAL_TEST through replay, reduction and export.
 """
 import argparse
 from copy import deepcopy
+from contextvars import ContextVar
 from datetime import datetime, timezone
 import hashlib
 import importlib.util
 import json
 from pathlib import Path, PurePosixPath
 import re
+import sys
 import tempfile
 import zipfile
 
@@ -20,6 +22,28 @@ from .invariant import DEFAULT_INVARIANT, evaluate
 
 class ReplayError(ValueError):
     pass
+
+
+# One dormant audit hook enforces the boundary only in the current replay
+# context. Unlike replacing socket.socket.connect, it does not alter sockets in
+# other threads and covers both connect() and connect_ex(). Each active nested
+# replay measures attempts made inside its own scope, including nested calls.
+_CONNECTION_GUARDS: ContextVar[tuple[list[int], ...]] = ContextVar(
+    "crashcart_replay_connection_guards", default=()
+)
+
+
+def _deny_replay_connection(event, args, guards=_CONNECTION_GUARDS):
+    if event != "socket.connect":
+        return
+    active = guards.get()
+    if active:
+        for counter in active:
+            counter[0] += 1
+        raise ReplayError("Offline replay blocked a socket connection attempt")
+
+
+sys.addaudithook(_deny_replay_connection)
 
 
 WORKSPACE_IMPORT_VERSION = "replay-workspace-v1"
@@ -412,6 +436,18 @@ def _clocked_store(path, clock):
 
 
 def replay(package, merchant="defective", steps=None, *, include_state=False):
+    """Execute recorded input with connection attempts blocked and measured."""
+    counter = [0]
+    token = _CONNECTION_GUARDS.set((*_CONNECTION_GUARDS.get(), counter))
+    try:
+        result = _replay(package, merchant, steps, include_state=include_state)
+        result["network_calls"] = counter[0]
+        return result
+    finally:
+        _CONNECTION_GUARDS.reset(token)
+
+
+def _replay(package, merchant="defective", steps=None, *, include_state=False):
     if type(include_state) is not bool:
         raise ReplayError("include_state must be boolean")
     tape = validate_package(package)
@@ -476,7 +512,7 @@ def replay(package, merchant="defective", steps=None, *, include_state=False):
                              key=lambda r: timestamp(observation_time(r)))
         result = {**verdict, "mode": mode, "source_mode": tape["source"]["mode"], "merchant_variant": merchant,
                 "source_authenticity": "not authenticated by replay; inspect original service evidence",
-                "network_calls": 0, "ticket_count": actual["ticket_count"], "trace": trace, "store_reopens": restart_count,
+                "ticket_count": actual["ticket_count"], "trace": trace, "store_reopens": restart_count,
                 "input_sha256": digest(tape), "invariant": tape["invariant"], "fault": tape["fault"],
                 "operation_mapping": operation_mapping,
                 "evaluation": {"at": tape["evaluate_at"], "merchant_observation_id": horizon_record["id"]},

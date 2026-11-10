@@ -50,6 +50,8 @@ python3 -m crashcart.replay run evidence/runs/paypal-live/early-response-loss-in
 ./scripts/test-judge.sh
 ```
 
+The healthy replay applies the repaired fulfil-on-confirmed-reconciliation rule to the same recorded input; it does not re-run `MerchantService`.
+
 The defective command intentionally exits 1. Both variants use the unchanged payment input and 60-second rule. The separate original late-read tape still fails correctly; it has not been rewritten to manufacture a pass.
 
 ## Run your own Sandbox checkout
