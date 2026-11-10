@@ -66,6 +66,15 @@ The [previous shared host](LIGHTSAIL_SHARED_HOST.md) remains intact; its firewal
 applications and proxy were not changed for this release. Do not restart its
 shared proxy to repair the new dedicated demo.
 
-The [Pages mirror](https://himanshu748.github.io/crashcart/) publishes through the
-**Recorded walkthrough** workflow after successful **Source behavior** CI on main.
-Inspect the deployment result before claiming that mirror has updated.
+The [Pages mirror](https://himanshu748.github.io/crashcart/) publishes through a
+manual **Recorded walkthrough** workflow. Merging does not publish it. After the
+owner separately approves this Pages deployment, run:
+
+```sh
+gh workflow run judge-pages.yml --ref main --repo himanshu748/crashcart
+```
+
+The workflow refuses a non-main ref or a main commit without successful
+**Source behavior** CI. It rebuilds the keyless export from that exact commit and
+runs the public replay, judge and asset checks before uploading. Inspect the
+deployment result and the served page before claiming the mirror has updated.

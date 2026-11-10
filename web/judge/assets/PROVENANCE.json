@@ -1,0 +1,47 @@
+{
+  "retrieved_date": "2026-11-10",
+  "gsap": {
+    "version": "3.15.1",
+    "source": "https://registry.npmjs.org/gsap/-/gsap-3.15.1.tgz",
+    "license": "Standard no-charge GSAP licence (not MIT)",
+    "license_source": "https://gsap.com/community/standard-license/",
+    "tarball_sha256": "c70a3bcf656015f32b4f6456e686034564c90d64280db535cfbd84de4497d988",
+    "local_normalization": "Trailing spaces in the copyright comment and final empty lines removed; code and licence notices retained.",
+    "files": {
+      "gsap.min.js": "9d9e0d0b8a885a1445e0a6960af890e9ff99608e73ce300040a1e7ec05bfce00",
+      "ScrollTrigger.min.js": "b52f2459961e3857c924b46d52a1c7854a8446dde04b6362e63ca146c9324141"
+    }
+  },
+  "instrument_serif": {
+    "fontsource_version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource/instrument-serif/-/instrument-serif-5.3.0.tgz",
+    "license": "SIL OFL 1.1",
+    "tarball_sha256": "b342b7a7844a0025bc6185a28dd23e8b382202d73a5a574e3bf6d969bef3875d"
+  },
+  "manrope": {
+    "fontsource_version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource-variable/manrope/-/manrope-5.3.0.tgz",
+    "license": "SIL OFL 1.1",
+    "tarball_sha256": "9629a2474e2bd73944d83392c856e268193d42c3954455bd6adb3d1ea74aa27a"
+  },
+  "media": {
+    "delivery-timing.webp": {
+      "source": "docs/images/crashcart-delivery-timing.png",
+      "source_sha256": "176121698a468b94e460e5e2b5246c6c2feb9842903c38f36844c8c81497ffbc",
+      "output_sha256": "cf1d49e28e82c6e693142ac2093b4c8dc8102692b0767154314a5cf901eaf881",
+      "operation": "cwebp resize to width1100 with original aspect ratio; no content editing",
+      "quality": 76,
+      "width": 1100,
+      "height": 619
+    },
+    "payment-evidence.webp": {
+      "source": "docs/images/crashcart-recorded-ai-desktop-expanded.jpg",
+      "source_sha256": "98af052d709068f70dc51fc2213cde1278b18e63e924cc1ce72074d3a359a9d7",
+      "output_sha256": "b6a187743a21a88a4746f3fb8fe757d0fb82ad6ef23af52112fc81ab3e6ec83c",
+      "operation": "cwebp resize to width1100 with original aspect ratio; no content editing",
+      "quality": 78,
+      "width": 1100,
+      "height": 800
+    }
+  }
+}

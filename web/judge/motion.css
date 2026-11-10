@@ -1,0 +1,49 @@
+/* Shared presentation layer. All recorded values and verdict text stay untouched. */
+:root { --display: 'Instrument Serif', Georgia, serif; --sans: 'Manrope', system-ui, sans-serif; }
+html { scroll-behavior: smooth; }
+body { overflow-wrap: break-word; }
+.btn, .pill, .next-card, .int-card, .bar-nav a, .compare-card { transition: transform .22s cubic-bezier(.2,.7,.2,1), opacity .22s; }
+@media (hover: hover) { :where(.btn,.next-card,.int-card):hover { transform: translateY(-3px); } }
+:where(.btn,.pill):active { transform: scale(.98); }
+.bar { position: relative; z-index: 10; }
+.compare-card, .fact, .glance, .failure-ai-panel, .ai-story-panel { min-width: 0; }
+.compare-card.is-selected { outline: 2px solid currentColor; outline-offset: 3px; }
+.pt-node { transition: transform .35s, opacity .35s; }
+.pt-fill { width: 100% !important; transform-origin: left center; transform: scaleX(0); transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.promise[data-story='payment'] .pt-fill { transform: scaleX(.12); }
+.promise[data-story='delivery'] .pt-fill { transform: scaleX(1); }
+.promise[data-story='repair'] .pt-fill { transform: scaleX(.5376903833); }
+.sim-fill, .sim-record { transition: none; }
+.sim-fill { transform-origin: left center; }
+.sim { overflow: clip; }
+.sim-now { left: 0; width: 100%; background: transparent; pointer-events: none; }
+.sim-now::before { content: ''; display: block; width: 2px; height: 100%; border-radius: 2px; background: var(--ink); }
+.motion-count-source { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.motion-count-visual { font-variant-numeric: tabular-nums; }
+/* Cross-document navigation stays native. Only supporting browsers crossfade snapshots. */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: cc-out .18s ease-out both; }
+::view-transition-new(root) { animation: cc-in .28s ease-out both; }
+@keyframes cc-out { to { opacity: 0; transform: translateY(-4px); } }
+@keyframes cc-in { from { opacity: 0; transform: translateY(5px); } }
+@media (max-width: 767px) {
+  .promise { padding: 18px; }
+  .promise-track { grid-template-columns: auto minmax(30px,1fr) auto; gap: 6px; }
+  .pt-node { min-width: 0; padding: 0 8px; font-size: .68rem; }
+  .pt-deadline { grid-column: 2 / 4; justify-self: end; }
+  .compare { grid-template-columns: 1fr; }
+  .compare-card { padding: 22px; }
+  .story-controls { gap: 6px; }
+  .story-controls button { padding-inline: 12px; }
+  .bar-nav { width: 100%; margin-left: 0; justify-content: space-between; }
+  .bar-nav a { padding: 8px 5px; font-size: .8rem; }
+  .sim-controls { flex-wrap: wrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+.reduce-motion { scroll-behavior: auto; }
+.reduce-motion *, .reduce-motion *::before, .reduce-motion *::after { animation: none !important; transition: none !important; }
+.reduce-motion::view-transition-group(*), .reduce-motion::view-transition-old(*), .reduce-motion::view-transition-new(*) { animation: none !important; }
