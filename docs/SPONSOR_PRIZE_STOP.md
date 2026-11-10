@@ -1,5 +1,10 @@
 # Sponsor-prize STOP report
 
+**Historical approval record:** the owner replied exactly `submit` on 10 November.
+Execution and subsequent dedicated-host authorization are recorded in
+[the run log](SPONSOR_PRIZE_RUN_LOG.md). Statements below describe preparation
+at 16:28 IST; consult the log for actual publication and remaining licence blockers.
+
 Prepared 10 November 2026, 16:28 IST. Branch: `sponsor-prizes-nov10`. Runtime/source tested: `244bd112916aad1e954f28a5efc3ab477966f54a`. Subsequent report-only changes do not change that runtime. Remote main remains `1cc49d9e2ff7156e36ed11155b787eca7261c214`.
 
 **Nothing pushed, merged, deployed, messaged or edited on Devpost/YouTube. No new PayPal, model or KERNEL call. No spending or billing change.** The existing submission remains the submitted entry; this work does not create another entry or close a CC requirement.

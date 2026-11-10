@@ -1,8 +1,9 @@
 # Recorded Studio release — prepared, not deployed
 
-This optional explorer is a local feature-branch build. Main, the public sites,
-the submitted entry and video remain unchanged. Public release needs the owner's
-exact `submit` instruction and an applicable vendor entitlement.
+The optional explorer is tested locally but remains unpublished. The owner
+approved the STOP actions with exact `submit`; the recorded core has since
+merged and deployed. The existing video is unchanged. Publishing this licensed
+explorer still requires applicable vendor coverage through 22 December.
 
 ## Local preflight
 
@@ -65,7 +66,9 @@ No judging-period key has been delivered/configured here. The existing private
 trial ends 17 December; it does not establish coverage through 22 December.
 Local evaluation is separate from a permitted public release. No key is in Git.
 
-Prepared message for the official AG Grid hackathon channel, **not sent**:
+The question was sent to the official AG Grid hackathon channel on 10 November
+at 16:59 IST, then edited into plainer wording at 17:09 IST. No reply or key is yet
+confirmed. [Message](https://discord.com/channels/1491162723361362021/1555253366999752814/1569675439784591370). Original approved draft:
 
 > CrashCart is already submitted to the PayPal AI Hackathon. We use AG Studio
 > 3.0.0 with five custom evidence panels, a themed layout and the native Agent

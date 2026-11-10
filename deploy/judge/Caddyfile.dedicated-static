@@ -1,0 +1,24 @@
+{
+	admin off
+}
+
+crashcart.32.193.44.79.sslip.io {
+	root * /srv
+	encode zstd gzip
+	@writes not method GET HEAD
+	respond @writes "Recorded example is read-only" 405
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+		Cache-Control no-store
+	}
+	@product path /product
+	rewrite @product /product.html
+	@example path /example
+	rewrite @example /demo.html
+	@integrations path /integrations
+	rewrite @integrations /integrations.html
+	header /downloads/* Content-Disposition "attachment"
+	file_server
+}

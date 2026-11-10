@@ -46,7 +46,7 @@ Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST (Orders v2, webhook 
 
 ## Try-it links
 
-- Recorded walkthrough: https://crashcart.52.202.25.181.sslip.io/
+- Recorded walkthrough: https://crashcart.32.193.44.79.sslip.io/
 - GitHub Pages recorded-demo mirror: https://himanshu748.github.io/crashcart/
 - Source and local setup: https://github.com/himanshu748/crashcart
 - Completed payment-and-AI run: https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md

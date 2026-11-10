@@ -1,6 +1,6 @@
 # CrashCart on the existing Lightsail host
 
-**Live:** https://crashcart.52.202.25.181.sslip.io/
+**Previous shared-host URL (retained; no longer the primary demo):** https://crashcart.52.202.25.181.sslip.io/
 
 Verified 8 November 2026. This serves the interactive **recorded demo**: replay
 results computed during export and a separate historical AI investigation.
