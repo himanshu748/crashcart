@@ -108,7 +108,7 @@ its test-only credentials through the submission's private testing instructions.
 
 ## Evidence
 
-`BUILD_CHECKLIST.md` defines the acceptance contract; [STATUS.md](STATUS.md)
+[The archived build checklist](archive/BUILD_CHECKLIST.md) defines the acceptance contract; [STATUS.md](archive/STATUS.md)
 records the public development status. The maintainer's private evidence archive
 binds runtime observations to source hashes. It is intentionally excluded from
 source publication, along with `.env`, databases, payment/account receipts,
@@ -171,7 +171,7 @@ The page uses authenticated, same-origin `GET /api/runs` and
 PayPal, start a checkout, run a model or change delivery. Viewing a saved test
 payment is distinct from a fresh sandbox verification. Historical local browser checks cover saved-record selection, filters and
 keyboard interactions. These do not establish a complete fresh checkout and
-repair comparison; [STATUS.md](STATUS.md) records the current boundaries.
+repair comparison; [STATUS.md](archive/STATUS.md) records the current boundaries.
 
 Build both frontend entries with the existing Node.js **22.14.0** toolchain:
 
@@ -198,14 +198,14 @@ eligible regression archives through the application. A reduced replay can remov
 a timely read that the repaired comparison needs, so a reduced failure alone
 must not be presented as proof of recovery.
 
-See [architecture](architecture.md), [invariant and scope](product-contract.md),
+See [architecture](ARCHITECTURE.md), [invariant and scope](product-contract.md),
 [investigator](investigator.md), [offline replay](replay.md),
 [Postman](postman.md), and [sponsor ledger](sponsor-ledger.md).
 
 The CI workflow is configured. A source commit or push does not establish that
 CI passed; inspect the repository's actual Actions results. Offline unit tests
 use synthetic `LOCAL_TEST` transports where needed. Live acceptance checks and
-release limitations remain separate in [STATUS.md](STATUS.md). The hosted recorded review serves build-time results; the live checkout backend is separate.
+release limitations remain separate in [STATUS.md](archive/STATUS.md). The hosted recorded review serves build-time results; the live checkout backend is separate.
 The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted on 10 November 2026. Submission does not close the remaining internal acceptance checks.
 
 ## Submission materials

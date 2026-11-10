@@ -115,7 +115,7 @@ from pathlib import Path
 from scripts.check_completion import checklist_items, digest
 
 root = Path.cwd()
-items, errors = checklist_items((root / "BUILD_CHECKLIST.md").read_text())
+items, errors = checklist_items((root / "docs/archive/BUILD_CHECKLIST.md").read_text())
 assert not errors
 acceptance_sha256 = items["CC-006"]["acceptance_sha256"]
 rules_sha256 = digest(root / "scripts/requirements.json")

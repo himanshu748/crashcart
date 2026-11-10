@@ -92,7 +92,7 @@ Shopify and WooCommerce connectors have local signed-event tests, but **no real 
 
 ## Project and submission
 
-[MIT licence](LICENSE) covers CrashCart’s source; vendor packages retain their own terms. [Health and restart](docs/OPERATIONS.md) · [Architecture](docs/architecture.md) · [Replay details](docs/replay.md).
+[MIT licence](LICENSE) covers CrashCart’s source; vendor packages retain their own terms. [Health and restart](docs/OPERATIONS.md) · [Architecture](docs/ARCHITECTURE.md) · [Replay details](docs/replay.md).
 
 [Devpost entry](https://devpost.com/software/crashcart-87asqz), submitted 10 November 2026 · [Submission text](docs/DEVPOST.md) · [Video script](docs/VIDEO_SCRIPT.md).
 

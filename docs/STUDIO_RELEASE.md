@@ -49,10 +49,13 @@ the complete shared config before reload. It internally rewrites `/product`,
 `/example` and `/integrations`. The local Python server already serves those
 extensionless routes directly. Pages directory aliases remain compatible.
 
-Docker is unavailable on this Mac (no daemon socket), so the template has not
-been validated by Caddy or deployed. Python HTTP tests do not prove proxy
-behavior. A future authorized deployment must preserve the other applications,
-validate the shared config and inspect actual HTTP headers and public URLs.
+The template passed local Caddy 2.11.9 validation and an HTTP-only loopback
+preflight: eight routes returned 200, extensionless pages served directly,
+writes returned 405, and actual Studio rendered with its route-specific CSP.
+The temporary proxy was stopped. This does not establish live-host HTTPS or
+compatibility with that host's complete shared configuration. A future
+authorized deployment must preserve the other applications, validate that full
+configuration and inspect actual HTTPS headers and public URLs.
 
 ## Licence decision
 
