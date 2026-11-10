@@ -2,6 +2,12 @@
 
 **Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 10 November 2026 (India).
 
+## 10 November, 21:49 IST — small landing polish prepared
+
+`landing-motion-nov10` preserves PR #5 and changes only landing labels/disclosure and responsive CSS. Runtime `941974b` passes the fresh-clone suite, both zero-network replays, five browser widths, keyboard/reduced motion and Lighthouse (mobile 96/100/100/100; desktop 100/100/100/100). A new actual 20-second browser scroll video is locally frame-reviewed. [Screenshots and local results](../LANDING_MOTION_STOP.md) · [Dedicated-host deploy/rollback plan](../LANDING_HOST_PLAN.md).
+
+Historical **47/60** remains frozen; no CC IDs newly verified or reclassified. The initial unsupported-Python launch was resolved with Python 3.13, without changing `judge.sh`. This branch has no public action: next exact `submit` permits its push and PR together; merge, Pages, dedicated host and each branch deletion stay separately gated. Main is `2aa20c5`; Pages has PR #5 and the dedicated host still has the older landing. Earlier candidate publication statements below are historical.
+
 ## 10 November — landing and motion candidate (local)
 
 The `ui-motion-nov10` branch redesigns the public landing and adds presentation-only motion to the recorded demo/product. Fresh-clone checks pass: 598 Python, 97 JavaScript, 17 judge and 58 Studio/timing/presentation tests; Ruff/mypy and build pass. Mobile and desktop Lighthouse are100/100/100/100. The first full run exposed a public-asset allowlist mismatch causing `/recorded/`503; the cause is fixed and the same integration test now passes. Payment rules, replay fixtures and the invariant are unchanged.
