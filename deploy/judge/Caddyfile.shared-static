@@ -11,6 +11,13 @@ crashcart.52.202.25.181.sslip.io {
 		Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
 		Cache-Control no-store
 	}
+	# Internal rewrites keep the canonical document at its public route.
+	@product path /product
+	rewrite @product /product.html
+	@example path /example
+	rewrite @example /demo.html
+	@integrations path /integrations
+	rewrite @integrations /integrations.html
 	header /downloads/* Content-Disposition "attachment"
 	file_server
 }
