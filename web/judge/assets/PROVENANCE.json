@@ -5,7 +5,12 @@
     "source": "https://registry.npmjs.org/gsap/-/gsap-3.15.1.tgz",
     "license": "Standard no-charge GSAP licence (not MIT)",
     "license_source": "https://gsap.com/community/standard-license/",
-    "tarball_sha256": "c70a3bcf656015f32b4f6456e686034564c90d64280db535cfbd84de4497d988"
+    "tarball_sha256": "c70a3bcf656015f32b4f6456e686034564c90d64280db535cfbd84de4497d988",
+    "local_normalization": "Trailing spaces in the copyright comment and final empty lines removed; code and licence notices retained.",
+    "files": {
+      "gsap.min.js": "9d9e0d0b8a885a1445e0a6960af890e9ff99608e73ce300040a1e7ec05bfce00",
+      "ScrollTrigger.min.js": "b52f2459961e3857c924b46d52a1c7854a8446dde04b6362e63ca146c9324141"
+    }
   },
   "instrument_serif": {
     "fontsource_version": "5.3.0",
