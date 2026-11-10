@@ -4,6 +4,7 @@ No credential, ledger initialization, injected model, deployment, webhook or
 remote-browser launch is provided here. API and worker require the same existing
 private state/ledger and an explicit finite access window.
 """
+
 import argparse
 from datetime import datetime, timezone
 import hashlib
@@ -36,10 +37,20 @@ CASE_LIMIT = 8
 ALLOWED_MODES = {"LIVE_SANDBOX", "FRESH_SANDBOX"}
 ALLOWED_ACTIONS = {"order", "capture", "reconcile", "observation", "investigation-job", "cancel"}
 _SECRET_NAMES = {"CRASHCART_OPERATOR_TOKEN", "PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET", "MODAL_API_KEY"}
-_ALLOWED_NAMES = _SECRET_NAMES | {"CRASHCART_PUBLIC_URL", "CRASHCART_MODEL_PROVIDER", "MODAL_MODEL",
-    "MODAL_ALLOWED_ORIGIN", "MODAL_BASE_URL", "CRASHCART_MODEL_ALLOWANCE_PATH", "CRASHCART_ALLOW_MODEL",
-    "CRASHCART_ALLOW_SANDBOX", "CRASHCART_ALLOW_KERNEL", "CRASHCART_ALLOW_PROCESS_INTERRUPT",
-    "CRASHCART_EVALUATION_MODE", "CRASHCART_LIVE_WINDOW_EXPIRES_AT"}
+_ALLOWED_NAMES = _SECRET_NAMES | {
+    "CRASHCART_PUBLIC_URL",
+    "CRASHCART_MODEL_PROVIDER",
+    "MODAL_MODEL",
+    "MODAL_ALLOWED_ORIGIN",
+    "MODAL_BASE_URL",
+    "CRASHCART_MODEL_ALLOWANCE_PATH",
+    "CRASHCART_ALLOW_MODEL",
+    "CRASHCART_ALLOW_SANDBOX",
+    "CRASHCART_ALLOW_KERNEL",
+    "CRASHCART_ALLOW_PROCESS_INTERRUPT",
+    "CRASHCART_EVALUATION_MODE",
+    "CRASHCART_LIVE_WINDOW_EXPIRES_AT",
+}
 
 
 class HostedLiveError(Exception):
@@ -68,8 +79,12 @@ def read_credentials(path):
         fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
         with os.fdopen(fd, "rb") as handle:
             info = os.fstat(handle.fileno())
-            if (not stat.S_ISREG(info.st_mode) or info.st_uid != os.getuid()
-                    or stat.S_IMODE(info.st_mode) != 0o600 or info.st_nlink != 1):
+            if (
+                not stat.S_ISREG(info.st_mode)
+                or info.st_uid != os.getuid()
+                or stat.S_IMODE(info.st_mode) != 0o600
+                or info.st_nlink != 1
+            ):
                 raise HostedLiveError("LIVE_CREDENTIAL_FILE_PERMISSIONS")
             raw = handle.read(32769)
         if len(raw) > 32768:
@@ -103,21 +118,35 @@ class Runtime:
             raise HostedLiveError("LIVE_WINDOW_INVALID") from None
         self.active()
         env = self.environ
-        if (env.get("CRASHCART_PUBLIC_URL") != PUBLIC_URL or env.get("CRASHCART_MODEL_PROVIDER") != "modal"
-                or env.get("MODAL_MODEL") != MODAL_MODEL or env.get("CRASHCART_ALLOW_SANDBOX") != "1"
-                or env.get("CRASHCART_ALLOW_MODEL") != "1"
-                or env.get("CRASHCART_EVALUATION_MODE", "ordinary") != "ordinary"
-                or env.get("CRASHCART_ALLOW_KERNEL", "0") != "0"
-                or env.get("CRASHCART_ALLOW_PROCESS_INTERRUPT", "0") != "0"):
+        if (
+            env.get("CRASHCART_PUBLIC_URL") != PUBLIC_URL
+            or env.get("CRASHCART_MODEL_PROVIDER") != "modal"
+            or env.get("MODAL_MODEL") != MODAL_MODEL
+            or env.get("CRASHCART_ALLOW_SANDBOX") != "1"
+            or env.get("CRASHCART_ALLOW_MODEL") != "1"
+            or env.get("CRASHCART_EVALUATION_MODE", "ordinary") != "ordinary"
+            or env.get("CRASHCART_ALLOW_KERNEL", "0") != "0"
+            or env.get("CRASHCART_ALLOW_PROCESS_INTERRUPT", "0") != "0"
+        ):
             raise HostedLiveError("LIVE_PROVIDER_SCOPE_INVALID")
-        forbidden = ("KERNEL_API_KEY", "AG_STUDIO_LICENSE_KEY", "PAYPAL_WEBHOOK_ID", "OPENAI_API_KEY",
-                     "OPENAI_MODEL", "CRASHCART_HELD_OUT_POLICY", "CRASHCART_HELD_OUT_POLICY_SHA256")
+        forbidden = (
+            "KERNEL_API_KEY",
+            "AG_STUDIO_LICENSE_KEY",
+            "PAYPAL_WEBHOOK_ID",
+            "OPENAI_API_KEY",
+            "OPENAI_MODEL",
+            "CRASHCART_HELD_OUT_POLICY",
+            "CRASHCART_HELD_OUT_POLICY_SHA256",
+        )
         if any(env.get(key) for key in forbidden):
             raise HostedLiveError("LIVE_FEATURE_DISABLED")
         token = env.get("CRASHCART_OPERATOR_TOKEN", "")
-        if (not isinstance(token, str) or not 32 <= len(token) <= 256
-                or any(not 33 <= ord(char) <= 126 for char in token)
-                or any(not isinstance(env.get(key), str) or not env[key].strip() for key in _SECRET_NAMES)):
+        if (
+            not isinstance(token, str)
+            or not 32 <= len(token) <= 256
+            or any(not 33 <= ord(char) <= 126 for char in token)
+            or any(not isinstance(env.get(key), str) or not env[key].strip() for key in _SECRET_NAMES)
+        ):
             raise HostedLiveError("LIVE_CREDENTIALS_REQUIRED")
         try:
             model = configuration(env)
@@ -148,8 +177,12 @@ def _private_database(path):
         raise HostedLiveError("LIVE_DATABASE_PERMISSIONS")
     if path.exists() or path.is_symlink():
         info = path.lstat()
-        if (not stat.S_ISREG(info.st_mode) or info.st_uid != os.getuid()
-                or stat.S_IMODE(info.st_mode) != 0o600 or info.st_nlink != 1):
+        if (
+            not stat.S_ISREG(info.st_mode)
+            or info.st_uid != os.getuid()
+            or stat.S_IMODE(info.st_mode) != 0o600
+            or info.st_nlink != 1
+        ):
             raise HostedLiveError("LIVE_DATABASE_PERMISSIONS")
     store = Store(path)
     os.chmod(path, 0o600)
@@ -162,7 +195,9 @@ def _private_database(path):
 
 def _reserve_case(store):
     with store.connect(write=True) as db:
-        row = db.execute("SELECT COUNT(*) total,COALESCE(MAX(grant_index),0) latest FROM hosted_live_case_grants").fetchone()
+        row = db.execute(
+            "SELECT COUNT(*) total,COALESCE(MAX(grant_index),0) latest FROM hosted_live_case_grants"
+        ).fetchone()
         if row["total"] != row["latest"] or row["total"] > CASE_LIMIT:
             raise HostedLiveError("LIVE_CASE_GRANTS_CORRUPT")
         if row["total"] >= CASE_LIMIT:
@@ -193,15 +228,21 @@ def granted_runs(store):
     through the hosted API, and does not prevent other granted cases restarting.
     """
     with store.connect() as db:
-        identities = [row[0] for row in db.execute(
-            "SELECT run_id FROM hosted_live_case_grants WHERE run_id IS NOT NULL ORDER BY grant_index DESC")]
+        identities = [
+            row[0]
+            for row in db.execute(
+                "SELECT run_id FROM hosted_live_case_grants WHERE run_id IS NOT NULL ORDER BY grant_index DESC"
+            )
+        ]
     return [require_case(store, identity) for identity in identities]
 
 
 class HostedHandler(Handler):
     def ui_capabilities(self):
-        return {"faults": [kind for kind in super().ui_capabilities()["faults"] if kind != "process_interrupt"],
-                "max_promise_chars": 1000}
+        return {
+            "faults": [kind for kind in super().ui_capabilities()["faults"] if kind != "process_interrupt"],
+            "max_promise_chars": 1000,
+        }
 
     def send(self, *args, **kwargs):
         try:
@@ -229,8 +270,9 @@ class HostedHandler(Handler):
 
     def json_body(self, **kwargs):
         if self.headers.get("Transfer-Encoding") is not None or any(
-                len(self.headers.get_all(key, [])) > 1 for key in
-                ("Content-Length", "Content-Type", "Authorization", "Cookie", "Origin", "Host")):
+            len(self.headers.get_all(key, [])) > 1
+            for key in ("Content-Length", "Content-Type", "Authorization", "Cookie", "Origin", "Host")
+        ):
             raise ValueError("Ambiguous request headers")
         value = self.headers.get("Content-Length", "")
         if not re.fullmatch(r"[0-9]+", value):
@@ -261,17 +303,27 @@ class HostedHandler(Handler):
                 self.server.runtime.active()
                 body = self.json_body()
                 token = self.server.runtime.environ["CRASHCART_OPERATOR_TOKEN"]
-                if set(body) != {"token"} or not isinstance(body["token"], str) or not hmac.compare_digest(body["token"], token):
+                if (
+                    set(body) != {"token"}
+                    or not isinstance(body["token"], str)
+                    or not hmac.compare_digest(body["token"], token)
+                ):
                     return self.send(401, {"error": "Invalid workspace access"})
                 session = hmac.new(token.encode(), b"operator-session-v1", hashlib.sha256).hexdigest()
-                return self.send(200, {"authenticated": True}, headers={"Set-Cookie":
-                    f"crashcart_session={session}; Secure; HttpOnly; SameSite=Strict; Path=/"})
+                return self.send(
+                    200,
+                    {"authenticated": True},
+                    headers={"Set-Cookie": f"crashcart_session={session}; Secure; HttpOnly; SameSite=Strict; Path=/"},
+                )
             if path == "/api/runs":
                 self.server.runtime.active()
                 body = self.json_body()
                 if set(body) - {"promise", "mode", "fault", "fixture_id"}:
                     raise ValueError("Unsupported case fields")
-                if body.get("mode", "LIVE_SANDBOX") not in ALLOWED_MODES or body.get("fixture_id", "workshop-v1") != "workshop-v1":
+                if (
+                    body.get("mode", "LIVE_SANDBOX") not in ALLOWED_MODES
+                    or body.get("fixture_id", "workshop-v1") != "workshop-v1"
+                ):
                     raise HostedLiveError("LIVE_CASE_SCOPE_INVALID", 403)
                 if not isinstance(body.get("promise"), str) or not 1 <= len(body["promise"].strip()) <= 1000:
                     raise ValueError("A bounded delivery promise is required")
@@ -283,7 +335,10 @@ class HostedHandler(Handler):
                 # slot. No refund/reset or replacement checkout is automatic.
                 run = self.store.create_run(body["promise"], mode=body.get("mode", "LIVE_SANDBOX"), fault=fault)
                 with self.store.connect(write=True) as db:
-                    db.execute("UPDATE hosted_live_case_grants SET run_id=? WHERE grant_index=? AND run_id IS NULL", (run["id"], index))
+                    db.execute(
+                        "UPDATE hosted_live_case_grants SET run_id=? WHERE grant_index=? AND run_id IS NULL",
+                        (run["id"], index),
+                    )
                 return self.send(201, run)
             parts = path.split("/")
             if len(parts) != 5 or parts[:3] != ["", "api", "runs"] or parts[4] not in ALLOWED_ACTIONS:
@@ -298,8 +353,16 @@ class HostedHandler(Handler):
             self.send(400, {"error": "Invalid workspace request"})
         except Exception as exc:
             from .paypal import PayPalError
+
             if isinstance(exc, PayPalError):
-                return self.send(503, {"error": "PayPal Sandbox could not confirm this action. Check the payment status before trying again.", "code": exc.code, "ambiguous": exc.ambiguous})
+                return self.send(
+                    503,
+                    {
+                        "error": "PayPal Sandbox could not confirm this action. Check the payment status before trying again.",
+                        "code": exc.code,
+                        "ambiguous": exc.ambiguous,
+                    },
+                )
             self.send(500, {"error": "This action could not finish. Contact the workspace owner for retained records."})
 
     def _unsupported_mutation(self):
@@ -341,13 +404,17 @@ class HostedHandler(Handler):
             except HostedLiveError as exc:
                 return self.send(503, {"error": error_message(exc.code), "code": exc.code})
         if path.startswith(("/studio/", "/deadlines/", "/monitor/")):
-            return self.send(200, b"<!doctype html><html lang='en'><meta charset='utf-8'>"
+            return self.send(
+                200,
+                b"<!doctype html><html lang='en'><meta charset='utf-8'>"
                 b"<meta name='viewport' content='width=device-width,initial-scale=1'>"
                 b"<link rel='stylesheet' href='/style.css'><title>CrashCart workspace</title>"
                 b"<main><h1>Your checkout workspace is ready</h1>"
                 b"<p>This private workspace runs PayPal Sandbox checkout and background AI investigations. "
                 b"The optional report builder and scheduling views are available in the local full workspace.</p>"
-                b"<a href='/'>Return to your checkout workspace</a></main></html>", "text/html")
+                b"<a href='/'>Return to your checkout workspace</a></main></html>",
+                "text/html",
+            )
         return super().do_GET()
 
 
@@ -364,7 +431,8 @@ def make_server(db_path, environ, *, host="0.0.0.0", port=8765, limits=None):
         server.enable_recordings = False
         return server
     except BaseException:
-        server.server_close(); raise
+        server.server_close()
+        raise
 
 
 def _install_expiry(runtime):
@@ -373,7 +441,8 @@ def _install_expiry(runtime):
     # A provider request already accepted remotely cannot be un-billed here.
     delay = max(0, (runtime.expires - _now()).total_seconds())
     timer = threading.Timer(delay, lambda: os._exit(78))
-    timer.daemon = True; timer.start()
+    timer.daemon = True
+    timer.start()
     return timer
 
 
@@ -383,15 +452,21 @@ def _claim_role(store, owner, kind):
         raise HostedLiveError("LIVE_WORKER_ROLE_INVALID")
     now = time.time()
     with store.connect(write=True) as db:
-        job = db.execute("""SELECT j.* FROM jobs j JOIN runs r ON r.id=j.run_id
+        job = db.execute(
+            """SELECT j.* FROM jobs j JOIN runs r ON r.id=j.run_id
             JOIN hosted_live_case_grants g ON g.run_id=j.run_id
             WHERE j.kind=? AND r.cancel_requested=0 AND
             (j.state='PENDING' AND j.available_at<=? OR j.state='RUNNING' AND j.lease_until<=?)
-            ORDER BY j.available_at,j.created_at LIMIT 1""", (kind, now, now)).fetchone()
+            ORDER BY j.available_at,j.created_at LIMIT 1""",
+            (kind, now, now),
+        ).fetchone()
         if job is None:
             return None
-        db.execute("""UPDATE jobs SET state='RUNNING',owner=?,lease_until=?,fence_token=fence_token+1,
-            attempts=attempts+1,updated_at=? WHERE id=?""", (owner, now+30, utcnow(), job["id"]))
+        db.execute(
+            """UPDATE jobs SET state='RUNNING',owner=?,lease_until=?,fence_token=fence_token+1,
+            attempts=attempts+1,updated_at=? WHERE id=?""",
+            (owner, now + 30, utcnow(), job["id"]),
+        )
         result = dict(db.execute("SELECT * FROM jobs WHERE id=?", (job["id"],)).fetchone())
         result["payload"] = json.loads(result["payload_json"])
         return result
@@ -401,6 +476,7 @@ def worker_cycle(store, runtime, owner, kind):
     """Real adapters only; tests may patch dependencies, never client supplied."""
     from .investigator import Investigation
     from .worker import _investigation_result, _reserve_investigation_job
+
     runtime.active()
     job = _claim_role(store, owner, kind)
     if job is None:
@@ -414,26 +490,41 @@ def worker_cycle(store, runtime, owner, kind):
             result = service.reconcile(job["run_id"])
             attempt = job["payload"].get("attempt", 0)
             if result.get("verdict") == "INCONCLUSIVE" and attempt < 29:
-                store.enqueue(job["run_id"], "reconcile", {"attempt": attempt+1},
-                              semantic_key=f"recovery-{attempt+1}", available_at=time.time()+2)
+                store.enqueue(
+                    job["run_id"],
+                    "reconcile",
+                    {"attempt": attempt + 1},
+                    semantic_key=f"recovery-{attempt + 1}",
+                    available_at=time.time() + 2,
+                )
         else:
             result = _reserve_investigation_job(store, job, owner)
             if result is None:
                 result = Investigation(store, service).run(job["run_id"])
             result = _investigation_result(result)
-            terminal = ("COMPLETED" if result.get("status") == "COMPLETED" else
-                        "CANCELLED" if result.get("status") == "CANCELLED" else "FAILED")
+            terminal = (
+                "COMPLETED"
+                if result.get("status") == "COMPLETED"
+                else "CANCELLED"
+                if result.get("status") == "CANCELLED"
+                else "FAILED"
+            )
         store.complete_job(job["id"], owner, job["fence_token"], result, state=terminal)
     except Exception as exc:
         cancelled = store.get_run(job["run_id"])["cancel_requested"]
         result = {"status": "CANCELLED" if cancelled else "FAILED", "reason": "LIVE_JOB_STOPPED:" + type(exc).__name__}
         try:
-            store.complete_job(job["id"], owner, job["fence_token"], result,
-                               state="CANCELLED" if cancelled else "FAILED")
+            store.complete_job(
+                job["id"], owner, job["fence_token"], result, state="CANCELLED" if cancelled else "FAILED"
+            )
         except ValueError:
             pass
-        store.record_event(job["run_id"], "worker", "job_cancelled" if cancelled else "job_failed",
-                           {"job_id": job["id"], "error": type(exc).__name__})
+        store.record_event(
+            job["run_id"],
+            "worker",
+            "job_cancelled" if cancelled else "job_failed",
+            {"job_id": job["id"], "error": type(exc).__name__},
+        )
     return True
 
 
@@ -457,21 +548,38 @@ def main(argv=None):
         os.environ.update(env)
         runtime = Runtime(env)
         timer = _install_expiry(runtime)
+
         def terminate(*_):
             raise SystemExit(0)
+
         signal.signal(signal.SIGTERM, terminate)
         if args.command == "api":
             server = make_server(args.db, env, port=args.port)
             try:
                 server.serve_forever()
             finally:
-                timer.cancel(); server.server_close()
+                timer.cancel()
+                server.server_close()
         elif args.command == "worker":
             # Two private child workers preserve recovery capacity while the
             # analysis lane waits on a bounded model response. No extra service.
             for role in ("reconcile", "investigate"):
-                children.append(subprocess.Popen([sys.executable, "-m", "crashcart.hosted_live", "worker-role",
-                    "--role", role, "--env-file", args.env_file, "--db", args.db]))
+                children.append(
+                    subprocess.Popen(
+                        [
+                            sys.executable,
+                            "-m",
+                            "crashcart.hosted_live",
+                            "worker-role",
+                            "--role",
+                            role,
+                            "--env-file",
+                            args.env_file,
+                            "--db",
+                            args.db,
+                        ]
+                    )
+                )
             while True:
                 runtime.active()
                 if any(child.poll() is not None for child in children):
@@ -496,7 +604,8 @@ def main(argv=None):
             try:
                 child.wait(timeout=5)
             except subprocess.TimeoutExpired:
-                child.kill(); child.wait()
+                child.kill()
+                child.wait()
 
 
 if __name__ == "__main__":

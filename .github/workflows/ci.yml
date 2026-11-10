@@ -16,6 +16,8 @@ jobs:
       - run: npm ci --ignore-scripts --prefix studio
       - run: npm run build --prefix studio
       - run: npm run test:deadlines --prefix studio
+      - run: python -m pip install ruff==0.14.3
+      - run: ruff check crashcart
       - run: python -m compileall -q crashcart scripts tests
       - run: node --check web/app.js
       - run: node --check web/marketing.js

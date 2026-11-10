@@ -113,7 +113,8 @@ def _timestamp(value, field: str, *, gmt=False) -> str:
             if not gmt:
                 raise ValueError('timezone required')
             dt = dt.replace(tzinfo=timezone.utc)
-        if gmt and dt.utcoffset().total_seconds() != 0:
+        offset = dt.utcoffset()
+        if gmt and (offset is None or offset.total_seconds() != 0):
             raise ValueError('GMT field has non-UTC offset')
         return dt.astimezone(timezone.utc).isoformat().replace('+00:00', 'Z')
     except (ValueError, OverflowError):
