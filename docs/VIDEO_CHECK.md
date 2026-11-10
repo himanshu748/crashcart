@@ -47,6 +47,6 @@ ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_n
 ffmpeg -hide_banner -loglevel error -i crashcart-demo.mp4 -f null -
 ```
 
-## Owner before submission
+## Publication
 
-Upload the final edit to YouTube as **Public**, check the watch link while signed out, then replace the video placeholder in [DEVPOST.md](DEVPOST.md). This video-editing task has not uploaded the film or submitted to Devpost.
+Published as **Public** on 10 November 2026: [watch the demo](https://www.youtube.com/watch?v=gFWje84_wEA). Safari Private Browsing showed the signed-out Sign in control and actual playback advancing to 0:27 of 2:45. The video is under 3 minutes. Devpost has not been submitted; final approval is still required.

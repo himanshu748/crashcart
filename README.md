@@ -4,7 +4,7 @@
 
 **“I paid, but my ticket never arrived.”** CrashCart helps support and engineering at small online sellers find the missing step between payment and delivery.
 
-[Open the recorded demo](https://crashcart.52.202.25.181.sslip.io/) · [GitHub Pages mirror](https://himanshu748.github.io/crashcart/) · Video: `<YOUTUBE_URL>`
+[Open the recorded demo](https://crashcart.52.202.25.181.sslip.io/) · [GitHub Pages mirror](https://himanshu748.github.io/crashcart/) · [Video walkthrough](https://www.youtube.com/watch?v=gFWje84_wEA)
 
 The public walkthrough is a **recorded replay: no new PayPal or AI calls**. The real **8 November 2026** test used PayPal Sandbox **Orders v2 create, capture and get**, followed by real DeepSeek calls through Modal. [Read that completed flow](docs/LIVE_FLOW.md). The healthy **32.26-second** repair uses a **separate saved checkout input**, not a new purchase; its faulty and healthy variants use the same payment input and 60-second promise.
 
@@ -55,7 +55,7 @@ In a second terminal run `python3 -m crashcart worker`. Open the workspace, ente
 
 **The AI proposes which records to read; fixed code decides whether the delivery promise was kept.** Never use a real-money buyer account or commit keys.
 
-[MIT licence](LICENSE) · [Video walkthrough](docs/VIDEO_SCRIPT.md) · [Health and restart instructions](docs/OPERATIONS.md) · [Final run log](docs/FINAL_RUN_LOG.md)
+[MIT licence](LICENSE) · [Video walkthrough](https://www.youtube.com/watch?v=gFWje84_wEA) · [Health and restart instructions](docs/OPERATIONS.md) · [Final run log](docs/FINAL_RUN_LOG.md)
 
 ## See the product
 
@@ -339,4 +339,4 @@ from this source repository; submission and final release remain unfinished.
 
 ## Submission materials
 
-[Verified clean-clone path](docs/SUBMISSION_VERIFICATION.md) · [Submission scope](docs/SUBMISSION_GATES.md) · [Shared Lightsail hosting](docs/LIGHTSAIL_SHARED_HOST.md) · [Video script](docs/VIDEO_SCRIPT.md) · [Devpost draft](docs/DEVPOST.md). The current recorded demo is verified on the existing Lightsail host. The public YouTube video and final submission are still owner actions.
+[Verified clean-clone path](docs/SUBMISSION_VERIFICATION.md) · [Submission scope](docs/SUBMISSION_GATES.md) · [Shared Lightsail hosting](docs/LIGHTSAIL_SHARED_HOST.md) · [Video script](docs/VIDEO_SCRIPT.md) · [Devpost draft](docs/DEVPOST.md). The current recorded demo is verified on the existing Lightsail host. The [public video](https://www.youtube.com/watch?v=gFWje84_wEA) is available. The Devpost draft still awaits the owner's final submission approval.
