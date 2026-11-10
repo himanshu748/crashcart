@@ -332,11 +332,9 @@ See [architecture](docs/architecture.md), [invariant and scope](docs/product-con
 The CI workflow is configured. A source commit or push does not establish that
 CI passed; inspect the repository's actual Actions results. Offline unit tests
 use synthetic `LOCAL_TEST` transports where needed. Live acceptance checks and
-release limitations remain separate in [STATUS.md](STATUS.md). A hosted recorded review, if published, serves build-time results; it does not
-deploy the live checkout backend. Source publication does not submit a hackathon entry.
-The [Devpost project page](https://devpost.com/software/crashcart-87asqz) is separate
-from this source repository; submission and final release remain unfinished.
+release limitations remain separate in [STATUS.md](STATUS.md). The hosted recorded review serves build-time results; the live checkout backend is separate.
+The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted on 10 November 2026. Submission does not close the remaining internal acceptance checks.
 
 ## Submission materials
 
-[Verified clean-clone path](docs/SUBMISSION_VERIFICATION.md) · [Submission scope](docs/SUBMISSION_GATES.md) · [Shared Lightsail hosting](docs/LIGHTSAIL_SHARED_HOST.md) · [Video script](docs/VIDEO_SCRIPT.md) · [Devpost draft](docs/DEVPOST.md). The current recorded demo is verified on the existing Lightsail host. The [public video](https://www.youtube.com/watch?v=gFWje84_wEA) is available. The Devpost draft still awaits the owner's final submission approval.
+[Verified clean-clone path](docs/SUBMISSION_VERIFICATION.md) · [Submission scope](docs/SUBMISSION_GATES.md) · [Shared Lightsail hosting](docs/LIGHTSAIL_SHARED_HOST.md) · [Video script](docs/VIDEO_SCRIPT.md) · [Devpost draft](docs/DEVPOST.md). The current recorded demo is verified on the existing Lightsail host. The [public video](https://www.youtube.com/watch?v=gFWje84_wEA) is available. The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted on 10 November 2026.

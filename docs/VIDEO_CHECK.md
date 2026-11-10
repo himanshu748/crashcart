@@ -49,4 +49,4 @@ ffmpeg -hide_banner -loglevel error -i crashcart-demo.mp4 -f null -
 
 ## Publication
 
-Published as **Public** on 10 November 2026: [watch the demo](https://www.youtube.com/watch?v=gFWje84_wEA). Safari Private Browsing showed the signed-out Sign in control and actual playback advancing to 0:27 of 2:45. The video is under 3 minutes. Devpost has not been submitted; final approval is still required.
+Published as **Public** on 10 November 2026: [watch the demo](https://www.youtube.com/watch?v=gFWje84_wEA). Safari Private Browsing showed the signed-out Sign in control and actual playback advancing to 0:27 of 2:45. The video is under 3 minutes. The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted on 10 November 2026 after the owner approved the final form and rules.

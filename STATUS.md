@@ -1,16 +1,18 @@
 # CrashCart development status
 
-**Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost is not submitted.** Updated 10 November 2026 (India).
+**Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 10 November 2026 (India).
 
-## 10 November — final submission review
+## 10 November — submitted and frozen
 
-PR #2 was squash-merged as `fe60ae4`. Both public recorded sites are deployed, including the repaired product/example routes and static health endpoint. Fresh-clone judge mode reproduces the missing-ticket failure and healthy pass without keys or network calls. The public host remains tagged to retain through 22 December; restart instructions are in [OPERATIONS.md](docs/OPERATIONS.md).
+**Submitted 10 November 2026, 14:31:32 IST.** [Devpost entry](https://devpost.com/software/crashcart-87asqz) · [Public video](https://www.youtube.com/watch?v=gFWje84_wEA). The official submission response and fresh project readback both report submission 1268551; the browser shows **SUBMITTED, 5/5 steps done**. Screenshot saved locally at `evidence/submission/devpost-submitted.jpg`.
 
-The [public 2:45 video](https://www.youtube.com/watch?v=gFWje84_wEA) was checked in signed-out Safari. It opens the saved 8 November Sandbox/DeepSeek investigation and a separate healthy replay, with the actual Bryntum timing view at 2:10–2:20. No new payment or model call occurred.
+Post-submission `./scripts/check_links.sh` exits 0 with 24/24 public URLs returning 200 and no failures. A fresh main clone at `102be76` runs `./scripts/judge.sh --no-open --port 8768`: demo and health return 200; defective replay exits 1 with `paid_without_ticket`, healthy replay exits 0 with `ticket_delivered_once_on_time`, and both report zero network calls. The temporary local server was stopped.
 
-The [Devpost entry](https://devpost.com/software/crashcart-87asqz) is **DRAFT, 4/5 steps done**. Story, links, media, technical answers and confirmed personal answers are saved. The final rules box and Submit button remain untouched. The filled-form screenshots are local under `evidence/submission/`. Next: owner reviews the form and replies **submit**, then perform final submission/readback, recheck links and a fresh clone, and tag the submitted commit. No submission tag has been created.
+The submission video is 2:45 and clearly separates the saved 8 November Sandbox/DeepSeek investigation from the earlier healthy replay. Bryntum's actual timing view appears at 2:10–2:20. No new payment or model call was made for submission. No CC acceptance score, payment rule or deadline changed.
 
-[Commands, outcomes, decisions and commit progression](docs/FINAL_RUN_LOG.md). The original failed/blocked/unverified CC items remain outside this frozen submission scope; no acceptance score or invariant was changed.
+Both recorded sites remain available. The existing host is tagged to retain through 22 December 2026; [restart instructions](docs/OPERATIONS.md) remain available. No teardown or billing change was made.
+
+Release policy: tag the final documentation commit `devpost-submission`, then make no more main pushes until winners are announced, unless the owner explicitly changes the freeze. No further product work is scheduled. [Final run log](docs/FINAL_RUN_LOG.md).
 
 The dated sections below are development history, not the current publication state.
 
