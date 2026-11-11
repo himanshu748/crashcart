@@ -1,6 +1,35 @@
 # CrashCart development status
 
-**Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 11 November 2026 (India).
+**Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 12 November 2026 (India).
+
+## 12 November 2026, 00:53:27 IST — review-fix publication authorized
+
+Owner replied exactly `submit` for commit/push of the reviewed seven-file fix
+to existing PR #13. The patch matches the STOP diff; runtime source is unchanged
+since 662 Python, 152 JS, 18 judge checks and both canonical replays passed.
+No merge or deployment is included. Historical 47/60 and real live 0/5 remain
+unchanged. Next: read back the new PR head and fresh CI/review, then stop at the
+separate merge gate.
+
+## 12 November 2026, 00:48:42 IST — PR #13 merge held; return and session fixes local
+
+The published PR head `5447aab` passed Linux CI (653 tests, 18 judge checks) and
+GitGuardian. Subsequent review found that exhausted new admission blocked the
+last checkout's return, and ordinary case links incorrectly requested capture.
+The security scan also flagged anonymous session-table exhaustion. Owner's merge
+grant was held; main remains `f0c3324` and no deployment or submission edit occurred.
+
+Local fixes separate read-only case viewing from explicit approval returns,
+retain server authorization on capture, and replace stored anonymous sessions
+with signed two-hour cookies. 520 cookieless HTTP requests pass without storage
+growth. Eight actual Chrome regressions failed before the fix and pass afterward
+with explicitly synthetic API responses. Full checks: **662 Python, 152 JS,
+18 judge checks**, both expected zero-connection replays, Ruff and mypy pass.
+Independent cross-review found no blocker. No real provider call occurred;
+fresh live runs remain **0/5** and historical acceptance stays **47/60**.
+
+Next: review the local diff, then exact `submit` may authorize its commit/push
+to existing PR #13. Fresh CI and another merge gate follow. [Current STOP](../PUBLIC_LIVE_STOP.md).
 
 ## 12 November 2026, 00:28:51 IST — source publication authorized
 

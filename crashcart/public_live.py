@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from decimal import Decimal
 import hashlib
 import hmac
-from http.cookies import SimpleCookie
+from http.cookies import CookieError, SimpleCookie
 from http.server import BaseHTTPRequestHandler
 import ipaddress
 import json
@@ -111,8 +111,6 @@ class Controller:
         self.secret = secret if len(secret) >= 32 else secrets.token_urlsafe(48)
         self.stable_secret = len(secret) >= 32
         with store.connect(write=True) as db:
-            db.execute("""CREATE TABLE IF NOT EXISTS public_live_sessions(
-                owner TEXT PRIMARY KEY,expires_at REAL NOT NULL)""")
             db.execute("""CREATE TABLE IF NOT EXISTS public_live_runs(
                 run_id TEXT PRIMARY KEY REFERENCES runs(id),owner TEXT NOT NULL,
                 state TEXT NOT NULL,approval_url TEXT,created_at REAL NOT NULL,
@@ -126,28 +124,30 @@ class Controller:
         return hmac.new(self.secret.encode(), value.encode(), hashlib.sha256).hexdigest()
 
     def session(self, cookie_header, *, create=False):
+        # Anonymous configuration reads mint no durable rows. The versioned
+        # cookie authenticates only its random nonce and bounded expiration;
+        # owner and CSRF identities use separate HMAC domains and contain no PII.
         token = None
         try:
             entry = SimpleCookie(cookie_header or "").get(COOKIE)
-            if entry and re.fullmatch(r"[A-Za-z0-9_-]{40,128}", entry.value):
-                token = entry.value
-        except Exception:
+            match = re.fullmatch(r"v1\.([1-9][0-9]{8,11})\.([A-Za-z0-9_-]{43})\.([a-f0-9]{64})",
+                                 entry.value) if entry else None
+            if match:
+                expiry = int(match[1])
+                payload = entry.value.rsplit('.', 1)[0]
+                authenticated = hmac.compare_digest(match[3], self.digest("session:" + payload))
+                now = self.clock()
+                if authenticated and now < expiry <= now + SESSION_SECONDS:
+                    token = entry.value
+        except (CookieError, ValueError, TypeError):
             pass
         if token:
-            owner = self.digest("owner:" + token)
-            with self.store.connect() as db:
-                row = db.execute("SELECT expires_at FROM public_live_sessions WHERE owner=?", (owner,)).fetchone()
-            if row and self.clock() < row[0]:
-                return owner, self.digest("csrf:" + token), None
+            return self.digest("owner:" + token), self.digest("csrf:" + token), None
         if not create:
             raise LiveError("SESSION_REQUIRED", 401)
-        token = secrets.token_urlsafe(40)
+        payload = f"v1.{int(self.clock()) + SESSION_SECONDS}.{secrets.token_urlsafe(32)}"
+        token = payload + "." + self.digest("session:" + payload)
         owner = self.digest("owner:" + token)
-        with self.store.connect(write=True) as db:
-            db.execute("DELETE FROM public_live_sessions WHERE expires_at<=?", (self.clock(),))
-            if db.execute("SELECT COUNT(*) FROM public_live_sessions").fetchone()[0] >= 512:
-                raise LiveError("SESSION_CAPACITY")
-            db.execute("INSERT INTO public_live_sessions VALUES(?,?)", (owner, self.clock() + SESSION_SECONDS))
         secure = "; Secure" if self.origin.startswith("https://") else ""
         cookie = f"{COOKIE}={token}; Path=/; HttpOnly; SameSite=Lax; Max-Age={SESSION_SECONDS}{secure}"
         return owner, self.digest("csrf:" + token), cookie
@@ -263,8 +263,17 @@ class Controller:
             return self.status(run["id"], owner)
 
     def confirm(self, run_id, owner):
-        self.row(run_id, owner)
-        self.active(run_id)
+        row = self.row(run_id, owner)
+        if row["state"] in TERMINAL:
+            return self.status(run_id, owner)
+        try:
+            self.active(run_id)
+        except LiveError:
+            # A concurrent phase may have completed between the first read
+            # and the guard. Returning retained results never authorizes work.
+            if self.row(run_id, owner)["state"] in TERMINAL:
+                return self.status(run_id, owner)
+            raise
         with self.store.connect(write=True) as db:
             changed = db.execute("""UPDATE public_live_runs SET state='CONFIRMING',phase='confirm',phase_started=?
                 WHERE run_id=? AND owner=? AND state='AWAITING_APPROVAL'""", (self.clock(), run_id, owner)).rowcount
@@ -532,7 +541,7 @@ class LiveHandler(BaseHTTPRequestHandler):
                 query = parse_qs(urlsplit(self.path).query)
                 run_id = query.get("run", [""])[0]
                 self.controller.row(run_id, self.session()[0])
-                destination = "/live.html?run=" + run_id + ("&cancel=1" if path == "/cancel" else "")
+                destination = "/live.html?run=" + run_id + ("&cancel=1" if path == "/cancel" else "&approval_return=1")
                 return self.send(303, b"", "text/plain", {"Location": destination})
             name = {"/": "index.html", "/product": "product.html", "/example": "demo.html",
                     "/integrations": "integrations.html"}.get(path, path.removeprefix("/"))

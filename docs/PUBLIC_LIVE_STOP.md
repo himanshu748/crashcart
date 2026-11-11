@@ -1,11 +1,44 @@
 # Public Sandbox candidate — STOP before publication
 
 Prepared 12 November 2026 IST on `codex/judge-live-sandbox-nov11`, based on
-`f0c3324500cfdf0c957093503b9056bbcb66fc1b`. Local, uncommitted candidate; no push,
-PR, merge, deployment or submission edit. The existing public site remains up.
+`f0c3324500cfdf0c957093503b9056bbcb66fc1b`. The reviewed baseline was published
+as [PR #13](https://github.com/himanshu748/crashcart/pull/13), head `5447aab`.
+The owner approved its merge, but review identified two return-path bugs and
+the known anonymous-session exhaustion risk. Merge was held. The fixes below
+are local and uncommitted; nothing further was pushed or changed publicly.
+Main and the hosted site remain unchanged.
 
 The live checkout is **implemented and locally tested, not live verified**.
 It stays paused until the approved host rollout and real-provider checks pass.
+
+## PR #13 review fixes — local only
+
+- Bare run links and reloads now read the owner's case first, without checking
+  new-start availability or dispatching confirmation. Completed results remain
+  readable when new starts are disabled.
+- Only the explicit `approval_return=1` callback marker on an awaiting-approval
+  case requests confirmation. The marker is consumed before requests, so reload
+  cannot retry a failed POST. It grants no authority: server ownership, CSRF,
+  kill switch and independent PayPal approval still control capture.
+- The last admitted checkout can continue with its reserved allowance even
+  when new admission is exhausted. An ordinary saved-case view makes GET only.
+- Signed two-hour cookies use no anonymous session-table reads or writes.
+  520 actual cookieless HTTP requests passed without storage growth. Tampered,
+  expired, foreign-secret and legacy unsigned cookies fail closed.
+- Real local Chrome regressions reproduced all eight failures at 1440/390px
+  before the fix and passed all eight afterward. Their API replies were
+  synthetic and intercepted; this is browser behavior proof, not a live payment.
+  Fresh actual paused-backend Chrome/Gecko checks also pass at 1440/390/360
+  with keyboard/reduced motion and no POST or external request. The initially
+  missing pinned Firefox binary was restored into an isolated QA cache; the
+  failed setup log remains retained.
+- Independent cross-review passed 24 UI tests and nine backend cases; foreign
+  owners cannot read or confirm any terminal case. No payment rule, replay
+  input, validator, deadline or provider configuration changed.
+
+The current patch changes four runtime/test files, plus this handoff, status
+and run log. Existing gallery captures remain actual saved-data UI; no synthetic
+successful-run screenshot was substituted into the gallery.
 
 ## Ready to inspect
 
@@ -42,8 +75,8 @@ It stays paused until the approved host rollout and real-provider checks pass.
 
 | Command or entry point | Actual result |
 | --- | --- |
-| `python3.13 -m unittest discover -s tests` | 653 tests / 134.764s / OK |
-| Full CI JavaScript group | 144 passed, 0 failed |
+| `python3.13 -m unittest discover -s tests` | 662 tests / 132.213s / OK |
+| Full CI JavaScript group | 152 passed, 0 failed |
 | `PYTHON=python3.13 ./scripts/test-judge.sh` | 18 / OK; repeated after copy cleanup |
 | Studio deadline / timing tests | 45 / 12 passed |
 | Studio build and typecheck | exit 0 |
@@ -85,8 +118,10 @@ No `.env`, private credential file, ledger or recording is tracked/exported.
 
 - **Fresh end-to-end live runs: 0/5.** No payment or model call occurred in this
   preparation. Mobile real-device proof was waived by the owner, not passed.
-- Linux `prctl`, systemd whole-group stop, real proxy-IP behavior and installed
-  Caddy topology remain unexercised. Local Docker is unavailable. Exact-image
+- The previous published head passed its real Linux model-worker death tests
+  in CI. The current local patch needs fresh CI after push. Actual systemd
+  whole-group stop, proxy-IP behavior and Caddy topology remain unexercised.
+  Local Docker is unavailable. Exact-image
   validation and host inspection must happen before enabling any live run.
 - Current public `/`, `/product`, `/example`, `/integrations`, `/timing.html`
   and `/healthz` all returned 200. They still serve the existing release.
@@ -95,8 +130,9 @@ No `.env`, private credential file, ledger or recording is tracked/exported.
   The existing host plan expressly excludes firewall changes from deploy approval.
 - Reconcile the authoritative existing model ledger before transfer or calls.
   Never create/reset a ledger or use a copied stale history to regain allowance.
-- Anonymous session storage is capped at 512 for two hours; deliberate cookie-less
-  exhaustion can deny live starts. Static replay and its fallback remain separate.
+- The local patch removes anonymous session storage entirely. Its signed cookie
+  still expires after two hours; old unsigned preparation cookies fail closed.
+  This endpoint has not been deployed, so no live-user migration is claimed.
 - The host plan stops if Caddy is bridged; it does not broaden the backend bind.
   A reviewed topology alternative would need a new exact plan before deployment.
 
@@ -110,9 +146,10 @@ Historical CC acceptance remains **47/60**, with no requirement closed here.
 
 The source and host access prerequisites precede the requested publication queue:
 
-1. **Next proposed action:** commit the reviewed candidate, push this feature
-   branch and open its PR. No main change, host change or Devpost edit.
-2. Merge only after that PR's actual Linux CI is green; stop afterward.
+1. **Next proposed action:** commit and push the reviewed fixes to existing
+   PR #13 only. No new PR, main change, host change or submission edit.
+2. Read fresh CI/review results, then merge only after a separate exact `submit`.
+   The earlier merge grant was held; it did not publish this changed patch.
 3. Temporarily permit this Mac's freshly checked single IP on SSH, perform only
    strict-host-key read-only topology/version inspection, then remove only that
    new rule. Requires a separate explicit access approval; not bundled into deploy.

@@ -34,7 +34,7 @@
     const params = new URLSearchParams(query);
     const runId = safeRunId(params.get('run'));
     const cancelled = params.get('cancel') === '1';
-    return {runId, confirm: Boolean(runId) && !cancelled, cancelled};
+    return {runId, confirm: Boolean(runId) && !cancelled && params.get('approval_return') === '1', cancelled};
   }
   function projectRun(run) {
     run = run || {};
@@ -97,7 +97,7 @@
   const doc = root.document;
   if (!doc.getElementById('live-start')) return;
   const byId = id => doc.getElementById(id);
-  let csrf = '', runId = null, polling = null, started = Date.now(), stopped = false, creating = false, idempotency = null, replayRequested = false, focusApproval = false;
+  let csrf = '', runId = null, polling = null, started = Date.now(), stopped = false, creating = false, idempotency = null, replayRequested = false, focusApproval = false, newAdmission = false;
   const returned = returnContext(root.location.search);
   const display = (id, value) => { byId(id).textContent = value; };
   const show = (id, visible) => { byId(id).hidden = !visible; };
@@ -196,7 +196,12 @@
     }
   }
   async function post(path) {
-    if (!csrf) throw new Error('Reload this page to renew your secure session.');
+    if (!csrf) {
+      const config = await requestJSON(root.fetch.bind(root), 'api/live/config');
+      // This renews the owner's CSRF context, not permission for a new run.
+      if (!text(config.csrf_token) || !['LIVE_SANDBOX', 'SAVED_REPLAY'].includes(config.mode)) throw new Error('Reload this run to renew its secure Sandbox session.');
+      csrf = config.csrf_token;
+    }
     return requestJSON(root.fetch.bind(root), 'api/live/' + path, {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: '{}'});
   }
   async function poll() {
@@ -207,11 +212,12 @@
       if (stopped) return;
       render(run);
       if (!stopped) polling = setTimeout(poll, POLL_MS);
+      return run;
     } catch (error) { fallback(error.name === 'AbortError' ? 'The live service took too long to respond. The saved example is available below.' : error.message); }
   }
   byId('live-start').addEventListener('click', async () => {
-    if (creating || stopped || !csrf) return;
-    creating = true; focusApproval = true; byId('live-start').disabled = true;
+    if (creating || stopped || !csrf || !newAdmission) return;
+    creating = true; newAdmission = false; focusApproval = true; byId('live-start').disabled = true;
     announce('Preparing your Sandbox order…');
     try {
       idempotency = idempotency || root.crypto.randomUUID();
@@ -236,25 +242,40 @@
   });
   async function initialize() {
     if (root.location.hostname.endsWith('.github.io') || root.location.hostname === 'github.io') { fallback('GitHub Pages hosts the recorded example. New Sandbox checkouts run only on the live-enabled workspace.', true); return; }
+    runId = returned.runId;
     try {
+      if (runId) {
+        show('live-welcome', false); show('live-run', true);
+        display('live-mode', 'Live PayPal Sandbox · this checkout’s records');
+        // A run link is a read-only view. Consume callback intent once, before
+        // any request, so refresh/back navigation cannot retry a failed POST.
+        if (returned.confirm || returned.cancelled) {
+          const url = new URL(root.location.href); url.search = ''; url.searchParams.set('run', runId);
+          root.history.replaceState(null, '', url);
+        }
+        const run = await poll();
+        if (stopped || !run) return;
+        const view = projectRun(run);
+        const action = returned.cancelled ? 'cancel' : returned.confirm && view.state === 'AWAITING_APPROVAL' ? 'confirm' : null;
+        if (!action) return;
+        clearTimeout(polling); polling = null;
+        // New admission can be exhausted while this run still owns its
+        // reservation. The server, not config.enabled, decides continuation.
+        if (action === 'confirm') announce('Checking your approval with PayPal…');
+        await post('runs/' + encodeURIComponent(runId) + '/' + action);
+        await poll();
+        return;
+      }
       const config = await requestJSON(root.fetch.bind(root), 'api/live/config');
       if (config.enabled !== true || config.mode !== 'LIVE_SANDBOX' || !text(config.csrf_token)) { fallback(availabilityReason(config.reason), true); return; }
       csrf = config.csrf_token;
+      newAdmission = true;
       display('live-mode', 'Live PayPal Sandbox · new payment and AI calls after you start');
-      runId = returned.runId;
-      if (runId) {
-        show('live-welcome', false); show('live-run', true);
-        if (returned.cancelled) await post('runs/' + encodeURIComponent(runId) + '/cancel');
-        else if (returned.confirm) {
-          announce('Checking this return with PayPal. The URL alone does not confirm payment.');
-          await post('runs/' + encodeURIComponent(runId) + '/confirm');
-        }
-        await poll();
-      } else {
-        byId('live-start').disabled = false;
-        announce('Ready when you are. Nothing is created until you start.');
-      }
-    } catch (error) { fallback(error.name === 'AbortError' ? 'The live service did not respond in time. The saved example is ready.' : 'The live service is unavailable here. The saved example works without an account or keys.', true); }
+      byId('live-start').disabled = false;
+      announce('Ready when you are. Nothing is created until you start.');
+    } catch (error) {
+      fallback(error.name === 'AbortError' ? 'The live service did not respond in time. The saved example is ready.' : 'The live service could not continue this checkout. Its confirmed records remain visible; the saved example is ready.', !runId);
+    }
   }
   initialize();
 })(typeof window !== 'undefined' ? window : globalThis);

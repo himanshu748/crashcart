@@ -86,6 +86,53 @@ class PublicLiveFixture(unittest.TestCase):
         self.service.webhook({'test': 'verified'}, event, raw_body=json.dumps(event).encode())
 
 
+class PublicLiveSessionTests(PublicLiveFixture):
+    def test_signed_session_creation_and_validation_do_not_read_or_write_storage(self):
+        with patch.object(self.store, 'connect', side_effect=AssertionError('Session storage forbidden')):
+            owner, csrf, cookie = self.controller.session(None, create=True)
+            self.assertRegex(cookie, r'crashcart_judge=v1\.')
+            self.assertEqual((owner, csrf, None), self.controller.session(cookie.split(';')[0]))
+
+    def test_signed_session_tampering_expiry_and_other_server_secret_are_rejected(self):
+        token = self.cookie_header.split('=', 1)[1]
+        self.assertRegex(token, r'^v1\.[0-9]+\.[A-Za-z0-9_-]+\.[a-f0-9]{64}$')
+        parts = token.split('.')
+        for index in (1, 2, 3):
+            changed = list(parts)
+            changed[index] = ('9' if changed[index][0] != '9' else '8') + changed[index][1:]
+            with self.subTest(index=index), self.assertRaises(LiveError) as caught:
+                self.controller.session('crashcart_judge=' + '.'.join(changed))
+            self.assertEqual(401, caught.exception.status)
+        with patch.object(self.controller, 'clock', return_value=int(parts[1])):
+            with self.assertRaises(LiveError):
+                self.controller.session(self.cookie_header)
+        # A valid MAC alone must not permit a lifetime beyond two hours.
+        expires = int(self.controller.clock()) + 7201
+        payload = f'v1.{expires}.{parts[2]}'
+        forged_long = payload + '.' + self.controller.digest('session:' + payload)
+        with self.assertRaises(LiveError):
+            self.controller.session('crashcart_judge=' + forged_long)
+        other = Controller(self.store, {**self.env, 'CRASHCART_PUBLIC_SESSION_SECRET': 'different-private-secret-at-least-32-bytes'},
+                           dispatch=lambda *_args: None)
+        self.addCleanup(other.close)
+        with self.assertRaises(LiveError):
+            other.session(self.cookie_header)
+
+    def test_session_owner_and_csrf_survive_restart_but_are_unique_per_nonce(self):
+        other = Controller(self.store, self.env, dispatch=lambda *_args: None)
+        self.addCleanup(other.close)
+        self.assertEqual((self.owner, self.csrf, None), other.session(self.cookie_header))
+        owner, csrf, cookie = other.session(None, create=True)
+        self.assertNotEqual(owner, self.owner)
+        self.assertNotEqual(csrf, self.csrf)
+        self.assertNotEqual(cookie, self.cookie)
+        self.assertNotIn(self.env['CRASHCART_PUBLIC_SESSION_SECRET'], cookie)
+        self.assertNotIn(self.owner, cookie)
+        # Unpublished, unsigned legacy cookies fail closed.
+        with self.assertRaises(LiveError):
+            other.session('crashcart_judge=' + 'a' * 54)
+
+
 class PublicLiveTests(PublicLiveFixture):
     def test_manual_start_only_idempotent_and_correlated_to_owner(self):
         run_id = self.start()
@@ -99,6 +146,35 @@ class PublicLiveTests(PublicLiveFixture):
             self.controller.status(run_id, foreign)
         self.assertEqual(404, caught.exception.status)
         self.assertEqual([], self.controller.timing(foreign)['cases'])
+
+    def test_terminal_confirm_is_read_only_after_run_expiry_or_live_pause(self):
+        run_id = self.start()
+        initial_dispatches = list(self.dispatches)
+        initial_calls = list(self.provider.calls)
+        for state in ('COMPLETED', 'FAILED', 'CANCELLED', 'EXPIRED'):
+            with self.store.connect(write=True) as db:
+                db.execute("UPDATE public_live_runs SET state=?,expires_at=? WHERE run_id=?", (state, 0, run_id))
+            self.env['CRASHCART_PUBLIC_LIVE_ENABLED'] = '0'
+            with self.subTest(state=state):
+                result = self.controller.confirm(run_id, self.owner)
+                self.assertEqual(state, result['state'])
+        self.assertEqual(initial_dispatches, self.dispatches)
+        self.assertEqual(initial_calls, self.provider.calls)
+
+    def test_reserved_checkout_confirms_after_new_admission_capacity_is_used_but_not_if_paused(self):
+        run_id = self.start()
+        self.env['CRASHCART_PUBLIC_LIVE_AUTHORIZED_RUNS'] = '1'
+        self.assertFalse(self.controller.configuration()['enabled'])
+        self.env['CRASHCART_PUBLIC_LIVE_ENABLED'] = '0'
+        before = list(self.dispatches)
+        with self.assertRaises(LiveError) as caught:
+            self.controller.confirm(run_id, self.owner)
+        self.assertEqual('PUBLIC_LIVE_PAUSED', caught.exception.code)
+        self.assertEqual(before, self.dispatches)
+        self.assertFalse(any(call[0] == 'capture' for call in self.provider.calls))
+        self.env['CRASHCART_PUBLIC_LIVE_ENABLED'] = '1'
+        self.assertEqual('CONFIRMING', self.controller.confirm(run_id, self.owner)['state'])
+        self.assertEqual((run_id, 'confirm'), self.dispatches[-1])
 
     def test_return_parameters_alone_never_allow_a_capture(self):
         run_id = self.start()
@@ -301,6 +377,70 @@ class PublicLiveHTTPTests(PublicLiveFixture):
         headers = {'Cookie': self.cookie_header, 'X-CSRF-Token': self.csrf, 'Origin': self.controller.origin,
                    'Content-Type': 'application/json', 'Idempotency-Key': 'synthetic-http-action-001', **extra}
         return self.request('POST', path, headers=headers, body='{}')
+
+    def test_more_than_512_cookieless_config_gets_do_not_exhaust_or_grow_session_storage(self):
+        with self.store.connect() as db:
+            before = {row[0]: db.execute('SELECT COUNT(*) FROM "' + row[0] + '"').fetchone()[0]
+                      for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        for index in range(520):
+            status, headers, raw = self.request('GET', '/api/live/config')
+            self.assertEqual(200, status, f'cookieless request {index + 1}')
+            self.assertTrue(json.loads(raw)['csrf_token'])
+            self.assertIn('HttpOnly', headers['Set-Cookie'])
+        with self.store.connect() as db:
+            after = {row[0]: db.execute('SELECT COUNT(*) FROM "' + row[0] + '"').fetchone()[0]
+                     for row in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        self.assertEqual(before, after)
+        self.assertEqual([], self.dispatches)
+        self.assertEqual([], self.provider.calls)
+
+    def test_expired_cookie_recovery_changes_csrf_and_cannot_open_prior_private_case(self):
+        run_id = self.start()
+        expiry = int(self.cookie_header.split('=', 1)[1].split('.')[1])
+        with patch.object(self.controller, 'clock', return_value=expiry):
+            status, headers, body = self.request('GET', '/api/live/config', headers={'Cookie': self.cookie_header})
+            self.assertEqual(200, status)
+            fresh = headers['Set-Cookie'].split(';')[0]
+            self.assertNotEqual(fresh, self.cookie_header)
+            self.assertNotEqual(self.csrf, json.loads(body)['csrf_token'])
+            self.assertEqual(401, self.request('GET', '/api/live/runs/' + run_id,
+                                             headers={'Cookie': self.cookie_header})[0])
+            self.assertEqual(403, self.post('/api/live/runs', Cookie=fresh)[0])
+        self.assertEqual(1, len(self.dispatches))
+        self.assertFalse(any(call[0] == 'capture' for call in self.provider.calls))
+
+    def test_completed_case_http_remains_readable_and_confirm_does_not_dispatch_when_paused(self):
+        run_id = self.start()
+        self.controller.update(run_id, 'COMPLETED')
+        self.env['CRASHCART_PUBLIC_LIVE_ENABLED'] = '0'
+        before = list(self.dispatches)
+        status, _, body = self.request('GET', '/api/live/runs/' + run_id,
+                                       headers={'Cookie': self.cookie_header})
+        self.assertEqual(200, status)
+        self.assertEqual('COMPLETED', json.loads(body)['state'])
+        status, _, body = self.post('/api/live/runs/' + run_id + '/confirm')
+        self.assertEqual(202, status)
+        self.assertEqual('COMPLETED', json.loads(body)['state'])
+        self.assertEqual(before, self.dispatches)
+        self.assertFalse(any(call[0] == 'capture' for call in self.provider.calls))
+
+    def test_return_redirect_marks_owned_navigation_but_never_captures(self):
+        run_id = self.start()
+        before = list(self.dispatches)
+        status, headers, _ = self.request('GET', '/return?run=' + run_id + '&token=UNTRUSTED',
+                                          headers={'Cookie': self.cookie_header})
+        self.assertEqual(303, status)
+        self.assertEqual('/live.html?run=' + run_id + '&approval_return=1', headers['Location'])
+        self.assertNotIn('UNTRUSTED', headers['Location'])
+        status, headers, _ = self.request('GET', '/cancel?run=' + run_id, headers={'Cookie': self.cookie_header})
+        self.assertEqual(303, status)
+        self.assertEqual('/live.html?run=' + run_id + '&cancel=1', headers['Location'])
+        self.assertEqual(before, self.dispatches)
+        self.assertFalse(any(call[0] == 'capture' for call in self.provider.calls))
+        foreign, _, cookie = self.controller.session(None, create=True)
+        self.assertNotEqual(foreign, self.owner)
+        self.assertEqual(404, self.request('GET', '/return?run=' + run_id,
+                                         headers={'Cookie': cookie.split(';')[0]})[0])
 
     def test_config_is_safe_and_http_cookie_has_expiry_scope_and_csrf(self):
         status, headers, raw = self.request('GET', '/api/live/config')
