@@ -92,6 +92,7 @@
   }
   function animateNumbers() {
     const source = document.getElementById('healthy-time');
+    if (source?.closest('[hidden]')) { clearCounts(); return; }
     if (!source || !source.textContent || source.dataset.motionValue === source.textContent) return;
     const label = source.textContent;
     const value = Number.parseFloat(label);
@@ -153,7 +154,7 @@
         if (fresh.length) context?.add(() => gsap.from(fresh, {y: 9, duration: 0.3,
           stagger: {each: 0.025, amount: Math.min(0.35, fresh.length * 0.025)}}));
       });
-    }).observe(review, {childList: true, subtree: true});
+    }).observe(review, {childList: true, subtree: true, attributes: true, attributeFilter: ['hidden']});
   }
   // State feedback is separate from data rendering and does not delay input or navigation.
   document.addEventListener('click', (event) => {

@@ -6,7 +6,7 @@
 
 [Open the recorded demo](https://crashcart.32.193.44.79.sslip.io/) · [Watch the 2:45 video](https://www.youtube.com/watch?v=gFWje84_wEA) · [Pages mirror](https://himanshu748.github.io/crashcart/)
 
-The public walkthrough replays saved records. **It makes no new PayPal or AI calls.** Compare a confirmed payment with a missing ticket, then see a repair deliver exactly one ticket inside the same 60-second promise.
+The public workspace opens a saved missing-ticket case: payment, delivery and the assistant’s three investigation steps. **It makes no new PayPal or AI calls.** A separate repair comparison shows one ticket inside the same 60-second promise.
 
 ### Try it in 60 seconds
 
@@ -26,7 +26,7 @@ Both outcomes recomputed at launch. No new payment or service call.
 Press Ctrl+C to stop.
 ```
 
-Open the printed URL. Compare **Missed order** and **Recovered order (replay)**. Stop with Ctrl+C. For a terminal without a browser, add `--no-open`.
+The printed URL opens the repair comparison: choose **Missed order** or **Recovered order (replay)**. Choose **Ticket not delivered** in Saved cases to follow the separate 8 November AI investigation. Stop with Ctrl+C. For a terminal without a browser, add `--no-open`.
 
 ![CrashCart’s landing page with the payment-to-delivery investigation](docs/images/crashcart-home.jpg)
 

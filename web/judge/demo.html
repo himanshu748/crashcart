@@ -4,9 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <title>CrashCart · Find out why a paid order wasn’t delivered · Recorded example</title>
-  <meta name="description" content="CrashCart lines up the PayPal payment, your store’s delivery record and the promise you made. Follow a recorded case where a customer paid $29 and their ticket never arrived, then see the repaired store checked against the same payment.">
+  <title>CrashCart · Review a missing ticket · Recorded workspace</title>
+  <meta name="description" content="Review a recorded PayPal payment and its missing ticket, follow the saved AI investigation, and compare a separate repaired checkout. No account or new payment needed.">
   <meta name="color-scheme" content="light">
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="motion.css">
@@ -15,10 +16,9 @@
   <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
   <script src="motion.js" defer></script>
 </head>
-<body>
+<body class="page-demo">
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="bar">
+  <header class="bar workspace-bar">
     <a class="brand" href="index.html" aria-label="CrashCart home">
       <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <rect class="mark-bg" x="1" y="1" width="30" height="30" rx="9"/>
@@ -29,179 +29,79 @@
       </svg>
       CrashCart
     </a>
-    <span class="badge">Recorded example</span>
-    <nav class="bar-nav" aria-label="Main">
-      <a href="index.html">Home</a>
-      <a href="product.html">Product</a>
-      <a href="integrations.html">Integrations</a>
-      <a href="demo.html" aria-current="page">Recorded example</a>
-    </nav>
-
+    <span class="workspace-label">Case workspace</span>
+    <nav class="bar-nav" aria-label="Main"><a href="index.html">Home</a><a href="product.html">Product</a><a href="integrations.html">Integrations</a><a href="demo.html" aria-current="page">Demo workspace</a></nav>
   </header>
 
-  <div class="trail">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="index.html">← Home</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">Recorded example</span>
-    </nav>
-    <nav class="trail-page" aria-label="On this page">
-      <span class="trail-label">On this page</span>
-      <a href="#investigation">Recorded case</a>
-      <a href="#faq">Questions</a>
-      <a href="#downloads">Downloads</a>
-    </nav>
-  </div>
-
-  <p class="replay-note" id="replay-note">
-    <strong>You’re exploring a recorded PayPal test order.</strong>
-    No new payment, store connection or AI request happens here.
-  </p>
-
-  <noscript>
-    <p class="noscript">This page needs JavaScript to read the saved records. The product overview, how it works, questions and downloads below still work without it.</p>
-  </noscript>
-
   <main id="main" tabindex="-1">
-    <!-- Always visible, whether or not the saved records load. -->
-    <section class="product" aria-labelledby="product-title">
-      <div class="product-copy">
-        <p class="eyebrow">Recorded example · one PayPal test checkout</p>
-        <h1 id="product-title">One paid order.<br><em>Follow it to the missing ticket.</em></h1>
-        <p class="lead">The payment went through, but the customer received no ticket. Follow the order to see where delivery stopped, then compare the recovered checkout.</p>
-        <div class="product-actions">
-          <a class="btn btn-signal" href="#investigation">Follow this order</a>
-          <a class="btn btn-outline-light" href="product.html">How CrashCart works</a>
+    <div class="workspace-shell" id="case-workspace">
+      <aside class="case-rail" aria-label="Recorded cases">
+        <div class="rail-heading"><span>Saved cases</span><span class="recording-mark">Recorded</span></div>
+        <div class="case-list" role="group" aria-label="Choose a recorded case">
+          <button type="button" class="case-item" id="workspace-failure-button" data-workspace-view="failure" aria-controls="failure-case" aria-pressed="false" disabled>
+            <span class="case-icon" aria-hidden="true">!</span><span><strong>Ticket not delivered</strong><span>8 Nov 2026 · AI investigation</span><small id="workspace-failure-status">Opening saved case…</small></span>
+          </button>
+          <button type="button" class="case-item" id="workspace-comparison-button" data-workspace-view="comparison" aria-controls="comparison-case" aria-pressed="false" disabled>
+            <span class="case-icon case-icon-compare" aria-hidden="true">↔</span><span><strong>Compare the repair</strong><span>22 Oct 2026 · Same saved input</span><small>Missed order → one ticket on time</small></span>
+          </button>
         </div>
-        <p class="product-fine">Recorded test checkout. Explore it without signing in, making a payment or connecting a store.</p>
-      </div>
-      <figure class="glance">
-        <ol class="glance-list" aria-label="How CrashCart connects the records">
-          <li><span class="glance-who">PayPal</span><span class="glance-says">Check the payment</span></li>
-          <li class="is-alert"><span class="glance-who">Your store</span><span class="glance-says">Look for the delivery</span></li>
-          <li class="is-verdict"><span class="glance-who">Your promise</span><span class="glance-says">Compare what happened</span></li>
-          <li class="is-kept"><span class="glance-who">Next step</span><span class="glance-says">Find the missing step</span></li>
-        </ol>
-        <figcaption><span class="tag">How it works · illustration</span> Payment record. Delivery record. One promise to check. The recorded case loads below.</figcaption>
-      </figure>
-    </section>
+        <div class="rail-explainer"><span class="rail-dot" aria-hidden="true"></span><p>Two separate recorded cases. Real payment evidence, available without an account.</p></div>
+        <nav class="rail-links" aria-label="Workspace help"><a href="#downloads">Download the comparison <span aria-hidden="true">↗</span></a><a href="#faq">About these records <span aria-hidden="true">↗</span></a><a href="product.html">How CrashCart works <span aria-hidden="true">↗</span></a></nav>
+      </aside>
 
-    <p class="load-state" id="load-state" role="status" tabindex="-1">Loading the saved records…</p>
+      <div class="workspace-content">
+        <header class="case-heading">
+          <div><p class="workspace-breadcrumb" id="workspace-case-date">Recorded workspace</p><h1 id="product-title">Review a paid order.</h1><p id="workspace-case-description">Follow the payment, check the delivery, find the missing step.</p></div>
+          <span class="recording-mark">Saved records · No new service calls</span>
+        </header>
+        <p id="workspace-notice" class="workspace-notice" role="status" hidden></p>
+        <p class="load-state" id="load-state" role="status" tabindex="-1">Opening the saved records…</p>
+        <noscript><p class="workspace-notice">Enable JavaScript to explore the recorded cases. The downloads and recording details below are still available. No payment or AI call is needed.</p></noscript>
 
-    <div id="review" hidden>
-      <section class="intro" aria-labelledby="intro-title">
-        <p class="tag tag-recorded">Recorded · saved PayPal test checkout · no live store</p>
-        <p class="eyebrow">Before and after, with the same delivery promise</p>
-        <h2 class="intro-title" id="intro-title">A customer paid $29.<br><em>The ticket never came.</em></h2>
-        <p class="lead">First, see the order that went missing after a real test payment. Then compare the repaired checkout using that same recorded payment. The customer’s promise stays at 60 seconds.</p>
+        <div id="review" hidden>
+          <section id="failure-case" class="workspace-pane" data-workspace-pane="failure" aria-label="8 November recorded investigation" hidden>
+            <div class="case-facts" aria-label="What happened to this order">
+              <div class="case-fact"><span class="fact-label">PayPal payment</span><strong class="fact-confirmed" id="workspace-payment-state">Payment confirmed</strong><span id="workspace-payment-time">Saved capture record</span></div>
+              <div class="case-fact"><span class="fact-label">Ticket delivery</span><strong class="fact-missing" id="workspace-ticket-count">Not available</strong><span>Checked against this order’s records</span></div>
+              <div class="case-fact"><span class="fact-label">The promise</span><strong id="workspace-promise">Recorded deadline</strong><span id="workspace-deadline">One ticket after confirmed payment</span></div>
+            </div>
+            <div class="case-outcome"><span class="outcome-symbol" aria-hidden="true">!</span><div><strong>Payment complete. Delivery missed.</strong><p>The saved investigation found no ticket after the promised minute.</p></div><span class="outcome-tag">Needs attention</span></div>
+            <section class="investigation-card ai" aria-labelledby="failure-ai-title">
+              <div class="card-heading"><div><p class="section-kicker">The saved investigation</p><h2 id="failure-ai-title">Follow how the answer was found.</h2></div><span class="small-label">DeepSeek via Modal · 8 Nov</span></div>
+              <p class="card-intro">Review the assistant’s three recorded steps. It chose the records to read; the payment and ticket evidence determined the result.</p>
+              <div class="ai-panel" id="failure-ai-panel" hidden>
+                <div class="ai-steps" role="group" aria-label="8 November investigation step">
+                  <button type="button" class="pill" data-failure-step="0" aria-pressed="true">1 <span>Payment</span></button>
+                  <button type="button" class="pill" data-failure-step="1" aria-pressed="false">2 <span>Delivery</span></button>
+                  <button type="button" class="pill" data-failure-step="2" aria-pressed="false">3 <span>The finding</span></button>
+                </div>
+                <div class="investigation-columns">
+                  <div class="ai-answer" aria-live="polite"><p class="section-kicker" id="workspace-step-label">Recorded step 1 of 3</p><h3 id="failure-question"></h3><p id="failure-answer"></p><p class="ai-takeaway" id="failure-verdict"></p></div>
+                  <aside class="evidence-note" aria-labelledby="workspace-evidence-heading"><span class="evidence-icon" aria-hidden="true">↗</span><h3 id="workspace-evidence-heading">What it knew at this point</h3><p id="workspace-evidence-copy">The saved trace starts before any records had been read.</p><span id="workspace-evidence-count" class="evidence-count">No records read yet</span></aside>
+                </div>
+                <div class="investigation-actions"><button type="button" class="btn btn-workspace" id="workspace-next-step">Review the delivery check <span aria-hidden="true">→</span></button><span id="workspace-next-note">Moves through saved steps. No AI request.</span></div>
+                <details class="tech source-details"><summary>Read the original model note and citations</summary><p id="failure-reasoning"></p><p id="failure-deterministic"></p><pre id="failure-citations" tabindex="0"></pre></details>
+              </div>
+              <p id="failure-ai-unavailable" class="workspace-notice">This saved investigation is unavailable. The repair comparison is still available.</p>
+            </section>
+            <div class="case-footer-note"><span aria-hidden="true">↗</span><p>The result comes from the saved 8 November checkout. The repair comparison uses a different order, recorded on 22 October. <a href="https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md">Read the original case notes.</a></p></div>
+          </section>
 
-        <aside class="case-dates" aria-label="Three separate recorded cases">
-          <p><strong>22 October · the missed order</strong><span>The payment below completed, but the original store issued no ticket. The recovered version replays that same saved input.</span></p>
-          <p><strong>23 October · an earlier AI-assisted case</strong><span>A separate checkout delivered its ticket. The saved AI investigation ran on 26 October; you can read its steps below.</span></p>
-          <p><strong>8 November · the live payment + AI run</strong><span>A different Sandbox order was created, captured and investigated with DeepSeek. <a href="https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md">Read that completed flow.</a></span></p>
-        </aside>
+          <section id="comparison-case" class="workspace-pane" data-workspace-pane="comparison" aria-label="22 October recorded repair comparison" hidden>
+            <div id="investigation" class="comparison-context"><span class="recording-mark">Different order · 22 Oct 2026</span><p>One saved payment, two merchant rules. Compare the missed ticket with the repaired replay. No new purchase is made.</p></div>
+            <div class="compare case-switch" role="group" aria-label="Choose an outcome">
+              <article class="compare-card compare-bad"><button type="button" data-case="defective" aria-controls="evidence" aria-pressed="true"><span class="fact-label">Original store</span><strong>Missed order</strong><span class="comparison-number"><span id="defective-count">0</span> <small>tickets</small></span><span id="defective-finding"></span></button></article>
+              <article class="compare-card compare-good"><button type="button" data-case="healthy" aria-controls="evidence" aria-pressed="false"><span class="fact-label">Repaired rule · replay</span><strong>Recovered order</strong><span class="comparison-number"><span id="healthy-count">1</span> <small>ticket · <span id="healthy-time"></span></small></span><span>Confirmed payment → one ticket inside the same 60 seconds.</span></button></article>
+            </div>
+            <section class="evidence evidence-card" id="evidence" aria-labelledby="evidence-title"><div class="card-heading"><div><p class="section-kicker">Payment and delivery</p><h2 id="evidence-title" tabindex="-1"><span id="selected-name">Missed order</span></h2></div><a class="text-action" id="download-case" href="downloads/defective.json" download>Download order summary</a></div><div class="facts" id="facts"></div>
+              <details class="order-records source-details"><summary>Inspect the order activity</summary><div class="records-tools"><label for="source-filter">Show</label><select id="source-filter"><option value="all">Everything</option><option value="provider">PayPal</option><option value="browser">Checkout page</option><option value="merchant">Ticket delivery</option><option value="harness">Connection interruption</option></select><p class="fine" id="timeline-count" role="status"></p></div><ol class="timeline" id="timeline"></ol></details>
+              <details class="tech source-details"><summary>How this outcome was checked</summary><pre id="technical-result" tabindex="0"></pre></details>
+            </section>
+            <details class="workspace-story source-details"><summary>Follow the checkout, step by step</summary><div class="story-controls" role="group" aria-label="Step"><button type="button" class="pill" data-story="payment" aria-pressed="true">1. The payment</button><button type="button" class="pill" data-story="delivery" aria-pressed="false">2. The delivery</button><button type="button" class="pill" data-story="repair" aria-pressed="false">3. The repair</button></div><div class="promise" data-story="payment"><div class="promise-track" aria-hidden="true"><span class="pt-node pt-pay">Paid</span><span class="pt-bar"><span class="pt-fill"></span></span><span class="pt-node pt-deadline">60s</span><span class="pt-node pt-ticket">Ticket</span></div><div class="story-copy" id="story-copy" aria-live="polite"><p class="story-meta"><span id="story-counter">1 of 3</span> · <span id="story-status">Payment confirmed</span></p><h3 id="story-title">The payment went through.</h3><p id="story-description">Read the recorded payment and delivery.</p></div></div></details>
+            <p class="fine execution-note" id="execution-note"></p>
+          </section>
 
-        <div class="compare">
-          <article class="compare-card compare-bad" aria-labelledby="cmp-bad-title">
-            <p class="compare-kicker">Original store</p>
-            <h3 id="cmp-bad-title">Missed order</h3>
-            <p class="compare-figure"><span id="defective-count">0</span> <span class="unit">tickets</span></p>
-            <p id="defective-finding"></p>
-            <button class="btn select-case" type="button" data-case="defective" aria-controls="evidence">See what happened</button>
-          </article>
-          <article class="compare-card compare-good" aria-labelledby="cmp-good-title">
-            <p class="compare-kicker">Repaired store · replay</p>
-            <h3 id="cmp-good-title">Recovered order</h3>
-            <p class="compare-figure"><span id="healthy-count">1</span> <span class="unit">ticket, after <span id="healthy-time"></span></span></p>
-            <p>The replay applies the repaired rule: issue a ticket after the saved payment read confirms capture. It uses the same input, not a new purchase or a live merchant run.</p>
-            <button class="btn select-case" type="button" data-case="healthy" aria-controls="evidence">See what happened</button>
-          </article>
-        </div>
-        <p class="fine" id="execution-note"></p>
-      </section>
-
-      <section class="story" id="investigation" aria-labelledby="story-heading">
-        <p class="eyebrow">Recorded case</p>
-        <h2 class="section-title" id="story-heading">What happened, in three steps</h2>
-        <div class="story-controls" role="group" aria-label="Step">
-          <button type="button" class="pill" data-story="payment" aria-pressed="true">1. The payment</button>
-          <button type="button" class="pill" data-story="delivery" aria-pressed="false">2. The delivery</button>
-          <button type="button" class="pill" data-story="repair" aria-pressed="false">3. The repair</button>
-        </div>
-        <div class="promise" data-story="payment">
-          <div class="promise-track" aria-hidden="true">
-            <span class="pt-node pt-pay">Paid</span>
-            <span class="pt-bar"><span class="pt-fill"></span></span>
-            <span class="pt-node pt-deadline">60s</span>
-            <span class="pt-node pt-ticket">Ticket</span>
-          </div>
-          <div class="story-copy" id="story-copy" aria-live="polite">
-            <p class="story-meta"><span id="story-counter">1 of 3</span> · <span id="story-status">Payment confirmed</span></p>
-            <h3 id="story-title">The payment went through.</h3>
-            <p id="story-description">PayPal’s saved record confirms the $29 payment. That tells us the money arrived. It doesn’t tell us whether the customer got their ticket.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="evidence" id="evidence" aria-labelledby="evidence-title">
-        <div class="evidence-head">
-          <div>
-            <p class="eyebrow">Saved records</p>
-            <h2 class="section-title" id="evidence-title" tabindex="-1">Showing: <span id="selected-name">Missed order</span></h2>
-          </div>
-          <div class="case-switch" role="group" aria-label="Which order">
-            <button type="button" class="pill" data-case="defective" aria-pressed="true">Missed order</button>
-            <button type="button" class="pill" data-case="healthy" aria-pressed="false">Recovered order (replay)</button>
-          </div>
-        </div>
-
-        <div class="facts" id="facts"></div>
-
-        <details class="order-records" open>
-          <summary>Order activity</summary>
-          <div class="records-tools">
-            <label for="source-filter">Show</label>
-            <select id="source-filter">
-              <option value="all">Everything</option>
-              <option value="provider">PayPal</option>
-              <option value="browser">Checkout page</option>
-              <option value="merchant">Ticket delivery</option>
-              <option value="harness">Checkout interruption</option>
-            </select>
-            <p class="fine" id="timeline-count" role="status"></p>
-          </div>
-          <ol class="timeline" id="timeline"></ol>
-        </details>
-
-        <div class="case-actions">
-          <a class="btn" id="download-case" href="downloads/defective.json" download>Download order details (JSON)</a>
-        </div>
-
-        <details class="tech">
-          <summary>How this answer was checked</summary>
-          <pre id="technical-result" tabindex="0"></pre>
-        </details>
-      </section>
-
-      <section class="ai" aria-labelledby="failure-ai-title">
-        <p class="eyebrow">AI on a missed delivery</p>
-        <h2 class="section-title" id="failure-ai-title">The payment was real. The ticket was missing.</h2>
-        <p>Recorded 8 Nov 2026 DeepSeek (Modal) investigation, no live call. This is a separate order from the 22 October repair comparison above.</p>
-        <div class="ai-panel" id="failure-ai-panel" hidden>
-          <div class="ai-steps" role="group" aria-label="8 November investigation step">
-            <button type="button" class="pill" data-failure-step="0" aria-pressed="true">1. Check payment</button>
-            <button type="button" class="pill" data-failure-step="1" aria-pressed="false">2. Find the ticket</button>
-            <button type="button" class="pill" data-failure-step="2" aria-pressed="false">3. Explain the gap</button>
-          </div>
-          <div class="ai-answer" aria-live="polite">
-            <h3 id="failure-question"></h3><p id="failure-answer"></p>
-            <details class="tech"><summary>Saved model note and supporting records</summary><p id="failure-reasoning"></p><pre id="failure-citations" tabindex="0"></pre></details>
-            <p class="ai-takeaway" id="failure-verdict"></p>
-          </div>
-          <p class="fine">AI selected the evidence. Deterministic code retained FAIL / paid_without_ticket. Viewing this saved trace makes no payment or model request.</p>
-        </div>
-        <p id="failure-ai-unavailable">The recorded failure investigation is unavailable. The payment and repair comparison still works.</p>
-      </section>
+          <div class="workspace-archive">
       <details class="earlier-ai"><summary>Earlier delivered checkout · captured 23 October, investigated 26 October</summary>
       <section class="ai" aria-labelledby="ai-title">
         <p class="eyebrow">Help finding the next step</p>
@@ -228,98 +128,23 @@
         </div>
       </section>
       </details>
-    </div>
+          </div>
+        </div>
 
-    <section class="how" id="how" aria-labelledby="how-title">
-      <p class="eyebrow">How it works</p>
-      <h2 class="section-title" id="how-title">Follow the payment. Find the missing delivery.</h2>
-      <p class="how-lead"><span class="tag">Private test workspace</span> These steps describe the private test workspace. This recorded example doesn’t start a checkout or run the assistant. The <a href="product.html">Product page</a> lets you try the delivery timeline yourself.</p>
-      <ol class="how-steps">
-        <li>
-          <span class="how-num" aria-hidden="true">01</span>
-          <h3>Start a test checkout</h3>
-          <p>Start a checkout in PayPal’s test environment and approve it yourself. No real card is charged.</p>
-        </li>
-        <li>
-          <span class="how-num" aria-hidden="true">02</span>
-          <h3>Confirm the approved payment</h3>
-          <p>Approve the checkout on PayPal, then choose to confirm it in CrashCart. CrashCart checks PayPal before completing the test payment.</p>
-        </li>
-        <li>
-          <span class="how-num" aria-hidden="true">03</span>
-          <h3>See whether delivery was on time</h3>
-          <p>Compare the confirmed payment with the store’s ticket record. The promise stays the same: one ticket, within 60 seconds.</p>
-        </li>
-        <li>
-          <span class="how-num" aria-hidden="true">04</span>
-          <h3>Find the missing step</h3>
-          <p>Ask the assistant to follow the payment and delivery records. It points to what happened and what to check next. You can stop it from taking further steps.</p>
-        </li>
-      </ol>
-    </section>
-
-    <section class="faq" id="faq" aria-labelledby="faq-title">
-      <p class="eyebrow">Questions</p>
-      <h2 class="section-title" id="faq-title">Good to know</h2>
-      <div class="faq-list">
-        <details class="faq-item" id="faq-payment">
-          <summary>Does this page take a payment or contact PayPal?</summary>
-          <p>No. You’re exploring a recorded test order. Nothing here charges money, contacts PayPal, connects a store or starts an AI investigation.</p>
-        </details>
-        <details class="faq-item" id="faq-recorded">
-          <summary>What exactly was recorded?</summary>
-          <p>A PayPal Sandbox test order for a $29 workshop ticket, due within 60 seconds of payment. The store lost the payment reply and never issued the ticket. The recovered order shows the repaired checkout using that same recorded payment, without making a new purchase.</p>
-        </details>
-        <details class="faq-item" id="faq-assistant">
-          <summary>Is the AI assistant running here?</summary>
-          <p>No. The first panel shows the saved 8 November missing-ticket investigation; the earlier delivered checkout is available separately. Both concern different orders from the 22 October repair comparison. Reading them makes no AI request. Payment and delivery records, rather than the assistant’s opinion, determine the answer.</p>
-        </details>
-        <details class="faq-item" id="faq-stores">
-          <summary>Which stores does CrashCart work with today?</summary>
-          <p>The current example uses a workshop test store. Shopify and WooCommerce connections are still in preview and haven’t been tested with a real store. There’s no store installation or connection available here yet.</p>
-        </details>
-        <details class="faq-item" id="faq-own">
-          <summary>How would I check my own orders?</summary>
-          <p>The private workspace can run test checkouts after its owner sets up PayPal Sandbox access. It isn’t a self-service connection for your shop yet. This recorded example needs no sign-in.</p>
-        </details>
-        <details class="faq-item" id="faq-downloads">
-          <summary>What can I download?</summary>
-          <p>Take the order details for both outcomes and the saved checkout data. The ZIP also lets you run the same comparison on your computer without making a payment. Downloading a file doesn’t run it.</p>
-        </details>
+        <div class="workspace-resources">
+          <details class="workspace-help"><summary>About these recordings</summary><section id="faq" aria-labelledby="faq-title"><h2 id="faq-title">Good to know</h2>
+            <details class="faq-item" id="faq-payment"><summary>Does this demo contact PayPal or run AI?</summary><p>No. It reads saved records. No payment, AI request or store connection is started here.</p></details>
+            <details class="faq-item" id="faq-recorded"><summary>Why are there two cases?</summary><p>The 8 November case shows a real Sandbox payment and its saved AI investigation. The 22 October case compares the original store with the repaired rule using the same saved payment. They are separate orders.</p></details>
+            <details class="faq-item" id="faq-assistant"><summary>Who decides whether delivery was on time?</summary><p>The assistant chooses which records to inspect. Fixed code checks payment, ticket count and the unchanged 60-second promise. The assistant cannot override that result.</p></details>
+            <details class="faq-item" id="faq-stores"><summary>Can I connect my store?</summary><p>Not on this public demo. Shopify and WooCommerce connectors are in preview and have not been verified with a real merchant store.</p></details>
+            <details class="faq-item" id="faq-own"><summary>Can I run a new Sandbox checkout?</summary><p>The separate private workspace can use your own PayPal Sandbox and AI access. <a href="https://github.com/himanshu748/crashcart/blob/main/docs/JUDGE_GUIDE.md">Read the setup guide.</a></p></details>
+            <details class="faq-item" id="faq-downloads"><summary>What can I download?</summary><p>The 22 October recorded input, both outcomes and a keyless offline replay. Downloading a file does not run it.</p></details>
+          </section></details>
+          <details class="workspace-help"><summary>Take the repair comparison with you</summary><section id="downloads" aria-labelledby="downloads-title"><h2 id="downloads-title">Download the recorded comparison</h2><p class="fine">22 October · saved input and both outcomes.</p><ul class="download-list"><li><a href="downloads/defective.json" download>Missed order records</a><span>JSON</span></li><li><a href="downloads/healthy.json" download>Recovered order records</a><span>JSON</span></li><li><a href="downloads/input.json" download>Original saved input</a><span>JSON</span></li><li><a href="downloads/replay.zip" download>Keyless offline replay</a><span>ZIP</span></li><li><a href="LICENSE">MIT licence</a><span>Text</span></li></ul></section></details>
+        </div>
+        <footer class="workspace-footer"><p>Recorded Sandbox evidence. No new PayPal or AI calls.</p><label class="motion-toggle"><input type="checkbox" id="reduce-motion"><span>Reduce motion</span></label><a href="integrations.html">What powers CrashCart <span aria-hidden="true">↗</span></a></footer>
       </div>
-    </section>
-
-    <section class="downloads" id="downloads" aria-labelledby="downloads-title">
-      <h2 class="section-title" id="downloads-title">Downloads</h2>
-      <p class="fine">Downloading doesn’t run anything.</p>
-      <ul class="download-list">
-        <li><a href="downloads/defective.json" download>Missed order records</a><span>JSON</span></li>
-        <li><a href="downloads/healthy.json" download>Recovered order records (replay)</a><span>JSON</span></li>
-        <li><a href="downloads/input.json" download>Saved checkout details</a><span>JSON</span></li>
-        <li><a href="downloads/replay.zip" download>Replay this comparison on your computer, without a payment</a><span>ZIP</span></li>
-        <li><a href="LICENSE">Licence</a><span>Text</span></li>
-      </ul>
-    </section>
+    </div>
   </main>
-
-  <nav class="page-end" aria-label="Previous and next page">
-    <a class="btn" href="integrations.html">← Integrations</a>
-    <a class="btn" href="index.html">Back to Home</a>
-  </nav>
-
-  <footer class="foot">
-    <label class="motion-toggle">
-      <input type="checkbox" id="reduce-motion">
-      <span>Reduce motion</span>
-    </label>
-    <nav class="foot-nav" aria-label="Footer">
-      <a href="index.html">Home</a>
-      <a href="product.html">Product</a>
-      <a href="integrations.html">Integrations</a>
-      <a href="demo.html" aria-current="page">Recorded example</a>
-    </nav>
-    <p>CrashCart finds out what happened between “paid” and “delivered”.</p>
-    <p class="fine">Recorded example. No live store or payment is connected to this page.</p>
-  </footer>
 </body>
 </html>

@@ -104,6 +104,110 @@
   let review = null;
   let selected = 'defective';
 
+  /* Compact workspace: presentation over the already validated saved records. */
+  let workspaceView = null;
+  let failureWorkspace = null;
+  let failureStep = 0;
+  const workspacePresent = () => !!byId('case-workspace');
+  function failureWorkspaceProjection(history) {
+    if (!review || !validFailureAi(history)) return null;
+    const result = history.deterministic_result;
+    if (!validTime(history.payment_completed_at) || !validTime(result.deadline)
+      || seconds(result.deadline, history.payment_completed_at) !== review.invariant.recovery_seconds
+      || result.invariant_version !== review.invariant.version) return null;
+    return {paymentAt: history.payment_completed_at, deadline: result.deadline,
+      tickets: result.source_ids.ticket_ids.length, promiseSeconds: review.invariant.recovery_seconds};
+  }
+  function showWorkspace(view) {
+    if (!workspacePresent() || !review) return false;
+    if (view !== 'failure' && view !== 'comparison') return false;
+    if (view === 'failure' && !failureWorkspace) return false;
+    workspaceView = view;
+    document.querySelectorAll('[data-workspace-pane]').forEach((pane) => {
+      pane.hidden = pane.dataset.workspacePane !== view;
+    });
+    document.querySelectorAll('[data-workspace-view]').forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.workspaceView === view));
+    });
+    byId('product-title').textContent = view === 'failure' ? 'Ticket not delivered' : 'Compare the repair';
+    byId('workspace-case-date').textContent = view === 'failure'
+      ? '8 November 2026 · Saved AI investigation' : '22 October 2026 · Recorded comparison';
+    byId('workspace-case-description').textContent = view === 'failure'
+      ? 'A completed PayPal payment. A customer still waiting for their ticket.'
+      : 'One saved payment, two outcomes. The customer’s one-minute promise stays the same.';
+    if (view === 'comparison') renderCase();
+    return true;
+  }
+  function updateWorkspaceStep(step) {
+    if (!workspacePresent()) return;
+    failureStep = step;
+    byId('workspace-step-label').textContent = `Recorded step ${step + 1} of 3`;
+    byId('workspace-evidence-copy').textContent = [
+      'No payment or delivery records had been read yet. The assistant requested the PayPal payment record.',
+      'The payment record confirmed capture. The assistant still needed to check the ticket store.',
+      'PayPal confirmed capture. The ticket store reported no ticket after the promised minute.',
+    ][step];
+    const count = failureHistory.trace[step].findings.length;
+    byId('workspace-evidence-count').textContent = count ? `${count} supporting ${count === 1 ? 'record' : 'records'}` : 'No records read yet';
+    const next = byId('workspace-next-step');
+    next.replaceChildren(document.createTextNode(['Review the delivery check', 'Review the finding', 'Compare the repaired replay'][step]));
+    const arrow = el('span', ' →'); arrow.setAttribute('aria-hidden', 'true'); next.append(arrow);
+    byId('workspace-next-note').textContent = step === 2
+      ? 'Opens a different recorded order, from 22 October.' : 'Moves through saved steps. No AI request.';
+  }
+  function workspaceAnchor() {
+    if (!workspacePresent() || !review) return;
+    const hash = window.location.hash.slice(1), anchor = hash ? byId(hash) : null;
+    if (!anchor) return;
+    const pane = anchor.closest('[data-workspace-pane]');
+    if (pane && !showWorkspace(pane.dataset.workspacePane)) {
+      showWorkspace('comparison');
+      byId('workspace-notice').hidden = false;
+      byId('workspace-notice').textContent = 'The saved AI case is unavailable. You can still compare the recorded repair.';
+      return;
+    }
+    let parent = anchor.parentElement;
+    while (parent) {
+      if (parent.tagName === 'DETAILS') parent.open = true;
+      parent = parent.parentElement;
+    }
+    anchor.scrollIntoView({block: 'start', behavior: 'auto'});
+  }
+  function initialiseWorkspace() {
+    if (!workspacePresent()) return;
+    failureWorkspace = failureWorkspaceProjection(failureHistory);
+    const failureButton = byId('workspace-failure-button');
+    failureButton.disabled = !failureWorkspace;
+    byId('workspace-comparison-button').disabled = false;
+    byId('workspace-failure-status').textContent = failureWorkspace ? 'Payment confirmed · 0 tickets' : 'Saved case unavailable';
+    if (failureWorkspace) {
+      byId('workspace-payment-state').textContent = 'Confirmed';
+      byId('workspace-payment-time').textContent = instant(failureWorkspace.paymentAt);
+      byId('workspace-ticket-count').textContent = `${failureWorkspace.tickets} tickets`;
+      byId('workspace-promise').textContent = `${failureWorkspace.promiseSeconds}-second promise`;
+      byId('workspace-deadline').textContent = `Missed · due ${instant(failureWorkspace.deadline)}`;
+      showWorkspace('failure');
+    } else {
+      byId('workspace-notice').hidden = false;
+      byId('workspace-notice').textContent = 'The saved AI case is unavailable. You can still compare the recorded repair.';
+      showWorkspace('comparison');
+    }
+  }
+  document.querySelectorAll('[data-workspace-view]').forEach((button) => {
+    button.addEventListener('click', () => showWorkspace(button.dataset.workspaceView));
+  });
+  byId('workspace-next-step')?.addEventListener('click', () => {
+    if (!review || !failureWorkspace || workspaceView !== 'failure') return;
+    if (failureStep < 2) showFailureStep(failureStep + 1);
+    else {
+      showWorkspace('comparison');
+      showStory('repair');
+      byId('evidence-title').focus({preventScroll: true});
+      byId('comparison-case').scrollIntoView({block: 'start', behavior: reduced() ? 'auto' : 'smooth'});
+    }
+  });
+  window.addEventListener?.('hashchange', workspaceAnchor);
+
   /* ---------- Case view ---------- */
   function fact(label, main, note, tone) {
     const box = el('div', null, 'fact' + (tone ? ` fact-${tone}` : ''));
@@ -210,10 +314,13 @@
     const step = failureHistory.trace[index];
     document.querySelectorAll('[data-failure-step]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.failureStep) === index)));
     byId('failure-question').textContent = ['Did the payment complete?', 'Was a ticket delivered?', 'What does the evidence support?'][index];
-    byId('failure-answer').textContent = ['The assistant started without payment or delivery observations and requested the PayPal record.', 'PayPal confirmed the $29 capture. The assistant then requested the matching ticket records.', 'The store had no ticket after the one-minute deadline. The assistant finished with citations to both records.'][index];
+    byId('failure-answer').textContent = ['The assistant started without payment or delivery observations and requested the PayPal record.', 'PayPal confirmed capture. The assistant then requested the matching ticket records.', 'The store had no ticket after the one-minute deadline. The assistant finished with citations to both records.'][index];
     byId('failure-reasoning').textContent = step.hypothesis;
+    const result = failureHistory.deterministic_result;
+    byId('failure-deterministic').textContent = `Recorded code result: ${result.verdict} / ${result.signature}. The 60-second promise is unchanged.`;
     byId('failure-citations').textContent = step.findings.length ? JSON.stringify(step.findings, null, 2) : 'No observations had been collected at this step.';
-    byId('failure-verdict').textContent = index === 2 ? 'Paid, but no ticket. Fixed code checked the unchanged promise: FAIL / paid_without_ticket.' : 'The assistant chooses where to look; it does not decide the payment outcome.';
+    byId('failure-verdict').textContent = index === 2 ? 'Paid, but no ticket. The payment and delivery records confirm the one-minute promise was missed.' : 'The assistant chooses where to look; it does not decide the payment outcome.';
+    updateWorkspaceStep(index);
   }
   document.querySelectorAll('[data-failure-step]').forEach(b => b.addEventListener('click', () => showFailureStep(Number(b.dataset.failureStep))));
   function initialiseFailureAi(history) {
@@ -325,12 +432,14 @@
       byId('story-copy').classList.remove('enter');
       if (data.failure_ai !== undefined) initialiseFailureAi(data.failure_ai);
       if (data.historical_ai !== undefined) initialiseAiHistory(data.historical_ai);
+      initialiseWorkspace();
       byId('load-state').hidden = true;
       byId('review').hidden = false;
       // A launch URL may point at a section before the records arrive.
       const hash = window.location.hash.slice(1);
       const anchor = hash ? byId(hash) : null;
-      if (anchor) anchor.scrollIntoView({block: 'start', behavior: 'auto'});
+      if (workspacePresent()) workspaceAnchor();
+      else if (anchor) anchor.scrollIntoView({block: 'start', behavior: 'auto'});
     })
     .catch(fail);
 })();

@@ -4,7 +4,7 @@ The public demo needs no keys. A new checkout and investigation uses your own ac
 
 ## No-account path
 
-Open [CrashCart](https://crashcart.52.202.25.181.sslip.io/), open the recorded example, and switch between **Missed order** and **Recovered order (replay)**. These are saved PayPal Sandbox records. The repair uses the same payment and the same 60-second rule. No payment or model request happens on this public page.
+Open [CrashCart](https://crashcart.32.193.44.79.sslip.io/), open the demo workspace, and follow the three saved investigation steps in **Ticket not delivered** (8 November). Choose **Compare the repair** for the separate 22 October case, then switch between **Missed order** and **Recovered order (replay)**. These are saved PayPal Sandbox records. The repair uses the same recorded 22 October payment and the same 60-second rule. No payment or model request happens on this public page.
 
 For an executable local comparison, follow the README's main-branch clone and `./scripts/judge.sh` commands. No checkout of a submission branch is needed.
 
