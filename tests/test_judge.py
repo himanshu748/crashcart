@@ -319,6 +319,58 @@ class JudgeReviewTests(unittest.TestCase):
                     finally:
                         server.shutdown(); server.server_close(); thread.join(timeout=5)
 
+    def test_startup_asset_burst_receives_every_complete_response(self):
+        body = b"window.motionLoaded = true;\n"
+        server = make_server({"motion.js": ("text/javascript; charset=utf-8", body)}, port=0)
+        clients = []
+        errors = []
+        responses = []
+        thread = None
+        try:
+            # Model a brief scheduler gap while a cold page queues its assets.
+            # Exercise real connections and responses, not the backlog attribute.
+            for index in range(12):
+                client = socket.socket()
+                client.settimeout(0.25)
+                phase = "connect"
+                try:
+                    client.connect(server.server_address)
+                    phase = "send"
+                    client.sendall(b"GET /motion.js HTTP/1.0\r\nHost: localhost\r\n\r\n")
+                except OSError as exc:
+                    errors.append((index, phase, type(exc).__name__))
+                    client.close()
+                else:
+                    clients.append((index, client))
+            thread = threading.Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            for index, client in clients:
+                client.settimeout(2)
+                try:
+                    raw = b""
+                    while len(raw) <= 4096:
+                        chunk = client.recv(4096)
+                        if not chunk:
+                            break
+                        raw += chunk
+                    responses.append(raw)
+                except OSError as exc:
+                    errors.append((index, "recv", type(exc).__name__))
+        finally:
+            for _, client in clients:
+                client.close()
+            if thread is not None:
+                server.shutdown()
+                thread.join(timeout=2)
+            server.server_close()
+        self.assertEqual(errors, [], f"Asset burst lost connections: {errors}")
+        self.assertEqual(len(responses), 12)
+        for raw in responses:
+            header, separator, payload = raw.partition(b"\r\n\r\n")
+            self.assertEqual(separator, b"\r\n\r\n")
+            self.assertEqual(header.split(b"\r\n", 1)[0].split()[1], b"200")
+            self.assertEqual(payload, body)
+
     def test_http_only_serves_frozen_allowlist_and_rejects_live_actions(self):
         server=make_server(self.files,port=0)
         thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()

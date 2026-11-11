@@ -257,7 +257,12 @@ def make_server(files, host="127.0.0.1", port=8766):
             # Do not log arbitrary request text or environment values.
             pass
 
-    return ThreadingHTTPServer((host, port), ReviewHandler)
+    class ReviewServer(ThreadingHTTPServer):
+        # A cold page queues several local scripts, styles and fonts together.
+        # Keep that bounded burst queued during brief accept-loop scheduling gaps.
+        request_queue_size = 32
+
+    return ReviewServer((host, port), ReviewHandler)
 
 
 def main(argv=None):
