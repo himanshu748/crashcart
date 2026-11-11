@@ -1,6 +1,12 @@
 # CrashCart development status
 
-**Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 10 November 2026 (India).
+**Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 11 November 2026 (India).
+
+## 11 November, 09:56 IST — recorded demo workspace prepared locally
+
+The public example is now a compact case workspace on local branch `feat/demo-workspace-nov11`. The 8 November missing-ticket investigation opens first; the 22 October repair remains a separate comparison. Source `d9ac854` passes a fresh local clone: 598 Python tests, 118 JavaScript tests, 17 judge checks, 58 Studio/timing tests, Ruff, mypy, build and both zero-network replays. Actual browser checks cover six widths, keyboard, reduced motion and missing-record recovery. Final Lighthouse: mobile 93/100/100/100; desktop 100/100/100/100. Independent review found no blockers.
+
+Historical **47/60 remains frozen**; no CC ID newly verified, closed or reclassified. Payment rules, original validators, replay inputs and `invariant.py` are unchanged. A 27-second browser preview is local only. No branch push, PR, deployment, Devpost edit or submitted-video replacement occurred. Next: owner reviews the screenshots/preview; an exact `submit` permits only the branch push and PR together. Merge and publication remain separate gates.
 
 ## 10 November, 21:49 IST — small landing polish prepared
 
