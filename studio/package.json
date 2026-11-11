@@ -9,7 +9,9 @@
     "test:deadlines": "node test-deadlines.mjs",
     "test:presentation": "node test-presentation.mjs",
     "build:recorded": "npm run typecheck && node build-recorded.mjs",
-    "test:recorded": "node test-recorded.mjs"
+    "test:recorded": "node test-recorded.mjs",
+    "build:timing": "npm run typecheck && node build-timing.mjs",
+    "test:public-timing": "node test-public-timing.mjs"
   },
   "dependencies": {
     "@bryntum/core-community": "8.0.0-beta.1",

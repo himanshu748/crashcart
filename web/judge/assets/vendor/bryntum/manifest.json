@@ -1,0 +1,45 @@
+{
+  "sdk": "@bryntum/scheduler-community",
+  "version": "8.0.0-beta.1",
+  "license": "MIT",
+  "source": "studio/src/public-timing.ts",
+  "recorded_only": true,
+  "files": {
+    "FONT-AWESOME-LICENSE.txt": {
+      "bytes": 7427,
+      "sha256": "9b914eae88817d63b576eab5aafde7068c7a1abae125d7cdfb034f1da43a9afc"
+    },
+    "LICENSE.txt": {
+      "bytes": 1069,
+      "sha256": "280f53dc7a9ef9bbe8a89cb011dee1eb6de6931c728775b57add4d541adae1b7"
+    },
+    "THIRD-PARTY-NOTICES.txt": {
+      "bytes": 17882,
+      "sha256": "c074e0f9ab5092b7de38b43efbd7d056623fc58abfdd7f88236d4e6527ce6637"
+    },
+    "fa-solid-900-5ZUYHGA7.woff2": {
+      "bytes": 158220,
+      "sha256": "aa75998623a391e61c6901794ace832e3ecdd288b56d608f21bea0411acc0b8e"
+    },
+    "fa-solid-900-PJNKLK6W.ttf": {
+      "bytes": 426112,
+      "sha256": "d2f0593540b0e33ba6de255a54f272d466e31144806956bea8cfdbf7edffc9bd"
+    },
+    "scheduler.css": {
+      "bytes": 393839,
+      "sha256": "9695c0d1aedf0313856fea4744cc940835c852bdd8c5940e90e3f84e05c702cf"
+    },
+    "timing.css": {
+      "bytes": 393839,
+      "sha256": "9695c0d1aedf0313856fea4744cc940835c852bdd8c5940e90e3f84e05c702cf"
+    },
+    "timing.css.LEGAL.txt": {
+      "bytes": 310,
+      "sha256": "6831825d7bd7f277e2c14a06755e35a9dfc85e242534f6e8deabc7d7c6fffd55"
+    },
+    "timing.js": {
+      "bytes": 2076052,
+      "sha256": "feac0f0ef8fc85b3135e46c7b99cd11e0ace23ec2017ddddb5282cc478b76eda"
+    }
+  }
+}

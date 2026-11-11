@@ -1,44 +1,40 @@
 # Recorded walkthrough hosting
 
-**Current demo:** https://crashcart.52.202.25.181.sslip.io/
+**Primary demo:** <https://crashcart.32.193.44.79.sslip.io/>
 
-Verified 8 November 2026 on the existing Lightsail host. Its existing Docker/Caddy
-proxy serves the frozen public export; no additional instance or plan upgrade was
-needed. The server holds no CrashCart provider credentials or licensed workspace
-bundle. [Configuration, cost, retention and rollback](LIGHTSAIL_SHARED_HOST.md).
-[Actual deployment and browser evidence](../evidence/runs/submission-ready/lightsail-hosted-nov8.json).
+**GitHub Pages mirror:** <https://himanshu748.github.io/crashcart/>
 
-The hosted page is an interactive recorded example. Results are computed during
-export, not on each click. The local `./scripts/judge.sh` command executes both
-merchant variants at startup. Neither mode creates a payment or calls AI. The
-historical AI section is a separate dated case. Full live merchant/model access
-remains outside this hosted deployment.
+Both public sites serve the recorded judge experience. They hold no PayPal or
+model credentials, start no checkout and make no AI requests. The current
+published video is the [2:45 Deepgram-narrated walkthrough](https://www.youtube.com/watch?v=3MIzDpFmRl0).
 
-Trusted HTTPS, the defective failure and healthy pass, both desktop and phone
-interactions, HTTP write rejection and the actual downloaded executable ZIP were
-exercised. All ten exported files match their frozen hashes. The six earlier
-sites retain their routes, HTTP statuses and successful-page hashes. The shared
-proxy container/image/start time/mounts and original routing table are unchanged.
+The static site computes both repair outcomes during export. A visitor inspects
+those saved results; clicking or refreshing does not run Python. To recompute
+them locally with no keys or packages, run `./scripts/judge.sh` as documented in
+[the README](../README.md#try-it-in-60-seconds).
 
-Keep access through the 21 December winner announcement, with a 22 December UTC
-buffer. The instance has an additive CrashCart retention tag. No automatic
-teardown is installed and future uptime is not established by these tests.
-Freeze submitted source, video and linked materials after the deadline until
-winners are announced. Do not stop/delete this shared host to remove CrashCart.
+The hosted page opens the 8 November saved AI investigation. The local command
+opens the separate 22 October comparison: faulty with no ticket, repaired with
+one ticket at 32.26 seconds. Both cases are available in the same workspace.
 
-## Fallback and retained failures
+## Operation and publication
 
-The [GitHub Pages preview](https://himanshu748.github.io/crashcart/) remains
-available on an older release. Its current workflow is blocked by an account
-billing lock. No Pages settings, unrelated project or existing public site was
-removed or replaced. Complete local setup is also an accepted judging path.
+The dedicated Lightsail instance, static IP and certificate storage must remain
+available through **22 December 2026**. No automatic teardown is configured.
+The owner approved the existing $12/month base plan; this document authorizes
+no spending or billing change. See [health, restart and host configuration](OPERATIONS.md).
 
-The earlier dedicated $7/month Lightsail attempt stopped before SSH and was
-cleaned up; [that failure remains recorded](../evidence/runs/submission-ready/aws-attempt-nov8.json).
-The current deployment reuses an existing $12/month host, adding no instance base
-fee. Existing transfer/tax/account charges still apply. Account-wide $20/$50
-budget alerts are configured, not hard caps. Email delivery is untested.
+Pages publication is manual and separate from merging. Dedicated-host publication
+uses the same reviewed static artifact, with a retained previous release and
+configuration backup. See [deployment and rollback](LANDING_HOST_PLAN.md).
+A successful check establishes availability at that time, not future uptime.
 
-The [dedicated-host plan](AWS_JUDGE_DEPLOY.md) is an alternative, not the deployed
-architecture. Render remains excluded. No new PayPal, model or KERNEL execution,
-Devpost edit or submission was performed as part of hosting.
+The keyless Bryntum timing page being prepared on the cleanup branch is **local
+only** until its own release is approved. No AG Studio bundle is publicly served.
+
+## Previous shared host
+
+[The November shared-host deployment](LIGHTSAIL_SHARED_HOST.md) is historical.
+Its URL is no longer the advertised demo. Preserve its receipts and unrelated
+applications; do not stop its instance or restart its shared proxy as part of
+this cleanup. Earlier AWS and browser failures remain dated historical records.

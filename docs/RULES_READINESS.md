@@ -1,5 +1,7 @@
 # Submission readiness — updated 10 November
 
+**Historical preparation document.** For the current public links and submitted video, use [the README](../README.md), [hosting guide](HOSTING.md) and [video check](VIDEO_CHECK.md). Dated checks and unresolved historical findings below retain their original scope.
+
 This is a project readiness assessment, not an organizer eligibility ruling.
 Sources: [official rules](https://paypalaihackathon.devpost.com/rules),
 [5 November organizer update](https://paypalaihackathon.devpost.com/updates/47307-submission-checklist-it-s-go-time)

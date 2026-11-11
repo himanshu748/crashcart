@@ -6,7 +6,7 @@
 
 [Open the recorded demo](https://crashcart.32.193.44.79.sslip.io/) · [Watch the 2:45 video](https://www.youtube.com/watch?v=3MIzDpFmRl0) · [Pages mirror](https://himanshu748.github.io/crashcart/)
 
-The public workspace opens a saved missing-ticket case: payment, delivery and the assistant’s three investigation steps. **It makes no new PayPal or AI calls.** A separate repair comparison shows one ticket inside the same 60-second promise.
+The hosted workspace opens the **8 November saved investigation**. Its results were computed when the site was exported. **It makes no new PayPal or AI calls.** The runnable local build below recomputes the separate **22 October repair comparison** at startup.
 
 ### Try it in 60 seconds
 
@@ -26,17 +26,18 @@ Both outcomes recomputed at launch. No new payment or service call.
 Press Ctrl+C to stop.
 ```
 
-The printed URL opens the repair comparison: choose **Missed order** or **Recovered order (replay)**. Choose **Ticket not delivered** in Saved cases to follow the separate 8 November AI investigation. Stop with Ctrl+C. For a terminal without a browser, add `--no-open`.
+The local command opens the **22 October repair comparison**; the hosted demo opens the **8 November investigation**. Both are available in Saved cases. Choose **Missed order** or **Recovered order (replay)** to compare the same recorded payment under two merchant rules. Stop with Ctrl+C. For a terminal without a browser, add `--no-open`.
 
-![CrashCart’s landing page with the payment-to-delivery investigation](docs/images/crashcart-home.jpg)
+![CrashCart’s landing page with the payment-to-delivery investigation](docs/images/crashcart-home-nov11.png)
 
 ## What actually happened
 
-Three separate cases explain the product:
+Two cases explain the product:
 
-- **22 October:** a saved Sandbox payment completed, but its ticket was missing. The public repair comparison reuses this input; the healthy variant delivers at **32.26 seconds**, without a new purchase.
-- **23 October:** an earlier checkout, investigated by AI on 26 October. Its saved AI steps concern a different case from the missed order.
-- **8 November:** a real PayPal Sandbox **Orders v2 create/capture/get** flow and real DeepSeek calls through Modal. [Completed live flow](docs/LIVE_FLOW.md).
+- **8 November — investigation:** a real PayPal Sandbox **Orders v2 create/capture/get** flow and real DeepSeek calls through Modal found a completed payment with no ticket. [Completed live flow](docs/LIVE_FLOW.md).
+- **22 October — repair comparison:** an earlier recorded payment supplies both faulty and repaired replays. The repaired rule delivers one ticket at **32.26 seconds**. It is a different order from the November investigation, with no new purchase.
+
+Earlier investigations remain available in [the workspace history](docs/WORKSPACE.md#earlier-recorded-investigation).
 
 The AI proposes which payment and ticket records to inspect. **Deterministic code decides whether the delivery promise was kept.** It cannot infer delivery from a checkout success message.
 
@@ -77,10 +78,11 @@ Open the workspace, approve a test checkout with your Sandbox Personal buyer, co
 | --- | --- |
 | PayPal Sandbox REST | Creates and captures test orders, independently reads payment status, verifies webhook signatures. Public pages show saved observations. |
 | Modal + DeepSeek | Selects the next evidence to inspect in bounded investigations. The 8 November run used three real model requests. |
-| AG Studio 3.0.0 | Optional records workspace: five evidence panels and native Agent Framework. The recorded explorer is verified locally and **not deployed**; permitted public licence coverage is pending. [Access and licensing](docs/studio.md). |
-| Bryntum Community Scheduler | Actual MIT-licensed delivery-timing view in the full workspace and video at 2:10–2:20. |
+| AG Studio 3.0.0 | Optional local records workspace with five evidence panels and Agent Framework. **Not part of the public submission experience or selected sponsor claim.** [Local setup and terms](docs/studio.md). |
+| Bryntum Community Scheduler | Actual MIT-licensed delivery-timing view in the video at 2:10–2:20. A keyless [recorded timing page](web/judge/timing.html) is prepared locally; publication remains gated. |
 | KERNEL | Remote test-checkout browser sessions and recordings in earlier authorized experiments. |
 | Postman / Newman | Executable API and linked-record checks. |
+| Deepgram Aura-2 Thalia | English narration in the current 2:45 video; not the in-product investigator. |
 
 The keyless path needs none of these service keys. Sponsor eligibility is separate from an installed package. [Integration scope](docs/sponsor-ledger.md).
 

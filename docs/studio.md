@@ -1,4 +1,8 @@
-# Evidence Studio
+# Evidence Studio — optional local tooling
+
+AG Studio is **not part of the public submission experience or selected sponsor claim**.
+Its optional local integration is documented here for developers. The account-free
+recorded workspace and its replay command do not require it.
 
 CrashCart embeds the actual `ag-studio` and `ag-studio-react` 3.0.0 packages. The
 React workspace reads authenticated saved investigations from the same local
@@ -69,9 +73,11 @@ limitations remain described in [replay documentation](replay.md).
 
 AG Studio is commercial software. Follow the vendor's
 [licensing and local-evaluation instructions](https://www.ag-grid.com/studio/react/licence-install/)
-and obtain your own entitlement where required. The vendor's [6 November hackathon announcement](https://www.ag-grid.com/blog/build-a-payments-dashboard-without-building-a-dashboard/) says entries do not require a licence during judging and AG Grid will provide the key. That announcement is not a key already delivered/configured for this deployment. The existing private trial ends 17 December; public access through 22 December still needs the promised key or explicit coverage. Local evaluation alone does not establish that coverage. The maintainer's private trial key and
-licensed compilation overlay are not included in this repository. Do not remove
-vendor watermarks or warnings.
+for your own optional build. The vendor's [6 November hackathon announcement](https://www.ag-grid.com/blog/build-a-payments-dashboard-without-building-a-dashboard/)
+describes judging-period licence arrangements. No Studio deployment or licence
+entitlement is offered as part of this public submission. Private trial keys and
+licence-bearing compilation overlays are not included in this repository.
+Do not remove vendor watermarks or warnings.
 
 `studio/build.mjs` reads only the explicitly named `AG_STUDIO_LICENSE_KEY` build
 variable for licensing; it does not export the rest of the server environment.

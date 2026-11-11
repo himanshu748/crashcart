@@ -88,7 +88,7 @@
           </section>
 
           <section id="comparison-case" class="workspace-pane" data-workspace-pane="comparison" aria-label="22 October recorded repair comparison" hidden>
-            <div id="investigation" class="comparison-context"><span class="recording-mark">Different order · 22 Oct 2026</span><p>One saved payment, two merchant rules. Compare the missed ticket with the repaired replay. No new purchase is made.</p></div>
+            <div id="investigation" class="comparison-context"><span class="recording-mark">Different order · 22 Oct 2026</span><p>This does not repair the 8 November order. It applies two merchant rules to the same 22 October input, with the original 60-second promise. No new purchase is made. <a href="timing.html">See both outcomes in the delivery-timing chart</a>.</p></div>
             <div class="compare case-switch" role="group" aria-label="Choose an outcome">
               <article class="compare-card compare-bad"><button type="button" data-case="defective" aria-controls="evidence" aria-pressed="true"><span class="fact-label">Original store</span><strong>Missed order</strong><span class="comparison-number"><span id="defective-count">0</span> <small>tickets</small></span><span id="defective-finding"></span></button></article>
               <article class="compare-card compare-good"><button type="button" data-case="healthy" aria-controls="evidence" aria-pressed="false"><span class="fact-label">Repaired rule · replay</span><strong>Recovered order</strong><span class="comparison-number"><span id="healthy-count">1</span> <small>ticket · <span id="healthy-time"></span></small></span><span>Confirmed payment → one ticket inside the same 60 seconds.</span></button></article>
