@@ -20,12 +20,9 @@ body { overflow-wrap: break-word; }
 .sim-now::before { content: ''; display: block; width: 2px; height: 100%; border-radius: 2px; background: var(--ink); }
 .motion-count-source { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .motion-count-visual { font-variant-numeric: tabular-nums; }
-/* Cross-document navigation stays native. Only supporting browsers crossfade snapshots. */
-@view-transition { navigation: auto; }
-::view-transition-old(root) { animation: cc-out .18s ease-out both; }
-::view-transition-new(root) { animation: cc-in .28s ease-out both; }
-@keyframes cc-out { to { opacity: 0; transform: translateY(-4px); } }
-@keyframes cc-in { from { opacity: 0; transform: translateY(5px); } }
+/* Keep document navigation native: cross-document snapshot transitions emitted
+   InvalidStateError during ordinary Chrome navigation. In-page motion below and
+   in motion.js remains independent, including its reduced-motion fallback. */
 @media (max-width: 767px) {
   .promise { padding: 18px; }
   .promise-track { grid-template-columns: auto minmax(30px,1fr) auto; gap: 6px; }

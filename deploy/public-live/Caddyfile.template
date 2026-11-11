@@ -1,0 +1,59 @@
+{
+	admin off
+	servers {
+		max_header_size 16KiB
+		timeouts {
+			read_header 5s
+			read_body 10s
+			write 15s
+			idle 30s
+		}
+	}
+}
+
+crashcart.32.193.44.79.sslip.io {
+	root * __STATIC_ROOT__
+	encode zstd gzip
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy no-referrer
+		Content-Security-Policy "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+		Cache-Control no-store
+	}
+	@live path_regexp live ^/(api/live/(config|timing|webhook|runs(/run_[a-f0-9]{32}(/(confirm|cancel))?)?)|return|cancel)$
+	handle @live {
+		request_body {
+			max_size 131072
+		}
+		reverse_proxy 127.0.0.1:8767 {
+			header_up X-CrashCart-Client-IP {remote_host}
+			header_up -Forwarded
+			header_up -X-Real-IP
+			header_up -X-Forwarded-For
+			transport http {
+				dial_timeout 2s
+				response_header_timeout 10s
+				read_timeout 12s
+				write_timeout 12s
+			}
+		}
+	}
+	handle {
+		@writes not method GET HEAD
+		respond @writes "Recorded example is read-only" 405
+		@private path /api/* /operator* /studio/* /.env* /var/*
+		respond @private "Not found" 404
+		@product path /product
+		rewrite @product /product.html
+		@example path /example
+		rewrite @example /demo.html
+		@integrations path /integrations
+		rewrite @integrations /integrations.html
+		header /downloads/* Content-Disposition "attachment"
+		file_server
+	}
+	handle_errors 502 503 504 {
+		header Content-Type application/json
+		respond `{ "error": { "code": "PUBLIC_LIVE_PAUSED", "message": "Live runs paused, showing saved replay." }, "replay_url": "/demo.html" }` 503
+	}
+}

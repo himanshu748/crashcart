@@ -24,6 +24,28 @@ download were exercised. The downloaded archive's members match the API export.
 
 [Payment, model responses, cited findings, source hashes and allowance receipt](../evidence/runs/submission-ready/live-flow-nov8/proof.json)
 
+## Read the saved payment evidence
+
+The recorded workspace now has a **Saved PayPal evidence** card. It projects only
+public payment fields from the linked record; opening it makes no PayPal request.
+
+| Field | Saved value |
+| --- | --- |
+| Captured amount | USD 29.00 |
+| Capture status | COMPLETED |
+| Capture completed | 8 November 2026, 09:23:15 UTC |
+| Sandbox order ID | `4HJ31244AH4428038` |
+| Sandbox capture ID | `9U732141TN8280908` |
+| App's capture route | `POST /v2/checkout/orders/4HJ31244AH4428038/capture` |
+| Independent confirmation | `GET /v2/checkout/orders/4HJ31244AH4428038` |
+
+The confirmation was saved at 09:25:44.918465 UTC after the store lost the
+capture reply. Its order response contains the completed capture. The POST path
+is the existing adapter route with this saved order ID, **not a preserved wire
+request or raw POST capture response**. The public card omits credentials,
+authorization headers and buyer information. Its source is SHA-256 bound to the
+already-public proof file; that binding is not independent provider authentication.
+
 ## Reproduce with your own accounts
 
 Follow the [full workspace and test-buyer setup](WORKSPACE.md#full-workspace-and-optional-live-test-payments).

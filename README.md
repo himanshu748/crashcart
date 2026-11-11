@@ -6,7 +6,21 @@
 
 [Open the recorded demo](https://crashcart.32.193.44.79.sslip.io/) · [Watch the 2:45 video](https://www.youtube.com/watch?v=3MIzDpFmRl0) · [Pages mirror](https://himanshu748.github.io/crashcart/)
 
-The hosted workspace opens the **8 November saved investigation**. Its results were computed when the site was exported. **It makes no new PayPal or AI calls.** The runnable local build below recomputes the separate **22 October repair comparison** at startup.
+**Mode:** the public walkthrough is a **Saved replay** of the 8 November investigation. The optional **Live sandbox** page starts a new fake-money checkout only when enabled. The local build below recomputes the separate 22 October repair comparison.
+
+### Optional live Sandbox checkout
+
+[Open the Sandbox purchase page](https://crashcart.32.193.44.79.sslip.io/live.html). If live runs are enabled, choose **Run a live Sandbox purchase**, approve the USD29 test checkout, and return to see the signed payment notification, cited investigation and delivery result. When paused or unavailable, the page displays the saved comparison.
+
+Dedicated **fake-money Sandbox buyer**, created only for judges and verified by sign-in on 12 November (never use this account at real PayPal):
+
+```text
+Email: sb-7leov53854706@personal.example.com
+Password: Fz$kA>5B
+Sign-in: https://www.sandbox.paypal.com/
+```
+
+These are intentionally shared Sandbox-only test credentials, not merchant app keys. Live testing is limited to three starts per IP per hour, eight starts per day and eight starts for the authorized window; each investigation is capped at three model calls. A verified new checkout and investigation are distinct from the saved walkthrough. [Operator setup, limits and rollback](docs/PUBLIC_LIVE_HOST_PLAN.md).
 
 ### Try it in 60 seconds
 
@@ -28,14 +42,14 @@ Press Ctrl+C to stop.
 
 The local command opens the **22 October repair comparison**; the hosted demo opens the **8 November investigation**. Both are available in Saved cases. Choose **Missed order** or **Recovered order (replay)** to compare the same recorded payment under two merchant rules. Stop with Ctrl+C. For a terminal without a browser, add `--no-open`.
 
-![CrashCart’s landing page with the payment-to-delivery investigation](docs/images/crashcart-home-nov11.png)
+![CrashCart’s landing page with the payment-to-delivery investigation](docs/images/crashcart-current-home.png)
 
 ## What actually happened
 
 Two cases explain the product:
 
 - **8 November — investigation:** a real PayPal Sandbox **Orders v2 create/capture/get** flow and real DeepSeek calls through Modal found a completed payment with no ticket. [Completed live flow](docs/LIVE_FLOW.md).
-- **22 October — repair comparison:** an earlier recorded payment supplies both faulty and repaired replays. The repaired rule delivers one ticket at **32.26 seconds**. It is a different order from the November investigation, with no new purchase.
+- **22 October — repair comparison:** an earlier recorded payment supplies both faulty and repaired replays. The repaired rule delivers one ticket at **32.26 seconds**. It is a different order from the November investigation.
 
 Earlier investigations remain available in [the workspace history](docs/WORKSPACE.md#earlier-recorded-investigation).
 
@@ -72,6 +86,26 @@ Required: `CRASHCART_OPERATOR_TOKEN`, `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`
 
 Open the workspace, approve a test checkout with your Sandbox Personal buyer, confirm payment, wait past the promise, and choose **Check payment and delivery**, then **Ask the assistant**. New calls need your provider allowance; they do not occur on the public demo.
 
+### Sandbox buyer for a judge’s own run
+
+Use a **PayPal Sandbox Personal account**, not a real-money PayPal account. Create
+one under Developer dashboard → Testing tools → Sandbox accounts, or use a
+separately supplied test buyer. Keep its password and the merchant app secret
+outside Git. The saved replay needs no buyer or credentials; the dedicated hosted test buyer above is separate from your own merchant app.
+
+```text
+Sandbox buyer email: <YOUR_SANDBOX_PERSONAL_EMAIL>
+Sandbox buyer password: <YOUR_SANDBOX_PERSONAL_PASSWORD>
+Merchant Sandbox app: <YOUR_SANDBOX_CLIENT_ID> / <YOUR_SANDBOX_CLIENT_SECRET>
+```
+
+The timing page starts with the saved comparison. **Load my Sandbox cases** reads
+only checkouts belonging to the current browser session when the live workspace
+is enabled; static mirrors retain the saved comparison. Reading that view never
+starts a payment or an AI investigation, and automatic status refresh stops
+after eight minutes. A new checkout requires your Sandbox buyer and provider
+allowance; use the keyless path above to inspect the recorded outcomes.
+
 ## What powers it
 
 | Technology | Actual job |
@@ -79,7 +113,7 @@ Open the workspace, approve a test checkout with your Sandbox Personal buyer, co
 | PayPal Sandbox REST | Creates and captures test orders, independently reads payment status, verifies webhook signatures. Public pages show saved observations. |
 | Modal + DeepSeek | Selects the next evidence to inspect in bounded investigations. The 8 November run used three real model requests. |
 | AG Studio 3.0.0 | Optional local records workspace with five evidence panels and Agent Framework. **Not part of the public submission experience or selected sponsor claim.** [Local setup and terms](docs/studio.md). |
-| Bryntum Community Scheduler | Actual MIT-licensed delivery-timing view in the video at 2:10–2:20. A keyless [recorded timing page](web/judge/timing.html) is prepared locally; publication remains gated. |
+| Bryntum Community Scheduler | Actual MIT-licensed delivery-timing view in the video at 2:10–2:20 and the [keyless recorded timing page](https://crashcart.32.193.44.79.sslip.io/timing.html). |
 | KERNEL | Remote test-checkout browser sessions and recordings in earlier authorized experiments. |
 | Postman / Newman | Executable API and linked-record checks. |
 | Deepgram Aura-2 Thalia | English narration in the current 2:45 video; not the in-product investigator. |
@@ -94,7 +128,7 @@ Shopify and WooCommerce connectors have local signed-event tests, but **no real 
 
 ## Path to production
 
-This prototype uses the PayPal **Sandbox** base URL and a fixed **2,900-cent USD ticket fixture**. Production needs a separately reviewed PayPal live app/base URL, merchant-owned catalog and fulfilment contracts, verified store onboarding, and per-user/store access with expiry and revocation. The current cookie has no server expiry; webhook timestamps are parsed without an age window, and duplicates are keyed by event ID. [Existing boundaries and required changes](docs/SECURITY_BOUNDARIES.md). No production payment or real merchant connection is claimed.
+This prototype uses the PayPal **Sandbox** base URL and a fixed **2,900-cent USD ticket fixture**. Production needs a separately reviewed PayPal live app/base URL, merchant-owned catalog and fulfilment contracts, verified store onboarding, and per-user/store access with expiry and revocation. The legacy operator cookie has no server expiry; the new public Sandbox session expires after two hours. Webhook timestamps are parsed without an age window, and duplicates are keyed by event ID. [Existing boundaries and required changes](docs/SECURITY_BOUNDARIES.md). No production payment or real merchant connection is claimed.
 
 ## Project and submission
 

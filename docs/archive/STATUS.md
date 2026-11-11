@@ -2,6 +2,78 @@
 
 **Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 11 November 2026 (India).
 
+## 12 November 2026, 00:28:51 IST — source publication authorized
+
+Owner replied exactly `submit` for the reviewed commit/feature-branch push/PR
+action only. The candidate matches the reviewed file hashes; the invariant and
+recorded inputs are unchanged. Runtime validation remains 653 Python, 144 JS,
+18 judge checks and both canonical replay outcomes. Historical 47/60 is
+unchanged; real live runs remain 0/5. Main, host rollout and submission edits
+retain their separate gates. Next: read back the published branch/PR and its
+Linux CI, then stop before any merge.
+
+## 12 November 2026 — public Sandbox flow prepared locally
+
+Branch `codex/judge-live-sandbox-nov11` retains the recorded judge path and adds
+a separate, default-paused public Sandbox entry point. Local safeguards cover
+owner sessions/CSRF, durable IP/day/lifetime limits, pending AI capacity and cost
+holds, scoped/throttled webhook verification, child timeouts and model-worker
+parent death. Independent review found the three reported blockers resolved.
+The dedicated fake-money buyer was created and its Safari sign-in verified; no
+new checkout or model call was made. Responsive live/fallback, the saved capture
+card, integration filter and real Bryntum saved timeline were inspected locally.
+
+Checks: 653 Python tests, 144 JavaScript tests, 18 judge checks, 45 deadline and
+12 timing adapter tests pass; Studio build/typecheck, Ruff and mypy pass. Both
+canonical replay outcomes retain zero measured connections. The explicit public
+allowlist is now 47 files: all existing 44 plus the three live-page assets.
+The keyless command also launched in an isolated local clone with the candidate
+overlay and an empty environment. The earlier 44-file assertion failure remains
+recorded; its corrected 47-file check passes without removing boundary checks.
+
+**Not live verified or deployed:** five consecutive real runs, real notification
+delivery, Linux parent-death/systemd behavior, Caddy proxy-IP/topology and public
+activation. Real iOS device proof was waived by the owner, not passed. Current
+SSH allowlist excludes this Mac's current IP; no connection or firewall change
+was attempted. Caption cleanup was separately completed at 20:46 IST on
+11 November; see the latest result in [its plan](../CAPTION_CLEANUP_PLAN.md).
+Historical **47/60 stays frozen**. [Current handoff](../PUBLIC_LIVE_STOP.md).
+Next: review the prepared release and gated access/deployment plan; keep live
+runs paused until authorized rollout and real-flow verification.
+
+## 11 November 2026, 20:34:20 IST — caption backup blocked, public state unchanged
+
+Owner authorized only caption cleanup. Manual-track SRT and original-format
+downloads each timed out after 20 seconds without returning a backup. Stopped
+under the two-failure rule. Both tracks were read back as Published; no public
+change occurred. Caption cleanup is unfinished and remains the next step.
+[Exact result](../CAPTION_CLEANUP_PLAN.md). Historical 47/60 unchanged.
+
+## 11 November 2026, 20:27 IST — presentation fixes prepared locally
+
+Branch `fix/judge-presentation-nov11`, based on merged `f0c3324`, adds a readable
+saved 8 November PayPal evidence card, includes Bryntum in the public-demo
+integration filter, fits its timeline on mobile, restores visible chart markers
+with reduced motion, and removes the cross-document transition opt-in that
+reproduced errors in ordinary Chrome. Payment rules, replay inputs and the
+pinned invariant are unchanged. No CC requirement is closed or reclassified.
+
+Local checks: 605 Python tests, 128 JavaScript tests, 18 judge checks, 45 Studio
+deadline tests, 8 timing adapter tests, typecheck/build, Ruff and mypy pass. Both
+exact replay outcomes retain zero measured connections. All 44 public files,
+root/Pages-prefix exports, links and images pass. Chrome and Gecko normal/reduced
+navigation passes; actual private Safari renders the local evidence/timing view
+and plays the current public video signed out. Seven real light-UI gallery
+images and a private 2:45 evidence-first video cut are ready for review.
+
+Caption inventory and exact pending steps are in
+[CAPTION_CLEANUP_PLAN.md](../CAPTION_CLEANUP_PLAN.md). Full local results and
+ordered public-action gates are in [PRESENTATION_STOP.md](../PRESENTATION_STOP.md).
+No commit, push, merge, deployment, caption change, gallery upload, video upload
+or Devpost edit occurred. Next: review the prepared cut/screenshots; the next
+exact `submit` authorizes only the explicitly listed current-video caption
+cleanup, including automatic-track deletion after a private backup.
+
 ## 11 November 2026, 12:35 IST — new video links prepared locally
 
 On isolated local branch `feat/deepgram-video-links-nov11`, four links in the README, landing page and Integrations page now target the verified Deepgram video `3MIzDpFmRl0`. Both Bryntum shortcuts retain the 2:10 start. No other public-page content, styling, motion, payment logic or recorded input changed. Earlier video-production work remains preserved in its separate worktree.

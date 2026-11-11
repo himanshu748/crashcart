@@ -30,7 +30,7 @@
       CrashCart
     </a>
     <span class="workspace-label">Case workspace</span>
-    <nav class="bar-nav" aria-label="Main"><a href="index.html">Home</a><a href="product.html">Product</a><a href="integrations.html">Integrations</a><a href="demo.html" aria-current="page">Demo workspace</a></nav>
+    <nav class="bar-nav" aria-label="Main"><a href="index.html">Home</a><a href="product.html">Product</a><a href="integrations.html">Integrations</a><a href="live.html">Live checkout</a><a href="demo.html" aria-current="page">Saved example</a></nav>
   </header>
 
   <main id="main" tabindex="-1">
@@ -52,7 +52,7 @@
       <div class="workspace-content">
         <header class="case-heading">
           <div><p class="workspace-breadcrumb" id="workspace-case-date">Recorded workspace</p><h1 id="product-title">Review a paid order.</h1><p id="workspace-case-description">Follow the payment, check the delivery, find the missing step.</p></div>
-          <span class="recording-mark">Saved records · No new service calls</span>
+          <span class="recording-mark">Saved replay · No new PayPal or AI calls</span>
         </header>
         <p id="workspace-notice" class="workspace-notice" role="status" hidden></p>
         <p class="load-state" id="load-state" role="status" tabindex="-1">Opening the saved records…</p>
@@ -66,6 +66,17 @@
               <div class="case-fact"><span class="fact-label">The promise</span><strong id="workspace-promise">Recorded deadline</strong><span id="workspace-deadline">One ticket after confirmed payment</span></div>
             </div>
             <div class="case-outcome"><span class="outcome-symbol" aria-hidden="true">!</span><div><strong>Payment complete. Delivery missed.</strong><p>The saved investigation found no ticket after the promised minute.</p></div><span class="outcome-tag">Needs attention</span></div>
+            <section class="saved-payment-card" id="paypal-evidence" aria-labelledby="paypal-evidence-title" hidden>
+              <div class="card-heading"><div><p class="section-kicker">Recorded PayPal Sandbox evidence · 8 November 2026</p><h2 id="paypal-evidence-title">The payment is in PayPal’s records.</h2></div><span class="recording-mark">Saved capture</span></div>
+              <div class="saved-payment-facts"><div><span>Captured amount</span><strong id="paypal-evidence-amount"></strong></div><div><span>Capture status</span><strong id="paypal-evidence-status"></strong></div><div><span>Capture completed</span><strong id="paypal-evidence-time"></strong></div></div>
+              <dl class="saved-payment-ids"><div><dt>Sandbox order ID</dt><dd id="paypal-evidence-order"></dd></div><div><dt>Sandbox capture ID</dt><dd id="paypal-evidence-capture"></dd></div></dl>
+              <div class="saved-payment-route"><span>Orders v2 capture route used by the app</span><code id="paypal-evidence-route"></code></div>
+              <div class="saved-payment-route"><span>Saved independent confirmation</span><code id="paypal-evidence-confirmation"></code></div>
+              <p class="saved-payment-note">The store lost the capture reply. A later order lookup confirmed this completed capture. The routes shown here describe that saved flow.</p>
+              <details class="source-details"><summary>Inspect the saved PayPal response fields</summary><pre id="paypal-evidence-json" tabindex="0"></pre><p class="fine">Selected fields from the saved order lookup, with identifiers shortened. The routes use an order-ID placeholder. Credentials, authorization headers and buyer details are omitted.</p></details>
+              <p class="fine"><a href="https://github.com/himanshu748/crashcart/blob/main/evidence/runs/submission-ready/live-flow-nov8/proof.json">Read the original public record</a> · <a href="https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md">How the real Sandbox flow ran</a></p>
+            </section>
+            <p class="workspace-notice" id="paypal-evidence-unavailable" hidden>Saved PayPal details are unavailable here. <a href="https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md">Read the original case notes.</a></p>
             <section class="investigation-card ai" aria-labelledby="failure-ai-title">
               <div class="card-heading"><div><p class="section-kicker">The saved investigation</p><h2 id="failure-ai-title">Follow how the answer was found.</h2></div><span class="small-label">DeepSeek via Modal · 8 Nov</span></div>
               <p class="card-intro">Review the assistant’s three recorded steps. It chose the records to read; the payment and ticket evidence determined the result.</p>
@@ -88,7 +99,7 @@
           </section>
 
           <section id="comparison-case" class="workspace-pane" data-workspace-pane="comparison" aria-label="22 October recorded repair comparison" hidden>
-            <div id="investigation" class="comparison-context"><span class="recording-mark">Different order · 22 Oct 2026</span><p>This does not repair the 8 November order. It applies two merchant rules to the same 22 October input, with the original 60-second promise. No new purchase is made. <a href="timing.html">See both outcomes in the delivery-timing chart</a>.</p></div>
+            <div id="investigation" class="comparison-context"><span class="recording-mark">Different order · 22 Oct 2026</span><p>This does not repair the 8 November order. It applies two merchant rules to the same 22 October input, with the original 60-second promise. <a href="timing.html">See both outcomes in the delivery-timing chart</a>.</p></div>
             <div class="compare case-switch" role="group" aria-label="Choose an outcome">
               <article class="compare-card compare-bad"><button type="button" data-case="defective" aria-controls="evidence" aria-pressed="true"><span class="fact-label">Original store</span><strong>Missed order</strong><span class="comparison-number"><span id="defective-count">0</span> <small>tickets</small></span><span id="defective-finding"></span></button></article>
               <article class="compare-card compare-good"><button type="button" data-case="healthy" aria-controls="evidence" aria-pressed="false"><span class="fact-label">Repaired rule · replay</span><strong>Recovered order</strong><span class="comparison-number"><span id="healthy-count">1</span> <small>ticket · <span id="healthy-time"></span></small></span><span>Confirmed payment → one ticket inside the same 60 seconds.</span></button></article>
@@ -142,7 +153,7 @@
           </section></details>
           <details class="workspace-help"><summary>Take the repair comparison with you</summary><section id="downloads" aria-labelledby="downloads-title"><h2 id="downloads-title">Download the recorded comparison</h2><p class="fine">22 October · saved input and both outcomes.</p><ul class="download-list"><li><a href="downloads/defective.json" download>Missed order records</a><span>JSON</span></li><li><a href="downloads/healthy.json" download>Recovered order records</a><span>JSON</span></li><li><a href="downloads/input.json" download>Original saved input</a><span>JSON</span></li><li><a href="downloads/replay.zip" download>Keyless offline replay</a><span>ZIP</span></li><li><a href="LICENSE">MIT licence</a><span>Text</span></li></ul></section></details>
         </div>
-        <footer class="workspace-footer"><p>Recorded Sandbox evidence. No new PayPal or AI calls.</p><label class="motion-toggle"><input type="checkbox" id="reduce-motion"><span>Reduce motion</span></label><a href="integrations.html">What powers CrashCart <span aria-hidden="true">↗</span></a></footer>
+        <footer class="workspace-footer"><p>PayPal Sandbox · Saved evidence.</p><label class="motion-toggle"><input type="checkbox" id="reduce-motion"><span>Reduce motion</span></label><a href="integrations.html">What powers CrashCart <span aria-hidden="true">↗</span></a></footer>
       </div>
     </div>
   </main>
