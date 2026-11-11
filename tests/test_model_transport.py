@@ -5,6 +5,9 @@ import json
 import os
 import select
 import socket
+import signal
+import subprocess
+import sys
 import threading
 import time
 from pathlib import Path
@@ -150,6 +153,92 @@ class WallClockTransportTests(unittest.TestCase):
         self.assertEqual(error.exception.code,"MODEL_TIMEOUT")
         self.assertEqual(error.exception.metadata["response_id"],"chatcmpl_synthetic")
         self.assertEqual(error.exception.metadata["usage"]["total_tokens"],18)
+
+class ParentDeathTransportTests(unittest.TestCase):
+    """Exercise the real detached HTTP worker, using only a local drip server."""
+
+    @staticmethod
+    def running(pid):
+        result = subprocess.run(['ps', '-o', 'stat=', '-p', str(pid)], capture_output=True, text=True)
+        return result.returncode == 0 and result.stdout.strip() and not result.stdout.strip().startswith('Z')
+
+    def stop(self, process, worker_pid=None):
+        if process.poll() is None:
+            process.kill()
+        process.communicate(timeout=3)
+        if worker_pid and self.running(worker_pid):
+            os.kill(worker_pid, signal.SIGKILL)
+
+    def test_detached_http_worker_dies_when_its_owner_is_killed_during_real_stream(self):
+        server = LoopbackHTTP('headers')
+        self.addCleanup(server.close)
+        folder = tempfile.TemporaryDirectory()
+        self.addCleanup(folder.cleanup)
+        ledger = Path(folder.name) / 'allowance.json'
+        ledger.write_text(json.dumps({'version': 1, 'call_limit': 24, 'ceiling_micro_usd': 1000000,
+            'calls': [], 'authorization_context': 'Synthetic local death-test grant only',
+            'published_usd_per_million': {'input': .30, 'output': 1.20}}))
+        ledger.chmod(0o600)
+        owner_code = """
+import sys
+import json
+from urllib.request import Request
+from crashcart import model_transport as wire
+from crashcart.model_allowance import reserve
+origin = 'https://synthetic-death-test.modal.run'
+body = {'model': wire.MODAL_MODEL, 'messages': [{'role': 'system', 'content': 'Synthetic'},
+    {'role': 'user', 'content': 'Synthetic'}], 'n': 1, 'max_tokens': 1, 'stream': False, 'reasoning_effort': 'none'}
+# A real synthetic ledger reservation precedes the owned loopback transport.
+# No destination validator is bypassed and no provider connection is made.
+reserve(sys.argv[2], Request(origin + '/v1/chat/completions', data=json.dumps(body).encode(), method='POST',
+    headers={'Authorization': 'Bearer test-only'}), expected_origin=origin, expected_model=wire.MODAL_MODEL)
+original = wire.subprocess.Popen
+def spawn(*args, **kwargs):
+    process = original(*args, **kwargs)
+    print(process.pid, flush=True)
+    return process
+wire.subprocess.Popen = spawn
+wire._bounded_http(Request(sys.argv[1], data=b'{}', method='POST'), 30)
+"""
+        owner = subprocess.Popen([sys.executable, '-c', owner_code, server.url, str(ledger)],
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                 cwd=Path(wire.__file__).resolve().parents[1], start_new_session=True)
+        self.addCleanup(self.stop, owner)
+        self.assertTrue(select.select([owner.stdout], [], [], 3)[0], 'Owner did not report its actual worker')
+        worker_pid = int(owner.stdout.readline())
+        self.addCleanup(self.stop, owner, worker_pid)
+        self.assertTrue(server.streaming.wait(3), 'The actual HTTP worker must connect and begin the drip')
+        self.assertTrue(self.running(worker_pid))
+        started = time.monotonic()
+        owner.kill()
+        owner.communicate(timeout=3)
+        until = time.monotonic() + .7
+        while self.running(worker_pid) and time.monotonic() < until:
+            time.sleep(.01)
+        self.assertFalse(self.running(worker_pid), 'Detached HTTP worker survived its killed owner')
+        self.assertLess(time.monotonic() - started, .9)
+        self.assertTrue(server.done.wait(.3))
+        self.assertTrue(server.disconnected)
+        self.assertIsNone(server.error)
+        calls = json.loads(ledger.read_text())['calls']
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(calls[0]['state'], 'RESERVED')
+        self.assertEqual(calls[0]['reserved_micro_usd'], 40000)
+        self.assertNotIn('finished_at', calls[0])
+
+    def test_owner_already_dead_is_rejected_before_reading_stdin(self):
+        owner = subprocess.Popen([sys.executable, '-c', 'pass'])
+        owner.wait(timeout=3)
+        worker = subprocess.Popen([sys.executable, '-I', '-S', wire.__file__, '--http-worker', str(owner.pid)],
+                                  stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                  start_new_session=True, env={'PATH': os.defpath})
+        self.addCleanup(self.stop, worker)
+        # Keep stdin open and empty: any attempt to read it would hang this wait.
+        worker.wait(timeout=.7)
+        self.assertNotEqual(worker.returncode, 0)
+        output, errors = worker.communicate(timeout=3)
+        self.assertEqual(output, b'')
+        self.assertEqual(errors, b'')
 
 class ModalOriginConfigurationTests(unittest.TestCase):
     def setUp(self):

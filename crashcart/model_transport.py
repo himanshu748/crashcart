@@ -14,6 +14,7 @@ import subprocess
 import sys
 import re
 import time
+import threading
 from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
@@ -200,7 +201,7 @@ def _bounded_http(request, timeout):
                          "headers": dict(request.header_items()),
                          "body": request.data.decode("utf-8"), "timeout": timeout},
                         ensure_ascii=False, separators=(",", ":"), allow_nan=False).encode("utf-8")
-    process = subprocess.Popen([sys.executable, "-I", "-S", str(Path(__file__).resolve()), "--http-worker"],
+    process = subprocess.Popen([sys.executable, "-I", "-S", str(Path(__file__).resolve()), "--http-worker", str(os.getpid())],
         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
         start_new_session=True, env={"PATH": os.defpath}, cwd=Path(__file__).resolve().parent)
     try:
@@ -234,7 +235,37 @@ def _bounded_http(request, timeout):
     return response
 
 
-def _http_worker():
+def _guard_parent(expected_parent):
+    """Exit with the owning phase, even though this worker has its own session.
+
+    Linux installs the kernel parent-death signal, checking both sides of prctl
+    to close the startup race. Other platforms monitor the actual parent PID;
+    they do not rely on an inherited pipe that an orphan could keep open.
+    """
+    if not isinstance(expected_parent, int) or expected_parent <= 1 or os.getppid() != expected_parent:
+        os._exit(1)
+    if sys.platform == "linux":
+        import ctypes
+        libc = ctypes.CDLL(None, use_errno=True)
+        prctl = libc.prctl
+        prctl.argtypes = [ctypes.c_int, ctypes.c_ulong, ctypes.c_ulong, ctypes.c_ulong, ctypes.c_ulong]
+        prctl.restype = ctypes.c_int
+        if prctl(1, signal.SIGKILL, 0, 0, 0) != 0:  # PR_SET_PDEATHSIG
+            os._exit(1)
+        if os.getppid() != expected_parent:
+            os._exit(1)
+    else:
+        def watch_parent():
+            while os.getppid() == expected_parent:
+                time.sleep(.02)
+            os._exit(1)
+        threading.Thread(target=watch_parent, name="model-owner-guard", daemon=True).start()
+        if os.getppid() != expected_parent:
+            os._exit(1)
+
+
+def _http_worker(expected_parent):
+    _guard_parent(expected_parent)
     # Only the parent supplies this private pipe. Never emit request, headers,
     # traceback or raw errors to stdout/stderr; stdout is one bounded envelope.
     try:
@@ -393,5 +424,7 @@ def complete(config, *, system, context, schema, schema_name, environ, timeout,
     return result
 
 
-if __name__ == "__main__" and sys.argv[1:] == ["--http-worker"]:
-    _http_worker()
+if __name__ == "__main__":
+    if len(sys.argv) != 3 or sys.argv[1] != "--http-worker" or not sys.argv[2].isdigit():
+        raise SystemExit(1)
+    _http_worker(int(sys.argv[2]))
