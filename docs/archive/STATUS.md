@@ -2,6 +2,12 @@
 
 **Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 11 November 2026 (India).
 
+## 11 November, 10:36 IST — unified public theme prepared locally
+
+Pages and the dedicated host now serve merged main `54ecafb`; all 32 files match, public browser checks pass, and the temporary SSH rule was removed. Product and Integrations now have a matching local theme on `feat/integrations-polish-nov11`. Runtime `65b0449` passes a fresh clone: 599 Python, 118 JavaScript, 18 judge and 58 Studio/timing tests; lint/types/build and both expected zero-network replays pass. All four pages pass desktop/mobile navigation, hover, keyboard, reduced motion and links. Product and Integrations score 99/100/100/100 mobile and 100/100/100/100 desktop in Lighthouse.
+
+The local preview exposed a small connection-queue failure. A real TCP regression failed before the bounded queue fix and passed afterward; the corrected whole-site browser run reports no loading errors. Earlier failures are retained in the local handoff. Payment rules, original validators, recorded inputs and the pinned invariant are unchanged. Historical **47/60 remains frozen**, with no CC IDs closed. This theme branch is committed locally only; next exact `submit` authorizes its push and PR, not merge or deployment.
+
 ## 11 November, 09:56 IST — recorded demo workspace prepared locally
 
 The public example is now a compact case workspace on local branch `feat/demo-workspace-nov11`. The 8 November missing-ticket investigation opens first; the 22 October repair remains a separate comparison. Source `d9ac854` passes a fresh local clone: 598 Python tests, 118 JavaScript tests, 17 judge checks, 58 Studio/timing tests, Ruff, mypy, build and both zero-network replays. Actual browser checks cover six widths, keyboard, reduced motion and missing-record recovery. Final Lighthouse: mobile 93/100/100/100; desktop 100/100/100/100. Independent review found no blockers.
