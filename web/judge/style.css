@@ -2038,7 +2038,7 @@ a.brand { color: inherit; text-decoration: none; border-radius: 8px; }
 .page-product .how-lead .tag::before { display: none; }
 .page-product .how-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 28px; margin: 38px 0 0; padding: 0; }
 .page-product .how-steps li { padding: 0; border: 0; background: none; border-radius: 0; }
-.page-product .how-num { font: 650 11px/1.5 var(--sans); letter-spacing: .03em; color: #5e784b; display: block; margin-bottom: 16px; }
+.page-product .how-num { font: 650 11px/1.5 var(--sans); letter-spacing: .03em; color: #4d603f; display: block; margin-bottom: 16px; }
 .page-product .how-steps h3 { font: 650 18px/1.5 var(--sans); letter-spacing: -.035em; max-width: 15em; }
 .page-product .how-steps p { color: #5b6c50; font-size: 13px; line-height: 1.9; margin-top: 12px; }
 @media (max-width: 1200px) {
