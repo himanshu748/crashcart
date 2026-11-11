@@ -7,6 +7,7 @@
   <title>Integrations · What CrashCart connects to</title>
   <meta name="description" content="See how PayPal, the assistant and optional workspace tools help you follow a paid order. Explore recorded examples and learn which store connections are still in preview.">
   <meta name="color-scheme" content="light">
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="motion.css">
@@ -17,8 +18,7 @@
 </head>
 <body class="page-integrations">
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="bar">
+  <header class="bar integration-bar">
     <a class="brand" href="index.html" aria-label="CrashCart home">
       <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <rect class="mark-bg" x="1" y="1" width="30" height="30" rx="9"/>
@@ -33,186 +33,94 @@
       <a href="index.html">Home</a>
       <a href="product.html">Product</a>
       <a href="integrations.html" aria-current="page">Integrations</a>
-      <a href="demo.html">Recorded example</a>
+      <a href="demo.html">Demo workspace <span aria-hidden="true">↗</span></a>
     </nav>
 
   </header>
 
-  <div class="trail">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="index.html">← Home</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">Integrations</span>
-    </nav>
-    <nav class="trail-page" aria-label="On this page">
-      <span class="trail-label">On this page</span>
-      <a href="#stack">How it connects</a>
-      <a href="#limits">What you can use today</a>
-    </nav>
-  </div>
 
   <main id="main" tabindex="-1">
-    <section class="page-hero" aria-labelledby="int-title">
-      <div class="hero-copy">
-      <p class="eyebrow">Integrations</p>
-      <h1 id="int-title">Follow the order <em>across your tools.</em></h1>
-      <p class="lead">PayPal confirms the payment. Your store records delivery. CrashCart brings those records together and uses AI to help investigate a missed promise. Explore each tool’s role and what you’ll need to use it.</p>
-      <div class="product-actions">
-        <a class="btn btn-signal" href="demo.html">See it in a recorded case</a>
-        <a class="btn btn-outline-light" href="#stack">Browse integrations</a>
+    <section class="integration-hero" aria-labelledby="int-title">
+      <div class="integration-hero-copy">
+        <p class="integration-eyebrow"><span aria-hidden="true"></span>What powers CrashCart</p>
+        <h1 id="int-title">One order.<br><em>The whole picture.</em></h1>
+        <p class="integration-lead">A payment tells you the money arrived. Delivery records tell you what the customer received. CrashCart brings them together, so you can find the missing step.</p>
+        <div class="integration-actions"><a class="btn integration-primary" href="demo.html">Explore a recorded case <span aria-hidden="true">↗</span></a><a class="integration-text-link" href="#stack">Meet the tools <span aria-hidden="true">↓</span></a></div>
+        <p class="integration-recorded-note">The public demo uses saved records. No new payment or AI call.</p>
       </div>
-      </div>
-      <figure class="glance hero-aside">
-        <ol class="glance-list" aria-label="How the records connect">
-          <li><span class="glance-who">PayPal</span><span class="glance-says">Confirms the payment</span></li>
-          <li><span class="glance-who">Store</span><span class="glance-says">Records the delivery</span></li>
-          <li class="is-verdict"><span class="glance-who">CrashCart</span><span class="glance-says">Checks the promise</span></li>
-          <li class="is-kept"><span class="glance-who">AI assistant</span><span class="glance-says">Suggests what to check</span></li>
+      <figure class="integration-map" aria-labelledby="integration-map-title">
+        <div class="integration-map-heading"><span>How a case comes together</span><span class="integration-small-tag">A guide to the workflow</span></div>
+        <h2 id="integration-map-title">Was the promise kept?</h2>
+        <ol class="integration-flow">
+          <li><span class="integration-flow-number" aria-hidden="true">01</span><div><strong>Read the payment</strong><p>PayPal confirms whether the payment completed.</p></div><span class="integration-flow-tool">PayPal</span></li>
+          <li><span class="integration-flow-number" aria-hidden="true">02</span><div><strong>Check the delivery</strong><p>The store reports the tickets linked to that payment.</p></div><span class="integration-flow-tool">Ticket store</span></li>
+          <li><span class="integration-flow-number" aria-hidden="true">03</span><div><strong>Follow the evidence</strong><p>The assistant chooses what to read and cites its findings.</p></div><span class="integration-flow-tool">DeepSeek</span></li>
+          <li><span class="integration-flow-number" aria-hidden="true">04</span><div><strong>Check the promise</strong><p>Fixed code checks payment, ticket count and delivery time.</p></div><span class="integration-flow-tool">CrashCart</span></li>
         </ol>
-        <figcaption>How the private workspace works. The public example reads saved records only.</figcaption>
+        <figcaption>This explains the workflow. The demo lets you inspect the actual saved records.</figcaption>
       </figure>
     </section>
 
-    <section class="band" id="stack" aria-labelledby="stack-title">
-      <p class="eyebrow">How it connects</p>
-      <h2 class="section-title" id="stack-title">How each integration helps</h2>
-      <p class="band-lead">Each tool helps answer a practical question: did the customer pay, did the store deliver, and what should you check next?</p>
-
-      <div class="int-tools" id="int-tools" role="group" aria-label="Show integrations" hidden>
-        <button type="button" class="pill" data-int-filter="all" aria-pressed="true">All</button>
-        <button type="button" class="pill" data-int-filter="public" aria-pressed="false">Recorded example</button>
+    <section class="integration-directory" id="stack" aria-labelledby="stack-title">
+      <div class="integration-section-heading"><div><p class="integration-eyebrow">The tools, and their jobs</p><h2 id="stack-title">Built around the answer.</h2></div><p>Start with the recorded case, or look at what’s available in a separately configured workspace.</p></div>
+      <div class="int-tools integration-filters" id="int-tools" role="group" aria-label="Show integrations" hidden>
+        <button type="button" class="pill" data-int-filter="all" aria-pressed="true">All tools</button>
+        <button type="button" class="pill" data-int-filter="public" aria-pressed="false">In the demo</button>
         <button type="button" class="pill" data-int-filter="workspace" aria-pressed="false">Private workspace</button>
-        <button type="button" class="pill" data-int-filter="preview" aria-pressed="false">Store connections</button>
-        <p class="fine" id="int-count" role="status"></p>
+        <button type="button" class="pill" data-int-filter="preview" aria-pressed="false">Store previews</button>
+        <p id="int-count" role="status"></p>
       </div>
-
-      <div class="int-grid">
-        <article class="int-card" data-where="workspace public" aria-labelledby="int-paypal">
-          <div class="int-card-head">
-            <h3 id="int-paypal">PayPal Sandbox</h3>
-            <span class="int-status int-status-public">Explore a recorded payment</span>
-          </div>
-          <dl class="int-dl">
-            <dt>How it helps</dt><dd>Checks the PayPal payment behind a test order, so a checkout message alone can’t be mistaken for money received. The test workspace also confirms payments and checks payment notifications before trusting them.</dd>
-            <dt>Where it’s available</dt><dd>The private test workspace needs PayPal Sandbox access. Here, you can explore the saved payment from an earlier test checkout.</dd>
-            <dt>Good to know</dt><dd>Test money only. The public site never starts a checkout or contacts PayPal.</dd>
-          </dl>
+      <div class="int-grid integration-grid">
+        <article class="int-card integration-card" data-where="workspace public" aria-labelledby="int-paypal">
+          <div class="integration-card-heading"><span class="integration-tool-mark" aria-hidden="true">P</span><div><p class="integration-tool-role">Payment records</p><h3 id="int-paypal">PayPal Sandbox</h3></div><span class="integration-status">Recorded in demo</span></div>
+          <p class="integration-card-summary">Confirm the money arrived, even when the store lost the reply. A checkout success message alone isn’t proof of payment.</p>
+          <details class="integration-details"><summary>What it does <span aria-hidden="true">+</span></summary><div><p>The private test workspace creates and captures Orders v2 payments, reads payment status directly, and verifies payment notifications before trusting them.</p><p>The public demo shows saved payment records. It never starts a checkout or contacts PayPal.</p><p><strong>To run a new checkout:</strong> use your own PayPal Sandbox app and test buyer. Test money only.</p><a href="demo.html">Inspect the recorded payment <span aria-hidden="true">↗</span></a></div></details>
         </article>
 
-        <article class="int-card" data-where="workspace public" aria-labelledby="int-ai">
-          <div class="int-card-head">
-            <h3 id="int-ai">Investigation assistant · DeepSeek on Modal</h3>
-            <span class="int-status int-status-public">Read an earlier investigation</span>
-          </div>
-          <dl class="int-dl">
-            <dt>How it helps</dt><dd>Helps trace a missed delivery by checking payment and ticket records, explaining what it found and suggesting where to look next.</dd>
-            <dt>Where it’s available</dt><dd>The assistant runs in the private workspace. Here, you can read a saved investigation from a separate earlier order.</dd>
-            <dt>Good to know</dt><dd>The answer stays tied to payment and delivery records. Reading the saved investigation makes no new AI request.</dd>
-          </dl>
+        <article class="int-card integration-card" data-where="workspace public" aria-labelledby="int-ai">
+          <div class="integration-card-heading"><span class="integration-tool-mark" aria-hidden="true">D</span><div><p class="integration-tool-role">Investigation assistant</p><h3 id="int-ai">DeepSeek on Modal</h3></div><span class="integration-status">Recorded in demo</span></div>
+          <p class="integration-card-summary">Choose which payment and ticket records to inspect next, then explain the findings with citations.</p>
+          <details class="integration-details"><summary>What it does <span aria-hidden="true">+</span></summary><div><p>The assistant runs in the private workspace. Its saved 8 November investigation is available in the demo, separately from the 22 October repair comparison.</p><p>It proposes where to look. Fixed code checks whether the delivery promise was kept; the assistant cannot override that result.</p><p>Reading the saved investigation makes no new AI request.</p><a href="demo.html#failure-ai-title">Follow the saved investigation <span aria-hidden="true">↗</span></a></div></details>
         </article>
 
-        <article class="int-card" data-where="workspace" aria-labelledby="int-ag">
-          <div class="int-card-head">
-            <h3 id="int-ag">AG Studio</h3>
-            <span class="int-status">Optional workspace tool</span>
-          </div>
-          <dl class="int-dl">
-            <dt>How it helps</dt><dd>Follow an order through linked payment and ticket records, and ask questions about saved cases.</dd>
-            <dt>Where it’s available</dt><dd>A private workspace with the required AG Studio licence.</dd>
-            <dt>Good to know</dt><dd>Available separately from this recorded example.</dd>
-          </dl>
+        <article class="int-card integration-card" data-where="workspace" aria-labelledby="int-bryntum">
+          <div class="integration-card-heading"><span class="integration-tool-mark" aria-hidden="true">B</span><div><p class="integration-tool-role">Delivery timing</p><h3 id="int-bryntum">Bryntum Community Scheduler</h3></div><span class="integration-status integration-status-optional">Optional view</span></div>
+          <p class="integration-card-summary">Put payment and delivery on the same timeline, and see which tickets missed their promised time.</p>
+          <details class="integration-details"><summary>Where to see it <span aria-hidden="true">+</span></summary><div><p>The actual MIT-licensed Community Scheduler powers the optional timing view in the full workspace. It appears in the video at 2:10–2:20.</p><p>It needs the optional workspace view to be built. The timeline on the public recorded-example page is a separate view, not Bryntum output.</p><a href="https://www.youtube.com/watch?v=gFWje84_wEA&amp;t=130">Watch the timing view <span aria-hidden="true">↗</span></a></div></details>
         </article>
 
-        <article class="int-card" data-where="workspace" aria-labelledby="int-bryntum">
-          <div class="int-card-head">
-            <h3 id="int-bryntum">Bryntum Scheduler (Community)</h3>
-            <span class="int-status">Optional workspace tool</span>
-          </div>
-          <dl class="int-dl">
-            <dt>How it helps</dt><dd>Compare when orders were paid and delivered, and spot tickets that missed their promised time.</dd>
-            <dt>Where it’s available</dt><dd>The private workspace, after this optional view is set up.</dd>
-            <dt>Good to know</dt><dd>This optional delivery view is separate from the timeline in the recorded example.</dd>
-          </dl>
+        <article class="int-card integration-card" data-where="workspace" aria-labelledby="int-ag">
+          <div class="integration-card-heading"><span class="integration-tool-mark" aria-hidden="true">A</span><div><p class="integration-tool-role">Linked-record exploration</p><h3 id="int-ag">AG Studio</h3></div><span class="integration-status integration-status-optional">Optional workspace</span></div>
+          <p class="integration-card-summary">Explore linked payment and ticket records in five evidence panels, and ask questions about saved cases.</p>
+          <details class="integration-details"><summary>Availability and access <span aria-hidden="true">+</span></summary><div><p>The optional workspace uses AG Studio 3.0.0 and its Agent Framework. It is implemented and tested locally, but is not deployed on this public site.</p><p>A permitted AG Studio licence is required. Public licence coverage is still pending. This integrations page is not AG Studio output.</p><a href="https://github.com/himanshu748/crashcart/blob/main/docs/studio.md">Read the workspace guide <span aria-hidden="true">↗</span></a></div></details>
         </article>
 
-        <article class="int-card" data-where="workspace" aria-labelledby="int-kernel">
-          <div class="int-card-head">
-            <h3 id="int-kernel">KERNEL</h3>
-            <span class="int-status">Optional checkout recording</span>
-          </div>
-          <dl class="int-dl">
-            <dt>How it helps</dt><dd>Records an approved test checkout in a remote browser, so you can review what the customer experienced alongside payment and delivery.</dd>
-            <dt>Where it’s available</dt><dd>The private workspace, when its owner enables a test session.</dd>
-            <dt>Good to know</dt><dd>Available separately from this recorded example. The public site starts no remote session.</dd>
-          </dl>
+        <article class="int-card integration-card" data-where="workspace" aria-labelledby="int-kernel">
+          <div class="integration-card-heading"><span class="integration-tool-mark" aria-hidden="true">K</span><div><p class="integration-tool-role">Checkout recordings</p><h3 id="int-kernel">KERNEL</h3></div><span class="integration-status integration-status-optional">Owner-enabled</span></div>
+          <p class="integration-card-summary">Review what the customer experienced alongside the payment and delivery records.</p>
+          <details class="integration-details"><summary>What it records <span aria-hidden="true">+</span></summary><div><p>KERNEL provides a remote browser for approved test checkouts and recordings in the private workspace.</p><p>A new session needs the workspace owner’s access and authorization. The public demo starts no remote browser session.</p></div></details>
         </article>
 
-        <article class="int-card" data-where="workspace" aria-labelledby="int-postman">
-          <div class="int-card-head">
-            <h3 id="int-postman">Postman</h3>
-            <span class="int-status">Optional workspace tool</span>
-          </div>
-          <dl class="int-dl">
-            <dt>How it helps</dt><dd>Runs repeatable checks on CrashCart’s payment and delivery records and the files it downloads.</dd>
-            <dt>Where it’s available</dt><dd>A separately set up private workspace.</dd>
-            <dt>Good to know</dt><dd>These checks are separate from the recorded example. Downloading its files makes no payment or AI request.</dd>
-          </dl>
+        <article class="int-card integration-card" data-where="workspace" aria-labelledby="int-postman">
+          <div class="integration-card-heading"><span class="integration-tool-mark" aria-hidden="true">P</span><div><p class="integration-tool-role">Repeatable checks</p><h3 id="int-postman">Postman / Newman</h3></div><span class="integration-status integration-status-optional">Workspace tools</span></div>
+          <p class="integration-card-summary">Check the payment and delivery records, their links, and the files exported from a case.</p>
+          <details class="integration-details"><summary>How it is used <span aria-hidden="true">+</span></summary><div><p>Executable API and linked-record checks run in a separately configured private workspace.</p><p>These checks are separate from browsing the recorded example. Downloading its files makes no payment or AI request.</p></div></details>
         </article>
 
-        <article class="int-card" data-where="preview" aria-labelledby="int-stores">
-          <div class="int-card-head">
-            <h3 id="int-stores">Shopify and WooCommerce</h3>
-            <span class="int-status int-status-preview">Preview</span>
-          </div>
-          <dl class="int-dl">
-            <dt>How it helps</dt><dd>Store order and delivery connections are in preview. They haven’t been tested with a real store yet.</dd>
-            <dt>Where it’s available</dt><dd>Not available to connect your store yet.</dd>
-            <dt>Good to know</dt><dd>This example uses a workshop test store. Store installation and connection are not available yet.</dd>
-          </dl>
+        <article class="int-card integration-card integration-store-card" data-where="preview" aria-labelledby="int-stores">
+          <div class="integration-card-heading"><span class="integration-tool-mark" aria-hidden="true">S</span><div><p class="integration-tool-role">Store connections</p><h3 id="int-stores">Shopify &amp; WooCommerce</h3></div><span class="integration-status integration-status-preview">In preview</span></div>
+          <p class="integration-card-summary">Order and fulfilment connectors are being prepared. They haven’t been verified with a real merchant store yet.</p>
+          <details class="integration-details"><summary>What’s available today <span aria-hidden="true">+</span></summary><div><p>Store installation and connecting your own store aren’t available on this public demo. It uses a workshop test store.</p><p>The connectors have local signed-event tests, but no real merchant store is connected yet.</p></div></details>
         </article>
       </div>
     </section>
 
-    <section class="band band-alt" id="limits" aria-labelledby="limits-title">
-      <p class="eyebrow">Before you start</p>
-      <h2 class="section-title" id="limits-title">What you can use today</h2>
-      <ul class="limits">
-        <li><strong>Test payments only</strong><span>The example follows a $29 workshop ticket due within 60 seconds. Test payments use PayPal Sandbox funds.</span></li>
-        <li><strong>Connect your store</strong><span>Shopify and WooCommerce connections are still a preview. Store installation, customer accounts and store billing aren’t available yet.</span></li>
-        <li><strong>Private workspace access</strong><span>The private workspace needs setup and access from its owner. No sign-in is needed for this recorded example.</span></li>
-        <li><strong>A recorded example</strong><span>Explore saved records here. A new payment or AI investigation needs the private test workspace.</span></li>
-      </ul>
+    <section class="integration-access" id="limits" aria-labelledby="limits-title">
+      <div><p class="integration-eyebrow">Choose your starting point</p><h2 id="limits-title">Explore now.<br><em>Connect your own tools later.</em></h2></div>
+      <div class="integration-access-options"><article><span class="integration-access-number">01</span><div><h3>Open the recorded workspace</h3><p>No account, key or setup. Follow a missing ticket, read the saved investigation and compare the separate repaired replay.</p><a href="demo.html">Open the demo <span aria-hidden="true">↗</span></a></div></article><article><span class="integration-access-number">02</span><div><h3>Run a private test checkout</h3><p>Use your own PayPal test accounts and model access. The full workspace needs separate setup; it isn’t a store connection on this public site.</p><a href="https://github.com/himanshu748/crashcart/blob/main/docs/JUDGE_GUIDE.md">Read the setup guide <span aria-hidden="true">↗</span></a></div></article></div>
     </section>
-
-    <section class="band band-dark" aria-labelledby="int-next-title">
-      <p class="eyebrow">Next</p>
-      <h2 class="section-title" id="int-next-title">Follow an order from payment to delivery</h2>
-      <p class="band-lead">See the missing ticket, compare how the repaired checkout handles the same recorded payment, and take the order details with you.</p>
-      <div class="band-actions">
-        <a class="btn btn-signal" href="demo.html">Open the recorded example</a>
-        <a class="btn btn-outline-light" href="demo.html#downloads">Go to the downloads</a>
-      </div>
-    </section>
+    <section class="integration-close" aria-labelledby="int-next-title"><div><p class="integration-eyebrow">Start with the missing ticket</p><h2 id="int-next-title">See the tools work together.</h2><p>Follow a real saved case, one question at a time.</p></div><a class="btn integration-primary" href="demo.html">Explore the recorded case <span aria-hidden="true">↗</span></a></section>
   </main>
-
-  <nav class="page-end" aria-label="Previous and next page">
-    <a class="btn" href="product.html">← Product</a>
-    <a class="btn" href="demo.html">Recorded example →</a>
-  </nav>
-
-  <footer class="foot">
-    <label class="motion-toggle">
-      <input type="checkbox" id="reduce-motion">
-      <span>Reduce motion</span>
-    </label>
-    <nav class="foot-nav" aria-label="Footer">
-      <a href="index.html">Home</a>
-      <a href="product.html">Product</a>
-      <a href="integrations.html" aria-current="page">Integrations</a>
-      <a href="demo.html">Recorded example</a>
-    </nav>
-    <p class="fine"><a href="LICENSE">MIT licence</a></p>
-    <p class="fine">Explore this recorded example without signing in. Connecting your own store isn’t available here yet.</p>
-  </footer>
+  <footer class="foot integration-footer"><a class="integration-footer-brand" href="index.html">CrashCart<span aria-hidden="true">↗</span></a><nav class="foot-nav" aria-label="Footer"><a href="index.html">Home</a><a href="product.html">Product</a><a href="integrations.html" aria-current="page">Integrations</a><a href="demo.html">Demo workspace</a></nav><div class="integration-footer-bottom"><p>No payment or AI call is made on this public site.</p><label class="motion-toggle"><input type="checkbox" id="reduce-motion"><span>Reduce motion</span></label><a href="LICENSE">MIT licence</a></div></footer>
 </body>
 </html>

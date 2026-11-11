@@ -7,6 +7,7 @@
   <title>Product · How CrashCart checks a paid order</title>
   <meta name="description" content="Follow a paid order from PayPal to delivery. Try an interactive timeline and see whether a ticket arrives within the promised 60 seconds.">
   <meta name="color-scheme" content="light">
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/fonts.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="motion.css">
@@ -17,8 +18,7 @@
 </head>
 <body class="page-product">
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="bar">
+  <header class="bar integration-bar">
     <a class="brand" href="index.html" aria-label="CrashCart home">
       <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <rect class="mark-bg" x="1" y="1" width="30" height="30" rx="9"/>
@@ -33,49 +33,20 @@
       <a href="index.html">Home</a>
       <a href="product.html" aria-current="page">Product</a>
       <a href="integrations.html">Integrations</a>
-      <a href="demo.html">Recorded example</a>
+      <a href="demo.html">Demo workspace <span aria-hidden="true">↗</span></a>
     </nav>
 
   </header>
 
-  <div class="trail">
-    <nav class="crumbs" aria-label="Breadcrumb">
-      <a href="index.html">← Home</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">Product</span>
-    </nav>
-    <nav class="trail-page" aria-label="On this page">
-      <span class="trail-label">On this page</span>
-      <a href="#rule">The delivery promise</a>
-      <a href="#steps">Four steps</a>
-    </nav>
-  </div>
 
   <main id="main" tabindex="-1">
-    <section class="page-hero" aria-labelledby="product-page-title">
-      <div class="hero-copy">
-      <p class="eyebrow">Product</p>
-      <h1 id="product-page-title">Check the payment.<em> Find the missing delivery.</em></h1>
-      <p class="lead">When a customer asks where their order is, you need more than “payment complete”. Follow the payment, find the delivery, and see whether it arrived when promised.</p>
-      <div class="product-actions">
-        <a class="btn btn-signal" href="demo.html">Explore a recorded order</a>
-        <a class="btn btn-outline-light" href="#rule">Try the delivery timeline</a>
-      </div>
-      </div>
-      <figure class="glance hero-aside">
-        <ol class="glance-list" aria-label="The delivery promise">
-          <li><span class="glance-who">Customer pays</span><span class="glance-says">$29.00</span></li>
-          <li><span class="glance-who">Your promise</span><span class="glance-says">One ticket · 60 seconds</span></li>
-          <li class="is-alert"><span class="glance-who">The question</span><span class="glance-says">Did it arrive?</span></li>
-          <li class="is-kept"><span class="glance-who">CrashCart</span><span class="glance-says">Follow the records</span></li>
-        </ol>
-        <figcaption>Illustration · try the delivery timeline below. No payment or AI request.</figcaption>
-      </figure>
+    <section class="integration-hero product-intro" aria-labelledby="product-page-title">
+      <div class="integration-hero-copy"><p class="integration-eyebrow"><span aria-hidden="true"></span>Payment is only half the story</p><h1 id="product-page-title">Paid should mean<br><em>delivered.</em></h1><p class="integration-lead">When a customer asks where their ticket is, “payment complete” isn’t enough. Check the money, find the ticket, and see whether the promise was kept.</p><div class="integration-actions"><a class="btn integration-primary" href="demo.html">Explore a recorded order <span aria-hidden="true">↗</span></a><a class="integration-text-link" href="#rule">Try the timeline <span aria-hidden="true">↓</span></a></div><p class="integration-recorded-note">Try an illustration below, or open the real saved case. No new payment or AI call.</p></div>
+      <figure class="product-promise-visual" aria-labelledby="product-promise-title"><div class="integration-map-heading"><span>The customer’s promise</span><span class="integration-small-tag">An illustration</span></div><h2 id="product-promise-title">One payment.<br>One ticket. On time.</h2><div class="product-promise-rule"><span><small>Payment</small><strong>USD 29.00</strong></span><span aria-hidden="true">→</span><span><small>Delivery</small><strong>1 ticket</strong></span></div><div class="product-promise-deadline"><span aria-hidden="true">◷</span><div><strong>Inside 60 seconds</strong><p>Measured from the completed payment.</p></div></div><figcaption>This is the workshop ticket used to explain the rule. The controls below let you try different outcomes.</figcaption></figure>
     </section>
-
-    <section class="band" id="rule" aria-labelledby="rule-title">
-      <p class="eyebrow">Try it</p>
-      <h2 class="section-title" id="rule-title">What happens after a customer pays?</h2>
+    <section class="product-playground" id="rule" aria-labelledby="rule-title">
+      <p class="integration-eyebrow">Try it</p>
+      <h2 class="product-section-title" id="rule-title">Try the delivery promise.</h2>
       <p class="band-lead">Choose what happens after payment, then drag the timeline or press play. See whether the customer gets exactly one ticket within the promised 60 seconds.</p>
 
       <div class="sim" id="sim" data-state="broken">
@@ -141,9 +112,9 @@
       <p class="fine sim-foot">This timeline is an illustration, not a real order. The <a href="demo.html">recorded example</a> shows real saved records, with the investigation and repair comparison clearly separated.</p>
     </section>
 
-    <section class="how band-alt" id="steps" aria-labelledby="steps-title">
-      <p class="eyebrow">In the private test workspace</p>
-      <h2 class="section-title" id="steps-title">Follow the payment. Find the missing delivery.</h2>
+    <section class="product-steps" id="steps" aria-labelledby="steps-title">
+      <p class="integration-eyebrow">In the private test workspace</p>
+      <h2 class="product-section-title" id="steps-title">Follow the payment. Find the missing delivery.</h2>
       <p class="how-lead"><span class="tag">Private test workspace</span> These steps describe CrashCart’s private test workspace. This public example doesn’t start a checkout or run the assistant.</p>
       <ol class="how-steps">
         <li>
@@ -169,35 +140,8 @@
       </ol>
     </section>
 
-    <section class="band band-dark" aria-labelledby="product-next-title">
-      <p class="eyebrow">Follow a recorded order</p>
-      <h2 class="section-title" id="product-next-title">See the missing ticket, then the recovery</h2>
-      <p class="band-lead">A test payment succeeded, but no ticket was issued. Follow the recorded order, then see the repaired checkout deliver within the same 60-second promise.</p>
-      <div class="band-actions">
-        <a class="btn btn-signal" href="demo.html">Open the recorded example</a>
-        <a class="btn btn-outline-light" href="integrations.html">What it connects to</a>
-      </div>
-    </section>
+    <section class="integration-close" aria-labelledby="product-next-title"><div><p class="integration-eyebrow">Go from illustration to evidence</p><h2 id="product-next-title">Now follow the real records.</h2><p>Read the saved 8 November investigation, then compare the separate 22 October repair.</p></div><a class="btn integration-primary" href="demo.html">Open the recorded workspace <span aria-hidden="true">↗</span></a></section>
   </main>
-
-  <nav class="page-end" aria-label="Previous and next page">
-    <a class="btn" href="index.html">← Home</a>
-    <a class="btn" href="integrations.html">Integrations →</a>
-  </nav>
-
-  <footer class="foot">
-    <label class="motion-toggle">
-      <input type="checkbox" id="reduce-motion">
-      <span>Reduce motion</span>
-    </label>
-    <nav class="foot-nav" aria-label="Footer">
-      <a href="index.html">Home</a>
-      <a href="product.html" aria-current="page">Product</a>
-      <a href="integrations.html">Integrations</a>
-      <a href="demo.html">Recorded example</a>
-    </nav>
-    <p class="fine"><a href="LICENSE">MIT licence</a></p>
-    <p class="fine">Explore this recorded example without signing in. Connecting your own store isn’t available here yet.</p>
-  </footer>
+  <footer class="foot integration-footer"><a class="integration-footer-brand" href="index.html">CrashCart<span aria-hidden="true">↗</span></a><nav class="foot-nav" aria-label="Footer"><a href="index.html">Home</a><a href="product.html" aria-current="page">Product</a><a href="integrations.html">Integrations</a><a href="demo.html">Demo workspace</a></nav><div class="integration-footer-bottom"><p>No payment or AI call is made on this public site.</p><label class="motion-toggle"><input type="checkbox" id="reduce-motion"><span>Reduce motion</span></label><a href="LICENSE">MIT licence</a></div></footer>
 </body>
 </html>
