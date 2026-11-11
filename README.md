@@ -4,7 +4,7 @@
 
 ## For judges
 
-[Open the recorded demo](https://crashcart.32.193.44.79.sslip.io/) · [Watch the 2:45 video](https://www.youtube.com/watch?v=gFWje84_wEA) · [Pages mirror](https://himanshu748.github.io/crashcart/)
+[Open the recorded demo](https://crashcart.32.193.44.79.sslip.io/) · [Watch the 2:45 video](https://www.youtube.com/watch?v=3MIzDpFmRl0) · [Pages mirror](https://himanshu748.github.io/crashcart/)
 
 The public workspace opens a saved missing-ticket case: payment, delivery and the assistant’s three investigation steps. **It makes no new PayPal or AI calls.** A separate repair comparison shows one ticket inside the same 60-second promise.
 

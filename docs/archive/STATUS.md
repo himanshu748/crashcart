@@ -2,6 +2,12 @@
 
 **Historical acceptance baseline: 47/60 (frozen). No CC requirement was closed by this submission work. Devpost submission is verified.** Updated 11 November 2026 (India).
 
+## 11 November 2026, 12:35 IST — new video links prepared locally
+
+On isolated local branch `feat/deepgram-video-links-nov11`, four links in the README, landing page and Integrations page now target the verified Deepgram video `3MIzDpFmRl0`. Both Bryntum shortcuts retain the 2:10 start. No other public-page content, styling, motion, payment logic or recorded input changed. Earlier video-production work remains preserved in its separate worktree.
+
+Verification: 22 Python tests, 118 JavaScript tests, a 32-file static export, both expected zero-network replay outcomes, five local HTTP routes and six keyboard link activations at 1440/390px passed. Browser checks verify link destinations with external navigation intercepted; the video itself was already verified in normal Safari and was not replayed for this patch. Independent review found no blockers. Historical **47/60 remains frozen**; no CC requirement closed or reclassified. No commit, push, PR, merge, deployment, Devpost edit or new provider call occurred. Next: review the local patch; exact `submit` may authorize only its commit, push and PR. Merge and each host deployment remain separate gates.
+
 ## 11 November, 10:36 IST — unified public theme prepared locally
 
 Pages and the dedicated host now serve merged main `54ecafb`; all 32 files match, public browser checks pass, and the temporary SSH rule was removed. Product and Integrations now have a matching local theme on `feat/integrations-polish-nov11`. Runtime `65b0449` passes a fresh clone: 599 Python, 118 JavaScript, 18 judge and 58 Studio/timing tests; lint/types/build and both expected zero-network replays pass. All four pages pass desktop/mobile navigation, hover, keyboard, reduced motion and links. Product and Integrations score 99/100/100/100 mobile and 100/100/100/100 desktop in Lighthouse.
