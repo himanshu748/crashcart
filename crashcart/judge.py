@@ -16,7 +16,7 @@ import webbrowser
 import zipfile
 
 from .model_ids import DEEPSEEK_MODEL_ID
-from .public_assets import ASSETS, ASSET_TYPES
+from .public_assets import ASSETS, ASSET_TYPES, TIMING_ASSETS
 from .replay import ReplayError, export_package, load_package
 from .replay_workspace import import_replay
 from .store import Store
@@ -170,7 +170,7 @@ def prepare_review(input_path=INPUT, *, exported=False):
                        "The healthy merchant is re-executed on the same recorded input and clock.",
                        "This is not a fresh payment, a deployed repair or a new AI investigation.",
                        "The original fault video is unavailable; saved page observations remain inspectable."]}
-    files = {name: (ASSET_TYPES[Path(name).suffix], (ROOT / "web/judge" / name).read_bytes()) for name in ASSETS}
+    files = {name: (ASSET_TYPES[Path(name).suffix], (ROOT / "web/judge" / name).read_bytes()) for name in ASSETS + TIMING_ASSETS}
     # Fixed directory-index redirects work on static hosts and project Pages.
     # Land on the unchanged canonical document before it loads scripts/data;
     # no base element, inline script or weaker CSP is needed.

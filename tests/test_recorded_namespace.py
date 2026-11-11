@@ -52,7 +52,8 @@ class RecordedNamespaceUnitTests(HTTPFixture):
     def test_lazy_single_cache_exact_public_members_and_private_auth(self):
         calls=[];files=synthetic_bundle()
         self.start(lambda:calls.append(True) or files)
-        self.assertEqual(len(RECORDED_FILES),32);self.assertEqual(self.request('/api/runs')[0],401);self.assertEqual(calls,[])
+        # 32 existing members plus 12 explicitly allowlisted, self-hosted timing assets.
+        self.assertEqual(len(RECORDED_FILES),44);self.assertEqual(self.request('/api/runs')[0],401);self.assertEqual(calls,[])
         for name in sorted(RECORDED_FILES):
             status,body,headers=self.request('/recorded/'+name)
             self.assertEqual(status,200);self.assertEqual(body,files[name][1]);self.assertIn("script-src 'self'",headers['Content-Security-Policy']);self.assertNotIn('Set-Cookie',headers)
