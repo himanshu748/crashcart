@@ -1,5 +1,7 @@
 # CrashCart demo — 2 minutes 40 seconds
 
+**Historical preparation document.** For the current public links and submitted video, use [the README](../README.md), [hosting guide](HOSTING.md) and [video check](VIDEO_CHECK.md). Dated checks and unresolved historical findings below retain their original scope.
+
 A recording plan for the owner. This is a script, not an exported video or
 CC-059 evidence. Record the current build only after its browser checks pass.
 Use your own narration; no generated voice or music is required.

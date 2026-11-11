@@ -21,15 +21,17 @@ and `"live_services_checked": false`. This checks static serving, not PayPal or 
   `small_3_0` (2GB RAM, 2vCPU, 60GB disk).
 - Attached static IP: `crashcart-demo-nov10-ip`, `32.193.44.79`.
 - Container: `crashcart-demo`, Docker restart policy `unless-stopped`.
-- Initial deployed source: `fc3e2432699e4ecd5ac62019883769aca00ce5ec`.
-- Exactly 17 public files at `/opt/crashcart/site`, mounted read-only at `/srv`.
+- Current published source: `490746f5c309fa787ae33343c76e3e2398aad406` (11 November).
+- The current 32-file static artifact is under `/opt/crashcart/site/releases/<SHA>`;
+  `/opt/crashcart/site` stays mounted read-only at `/srv`.
+- The initial 17-file release is retained as historical deployment material.
 - [Applied Caddy configuration](../deploy/judge/Caddyfile.dedicated-static):
   `/opt/crashcart/Caddyfile`; TLS state at `/opt/crashcart/caddy-data` and
   `/opt/crashcart/caddy-config`. Only HTTP/HTTPS is public; SSH is operator-IP-only.
 - Caddy image: `caddy:2.11.9-alpine@sha256:0bbb055bda6793c999bde78b1b5ce3e89f829fb031af2cf50056ea1246559fee`.
 
 No CrashCart worker, provider keys, AG Studio licence or model service runs here.
-The site replays saved records. The optional licensed explorer is **not deployed**.
+The site serves results computed from saved records during export. Browser clicks do not rerun the backend. The optional licensed explorer is **not deployed**.
 The hostname uses public `sslip.io` DNS; local replay is the fallback if DNS fails.
 
 ## Inspect and restart

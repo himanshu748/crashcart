@@ -1,52 +1,42 @@
-# Submission video
+# Current submission video
 
-**Final local edit:** `dist/crashcart-demo.mp4`. An identical archive is retained at `var/final-run-nov10/bryntum-video/crashcart-demo.mp4` in the private build workspace. The source film at `var/ship-devpost/dist/crashcart-demo.mp4` is preserved unchanged. These local video files are not committed to Git.
+[Watch the Deepgram-narrated video](https://www.youtube.com/watch?v=3MIzDpFmRl0).
+The existing Devpost entry uses this URL. The film opens the saved 8 November
+PayPal Sandbox + DeepSeek investigation, then switches to the separate
+22 October repaired-rule replay. It starts no new payment or model call.
 
-| Property | Actual final export |
+| Property | Published cut |
 | --- | --- |
-| Runtime | **165.000 seconds — 2:45** |
-| File size | **9,220,462 bytes — 9.22 MB**, below 100 MB |
-| Picture | H.264, 1920 × 1080, 30 fps, MP4 |
-| Narration | Existing AAC audio, mono, 96 kHz; copied without re-encoding |
-| Captions | Original burned-in captions, chapter labels and progress retained |
-| Updated footage | Actual Playwright recording of the existing Bryntum timing view, replacing only **2:10–2:20** |
+| Local file (gitignored) | `dist/crashcart-demo-ui-nov11-deepgram.mp4` |
+| Runtime | **165.000 seconds / 2:45**; public player 165.021 seconds |
+| Size | **9,391,079 bytes / 9.39 MB** |
+| Picture | H.264, 1920 × 1080, 30 fps |
+| Narration | Deepgram Aura-2 Thalia, 18 clips; mono 48 kHz AAC |
+| Captions | Burned-in narrative captions and timed English YouTube captions |
+| Bryntum | Actual Community Scheduler footage at **2:10–2:20**, retained unchanged |
 
-The film shows the saved **8 November Sandbox payment and real AI investigation**, then explicitly switches to a **different recorded checkout** for the healthy 32.26-second comparison. It does not show a new payment, new AI call, fresh repaired purchase or original buyer-approval video. The November 8 case has no original checkout recording.
+Full video/audio decoding passed without errors. The picture stream was copied
+unchanged from the reviewed redesigned-UI cut. All narration clips fit their
+slots without acceleration or overlap. No credentials or original buyer-approval
+recording appear in this film; the 8 November case has no original checkout video.
 
-The ten-second insert shows the actual Bryntum Scheduler Community **8.0.0-beta.1** view, under its distributed MIT licence. Both cases were freshly replayed locally from the unchanged canonical public `early-response-loss-input.json`: the faulty case has zero tickets; the healthy case has one at **32.261423 seconds**. These are recorded replays, not fresh Sandbox transactions. The browser shows both cases, briefly filters to the healthy case, then returns to both. No product code or payment rule changed for the recording.
-
-The capture server served only local public replay records and existing assets, rejected writes and denied outbound connections. Playwright recorded zero external requests and zero page errors. No credentials were used for the insert. The temporary capture server has been stopped.
-
-## Final-file inspection
-
-Frames were extracted from the **new final MP4**, including both cut boundaries:
-
-| Position | Inspected result |
-| --- | --- |
-| 2:10 / 2:12 | Both recorded cases fit in the timing view; the 60-second window and healthy ticket marker are legible. |
-| 2:15 | The healthy-case filter shows one ticket at 32.261423 seconds. |
-| 2:20 | The film returns to its original download scene and caption. |
-| 2:44 | The original closing product view and repository invitation remain legible. |
-
-The original caption, “The missing-ticket case needs attention. The recovered order keeps the same one-minute promise,” remains on the insert. The separate-recorded-replay label stays visible, and neither covers the chart's result or marker. No third-party logo was added.
-
-The entire final video and audio decoded successfully with exit 0 and no error output. The original and final compressed AAC packet payloads have the same SHA-256, confirming the existing narration was retained unchanged:
+**Published-file SHA-256:**
 
 ```text
-f5e0e00f73e7ae281c4ec21c7b930f8eba18e16d2da2898f91aca451dc2f39f9
+a38222d0fecb84df406dc6d8b4d00063477368981e989c6a74cced9e44641a76
 ```
 
-Final MP4 SHA-256:
+On 11 November 2026, normal Safari Private Browsing played the public video from
+its opening through the 2:45 Replay screen while signed out. Screenshots covered
+the saved investigation, separate repair comparison and Bryntum timing view.
+Earlier headless playback failures remain recorded privately; this normal-browser
+pass does not establish their cause or claim that they were fixed.
 
-```text
-35be48ddb77e5287c394404ec976449ab2af7bc1f0d9a64ccf58dae95ffed15d
-```
+The owner separately approved replacing the existing Devpost video field and
+updating its AI-tools answer to name Deepgram. The entry retained its original
+10 November submission time. Website and README links were subsequently updated
+to this cut. No new payment, investigation or KERNEL session was used for filming.
 
-```sh
-ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,width,height,r_frame_rate,sample_rate,channels -of json crashcart-demo.mp4
-ffmpeg -hide_banner -loglevel error -i crashcart-demo.mp4 -f null -
-```
-
-## Publication
-
-Published as **Public** on 10 November 2026: [watch the demo](https://www.youtube.com/watch?v=gFWje84_wEA). Safari Private Browsing showed the signed-out Sign in control and actual playback advancing to 0:27 of 2:45. The video is under 3 minutes. The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted on 10 November 2026 after the owner approved the final form and rules.
+The [earlier 10 November export report](archive/VIDEO_CHECK_NOV10.md) preserves
+its own original file measurements and publication history. It is not the current
+video. [Current shot list and narration](VIDEO_SCRIPT.md).

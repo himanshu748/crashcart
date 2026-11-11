@@ -1,5 +1,7 @@
 # Submission scope and gates
 
+**Historical preparation document.** For the current public links and submitted video, use [the README](../README.md), [hosting guide](HOSTING.md) and [video check](VIDEO_CHECK.md). Dated checks and unresolved historical findings below retain their original scope.
+
 Decision recorded 4 November 2026: the owner froze features and asked to close only requirements that gate a judgeable Devpost entry. Deferred items remain unchecked in BUILD_CHECKLIST.md. **47/60 verified; project incomplete.** This scope decision does not weaken an invariant or turn a partial result into acceptance.
 
 ## Official requirements
@@ -34,7 +36,7 @@ Evidence reviewed through 5 November 2026. These task states do not add CC check
 | Clean-clone build and keyless runtime | Verified | [Commands, outputs and browser inspection](SUBMISSION_VERIFICATION.md). |
 | Faulty/healthy replay and unchanged deadline | Verified | [Replay test output](../evidence/runs/submission-ready/replay-v62.log): faulty fails, timely healthy passes, original late healthy still fails. |
 | Public source and OSI licence | Verified | [GitHub metadata](../evidence/runs/submission-ready/github-metadata.json), [About licence readback](../evidence/runs/submission-ready/github-license.txt), root MIT LICENSE. |
-| Sandbox credential instructions | Verified document | [README](../README.md#optional-sandbox-test-buyer-path) has account roles, variable names and safe private placeholders; no live access is included. |
+| Sandbox credential instructions | Verified document | [README](../README.md#run-your-own-sandbox-checkout) has account roles, variable names and safe private placeholders; no live access is included. |
 | Meaningful PayPal and AI evidence | Historically exercised; documented | [Actual Sandbox recovery](../evidence/runs/judge-ready/recovery-v56.json) and [actual model investigation](AI_EVIDENCE.md). Different cases; keyless mode makes no new payment/model calls. Show this distinction in the video. |
 | Submission fields and video script | Prepared | [DEVPOST.md](DEVPOST.md), [SUBMISSION.md](SUBMISSION.md), [175-second script](VIDEO_SCRIPT.md). Prepared copy is not a completed video or submitted form. |
 | Public YouTube video under three minutes | **Pending — required** | Owner records, checks actual exported duration and privacy, uploads Public and verifies signed-out playback. A script does not satisfy this task or CC-059. |

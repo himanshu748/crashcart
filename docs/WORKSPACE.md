@@ -210,4 +210,13 @@ The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted
 
 ## Submission materials
 
-[Verified clean-clone path](SUBMISSION_VERIFICATION.md) · [Submission scope](SUBMISSION_GATES.md) · [Shared Lightsail hosting](LIGHTSAIL_SHARED_HOST.md) · [Video script](VIDEO_SCRIPT.md) · [Devpost draft](DEVPOST.md). The current recorded demo is verified on the existing Lightsail host. The [public video](https://www.youtube.com/watch?v=gFWje84_wEA) is available. The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted on 10 November 2026.
+[Verified clean-clone path](SUBMISSION_VERIFICATION.md) · [Submission scope](SUBMISSION_GATES.md) · [Current hosting](HOSTING.md) · [Video script](VIDEO_SCRIPT.md) · [Devpost draft](DEVPOST.md). The current recorded demo is verified on the existing Lightsail host. The [public video](https://www.youtube.com/watch?v=3MIzDpFmRl0) is available. The [Devpost entry](https://devpost.com/software/crashcart-87asqz) was submitted on 10 November 2026.
+
+## Earlier recorded investigation
+
+The optional historical disclosure concerns a checkout captured on **23 October**
+and investigated with AI on **26 October**. It is a delivered-order case, separate
+from both the 8 November missing-ticket investigation and the 22 October repair
+comparison. Its different delivery time is retained in the original evidence; it
+is not an alternative measurement of the public 32.26-second repaired replay.
+The main product story uses the two cases described in the README.

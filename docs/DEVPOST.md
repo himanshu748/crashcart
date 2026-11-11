@@ -4,6 +4,10 @@
 
 Find the missing step between a PayPal payment and delivery.
 
+## Story opening
+
+Run CrashCart’s keyless build to recompute both recorded delivery outcomes locally; the hosted walkthrough shows build-time results, and the [8 November PayPal Sandbox + AI flow](https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md) documents the real integration.
+
 ## Inspiration
 
 “Payment complete” should mean a customer is about to receive what they bought. Sometimes it means a merchant has a support problem they cannot yet explain. The payment record, checkout page and delivery system each tell only part of the story. CrashCart brings them together around the customer's promise.
@@ -14,7 +18,7 @@ CrashCart helps small merchants investigate “I paid, but nothing arrived.” T
 
 Open the account-free recorded walkthrough, inspect the missing ticket, filter the timeline by source and compare the recovered order. The healthy 32.26-second repair uses a separate saved checkout input, not a new purchase. Its faulty and healthy variants use the same payment input and deadline. The healthy variant applies a repaired fulfil-on-confirmed-reconciliation rule to saved input; it does not re-run the merchant service. Download the replay to run both outcomes locally.
 
-The completed 8 November 2026 run used real PayPal Sandbox Orders v2 create, capture and get, followed by real DeepSeek calls through Modal on that same order. DeepSeek checked PayPal, checked ticket records and cited the missing delivery. The recorded failure investigation shows its three saved steps and citations before the earlier successful case. Showing that saved result starts no new payment or model call. The public walkthrough is recorded; it is not a live merchant connection.
+The completed 8 November 2026 run used real PayPal Sandbox Orders v2 create, capture and get, followed by real DeepSeek calls through Modal on that same order. DeepSeek checked PayPal, checked ticket records and cited the missing delivery. The recorded failure investigation shows its three saved steps and citations. Showing that saved result starts no new payment or model call. The public walkthrough is recorded; it is not a live merchant connection.
 
 ## How we built it
 
@@ -30,7 +34,7 @@ A lost reply made a successful purchase look unfinished. We had to connect the p
 
 ## Accomplishments
 
-One customer complaint becomes a readable payment-to-delivery story and a test anyone can rerun without credentials. A real Sandbox test also recovered after checkout stopped following capture, delivering exactly one ticket in about four seconds. The separate 8 November run connected real payment evidence with AI-selected investigation steps.
+One customer complaint becomes a readable payment-to-delivery story and a test anyone can rerun without credentials. The 22 October repaired-rule replay delivers one ticket in 32.26 seconds under the unchanged deadline. The separate 8 November run connected real payment evidence with AI-selected investigation steps.
 
 ## What we learned
 
@@ -42,7 +46,7 @@ Validate Shopify and WooCommerce connections with owned stores, broaden delivery
 
 ## Built with
 
-Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST (Orders v2, webhook verification), Modal, DeepSeek, Postman, Newman, Bryntum Community Scheduler.
+Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST (Orders v2, webhook verification), Modal, DeepSeek, Postman, Newman, Bryntum Community Scheduler. Deepgram Aura-2 Thalia supplies the video narration.
 
 ## Try-it links
 
@@ -50,4 +54,4 @@ Python, SQLite, JavaScript, TypeScript, PayPal Sandbox REST (Orders v2, webhook 
 - GitHub Pages recorded-demo mirror: https://himanshu748.github.io/crashcart/
 - Source and local setup: https://github.com/himanshu748/crashcart
 - Completed payment-and-AI run: https://github.com/himanshu748/crashcart/blob/main/docs/LIVE_FLOW.md
-- Video: https://www.youtube.com/watch?v=gFWje84_wEA
+- Video: https://www.youtube.com/watch?v=3MIzDpFmRl0
