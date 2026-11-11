@@ -21,6 +21,7 @@ from .replay import ReplayError, export_package, load_package
 from .replay_workspace import import_replay
 from .store import Store
 from .recorded_ai import failure_ai
+from .recorded_paypal import saved_capture
 
 ROOT = Path(__file__).resolve().parents[1]
 INPUT = ROOT / "evidence/runs/paypal-live/early-response-loss-input.json"
@@ -166,6 +167,7 @@ def prepare_review(input_path=INPUT, *, exported=False):
             "input_file_sha256": INPUT_SHA256, "invariant": tape["invariant"],
             "recorded_source": tape["source"], "original_records": tape["records"],
             "cases": cases, "network_calls": 0, "historical_ai": ai_history, "failure_ai": failure_ai(),
+            "paypal_capture": saved_capture(),
             "limits": ["Historical PayPal Sandbox observations, replayed without new service calls.",
                        "The healthy merchant is re-executed on the same recorded input and clock.",
                        "This is not a fresh payment, a deployed repair or a new AI investigation.",

@@ -173,9 +173,47 @@
     }
     anchor.scrollIntoView({block: 'start', behavior: 'auto'});
   }
+  function renderSavedPayPal() {
+    const card = byId('paypal-evidence');
+    if (!card) return;
+    const e = review.paypal_capture, history = failureHistory, ids = history?.deterministic_result?.source_ids;
+    const amountOK = (a) => a?.value === '29.00' && a?.currency_code === 'USD';
+    const path = ids ? `/v2/checkout/orders/${ids.order_id}` : '';
+    const response = e?.response_fields, capture = response?.capture;
+    const valid = e?.kind === 'recorded-paypal-capture-evidence-v1' && e.fresh_execution === false
+      && e.environment === 'Sandbox' && e.recorded_date === '2026-11-08'
+      && digest(e.proof_sha256) && e.proof_sha256 === history?.proof_sha256
+      && e.order_id === ids?.order_id && e.capture_id === ids?.capture_id
+      && e.capture_completed_at === history?.payment_completed_at
+      && e.capture_status === 'COMPLETED' && amountOK(e.amount)
+      && e.capture_route?.method === 'POST' && e.capture_route.path === path + '/capture'
+      && e.confirmation?.method === 'GET' && e.confirmation.path === path
+      && e.confirmation.source === 'independent_order_lookup' && validTime(e.confirmation.observed_at)
+      && response?.id === e.order_id && response.status === 'COMPLETED' && amountOK(response.amount)
+      && capture?.id === e.capture_id && capture.status === 'COMPLETED' && amountOK(capture.amount)
+      && capture.create_time === e.capture_completed_at;
+    card.hidden = !valid;
+    byId('paypal-evidence-unavailable').hidden = valid;
+    if (!valid) return;
+    byId('paypal-evidence-amount').textContent = `${e.amount.currency_code} ${e.amount.value}`;
+    byId('paypal-evidence-status').textContent = e.capture_status;
+    byId('paypal-evidence-time').textContent = instant(e.capture_completed_at);
+    const shortId = value => value.slice(0, 4) + '…' + value.slice(-4);
+    byId('paypal-evidence-order').textContent = shortId(e.order_id);
+    byId('paypal-evidence-capture').textContent = shortId(e.capture_id);
+    byId('paypal-evidence-route').textContent = 'POST https://api-m.sandbox.paypal.com/v2/checkout/orders/{order_id}/capture';
+    byId('paypal-evidence-confirmation').textContent = 'GET https://api-m.sandbox.paypal.com/v2/checkout/orders/{order_id}';
+    // Select the displayed fields again: never stringify arbitrary response keys.
+    byId('paypal-evidence-json').textContent = JSON.stringify({id: shortId(response.id), status: response.status,
+      purchase_units: [{amount: {currency_code: 'USD', value: '29.00'}, payments: {captures: [{
+        id: shortId(capture.id), status: capture.status, amount: {currency_code: 'USD', value: '29.00'},
+        create_time: capture.create_time,
+      }]}}]}, null, 2);
+  }
   function initialiseWorkspace() {
     if (!workspacePresent()) return;
     failureWorkspace = failureWorkspaceProjection(failureHistory);
+    renderSavedPayPal();
     const failureButton = byId('workspace-failure-button');
     failureButton.disabled = !failureWorkspace;
     byId('workspace-comparison-button').disabled = false;

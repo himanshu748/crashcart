@@ -3,7 +3,9 @@
   "version": "8.0.0-beta.1",
   "license": "MIT",
   "source": "studio/src/public-timing.ts",
-  "recorded_only": true,
+  "default_source": "RECORDED_REPLAY",
+  "optional_owner_scoped_live": true,
+  "live_status_route": "/api/live/timing",
   "files": {
     "FONT-AWESOME-LICENSE.txt": {
       "bytes": 7427,
@@ -38,8 +40,8 @@
       "sha256": "6831825d7bd7f277e2c14a06755e35a9dfc85e242534f6e8deabc7d7c6fffd55"
     },
     "timing.js": {
-      "bytes": 2076052,
-      "sha256": "feac0f0ef8fc85b3135e46c7b99cd11e0ace23ec2017ddddb5282cc478b76eda"
+      "bytes": 2082976,
+      "sha256": "01149f2ab03f8cd29a9549413ef05ddc28357fe1a9c555a4dc610169351e3bcb"
     }
   }
 }

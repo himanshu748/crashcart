@@ -3,6 +3,7 @@
 # Explicit public allowlist: no runtime packages, remote fonts or private files.
 ASSETS = (
     "index.html", "product.html", "integrations.html", "demo.html", "app.js", "style.css", "site.js",
+    "live.html", "live.js", "live.css",
     "landing.css", "motion.css", "motion.js", "assets/fonts.css", "assets/favicon.svg", "assets/PROVENANCE.json",
     "assets/vendor/gsap.min.js", "assets/vendor/ScrollTrigger.min.js", "assets/vendor/GSAP-LICENSE.txt",
     "assets/fonts/instrument-serif-latin.woff2", "assets/fonts/manrope-latin.woff2",

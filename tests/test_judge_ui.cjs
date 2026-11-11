@@ -216,3 +216,40 @@ test('failed records do not enable workspace controls or allow a saved next step
   for(const control of p.document.querySelectorAll('[data-workspace-view]'))await control.trigger('click');
   assert.equal(p.nodes.get('review').hidden,true);assert.equal(p.calls.length,1);
 });
+
+test('saved PayPal evidence shows the same November capture, separate POST route and recorded GET confirmation',async()=>{
+  const p=await loadJudge(()=>response(genuine));
+  assert.equal(p.nodes.get('paypal-evidence').hidden,false);
+  assert.equal(p.nodes.get('paypal-evidence-amount').textContent,'USD 29.00');
+  assert.equal(p.nodes.get('paypal-evidence-status').textContent,'COMPLETED');
+  assert.equal(p.nodes.get('paypal-evidence-order').textContent,'4HJ3…8038');
+  assert.equal(p.nodes.get('paypal-evidence-capture').textContent,'9U73…0908');
+  assert.equal(p.nodes.get('paypal-evidence-route').textContent,'POST https://api-m.sandbox.paypal.com/v2/checkout/orders/{order_id}/capture');
+  assert.equal(p.nodes.get('paypal-evidence-confirmation').textContent,'GET https://api-m.sandbox.paypal.com/v2/checkout/orders/{order_id}');
+  const displayed=JSON.parse(p.nodes.get('paypal-evidence-json').textContent);
+  assert.equal(displayed.purchase_units[0].payments.captures[0].id,'9U73…0908');
+  assert.doesNotMatch(p.nodes.get('paypal-evidence-json').textContent,/4HJ31244AH4428038|9U732141TN8280908/);
+  assert.equal(p.calls.length,1);assert.equal(p.calls[0][0],'data.json');
+});
+for(const mutation of ['missing','foreign-capture','currency','status','new-call','capture-method','proof'])test('invalid saved PayPal evidence stays hidden without breaking the case: '+mutation,async()=>{
+  const d=reviewData();
+  if(mutation==='missing')delete d.paypal_capture;
+  else if(mutation==='foreign-capture')d.paypal_capture.capture_id='FOREIGN';
+  else if(mutation==='currency')d.paypal_capture.amount.currency_code='EUR';
+  else if(mutation==='status')d.paypal_capture.capture_status='PENDING';
+  else if(mutation==='new-call')d.paypal_capture.fresh_execution=true;
+  else if(mutation==='capture-method')d.paypal_capture.capture_route.method='GET';
+  else d.paypal_capture.proof_sha256='0'.repeat(64);
+  const p=await loadJudge(()=>response(d));
+  assert.equal(p.nodes.get('paypal-evidence').hidden,true);
+  assert.equal(p.nodes.get('paypal-evidence-unavailable').hidden,false);
+  assert.equal(p.nodes.get('review').hidden,false);
+  assert.equal(p.calls.length,1);
+});
+test('saved PayPal response rendering never copies unknown buyer or authorization fields',async()=>{
+  const d=reviewData();d.paypal_capture.response_fields.payer={email:'PRIVATE_BUYER'};
+  d.paypal_capture.response_fields.capture.authorization='PRIVATE_TOKEN';
+  const p=await loadJudge(()=>response(d));
+  assert.equal(p.nodes.get('paypal-evidence').hidden,false);
+  assert.doesNotMatch(p.nodes.get('paypal-evidence-json').textContent,/PRIVATE_|payer|authorization/);
+});

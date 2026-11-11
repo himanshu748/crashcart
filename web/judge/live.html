@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Follow a new PayPal Sandbox checkout through capture, a verified notification and an AI investigation. A saved example remains available when live runs are paused.">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f5f1e8">
+  <title>CrashCart · Try a PayPal Sandbox checkout</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="live.css">
+  <script src="site.js" defer></script>
+  <script src="live.js" defer></script>
+</head>
+<body class="page-live">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="bar live-bar">
+    <a class="brand" href="index.html" aria-label="CrashCart home"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect class="mark-bg" x="1" y="1" width="30" height="30" rx="9"/><path class="mark-line" d="M7.5 10h2.6l2.4 10.2h9.4l2-7.4H11.4"/><circle class="mark-dot" cx="13.6" cy="24" r="1.6"/><circle class="mark-dot" cx="20.6" cy="24" r="1.6"/><path class="mark-crack" d="M17.6 6.5l-1.8 3.4 2.4.9-1.6 3.2"/></svg>CrashCart</a>
+    <nav class="bar-nav" aria-label="Main"><a href="index.html">Home</a><a href="product.html">Product</a><a href="live.html" aria-current="page">Live checkout</a><a href="demo.html">Saved example</a></nav>
+  </header>
+  <main id="main" class="live-page" tabindex="-1">
+    <p id="live-mode" class="live-mode">Checking live availability · saved example always available</p>
+    <section class="live-intro" aria-labelledby="live-title">
+      <div><p class="live-eyebrow">Follow an order from the start</p><h1 id="live-title">PayPal confirms payment.<br>Did the ticket arrive?</h1><p class="live-lead" id="live-lead">Try the faulty store in PayPal Sandbox. Then watch CrashCart connect the payment, delivery and customer’s promise.</p></div>
+      <aside class="live-order-summary" aria-label="Test order"><span class="live-eyebrow">Workshop ticket · test purchase</span><strong id="live-amount">USD 29.00</strong><p>One ticket within 60 seconds of capture.</p><span class="live-test-mark">Sandbox only · no real-money payment</span></aside>
+    </section>
+    <noscript><section class="live-notice"><h2>Open the saved example</h2><p>This checkout needs JavaScript to show server-confirmed updates. The recorded example and its downloads are ready without making a new payment.</p><a class="btn" href="demo.html">Open saved example →</a></section></noscript>
+    <section id="live-error" class="live-notice" hidden aria-labelledby="live-error-title"><h2 id="live-error-title">Live runs paused, showing saved replay</h2><p id="live-error-copy"></p><a class="btn live-primary" href="demo.html">Open saved example <span aria-hidden="true">→</span></a><a class="live-text-link" href="timing.html">Compare recorded delivery times</a></section>
+    <section id="live-saved-replay" class="live-card live-saved-replay" hidden aria-labelledby="live-saved-title"><p class="live-eyebrow">Saved replay · 22 October repair comparison</p><h2 id="live-saved-title">One saved payment. Two outcomes.</h2><p>This is a separate recorded order. The original and repaired rules use the same saved input and the same sixty-second promise.</p><div class="live-saved-comparison"><article><span>Original store</span><strong><span id="live-saved-missed"></span> tickets</strong><p>Payment confirmed. Delivery missed.</p></article><article><span>Repaired rule · replay</span><strong><span id="live-saved-recovered"></span> ticket</strong><p>Delivered inside the same promise.</p></article></div><a class="live-text-link" href="demo.html#investigation">Inspect the saved comparison <span aria-hidden="true">→</span></a></section>
+    <div class="live-layout">
+      <div class="live-main-column">
+        <section id="live-welcome" class="live-card" aria-labelledby="live-start-title"><span class="live-card-icon" aria-hidden="true">↗</span><h2 id="live-start-title">A small checkout. The whole story.</h2><p>This store deliberately misses ticket delivery. You approve a test payment in PayPal Sandbox; CrashCart verifies the capture and its signed notification, waits for the one-minute promise, then asks DeepSeek to investigate the evidence.</p><p class="live-account-note">Use a PayPal <strong>Sandbox buyer account</strong>. A regular PayPal login will not work. Nothing starts until you choose the button below.</p><button type="button" class="btn live-primary" id="live-start" disabled>Start Sandbox checkout <span aria-hidden="true">→</span></button><p class="live-small">Prefer a quick look? <a href="demo.html">Explore the saved example.</a></p></section>
+        <section id="live-run" class="live-card" hidden aria-labelledby="live-run-title"><p class="live-eyebrow">This checkout’s records</p><h2 id="live-run-title">Follow the payment.</h2><dl class="live-payment-facts"><div><dt>PayPal capture</dt><dd id="live-payment">Not confirmed</dd></div><div><dt>Payment notification</dt><dd id="live-webhook">Not verified yet</dd></div><div><dt>Sandbox order ID</dt><dd id="live-order">Not created yet</dd></div><div><dt>Sandbox capture ID</dt><dd id="live-capture">Not captured yet</dd></div></dl><div class="live-approval-actions"><a class="btn live-primary" id="live-approve" hidden>Approve in PayPal Sandbox <span aria-hidden="true">↗</span></a><button type="button" class="live-cancel" id="live-cancel" hidden>Cancel this checkout</button></div></section>
+        <section id="live-investigation" class="live-card" hidden aria-labelledby="live-investigation-title"><p class="live-eyebrow">DeepSeek via Modal</p><h2 id="live-investigation-title">Read the evidence. Find the gap.</h2><p>The assistant chooses which records to read. Deterministic code decides whether the delivery promise was kept.</p><ol id="live-ai-steps" class="live-ai-steps"></ol></section>
+        <section id="live-result" class="live-card live-result" hidden aria-labelledby="live-result-title"><p class="live-eyebrow">Checked against this run’s records</p><h2 id="live-result-title"></h2><p id="live-result-reason"></p><dl class="live-result-facts"><div><dt>Tickets</dt><dd id="live-ticket-count"></dd></div><div><dt>Delivery promise</dt><dd id="live-result-outcome"></dd></div></dl><details class="live-technical"><summary>Inspect the checker result</summary><code id="live-result-signature"></code></details><h3>Supporting records</h3><ul id="live-citations" class="live-citations"></ul><a class="live-text-link" href="demo.html#investigation">Compare the separate recorded repair <span aria-hidden="true">↗</span></a></section>
+      </div>
+      <aside id="live-progress" class="live-progress live-card" aria-labelledby="live-progress-title"><p class="live-eyebrow">Every step has a source</p><h2 id="live-progress-title">From payment to answer.</h2><ol class="live-steps"><li id="stage-order" data-status="waiting"><span class="live-step-number" aria-hidden="true">1</span><div><strong>Prepare the order</strong><span class="live-step-state">Waiting</span><p>A new order in PayPal Sandbox.</p></div></li><li id="stage-approval" data-status="waiting"><span class="live-step-number" aria-hidden="true">2</span><div><strong>You approve in PayPal</strong><span class="live-step-state">Waiting</span><p>Your test buyer stays on PayPal.</p></div></li><li id="stage-payment" data-status="waiting"><span class="live-step-number" aria-hidden="true">3</span><div><strong>Confirm the capture</strong><span class="live-step-state">Waiting</span><p>Server checks PayPal’s payment record.</p></div></li><li id="stage-webhook" data-status="waiting"><span class="live-step-number" aria-hidden="true">4</span><div><strong>Verify the notification</strong><span class="live-step-state">Waiting</span><p>A signed payment event from PayPal.</p></div></li><li id="stage-investigation" data-status="waiting"><span class="live-step-number" aria-hidden="true">5</span><div><strong>Investigate delivery</strong><span class="live-step-state">Waiting</span><p>One-minute observation, cited AI result.</p></div></li></ol><p id="live-status" class="live-status" role="status" aria-live="polite" aria-atomic="true">Checking whether new runs are available…</p></aside>
+    </div>
+    <footer class="live-footer"><p>A live run creates a new Sandbox order and, after approval, makes new PayPal and AI calls. The <a href="demo.html">saved example</a> uses recorded data and makes none.</p><label class="motion-toggle"><input type="checkbox" id="reduce-motion"><span>Reduce motion</span></label><a href="LICENSE">MIT licence</a></footer>
+  </main>
+</body>
+</html>

@@ -26,7 +26,7 @@ Python, SQLite and a background worker keep payment requests, purchases, observa
 
 DeepSeek-V4.1-Flash, served through Modal, chooses which payment and ticket records to read and explains its findings. Fixed rules decide whether payment and delivery meet the promise.
 
-Bryntum Community Scheduler compares saved ticket times with the delivery window; the video shows this actual view at 2:10–2:20. It is separate from the public website's simpler timeline. KERNEL supported remote checkout experiments; Postman/Newman provide executable API checks.
+Bryntum Community Scheduler compares saved ticket times with the delivery window in the keyless [Delivery timing page](https://crashcart.32.193.44.79.sslip.io/timing.html); the video shows this actual SDK view at 2:10–2:20. KERNEL supported remote checkout experiments; Postman/Newman provide executable API checks.
 
 ## Challenges
 

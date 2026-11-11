@@ -25,3 +25,25 @@ for(const [i,example] of cases.entries())test('illustration agrees with checker:
  assert.equal(stateAt(example,example.time),expected[i].state,expected[i].signature);
  assert.equal(JSON.stringify(example),before,'Illustration must not mutate the supplied ticket record');
 });
+
+test('In the demo exposes payment, investigation and the working Bryntum timing page',()=>{
+ const page=fs.readFileSync(path.join(root,'web/judge/integrations.html'),'utf8');
+ const cards=[...page.matchAll(/<article\b[^>]*data-where="([^"]+)"[^>]*aria-labelledby="([^"]+)"[^>]*>([\s\S]*?)<\/article>/g)].map(match=>({
+  dataset:{where:match[1]},id:match[2],html:match[3],hidden:false,
+ }));
+ assert.equal(cards.length,7,'Exercise the complete integration list, including private and preview tools');
+ const count={textContent:''};
+ const filterStart=source.indexOf('  function applyFilter('),filterEnd=source.indexOf('  if (filters.length',filterStart);
+ assert.ok(filterStart>=0&&filterEnd>filterStart);
+ const applyFilter=vm.runInNewContext(source.slice(filterStart,filterEnd)+';applyFilter',{
+  cards,filters:[],byId:(id)=>id==='int-count'?count:null,
+ });
+ applyFilter('public');
+ assert.deepEqual(cards.filter(card=>!card.hidden).map(card=>card.id),['int-paypal','int-ai','int-bryntum']);
+ assert.equal(count.textContent,'Showing 3 of 7');
+ assert.match(cards.find(card=>card.id==='int-bryntum').html,/<a href="timing\.html">Open delivery timing<\/a>/);
+ applyFilter('preview');
+ assert.deepEqual(cards.filter(card=>!card.hidden).map(card=>card.id),['int-stores']);
+ applyFilter('all');
+ assert.equal(cards.filter(card=>!card.hidden).length,7);
+});

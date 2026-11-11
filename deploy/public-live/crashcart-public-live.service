@@ -1,0 +1,41 @@
+[Unit]
+Description=CrashCart owner-scoped Sandbox workspace (paused by default)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=crashcart-live
+Group=crashcart-live
+WorkingDirectory=/opt/crashcart/public-live/current
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+EnvironmentFile=/etc/crashcart/public-live.env
+ExecStart=/usr/bin/python3 -m crashcart.public_live --db /var/lib/crashcart-public-live/workspace.sqlite3 --port 8767
+Restart=on-failure
+RestartSec=3
+TimeoutStartSec=30
+TimeoutStopSec=10
+KillMode=control-group
+KillSignal=SIGTERM
+SendSIGKILL=yes
+FinalKillSignal=SIGKILL
+StateDirectory=crashcart-public-live
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/var/lib/crashcart-public-live
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+TasksMax=64
+MemoryMax=384M
+CPUQuota=50%
+LimitNOFILE=256
+
+[Install]
+WantedBy=multi-user.target
