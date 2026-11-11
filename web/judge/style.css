@@ -307,7 +307,7 @@ button, input, select { font: inherit; color: inherit; }
 
 /* ---------- Public site: shared navigation across the four pages ---------- */
 a.brand { color: inherit; text-decoration: none; border-radius: 8px; }
-a.brand:hover { color: #fff; }
+:is(.page-home,.page-demo,.page-product,.page-integrations) a.brand:hover { color: var(--ink); }
 .bar-nav a[aria-current="page"], .bar-nav a[aria-current="page"]:hover { background: var(--on-night); color: var(--night); }
 
 .trail { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; padding: 6px clamp(16px, 5vw, 64px); background: var(--night-2); border-bottom: 1px solid var(--night-line); color: var(--on-night-muted); font-size: .88rem; }
@@ -1870,7 +1870,7 @@ a.brand:hover { color: #fff; }
 .integration-access-options { display: grid; gap: 28px; }
 .integration-access-options article { display: flex; gap: 17px; }
 .integration-access-options article+article { border-top: 1px solid #d2dcc6; padding-top: 28px; }
-.integration-access-number { color: #62794f; font-size: 11px; line-height: 2; }
+.integration-access-number { color: #4d603f; font-size: 11px; line-height: 2; }
 .integration-access-options h3 { font: 650 18px/1.5 var(--sans); letter-spacing: -.03em; }
 .integration-access-options p { font-size: 14px; line-height: 1.9; color: #5b6b50; margin-top: 9px; max-width: 37em; }
 .integration-access-options a { display: inline-flex; align-items: center; gap: 15px; color: #3f5e33; font-size: 12px; font-weight: 650; min-height: 44px; margin-top: 13px; text-underline-offset: 4px; }
